@@ -1,0 +1,5 @@
+macro break_item {
+    playsound minecraft:entity.item.break player @s ~ ~ ~ 2.0 1.0
+    particle minecraft:item $$1 ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
+    item modify entity @s $$0 foxcraft_dungeon_loot:remove
+}

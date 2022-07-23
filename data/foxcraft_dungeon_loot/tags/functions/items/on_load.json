@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/auto_pickaxe/on_load",
+    "foxcraft_dungeon_loot:items/gravilock_boots/on_load"
+  ]
+}
