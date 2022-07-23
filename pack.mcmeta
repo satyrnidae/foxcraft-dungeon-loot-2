@@ -1,0 +1,17 @@
+{
+  "pack": {
+    "pack_format": 10,
+    "description": "Foxcraft Dungeon Loot 2"
+  },
+  "meta": {
+    "author": "saturniidae",
+    "website": "https://satyrn.dev",
+    "version": "1.0.0",
+    "baseArchiveName": "foxcraft-dungeon-loot",
+    "changelog": {
+      "1.0.0": [
+        "Initial Version"
+      ]
+    }
+  }
+}

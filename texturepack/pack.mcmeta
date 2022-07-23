@@ -1,0 +1,17 @@
+{
+  "pack": {
+    "pack_format": 9,
+    "description": "Foxcraft Dungeon Loot 1.19"
+  },
+  "meta": {
+    "author": "saturniidae",
+    "website": "https://satyrn.dev",
+    "version": "1.0.0",
+    "baseArchiveName": "foxcraft-dungeon-loot-resources",
+    "changelog": {
+      "1.0.0": [
+        "Initial Version"
+      ]
+    }
+  }
+}
