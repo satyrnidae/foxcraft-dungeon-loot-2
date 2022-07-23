@@ -1,0 +1,68 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/music_disc_11"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "custom_model_data": 1
+            },
+            "model": "custom_music_discs:item/music_disc_wolfguneverymorning"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 2
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunmoonrays"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 3
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunafteranother"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 4
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunthroughout"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 5
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunblackdawn"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 6
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunpassing"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 7
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgununseenland"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 8
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunpeaks"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 9
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunfaraway"
+        },
+        {
+            "predicate": {
+                "custom_model_data": 10
+            },
+            "model": "custom_music_discs:item/music_disc_wolfgunintostars"
+        }
+    ]
+}

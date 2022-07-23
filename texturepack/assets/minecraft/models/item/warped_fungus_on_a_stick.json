@@ -1,0 +1,92 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "minecraft:item/warped_fungus_on_a_stick"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 421950
+      },
+      "model": "foxcraft_dungeon_loot:item/poncho_sanchezs_fate"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421951
+      },
+      "model": "foxcraft_dungeon_loot:item/evoker_tome"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421952
+      },
+      "model": "foxcraft_dungeon_loot:item/hero_amulet"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421953
+      },
+      "model": "foxcraft_dungeon_loot:item/scripture_of_cleansing"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421954
+      },
+      "model": "foxcraft_dungeon_loot:item/downpour_amulet"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421955
+      },
+      "model": "foxcraft_dungeon_loot:item/deilonas_holy_blessings"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421956
+      },
+      "model": "foxcraft_dungeon_loot:item/x_no_evil"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421957
+      },
+      "model": "foxcraft_dungeon_loot:item/eye_cream"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421958
+      },
+      "model": "foxcraft_dungeon_loot:item/gift_of_sheep_island"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421959
+      },
+      "model": "foxcraft_dungeon_loot:item/how_about_no"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219510
+      },
+      "model": "foxcraft_dungeon_loot:item/silverfish_escape_artist"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219511
+      },
+      "model": "foxcraft_dungeon_loot:item/pride_and_extreme_prejudice"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219512
+      },
+      "model": "foxcraft_dungeon_loot:item/bringer_of_fear"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219513
+      },
+      "model": "foxcraft_dungeon_loot:item/feather_of_quet_zala"
+    }
+  ]
+}

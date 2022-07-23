@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/totem_of_undying"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 421951
+      },
+      "model": "foxcraft_dungeon_loot:item/totem_of_deilona"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421952
+      },
+      "model": "foxcraft_dungeon_loot:item/totem_of_mysteria"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421953
+      },
+      "model": "foxcraft_dungeon_loot:item/totem_of_ekila"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421954
+      },
+      "model": "foxcraft_dungeon_loot:item/totem_of_gnumoch"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421955
+      },
+      "model": "foxcraft_dungeon_loot:item/totem_of_dendris"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421956
+      },
+      "model": "foxcraft_dungeon_loot:item/idol_of_melimonas"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421957
+      },
+      "model": "foxcraft_dungeon_loot:item/wing_of_quet_zala"
+    }
+  ]
+}

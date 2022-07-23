@@ -1,0 +1,18 @@
+{
+  "item.gravilock_boots.spark": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:items/spark",
+        "volume": 0.5
+      }
+    ]
+  },
+  "item.gravilock_boots.zap": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:items/zap",
+        "volume": 0.5
+      }
+    ]
+  }
+}

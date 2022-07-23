@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/bow",
+    "textures": {
+        "layer0": "foxcraft_dungeon_loot:item/peerless_yewhewn_pulling_1"
+    }
+}
