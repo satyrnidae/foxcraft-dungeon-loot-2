@@ -4,7 +4,7 @@
   },
   "mc": {
     "dev": true,
-    "header": "# Foxcraft Dungeon Loot by saturniidae\n# Built using mc-build (https://github.com/mc-build/mc-build)",
+    "header": "# Foxcraft Dungeon Loot by satyrnidae\n# Built using mc-build (https://github.com/mc-build/mc-build)",
     "internalScoreboard": "satyrn.fdl.internal",
     "generatedDirectory": "zz_generated",
     "rootNamespace": "foxcraft_dungeon_loot"
