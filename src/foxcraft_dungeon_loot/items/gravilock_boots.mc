@@ -44,7 +44,7 @@ function nullify_levitation {
         # Spawn a particle effect at the player's feet
         particle minecraft:effect ~ ~ ~ 0.1 0 0.1 0.25 5
 
-        # NBT Scan is pretty necessary here too.
+        # NBT Scan is probably better here than in the main tick.
         execute(if entity @s[nbt=!{playerGameType:1}]) {
             # NBT scan needed to determine the amount of damage to apply to the boots.
             execute(if entity @s[nbt={Inventory:[{Slot:100b,id:"minecraft:iron_boots"}]}]) {
