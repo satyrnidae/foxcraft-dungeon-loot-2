@@ -3,4 +3,4 @@ build.ps1
 config.json
 exclude.txt
 src/
-resources/
+texturepack/

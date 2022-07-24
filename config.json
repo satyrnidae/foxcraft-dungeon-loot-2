@@ -7,6 +7,8 @@
     "header": "# Foxcraft Dungeon Loot by satyrnidae\n# Built using mc-build (https://github.com/mc-build/mc-build)",
     "internalScoreboard": "satyrn.fdl.internal",
     "generatedDirectory": "__generated__",
-    "rootNamespace": "foxcraft_dungeon_loot"
+    "rootNamespace": null,
+    "baseArchiveName":"foxcraft-dungeon-loot",
+    "version": "1.0.0"
   }
 }

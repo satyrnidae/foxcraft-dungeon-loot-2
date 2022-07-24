@@ -10,6 +10,7 @@ function load {
     scoreboard objectives add satyrn.fdl.itemId.chestplate dummy
     scoreboard objectives add satyrn.fdl.itemId.helmet dummy
 
+    # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:items/on_load
 }
 
@@ -22,10 +23,24 @@ function tick {
     execute as @a store result score @s satyrn.fdl.itemId.chestplate run data get entity @s Inventory[{Slot:102b}].tag.DungeonLootId
     execute as @a store result score @s satyrn.fdl.itemId.helmet run data get entity @s Inventory[{Slot:103b}].tag.DungeonLootId
 
-    # TODO: Call item update functions
+    # Tick functions are executed with a player in context.
     execute as @a run function #foxcraft_dungeon_loot:items/on_tick
 
     # Reset statistics scoreboards
     execute as @a unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0
     execute as @a unless score @s satyrn.fdl.used.warpedFungusOnAStick matches 0 run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
+}
+
+function uninstall {
+    tellraw @a {"text":"Uninstalling Foxcraft Dungeon Loot v<%config.version%>..."}
+
+    execute store success score #uninstall <%config.internalScoreboard%> run datapack disable "file/<%config.baseArchiveName%>-<%config.version%>.zip"
+
+    execute(unless score #uninstall <%config.internalScoreboard%> matches 1) {
+        tellraw @a ["", {"text":"Default file name has been changed!","color":"red"},{"text":"\n"},{"text":"To complete the uninstall process please use the following command:"},{"text":"\n"},{"text":"/datapack disable \"file/<pack_name>\"","color":"aqua"}]
+    } else {
+        tellraw @s {"text":"Foxcraft Dungeon Loot successfully uninstalled.","color":"green"}
+    }
+
+    scoreboard players reset #uninstall <%config.internalScoreboard%>
 }

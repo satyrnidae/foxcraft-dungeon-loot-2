@@ -6,17 +6,17 @@ if (-not (Test-Path $BuildDir)) {
 }
 
 # Read pack.mcmeta
-$PackFile = "$PSScriptRoot/pack.mcmeta"
+$ConfigFile = "$PSScriptRoot/config.json"
 
-if (Test-Path $PackFile) {
-    $PackData = (Get-Content $PackFile | Out-String | ConvertFrom-Json)
-    if ($PackData.meta.baseArchiveName -and $PackData.meta.version) {
-        $OutFile = "$BuildDir/$($PackData.meta.baseArchiveName)-$($PackData.meta.version).zip"
+if (Test-Path $ConfigFile) {
+    $Config = (Get-Content $ConfigFile | Out-String | ConvertFrom-Json)
+    if ($Config.mc.baseArchiveName -and $Config.mc.version) {
+        $OutFile = "$BuildDir/$($Config.mc.baseArchiveName)-$($Config.mc.version).zip"
         $ExistingTest = 0
 
         while (Test-Path $OutFile) {
             $ExistingTest += 1
-            $OutFile = "$BuildDir/$($PackData.meta.baseArchiveName)-$($PackData.meta.version) ($ExistingTest).zip"
+            $OutFile = "$BuildDir/$($Config.mc.baseArchiveName)-$($Config.mc.version) ($ExistingTest).zip"
         }
 
         7z a -tzip -i"!$PSScriptRoot/*" -xr@"$PSScriptRoot/exclude.txt" -x"!$PSScriptRoot/src/*" $OutFile
