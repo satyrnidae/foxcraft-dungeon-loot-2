@@ -23,8 +23,8 @@ function tick {
     execute as @a store result score @s satyrn.fdl.itemId.chestplate run data get entity @s Inventory[{Slot:102b}].tag.DungeonLootId
     execute as @a store result score @s satyrn.fdl.itemId.helmet run data get entity @s Inventory[{Slot:103b}].tag.DungeonLootId
 
-    # Tick functions are executed with a player in context.
-    execute as @a run function #foxcraft_dungeon_loot:items/on_tick
+    # Tick functions are executed with a player in context at the player's location.
+    execute as @a at @s run function #foxcraft_dungeon_loot:items/on_tick
 
     # Reset statistics scoreboards
     execute as @a unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0

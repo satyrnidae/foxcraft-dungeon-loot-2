@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick"
   ]
 }
