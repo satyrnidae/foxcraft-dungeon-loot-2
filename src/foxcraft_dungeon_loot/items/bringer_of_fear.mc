@@ -39,9 +39,9 @@ function on_tick {
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }
-    execute (if score @s satyrn.fdl.bringerOfFear.cooldown matches 1..) {
-        scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
-    }
+
+    execute if score @s satyrn.fdl.bringerOfFear.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
+
     execute (if score @s satyrn.fdl.bringerOfFear.cooldown matches 24000) {
         macro cooldown_complete
         title @s actionbar {"text":"Bringer of Fear is ready to be used once more.","color":"dark_purple"}
