@@ -113,11 +113,6 @@ dir shield_of_the_juggernaut {
     }
 }
 
-dir rogues_dagger {
-    function give {
-        give @s minecraft:golden_sword{DungeonLootId:17,Unbreakable:1,CustomModelData:421951,AttributeModifiers:[{AttributeName:"generic.attack_damage",Amount:4,Slot:offhand,Name:"generic.attack_damage",UUID:[I;-122527,287560,12513,-575120]},{AttributeName:"generic.attack_speed",Amount:0.6,Slot:offhand,Name:"generic.attack_speed",UUID:[I;-122527,287660,12513,-575320]},{AttributeName:"generic.movement_speed",Amount:0.1,Slot:offhand,Operation:1,Name:"generic.movement_speed",UUID:[I;-122527,287760,12513,-575520]},{AttributeName:"generic.attack_damage",Amount:4,Slot:mainhand,Name:"generic.attack_damage",UUID:[I;-122527,287860,12513,-575720]},{AttributeName:"generic.attack_speed",Amount:0.6,Slot:mainhand,Name:"generic.attack_speed",UUID:[I;-122527,287960,12513,-575920]}],display:{Name:'[{"text":"Rogue\'s Dagger","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Stabs so nice you\'ll stab it twice!","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple","italic":true}]']},Enchantments:[{id:"minecraft:vanishing_curse",lvl:1}]} 1
-    }
-}
 
 dir aurelias_lucky_compass {
     function give {
