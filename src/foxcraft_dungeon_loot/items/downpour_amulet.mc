@@ -31,7 +31,7 @@ function on_tick {
             execute (if entity @s[nbt=!{playerGameType:1}]) {
                 scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
                 title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
-                execute (if score satyrn.fdl.custom.sneakTime matches 1..) {
+                execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_thunder
                 } else {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_rain
