@@ -3,6 +3,7 @@
   "values": [
     "foxcraft_dungeon_loot:items/auto_pickaxe/on_load",
     "foxcraft_dungeon_loot:items/gravilock_boots/on_load",
-    "foxcraft_dungeon_loot:items/bringer_of_fear/on_load"
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_load",
+    "foxcraft_dungeon_loot:items/constantines_gift/on_load"
   ]
 }
