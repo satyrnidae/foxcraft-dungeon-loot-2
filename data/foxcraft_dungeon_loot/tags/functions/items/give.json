@@ -31,6 +31,16 @@
     "foxcraft_dungeon_loot:items/war_hogs_burning_rage/give",
     "foxcraft_dungeon_loot:items/war_hogs_festering_wrath/give",
     "foxcraft_dungeon_loot:items/war_hogs_lingering_spite/give",
-    "foxcraft_dungeon_loot:items/yoyo_mans_revenge/give"
+    "foxcraft_dungeon_loot:items/yoyo_mans_revenge/give",
+    "foxcraft_dungeon_loot:items/auto_pickaxe/give",
+    "foxcraft_dungeon_loot:items/bringer_of_fear/give",
+    "foxcraft_dungeon_loot:items/constantines_gift/give",
+    "foxcraft_dungeon_loot:items/deilonas_holy_blessings/give",
+    "foxcraft_dungeon_loot:items/downpour_amulet/give",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give",
+    "foxcraft_dungeon_loot:items/estudinaes_survival/give",
+    "foxcraft_dungeon_loot:items/gravilock_boots/give",
+    "foxcraft_dungeon_loot:items/evokers_tome/give"
   ]
 }
