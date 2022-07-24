@@ -2,7 +2,7 @@
 Customized Dungeon Loot for Minecraft 1.19
 
 ## Introduction
-This datapack was first created as an attempt to add unique, modded-esque loot to the chests in the Oh The Dungeons You'll Go plugin.
+This datapack was first created as an attempt to add unique, modded-esque loot to the chests in the [Oh The Dungeons You'll Go](https://www.spigotmc.org/resources/delete.76437/) plugin.
 (The plugin is now unfortunately discontinued.)
 This rewrite aims to make the datapack more performant on old, slow CPUs like the one running the private server this datapack was designed for.
 
