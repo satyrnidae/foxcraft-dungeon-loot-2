@@ -3,6 +3,7 @@ function load {
     scoreboard objectives add <%config.internalScoreboard%> dummy
     scoreboard objectives add satyrn.fdl.custom.sneakTime minecraft.custom:minecraft.sneak_time
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick
+    scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
     scoreboard objectives add satyrn.fdl.itemId.mainHand dummy
     scoreboard objectives add satyrn.fdl.itemId.offHand dummy
     scoreboard objectives add satyrn.fdl.itemId.boots dummy
@@ -24,6 +25,7 @@ function tick {
     execute as @a store result score @s satyrn.fdl.itemId.leggings run data get entity @s Inventory[{Slot:101b}].tag.DungeonLootId
     execute as @a store result score @s satyrn.fdl.itemId.chestplate run data get entity @s Inventory[{Slot:102b}].tag.DungeonLootId
     execute as @a store result score @s satyrn.fdl.itemId.helmet run data get entity @s Inventory[{Slot:103b}].tag.DungeonLootId
+    execute as @a store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
 
     # Tick functions are executed with a player in context at the player's location.
     execute as @a at @s run function #foxcraft_dungeon_loot:items/on_tick
