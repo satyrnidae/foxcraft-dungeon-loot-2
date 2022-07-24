@@ -1,7 +1,7 @@
 # Applies the item's effects every two seconds.
 function clock_2s {
     schedule function foxcraft_dungeon_loot:items/estudinaes_guidance/clock_2s 2s
-    execute as @a at @s if score @s satyrn.fdl.itemId.boots matches 38 run {
+    execute as @a if score @s satyrn.fdl.itemId.boots matches 38 run {
         effect give @s minecraft:slowness 3 1
         effect give @s minecraft:dolphins_grace 3
     }
@@ -36,5 +36,5 @@ dir give {
 
 # Initializes the item's clocks.
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/estudinaes_guidance/clock_2s 2s
+    schedule function foxcraft_dungeon_loot:items/estudinaes_guidance/clock_2s 2t
 }

@@ -70,6 +70,6 @@ function nullify_levitation {
 
 # Schedules the item's clock functions.
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/gravilock_boots/clock_10t 10t
-    schedule function foxcraft_dungeon_loot:items/gravilock_boots/clock_2s 2s
+    schedule function foxcraft_dungeon_loot:items/gravilock_boots/clock_10t 4t
+    schedule function foxcraft_dungeon_loot:items/gravilock_boots/clock_2s 5t
 }

@@ -23,5 +23,5 @@ dir give {
 
 # Sets up item-specific clocks, counters, etc.
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock 2s
+    function foxcraft_dungeon_loot:items/auto_pickaxe/clock
 }

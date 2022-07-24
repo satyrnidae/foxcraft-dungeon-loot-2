@@ -11,5 +11,5 @@ function give {
 
 # Initializes the item's timer function.
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/constantines_gift/clock 10s
+    schedule function foxcraft_dungeon_loot:items/constantines_gift/clock 1t
 }
