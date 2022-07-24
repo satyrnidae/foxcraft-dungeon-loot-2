@@ -12,6 +12,8 @@ function load {
 
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:items/on_load
+
+    tellraw @a ["",{"text":"Foxcraft Dungeon Loot","color":"gold"},{"text":" v<%config.version%> ","color":"gray"},{"text":"loaded successfully!"}]
 }
 
 function tick {
