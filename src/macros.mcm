@@ -3,3 +3,8 @@ macro break_item {
     particle minecraft:item $$1 ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
     item modify entity @s $$0 foxcraft_dungeon_loot:remove
 }
+
+macro roll {
+    execute as @s store result score #random <%config.internalScoreboard%> run loot spawn ~ -128 ~ loot foxcraft_dungeon_loot:dice/roll_$$0
+    kill @e[type=minecraft:item,nbt={Item:{tag:{Tags:["dice"]}}}]
+}
