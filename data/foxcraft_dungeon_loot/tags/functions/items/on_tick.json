@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick",
-    "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_tick"
+    "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_tick",
+    "foxcraft_dungeon_loot:items/downpour_amulet/on_tick"
   ]
 }
