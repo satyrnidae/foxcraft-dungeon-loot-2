@@ -27,7 +27,7 @@ function on_tick {
             }
         } else {
             playsound minecraft:entity.evoker.prepare_summon player @s ~ ~ ~ 0.5 1
-            title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple","italic":true}
+            title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }
     execute (if score @s satyrn.fdl.deilonasHolyBlessings.cooldown matches 1..) {
