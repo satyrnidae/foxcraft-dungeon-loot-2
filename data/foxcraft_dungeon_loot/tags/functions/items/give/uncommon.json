@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/copper_plated_axe/give",
+    "foxcraft_dungeon_loot:items/copper_plated_hoe/give",
+    "foxcraft_dungeon_loot:items/copper_plated_pickaxe/give",
+    "foxcraft_dungeon_loot:items/copper_plated_shovel/give",
+    "foxcraft_dungeon_loot:items/copper_plated_sword/give",
+    "foxcraft_dungeon_loot:items/totem_of_undying/give"
+  ]
+}
