@@ -35,7 +35,7 @@ function on_tick {
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:4219512}
             }
         } else {
-            playsound minecraft:entity.evoker.prepare_summon player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }

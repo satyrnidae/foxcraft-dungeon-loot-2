@@ -10,6 +10,6 @@ macro roll {
 }
 
 macro cooldown_complete {
-    playsound minecraft:entity.evoker.prepare_attack player @s ~ ~ ~ 0.5 1
+    playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
     particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
 }

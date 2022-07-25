@@ -14,7 +14,7 @@ function on_tick {
         execute (unless score @s satyrn.fdl.deilonasHolyBlessings.cooldown matches 1..) {
             # Apply the effects for using Deilona's Holy Blessings
             effect give @e[distance=0.0001..20,type=!#foxcraft_dungeon_loot:non_living] minecraft:instant_health 3 5
-            playsound minecraft:entity.evoker.prepare_wololo player @s ~ ~ ~ 20.0
+            playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @s ~ ~ ~ 20.0
             particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10 normal @s
             particle minecraft:heart ~ ~1 ~ 20 0.5 20 0.1 50 normal @a[distance=0.0001..20]
 
@@ -26,7 +26,7 @@ function on_tick {
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421955}
             }
         } else {
-            playsound minecraft:entity.evoker.prepare_summon player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
             title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }

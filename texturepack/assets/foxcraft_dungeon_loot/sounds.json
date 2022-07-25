@@ -14,5 +14,31 @@
         "volume": 0.5
       }
     ]
+  },
+  "entity.player.cast_spell": {
+    "subtitle": "subtitles.entity.player.cast_spell",
+    "sounds": [
+      "minecraft:mob/evocation_illager/cast1",
+      "minecraft:mob/evocation_illager/cast2"
+    ]
+  },
+  "entity.player.spell_fails": {
+    "subtitle": "subtitles.entity.player.spell_fails",
+    "sounds": [
+      "mob/evocation_illager/prepare_summon"
+    ]
+  },
+  "entity.player.spell_ready": {
+    "subtitle": "subtitles.entity.player.spell_ready",
+    "sounds": [
+      "mob/evocation_illager/prepare_attack1",
+      "mob/evocation_illager/prepare_attack2"
+    ]
+  },
+  "entity.player.cast_wololo": {
+    "subtitle": "subtitles.entity.player.cast_spell",
+    "sounds": [
+      "mob/evocation_illager/prepare_wololo"
+    ]
   }
 }

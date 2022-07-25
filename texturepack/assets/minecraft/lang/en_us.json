@@ -244,5 +244,8 @@
   "enchantment.level.252": "CCLII",
   "enchantment.level.253": "CCLIII",
   "enchantment.level.254": "CCLIV",
-  "enchantment.level.255": "CCLV"
+  "enchantment.level.255": "CCLV",
+  "subtitles.entity.player.cast_spell": "Player casts spell",
+  "subtitles.entity.player.spell_fails": "Spell cast failed",
+  "subtitles.entity.player.spell_ready": "Spell ready"
 }

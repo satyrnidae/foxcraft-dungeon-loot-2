@@ -15,7 +15,7 @@ function on_tick {
     execute (if score @s satyrn.fdl.itemId.mainHand matches 41) {
         execute (if score @s satyrn.fdl.evokersTome.cooldown matches 1) {
             summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
-            playsound minecraft:entity.evoker.cast_spell player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 0.5 1
 
             execute (if entity @s[nbt=!{playerGameType:1}]) {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
@@ -26,7 +26,7 @@ function on_tick {
 
         } else execute(if score @s satyrn.fdl.evokersTome.cooldown matches 100) {
             summon minecraft:armor_stand ~ ~2 ~ {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
-            playsound minecraft:entity.evoker.prepare_attack player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 0.5 1
 
             execute (if entity @s[nbt=!{playerGameType:1}]) {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
@@ -62,7 +62,7 @@ function on_tick {
                 title @s actionbar {"text":"The Evoker's Tome is now on cooldown for 2 seconds.","color":"dark_purple"}
             }
         } else {
-            playsound minecraft:entity.evoker.prepare_summon player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
             title @s actionbar {"text":"The Evoker's Tome is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }
