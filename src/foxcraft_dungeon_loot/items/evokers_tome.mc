@@ -14,7 +14,7 @@ function on_tick {
     # Execute if the sender is holding the Evoker's Tome in their main hand.
     execute (if score @s satyrn.fdl.itemId.mainHand matches 41..) {
         execute (if score @s satyrn.fdl.evokersTome.cooldown matches 1) {
-            summon minecraft:armor_stand ^ ^ ^1 {Invisible:0b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
+            summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
             playsound minecraft:entity.evoker.cast_spell player @s ~ ~ ~ 0.5 1
 
             execute (if entity @s[nbt=!{playerGameType:1}]) {
@@ -25,7 +25,7 @@ function on_tick {
             }
 
         } else execute(if score @s satyrn.fdl.evokersTome.cooldown matches 100) {
-            summon minecraft:armor_stand ~ ~2 ~ {Invisible:0b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
+            summon minecraft:armor_stand ~ ~2 ~ {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
             playsound minecraft:entity.evoker.prepare_attack player @s ~ ~ ~ 0.5 1
 
             execute (if entity @s[nbt=!{playerGameType:1}]) {
@@ -88,10 +88,10 @@ function on_tick {
     execute (if entity @e[tag=satyrn.fdl.fangPivot] as @e[tag=satyrn.fdl.fangPivot] at @s) {
         scoreboard players add @s satyrn.fdl.evokersTome.spawnerLife 1
         execute (if score @s satyrn.fdl.evokersTome.spawnerLife matches 2) {
-            summon minecraft:armor_stand ~5 ~ ~ {Invisible:0b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fangLead]}
-            summon minecraft:armor_stand ~4 ~ ~ {Invisible:0b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang4]}
-            summon minecraft:armor_stand ~3 ~ ~ {Invisible:0b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang3]}
-            summon minecraft:armor_stand ~4 ~ ~ {Invisible:0b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang2]}
+            summon minecraft:armor_stand ~5 ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fangLead]}
+            summon minecraft:armor_stand ~4 ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang4]}
+            summon minecraft:armor_stand ~3 ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang3]}
+            summon minecraft:armor_stand ~4 ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fang2]}
         }
 
         tp @s ~ ~ ~ facing entity @e[tag=satyrn.fdl.fangLead,limit=1,sort=nearest] feet
@@ -111,8 +111,11 @@ function on_tick {
         }
     }
     execute if entity @e[tag=satyrn.fdl.fang] run scoreboard players add @e[tag=satyrn.fdl.fang] satyrn.fdl.evokersTome.fangLife 1
-    execute if entity @e[tag=satyrn.fdl.fangSpawn] as @e[tag=satyrn.fdl.fangSpawn] at @s if score @s satyrn.fdl.evokersTome.spawnerLife matches 2.. run summon minecraft:armor_stand ~ ~ ~ {Invisible:0b,Silent:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fang],Motion:[0.0,-10.0,0.0]}
 
+    # Spawn the armor stand marker for the evoker fangs
+    execute if entity @e[tag=satyrn.fdl.fangSpawn] as @e[tag=satyrn.fdl.fangSpawn] at @s if score @s satyrn.fdl.evokersTome.spawnerLife matches 2.. run summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Silent:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fang],Motion:[0.0,-10.0,0.0]}
+
+    # Spawn the evoker fangs
     execute (if entity @e[tag=satyrn.fdl.fang] as @e[tag=satyrn.fdl.fang] at @s) {
         execute (if entity @s[nbt={OnGround:1b}] if score @s satyrn.fdl.evokersTome.fangLife matches 1) {
             summon minecraft:evoker_fangs ~ ~ ~ {Tags:[satyrn.fdl.playerEvokerFang]}
