@@ -6,6 +6,7 @@
     "foxcraft_dungeon_loot:items/downpour_amulet/on_tick",
     "foxcraft_dungeon_loot:items/rogues_dagger/on_tick",
     "foxcraft_dungeon_loot:items/evokers_tome/on_tick",
-    "foxcraft_dungeon_loot:items/eye_cream/on_tick"
+    "foxcraft_dungeon_loot:items/eye_cream/on_tick",
+    "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_tick"
   ]
 }

@@ -10,6 +10,7 @@
     "foxcraft_dungeon_loot:items/estudinaes_guidance/on_load",
     "foxcraft_dungeon_loot:items/estudinaes_patience/on_load",
     "foxcraft_dungeon_loot:items/estudinaes_survival/on_load",
-    "foxcraft_dungeon_loot:items/evokers_tome/on_load"
+    "foxcraft_dungeon_loot:items/evokers_tome/on_load",
+    "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_load"
   ]
 }
