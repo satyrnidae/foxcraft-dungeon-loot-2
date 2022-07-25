@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/dawncleaver/give",
+    "foxcraft_dungeon_loot:items/dawncleaver/give/diamond",
+    "foxcraft_dungeon_loot:items/dawncleaver/give/netherite"
+  ]
+}

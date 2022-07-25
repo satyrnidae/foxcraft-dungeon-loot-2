@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/estudinaes_sorrow/give",
+    "foxcraft_dungeon_loot:items/estudinaes_sorrow/give/netherite"
+  ]
+}

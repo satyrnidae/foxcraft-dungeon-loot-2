@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give/chainmail",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give/iron",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give/diamond",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/give/netherite"
+  ]
+}

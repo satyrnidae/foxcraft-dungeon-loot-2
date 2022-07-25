@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/fortune_500/give",
+    "foxcraft_dungeon_loot:items/fortune_500/give/diamond",
+    "foxcraft_dungeon_loot:items/fortune_500/give/netherite"
+  ]
+}

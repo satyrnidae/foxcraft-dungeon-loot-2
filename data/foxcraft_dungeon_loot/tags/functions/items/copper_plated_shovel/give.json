@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/copper_plated_shovel/give",
+    "foxcraft_dungeon_loot:items/copper_plated_shovel/give/iron",
+    "foxcraft_dungeon_loot:items/copper_plated_shovel/give/diamond",
+    "foxcraft_dungeon_loot:items/copper_plated_shovel/give/netherite"
+  ]
+}

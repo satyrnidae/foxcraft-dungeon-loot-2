@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/copper_plated_axe/give",
+    "foxcraft_dungeon_loot:items/copper_plated_axe/give/netherite",
+    "foxcraft_dungeon_loot:items/copper_plated_axe/give/diamond",
+    "foxcraft_dungeon_loot:items/copper_plated_axe/give/iron"
+  ]
+}

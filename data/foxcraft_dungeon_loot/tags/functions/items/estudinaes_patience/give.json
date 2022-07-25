@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give/chainmail",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give/iron",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give/diamond",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/give/netherite"
+  ]
+}
