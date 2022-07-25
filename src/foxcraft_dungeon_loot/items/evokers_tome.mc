@@ -12,7 +12,7 @@ function on_load {
 
 function on_tick {
     # Execute if the sender is holding the Evoker's Tome in their main hand.
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 41..) {
+    execute (if score @s satyrn.fdl.itemId.mainHand matches 41) {
         execute (if score @s satyrn.fdl.evokersTome.cooldown matches 1) {
             summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
             playsound minecraft:entity.evoker.cast_spell player @s ~ ~ ~ 0.5 1
@@ -51,7 +51,7 @@ function on_tick {
 
     # We want to check if the player is using the Evoker's Tome after the cooldown has incremented since processing is
     # offset into the next tick.
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 41.. if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1..) {
+    execute (if score @s satyrn.fdl.itemId.mainHand matches 41 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1..) {
         execute (unless score @s satyrn.fdl.evokersTome.cooldown matches 1..) {
             # Since the cooldown timer is incremented in the same tick,
             execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
