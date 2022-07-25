@@ -7,6 +7,7 @@
     "foxcraft_dungeon_loot:items/rogues_dagger/on_tick",
     "foxcraft_dungeon_loot:items/evokers_tome/on_tick",
     "foxcraft_dungeon_loot:items/eye_cream/on_tick",
-    "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_tick"
+    "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_tick",
+    "foxcraft_dungeon_loot:items/gift_of_sheep_island/on_tick"
   ]
 }
