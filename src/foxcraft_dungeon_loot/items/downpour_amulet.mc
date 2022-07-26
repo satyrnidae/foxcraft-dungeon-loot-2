@@ -54,7 +54,8 @@ function on_tick {
     }
     # Reset cooldown after 5 minutes
     execute (if score @s satyrn.fdl.downpourAmulet.cooldown matches 6000) {
-        macro cooldown_complete
+        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
+        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Downpour Amulet is ready to be used once more.","color":"dark_purple"}
         scoreboard players reset @s satyrn.fdl.downpourAmulet.cooldown
     }

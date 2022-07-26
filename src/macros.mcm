@@ -8,8 +8,3 @@ macro roll {
     execute as @s store result score #random <%config.internalScoreboard%> run loot spawn ~ -128 ~ loot foxcraft_dungeon_loot:dice/roll_$$0
     kill @e[type=minecraft:item,nbt={Item:{tag:{Tags:["dice"]}}}]
 }
-
-macro cooldown_complete {
-    playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
-    particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
-}

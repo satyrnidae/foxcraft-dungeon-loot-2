@@ -129,7 +129,8 @@ function on_tick {
 }
 
 function reset_cooldown {
-    macro cooldown_complete
+    playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+    particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
     title @s actionbar {"text":"The Evoker's Tome is ready to use once more.","color":"dark_purple"}
     scoreboard players reset @s satyrn.fdl.evokersTome.cooldown
 }

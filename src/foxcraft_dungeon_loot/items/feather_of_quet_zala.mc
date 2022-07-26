@@ -34,7 +34,8 @@ function on_tick {
 
     # Reset the cooldown timer after 30 seconds.
     execute (if score @s satyrn.fdl.featherOfQuetZala.cooldown matches 600) {
-        macro cooldown_complete
+        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
+        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Feather of Quet-Zala is ready to be used once more.","color":"dark_purple"}
         scoreboard players reset @s satyrn.fdl.featherOfQuetZala.cooldown
     }

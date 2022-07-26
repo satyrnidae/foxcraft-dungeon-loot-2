@@ -49,7 +49,8 @@ function on_tick {
     execute if score @s satyrn.fdl.ponchoSanchezsFate.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.ponchoSanchezsFate.cooldown 1
 
     execute (if score @s satyrn.fdl.ponchoSanchezsFate.cooldown matches 6000..) {
-        macro cooldown_complete
+        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
+        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"Poncho Sanchez's Fate is ready to be used once more.","color":"dark_purple"}
         scoreboard players reset @s satyrn.fdl.ponchoSanchezsFate.cooldown
     }
