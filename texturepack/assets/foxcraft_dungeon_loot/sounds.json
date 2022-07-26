@@ -40,5 +40,14 @@
     "sounds": [
       "mob/evocation_illager/prepare_wololo"
     ]
+  },
+  "event.roll.hero": {
+    "subtitle": "subtitles.event.roll.hero",
+    "sounds": [
+      {
+        "name": "ui/toast/challenge_complete",
+        "volume": 0.6
+      }
+    ]
   }
 }

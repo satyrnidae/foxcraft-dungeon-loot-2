@@ -247,5 +247,6 @@
   "enchantment.level.255": "CCLV",
   "subtitles.entity.player.cast_spell": "Player casts spell",
   "subtitles.entity.player.spell_fails": "Spell cast fails",
-  "subtitles.entity.player.spell_ready": "Spell ready"
+  "subtitles.entity.player.spell_ready": "Spell ready",
+  "subtitles.event.roll.hero": "Hero of the Village awarded"
 }
