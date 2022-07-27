@@ -1,6 +1,6 @@
 # Main clock for the item.
-function clock {
-    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock 2s
+function clock_2s {
+    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock_2s 2s
     execute as @a if score @s satyrn.fdl.itemId.mainHand matches 32 run effect give @s minecraft:haste 3 1 true
 }
 
@@ -23,5 +23,5 @@ dir give {
 
 # Sets up item-specific clocks, counters, etc.
 function on_load {
-    function foxcraft_dungeon_loot:items/auto_pickaxe/clock
+    function foxcraft_dungeon_loot:items/auto_pickaxe/clock_2s
 }
