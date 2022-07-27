@@ -12,7 +12,7 @@ function on_tick {
         effect give @s minecraft:hunger 60
         effect give @s minecraft:fire_resistance 600
 
-        execute (if entity @s[nbt=!{playerGameType:1}]) {
+        execute (unless entity @s[nbt={playerGameType:1}]) {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         }
     }

@@ -23,7 +23,6 @@ function on_tick {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
                 }
             }
-
         } else execute(if score @s satyrn.fdl.evokersTome.cooldown matches 100) {
             summon minecraft:armor_stand ~ ~2 ~ {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 0.5 1
@@ -52,18 +51,15 @@ function on_tick {
     # We want to check if the player is using the Evoker's Tome after the cooldown has incremented since processing is
     # offset into the next tick.
     execute (if score @s satyrn.fdl.itemId.mainHand matches 41 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1..) {
-        execute (unless score @s satyrn.fdl.evokersTome.cooldown matches 1..) {
-            # Since the cooldown timer is incremented in the same tick,
-            execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
+        execute (if score @s satyrn.fdl.evokersTome.cooldown matches 1..) {
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
+            title @s actionbar {"text":"The Evoker's Tome is on cooldown and cannot be used.","color":"dark_purple"}
+        } else execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
                 scoreboard players set @s satyrn.fdl.evokersTome.cooldown 100
                 title @s actionbar {"text":"The Evoker's Tome is now on cooldown for 5 seconds.","color":"dark_purple"}
-            } else {
-                scoreboard players set @s satyrn.fdl.evokersTome.cooldown 1
-                title @s actionbar {"text":"The Evoker's Tome is now on cooldown for 2 seconds.","color":"dark_purple"}
-            }
         } else {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
-            title @s actionbar {"text":"The Evoker's Tome is on cooldown and cannot be used.","color":"dark_purple"}
+            scoreboard players set @s satyrn.fdl.evokersTome.cooldown 1
+            title @s actionbar {"text":"The Evoker's Tome is now on cooldown for 2 seconds.","color":"dark_purple"}
         }
     }
 

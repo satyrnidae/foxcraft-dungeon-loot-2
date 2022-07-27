@@ -32,7 +32,7 @@ function on_tick {
             effect give @s minecraft:hero_of_the_village 24000 0 false
         }
 
-        execute (if entity @s[nbt=!{playerGameType:1}]) {
+        execute (unless entity @s[nbt={playerGameType:1}]) {
             macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421952}
         }
     }

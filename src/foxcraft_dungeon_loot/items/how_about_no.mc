@@ -10,18 +10,18 @@ function on_load {
 
 function on_tick {
     execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 46) {
-        execute (unless score @s satyrn.fdl.howAboutNo.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 2.0 1
+        execute (if score @s satyrn.fdl.howAboutNo.cooldown matches 1..) {
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
+            title @s actionbar {"text":"How About No is on cooldown and cannot be used.","color":"dark_purple"}
+        } else {
+            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 2.0
             kill @e[type=#foxcraft_dungeon_loot:hostile,distance=..50,nbt=!{PersistenceRequired:1b}]
 
-            execute (if entity @s[nbt=!{playerGameType:1}]) {
+            execute (unless entity @s[nbt={playerGameType:1}]) {
                 scoreboard players set @s satyrn.fdl.howAboutNo.cooldown 1
                 title @s actionbar {"text":"How About No is now on cooldown for 5 minutes.","color":"dark_purple"}
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421959}
             }
-        } else {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
-            title @s actionbar {"text":"How About No is on cooldown and cannot be used.","color":"dark_purple"}
         }
     }
 

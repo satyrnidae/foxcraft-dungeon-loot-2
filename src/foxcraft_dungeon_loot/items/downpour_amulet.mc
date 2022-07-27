@@ -14,7 +14,11 @@ function on_load {
 # Executed in the context and at the location of a single player.
 function on_tick {
     execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fd.itemId.mainHand matches 37) {
-        execute (unless score @s satyrn.fdl.downpourAmulet.cooldown matches 1..) {
+        execute (if score @s satyrn.fdl.downpourAmulet.cooldown matches 1..) {
+            # Warn the player that the item cooldown is currently active.
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
+            title @s actionbar {"text":"The Downpour Amulet is currently on cooldown and cannot be used.","color":"dark_purple"}
+        } else {
             playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @s ~ ~ ~ 100.0
             particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10 normal @s
 
@@ -28,7 +32,7 @@ function on_tick {
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
-            execute (if entity @s[nbt=!{playerGameType:1}]) {
+            execute (unless entity @s[nbt={playerGameType:1}]) {
                 scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
                 title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
                 execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
@@ -42,10 +46,6 @@ function on_tick {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421954}
                 }
             }
-        } else {
-            # Warn the player that the item cooldown is currently active.
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
-            title @s actionbar {"text":"The Downpour Amulet is currently on cooldown and cannot be used.","color":"dark_purple"}
         }
     }
     # Increment cooldown timer

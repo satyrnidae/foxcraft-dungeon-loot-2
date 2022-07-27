@@ -22,7 +22,7 @@ function on_tick {
         }
 
         # Break item
-        execute (if entity @s[nbt=!{playerGameType:1}]) {
+        execute (unless entity @s[nbt={playerGameType:1}]) {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         }
     }
