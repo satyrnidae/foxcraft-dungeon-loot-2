@@ -12,6 +12,7 @@
     "foxcraft_dungeon_loot:items/heros_amulet/on_tick",
     "foxcraft_dungeon_loot:items/how_about_no/on_tick",
     "foxcraft_dungeon_loot:items/poncho_sanchezs_fate/on_tick",
-    "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_tick"
+    "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_tick",
+    "foxcraft_dungeon_loot:items/quet_zalas_beloved/on_tick"
   ]
 }
