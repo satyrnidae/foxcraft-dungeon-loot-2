@@ -248,5 +248,13 @@
   "subtitles.entity.player.cast_spell": "Player casts spell",
   "subtitles.entity.player.spell_fails": "Spell cast fails",
   "subtitles.entity.player.spell_ready": "Spell ready",
-  "subtitles.event.roll.hero": "Hero of the Village awarded"
+  "subtitles.event.roll.hero": "Hero of the Village awarded",
+  "subtitles.item.dice.d4": "Four-sided dice rolls",
+  "subtitles.item.dice.d6": "Six-sided dice rolls",
+  "subtitles.item.dice.d8": "Eight-sided dice rolls",
+  "subtitles.item.dice.d10": "Ten-sided dice rolls",
+  "subtitles.item.dice.d12": "Twelve-sided dice rolls",
+  "subtitles.item.dice.d20": "Twenty-sided dice rolls",
+  "subtitles.item.gravilock_boots.spark": "GraviLock™ Boots spark",
+  "subtitles.item.gravilock_boots.zap": "GraviLock™ Boots arc"
 }
