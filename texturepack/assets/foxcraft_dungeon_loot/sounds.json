@@ -37,44 +37,54 @@
   "item.dice.d4": {
     "subtitle": "subtitles.item.dice.d4",
     "sounds": [
-      "foxcraft:items/dice/roll_d4"
+      "foxcraft_dungeon_loot:items/dice/roll_d4"
     ]
   },
   "item.dice.d6": {
     "subtitle": "subtitles.item.dice.d6",
     "sounds": [
-      "foxcraft:items/dice/roll_d6"
+      "foxcraft_dungeon_loot:items/dice/roll_d6"
     ]
   },
   "item.dice.d8": {
     "subtitle": "subtitles.item.dice.d8",
     "sounds": [
-      "foxcraft:items/dice/roll_d8"
+      "foxcraft_dungeon_loot:items/dice/roll_d8"
     ]
   },
   "item.dice.d10": {
     "subtitle": "subtitles.item.dice.d10",
     "sounds": [
-      "foxcraft:items/dice/roll_d10"
+      "foxcraft_dungeon_loot:items/dice/roll_d10"
     ]
   },
   "item.dice.d12": {
     "subtitle": "subtitles.item.dice.d12",
     "sounds": [
-      "foxcraft:items/dice/roll_d12"
+      "foxcraft_dungeon_loot:items/dice/roll_d12"
     ]
   },
   "item.dice.d20": {
     "subtitle": "subtitles.item.dice.d20",
     "sounds": [
-      "foxcraft:items/dice/roll_d20"
+      "foxcraft_dungeon_loot:items/dice/roll_d20"
+    ]
+  },
+  "item.grab_bag.open": {
+    "subtitle": "subtitles.item.grab_bag.open",
+    "sounds": [
+      "foxcraft_dungeon_loot:items/grab_bag/open1",
+      "foxcraft_dungeon_loot:items/grab_bag/open2",
+      "foxcraft_dungeon_loot:items/grab_bag/open3",
+      "foxcraft_dungeon_loot:items/grab_bag/open4",
+      "foxcraft_dungeon_loot:items/grab_bag/open5"
     ]
   },
   "item.gravilock_boots.spark": {
     "subtitle": "subtitles.item.gravilock_boots.spark",
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:items/spark",
+        "name": "foxcraft_dungeon_loot:items/gravilock_boots/spark",
         "volume": 0.5
       }
     ]
@@ -83,7 +93,7 @@
     "subtitle": "subtitles.item.gravilock_boots.zap",
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:items/zap",
+        "name": "foxcraft_dungeon_loot:items/gravilock_boots/zap",
         "volume": 0.5
       }
     ]
