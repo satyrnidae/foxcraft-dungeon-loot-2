@@ -12,7 +12,7 @@ function load {
     scoreboard objectives add satyrn.fdl.itemId.helmet dummy
 
     # Load functions are executed with no sender in context.
-    function #foxcraft_dungeon_loot:items/on_load
+    function #foxcraft_dungeon_loot:on_load
 
     tellraw @a ["",{"text":"Foxcraft Dungeon Loot","color":"gold"},{"text":" v<%config.version%> ","color":"gray"},{"text":"loaded successfully!"}]
 }
@@ -28,7 +28,7 @@ function tick {
     execute as @a store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
 
     # Tick functions are executed with a player in context at the player's location.
-    execute as @a at @s run function #foxcraft_dungeon_loot:items/on_tick
+    execute as @a at @s run function #foxcraft_dungeon_loot:on_tick
 
     # Reset statistics scoreboards
     execute as @a unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0
