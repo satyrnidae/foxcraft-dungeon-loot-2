@@ -3,7 +3,7 @@ function give {
 }
 
 function on_tick {
-    execute (if entity @s[scores={satyrn.fdl.custom.fallOneCm=40..}] if score @s satyrn.fdl.itemId.chestplate matches 50) {
+    execute (if entity @s[scores={satyrn.fdl.custom.fallOneCm=400..}] if score @s satyrn.fdl.itemId.chestplate matches 50) {
         execute (unless entity @s[nbt={Inventory:[{Slot:102b,tag:{Damage:431}}]}]) {
             effect give @s minecraft:slow_falling 3
 
