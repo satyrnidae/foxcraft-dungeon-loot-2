@@ -18,3 +18,13 @@ macro random {
 
     function foxcraft_dungeon_loot:math/random
 }
+
+macro remove_enchantment {
+    item replace entity @s weapon.mainhand from entity @p $$0
+    data remove entity @s HandItems[0].tag.Enchantments[{id:"$$1"}]
+    item replace entity @p $$0 from entity @s weapon.mainhand
+    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
+
+    playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @p ~ ~ ~ 1.0
+    particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10
+}
