@@ -11,3 +11,10 @@ macro roll {
     }
     kill @e[type=minecraft:item,nbt={Item:{tag:{Tags:["dice"]}}}]
 }
+
+macro random {
+    scoreboard objectives set @s satyrn.fdl.math.input1 $$0
+    scoreboard objectives set @s satyrn.fdl.math.input2 $$1
+
+    function foxcraft_dungeon_loot:math/random
+}
