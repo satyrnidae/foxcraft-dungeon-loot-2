@@ -6,7 +6,7 @@ function give {
 
 function on_tick {
     execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 45) {
-        macro roll d20
+        macro random 1 20
 
         execute (if score #random <%config.internalScoreboard%> matches 1) {
             # Crit fail. Player gets a bad omen.

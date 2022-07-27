@@ -15,7 +15,7 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 1.0
             title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
         } else {
-            macro roll d10
+            macro random 1 10
 
             execute (if score #random <%config.internalScoreboard%> matches 1) {
                 playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200.0

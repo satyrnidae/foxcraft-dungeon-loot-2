@@ -14,18 +14,18 @@ function on_tick {
         execute (unless score @s satyrn.fdl.bringerOfFear.cooldown matches 1..) {
             playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200 1
 
-            macro roll d2
+            macro random 1 20
 
-            execute (if score #random <%config.internalScoreboard%> matches 1) {
+            execute (if score #random <%config.internalScoreboard%> matches 1..10) {
                 effect give @s minecraft:bad_omen 1200
+                tellraw @s {"text":"A chill trickles down your spine.","color":"gray","italic":true}
+            } else execute (if score #random <%config.internalScoreboard%> matches 11..17) {
+                effect give @s minecraft:bad_omen 1200 2
+                tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
             } else {
-                macro roll d10
-
-                execute (if score #random <%config.internalScoreboard%> matches 1..7) {
-                    effect give @s minecraft:bad_omen 1200 2
-                } else {
-                    effect give @s minecraft:bad_omen 1200 4
-                }
+                effect give @s minecraft:bad_omen 1200 4
+                weather thunder 15
+                tellraw @s {"text":"The sky darkens as the horns blare. What have you done?","color":"gray","italic":true}
             }
 
             execute (if entity @s[nbt=!{playerGameType:1}]) {

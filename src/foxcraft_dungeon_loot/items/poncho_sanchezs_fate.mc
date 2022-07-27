@@ -12,7 +12,7 @@ function on_tick {
     # Executes this block if the user has used Poncho Sanchez's Fate
     execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 48) {
         execute (unless score @s satyrn.fdl.ponchoSanchezsFate.cooldown matches 1..) {
-            macro roll d9
+            macro random 1 9
 
             LOOP(8,i) {
                 execute if score #random <%config.internalScoreboard%> matches <%i%> run playsound minecraft:item.goat_horn.sound.<%i%> ambient @s ~ ~ ~ 100.0 1.0

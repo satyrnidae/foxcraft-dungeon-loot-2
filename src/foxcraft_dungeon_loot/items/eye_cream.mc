@@ -14,7 +14,7 @@ function on_tick {
 
         # Roll a D5. If you roll a 1, blindness is applied for 5 minutes.
         #   Otherwise, applies night vision for 20 seconds.
-        macro roll d5
+        macro random 1 5
         execute (if score #random <%config.internalScoreboard%> matches 1) {
             effect give @s minecraft:blindness 300
         } else {
