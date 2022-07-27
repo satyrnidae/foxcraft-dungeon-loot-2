@@ -13,7 +13,7 @@ function on_load {
 # Handles events for the item. Executes every tick. Be extra mindful of NBT scans!
 # Executed in the context and at the location of a single player.
 function on_tick {
-    execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fd.itemId.mainHand matches 37) {
+    execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 37 run {
         execute (if score @s satyrn.fdl.downpourAmulet.cooldown matches 1..) {
             # Warn the player that the item cooldown is currently active.
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
@@ -32,7 +32,7 @@ function on_tick {
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
-            execute (unless entity @s[nbt={playerGameType:1}]) {
+            execute unless entity @s[nbt={playerGameType:1}] run {
                 scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
                 title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
                 execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
@@ -42,18 +42,17 @@ function on_tick {
                 }
 
                 # Break item if damage is maxed out.
-                execute (if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}]) {
+                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421954}
                 }
             }
         }
     }
     # Increment cooldown timer
-    execute (if score @s satyrn.fdl.downpourAmulet matches 1..) {
-        scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 1
-    }
+    execute if score @s satyrn.fdl.downpourAmulet matches 1.. run scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 100
+
     # Reset cooldown after 5 minutes
-    execute (if score @s satyrn.fdl.downpourAmulet.cooldown matches 6000) {
+    execute if score @s satyrn.fdl.downpourAmulet.cooldown matches 6000.. run {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Downpour Amulet is ready to be used once more.","color":"dark_purple"}

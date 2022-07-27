@@ -3,7 +3,7 @@ import ../../macros.mcm
 # Applies effects every 2 seconds.
 function clock_2s {
     schedule function foxcraft_dungeon_loot:items/idol_of_melimonas/clock_2s 2s
-    execute (as @a if score @s satyrn.fdl.itemId.offHand matches 47) {
+    execute as @a if score @s satyrn.fdl.itemId.offHand matches 47 run {
         effect give @s minecraft:jump_boost 3 1 true
         effect give @s minecraft:invisibility 30 0 true
     }

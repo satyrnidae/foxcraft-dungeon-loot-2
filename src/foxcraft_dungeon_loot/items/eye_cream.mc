@@ -7,7 +7,7 @@ function give {
 
 # Handles the item updates each tick. Executed in the context of a single player.
 function on_tick {
-    execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 42) {
+    execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 42 run {
         playsound minecraft:block.slime_block.break player @s ~ ~ ~ 1.0 1.5
 
         effect give @s minecraft:blindness 3 0 true
@@ -22,7 +22,7 @@ function on_tick {
         }
 
         # Break item
-        execute (unless entity @s[nbt={playerGameType:1}]) {
+        execute unless entity @s[nbt={playerGameType:1}] run {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         }
     }

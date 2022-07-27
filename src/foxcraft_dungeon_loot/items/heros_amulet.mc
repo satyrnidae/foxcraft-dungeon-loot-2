@@ -5,7 +5,7 @@ function give {
 }
 
 function on_tick {
-    execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 45) {
+    execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 45 run {
         macro random 1 20
 
         execute (if score #random <%config.internalScoreboard%> matches 1) {
@@ -32,7 +32,7 @@ function on_tick {
             effect give @s minecraft:hero_of_the_village 24000 0 false
         }
 
-        execute (unless entity @s[nbt={playerGameType:1}]) {
+        execute unless entity @s[nbt={playerGameType:1}] run {
             macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421952}
         }
     }

@@ -9,7 +9,7 @@ function on_load {
 }
 
 function on_tick {
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 43 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1..) {
+    execute if score @s satyrn.fdl.itemId.mainHand matches 43 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
         execute (if score @s satyrn.fdl.featherOfQuetZala.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
             title @s actionbar {"text":"The Feather of Quet-Zala is on cooldown and cannot be used.","color":"dark_purple"}
@@ -20,7 +20,7 @@ function on_tick {
             effect give @s minecraft:levitation 30
 
             # If the player is not in creative mode, destroy the feather and trigger the cooldown.
-            execute (unless entity @s[nbt={playerGameType:1}]) {
+            execute unless entity @s[nbt={playerGameType:1}] run {
                 scoreboard players set @s satyrn.fdl.featherOfQuetZala.cooldown 1
                 title @s actionbar {"text":"The Feather of Quet-Zala is now on cooldown for 30 seconds.","color":"dark_purple"}
 
@@ -33,7 +33,7 @@ function on_tick {
     execute if score @s satyrn.fdl.featherOfQuetZala.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.featherOfQuetZala.cooldown 1
 
     # Reset the cooldown timer after 30 seconds.
-    execute (if score @s satyrn.fdl.featherOfQuetZala.cooldown matches 600) {
+    execute if score @s satyrn.fdl.featherOfQuetZala.cooldown matches 600.. run {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5 1
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Feather of Quet-Zala is ready to be used once more.","color":"dark_purple"}
