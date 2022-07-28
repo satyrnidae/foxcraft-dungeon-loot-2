@@ -24,6 +24,7 @@
     "foxcraft_dungeon_loot:items/totem_of_deilona/on_load",
     "foxcraft_dungeon_loot:items/totem_of_ekila/on_load",
     "foxcraft_dungeon_loot:items/totem_of_mysteria/on_load",
-    "foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/on_load"
+    "foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/on_load",
+    "foxcraft_dungeon_loot:items/war_hogs_seething_hatred/on_load"
   ]
 }
