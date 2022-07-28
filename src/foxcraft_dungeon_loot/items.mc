@@ -120,12 +120,6 @@ dir aurelias_lucky_compass {
     }
 }
 
-dir totem_of_ekila {
-    function give {
-        give @s minecraft:totem_of_undying{DungeonLootId:19,CustomModelData:421953,AttributeModifiers:[{AttributeName:"generic.max_health",Amount:-0.5,Slot:offhand,Operation:1,Name:"generic.max_health",UUID:[I;-122527,383360,12513,-766720]},{AttributeName:"generic.attack_damage",Amount:1,Slot:offhand,Operation:1,Name:"generic.attack_damage",UUID:[I;-122527,383460,12513,-766920]},{AttributeName:"generic.movement_speed",Amount:0.4,Slot:offhand,Operation:1,Name:"generic.movement_speed",UUID:[I;-122527,383560,12513,-767120]},{AttributeName:"generic.armor",Amount:0.2,Slot:offhand,Operation:1,Name:"generic.armor",UUID:[I;-122527,383660,12513,-767320]}],display:{Name:'[{"text":"Totem of Ekila","italic":false,"color":"green"}]',Lore:['[{"text":"May Ekila, the God of the Sky, smile upon","italic":true}]','[{"text":"thee!","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
-    }
-}
-
 dir totem_of_gnumoch {
     function give {
         give @s minecraft:totem_of_undying{DungeonLootId:20,CustomModelData:421954,AttributeModifiers:[{AttributeName:"generic.knockback_resistance",Amount:1,Slot:offhand,Name:"generic.knockback_resistance",UUID:[I;-122527,391760,12513,-783520]},{AttributeName:"generic.movement_speed",Amount:-0.4,Slot:offhand,Operation:1,Name:"generic.movement_speed",UUID:[I;-122527,391860,12513,-783720]},{AttributeName:"generic.armor",Amount:20,Slot:offhand,Name:"generic.armor",UUID:[I;-122527,391960,12513,-783920]},{AttributeName:"generic.armor_toughness",Amount:5,Slot:offhand,Name:"generic.armor_toughness",UUID:[I;-122527,392060,12513,-784120]}],display:{Name:'[{"text":"Totem of Gnumoch","italic":false,"color":"green"}]',Lore:['[{"text":"May Gnumoch, the God of the Earth,","italic":true}]','[{"text":"smile upon thee!","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
