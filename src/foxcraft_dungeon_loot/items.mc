@@ -120,12 +120,6 @@ dir aurelias_lucky_compass {
     }
 }
 
-dir totem_of_gnumoch {
-    function give {
-        give @s minecraft:totem_of_undying{DungeonLootId:20,CustomModelData:421954,AttributeModifiers:[{AttributeName:"generic.knockback_resistance",Amount:1,Slot:offhand,Name:"generic.knockback_resistance",UUID:[I;-122527,391760,12513,-783520]},{AttributeName:"generic.movement_speed",Amount:-0.4,Slot:offhand,Operation:1,Name:"generic.movement_speed",UUID:[I;-122527,391860,12513,-783720]},{AttributeName:"generic.armor",Amount:20,Slot:offhand,Name:"generic.armor",UUID:[I;-122527,391960,12513,-783920]},{AttributeName:"generic.armor_toughness",Amount:5,Slot:offhand,Name:"generic.armor_toughness",UUID:[I;-122527,392060,12513,-784120]}],display:{Name:'[{"text":"Totem of Gnumoch","italic":false,"color":"green"}]',Lore:['[{"text":"May Gnumoch, the God of the Earth,","italic":true}]','[{"text":"smile upon thee!","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
-    }
-}
-
 dir totem_of_undying {
     function give {
         give @s totem_of_undying{DungeonLootId:21,display:{Name:'[{"text":"Totem of Undying","italic":false,"color":"yellow"}]',Lore:['[{"text":"Pick yourself up and try again.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']}} 1
