@@ -87,6 +87,12 @@
         "custom_model_data": 4219513
       },
       "model": "foxcraft_dungeon_loot:item/feather_of_quet_zala"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219514
+      },
+      "model": "foxcraft_dungeon_loot:item/d4"
     }
   ]
 }

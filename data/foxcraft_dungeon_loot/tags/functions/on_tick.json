@@ -18,6 +18,7 @@
     "foxcraft_dungeon_loot:items/totem_of_gnumoch/on_tick",
     "foxcraft_dungeon_loot:items/wand_of_block_state_editing/on_tick",
     "foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/on_tick",
-    "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_tick"
+    "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_tick",
+    "foxcraft_dungeon_loot:items/d4/on_tick"
   ]
 }
