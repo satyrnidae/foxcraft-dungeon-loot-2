@@ -20,6 +20,7 @@
     "foxcraft_dungeon_loot:items/scripture_of_cleansing/on_load",
     "foxcraft_dungeon_loot:items/stompies/on_load",
     "foxcraft_dungeon_loot:items/talking_stick/on_load",
-    "foxcraft_dungeon_loot:items/totem_of_dendris/on_load"
+    "foxcraft_dungeon_loot:items/totem_of_dendris/on_load",
+    "foxcraft_dungeon_loot:items/totem_of_deilona/on_load"
   ]
 }
