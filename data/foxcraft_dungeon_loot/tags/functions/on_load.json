@@ -18,6 +18,7 @@
     "foxcraft_dungeon_loot:items/poncho_sanchezs_fate/on_load",
     "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_load",
     "foxcraft_dungeon_loot:items/scripture_of_cleansing/on_load",
-    "foxcraft_dungeon_loot:items/stompies/on_load"
+    "foxcraft_dungeon_loot:items/stompies/on_load",
+    "foxcraft_dungeon_loot:items/talking_stick/on_load"
   ]
 }
