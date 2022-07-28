@@ -1,6 +1,14 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "foxcraft_dungeon_loot:item/debug_stick"
-  }
+    "layer0": "minecraft:item/stick"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 421950
+      },
+      "model": "foxcraft_dungeon_loot:item/debug_stick"
+    }
+  ]
 }

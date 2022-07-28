@@ -15,6 +15,7 @@
     "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_tick",
     "foxcraft_dungeon_loot:items/quet_zalas_beloved/on_tick",
     "foxcraft_dungeon_loot:items/scripture_of_cleansing/on_tick",
-    "foxcraft_dungeon_loot:items/totem_of_gnumoch/on_tick"
+    "foxcraft_dungeon_loot:items/totem_of_gnumoch/on_tick",
+    "foxcraft_dungeon_loot:items/wand_of_block_state_editing/on_tick"
   ]
 }
