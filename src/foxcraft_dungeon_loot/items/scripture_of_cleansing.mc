@@ -131,6 +131,8 @@ function on_tick {
             }
             kill @e[type=minecraft:armor_stand,tag=satyrn.fdl.cleaner,limit=1,sort=nearest]
             execute (if score #test <%config.internalScoreboard%> matches 1) {
+                playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @p ~ ~ ~ 1.0
+                particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10
                 summon minecraft:experience_orb ~ ~ ~ {Value:6}
             } else {
                 playsound minecraft:block.fire.extinguish player @s ~ ~ ~ 1.0 2.0
