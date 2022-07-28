@@ -32,13 +32,13 @@ function on_tick {
                 effect give @s minecraft:absorption 60 1
             }
 
-            execute (unless entity @s[nbt={playerGameType:1}]) {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 scoreboard players set @s satyrn.fdl.ponchoSanchezsFate.cooldown 1
                 title @s actionbar {"text":"Poncho Sanchez's Fate is now on cooldown for 5 minutes.","color":"dark_purple"}
 
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:poncho_sanchezs_fate/damage
 
-                execute (if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}]) {
+                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421950}
                 }
             }

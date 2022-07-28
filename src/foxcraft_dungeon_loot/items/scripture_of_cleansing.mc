@@ -139,7 +139,7 @@ function on_tick {
             }
 
             # Really banking on #test's value in the internal scoreboard being set to 1 or 0 at this point :)
-            execute unless entity @s[nbt={playerGameType:1}] run {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 execute (if score #test <%config.internalScoreboard%> matches 1) {
                     # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me :)))))
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}

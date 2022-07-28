@@ -9,7 +9,7 @@ function clock_10t {
         # Check if we successfully cleared the levitation effect
         execute if score #test <%config.internalScoreboard%> matches 1 run {
             # NBT scan is only performed when levitation effect is removed.
-            execute (if entity @s[nbt={OnGround:1b}]) {
+            execute (if score @s satyrn.fdl.custom.onGround matches 1) {
                 playsound foxcraft_dungeon_loot:item.gravilock_boots.spark player @s ~ ~ ~ 1.0 1.0
             } else {
                 playsound foxcraft_dungeon_loot:item.gravilock_boots.zap player @s ~ ~ ~ 1.0 0.5

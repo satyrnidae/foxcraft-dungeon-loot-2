@@ -22,7 +22,7 @@ function on_tick {
         }
 
         # Break item
-        execute unless entity @s[nbt={playerGameType:1}] run {
+        execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         }
     }

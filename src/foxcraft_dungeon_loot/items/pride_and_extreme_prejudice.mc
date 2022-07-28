@@ -10,7 +10,7 @@ function on_load {
 }
 
 function on_tick {
-    execute (if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 49) {
+    execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 49 run {
         execute (if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 1.0
             title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
@@ -35,7 +35,7 @@ function on_tick {
                 tellraw @s {"text":"A warm breeze calms your nerves.","color":"gray","italic":true}
             }
 
-            execute (unless entity @s[nbt={playerGameType:1}]) {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 scoreboard players add @s satyrn.fdl.prideAndExtremePrejudice.cooldown 1
                 title @s actionbar {"text":"Pride and Extreme Prejudice is now on cooldown for 20 minutes.","color":"dark_purple"}
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:4219511}

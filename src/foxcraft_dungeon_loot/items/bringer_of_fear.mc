@@ -31,7 +31,7 @@ function on_tick {
                 tellraw @s {"text":"The sky darkens as the horns blare. What have you done?","color":"gray","italic":true}
             }
 
-            execute unless entity @s[nbt={playerGameType:1}] run {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 scoreboard players set @s satyrn.fdl.bringerOfFear.cooldown 1
                 title @s actionbar {"text":"Bringer of Fear is now on cooldown for 20 minutes.","color":"dark_purple"}
 

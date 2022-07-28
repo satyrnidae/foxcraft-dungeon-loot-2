@@ -12,7 +12,7 @@ function on_tick {
         effect give @s minecraft:hunger 60
         effect give @s minecraft:fire_resistance 600
 
-        execute unless entity @s[nbt={playerGameType:1}] run {
+        execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         }
     }

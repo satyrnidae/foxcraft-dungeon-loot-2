@@ -3,11 +3,11 @@ function give {
 }
 
 function on_tick {
-    execute if entity @s[scores={satyrn.fdl.custom.fallOneCm=400..}] if score @s satyrn.fdl.itemId.chestplate matches 50 run {
-        execute if entity @s[nbt={FallFlying:0b}] unless entity @s[nbt={Inventory:[{Slot:102b,tag:{Damage:431}}]}] run {
+    execute if entity @s[scores={satyrn.fdl.custom.fallOneCm=400..}] if score @s satyrn.fdl.itemId.chestplate matches 50 if score @s satyrn.fdl.custom.fallFlying matches 0 run {
+        execute unless entity @s[nbt={Inventory:[{Slot:102b,tag:{Damage:431}}]}] run {
             effect give @s minecraft:slow_falling 3
 
-            execute unless entity @s[nbt={playerGameType:1}] run {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 item modify entity @s armor.chest foxcraft_dungeon_loot:quet_zalas_beloved/damage_slow_falling
             }
         }

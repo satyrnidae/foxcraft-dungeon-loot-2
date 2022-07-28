@@ -22,7 +22,7 @@ function on_tick {
             particle minecraft:heart ~ ~1 ~ 20 0.5 20 0.1 50 normal @a[distance=0.0001..20]
 
             # Break the item and set cooldown for players who are not creative enough ;P
-            execute unless entity @s[nbt={playerGameType:1}] run {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 scoreboard players set @s satyrn.fdl.deilonasHolyBlessings.cooldown 1
                 title @s actionbar {"text":"Deilona's Holy Blessings is now on cooldown for 10 seconds.","color":"dark_purple"}
 

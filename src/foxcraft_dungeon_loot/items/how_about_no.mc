@@ -17,7 +17,7 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 2.0
             kill @e[type=#foxcraft_dungeon_loot:hostile,distance=..50,nbt=!{PersistenceRequired:1b}]
 
-            execute unless entity @s[nbt={playerGameType:1}] run {
+            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
                 scoreboard players set @s satyrn.fdl.howAboutNo.cooldown 1
                 title @s actionbar {"text":"How About No is now on cooldown for 5 minutes.","color":"dark_purple"}
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421959}
