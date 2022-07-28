@@ -1,6 +1,6 @@
 function clock_2s {
     schedule function foxcraft_dungeon_loot:items/war_hogs_seething_hatred/clock_2s 2s
-    execute if score @s satyrn.fdl.itemId.leggings matches 60 run effect give @s minecraft:fire_resistance 3
+    execute as @a if score @s satyrn.fdl.itemId.leggings matches 60 run effect give @s minecraft:fire_resistance 3
 }
 
 function give {

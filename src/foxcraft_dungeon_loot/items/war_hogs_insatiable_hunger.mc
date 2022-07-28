@@ -1,6 +1,6 @@
 function clock_2s {
     schedule function foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/clock_2s 2s
-    execute if score @s satyrn.fdl.itemId.chestplate matches 59 run effect give @s minecraft:hunger 10 1 true
+    execute as @a if score @s satyrn.fdl.itemId.chestplate matches 59 run effect give @s minecraft:hunger 10 1 true
 }
 
 function give {
