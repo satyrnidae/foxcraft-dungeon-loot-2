@@ -29,6 +29,9 @@
     "foxcraft_dungeon_loot:items/totem_of_dendris/give",
     "foxcraft_dungeon_loot:items/totem_of_deilona/give",
     "foxcraft_dungeon_loot:items/totem_of_mysteria/give",
-    "foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/give"
+    "foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/give",
+    "foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/give",
+    "foxcraft_dungeon_loot:items/war_hogs_seething_hatred/give",
+    "foxcraft_dungeon_loot:items/wing_of_ouet_zala/give"
   ]
 }
