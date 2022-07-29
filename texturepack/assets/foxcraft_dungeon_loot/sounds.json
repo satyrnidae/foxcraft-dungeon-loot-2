@@ -37,37 +37,91 @@
   "item.dice.d4": {
     "subtitle": "subtitles.item.dice.d4",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d4"
+      {
+        "name": "foxcraft_dungeon_loot:items/dice/d4/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d4/roll2",
+      "foxcraft_dungeon_loot:items/dice/d4/roll3",
+      "foxcraft_dungeon_loot:items/dice/d4/roll4",
+      "foxcraft_dungeon_loot:items/dice/d4/roll5",
+      "foxcraft_dungeon_loot:items/dice/d4/roll6",
+      "foxcraft_dungeon_loot:items/dice/d4/roll7"
     ]
   },
   "item.dice.d6": {
     "subtitle": "subtitles.item.dice.d6",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d6"
+      {
+        "name": "foxcraft_dungeon_loot:items/dice/d6/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d6/roll2",
+      "foxcraft_dungeon_loot:items/dice/d6/roll3",
+      "foxcraft_dungeon_loot:items/dice/d6/roll4",
+      "foxcraft_dungeon_loot:items/dice/d6/roll5",
+      "foxcraft_dungeon_loot:items/dice/d6/roll6",
+      "foxcraft_dungeon_loot:items/dice/d6/roll7"
     ]
   },
   "item.dice.d8": {
     "subtitle": "subtitles.item.dice.d8",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d8"
+      {
+        "name":"foxcraft_dungeon_loot:items/dice/d8/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d8/roll2",
+      "foxcraft_dungeon_loot:items/dice/d8/roll3",
+      "foxcraft_dungeon_loot:items/dice/d8/roll4",
+      "foxcraft_dungeon_loot:items/dice/d8/roll5",
+      "foxcraft_dungeon_loot:items/dice/d8/roll6",
+      "foxcraft_dungeon_loot:items/dice/d8/roll7"
     ]
   },
   "item.dice.d10": {
     "subtitle": "subtitles.item.dice.d10",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d10"
+      {
+        "name":"foxcraft_dungeon_loot:items/dice/d10/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d10/roll2",
+      "foxcraft_dungeon_loot:items/dice/d10/roll3",
+      "foxcraft_dungeon_loot:items/dice/d10/roll4",
+      "foxcraft_dungeon_loot:items/dice/d10/roll5",
+      "foxcraft_dungeon_loot:items/dice/d10/roll6",
+      "foxcraft_dungeon_loot:items/dice/d10/roll7"
     ]
   },
   "item.dice.d12": {
     "subtitle": "subtitles.item.dice.d12",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d12"
+      {
+        "name":"foxcraft_dungeon_loot:items/dice/d12/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d12/roll2",
+      "foxcraft_dungeon_loot:items/dice/d12/roll3",
+      "foxcraft_dungeon_loot:items/dice/d12/roll4",
+      "foxcraft_dungeon_loot:items/dice/d12/roll5",
+      "foxcraft_dungeon_loot:items/dice/d12/roll6",
+      "foxcraft_dungeon_loot:items/dice/d12/roll7"
     ]
   },
   "item.dice.d20": {
     "subtitle": "subtitles.item.dice.d20",
     "sounds": [
-      "foxcraft_dungeon_loot:items/dice/roll_d20"
+      {
+        "name":"foxcraft_dungeon_loot:items/dice/d20/roll1",
+        "volume": 10.0
+      },
+      "foxcraft_dungeon_loot:items/dice/d20/roll2",
+      "foxcraft_dungeon_loot:items/dice/d20/roll3",
+      "foxcraft_dungeon_loot:items/dice/d20/roll4",
+      "foxcraft_dungeon_loot:items/dice/d20/roll5",
+      "foxcraft_dungeon_loot:items/dice/d20/roll6",
+      "foxcraft_dungeon_loot:items/dice/d20/roll7"
     ]
   },
   "item.grab_bag.open": {
