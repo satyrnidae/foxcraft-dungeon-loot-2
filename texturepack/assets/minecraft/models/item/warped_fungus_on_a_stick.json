@@ -93,6 +93,36 @@
         "custom_model_data": 4219514
       },
       "model": "foxcraft_dungeon_loot:item/d4"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219515
+      },
+      "model": "foxcraft_dungeon_loot:item/d6"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219516
+      },
+      "model": "foxcraft_dungeon_loot:item/d8"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219517
+      },
+      "model": "foxcraft_dungeon_loot:item/d10"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219518
+      },
+      "model": "foxcraft_dungeon_loot:item/d12"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219519
+      },
+      "model": "foxcraft_dungeon_loot:item/d20"
     }
   ]
 }

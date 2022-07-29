@@ -19,6 +19,11 @@
     "foxcraft_dungeon_loot:items/wand_of_block_state_editing/on_tick",
     "foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/on_tick",
     "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_tick",
-    "foxcraft_dungeon_loot:items/d4/on_tick"
+    "foxcraft_dungeon_loot:items/d4/on_tick",
+    "foxcraft_dungeon_loot:items/d6/on_tick",
+    "foxcraft_dungeon_loot:items/d8/on_tick",
+    "foxcraft_dungeon_loot:items/d10/on_tick",
+    "foxcraft_dungeon_loot:items/d12/on_tick",
+    "foxcraft_dungeon_loot:items/d20/on_tick"
   ]
 }
