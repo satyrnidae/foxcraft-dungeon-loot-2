@@ -55,11 +55,10 @@
         "",
         [
           {
-            "text": "Wings of the Devil:",
+            "text": "Wings of the Devil: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "While holding the idol",
             "color": "gray",
@@ -78,11 +77,10 @@
         },
         [
           {
-            "text": "Pass Without Trace:",
+            "text": "Pass Without Trace: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "When held in your",
             "color": "gray",

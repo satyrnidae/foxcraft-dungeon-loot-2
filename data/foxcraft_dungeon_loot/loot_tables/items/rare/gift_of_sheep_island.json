@@ -36,11 +36,10 @@
         "",
         [
           {
-            "text": "Insulative Cover:",
+            "text": "Insulative Cover: ",
             "color": "aqua",
             "italic": false
           },
-          " ",
           {
             "text": "Applies 10 minutes of fire",
             "color": "gray",
@@ -54,13 +53,12 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
-            "text": "This item is consumed on use.",
+            "text": "This item is consumed upon use.",
             "color": "gray",
             "italic": false
           }

@@ -36,36 +36,32 @@
         "",
         [
           {
-            "text": "Darkness Whispers:",
+            "text": "The Darkness Whispers Back: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
-            "text": "Rolls a D20. The result",
+            "text": "Rolls a D20. The",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "will determine the outcome:",
+          "text": "result will determine the outcome:",
           "color": "gray",
           "italic": false
         },
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "1-10:",
+            "text": "1-10: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Inflicts Bad Omen I.",
             "color": "gray",
@@ -73,38 +69,33 @@
           }
         ],
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "11-17:",
+            "text": "11-17: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Inflicts Bad Omen III.",
             "color": "gray",
             "italic": false
           }
-        ],[
-          " ",
+        ],
+        [
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "18-20:",
+            "text": "18-20: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Inflicts Bad Omen V.",
             "color": "gray",
@@ -118,11 +109,10 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
             "text": "The item will be consumed upon use.",
             "color": "gray",

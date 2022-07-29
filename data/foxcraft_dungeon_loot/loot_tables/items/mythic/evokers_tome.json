@@ -35,11 +35,10 @@
         "",
         [
           {
-            "text": "Jaw Trap:",
+            "text": "Jaw Trap: ",
             "italic": false,
             "color": "green"
           },
-          " ",
           {
             "text": "Summons a line of Evoker Fangs in",
             "color": "gray",
@@ -53,11 +52,10 @@
         },
         [
           {
-            "text": "Sharknado:",
+            "text": "Sharknado: ",
             "italic": false,
             "color": "green"
           },
-          " ",
           {
             "text": "While crouched, summons a whirling",
             "color": "gray",

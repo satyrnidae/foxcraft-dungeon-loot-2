@@ -90,11 +90,10 @@
         "",
         [
           {
-            "text": "Spring-Loaded Heads:",
+            "text": "Spring-Loaded Heads: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "Tears through the",
             "color": "gray",

@@ -129,11 +129,10 @@
         "",
         [
           {
-            "text": "Estudinae's Constitution:",
+            "text": "Estudinae's Constitution: ",
             "italic": false,
             "color": "light_purple"
           },
-          " ",
           {
             "text": "Grants Conduit Power",
             "italic": false,

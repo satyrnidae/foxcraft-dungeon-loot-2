@@ -129,11 +129,10 @@
         "",
         [
           {
-            "text": "Estudinae's Fortitude:",
+            "text": "Estudinae's Fortitude: ",
             "italic": false,
             "color": "light_purple"
           },
-          " ",
           {
             "text": "Grants extra health at",
             "color": "gray",

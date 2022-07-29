@@ -36,11 +36,10 @@
         "",
         [
           {
-            "text": "Act of Kindness:",
+            "text": "Act of Kindness: ",
             "italic": false,
             "color": "green"
           },
-          " ",
           {
             "text": "Courses with the holy power",
             "color": "gray",
@@ -64,11 +63,10 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "italic": false,
             "color": "red"
           },
-          " ",
           {
             "text": "This item is consumed upon use.",
             "color": "gray"

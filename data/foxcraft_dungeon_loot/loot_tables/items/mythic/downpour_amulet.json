@@ -35,11 +35,10 @@
         "",
         [
           {
-            "text": "Drizzle:",
+            "text": "Drizzle: ",
             "color": "light_purple",
             "italic": false
           },
-          " ",
           {
             "text": "When used, summons a rainstorm",
             "color": "gray",
@@ -52,26 +51,23 @@
           "italic": false
         },
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
             "text": "Durability is decreased by 4%.",
             "color": "red",
-            "italic": true
+            "italic": false
           }
         ],
         [
           {
-            "text": "Downpour:",
+            "text": "Downpour: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "When used while crouching,",
             "color": "gray",
@@ -84,17 +80,15 @@
           "italic": true
         },
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
             "text": "Durability is decreased by 13%.",
             "color": "red",
-            "italic": true
+            "italic": false
           }
         ]
       ]
