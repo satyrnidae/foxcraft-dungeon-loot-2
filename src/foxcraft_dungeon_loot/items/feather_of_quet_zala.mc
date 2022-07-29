@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:43,Unbreakable:1,CustomModelData:4219513,display:{Name:'[{"text":"The Feather of Quet-Zala","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Quet-Zala, God of the Winds, gives unto"}]','[{"text":"you this gift. May it inspire you to","italic":true}]','[{"text":"reach new heights.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Wing of Quet-Zala:","italic":false,"color":"light_purple"},{"text":" Upon use, applies 30","italic":false,"color":"gray"}]','[{"text":"seconds Levitation.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile:","italic":false,"color":"red"},{"text":" The item is consumed upon use.","color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:5} 1
+    macro give epic/feather_of_quet_zala
 }
 
 function on_load {
