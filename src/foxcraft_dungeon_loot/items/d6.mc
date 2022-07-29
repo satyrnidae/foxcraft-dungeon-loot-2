@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s warped_fungus_on_a_stick{DungeonLootId:65,Unbreakable:1,CustomModelData:4219515,display:{Name:'[{"text":"D6","italic":false}]',Lore:['[{"text":"A simple six-sided die."}]','[{"text":"Rarity: ","italic":true},{"text":"Common","color":"white"}]']}} 1
+    loot give @s loot foxcraft_dungeon_loot:items/common/d6
 }
 
 function on_tick {
