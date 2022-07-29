@@ -6,37 +6,37 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:warped_fungus_on_a_stick",
-          "functions": [
-            {
-              "function": "minecraft:set_name",
-              "name": {
-                "text": "D20",
-                "color": "white",
-                "italic": false
-              }
-            },
-            {
-              "function": "minecraft:set_lore",
-              "lore": [
-                "A simple twenty-sided die.",
-                [
-                  "Rarity: ",
-                  {
-                    "text": "Common",
-                    "color": "white",
-                    "italic": true
-                  }
-                ]
-              ]
-            },
-            {
-              "function": "minecraft:set_nbt",
-              "tag": "{DungeonLootId:69,Unbreakable:1,CustomModelData:4219519,HideFlags:4}"
-            }
-          ]
+          "name": "minecraft:warped_fungus_on_a_stick"
         }
       ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "D20",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A simple twenty-sided die.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:69,Unbreakable:1,CustomModelData:4219519,HideFlags:4}"
     }
   ]
 }
