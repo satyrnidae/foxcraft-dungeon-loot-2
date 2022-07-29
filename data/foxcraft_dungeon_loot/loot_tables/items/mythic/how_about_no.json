@@ -1,0 +1,83 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "How About No?",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "\"I can't deal with this right now. Do",
+        "you know how much crap I've got going on?",
+        "I have things to do! I can't be here that",
+        "long! So go on! Get! Or else!\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Beset and Beleaguered:",
+            "color": "green",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Upon use, kills all",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "hostile mobs in a 50-meter radius.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "This item is consumed upon use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:46,Unbreakable:1,CustomModelData:421959,HideFlags:5}"
+    }
+  ]
+}
