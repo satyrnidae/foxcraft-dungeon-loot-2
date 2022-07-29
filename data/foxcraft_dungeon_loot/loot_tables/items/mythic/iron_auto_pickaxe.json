@@ -1,0 +1,20 @@
+{
+  "__comment": "Albatross Heavy Industries® Auto-Pickaxe™ - Iron Variant",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:iron_pickaxe",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{DungeonLootId:32,CustomModelData:421951,display:{Name:'[{\"text\":\"Albatross Heavy Industries® Auto-Pickaxe™\",\"italic\":false,\"color\":\"green\"}]',Lore:['[{\"text\":\"Haste II\",\"italic\":false,\"color\":\"gray\"},{\"text\":\"\",\"italic\":false,\"color\":\"dark_purple\"}]','[{\"text\":\"The new Albatross Heavy Industries®\",\"italic\":true,\"color\":\"dark_purple\"}]','[{\"text\":\"Auto-Pickaxe™: For all your tunneling needs!\",\"italic\":true,\"color\":\"dark_purple\"}]','[{\"text\":\"Rarity: \",\"italic\":true,\"color\":\"dark_purple\"},{\"text\":\"Mythic\",\"color\":\"green\",\"italic\":true}]']},Enchantments:[{id:\"minecraft:efficiency\",lvl:10},{id:\"minecraft:mending\",lvl:1},{id:\"minecraft:silk_touch\",lvl:1},{id:\"minecraft:unbreaking\",lvl:5}]}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
