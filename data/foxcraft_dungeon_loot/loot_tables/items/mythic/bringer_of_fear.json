@@ -48,21 +48,65 @@
                   "color": "gray",
                   "italic": false
                 },
-                {
-                  "text": " - 1-10: Bad Omen I",
-                  "color": "gray",
-                  "italic": false
-                },
-                {
-                  "text": " - 11-17: Bad Omen III",
-                  "color": "gray",
-                  "italic": false
-                },
-                {
-                  "text": " - 18-20: Bad Omen V",
-                  "color": "gray",
-                  "italic": false
-                },
+                [
+                  " ",
+                  {
+                    "text": "-",
+                    "color": "gray",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "1-10:",
+                    "color": "white",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Inflicts Bad Omen I.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                [
+                  " ",
+                  {
+                    "text": "-",
+                    "color": "gray",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "11-17:",
+                    "color": "white",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Inflicts Bad Omen III.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],[
+                  " ",
+                  {
+                    "text": "-",
+                    "color": "gray",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "18-20:",
+                    "color": "white",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Inflicts Bad Omen V.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
                 {
                   "text": "All effects are applied for 20 minutes.",
                   "color": "gray",

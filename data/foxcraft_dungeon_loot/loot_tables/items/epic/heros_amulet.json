@@ -1,0 +1,165 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Hero's Amulet",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "\"Shouldst thou be a True Hero, I shall grant",
+        "thee a boon unparalleled.\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple"
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Hero's Chance:",
+            "color": "light_purple",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Rolls a D20 with a DC of 10.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "The outcome of the roll determines the",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "effect:",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          " ",
+          {
+            "text": "-",
+            "color": "gray",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Crit Fail:",
+            "color": "white",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Inflicts Bad Omen I.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          " ",
+          {
+            "text": "-",
+            "color": "gray",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Fail:",
+            "color": "white",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Summons a Vex at your position.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          " ",
+          {
+            "text": "-",
+            "color": "gray",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Success:",
+            "color": "white",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Drops various valuable items.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          " ",
+          {
+            "text": "-",
+            "color": "gray",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Crit Success:",
+            "color": "white",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Grants Hero of the Village.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "This item is consumed on use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:45,Unbreakable:1,CustomModelData:421952,HideFlags:5}"
+    }
+  ]
+}
