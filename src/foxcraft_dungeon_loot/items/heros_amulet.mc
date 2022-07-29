@@ -24,7 +24,7 @@ function on_tick {
             title @s actionbar {"text":"You are pure of heart, but you are not a true hero.","color":"dark_purple"}
             playsound minecraft:entity.player.levelup player @s ~ ~ ~ 300 1
             particle minecraft:smoke ^ ^1 ^1.5 0 0.5 0.5 0.1 20
-            loot spawn ^ ^1 ^1 loot foxcraft_dungeon_loot:heros_amulet/loot
+            loot spawn ^ ^1 ^1 loot foxcraft_dungeon_loot:heros_amulet
         } else {
             # Success. Player gets Hero of the Village.
             title @s actionbar {"text":"You are a true hero.","color":"dark_purple"}
