@@ -13,8 +13,8 @@
       ],
       "functions": [
         {
-            "function": "minecraft:set_nbt",
-            "tag": "{\"Tags\":[\"dice\"]}"
+          "function": "minecraft:set_nbt",
+          "tag": "{\"Tags\":[\"dice\"]}"
         }
       ]
     }
