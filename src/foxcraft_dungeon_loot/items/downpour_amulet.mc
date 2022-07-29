@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the Downpour Amulet item.
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:37,CustomModelData:421954,display:{Name:'[{"text":"Downpour Amulet","italic":false,"color":"green"}]',Lore:['[{"text":"Make it rain.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Drizzle:","italic":false,"color":"light_purple"},{"text":" ","color":"dark_purple"},{"text":"When used, summons a rainstorm","color":"gray"}]','[{"text":"for five minutes.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"  ","italic":false,"color":"dark_purple"},{"text":"- ","color":"gray"},{"text":"Durability is decreased by 4%.","color":"red"},{"text":"","color":"dark_purple"}]','[{"text":"Downpour:","italic":false,"color":"green"},{"text":" ","color":"dark_purple"},{"text":"When used while crouching,","color":"gray"}]','[{"text":"summons a thunderstorm for five minutes.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"  ","italic":false,"color":"red"},{"text":"- ","color":"gray"},{"text":"Durability is decreased by 13%."}]']},Enchantments:[{id:"minecraft:mending",lvl:1}]} 1
+    macro give mythic/downpour_amulet
 }
 
 # Initializes the Downpour Amulet's cooldown scoreboard.
