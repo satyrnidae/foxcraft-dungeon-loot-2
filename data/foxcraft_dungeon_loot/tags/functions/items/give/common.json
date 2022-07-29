@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "foxcraft_dungeon_loot:items/d4/give"
+    "foxcraft_dungeon_loot:items/d4/give",
+    "#foxcraft_dungeon_loot:items/armor_stand/give"
   ]
 }

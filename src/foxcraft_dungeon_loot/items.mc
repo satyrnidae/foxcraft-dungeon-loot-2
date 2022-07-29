@@ -288,3 +288,39 @@ dir estudinaes_sorrow {
         }
     }
 }
+
+dir armor_stand {
+    function give {
+        give @s armor_stand{CustomModelData:421950,display:{Lore:['[{"text":"Pose: None","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b}} 1
+    }
+
+    dir give {
+        function baby {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Baby)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Baby","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Small:1b}} 1
+        }
+
+        function bashful {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Bashful)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Bashful","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{RightArm:[30.0f,0.0f,-35.0f],Head:[20.0f,25.0f,15.0f],LeftArm:[30.0f,0.0f,35.0f],RightLeg:[10.0f,10.0f,0.0f],Body:[0.0f,3.8545465f,0.0f]}}} 1
+        }
+
+        function cancan {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Can-Can)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Can-Can","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{RightArm:[0.0f,0.0f,90.0f],LeftLeg:[-90.0f,0.0f,0.0f],Head: [0.0f,-15.0f,0.0f],LeftArm:[0.0f,0.0f,-90.0f],Body: [0.0f,15.0f,0.0f]}}} 1
+        }
+
+        function gallant {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Gallant)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Gallant","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{Head:[0f,45f,0f],RightArm:[-90f,45f,0f],LeftArm:[-25f,45f,-15f]}}} 1
+        }
+
+        function greyskull {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Greyskull)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Greyskull","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{Head:[-20.0f,75.0f,0.0f],RightArm:[-180.0f,110.0f,-50.0f]}}} 1
+        }
+
+        function skeleton {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Skeleton)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Skeleton","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{RightArm:[-90.0f,-10.0f,0.0f],Head:[1.4536514f,7.777254f,0.0f],LeftArm:[-90.0f,30.0f,0.0f],Body:[0.0f,0.22099066f,0.0f]}}} 1
+        }
+
+        function zombie {
+            give @s armor_stand{CustomModelData:421950,display:{Name:'[{"text":"Armor Stand","italic":false},{"text":" (Zombie)","color":"gray","italic":false}]',Lore:['[{"text":"Pose: Zombie","italic":false,"color":"gray"}]']},EntityTag:{ShowArms:1b,Pose:{RightArm:[-90.0f,0.0f,0.0f],Head:[1.4536514f,7.777254f,0.0f],LeftArm:[-90.0f,0.0f,0.0f],Body:[0.0f,0.22099066f,0.0f]}}} 1
+        }
+    }
+}
