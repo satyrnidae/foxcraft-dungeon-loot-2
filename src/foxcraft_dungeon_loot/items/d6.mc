@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give common/d6
+    macro give_as_loot common/d6
 }
 
 function on_tick {
