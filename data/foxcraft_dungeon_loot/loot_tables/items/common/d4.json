@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{DungeonLootId:64,Unbreakable:1,CustomModelData:4219514,display:{Name:'[{\"text\":\"D4\",\"italic\":false}]',Lore:['[{\"text\":\"A simple four-sided die.\"}]','[{\"text\":\"Rarity: \",\"italic\":true},{\"text\":\"Common\",\"color\":\"white\"}]']}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
