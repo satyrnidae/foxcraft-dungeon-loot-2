@@ -1,0 +1,82 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Feather of Quet-Zala",
+                "color": "light_purple",
+                "italic": false
+              }
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "Quet-Zala, God of the Winds, bestows unto",
+                "thee this gift. May it inspire you to",
+                "reach new heights.",
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Epic",
+                    "color": "light_purple",
+                    "italic": true
+                  }
+                ],
+                "",
+                [
+                  {
+                    "text": "Quet-Zala's Embrace:",
+                    "color": "light_purple",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Upon use, applies 30",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "seconds of Levitation.",
+                  "color": "gray",
+                  "italic": false
+                },
+                [
+                  {
+                    "text": "Fragile:",
+                    "color": "red",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "This item is consumed upon use.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ]
+              ]
+            },
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:mending": 1
+              },
+              "add": true
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{DungeonLootId:43,Unbreakable:1,CustomModelData:4219513,HideFlags:5}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
