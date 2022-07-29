@@ -26,12 +26,12 @@ macro remove_enchantment {
     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
 }
 
-macro give {
+macro give_as_loot {
     scoreboard players reset @s satyrn.fdl.loot.variant
     loot give @s loot foxcraft_dungeon_loot:items/$$0
 }
 
-macro give_variant {
+macro give_as_variant_loot {
     scoreboard players set @s satyrn.fdl.loot.variant $$1
     loot give @s loot foxcraft_dungeon_loot:items/$$0
     scoreboard players reset @s satyrn.fdl.loot.variant
