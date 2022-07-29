@@ -50,18 +50,18 @@ function clock_2s {
 
 # Gives the sender a copy of the item.
 function give {
-    give @s minecraft:iron_boots{DungeonLootId:33,CustomModelData:421953,AttributeModifiers:[{AttributeName:"generic.armor",Amount:3,Slot:feet,Name:"generic.armor",UUID:[I;-122620,37037,171513,-74074]},{AttributeName:"generic.armor_toughness",Amount:3,Slot:feet,Name:"generic.armor_toughness",UUID:[I;-122620,37137,171513,-74274]}],display:{Name:'[{"text":"Albatross Heavy Industries® GraviLock™ Boots","italic":false,"color":"green"}]',Lore:['[{"text":"Keep those feet on the ground, right","italic":false}]','[{"text":"where they belong.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Magnetic Stabilizers:","italic":false,"color":"green"},{"text":" Renders the user","color":"gray"},{"text":"","color":"dark_purple"}]','[{"text":"immune to levitation effects.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:vanishing_curse",lvl:1},{id:"minecraft:feather_falling",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:5}]} 1
+    macro give mythic/gravilock_boots
 }
 
 dir give {
     # Gives the sender a copy of the item. The item is upgraded to diamond.
     function diamond {
-        give @s minecraft:diamond_boots{DungeonLootId:33,CustomModelData:421953,AttributeModifiers:[{AttributeName:"generic.armor",Amount:3,Slot:feet,Name:"generic.armor",UUID:[I;-122620,37037,171513,-74074]},{AttributeName:"generic.armor_toughness",Amount:3,Slot:feet,Name:"generic.armor_toughness",UUID:[I;-122620,37137,171513,-74274]}],display:{Name:'[{"text":"Albatross Heavy Industries® GraviLock™ Boots","italic":false,"color":"green"}]',Lore:['[{"text":"Keep those feet on the ground, right","italic":false}]','[{"text":"where they belong.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Magnetic Stabilizers:","italic":false,"color":"green"},{"text":" Renders the user","color":"gray"},{"text":"","color":"dark_purple"}]','[{"text":"immune to levitation effects.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:vanishing_curse",lvl:1},{id:"minecraft:feather_falling",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:5}]} 1
+        macro give_variant mythic/gravilock_boots 1
     }
 
     # Gives the sender a copy of the item. The item is upgraded to netherite.
     function netherite {
-        give @s minecraft:netherite_boots{DungeonLootId:33,CustomModelData:421953,AttributeModifiers:[{AttributeName:"generic.armor",Amount:3,Slot:feet,Name:"generic.armor",UUID:[I;-122620,37037,171513,-74074]},{AttributeName:"generic.armor_toughness",Amount:3,Slot:feet,Name:"generic.armor_toughness",UUID:[I;-122620,37137,171513,-74274]}],display:{Name:'[{"text":"Albatross Heavy Industries® GraviLock™ Boots","italic":false,"color":"green"}]',Lore:['[{"text":"Keep those feet on the ground, right","italic":false}]','[{"text":"where they belong.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Magnetic Stabilizers:","italic":false,"color":"green"},{"text":" Renders the user","color":"gray"},{"text":"","color":"dark_purple"}]','[{"text":"immune to levitation effects.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:vanishing_curse",lvl:1},{id:"minecraft:feather_falling",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:5}]} 1
+        macro give_variant mythic/gravilock_boots 2
     }
 }
 
