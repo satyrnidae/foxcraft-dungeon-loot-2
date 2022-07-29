@@ -32,7 +32,7 @@ function on_tick {
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless @s[gamemode=creative] run {
                 scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
                 title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
                 execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {

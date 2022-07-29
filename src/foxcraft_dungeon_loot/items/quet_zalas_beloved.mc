@@ -7,7 +7,7 @@ function on_tick {
         execute unless entity @s[nbt={Inventory:[{Slot:102b,tag:{Damage:431}}]}] run {
             effect give @s minecraft:slow_falling 3
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 item modify entity @s armor.chest foxcraft_dungeon_loot:quet_zalas_beloved/damage_slow_falling
             }
         }

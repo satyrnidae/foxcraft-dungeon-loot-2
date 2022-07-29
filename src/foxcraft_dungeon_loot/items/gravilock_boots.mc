@@ -18,7 +18,7 @@ function clock_10t {
             particle minecraft:effect ~ ~ ~ 0.1 0 0.1 0.25 5
 
             # NBT Scan is probably better here than in the main tick.
-            execute if entity @s[nbt=!{playerGameType:1}] run {
+            execute unless entity @s[gamemode=creative] run {
                 # NBT scan needed to determine the amount of damage to apply to the boots.
                 execute (if entity @s[nbt={Inventory:[{Slot:100b,id:"minecraft:iron_boots"}]}]) {
                     item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron

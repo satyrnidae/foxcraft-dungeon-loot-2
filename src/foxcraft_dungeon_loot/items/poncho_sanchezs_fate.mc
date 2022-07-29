@@ -32,7 +32,7 @@ function on_tick {
                 effect give @s minecraft:absorption 60 1
             }
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 scoreboard players set @s satyrn.fdl.ponchoSanchezsFate.cooldown 1
                 title @s actionbar {"text":"Poncho Sanchez's Fate is now on cooldown for 5 minutes.","color":"dark_purple"}
 

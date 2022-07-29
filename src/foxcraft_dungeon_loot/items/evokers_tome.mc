@@ -17,7 +17,7 @@ function on_tick {
             summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 0.5 1
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
                 execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
@@ -27,7 +27,7 @@ function on_tick {
             summon minecraft:armor_stand ~ ~2 ~ {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 0.5 1
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
                 execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}

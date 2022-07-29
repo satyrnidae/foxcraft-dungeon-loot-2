@@ -31,7 +31,7 @@ function on_tick {
             effect give @s minecraft:slow_falling 30
             effect give @s minecraft:hunger 30 2
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 scoreboard players add @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
                 title @s actionbar {"text":"Silverfish Escape Artist is now on cooldown for 30 seconds.","color":"dark_purple"}
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove

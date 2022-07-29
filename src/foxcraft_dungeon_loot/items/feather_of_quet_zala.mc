@@ -20,7 +20,7 @@ function on_tick {
             effect give @s minecraft:levitation 30
 
             # If the player is not in creative mode, destroy the feather and trigger the cooldown.
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 scoreboard players set @s satyrn.fdl.featherOfQuetZala.cooldown 1
                 title @s actionbar {"text":"The Feather of Quet-Zala is now on cooldown for 30 seconds.","color":"dark_purple"}
 
