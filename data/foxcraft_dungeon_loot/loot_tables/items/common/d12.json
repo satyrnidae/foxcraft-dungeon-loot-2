@@ -1,0 +1,31 @@
+{
+  "__comment": "Twelve-sided die",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": {"text":"D12","color":"white","italic":false}
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "A simple twelve-sided die.",
+                ["Rarity: ",{"text":"Common","color":"white","italic":true}]
+              ]
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{DungeonLootId:68,Unbreakable:1,CustomModelData:4219518,HideFlags:4}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
