@@ -35,7 +35,7 @@ function on_tick {
                 tellraw @s {"text":"A warm breeze calms your nerves.","color":"gray","italic":true}
             }
 
-            execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+            execute unless entity @s[gamemode=creative] run {
                 scoreboard players add @s satyrn.fdl.prideAndExtremePrejudice.cooldown 1
                 title @s actionbar {"text":"Pride and Extreme Prejudice is now on cooldown for 20 minutes.","color":"dark_purple"}
                 macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:4219511}

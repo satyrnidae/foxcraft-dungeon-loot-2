@@ -6,7 +6,6 @@ function load {
     scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
     scoreboard objectives add satyrn.fdl.custom.fallFlying dummy
     scoreboard objectives add satyrn.fdl.custom.onGround dummy
-    scoreboard objectives add satyrn.fdl.custom.playerGameType dummy
     scoreboard objectives add satyrn.fdl.itemId.mainHand dummy
     scoreboard objectives add satyrn.fdl.itemId.offHand dummy
     scoreboard objectives add satyrn.fdl.itemId.boots dummy
@@ -33,7 +32,6 @@ function tick {
         execute store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
         execute store result score @s satyrn.fdl.custom.fallFlying run data get entity @s FallFlying
         execute store result score @s satyrn.fdl.custom.onGround run data get entity @s OnGround
-        execute store result score @s satyrn.fdl.custom.playerGameType run data get entity @s playerGameType
     }
 
     # Tick functions are executed with a player in context at the player's location.

@@ -32,7 +32,7 @@ function on_tick {
             effect give @s minecraft:hero_of_the_village 24000 0 false
         }
 
-        execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+        execute unless entity @s[gamemode=creative] run {
             macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421952}
         }
     }

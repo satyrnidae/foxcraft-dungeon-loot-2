@@ -8,7 +8,7 @@ function on_tick {
     execute if score @s satyrn.fdl.custom.fallOneCm matches 400.. if score @s satyrn.fdl.itemId.boots matches 58 if score @s satyrn.fdl.custom.fallFlying matches 0 run {
         effect give @s minecraft:slow_falling 3 1
 
-        execute unless score @s satyrn.fdl.custom.playerGameType matches 1 run {
+        execute unless entity @s[gamemode=creative] run {
             item modify entity @s armor.feet foxcraft_dungeon_loot:war_hogs_disdainful_pride/damage_slow_falling
             execute if entity @s[nbt={Inventory:[{Slot:100b,tag:{Damage:481}}]}] run {
                 macro break_item armor.feet minecraft:netherite_boots{CustomModelData:421951}
