@@ -7,76 +7,76 @@
           "type": "minecraft:item",
           "name": "minecraft:warped_fungus_on_a_stick"
         }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "The Gift of Sheep Island",
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "The Gift of Sheep Island",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Keeping someone warm is basically like keeping",
+        "them protected from external temperatures,",
+        "right?",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Insulative Cover:",
             "color": "aqua",
             "italic": false
-          }
-        },
-        {
-          "function": "minecraft:set_lore",
-          "lore": [
-            "Keeping someone warm is basically like keeping",
-            "them protected from external temperatures,",
-            "right?",
-            [
-              "Rarity: ",
-              {
-                "text": "Rare",
-                "color": "aqua",
-                "italic": true
-              }
-            ],
-            "",
-            [
-              {
-                "text": "Insulative Cover:",
-                "color": "aqua",
-                "italic": false
-              },
-              " ",
-              {
-                "text": "Applies 10 minutes of fire",
-                "color": "gray",
-                "italic": false
-              }
-            ],
-            {
-              "text": "resistance at the cost of 1 minute of Hunger.",
-              "color": "gray",
-              "italic": false
-            },
-            [
-              {
-                "text": "Fragile:",
-                "color": "red",
-                "italic": false
-              },
-              " ",
-              {
-                "text": "This item is consumed on use.",
-                "color": "gray",
-                "italic": false
-              }
-            ]
-          ]
-        },
-        {
-          "function": "minecraft:set_enchantments",
-          "enchantments": {
-            "minecraft:mending": 1
           },
-          "add": true
-        },
+          " ",
+          {
+            "text": "Applies 10 minutes of fire",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "function": "minecraft:set_nbt",
-          "tag": "{DungeonLootId:44,Unbreakable:1,CustomModelData:421958,HideFlags:5}"
-        }
+          "text": "resistance at the cost of 1 minute of Hunger.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "This item is consumed on use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
       ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:44,Unbreakable:1,CustomModelData:421958,HideFlags:5}"
     }
   ]
 }
