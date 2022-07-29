@@ -1,0 +1,110 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_sword"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 4,
+          "operation": "addition",
+          "id": "ece1f015-26c8-4213-a1d9-23b9d6fa12f9",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": 0.6,
+          "operation": "addition",
+          "id": "9dc37444-4da9-492d-a958-c6bb03a4f9d4",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 4,
+          "operation": "addition",
+          "id": "99236245-4f86-4f5b-bcb5-9e5e0a63c1f5",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": 0.6,
+          "operation": "addition",
+          "id": "acf31aa8-0c05-421d-b341-8f1ada63e15f",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.2,
+          "operation": "multiply_total",
+          "id": "e036c850-43a4-4e7d-96a3-1116ebfa1111",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Rogue's Dagger",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Stabs so nice, you'll stab it twice!",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Sneaky, Sneaky: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "While sneaking with the dagger in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "your offhand, you gain Invisibility.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:17,Unbreakable:1,CustomModelData:421951}"
+    }
+  ]
+}
