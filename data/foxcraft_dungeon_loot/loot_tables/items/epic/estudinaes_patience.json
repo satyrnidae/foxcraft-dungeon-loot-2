@@ -1,0 +1,153 @@
+{
+  "__comment": "Estudinae's Patience - All Variants",
+  "pools": [
+    {
+      "__comment": "Leather variant, default",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+              "condition": "minecraft:entity_scores",
+              "entity": "this",
+              "scores": {
+                "satyrn.fdl.loot.variant": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Chainmail variant, loot variant score = 1",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Iron Variant, loot variant score = 2",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Diamond Variant, loot variant score = 3",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 3
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Netherite Variant, loot variant score = 4",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 3
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_chestplate"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {"text":"Estudinae's Patience","italic":false,"color":"light_purple"}
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Guardians of Dinidae wore this armor as they",
+        "marched to their inevitable deaths at war",
+        "with Poncho Sanchez.",
+        ["Rarity: ",{"text":"Epic","color":"light_purple","italic":true}],
+        "",
+        [{"text":"Estudinae's Fortitude:","italic":false,"color":"light_purple"}," ",{"text":"Grants extra health at","color":"gray","italic":false}],
+        [{"text":"the cost of Weakness.","italic":false,"color":"gray"}]
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.max_health",
+          "amount": 10.0,
+          "operation": "addition",
+          "slot": "chest",
+          "name": "generic.max_health",
+          "id": "63f941e7-0da7-459d-b89f-c91e0ae8e727"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:fire_protection": 4,
+        "minecraft:mending": 1,
+        "minecraft:projectile_protection": 4,
+        "minecraft:protection": 4,
+        "minecraft:thorns": 3,
+        "minecraft:unbreaking": 3
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:39,CustomModelData:421951,display:{color:5215783}}"
+    }
+  ]
+}
