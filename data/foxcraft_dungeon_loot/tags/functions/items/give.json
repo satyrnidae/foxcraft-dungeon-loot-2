@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#foxcraft_dungeon_loot:items/give/common",
     "#foxcraft_dungeon_loot:items/give/uncommon",
     "#foxcraft_dungeon_loot:items/give/rare",
     "#foxcraft_dungeon_loot:items/give/epic",
