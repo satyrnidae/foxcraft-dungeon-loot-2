@@ -49,10 +49,28 @@
                   "italic": false
                 },
                 {
-                  "text": "for 20 minutes.",
+                  "text": "for 20 minutes, or a 20% chance to apply",
                   "color": "gray",
                   "italic": false
-                }
+                },
+                {
+                  "text": "Blindness for 5 minutes.",
+                  "color": "gray",
+                  "italic": false
+                },
+                [
+                  {
+                    "text": "Fragile:",
+                    "color": "red",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "This item is consumed on use.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ]
               ]
             },
             {
