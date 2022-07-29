@@ -1,0 +1,43 @@
+{
+  "__comment": "Evoker's Tome",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": {"text":"Evoker's Tome","italic":false,"color":"green"}
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "What Foul Magicks Dwell Within...?",
+                ["Rarity: ",{"text":"Mythic","color":"green","italic":true}],
+                "",
+                [{"text":"Jaw Trap:","italic":false,"color":"green"}," ",{"text":"Summons a line of Evoker Fangs in","color":"gray","italic":false}],
+                {"text":"the direction you are looking.","italic":false,"color":"gray"},
+                [{"text":"Sharknado:","italic":false,"color":"green"}," ",{"text":"While crouched, summons a whirling","color":"gray","italic":false}],
+                {"text":"frenzy of Evoker Fangs centered on your","italic":false,"color":"gray"},
+                {"text":"current position.","italic":false,"color":"gray"}
+              ]
+            },
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:mending": 1
+              }
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{DungeonLootId:41,CustomModelData:421951}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
