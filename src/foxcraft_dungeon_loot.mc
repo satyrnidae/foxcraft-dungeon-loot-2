@@ -3,6 +3,7 @@ function load {
     scoreboard objectives add <%config.internalScoreboard%> dummy
     scoreboard objectives add satyrn.fdl.custom.sneakTime minecraft.custom:minecraft.sneak_time
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick
+    scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball
     scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
     scoreboard objectives add satyrn.fdl.custom.fallFlying dummy
     scoreboard objectives add satyrn.fdl.custom.onGround dummy
@@ -40,6 +41,7 @@ function tick {
     # Reset statistics scoreboards
     execute as @a unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0
     execute as @a unless score @s satyrn.fdl.used.warpedFungusOnAStick matches 0 run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
+    execute as @a unless score @s satyrn.fdl.used.snowball matches 0 run scoreboard players set @s satyrn.fdl.used.snowball 0
 }
 
 function uninstall {
