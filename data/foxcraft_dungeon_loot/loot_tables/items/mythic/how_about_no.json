@@ -37,11 +37,10 @@
         "",
         [
           {
-            "text": "Beset and Beleaguered:",
+            "text": "Beset and Beleaguered: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "Upon use, kills all",
             "color": "gray",
@@ -55,11 +54,10 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
             "text": "This item is consumed upon use.",
             "color": "gray",

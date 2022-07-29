@@ -36,11 +36,10 @@
         "",
         [
           {
-            "text": "It Burns:",
+            "text": "It Burns: ",
             "color": "light_purple",
             "italic": false
           },
-          " ",
           {
             "text": "Right-click to apply to your eyes.",
             "color": "gray",
@@ -64,11 +63,10 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
             "text": "This item is consumed on use.",
             "color": "gray",

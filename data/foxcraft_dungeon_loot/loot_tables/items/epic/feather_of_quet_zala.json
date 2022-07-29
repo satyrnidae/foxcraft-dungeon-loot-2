@@ -36,11 +36,10 @@
         "",
         [
           {
-            "text": "Quet-Zala's Embrace:",
+            "text": "Quet-Zala's Embrace: ",
             "color": "light_purple",
             "italic": false
           },
-          " ",
           {
             "text": "Upon use, applies 30",
             "color": "gray",
@@ -54,11 +53,10 @@
         },
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
             "text": "This item is consumed upon use.",
             "color": "gray",

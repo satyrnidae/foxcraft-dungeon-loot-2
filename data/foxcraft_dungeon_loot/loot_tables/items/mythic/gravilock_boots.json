@@ -86,11 +86,10 @@
         "",
         [
           {
-            "text": "Magnetic Stabilizers:",
+            "text": "Magnetic Stabilizers: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "Renders the user",
             "color": "gray",
@@ -103,13 +102,11 @@
           "italic": false
         },
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
             "text": "Durability is decreased by 1.",
             "color": "red",

@@ -34,11 +34,10 @@
         "",
         [
           {
-            "text": "Hero's Chance:",
+            "text": "Hero's Chance: ",
             "color": "light_purple",
             "italic": false
           },
-          " ",
           {
             "text": "Rolls a D20 with a DC of 10.",
             "color": "gray",
@@ -56,19 +55,16 @@
           "italic": false
         },
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "Crit Fail:",
+            "text": "Crit Fail: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Inflicts Bad Omen I.",
             "color": "gray",
@@ -76,19 +72,16 @@
           }
         ],
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "Fail:",
+            "text": "Fail: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Summons a Vex at your position.",
             "color": "gray",
@@ -96,19 +89,16 @@
           }
         ],
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "Success:",
+            "text": "Success: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Drops various valuable items.",
             "color": "gray",
@@ -116,19 +106,16 @@
           }
         ],
         [
-          " ",
           {
-            "text": "-",
+            "text": " - ",
             "color": "gray",
             "italic": false
           },
-          " ",
           {
-            "text": "Crit Success:",
+            "text": "Crit Success: ",
             "color": "white",
             "italic": false
           },
-          " ",
           {
             "text": "Grants Hero of the Village.",
             "color": "gray",
@@ -137,11 +124,10 @@
         ],
         [
           {
-            "text": "Fragile:",
+            "text": "Fragile: ",
             "color": "red",
             "italic": false
           },
-          " ",
           {
             "text": "This item is consumed on use.",
             "color": "gray",

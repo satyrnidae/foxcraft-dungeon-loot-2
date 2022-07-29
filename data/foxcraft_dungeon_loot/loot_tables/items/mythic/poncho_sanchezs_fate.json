@@ -35,11 +35,10 @@
         "",
         [
           {
-            "text": "The Roar of Poncho Sanchez:",
+            "text": "The Roar of Poncho Sanchez: ",
             "color": "green",
             "italic": false
           },
-          " ",
           {
             "text": "When blown, sounds",
             "color": "gray",
