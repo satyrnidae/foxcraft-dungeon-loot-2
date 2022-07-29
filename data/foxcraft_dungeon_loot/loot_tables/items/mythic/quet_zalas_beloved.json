@@ -1,0 +1,105 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:elytra"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_damage",
+      "damage": 431,
+      "add": false
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 6,
+          "operation": "addition",
+          "id": "2ec67cdd-b1d0-42d6-8b35-96a15572a3ad",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.4,
+          "operation": "multiply_base",
+          "id": "d312f206-cbce-40fc-8aa1-4bdb2502c7cc",
+          "slot": "chest"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Quet-Zala's Beloved",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "\"And to you, my most cherished disciple: Wings.",
+        "May they carry you away from harm, and into my",
+        "loving embrace.\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Quet-Zala's Embrace: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When falling for more than",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "four meters, Slow Falling is applied for three",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:fire_protection": 4,
+        "minecraft:mending": 1,
+        "minecraft:projectile_protection": 4,
+        "minecraft:protection": 5,
+        "minecraft:thorns": 3,
+        "minecraft:unbreaking": 5
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:50,CustomModelData:421951}"
+    }
+  ]
+}
