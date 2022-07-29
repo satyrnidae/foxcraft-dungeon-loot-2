@@ -10,13 +10,24 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"D12","color":"white","italic":false}
+              "name": {
+                "text": "D12",
+                "color": "white",
+                "italic": false
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "A simple twelve-sided die.",
-                ["Rarity: ",{"text":"Common","color":"white","italic":true}]
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Common",
+                    "color": "white",
+                    "italic": true
+                  }
+                ]
               ]
             },
             {

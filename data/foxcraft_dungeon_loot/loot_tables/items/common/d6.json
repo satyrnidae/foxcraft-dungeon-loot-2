@@ -9,13 +9,24 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"D6","italic":false,"color":"white"}
+              "name": {
+                "text": "D6",
+                "italic": false,
+                "color": "white"
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "A simple six-sided die.",
-                ["Rarity: ",{"text":"Common","italic":true,"color":"white"}]
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Common",
+                    "italic": true,
+                    "color": "white"
+                  }
+                ]
               ]
             },
             {

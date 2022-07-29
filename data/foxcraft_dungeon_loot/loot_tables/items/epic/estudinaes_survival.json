@@ -8,14 +8,14 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-              "condition": "minecraft:entity_scores",
-              "entity": "this",
-              "scores": {
-                "satyrn.fdl.loot.variant": {
-                  "min": 1,
-                  "max": 4
-                }
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": {
+                "min": 1,
+                "max": 4
               }
+            }
           }
         }
       ],
@@ -106,7 +106,11 @@
   "functions": [
     {
       "function": "minecraft:set_name",
-      "name": {"text":"Estudinae's Survival","italic":false,"color":"light_purple"}
+      "name": {
+        "text": "Estudinae's Survival",
+        "italic": false,
+        "color": "light_purple"
+      }
     },
     {
       "function": "minecraft:set_lore",
@@ -114,10 +118,35 @@
         "Scientists of Dinidae developed equipment to",
         "keep survivors alive as they fled their",
         "homeland.",
-        ["Rarity: ",{"text":"Epic","color":"light_purple","italic":true}],
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
         "",
-        [{"text":"Estudinae's Constitution:","italic":false,"color":"light_purple"}," ",{"text":"Grants Conduit Power","italic":false,"color":"gray"}],
-        [{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]
+        [
+          {
+            "text": "Estudinae's Constitution:",
+            "italic": false,
+            "color": "light_purple"
+          },
+          " ",
+          {
+            "text": "Grants Conduit Power",
+            "italic": false,
+            "color": "gray"
+          }
+        ],
+        [
+          {
+            "text": "and Saturation at the cost of Mining Fatigue.",
+            "italic": false,
+            "color": "gray"
+          }
+        ]
       ]
     },
     {

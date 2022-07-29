@@ -10,13 +10,23 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"D8","italic":false}
+              "name": {
+                "text": "D8",
+                "italic": false
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "A simple eight-sided die.",
-                ["Rarity: ",{"text":"Common","italic":true,"color":"white"}]
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Common",
+                    "italic": true,
+                    "color": "white"
+                  }
+                ]
               ]
             },
             {

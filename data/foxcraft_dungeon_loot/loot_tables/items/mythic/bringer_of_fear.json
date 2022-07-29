@@ -5,38 +5,93 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "minecraft:item",
           "name": "minecraft:warped_fungus_on_a_stick",
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"Bringer of Fear","color":"red","italic":false}
+              "name": {
+                "text": "Bringer of Fear",
+                "color": "red",
+                "italic": false
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "Those who whisper into the darkness had",
                 "best be prepared for the consequences.",
-                ["Rarity: ",{"text":"Cursed","color":"red","italic":true}],
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Cursed",
+                    "color": "red",
+                    "italic": true
+                  }
+                ],
                 "",
-                [{"text":"Darkness Whispers:","color":"red","italic":false}," ",{"text":"Rolls a D20. The result","color":"gray","italic":false}],
-                {"text":"will determine the outcome:","color":"gray","italic":false},
-                {"text":" - 1-10: Bad Omen I","color":"gray","italic":false},
-                {"text":" - 11-17: Bad Omen III","color":"gray","italic":false},
-                {"text":" - 18-20: Bad Omen V","color":"gray","italic":false},
-                {"text":"All effects are applied for 20 minutes.","color":"gray","italic":false},
-                [{"text":"Fragile:","color":"red","italic":false}," ",{"text":"The item will be consumed upon use.","color":"gray","italic":false}]
+                [
+                  {
+                    "text": "Darkness Whispers:",
+                    "color": "red",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Rolls a D20. The result",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "will determine the outcome:",
+                  "color": "gray",
+                  "italic": false
+                },
+                {
+                  "text": " - 1-10: Bad Omen I",
+                  "color": "gray",
+                  "italic": false
+                },
+                {
+                  "text": " - 11-17: Bad Omen III",
+                  "color": "gray",
+                  "italic": false
+                },
+                {
+                  "text": " - 18-20: Bad Omen V",
+                  "color": "gray",
+                  "italic": false
+                },
+                {
+                  "text": "All effects are applied for 20 minutes.",
+                  "color": "gray",
+                  "italic": false
+                },
+                [
+                  {
+                    "text": "Fragile:",
+                    "color": "red",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "The item will be consumed upon use.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ]
               ]
             },
             {
               "function": "minecraft:set_enchantments",
               "enchantments": {
-                "mending": 1
+                "minecraft:mending": 1
               },
               "add": true
             },
             {
-              "function": "set_nbt",
+              "function": "minecraft:set_nbt",
               "tag": "{DungeonLootId:34,Unbreakable:1,CustomModelData:4219512,HideFlags:5}"
             }
           ]
