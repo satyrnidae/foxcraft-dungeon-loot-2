@@ -1,0 +1,160 @@
+{
+  "__comment": "Estudinae's Guidance",
+  "pools": [
+    {
+      "__comment": "Leather variant, default",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+              "condition": "minecraft:entity_scores",
+              "entity": "this",
+              "scores": {
+                "satyrn.fdl.loot.variant": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots"
+        }
+      ]
+    },
+    {
+      "__comment": "Chainmail variant, loot variant score = 1",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_boots"
+        }
+      ]
+    },
+    {
+      "__comment": "Iron variant, loot variant score = 2",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_boots"
+        }
+      ]
+    },
+    {
+      "__comment": "Diamond variant, loot variant score = 3",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 3
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_boots"
+        }
+      ]
+    },
+    {
+      "__comment": "Netherite variant, loot variant score = 4",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 4
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {"text":"Estudinae's Guidance","color":"light_purple","italic":false}
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Survivors of Dinidae were aided by fellow tribes",
+        "as they escaped the dangers of Poncho Sanchez.",
+        ["Rarity: ",{"text":"Epic","color":"light_purple","italic":true}],
+        "",
+        [{"text":"Estudinae's Solidarity:","italic":false,"color":"light_purple"}," ",{"text":"Grants Luck, Dolphin's","italic":false,"color":"gray"}],
+        {"text":"Grace, and Health Boost at the cost of Slowness.","italic":false,"color":"gray"}
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "name": "generic.luck",
+          "attribute": "minecraft:generic.luck",
+          "operation": "addition",
+          "amount": 1,
+          "slot": "feet",
+          "id": "57317025-3079-49dc-a477-dfa49a02edfb"
+        },
+        {
+          "name": "generic.max_health",
+          "attribute": "minecraft:generic.max_health",
+          "operation": "addition",
+          "amount": 4,
+          "slot": "feet",
+          "id": "7ab1e91d-a139-4fb1-9065-f4e39e1daebd"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:depth_strider": 3,
+        "minecraft:fire_protection": 4,
+        "minecraft:mending": 1,
+        "minecraft:projectile_protection": 4,
+        "minecraft:protection": 4,
+        "minecraft:unbreaking": 3
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:38,CustomModelData:421952,display:{color:5215783}}"
+    }
+  ]
+}
