@@ -1,0 +1,74 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "text": "Eye Cream",
+                "color": "light_purple",
+                "italic": false
+              }
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "Look, stop asking where I got it, and just",
+                "rub it in your eyes. It totally works...",
+                "Most of the time... trust me!",
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Epic",
+                    "color": "light_purple",
+                    "italic": true
+                  }
+                ],
+                "",
+                [
+                  {
+                    "text": "It Burns:",
+                    "color": "light_purple",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Right-click to apply to your eyes.",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "Has an 80% chance to apply Night Vision for",
+                  "color": "gray",
+                  "italic": false
+                },
+                {
+                  "text": "for 20 minutes.",
+                  "color": "gray",
+                  "italic": false
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "minecraft:mending": 1
+              },
+              "add": true
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{DungeonLootId:42,Unbreakable:1,CustomModelData:421957,HideFlags:5}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

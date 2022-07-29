@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the item.
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:42,Unbreakable:1,CustomModelData:421957,display:{Name:'[{"text":"Eye Cream","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Look, stop asking where I got it, and just"}]','[{"text":"rub it in your eyes. It totally works...","italic":true}]','[{"text":"Most of the time... trust me!","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"It Burns:","italic":false,"color":"light_purple"},{"text":" ","color":"green"},{"text":"Right click to apply to your eyes.","color":"gray"}]','[{"text":"Has an 80% chance to apply Night Vision for","italic":false,"color":"gray"}]','[{"text":"20 minutes.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:5} 1
+    macro give epic/eye_cream
 }
 
 # Handles the item updates each tick. Executed in the context of a single player.
