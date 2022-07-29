@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:36,Unbreakable:1,CustomModelData:421955,display:{Name:'[{"text":"Deilona\'s Holy Blessings","italic":false,"color":"green"}]',Lore:['[{"text":"When enemies need to be friends, why not try","italic":true}]','[{"text":"helping them out?","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Act of Kindness:","italic":false,"color":"green"},{"text":" ","color":"dark_purple"},{"text":"Courses with the holy power","color":"gray"}]','[{"text":"of Deilona. When used, applies high-level","italic":false,"color":"gray"}]','[{"text":"Instant Health to all other entities in a 20","italic":false,"color":"gray"}]','[{"text":"block radius.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile: ","italic":false,"color":"red"},{"text":"This item is consumed upon use.","color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:5} 1
+    macro give mythic/deilonas_holy_blessings
 }
 
 function on_load {
