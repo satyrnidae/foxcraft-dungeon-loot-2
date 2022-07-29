@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:41,CustomModelData:421951,display:{Name:'[{"text":"Evoker\'s Tome","italic":false,"color":"green"}]',Lore:['[{"text":"What Foul Magicks Dwell Within...?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green","italic":true},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Jaw Trap:","italic":false,"color":"green"},{"text":" ","color":"dark_purple"},{"text":"Summons a line of Evoker Fangs in","color":"gray"},{"text":"","color":"dark_purple"}]','[{"text":"the direction you are looking.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Sharknado:","italic":false,"color":"green"},{"text":" ","color":"dark_purple"},{"text":"While crouched, summons a whirling","color":"gray"}]','[{"text":"frenzy of ","italic":false,"color":"gray"},{"text":"Evoker Fangs centered on your","italic":false,"color":"gray"}]','[{"text":"current position.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}]} 1
+    macro give mythic/evokers_tome
 }
 
 function on_load {
