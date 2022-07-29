@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s warped_fungus_on_a_stick{DungeonLootId:67,Unbreakable:1,CustomModelData:4219517,display:{Name:'[{"text":"D10","italic":false}]',Lore:['[{"text":"A simple ten-sided die."}]','[{"text":"Rarity: ","italic":true},{"text":"Common","color":"white"}]']}} 1
+    macro give common/d10
 }
 
 function on_tick {
