@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the user a copy of the item.
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:44,Unbreakable:1,CustomModelData:421958,display:{Name:'[{"text":"The Gift of Sheep Island","italic":false,"color":"aqua"}]',Lore:['[{"text":"Keeping someone warm is basically like keeping"}]','[{"text":"them protected from external temperatures,","italic":true}]','[{"text":"right?","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Rare","color":"aqua"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Insulative Cover:","italic":false,"color":"aqua"},{"text":" ","color":"green"},{"text":"Applies 10 minutes of fire","color":"gray"}]','[{"text":"resistance at the cost of 1 minute of Hunger.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile:","italic":false,"color":"red"},{"text":" This item is consumed on use.","color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:5} 1
+    macro give rare/gift_of_sheep_island
 }
 
 # Updates the item every tick.
