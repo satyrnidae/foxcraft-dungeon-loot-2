@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the item.
 function give {
-    macro give epic/eye_cream
+    macro give_as_loot epic/eye_cream
 }
 
 # Handles the item updates each tick. Executed in the context of a single player.

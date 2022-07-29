@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give epic/heros_amulet
+    macro give_as_loot epic/heros_amulet
 }
 
 function on_tick {

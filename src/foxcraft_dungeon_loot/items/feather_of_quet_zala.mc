@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give epic/feather_of_quet_zala
+    macro give_as_loot epic/feather_of_quet_zala
 }
 
 function on_load {

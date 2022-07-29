@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the Downpour Amulet item.
 function give {
-    macro give mythic/downpour_amulet
+    macro give_as_loot mythic/downpour_amulet
 }
 
 # Initializes the Downpour Amulet's cooldown scoreboard.

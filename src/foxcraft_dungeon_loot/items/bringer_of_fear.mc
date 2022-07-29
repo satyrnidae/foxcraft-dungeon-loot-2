@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give mythic/bringer_of_fear
+    macro give_as_loot mythic/bringer_of_fear
 }
 
 function on_load {

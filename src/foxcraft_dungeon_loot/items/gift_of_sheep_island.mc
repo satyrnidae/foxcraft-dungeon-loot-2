@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the user a copy of the item.
 function give {
-    macro give rare/gift_of_sheep_island
+    macro give_as_loot rare/gift_of_sheep_island
 }
 
 # Updates the item every tick.

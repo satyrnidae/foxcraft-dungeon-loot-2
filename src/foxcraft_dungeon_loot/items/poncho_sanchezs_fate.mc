@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give mythic/poncho_sanchezs_fate
+    macro give_as_loot mythic/poncho_sanchezs_fate
 }
 
 function on_load {

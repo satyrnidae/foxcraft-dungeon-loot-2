@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give mythic/evokers_tome
+    macro give_as_loot mythic/evokers_tome
 }
 
 function on_load {
