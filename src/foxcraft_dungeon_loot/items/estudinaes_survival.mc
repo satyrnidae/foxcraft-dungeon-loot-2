@@ -1,3 +1,5 @@
+import ../../macros.mcm
+
 # Applies the item's effects every two seconds.
 function clock_2s {
     schedule function foxcraft_dungeon_loot:items/estudinaes_survival/clock_2s 2s
@@ -15,28 +17,28 @@ function clock_10s {
 
 # Gives the sender a copy of this item.
 function give {
-    give @s minecraft:leather_helmet{DungeonLootId:40,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Survival","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Scientists of Dinidae developed equipment to"}]','[{"text":"keep survivors alive as they fled their","italic":true}]','[{"text":"homeland.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Constitution: ","italic":false,"color":"light_purple"},{"text":"Grants Conduit Power","italic":false,"color":"gray"}]','[{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:3}]} 1
+    macro give epic/estudinaes_survival
 }
 
 dir give {
     # Gives the sender a copy of this item. The item is upgraded to chainmail.
     function chainmail {
-        give @s minecraft:chainmail_helmet{DungeonLootId:40,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Survival","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Scientists of Dinidae developed equipment to"}]','[{"text":"keep survivors alive as they fled their","italic":true}]','[{"text":"homeland.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Constitution: ","italic":false,"color":"light_purple"},{"text":"Grants Conduit Power","italic":false,"color":"gray"}]','[{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:3}]} 1
+        macro give_variant epic/estudinaes_survival 1
     }
 
     # Gives the sender a copy of this item. The item is upgraded to iron.
     function iron {
-        give @s minecraft:iron_helmet{DungeonLootId:40,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Survival","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Scientists of Dinidae developed equipment to"}]','[{"text":"keep survivors alive as they fled their","italic":true}]','[{"text":"homeland.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Constitution: ","italic":false,"color":"light_purple"},{"text":"Grants Conduit Power","italic":false,"color":"gray"}]','[{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:3}]} 1
+        macro give_variant epic/estudinaes_survival 2
     }
 
     # Gives the sender a copy of this item. The item is upgraded to diamond.
     function diamond {
-        give @s minecraft:diamond_helmet{DungeonLootId:40,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Survival","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Scientists of Dinidae developed equipment to"}]','[{"text":"keep survivors alive as they fled their","italic":true}]','[{"text":"homeland.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Constitution: ","italic":false,"color":"light_purple"},{"text":"Grants Conduit Power","italic":false,"color":"gray"}]','[{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:3}]} 1
+        macro give_variant epic/estudinaes_survival 3
     }
 
     # Gives the sender a copy of this item. The item is upgraded to netherite.
     function netherite {
-        give @s minecraft:netherite_helmet{DungeonLootId:40,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Survival","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Scientists of Dinidae developed equipment to"}]','[{"text":"keep survivors alive as they fled their","italic":true}]','[{"text":"homeland.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Constitution: ","italic":false,"color":"light_purple"},{"text":"Grants Conduit Power","italic":false,"color":"gray"}]','[{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:unbreaking",lvl:3}]} 1
+        macro give_variant epic/estudinaes_survival 4
     }
 }
 

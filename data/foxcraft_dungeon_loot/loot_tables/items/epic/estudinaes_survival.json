@@ -1,0 +1,139 @@
+{
+  "__comment": "Estudinae's Survival - All Variants",
+  "pools": [
+    {
+      "__comment": "Leather variant, default",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+              "condition": "minecraft:entity_scores",
+              "entity": "this",
+              "scores": {
+                "satyrn.fdl.loot.variant": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_helmet"
+        }
+      ]
+    },
+    {
+      "__comment": "Chainmail variant, loot variant score = 1",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_helmet"
+        }
+      ]
+    },
+    {
+      "__comment": "Iron variant, loot variant score = 2",
+      "rolls": 2,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_helmet"
+        }
+      ]
+    },
+    {
+      "__comment": "Diamond variant, loot variant score = 3",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 3
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_helmet"
+        }
+      ]
+    },
+    {
+      "__comment": "Netherite variant, loot variant score = 4",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 4
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {"text":"Estudinae's Survival","italic":false,"color":"light_purple"}
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Scientists of Dinidae developed equipment to",
+        "keep survivors alive as they fled their",
+        "homeland.",
+        ["Rarity: ",{"text":"Epic","color":"light_purple","italic":true}],
+        "",
+        [{"text":"Estudinae's Constitution:","italic":false,"color":"light_purple"}," ",{"text":"Grants Conduit Power","italic":false,"color":"gray"}],
+        [{"text":"and Saturation at the cost of Mining Fatigue.","italic":false,"color":"gray"}]
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:fire_protection": 4,
+        "minecraft:mending": 4,
+        "minecraft:projectile_protection": 4,
+        "minecraft:protection": 4,
+        "minecraft:unbreaking": 3
+      }
+    },
+    {
+      "function": "set_nbt",
+      "tag": "{DungeonLootId:40,CustomModelData:421951,display:{color:5215783}}"
+    }
+  ]
+}
