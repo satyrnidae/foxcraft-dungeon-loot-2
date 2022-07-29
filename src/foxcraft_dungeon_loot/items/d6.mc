@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    loot give @s loot foxcraft_dungeon_loot:items/common/d6
+    macro give common/d6
 }
 
 function on_tick {
