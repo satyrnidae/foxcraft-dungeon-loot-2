@@ -10,26 +10,95 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"Downpour Amulet","italic":false,"color":"green"}
+              "name": {
+                "text": "Downpour Amulet",
+                "italic": false,
+                "color": "green"
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "Make it rain.",
-                ["Rarity: ",{"text":"Mythic","color":"green","italic": true}],
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Mythic",
+                    "color": "green",
+                    "italic": true
+                  }
+                ],
                 "",
-                [{"text":"Drizzle:","color":"light_purple","italic":false}," ",{"text":"When used, summons a rainstorm","color":"gray","italic":false}],
-                {"text":"for five minutes.","color":"gray","italic":false},
-                [" ",{"text":"-","color":"gray","italic":false}," ",{"text":"Durability is decreased by 4%.","color":"red","italic":true}],
-                [{"text":"Downpour:","color":"green","italic":false}," ",{"text":"When used while crouching,","color":"gray","italic":false}],
-                {"text":"summons a thunderstorm for five minutes.","color":"gray","italic":true},
-                [" ",{"text":"-","color":"gray","italic":false}," ",{"text":"Durability is decreased by 13%.","color":"red","italic":true}]
+                [
+                  {
+                    "text": "Drizzle:",
+                    "color": "light_purple",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "When used, summons a rainstorm",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "for five minutes.",
+                  "color": "gray",
+                  "italic": false
+                },
+                [
+                  " ",
+                  {
+                    "text": "-",
+                    "color": "gray",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Durability is decreased by 4%.",
+                    "color": "red",
+                    "italic": true
+                  }
+                ],
+                [
+                  {
+                    "text": "Downpour:",
+                    "color": "green",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "When used while crouching,",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "summons a thunderstorm for five minutes.",
+                  "color": "gray",
+                  "italic": true
+                },
+                [
+                  " ",
+                  {
+                    "text": "-",
+                    "color": "gray",
+                    "italic": false
+                  },
+                  " ",
+                  {
+                    "text": "Durability is decreased by 13%.",
+                    "color": "red",
+                    "italic": true
+                  }
+                ]
               ]
             },
             {
               "function": "minecraft:set_enchantments",
               "enchantments": {
-                "mending": 1
+                "minecraft:mending": 1
               }
             },
             {

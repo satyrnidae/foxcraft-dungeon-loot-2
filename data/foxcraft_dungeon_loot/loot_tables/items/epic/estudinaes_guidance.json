@@ -8,14 +8,14 @@
         {
           "condition": "minecraft:inverted",
           "term": {
-              "condition": "minecraft:entity_scores",
-              "entity": "this",
-              "scores": {
-                "satyrn.fdl.loot.variant": {
-                  "min": 1,
-                  "max": 4
-                }
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": {
+                "min": 1,
+                "max": 4
               }
+            }
           }
         }
       ],
@@ -106,17 +106,44 @@
   "functions": [
     {
       "function": "minecraft:set_name",
-      "name": {"text":"Estudinae's Guidance","color":"light_purple","italic":false}
+      "name": {
+        "text": "Estudinae's Guidance",
+        "color": "light_purple",
+        "italic": false
+      }
     },
     {
       "function": "minecraft:set_lore",
       "lore": [
         "Survivors of Dinidae were aided by fellow tribes",
         "as they escaped the dangers of Poncho Sanchez.",
-        ["Rarity: ",{"text":"Epic","color":"light_purple","italic":true}],
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
         "",
-        [{"text":"Estudinae's Solidarity:","italic":false,"color":"light_purple"}," ",{"text":"Grants Luck, Dolphin's","italic":false,"color":"gray"}],
-        {"text":"Grace, and Health Boost at the cost of Slowness.","italic":false,"color":"gray"}
+        [
+          {
+            "text": "Estudinae's Solidarity:",
+            "italic": false,
+            "color": "light_purple"
+          },
+          " ",
+          {
+            "text": "Grants Luck, Dolphin's",
+            "italic": false,
+            "color": "gray"
+          }
+        ],
+        {
+          "text": "Grace, and Health Boost at the cost of Slowness.",
+          "italic": false,
+          "color": "gray"
+        }
       ]
     },
     {

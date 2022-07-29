@@ -10,19 +10,66 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": {"text":"Evoker's Tome","italic":false,"color":"green"}
+              "name": {
+                "text": "Evoker's Tome",
+                "italic": false,
+                "color": "green"
+              }
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "What Foul Magicks Dwell Within...?",
-                ["Rarity: ",{"text":"Mythic","color":"green","italic":true}],
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Mythic",
+                    "color": "green",
+                    "italic": true
+                  }
+                ],
                 "",
-                [{"text":"Jaw Trap:","italic":false,"color":"green"}," ",{"text":"Summons a line of Evoker Fangs in","color":"gray","italic":false}],
-                {"text":"the direction you are looking.","italic":false,"color":"gray"},
-                [{"text":"Sharknado:","italic":false,"color":"green"}," ",{"text":"While crouched, summons a whirling","color":"gray","italic":false}],
-                {"text":"frenzy of Evoker Fangs centered on your","italic":false,"color":"gray"},
-                {"text":"current position.","italic":false,"color":"gray"}
+                [
+                  {
+                    "text": "Jaw Trap:",
+                    "italic": false,
+                    "color": "green"
+                  },
+                  " ",
+                  {
+                    "text": "Summons a line of Evoker Fangs in",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "the direction you are looking.",
+                  "italic": false,
+                  "color": "gray"
+                },
+                [
+                  {
+                    "text": "Sharknado:",
+                    "italic": false,
+                    "color": "green"
+                  },
+                  " ",
+                  {
+                    "text": "While crouched, summons a whirling",
+                    "color": "gray",
+                    "italic": false
+                  }
+                ],
+                {
+                  "text": "frenzy of Evoker Fangs centered on your",
+                  "italic": false,
+                  "color": "gray"
+                },
+                {
+                  "text": "current position.",
+                  "italic": false,
+                  "color": "gray"
+                }
               ]
             },
             {

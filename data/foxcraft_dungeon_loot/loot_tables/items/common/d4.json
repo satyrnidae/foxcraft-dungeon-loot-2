@@ -9,13 +9,26 @@
           "functions": [
             {
               "function": "minecraft:set_name",
-              "name": [{"text": "D4","italic":false,"color":"white"}]
+              "name": [
+                {
+                  "text": "D4",
+                  "italic": false,
+                  "color": "white"
+                }
+              ]
             },
             {
               "function": "minecraft:set_lore",
               "lore": [
                 "A simple four-sided die.",
-                ["Rarity: ",{"text":"Common","italic":true,"color":"white"}]
+                [
+                  "Rarity: ",
+                  {
+                    "text": "Common",
+                    "italic": true,
+                    "color": "white"
+                  }
+                ]
               ]
             },
             {

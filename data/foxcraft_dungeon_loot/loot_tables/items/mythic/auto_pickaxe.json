@@ -40,7 +40,7 @@
       ],
       "entries": [
         {
-          "type": "item",
+          "type": "minecraft:item",
           "name": "minecraft:diamond_pickaxe"
         }
       ]
@@ -59,7 +59,7 @@
       ],
       "entries": [
         {
-          "type": "item",
+          "type": "minecraft:item",
           "name": "minecraft:netherite_pickaxe"
         }
       ]
@@ -68,32 +68,63 @@
   "functions": [
     {
       "function": "minecraft:set_name",
-      "name": {"text": "Albatross Heavy Industries® Auto-Pickaxe™", "color": "green", "italic": false}
+      "name": {
+        "text": "Albatross Heavy Industries® Auto-Pickaxe™",
+        "color": "green",
+        "italic": false
+      }
     },
     {
       "function": "minecraft:set_lore",
       "lore": [
         "The new Albatross Heavy Industries®",
         "Auto-Pickaxe™: For all your tunnelling needs!",
-        ["Rarity: ",{"text":"Mythic","color":"green","italic": true}],
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
         "",
-        [{"text":"Spring-Loaded Heads:","color":"green","italic": false}," ",{"text":"Tears through the","color":"gray","italic":false}],
-        {"text":"toughest stone with ease. Grants Haste II when","color":"gray","italic": false},
-        {"text":"held in main-hand.","color":"gray","italic":false}
+        [
+          {
+            "text": "Spring-Loaded Heads:",
+            "color": "green",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "Tears through the",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "toughest stone with ease. Grants Haste II when",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "held in main-hand.",
+          "color": "gray",
+          "italic": false
+        }
       ]
     },
     {
       "function": "minecraft:set_enchantments",
       "enchantments": {
-        "efficiency": 10,
-        "mending": 1,
-        "silk_touch": 1,
-        "unbreaking": 5
+        "minecraft:efficiency": 10,
+        "minecraft:mending": 1,
+        "minecraft:silk_touch": 1,
+        "minecraft:unbreaking": 5
       },
       "add": true
     },
     {
-      "function": "set_nbt",
+      "function": "minecraft:set_nbt",
       "tag": "{DungeonLootId:32,CustomModelData:421951}"
     }
   ]
