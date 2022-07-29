@@ -13,6 +13,7 @@ function load {
     scoreboard objectives add satyrn.fdl.itemId.leggings dummy
     scoreboard objectives add satyrn.fdl.itemId.chestplate dummy
     scoreboard objectives add satyrn.fdl.itemId.helmet dummy
+    scoreboard objectives add satyrn.fdl.loot.variant dummy
 
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:on_load
