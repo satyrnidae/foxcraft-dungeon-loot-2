@@ -1,0 +1,57 @@
+{
+  "__comment": "Constantine's Gift",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:enchanted_golden_apple",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": {"text": "Constantine's Gift", "color": "green", "italic": false}
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "Don't look a gift h- uh, donkey... in the... uh...",
+                "You know what? Just roll with it.",
+                ["Rarity: ",{"text":"Mythic","color":"green","italic":true}],
+                "",
+                [{"text": "Full on Love and Sugar Cubes:", "color": "green", "italic": false}," ",{"text": "When held in", "color": "gray", "italic": false}],
+                {"text": "off-hand, applies Saturation once every ten","color":"gray","italic":false},
+                {"text": "seconds.","color":"gray","italic":false}
+              ]
+            },
+            {
+              "function": "minecraft:set_attributes",
+              "modifiers": [
+                {
+                  "name": "generic.luck",
+                  "attribute": "minecraft:generic.luck",
+                  "operation": "addition",
+                  "amount": 2,
+                  "slot": "offhand",
+                  "id": "ff65ad47-94ea-4fc7-a8e0-de301e119d04"
+                },
+                {
+                  "name":"generic.movement_speed",
+                  "attribute": "minecraft:generic.movement_speed",
+                  "operation": "multiply_base",
+                  "amount": 0.2,
+                  "slot": "offhand",
+                  "id": "e10b1056-c5cd-45bd-bccb-f940561e9eb3"
+                }
+              ]
+            },
+            {
+              "function": "set_nbt",
+              "tag": "{DungeonLootId:35,CustomModelData:421951}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
