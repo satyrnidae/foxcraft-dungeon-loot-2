@@ -17,28 +17,28 @@ function clock_10s {
 
 # Gives the sender a copy of this item.
 function give {
-    macro give epic/estudinaes_survival
+    macro give_as_loot epic/estudinaes_survival
 }
 
 dir give {
     # Gives the sender a copy of this item. The item is upgraded to chainmail.
     function chainmail {
-        macro give_variant epic/estudinaes_survival 1
+        macro give_as_variant_loot epic/estudinaes_survival 1
     }
 
     # Gives the sender a copy of this item. The item is upgraded to iron.
     function iron {
-        macro give_variant epic/estudinaes_survival 2
+        macro give_as_variant_loot epic/estudinaes_survival 2
     }
 
     # Gives the sender a copy of this item. The item is upgraded to diamond.
     function diamond {
-        macro give_variant epic/estudinaes_survival 3
+        macro give_as_variant_loot epic/estudinaes_survival 3
     }
 
     # Gives the sender a copy of this item. The item is upgraded to netherite.
     function netherite {
-        macro give_variant epic/estudinaes_survival 4
+        macro give_as_variant_loot epic/estudinaes_survival 4
     }
 }
 

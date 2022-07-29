@@ -11,7 +11,7 @@ function clock_2s {
 
 # Gives the sender a copy of the item.
 function give {
-    macro give mythic/idol_of_melimonas
+    macro give_as_loot mythic/idol_of_melimonas
 }
 
 # Initializes the 2 second item clock (offset by 8 ticks).

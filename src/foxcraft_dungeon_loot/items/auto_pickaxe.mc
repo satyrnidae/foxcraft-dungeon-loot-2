@@ -8,18 +8,18 @@ function clock_2s {
 
 # Gives a copy of the item to the sender.
 function give {
-    macro give mythic/auto_pickaxe
+    macro give_as_loot mythic/auto_pickaxe
 }
 
 dir give {
     # Gives a copy of this item to the sender. The item is upgraded to a diamond pickaxe.
     function diamond {
-        macro give_variant mythic/auto_pickaxe 1
+        macro give_as_variant_loot mythic/auto_pickaxe 1
     }
 
     # Gives a copy of this item to the sender. The item is upgraded to a netherite pickaxe.
     function netherite {
-        macro give_variant mythic/auto_pickaxe 2
+        macro give_as_variant_loot mythic/auto_pickaxe 2
     }
 }
 

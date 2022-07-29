@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give mythic/quet_zalas_beloved
+    macro give_as_loot mythic/quet_zalas_beloved
 }
 
 function on_tick {

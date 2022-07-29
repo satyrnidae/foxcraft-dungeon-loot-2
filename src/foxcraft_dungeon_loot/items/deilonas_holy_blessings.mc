@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    macro give mythic/deilonas_holy_blessings
+    macro give_as_loot mythic/deilonas_holy_blessings
 }
 
 function on_load {

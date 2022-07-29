@@ -8,7 +8,7 @@ function clock_10s {
 
 # Gives the sender a copy of the item.
 function give {
-    macro give mythic/constantines_gift
+    macro give_as_loot mythic/constantines_gift
 }
 
 # Initializes the item's timer function.

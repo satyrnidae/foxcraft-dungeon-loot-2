@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the item.
 function give {
-    macro give epic/rogues_dagger
+    macro give_as_loot epic/rogues_dagger
 }
 
 # Makes the player invisible if they are crouching.

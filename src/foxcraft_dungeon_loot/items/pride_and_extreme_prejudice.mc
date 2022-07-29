@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the item.
 function give {
-    macro give mythic/pride_and_extreme_prejudice
+    macro give_as_loot mythic/pride_and_extreme_prejudice
 }
 
 function on_load {
