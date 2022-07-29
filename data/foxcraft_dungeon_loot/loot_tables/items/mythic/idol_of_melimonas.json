@@ -1,0 +1,116 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.4,
+          "operation": "multiply_base",
+          "id": "d71dbb1c-0a65-4019-abc6-3820ccb8eae0",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 1,
+          "operation": "addition",
+          "id": "978773dd-ae5e-42b2-b75b-87920c895a86",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Idol of Melimonas",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Weep, for Melimonas smiles upon thee.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Wings of the Devil:",
+            "color": "green",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "While holding the idol",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "in your off hand, you gain Jump Boost",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "II.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Pass Without Trace:",
+            "color": "green",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "When held in your",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "off hand, you gain Invisibility for",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "30 seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:47,CustomModelData:421956,HideFlags:1}"
+    }
+  ]
+}
