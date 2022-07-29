@@ -130,6 +130,14 @@
           "slot": "chest",
           "name": "generic.max_health",
           "id": "63f941e7-0da7-459d-b89f-c91e0ae8e727"
+        },
+        {
+          "attribute": "minecraft:generic.armor",
+          "amount": 8,
+          "operation": "addition",
+          "slot": "chest",
+          "name": "generic.armor",
+          "id": "3469df08-a5c8-495e-b98a-8c5c32ea4511"
         }
       ]
     },
