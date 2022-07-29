@@ -9,8 +9,35 @@
           "name": "minecraft:warped_fungus_on_a_stick",
           "functions": [
             {
+              "function": "minecraft:set_name",
+              "name": {"text":"Bringer of Fear","color":"red","italic":false}
+            },
+            {
+              "function": "minecraft:set_lore",
+              "lore": [
+                "Those who whisper into the darkness had",
+                "best be prepared for the consequences.",
+                ["Rarity: ",{"text":"Cursed","color":"red","italic":true}],
+                "",
+                [{"text":"Darkness Whispers:","color":"red","italic":false}," ",{"text":"Rolls a D20. The result","color":"gray","italic":false}],
+                {"text":"will determine the outcome:","color":"gray","italic":false},
+                {"text":" - 1-10: Bad Omen I","color":"gray","italic":false},
+                {"text":" - 11-17: Bad Omen III","color":"gray","italic":false},
+                {"text":" - 18-20: Bad Omen V","color":"gray","italic":false},
+                {"text":"All effects are applied for 20 minutes.","color":"gray","italic":false},
+                [{"text":"Fragile:","color":"red","italic":false}," ",{"text":"The item will be consumed upon use.","color":"gray","italic":false}]
+              ]
+            },
+            {
+              "function": "minecraft:set_enchantments",
+              "enchantments": {
+                "mending": 1
+              },
+              "add": true
+            },
+            {
               "function": "set_nbt",
-              "tag": "{DungeonLootId:34,Unbreakable:1,CustomModelData:4219512,display:{Name:'[{\"text\":\"Bringer of Fear\",\"italic\":false,\"color\":\"red\"}]',Lore:['[{\"text\":\"Those who whisper into the darkness had\"}]','[{\"text\":\"best be prepared for the consequences.\",\"italic\":true}]','[{\"text\":\"Rarity: \",\"italic\":true},{\"text\":\"Cursed\",\"color\":\"red\",\"italic\":true},{\"text\":\"\",\"color\":\"dark_purple\",\"italic\":false}]','[{\"text\":\"\",\"italic\":false,\"color\":\"dark_purple\"}]','[{\"text\":\"Darkness Whispers:\",\"italic\":false,\"color\":\"red\"},{\"text\":\" Rolls a D20. The result\",\"italic\":false,\"color\":\"gray\"}]','[{\"text\":\"will determine the outcome:\",\"italic\":false,\"color\":\"gray\"}]','[{\"text\":\" - 50% Bad Omen I\",\"italic\":false,\"color\":\"gray\"}]','[{\"text\":\" - 35% Bad Omen III\",\"italic\":false,\"color\":\"gray\"}]','[{\"text\":\" - 15% Bad Omen V\",\"italic\":false,\"color\":\"gray\"}]','[{\"text\":\"All effects are applied for 20 minutes.\",\"italic\":false,\"color\":\"gray\"},{\"text\":\"\",\"italic\":false,\"color\":\"dark_purple\"}]','[{\"text\":\"Fragile:\",\"italic\":false,\"color\":\"red\"},{\"text\":\" The item will be consumed upon use.\",\"color\":\"gray\"}]']},Enchantments:[{id:\"minecraft:mending\",lvl:1}],HideFlags:5}"
+              "tag": "{DungeonLootId:34,Unbreakable:1,CustomModelData:4219512,HideFlags:5}"
             }
           ]
         }

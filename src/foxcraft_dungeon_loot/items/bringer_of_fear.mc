@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    loot give @s loot foxcraft_dungeon_loot:items/mythic/bringer_of_fear
+    macro give mythic/bringer_of_fear
 }
 
 function on_load {
