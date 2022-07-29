@@ -1,0 +1,78 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Poncho Sanchez's Fate",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "The arrival of Poncho Sanchez was preceded by",
+        "the baleful wailing of horns.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "The Roar of Poncho Sanchez:",
+            "color": "green",
+            "italic": false
+          },
+          " ",
+          {
+            "text": "When blown, sounds",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "a random goat horn and applies multiple effects",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "to yourself and any friendly entity within a 100-",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "meter radius.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:48,CustomModelData:421950}"
+    }
+  ]
+}

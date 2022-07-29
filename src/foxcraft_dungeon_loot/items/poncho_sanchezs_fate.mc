@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:48,CustomModelData:421950,AttributeModifiers:[{AttributeName:"generic.max_health",Amount:4,Slot:chest,Name:"generic.max_health",UUID:[I;-122620,36037,171513,-72074]}],display:{Name:'[{"text":"Poncho Sanchez\'s Fate","italic":false,"color":"green"}]',Lore:['[{"text":"The arrival of Poncho Sanchez was preceded by"}]','[{"text":"the baleful wail of his horn.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity:","italic":true},{"text":" Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"The Roar of Poncho Sanchez:","italic":false,"color":"green"},{"text":" When blown, sounds","italic":false,"color":"gray"}]','[{"text":"a random goat horn and applies a bevy of","italic":false,"color":"gray"}]','[{"text":"effects.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}]} 1
+    macro give mythic/poncho_sanchezs_fate
 }
 
 function on_load {
