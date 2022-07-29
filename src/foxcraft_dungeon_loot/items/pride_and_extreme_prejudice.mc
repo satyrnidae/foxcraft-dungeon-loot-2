@@ -2,7 +2,7 @@ import ../../macros.mcm
 
 # Gives the sender a copy of the item.
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:49,Unbreakable:1,CustomModelData:4219511,display:{Name:'[{"text":"Pride and Extreme Prejudice","italic":false,"color":"green"}]',Lore:['[{"text":"There is no glory without risk. Best to be"}]','[{"text":"prepared for the worst.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Roll the Dice:","italic":false,"color":"green"},{"text":" Rolls a D10. The result will","italic":false,"color":"gray"}]','[{"text":"determine the outcome:","italic":false,"color":"gray"}]','[{"text":" - 10% Bad Omen IV","italic":false,"color":"gray"}]','[{"text":" - 10% Bad Omen III","italic":false,"color":"gray"}]','[{"text":" - 60% Bad Omen I","italic":false,"color":"gray"}]','[{"text":" - 20% Hero of the Village","italic":false,"color":"gray"}]','[{"text":"All effects are applied for 20 minutes.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile:","italic":false,"color":"red"},{"text":" The item will be consumed upon use.","color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:5} 1
+    macro give mythic/pride_and_extreme_prejudice
 }
 
 function on_load {
