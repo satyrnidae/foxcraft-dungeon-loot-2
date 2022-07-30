@@ -5,6 +5,11 @@ data/foxcraft_dungeon_loot/functions
 data/minecraft/tags/functions/load.json
 data/minecraft/tags/functions/tick.json
 
+# Custom music discs
+texturepack/assets/minecraft/sounds.json
+texturepack/assets/custom_music_discs
+texturepack/assets/minecraft/models/item/music_disc_11.json
+
 # Build output
 .build
 

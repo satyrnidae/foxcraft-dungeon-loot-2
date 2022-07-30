@@ -22,4 +22,4 @@ This pack contains code derived from utility packs and examples provided by [Clo
 
 Additional shoutouts go to Link2_thepast's [Custom Music Discs](https://www.reddit.com/r/Minecraft/comments/picmad/my_datapack_lets_you_add_lots_of_custom_music/) datapack generator, though generated code was not imported into this pack.
 
-Assets include a set of custom music disc sound files which are mixed-down mono versions of Wolfgun's album [RUNNING](https://wolfgun.bandcamp.com/album/running). The album can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
+Older commits of assets may include a set of custom music disc sound files which are mixed-down mono versions of Wolfgun's album [RUNNING](https://wolfgun.bandcamp.com/album/running). These files are excluded in more recent versions. The album can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
