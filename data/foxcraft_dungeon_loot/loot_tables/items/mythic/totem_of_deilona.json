@@ -1,0 +1,94 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 2,
+          "operation": "addition",
+          "id": "73139761-a274-4bda-a559-9dced3bfe6d1",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Deilona",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Deilona, Goddess of Health and Good",
+        "Fortune, smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Deilona's Blessing: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When held in off-hand,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "grants the user Regeneration II. When held",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "in main hand, grants nearby players (with",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "the exception of the wielder) Regeneration",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "I.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:55,CustomModelData:421951,HideFlags:1}"
+    }
+  ]
+}
