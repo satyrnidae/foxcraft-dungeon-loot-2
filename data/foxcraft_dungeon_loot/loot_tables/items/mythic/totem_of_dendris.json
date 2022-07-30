@@ -1,0 +1,113 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": -0.2,
+          "operation": "multiply_base",
+          "id": "bfb85417-2099-4323-a9d1-e9286814c5c9",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Dendris",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Dendris, the God of Dreams, Darkness,",
+        "and the Deep Things, smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Darkvision: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Night Vision when held in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "your off-hand.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Crushing Depths: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Resistance V when",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "held in your off-hand.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Arbiter of the Deep: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Water Breathing",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "when held in your off-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:54,CustomModelData:421955,HideFlags:1}"
+    }
+  ]
+}
