@@ -12,7 +12,7 @@ function clock_10t {
 }
 
 function give {
-    gmacro give_as_loot mythic/scripture_of_cleansing
+    macro give_as_loot mythic/scripture_of_cleansing
 }
 
 function on_load {
