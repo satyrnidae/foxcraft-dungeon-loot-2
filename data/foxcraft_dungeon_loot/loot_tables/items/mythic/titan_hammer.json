@@ -114,7 +114,7 @@
       {
         "function": "minecraft:set_enchantments",
         "enchantments": {
-            "minecraft:knockback": 1
+            "minecraft:knockback": 2
         },
         "add": true
       },
