@@ -1,0 +1,103 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": -0.25,
+          "operation": "multiply_total",
+          "id": "601d7a86-58e1-4a64-93c2-9741759c1877",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.4,
+          "operation": "multiply_total",
+          "id": "1fa1f215-be02-4aa2-b6e2-2268f063aaac",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Ekila",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Ekila, the God of the Sky, smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Smooth Landing: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "While flying, gain Resistance",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "III and Absorption II.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Headed Skyward: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "While grounded, gain Jump",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Boost III.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:19,CustomModelData:421953,HideFlags:1}"
+    }
+  ]
+}
