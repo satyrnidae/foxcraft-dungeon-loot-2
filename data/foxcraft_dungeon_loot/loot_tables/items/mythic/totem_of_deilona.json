@@ -35,7 +35,7 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "May Deilona, Goddess of Health and Good",
+        "May Deilona, God of Health and Good",
         "Fortune, smile upon thee!",
         [
           "Rarity: ",
@@ -53,28 +53,40 @@
             "italic": false
           },
           {
-            "text": "When held in off-hand,",
+            "text": "When held in your",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "grants the user Regeneration II. When held",
+          "text": "main hand, grants up to five nearby",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "in main hand, grants nearby players (with",
+          "text": "allies Regeneration I.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Doctor, Heal Thyself: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When held in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "your off-hand, grants Regeneration",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "the exception of the wielder) Regeneration",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "I.",
+          "text": "II to yourself.",
           "color": "gray",
           "italic": false
         }
