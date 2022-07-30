@@ -1,0 +1,103 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Scripture of Cleansing",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Approach, ye Blasted Souls, and be Cleansed.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Cleansing Ritual: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": " When used, an item that",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "you are either holding or wearing will be",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "cleansed of either Curse of Vanishing or",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Curse of Binding. If no cursed item is found,",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "the Scripture is damaged, but not consumed.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": " This item is consumed when",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Cleansing Ritual is used to successfully",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "cleanse a cursed item.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 0
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:51,CustomModelData:421953,HideFlags:1}"
+    }
+  ]
+}

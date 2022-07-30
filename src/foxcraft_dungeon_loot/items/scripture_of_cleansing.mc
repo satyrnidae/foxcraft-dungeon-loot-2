@@ -12,7 +12,7 @@ function clock_10t {
 }
 
 function give {
-    give @p minecraft:warped_fungus_on_a_stick{DungeonLootId:51,CustomModelData:421953,display:{Name:'[{"text":"Scripture of Cleansing","italic":false,"color":"green"}]',Lore:['[{"text":"Approach, ye Blasted Souls, and be Cleansed."}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"green","italic":false}]','[{"text":"","italic":false,"color":"green"}]','[{"text":"Cleansing Ritual:","italic":false,"color":"green"},{"text":" When used, an item that","italic":false,"color":"gray"}]','[{"text":"you are either holding or wearing will be","italic":false,"color":"gray"}]','[{"text":"cleansed of either Curse of Vanishing or","italic":false,"color":"gray"}]','[{"text":"Curse of Binding. If no cursed item is found,","italic":false,"color":"gray"}]','[{"text":"the Scripture is not consumed.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile:","italic":false,"color":"red"},{"text":" This item is consumed when","italic":false,"color":"gray"}]','[{"text":"Cleansing Ritual is used to successfully","italic":false,"color":"gray"}]','[{"text":"cleanse a cursed item.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
+    gmacro give_as_loot mythic/scripture_of_cleansing
 }
 
 function on_load {
