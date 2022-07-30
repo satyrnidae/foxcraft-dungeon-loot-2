@@ -20,6 +20,10 @@ After cloning this repository, run `mcb` in the directory to generate the functi
 ## Acknowledgements
 This pack contains code derived from utility packs and examples provided by [CloudWolf](https://www.youtube.com/c/CloudWolfMinecraft) and [WASD Build Team](https://www.youtube.com/c/WASDBuildTeam), as well as code derived from Siscu's [Evoker Charm](https://www.planetminecraft.com/data-pack/evoker-charm-functions-datapack/download/file/14409645/) datapack.
 
-Additional shoutouts go to Link2_thepast's [Custom Music Discs](https://www.reddit.com/r/Minecraft/comments/picmad/my_datapack_lets_you_add_lots_of_custom_music/) datapack generator, though generated code was not imported into this pack.
-
+### Wolfgun
 Older commits of assets may include a set of custom music disc sound files which are mixed-down mono versions of Wolfgun's album [RUNNING](https://wolfgun.bandcamp.com/album/running). These files are excluded in more recent versions. The album can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
+
+### Freesound
+Some sound effects were downloaded from Freesound.org. Those are listed here:
+ - [Electric zap](https://freesound.org/people/michael_grinnell/sounds/512471/) by michael_grinnell, CC-0
+ - [Spark](https://freesound.org/people/elliott.klein/sounds/189630/) by elliot.klein, CC-0
