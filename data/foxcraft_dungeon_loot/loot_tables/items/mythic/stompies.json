@@ -1,0 +1,203 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 3
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 4
+          }
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "St0mp-EE5",
+        "color": "gold",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "\"I call them the Stompies! For when you need that",
+        "extra kick.\" - Marcus Ren",
+        [
+          "Rarity: ",
+          {
+            "text": "Exotic",
+            "color": "gold",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Hydraulic Boosters: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Increases movement speed",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "and jump height. Grants Jump Boost II.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Exotic Item: ",
+            "color": "gold",
+            "italic": false
+          },
+          {
+            "text": "Cannot be equipped while wearing",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "another piece of Exotic armor. Good thing there's",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "only one, huh?",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 3,
+          "operation": "addition",
+          "id": "5717a7f8-5fe5-4c0a-9d27-7fb97fde08df",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.4,
+          "operation": "multiply_total",
+          "id": "d46b1ef1-b7ff-49be-9214-7bf39ae91e97",
+          "slot": "feet"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:feather_falling": 4,
+        "minecraft:protection": 5,
+        "minecraft:soul_speed": 1,
+        "minecraft:binding_curse": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:52,CustomModelData:421950,Unbreakable:1,display:{color:14605273}}"
+    }
+  ]
+}
