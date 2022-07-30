@@ -1,29 +1,77 @@
 import ../../macros.mcm
 
 function give {
-    give @s snowball{DungeonLootId:75,CustomModelData:4219525,display:{Name:'[{"text":"Hammer of Sol","italic":false,"color":"green"}]', Lore:['[{"text":"Vanquish your foes with a hammer","italic":true,"color":"dark_purple"}]', '[{"text":"of pure celestial fire","italic":true,"color":"dark_purple"}]', '[{"text":"Rarity: ","italic":true,"color":"dark_purple"},{"text":"Mythic","color":"green","italic":true}]']}} 1
+    loot give @s loot foxcraft_dungeon_loot:items/mythic/titan_hammer
 }
 
 function on_tick {
-    execute if score @s satyrn.fdl.itemId.mainHand matches 75 if score @s satyrn.fdl.used.snowball matches 1.. run {
-        stopsound @s * entity.snowball.throw
-        playsound minecraft:entity.evoker.prepare_wololo player @s ~ ~ ~ 10
-
-        say "heyo 1"
-
-        # Add tag to thrown snowball so we can track it
-        data merge entity @e[type=snowball, limit=1, sort=nearest] {Tags:[satyrn.fdl.titanHammer]}
+    # Add tag to player to know they have the hammer in their main hand (Since they are throwing it, if they only have 1, the next they wouldn't have it in their hand anymore)
+    execute if score @s satyrn.fdl.itemId.mainHand matches 75 run {
+        tag @s add satyrn.fdl.holdingTitanHammer
     }
 
-    # Track thrown snowball
-    execute if entity @e[tag=satyrn.fdl.titanHammer] as @e[tag=satyrn.fdl.titanHammer] at @s run {
-        execute unless block ~ ~-1 ~ air run {
-            say "heyo 3"
-            summon tnt
+    execute if score @s[tag=satyrn.fdl.holdingTitanHammer] satyrn.fdl.used.snowball matches 1.. run {
+        stopsound @s * entity.snowball.throw
+        playsound minecraft:entity.blaze.shoot player @a ~ ~ ~ 10
+        playsound minecraft:item.trident.throw player @a ~ ~ ~ 10
+
+        # Add tag to thrown hammer so we can track it.
+        data merge entity @e[type=snowball, limit=1, sort=nearest] {Tags:[satyrn.fdl.titanHammer]}
+
+        # Summon an armor stand (tracker) to track when the hammer breaks.
+        execute at @e[type=snowball, limit=1, sort=nearest] run {
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b, Invulnerable:1, NoGravity:1, Small:1, Tags:[satyrn.fdl.titanHammerTracker]}
+        }
+    }
+
+    # Remove the tag that says the player has a hammer if they no longer have one in their main hand.
+    execute unless score @s satyrn.fdl.itemId.mainHand matches 75 run {
+        tag @s remove satyrn.fdl.holdingTitanHammer
+    }
+
+    # Teleport tracker to the hammer and do all the tracking that needs to be tracked
+    execute if entity @e[tag=satyrn.fdl.titanHammerTracker] as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
+        execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..2, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
+            tp @s ~ ~ ~
+
+        # If tracker cannot find a hammer, it hit something and was destroyed.
+        } else {
+            # Search for entity to damage
+            execute (if entity @e[type=!#foxcraft_dungeon_loot:non_living, distance=0.0001..2.8, limit=1, sort=nearest] as @e[distance=0.0001..2.8, limit=1, sort=nearest] at @s) {
+                playsound minecraft:entity.blaze.hurt player @a ~ ~ ~ 10
+                # Set on fire for 5 seconds (100 ticks)
+                data merge entity @s {Fire:100}
+                # Deal damage via potion effects for both living and undead targets
+                execute (if entity @s[type=#foxcraft_dungeon_loot:undead] at @s) {
+                    #TODO: this damage is being applied to the player that threw the hammer, fix that with a new tag
+                    effect give @s minecraft:instant_health 10
+                } else {
+                    effect give @s minecraft:instant_damage 10
+                }
+            } else {
+                playsound minecraft:block.metal.hit player @a ~ ~ ~ 20
+            }
+
+            # Spawn new hammer that will disappear after 5 seconds (100 ticks)
+            loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:items/mythic/titan_hammer
+            data merge entity @e[type=item, limit=1, sort=nearest] {Age: 5900, Tags:[satyrn.fdl.titanHammerSpawnedItem]}
+
+            # Destroy tracker, play hit sound, and hit particle effects
+            particle minecraft:flame ~ ~ ~ 0.2 0.2 0.2 0 20
+            particle minecraft:smoke ~ ~ ~ 0.1 0.1 0.1 0 10
+            kill @s
+        }
+    }
+
+    # Track newly spawned hammers after they were destroyed.
+    # If one is about to disappear, play sound, spawn particle effects, and delete the tag so it only happens once.
+    execute if entity @e[tag=satyrn.fdl.titanHammerSpawnedItem] as @e[tag=satyrn.fdl.titanHammerSpawnedItem] at @s run {
+        execute if entity @s[nbt={Age: 5999s}] run {
+            particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
+            particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 100
+            particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 20
+            playsound minecraft:entity.shulker_bullet.hit player @a ~ ~ ~ 20
+            tag @s remove satyrn.fdl.titanHammerSpawnedItem
         }
     }
 }
-
-
-# Set item decay Age very high
-# set owner?

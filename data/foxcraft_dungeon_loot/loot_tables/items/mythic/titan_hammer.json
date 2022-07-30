@@ -1,0 +1,126 @@
+{
+    "pools": [
+      {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "minecraft:snowball"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "function": "minecraft:set_name",
+        "name": {
+          "text": "Hammer of Sol",
+          "color": "green",
+          "italic": false
+        }
+      },
+      {
+        "function": "minecraft:set_lore",
+        "lore": [
+          [
+            {
+              "text": "Eyes up, Guardian."
+            }
+          ],
+          [
+            {
+              "text": "Rarity: ",
+              "italic": true
+            },
+            {
+              "text": "Mythic",
+              "color": "green"
+            },
+            {
+              "text": "",
+              "color": "dark_purple"
+            }
+          ],
+          [
+            {
+              "text": " ",
+              "color": "dark_purple",
+              "italic": true
+            },
+            {
+              "text": "",
+              "color": "dark_purple",
+              "italic": false
+            }
+          ],
+          [
+            {
+              "text": "Titan Chonk:",
+              "color": "green",
+              "italic": false
+            },
+            {
+              "text": " ",
+              "color": "white"
+            },
+            {
+              "text": "Right-click to throw",
+              "color": "gray"
+            }
+          ],
+          [
+            {
+              "text": "the hammer. When the hammer hits",
+              "color": "gray",
+              "italic": false
+            }
+          ],
+          [
+            {
+              "text": "its target, it inflicts damage and",
+              "color": "gray",
+              "italic": false
+            }
+          ],
+          [
+            {
+              "text": "lights the target on fire, and drops",
+              "color": "gray",
+              "italic": false
+            }
+          ],
+          [
+            {
+              "text": "as a short-lived item.",
+              "color": "gray",
+              "italic": false
+            }
+          ]
+        ]
+      },
+      {
+        "function": "minecraft:set_attributes",
+        "modifiers": [
+          {
+            "attribute": "minecraft:generic.attack_damage",
+            "name": "generic.attack_damage",
+            "amount": 4,
+            "operation": "addition",
+            "id": "f576707d-7974-4509-b87c-a8f99bfd332f",
+            "slot": "mainhand"
+          }
+        ]
+      },
+      {
+        "function": "minecraft:set_enchantments",
+        "enchantments": {
+            "minecraft:knockback": 1
+        },
+        "add": true
+      },
+      {
+        "function": "minecraft:set_nbt",
+        "tag": "{DungeonLootId:75,CustomModelData:421950}"
+      }
+    ]
+  }
