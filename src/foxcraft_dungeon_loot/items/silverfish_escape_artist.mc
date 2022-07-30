@@ -1,5 +1,7 @@
+import ../../macros.mcm
+
 function give {
-    give @s minecraft:warped_fungus_on_a_stick{DungeonLootId:63,CustomModelData:4219510,display:{Name:'[{"text":"Silverfish Escape Artist","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Sometimes getting out alive is more"}]','[{"text":"important than getting what you want. You","italic":true}]','[{"text":"might be able to kill a silverfish, but","italic":true}]','[{"text":"could you stop one from running away?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Escape Artist:","italic":false,"color":"light_purple"},{"text":" When you consume this item,","italic":false,"color":"gray"}]','[{"text":"it grants 30 seconds of every effect you","italic":false,"color":"gray"}]','[{"text":"need to escape.","italic":false,"color":"gray"},{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Fragile:","italic":false,"color":"red"},{"text":" This item is consumed upon use.","color":"gray"},{"text":"","color":"dark_purple"}]','[{"text":"Edible:","italic":false,"color":"yellow"},{"text":" >:3","color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
+    macro give_as_loot epic/silverfish_escape_artist
 }
 
 function on_load {
