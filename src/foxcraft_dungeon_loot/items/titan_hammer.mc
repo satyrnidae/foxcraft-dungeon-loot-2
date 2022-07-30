@@ -20,7 +20,8 @@ function on_tick {
 
         # Summon an armor stand (tracker) to track when the hammer breaks.
         execute at @e[type=snowball, limit=1, sort=nearest] run {
-            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b, Invulnerable:1, NoGravity:1, Small:1, Tags:[satyrn.fdl.titanHammerTracker]}
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Invulnerable:1, Small:1, Tags:[satyrn.fdl.titanHammerTracker]}
+            data modify entity @e[tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] Motion set from entity @e[type=snowball,limit=1,sort=nearest] Motion
         }
     }
 
@@ -32,12 +33,11 @@ function on_tick {
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
     execute if entity @e[tag=satyrn.fdl.titanHammerTracker] as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
         execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..2, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
-            tp @s ~ ~ ~
-
+            data modify entity @s Motion set from entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] Motion
         # If tracker cannot find a hammer, it hit something and was destroyed.
         } else {
             # Search for entity to damage
-            execute (if entity @e[type=!#foxcraft_dungeon_loot:non_living, distance=0.0001..2.8, limit=1, sort=nearest] as @e[distance=0.0001..2.8, limit=1, sort=nearest] at @s) {
+            execute (anchored feet if entity @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] as @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] at @s) {
                 playsound minecraft:entity.blaze.hurt player @a ~ ~ ~ 10
                 # Set on fire for 5 seconds (100 ticks)
                 data merge entity @s {Fire:100}
@@ -57,8 +57,8 @@ function on_tick {
             data merge entity @e[type=item, limit=1, sort=nearest] {Age: 5900, Tags:[satyrn.fdl.titanHammerSpawnedItem]}
 
             # Destroy tracker, play hit sound, and hit particle effects
-            particle minecraft:flame ~ ~ ~ 0.2 0.2 0.2 0 20
-            particle minecraft:smoke ~ ~ ~ 0.1 0.1 0.1 0 10
+            particle minecraft:flame ~ ~ ~ 0.5 0.2 0.5 0 20
+            particle minecraft:smoke ~ ~ ~ 0.5 0.1 0.5 0 10
             kill @s
         }
     }
