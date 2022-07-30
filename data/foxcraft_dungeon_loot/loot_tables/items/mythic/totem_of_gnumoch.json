@@ -1,0 +1,110 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 1,
+          "operation": "addition",
+          "id": "2bcdad90-7498-4788-942e-30d3e8f45981",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 10,
+          "operation": "addition",
+          "id": "f301efcb-a389-4198-b12f-6dab07120020",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 5,
+          "operation": "addition",
+          "id": "e4426144-5263-4312-aa45-17ae7d605e77",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Gnumoch",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Gnumoch, the God of the Earth, smile",
+        "upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Feet Firmly Planted: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "While on the ground",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "and crouching with the totem in your",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "off-hand, grants Resistance III and",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Absorption III at the cost of Slowness",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "II.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:20,CustomModelData:421954,HideFlags:1}"
+    }
+  ]
+}

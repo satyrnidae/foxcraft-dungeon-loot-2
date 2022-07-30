@@ -1,11 +1,31 @@
+import ../../macros.mcm
+
 function give {
-    give @s minecraft:totem_of_undying{DungeonLootId:20,CustomModelData:421954,AttributeModifiers:[{AttributeName:"generic.knockback_resistance",Amount:1,Slot:offhand,Name:"generic.knockback_resistance",UUID:[I;-122628,70376,745,-140752]},{AttributeName:"generic.armor",Amount:10,Slot:offhand,Name:"generic.armor",UUID:[I;-122628,70576,745,-141152]},{AttributeName:"generic.armor_toughness",Amount:5,Slot:offhand,Name:"generic.armor_toughness",UUID:[I;-122628,70676,745,-141352]}],display:{Name:'[{"text":"Totem of Gnumoch","italic":false,"color":"green"}]',Lore:['[{"text":"May Gnumoch, the God of the Earth, smile"}]','[{"text":"upon thee!","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Mythic","color":"green"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Feet Firmly Planted: ","italic":false,"color":"green"},{"text":"While on the ground,","italic":false,"color":"gray"}]','[{"text":"and with the totem in off-hand, grants","italic":false,"color":"gray"}]','[{"text":"Resistance III.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:mending",lvl:1}],HideFlags:1} 1
+    macro give_as_loot mythic/totem_of_gnumoch
 }
 
 function on_tick {
-    execute if score @s satyrn.fdl.itemId.offHand matches 20 if score @s satyrn.fdl.custom.onGround matches 1 if score @s satyrn.fdl.custom.sneakTime matches 1.. run {
-        effect give @s minecraft:resistance 3 2
-        effect give @s minecraft:slowness 3 1
-        effect give @s minecraft:absorption 3 2
+    execute (if score @s satyrn.fdl.itemId.offHand matches 20) {
+        execute (if score @s satyrn.fdl.custom.onGround matches 1 if score @s satyrn.fdl.custom.sneakTime matches 1..) {
+            execute unless entity @s[tag=satyrn.fdl.gnumochCrouch] run function foxcraft_dungeon_loot:items/totem_of_gnumoch/give_effects
+       } else execute (if entity @s[tag=satyrn.fdl.gnumochCrouch]) {
+            function foxcraft_dungeon_loot:items/totem_of_gnumoch/clear_effects
+        }
+    } else execute (if entity @s[tag=satyrn.fdl.gnumochCrouch]) {
+        function foxcraft_dungeon_loot:items/totem_of_gnumoch/clear_effects
     }
+}
+
+function give_effects {
+    effect give @s minecraft:absorption 9999 2
+    effect give @s minecraft:resistance 9999 2
+    effect give @s minecraft:slowness 9999 1
+    tag @s add satyrn.fdl.gnumochCrouch
+}
+
+function clear_effects {
+    effect clear @s minecraft:absorption
+    effect clear @s minecraft:resistance
+    effect clear @s minecraft:slowness
+    tag @s remove satyrn.fdl.gnumochCrouch
 }
