@@ -1,0 +1,92 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.2,
+          "operation": "multiply_total",
+          "id": "f89107ea-7316-4c04-851e-0896b11d9ff5",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "The Talking Stick",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Hey! Hey! Shut up! You look here, I have",
+        "the stick, so you have to shut up! Shut up",
+        "shut up shut up! Now... What were we",
+        "supposed to be doing again?",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Pay Attention to Me: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Applies Night Vision,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "Glowing, Resistance X, and Haste II when in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "the off-hand.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:53,CustomModelData:421951,HideFlags:1}"
+    }
+  ]
+}
