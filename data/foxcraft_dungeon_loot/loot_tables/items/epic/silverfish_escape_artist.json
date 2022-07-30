@@ -1,0 +1,84 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Silverfish Escape Artist",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Sometimes getting out alive is more",
+        "important than getting what you want. You",
+        "might be able to kill a silverfish, but",
+        "could you stop one from running away?",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Escape Artist: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "When you consume this item,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "it grants 30 seconds of every effect you",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "need to escape.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": " This item is consumed upon use.",
+            "color": "gray"
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:63,CustomModelData:4219510,HideFlags:1}"
+    }
+  ]
+}
