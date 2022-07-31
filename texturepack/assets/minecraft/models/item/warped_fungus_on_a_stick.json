@@ -123,6 +123,12 @@
         "custom_model_data": 4219519
       },
       "model": "foxcraft_dungeon_loot:item/d20"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219525
+      },
+      "model": "foxcraft_dungeon_loot:item/ima_leave"
     }
   ]
 }

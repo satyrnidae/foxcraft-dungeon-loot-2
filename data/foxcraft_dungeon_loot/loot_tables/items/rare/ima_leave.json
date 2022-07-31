@@ -1,0 +1,82 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Ima Leave",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Ight, ima head out",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Head Out: ",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": "Instantly teleports you",
+            "color": "gray",
+            "italic": false
+          }
+
+        ],
+        [
+          {
+            "text": "10,000 meters in the sky",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed on use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:77,CustomModelData:4219525,HideFlags:5}"
+    }
+  ]
+}
