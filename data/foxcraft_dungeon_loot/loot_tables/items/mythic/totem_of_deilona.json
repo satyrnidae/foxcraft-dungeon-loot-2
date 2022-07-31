@@ -21,6 +21,14 @@
           "operation": "addition",
           "id": "73139761-a274-4bda-a559-9dced3bfe6d1",
           "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 10,
+          "operation": "addition",
+          "id": "b78243e6-d894-4ab0-8337-bd00de41545f",
+          "slot": "offhand"
         }
       ]
     },
@@ -59,7 +67,7 @@
           }
         ],
         {
-          "text": "main hand, grants up to five nearby",
+          "text": "off-hand, grants up to five nearby",
           "color": "gray",
           "italic": false
         },
@@ -81,12 +89,12 @@
           }
         ],
         {
-          "text": "your off-hand, grants Regeneration",
+          "text": "your main hand, grants five seconds",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "II to yourself.",
+          "text": "of Regeneration II to yourself.",
           "color": "gray",
           "italic": false
         }

@@ -26,6 +26,7 @@
     "foxcraft_dungeon_loot:items/d12/on_tick",
     "foxcraft_dungeon_loot:items/d20/on_tick",
     "foxcraft_dungeon_loot:items/titan_hammer/on_tick",
-    "foxcraft_dungeon_loot:items/totem_of_mysteria/on_tick"
+    "foxcraft_dungeon_loot:items/totem_of_mysteria/on_tick",
+    "foxcraft_dungeon_loot:items/totem_of_deilona/on_tick"
   ]
 }
