@@ -1,0 +1,76 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wheat"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Buckwheat",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "But with an \"F\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Love Potion #9: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Holding this item in your",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "main hand will make all breedable",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "livestock within 5 blocks enter love",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "mode every 3 seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:76,CustomModelData:421950,HideFlags:1}"
+    }
+  ]
+}
