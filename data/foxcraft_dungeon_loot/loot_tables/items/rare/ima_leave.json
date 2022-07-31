@@ -22,7 +22,7 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "Ight, ima head out",
+        "Ight, Ima head out",
         [
           "Rarity: ",
           {
@@ -34,12 +34,12 @@
         "",
         [
           {
-            "text": "Head Out: ",
+            "text": "Make Like A Tree: ",
             "color": "aqua",
             "italic": false
           },
           {
-            "text": "Instantly teleports you",
+            "text": "Instantly teleports",
             "color": "gray",
             "italic": false
           }
@@ -47,7 +47,7 @@
         ],
         [
           {
-            "text": "10,000 meters in the sky",
+            "text": "you 10,000 meters into the sky",
             "color": "gray",
             "italic": false
           }
