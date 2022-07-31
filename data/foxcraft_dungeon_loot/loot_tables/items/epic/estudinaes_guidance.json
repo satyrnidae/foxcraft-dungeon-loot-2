@@ -1,9 +1,13 @@
 {
-  "__comment": "Estudinae's Guidance",
   "pools": [
     {
-      "__comment": "Leather variant, default",
       "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:inverted",
@@ -18,17 +22,16 @@
             }
           }
         }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:leather_boots"
-        }
       ]
     },
     {
-      "__comment": "Chainmail variant, loot variant score = 1",
       "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_boots"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:entity_scores",
@@ -37,17 +40,16 @@
             "satyrn.fdl.loot.variant": 1
           }
         }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:chainmail_boots"
-        }
       ]
     },
     {
-      "__comment": "Iron variant, loot variant score = 2",
       "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_boots"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:entity_scores",
@@ -56,17 +58,16 @@
             "satyrn.fdl.loot.variant": 2
           }
         }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_boots"
-        }
       ]
     },
     {
-      "__comment": "Diamond variant, loot variant score = 3",
       "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_boots"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:entity_scores",
@@ -75,17 +76,16 @@
             "satyrn.fdl.loot.variant": 3
           }
         }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:diamond_boots"
-        }
       ]
     },
     {
-      "__comment": "Netherite variant, loot variant score = 4",
       "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots"
+        }
+      ],
       "conditions": [
         {
           "condition": "minecraft:entity_scores",
@@ -93,12 +93,6 @@
           "scores": {
             "satyrn.fdl.loot.variant": 4
           }
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:netherite_boots"
         }
       ]
     }
@@ -129,19 +123,19 @@
         [
           {
             "text": "Estudinae's Solidarity: ",
-            "italic": false,
-            "color": "light_purple"
+            "color": "light_purple",
+            "italic": false
           },
           {
             "text": "Grants Luck, Dolphin's",
-            "italic": false,
-            "color": "gray"
+            "color": "gray",
+            "italic": false
           }
         ],
         {
           "text": "Grace, and Health Boost at the cost of Slowness.",
-          "italic": false,
-          "color": "gray"
+          "color": "gray",
+          "italic": false
         }
       ]
     },
@@ -149,20 +143,36 @@
       "function": "minecraft:set_attributes",
       "modifiers": [
         {
-          "name": "generic.luck",
           "attribute": "minecraft:generic.luck",
-          "operation": "addition",
+          "name": "generic.luck",
           "amount": 1,
-          "slot": "feet",
-          "id": "57317025-3079-49dc-a477-dfa49a02edfb"
+          "operation": "addition",
+          "id": "57317025-3079-49dc-a477-dfa49a02edfb",
+          "slot": "feet"
         },
         {
-          "name": "generic.max_health",
           "attribute": "minecraft:generic.max_health",
-          "operation": "addition",
+          "name": "generic.max_health",
           "amount": 4,
-          "slot": "feet",
-          "id": "7ab1e91d-a139-4fb1-9065-f4e39e1daebd"
+          "operation": "addition",
+          "id": "7ab1e91d-a139-4fb1-9065-f4e39e1daebd",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 2,
+          "operation": "addition",
+          "id": "73c566f0-7048-4fab-a467-610ab97718b5",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 0.5,
+          "operation": "addition",
+          "id": "4846f25f-ab1b-420e-b7ed-ad3561d76a0f",
+          "slot": "feet"
         }
       ]
     },
