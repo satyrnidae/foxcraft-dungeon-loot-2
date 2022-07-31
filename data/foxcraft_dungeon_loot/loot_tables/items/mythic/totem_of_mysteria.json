@@ -1,0 +1,116 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 5,
+          "operation": "addition",
+          "id": "c9033bb4-9923-44d8-a19d-d3dc46da3334",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Mysteria",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Mysteria, Goddess of the Sun and Life,",
+        "smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Mysteria's Embrace: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants yourself and five",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "of your allies within a seven-meter radius",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Fire Protection as long as the totem is held",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "in your off-hand.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Mysteria's Wrath: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Five hostile entities within a",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "seven-meter radius are set on fire for",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "four seconds as long as the totem is held",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "in your off-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 1
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:56,CustomModelData:421952}"
+    }
+  ]
+}
