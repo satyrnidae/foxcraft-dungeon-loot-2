@@ -15,19 +15,11 @@
       "function": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
-          "amount": 2,
-          "operation": "addition",
-          "id": "73139761-a274-4bda-a559-9dced3bfe6d1",
-          "slot": "offhand"
-        },
-        {
           "attribute": "minecraft:generic.max_health",
           "name": "generic.max_health",
-          "amount": 10,
+          "amount": 5,
           "operation": "addition",
-          "id": "b78243e6-d894-4ab0-8337-bd00de41545f",
+          "id": "c9033bb4-9923-44d8-a19d-d3dc46da3334",
           "slot": "offhand"
         }
       ]
@@ -35,7 +27,7 @@
     {
       "function": "minecraft:set_name",
       "name": {
-        "text": "Totem of Deilona",
+        "text": "Totem of Mysteria",
         "color": "green",
         "italic": false
       }
@@ -43,8 +35,8 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "May Deilona, God of Health and Good",
-        "Fortune, smile upon thee!",
+        "May Mysteria, God of the Sun and Life, smile",
+        "upon thee!",
         [
           "Rarity: ",
           {
@@ -56,45 +48,55 @@
         "",
         [
           {
-            "text": "Deilona's Blessing: ",
+            "text": "Mysteria's Embrace: ",
             "color": "green",
             "italic": false
           },
           {
-            "text": "When held in your",
+            "text": "Grants yourself and five",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "off-hand, grants up to five nearby",
+          "text": "of your allies within a seven-meter radius",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "allies Regeneration I.",
+          "text": "Fire Protection as long as the totem is held",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "in your off-hand.",
           "color": "gray",
           "italic": false
         },
         [
           {
-            "text": "Doctor, Heal Thyself: ",
+            "text": "Mysteria's Wrath: ",
             "color": "green",
             "italic": false
           },
           {
-            "text": "When held in",
+            "text": "Five hostile entities within a",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "your main hand, grants five seconds",
+          "text": "seven-meter radius are set on fire for",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "of Regeneration II to yourself.",
+          "text": "four seconds as long as the totem is held",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "in your off-hand.",
           "color": "gray",
           "italic": false
         }
@@ -103,12 +105,12 @@
     {
       "function": "minecraft:set_enchantments",
       "enchantments": {
-        "minecraft:mending": 1
+        "minecraft:fire_aspect": 1
       }
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:55,CustomModelData:421951,HideFlags:1}"
+      "tag": "{DungeonLootId:56,CustomModelData:421952}"
     }
   ]
 }
