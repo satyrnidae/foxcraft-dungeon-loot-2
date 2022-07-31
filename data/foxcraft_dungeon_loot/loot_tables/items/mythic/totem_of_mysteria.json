@@ -35,8 +35,8 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "May Mysteria, Goddess of the Sun and Life,",
-        "smile upon thee!",
+        "May Mysteria, God of the Sun and Life, smile",
+        "upon thee!",
         [
           "Rarity: ",
           {
