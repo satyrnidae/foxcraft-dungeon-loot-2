@@ -1,0 +1,124 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_leggings"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 8,
+          "operation": "addition",
+          "id": "1167c954-0f13-42f1-a19f-cffe12a450c9",
+          "slot": "legs"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 3,
+          "operation": "addition",
+          "id": "f1d72d50-08c6-4b9c-aa51-45dd1ddabc03",
+          "slot": "legs"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.2,
+          "operation": "addition",
+          "id": "8402122d-0d54-4ffc-8af0-b18acee2c53b",
+          "slot": "legs"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": -0.1,
+          "operation": "addition",
+          "id": "e7349caa-db06-4fdc-9b0d-ac4ce981ed56",
+          "slot": "legs"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 2,
+          "operation": "addition",
+          "id": "b5d8491e-2afe-42c4-a093-50014e236847",
+          "slot": "legs"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Seething Hatred",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_count",
+      "count": 1
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Today, the Piglin Brutes guard the Bastions,",
+        "but long ago, their ancestors staged campaigns",
+        "into the Overworld from them. These leggings",
+        "are their seething hatred.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Out of the Frying Pan: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Fire Resistance",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "while the leggings are worn.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:binding_curse": 1,
+        "minecraft:depth_strider": 3,
+        "minecraft:mending": 1,
+        "minecraft:protection": 5,
+        "minecraft:swift_sneak": 5,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:60,CustomModelData:421950}"
+    }
+  ]
+}
