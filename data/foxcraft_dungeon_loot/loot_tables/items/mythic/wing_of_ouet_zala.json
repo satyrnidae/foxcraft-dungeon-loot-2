@@ -1,0 +1,68 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Wing of Ouet-Zala",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May the Blessings of Ouet-Zala, God",
+        "of the Winds, lift you to the heathens",
+        "where you belong.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Wing of Ouet-Zala: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "Applies Levitation",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "while held in off-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:61,CustomModelData:421957,HideFlags:1}"
+    }
+  ]
+}
