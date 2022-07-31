@@ -21,6 +21,14 @@
           "operation": "multiply_total",
           "id": "f89107ea-7316-4c04-851e-0896b11d9ff5",
           "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": -0.2,
+          "operation": "multiply_total",
+          "id": "9c767d48-2031-4dfb-b2cb-8190337f7bf9",
+          "slot": "offhand"
         }
       ]
     },
@@ -62,7 +70,7 @@
         ],
         [
           {
-            "text": "Glowing, Resistance X, and Haste II when in",
+            "text": "Glowing, Resistance IV, and Haste II when in",
             "color": "gray",
             "italic": false
           }
