@@ -1,0 +1,43 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Totem of Undying",
+          "italic": false,
+          "color": "yellow"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Pick yourself up and try again.",
+        [
+          "Rarity: ",
+          {
+            "text": "Uncommon",
+            "italic": true,
+            "color": "yellow"
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:21}"
+    }
+  ]
+}

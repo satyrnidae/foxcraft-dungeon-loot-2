@@ -1,0 +1,43 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:armor_stand"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Armor Stand",
+          "italic": false
+        },
+        {
+          "text":" (Can-Can)",
+          "color":"gray",
+          "italic":false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pose: Can-Can",
+          "italic": false,
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{RightArm:[0.0f,0.0f,90.0f],LeftLeg:[-90.0f,0.0f,0.0f],Head: [0.0f,-15.0f,0.0f],LeftArm:[0.0f,0.0f,-90.0f],Body: [0.0f,15.0f,0.0f]}}}"
+    }
+  ]
+}

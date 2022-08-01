@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:armor_stand"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Armor Stand",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pose: None",
+          "italic": false,
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b}}"
+    }
+  ]
+}
