@@ -12,8 +12,8 @@ function on_tick {
 
     execute if score @s[tag=satyrn.fdl.holdingTitanHammer] satyrn.fdl.used.snowball matches 1.. run {
         stopsound @s * entity.snowball.throw
-        playsound minecraft:entity.blaze.shoot player @a ~ ~ ~ 10
-        playsound minecraft:item.trident.throw player @a ~ ~ ~ 10
+        playsound foxcraft_dungeon_loot:item.hammer_of_sol.throw player @a ~ ~ ~ 10
+        playsound foxcraft_dungeon_loot:item.hammer_of_sol.throw2 player @a ~ ~ ~ 10
 
         # Add tag to thrown hammer so we can track it.
         data merge entity @e[type=snowball, limit=1, sort=nearest] {Tags:[satyrn.fdl.titanHammer]}
@@ -41,7 +41,7 @@ function on_tick {
         } else {
             # Search for entity to damage
             execute (anchored feet if entity @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] as @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] at @s) {
-                playsound minecraft:entity.blaze.hurt player @a ~ ~ ~ 10
+                playsound foxcraft_dungeon_loot:item.hammer_of_sol.hit player @a ~ ~ ~ 10
                 # Set on fire for 5 seconds (100 ticks)
                 data merge entity @s {Fire:100}
                 # Deal damage via potion effects for both living and undead targets
@@ -51,7 +51,7 @@ function on_tick {
                     effect give @s minecraft:instant_damage 10
                 }
             } else {
-                playsound minecraft:entity.shulker.close player @a ~ ~ ~ 20
+                playsound foxcraft_dungeon_loot:item.hammer_of_sol.miss player @a ~ ~ ~ 20
             }
 
             # Spawn new hammer that will disappear after 5 seconds (100 ticks)
@@ -79,7 +79,7 @@ function on_tick {
             particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
             particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
             particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
-            playsound minecraft:entity.shulker_bullet.hit player @a ~ ~ ~ 20
+            playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 20
             tag @s remove satyrn.fdl.titanHammerSpawnedItem
         }
     }
