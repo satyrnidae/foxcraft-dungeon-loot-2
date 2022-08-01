@@ -1,3 +1,5 @@
+import ../macros.mcm
+
 dir peerless_yewhewn {
     function give {
         give @s minecraft:bow{DungeonLootId:1,CustomModelData:421951,display:{Name:'[{"text":"Peerless Yewhewn","italic":false,"color":"light_purple"}]',Lore:['[{"text":"In ages long past, bowsmiths knew how to make","italic":true}]','[{"text":"a bow which could fire endlessly. Their","italic":true}]','[{"text":"techniques are lost to history, but some bows","italic":true}]','[{"text":"still remain.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple","italic":true}]']},Enchantments:[{id:"minecraft:flame",lvl:1},{id:"minecraft:infinity",lvl:1},{id:"minecraft:mending",lvl:1},{id:"minecraft:power",lvl:5},{id:"minecraft:unbreaking",lvl:5}]} 1
@@ -116,13 +118,13 @@ dir shield_of_the_juggernaut {
 
 dir aurelias_lucky_compass {
     function give {
-        loot give @s loot foxcraft_dungeon_loot:items/rare/aurelias_lucky_compass
+        macro give_as_loot rare/aurelias_lucky_compass
     }
 }
 
 dir totem_of_undying {
     function give {
-        loot give @s loot foxcraft_dungeon_loot:items/uncommon/totem_of_undying
+        macro give_as_loot uncommon/totem_of_undying
     }
 }
 
@@ -243,13 +245,13 @@ dir copper_plated_sword {
 
 dir war_hogs_burning_rage {
     function give {
-        loot give @s loot foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage
+        macro give_as_loot mythic/war_hogs_burning_rage
     }
 }
 
 dir lucky_rabbits_foot {
     function give {
-        loot give @s loot foxcraft_dungeon_loot:items/rare/lucky_rabbits_foot
+        macro give_as_loot rare/lucky_rabbits_foot
     }
 }
 
@@ -291,36 +293,36 @@ dir estudinaes_sorrow {
 
 dir armor_stand {
     function give {
-        loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand
+        macro give_as_loot common/armor_stand
     }
 
     dir give {
         function baby {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_baby
+            macro give_as_loot common/armor_stand_baby
         }
 
         function bashful {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_bashful
+            macro give_as_loot common/armor_stand_bashful
         }
 
         function cancan {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_cancan
+            macro give_as_loot common/armor_stand_cancan
         }
 
         function gallant {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_gallant
+            macro give_as_loot common/armor_stand_gallant
         }
 
         function greyskull {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_greyskull
+            macro give_as_loot common/armor_stand_greyskull
         }
 
         function skeleton {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_skeleton
+            macro give_as_loot common/armor_stand_skeleton
         }
 
         function zombie {
-            loot give @s loot foxcraft_dungeon_loot:items/common/armor_stand_zombie
+            macro give_as_loot common/armor_stand_zombie
         }
     }
 }
