@@ -257,5 +257,9 @@
   "subtitles.item.dice.d20": "Twenty-sided dice rolls",
   "subtitles.item.grab_bag.open": "Grab-bag opened",
   "subtitles.item.gravilock_boots.spark": "GraviLock™ Boots spark",
-  "subtitles.item.gravilock_boots.zap": "GraviLock™ Boots arc"
+  "subtitles.item.gravilock_boots.zap": "GraviLock™ Boots arc",
+  "subtitles.item.hammer_of_sol.throw": "Hammer of Sol thrown",
+  "subtitles.item.hammer_of_sol.hit": "Hammer of Sol hits",
+  "subtitles.item.hammer_of_sol.miss": "Hammer of Sol misses",
+  "subtitles.item.hammer_of_sol.pop": "Hammer of Sol disappears"
 }

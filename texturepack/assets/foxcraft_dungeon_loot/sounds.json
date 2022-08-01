@@ -151,5 +151,45 @@
         "volume": 0.5
       }
     ]
+  },
+  "item.hammer_of_sol.throw": {
+    "subtitle": "subtitles.item.hammer_of_sol.throw",
+    "sounds": [
+      "mob/ghast/fireball4"
+    ]
+  },
+  "item.hammer_of_sol.throw2": {
+    "sounds": [
+      "item/trident/throw1",
+      "item/trident/throw2"
+    ]
+  },
+  "item.hammer_of_sol.hit": {
+    "subtitle": "subtitles.item.hammer_of_sol.hit",
+    "sounds": [
+      "mob/blaze/hit1",
+      "mob/blaze/hit2",
+      "mob/blaze/hit3",
+      "mob/blaze/hit4"
+    ]
+  },
+  "item.hammer_of_sol.miss": {
+    "subtitle": "subtitles.item.hammer_of_sol.miss",
+    "sounds": [
+      "entity/shulker/close1",
+      "entity/shulker/close2",
+      "entity/shulker/close3",
+      "entity/shulker/close4",
+      "entity/shulker/close5"
+    ]
+  },
+  "item.hammer_of_sol.pop": {
+    "subtitle": "subtitles.item.hammer_of_sol.pop",
+    "sounds": [
+      "entity/shulker_bullet/hit1",
+      "entity/shulker_bullet/hit2",
+      "entity/shulker_bullet/hit3",
+      "entity/shulker_bullet/hit4"
+    ]
   }
 }
