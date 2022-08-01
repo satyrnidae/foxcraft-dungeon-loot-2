@@ -1,0 +1,43 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:armor_stand"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Armor Stand",
+          "italic": false
+        },
+        {
+          "text":" (Skeleton)",
+          "color":"gray",
+          "italic":false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pose: Skeleton",
+          "italic": false,
+          "color": "gray"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{RightArm:[-90.0f,-10.0f,0.0f],Head:[1.4536514f,7.777254f,0.0f],LeftArm:[-90.0f,30.0f,0.0f],Body:[0.0f,0.22099066f,0.0f]}}}"
+    }
+  ]
+}

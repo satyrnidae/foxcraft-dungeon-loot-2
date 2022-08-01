@@ -1,0 +1,75 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_axe"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Burning Rage",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "In a time long past, fearsome warriors",
+        "roamed the Nether. This axe is their",
+        "burning rage.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": 1.6,
+          "operation": "addition",
+          "id": "52174f7e-f702-4800-875b-cde7c7a6de7e",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 15,
+          "operation": "addition",
+          "id": "965c6ef1-d8b8-45f1-9e35-745abc29d7fd",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 3,
+        "minecraft:impaling": 3,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 6,
+        "minecraft:unbreaking": 5
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:28,CustomModelData:421951}"
+    }
+  ]
+}

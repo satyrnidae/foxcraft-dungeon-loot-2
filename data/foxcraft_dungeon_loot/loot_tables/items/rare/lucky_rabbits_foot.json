@@ -1,0 +1,70 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit_foot"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Lucky Rabbit's Foot",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "You'd honestly think these would just",
+        "do this normally.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 4,
+          "operation": "addition",
+          "id": "0b416758-43c1-4849-9606-c2b148b50132",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 4,
+          "operation": "addition",
+          "id": "975174c0-4f88-4abd-8150-0b761216c352",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:29,HideFlags:1}"
+    }
+  ]
+}

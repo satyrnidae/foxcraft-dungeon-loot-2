@@ -1,0 +1,69 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:compass"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Aurelia's Lucky Compass",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Find yerself some nice booty",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 2,
+          "operation": "addition",
+          "id": "b28a6c13-bb60-4b0d-af39-00cd721ef3a9",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.luck",
+          "name": "generic.luck",
+          "amount": 2,
+          "operation": "addition",
+          "id": "c7c078b8-383c-4848-a666-560061c14934",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:18,HideFlags:1}"
+    }
+  ]
+}
