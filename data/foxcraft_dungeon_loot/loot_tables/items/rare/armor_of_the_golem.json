@@ -1,0 +1,96 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:carved_pumpkin"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 3,
+          "operation": "addition",
+          "id": "8a49d781-937a-4118-8343-4d5b865b20c7",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.1,
+          "operation": "addition",
+          "id": "b46f74b5-0324-484e-b247-bd55bd6c464e",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 1,
+          "operation": "addition",
+          "id": "facb77d0-c9f8-4df3-a818-b70042f9916f",
+          "slot": "head"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Armor of the Golem",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Not your ordinary pumpkin.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Ephemeral: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "The effects applied to this item",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "will be lost if the item is placed.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_protection": 4,
+        "minecraft:protection": 4
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:14}"
+    }
+  ]
+}

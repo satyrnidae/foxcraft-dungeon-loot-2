@@ -1,0 +1,76 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 5,
+          "operation": "addition",
+          "id": "8be83969-dd5c-4844-a988-8bfc179e1714",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 3,
+          "operation": "addition",
+          "id": "11f81848-25a6-4098-9471-5e3eba067d2f",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Skullbasher",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "When fighting skeletons, the best offense",
+        "is often a great defense.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:knockback": 4,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:sharpness": 3,
+        "minecraft:smite": 5,
+        "minecraft:looting": 3
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:6}"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:trident"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Palomina's Gift",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "The sun god Mysteria imparted unto her a spear,",
+        "which would burn away the Dæmon King's endless",
+        "night and shepherd light into the sky once more.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 5,
+        "minecraft:loyalty": 5,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 5,
+        "minecraft:smite": 5,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:5}"
+    }
+  ]
+}

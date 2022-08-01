@@ -1,0 +1,47 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Nectar",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A floral extract.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ],
+        "",
+        {
+          "text": "Unknown effect",
+          "color": "blue",
+          "italic": true
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:15915073,HideFlags:32,CustomPotionEffects:[{Id:22,Duration:400,Amplifier:9},{Id:6,Duration:10,Amplifier:1},{Id:11,Duration:400,Amplifier:2}]}"
+    }
+  ]
+}

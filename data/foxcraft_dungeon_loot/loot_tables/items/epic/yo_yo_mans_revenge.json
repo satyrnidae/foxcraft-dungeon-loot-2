@@ -1,0 +1,66 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fishing_rod"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 4,
+          "operation": "addition",
+          "id": "0be90dfc-3689-433d-a5c6-242d29515f36",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Yo-Yo Man's Revenge",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "\"I wanna be a yo-yo man!\" he cried, \"Make me",
+        "a yo-yo man!\" But the Yo-Yo Master did not",
+        "answer. He just kept on yo-ing!",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:knockback": 10,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 3
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:8}"
+    }
+  ]
+}

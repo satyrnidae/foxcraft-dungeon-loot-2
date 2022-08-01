@@ -1,0 +1,104 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 5,
+          "operation": "addition",
+          "id": "1684efe2-011b-4260-ad56-cdd2d0a4ad07",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.6,
+          "operation": "addition",
+          "id": "92da65d0-eaab-492c-92d8-23eb0e4531f6",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 4,
+          "operation": "addition",
+          "id": "2cfdbaec-1128-4100-bd9b-563603868507",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 3,
+          "operation": "addition",
+          "id": "7ca93405-501a-45a4-a87b-b25dd62a2051",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": -0.1,
+          "operation": "multiply_total",
+          "id": "383e6af2-c334-43cf-8925-42b147b66eca",
+          "slot": "head"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Festering Wrath",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "In ancient times, a war broke out between the",
+        "Overworld and the Nether. The armor that the",
+        "enemy's generals wore remains in scattered",
+        "pieces to this day. This helmet is their",
+        "festering wrath.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 3,
+        "minecraft:binding_curse": 1,
+        "minecraft:fire_protection": 3,
+        "minecraft:projectile_protection": 3,
+        "minecraft:protection": 5,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:13}"
+    }
+  ]
+}
