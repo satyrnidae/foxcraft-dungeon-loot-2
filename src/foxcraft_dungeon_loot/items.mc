@@ -138,115 +138,116 @@ dir totem_of_undying {
 
 dir fortune_500 {
     function give {
-        give @s minecraft:iron_pickaxe{DungeonLootId:22,display:{Name:'[{"text":"Fortune 5","italic":false,"color":"light_purple"},{"text":"00","strikethrough":true}]',Lore:['[{"text":"One of those famous top-rated ","italic":true},{"text":"companies","strikethrough":true,"italic":true},{"text":"","strikethrough":false}]','[{"text":"pickaxes that everyone is talking about.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple","italic":true}]']},Enchantments:[{id:"minecraft:efficiency",lvl:5},{id:"minecraft:fortune",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:unbreaking",lvl:5}]} 1
+        macro give_as_loot epic/fortune_500
     }
 
     dir give {
         function diamond {
-            give @s minecraft:diamond_pickaxe{DungeonLootId:22,display:{Name:'[{"text":"Fortune 5","italic":false,"color":"light_purple"},{"text":"00","strikethrough":true}]',Lore:['[{"text":"One of those famous top-rated ","italic":true},{"text":"companies","strikethrough":true,"italic":true},{"text":"","strikethrough":false}]','[{"text":"pickaxes that everyone is talking about.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple","italic":true}]']},Enchantments:[{id:"minecraft:efficiency",lvl:5},{id:"minecraft:fortune",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:unbreaking",lvl:5}]} 1
+            macro give_as_variant_loot epic/fortune_500 1
         }
 
         function netherite {
-            give @s minecraft:netherite_pickaxe{DungeonLootId:22,display:{Name:'[{"text":"Fortune 5","italic":false,"color":"light_purple"},{"text":"00","strikethrough":true}]',Lore:['[{"text":"One of those famous top-rated ","italic":true},{"text":"companies","strikethrough":true,"italic":true},{"text":"","strikethrough":false}]','[{"text":"pickaxes that everyone is talking about.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple","italic":true}]']},Enchantments:[{id:"minecraft:efficiency",lvl:5},{id:"minecraft:fortune",lvl:5},{id:"minecraft:mending",lvl:1},{id:"minecraft:unbreaking",lvl:5}]} 1
+            macro give_as_variant_loot epic/fortune_500 2
         }
     }
 }
 
 dir copper_plated_pickaxe {
     function give {
-        give @s minecraft:stone_pickaxe{DungeonLootId:23,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Pickaxe","italic":false,"color":"yellow"}]',Lore:['[{"text":"...Well that\'s odd.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+        macro give_as_loot uncommon/copper_plated_pickaxe
     }
 
     dir give {
         function iron {
-            give @s minecraft:iron_pickaxe{DungeonLootId:23,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Pickaxe","italic":false,"color":"yellow"}]',Lore:['[{"text":"...Well that\'s odd.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_pickaxe 1
         }
 
         function diamond {
-            give @s minecraft:diamond_pickaxe{DungeonLootId:23,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Pickaxe","italic":false,"color":"yellow"}]',Lore:['[{"text":"...Well that\'s odd.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_pickaxe 2
         }
+
         function netherite {
-            give @s minecraft:netherite_pickaxe{DungeonLootId:23,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Pickaxe","italic":false,"color":"yellow"}]',Lore:['[{"text":"...Well that\'s odd.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_pickaxe 3
         }
     }
 }
 
 dir copper_plated_axe {
     function give {
-        give @s minecraft:stone_axe{DungeonLootId:24,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Axe","italic":false,"color":"yellow"}]',Lore:['[{"text":"No really, what is this.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+        macro give_as_loot uncommon/copper_plated_axe
     }
 
     dir give {
         function iron {
-            give @s minecraft:iron_axe{DungeonLootId:24,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Axe","italic":false,"color":"yellow"}]',Lore:['[{"text":"No really, what is this.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_axe 1
         }
 
         function diamond {
-            give @s minecraft:diamond_axe{DungeonLootId:24,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Axe","italic":false,"color":"yellow"}]',Lore:['[{"text":"No really, what is this.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_axe 2
         }
 
         function netherite {
-            give @s minecraft:netherite_axe{DungeonLootId:24,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Axe","italic":false,"color":"yellow"}]',Lore:['[{"text":"No really, what is this.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_axe 3
         }
     }
 }
 
 dir copper_plated_hoe {
     function give {
-        give @s minecraft:stone_hoe{DungeonLootId:25,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Hoe","italic":false,"color":"yellow"}]',Lore:['[{"text":"These are just recolored stone, right?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+        macro give_as_loot uncommon/copper_plated_hoe
     }
 
     dir give {
         function iron {
-            give @s minecraft:iron_hoe{DungeonLootId:25,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Hoe","italic":false,"color":"yellow"}]',Lore:['[{"text":"These are just recolored stone, right?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_hoe 1
         }
 
         function diamond {
-            give @s minecraft:diamond_hoe{DungeonLootId:25,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Hoe","italic":false,"color":"yellow"}]',Lore:['[{"text":"These are just recolored stone, right?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_hoe 2
         }
 
         function netherite {
-            give @s minecraft:netherite_hoe{DungeonLootId:25,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Hoe","italic":false,"color":"yellow"}]',Lore:['[{"text":"These are just recolored stone, right?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_hoe 3
         }
     }
 }
 
 dir copper_plated_shovel {
     function give {
-        give @s minecraft:stone_shovel{DungeonLootId:26,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Shovel","italic":false,"color":"yellow"}]',Lore:['[{"text":"Do these even melt down into copper?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+        macro give_as_loot uncommon/copper_plated_shovel
     }
 
     dir give {
         function iron {
-            give @s minecraft:iron_shovel{DungeonLootId:26,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Shovel","italic":false,"color":"yellow"}]',Lore:['[{"text":"Do these even melt down into copper?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_shovel 1
         }
 
         function diamond {
-            give @s minecraft:diamond_shovel{DungeonLootId:26,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Shovel","italic":false,"color":"yellow"}]',Lore:['[{"text":"Do these even melt down into copper?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_shovel 2
         }
 
         function netherite {
-            give @s minecraft:netherite_shovel{DungeonLootId:26,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Shovel","italic":false,"color":"yellow"}]',Lore:['[{"text":"Do these even melt down into copper?","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_shovel 3
         }
     }
 }
 
 dir copper_plated_sword {
     function give {
-        give @s minecraft:stone_sword{DungeonLootId:27,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Sword","italic":false,"color":"yellow"}]',Lore:['[{"text":"I guess it makes a nice display piece, at least.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+        macro give_as_loot uncommon/copper_plated_sword
     }
 
     dir give {
         function iron {
-            give @s minecraft:iron_sword{DungeonLootId:27,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Sword","italic":false,"color":"yellow"}]',Lore:['[{"text":"I guess it makes a nice display piece, at least.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_sword 1
         }
 
         function diamond {
-            give @s minecraft:diamond_sword{DungeonLootId:27,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Sword","italic":false,"color":"yellow"}]',Lore:['[{"text":"I guess it makes a nice display piece, at least.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_sword 2
         }
 
         function netherite {
-            give @s minecraft:netherite_sword{DungeonLootId:27,CustomModelData:421952,display:{Name:'[{"text":"Copper-Plated Sword","italic":false,"color":"yellow"}]',Lore:['[{"text":"I guess it makes a nice display piece, at least.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Uncommon","color":"yellow","italic":true}]']},Enchantments:[{id:"minecraft:unbreaking",lvl:1}]} 1
+            macro give_as_variant_loot uncommon/copper_plated_sword 3
         }
     }
 }
@@ -265,36 +266,24 @@ dir lucky_rabbits_foot {
 
 dir estudinaes_script {
     function give {
-        give @s minecraft:leather_leggings{DungeonLootId:30,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Script","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Survivors of Poncho Sanchez do not forget"}]','[{"text":"their pain.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"}]']},AttributeModifiers:[{AttributeName:"generic.luck",Amount:1,Slot:feet,Name:"generic.luck",UUID:[I;-122620,19437,171513,-38874]}],Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:depth_strider",lvl:3},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:swift_sneak",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
+        macro give_as_loot epic/estudinaes_script
     }
 
     dir give {
         function chainmail {
-            give @s minecraft:chainmail_leggings{DungeonLootId:30,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Script","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Survivors of Poncho Sanchez do not forget"}]','[{"text":"their pain.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"}]']},AttributeModifiers:[{AttributeName:"generic.luck",Amount:1,Slot:feet,Name:"generic.luck",UUID:[I;-122620,19437,171513,-38874]}],Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:depth_strider",lvl:3},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:swift_sneak",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
+            macro give_as_variant_loot epic/estudinaes_script 1
         }
 
         function iron {
-            give @s minecraft:iron_leggings{DungeonLootId:30,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Script","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Survivors of Poncho Sanchez do not forget"}]','[{"text":"their pain.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"}]']},AttributeModifiers:[{AttributeName:"generic.luck",Amount:1,Slot:feet,Name:"generic.luck",UUID:[I;-122620,19437,171513,-38874]}],Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:depth_strider",lvl:3},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:swift_sneak",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
+            macro give_as_variant_loot epic/estudinaes_script 2
         }
 
         function diamond {
-            give @s minecraft:diamond_leggings{DungeonLootId:30,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Script","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Survivors of Poncho Sanchez do not forget"}]','[{"text":"their pain.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"}]']},AttributeModifiers:[{AttributeName:"generic.luck",Amount:1,Slot:feet,Name:"generic.luck",UUID:[I;-122620,19437,171513,-38874]}],Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:depth_strider",lvl:3},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:swift_sneak",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
+            macro give_as_variant_loot epic/estudinaes_script 3
         }
 
         function netherite {
-            give @s minecraft:netherite_leggings{DungeonLootId:30,CustomModelData:421951,display:{color:5215783,Name:'[{"text":"Estudinae\'s Script","italic":false,"color":"light_purple"}]',Lore:['[{"text":"Survivors of Poncho Sanchez do not forget"}]','[{"text":"their pain.","italic":true},{"text":"","italic":false}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"}]']},AttributeModifiers:[{AttributeName:"generic.luck",Amount:1,Slot:feet,Name:"generic.luck",UUID:[I;-122620,19437,171513,-38874]}],Enchantments:[{id:"minecraft:blast_protection",lvl:4},{id:"minecraft:depth_strider",lvl:3},{id:"minecraft:fire_protection",lvl:4},{id:"minecraft:mending",lvl:1},{id:"minecraft:projectile_protection",lvl:4},{id:"minecraft:protection",lvl:4},{id:"minecraft:swift_sneak",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
-        }
-    }
-}
-
-dir estudinaes_sorrow {
-    function give {
-        give @s minecraft:diamond_sword{DungeonLootId:31,Tags:["potion.target.wither=1","potion.self.nausea=0"],display:{Name:'[{"text":"Estudinae\'s Sorrow","italic":false,"color":"light_purple"}]',Lore:['[{"text":"A weapon wielded by Guardians of Dinidae during"}]','[{"text":"their battle with Poncho Sanchez. Their lack of","italic":true}]','[{"text":"natural desire for combat had... unintended","italic":true}]','[{"text":"consequences.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Regret:","italic":false,"color":"light_purple"},{"text":" ","color":"dark_purple"},{"text":"Damaging an enemy will apply","color":"gray"}]','[{"text":"Wither II to them, but also apply Nausea to","italic":false,"color":"gray"}]','[{"text":"yourself.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:knockback",lvl:5},{id:"minecraft:luck_of_the_sea",lvl:10},{id:"minecraft:mending",lvl:1},{id:"minecraft:sharpness",lvl:5},{id:"minecraft:smite",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
-    }
-
-    dir give {
-        function netherite {
-            give @s minecraft:netherite_sword{DungeonLootId:31,Tags:["potion.target.wither=1","potion.self.nausea=0"],display:{Name:'[{"text":"Estudinae\'s Sorrow","italic":false,"color":"light_purple"}]',Lore:['[{"text":"A weapon wielded by Guardians of Dinidae during"}]','[{"text":"their battle with Poncho Sanchez. Their lack of","italic":true}]','[{"text":"natural desire for combat had... unintended","italic":true}]','[{"text":"consequences.","italic":true}]','[{"text":"Rarity: ","italic":true},{"text":"Epic","color":"light_purple"},{"text":"","color":"dark_purple","italic":false}]','[{"text":"","italic":false,"color":"dark_purple"}]','[{"text":"Estudinae\'s Regret:","italic":false,"color":"light_purple"},{"text":" ","color":"dark_purple"},{"text":"Damaging an enemy will apply","color":"gray"}]','[{"text":"Wither II to them, but also apply Nausea to","italic":false,"color":"gray"}]','[{"text":"yourself.","italic":false,"color":"gray"}]']},Enchantments:[{id:"minecraft:knockback",lvl:5},{id:"minecraft:luck_of_the_sea",lvl:10},{id:"minecraft:mending",lvl:1},{id:"minecraft:sharpness",lvl:5},{id:"minecraft:smite",lvl:3},{id:"minecraft:unbreaking",lvl:3}]} 1
+            macro give_as_variant_loot epic/estudinaes_script 4
         }
     }
 }

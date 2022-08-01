@@ -5,8 +5,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 1,
+          "weight": 7,
+          "quality": 0,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -17,8 +17,8 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 2,
+          "weight": 6,
+          "quality": 1,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -29,8 +29,8 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 3,
+          "weight": 5,
+          "quality": 2,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -41,8 +41,8 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 4,
+          "weight": 4,
+          "quality": 3,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -53,8 +53,8 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 5,
+          "weight": 3,
+          "quality": 4,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -65,8 +65,8 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "quality": 6,
+          "weight": 2,
+          "quality": 5,
           "name": "minecraft:potion",
           "functions": [
             {
@@ -78,7 +78,7 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "quality": 7,
+          "quality": 6,
           "name": "minecraft:potion",
           "functions": [
             {

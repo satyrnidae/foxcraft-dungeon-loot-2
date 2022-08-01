@@ -1,8 +1,6 @@
 function load {
     # Set up scoreboards
     scoreboard objectives add <%config.internalScoreboard%> dummy
-
-
     execute unless score version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run {
         # Remove scoreboards which were updated during testing
         scoreboard objectives remove satyrn.fdl.loot.variant
@@ -23,10 +21,14 @@ function load {
     scoreboard objectives add satyrn.fdl.itemId.chestplate dummy
     scoreboard objectives add satyrn.fdl.itemId.helmet dummy
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
+    scoreboard players reset * satyrn.fdl.loot.variant
 
     !IF(!config.dev) {
         scoreboard players disable @s satyrn.fdl.loot.variant
     }
+
+    # Reset item utility advancements for online players
+    advancement revoke @a from foxcraft_dungeon_loot:items
 
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:on_load
