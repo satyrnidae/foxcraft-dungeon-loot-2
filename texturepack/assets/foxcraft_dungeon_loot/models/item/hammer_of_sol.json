@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "foxcraft_dungeon_loot:item/titan_hammer"
+    "layer0": "foxcraft_dungeon_loot:item/hammer_of_sol"
   }
 }

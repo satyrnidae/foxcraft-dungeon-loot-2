@@ -1,7 +1,7 @@
 import ../../macros.mcm
 
 function give {
-    loot give @s loot foxcraft_dungeon_loot:items/mythic/titan_hammer
+    macro give_as_loot mythic/hammer_of_sol
 }
 
 function on_tick {
@@ -20,7 +20,7 @@ function on_tick {
 
         # Summon an armor stand (tracker) to track when the hammer breaks.
         execute at @e[type=snowball, limit=1, sort=nearest] run {
-            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Invulnerable:1, Small:1, Tags:[satyrn.fdl.titanHammerTracker]}
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.titanHammerTracker]}
             data modify entity @e[tag=satyrn.fdl.titanHammerTracker, limit=1, sort=nearest] Motion set from entity @e[type=snowball, limit=1, sort=nearest] Motion
         }
     }
@@ -32,7 +32,7 @@ function on_tick {
 
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
     execute if entity @e[tag=satyrn.fdl.titanHammerTracker] as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
-        execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..2, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
+        execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
             # Set motion instead of tp
             data modify entity @s Motion set from entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] Motion
             particle minecraft:small_flame ~ ~ ~ 0.1 0.1 0.1 0 1
@@ -55,13 +55,20 @@ function on_tick {
             }
 
             # Spawn new hammer that will disappear after 5 seconds (100 ticks)
-            loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:items/mythic/titan_hammer
+            loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:items/mythic/hammer_of_sol
             data merge entity @e[type=item, limit=1, sort=nearest] {Age: 5900, Tags:[satyrn.fdl.titanHammerSpawnedItem]}
 
             # Destroy tracker, play hit sound, and hit particle effects
             particle minecraft:flame ~ ~ ~ 0.5 0.2 0.5 0 20
             particle minecraft:smoke ~ ~ ~ 0.5 0.1 0.5 0 10
-            kill @s
+            !IF(config.dev) {
+                data modify entity @s Motion set value [0f,0f,0f]
+                data modify entity @s NoGravity set value 1b
+                tag @s remove satyrn.fdl.titanHammerTracker
+            }
+            !IF(!config.dev) {
+                kill @s
+            }
         }
     }
 
