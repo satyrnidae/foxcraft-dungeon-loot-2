@@ -1,0 +1,124 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 5,
+          "operation": "addition",
+          "id": "09b60283-040e-4b1a-9d85-3ad61ddfa002",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 3,
+          "operation": "addition",
+          "id": "bfae922e-fe53-4d2f-b907-d09095bdaa0f",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.2,
+          "operation": "addition",
+          "id": "cd679d68-d71d-4f29-9f57-9dee2a11d482",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": -0.1,
+          "operation": "multiply_total",
+          "id": "6492da67-03b9-4a3d-a57e-652be8dcdac6",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 2,
+          "operation": "addition",
+          "id": "65aa43c2-a8b0-4275-ab3a-a75c75dd2157",
+          "slot": "feet"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Disdainful Pride",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Long ago, great warriors roamed the nether,",
+        "dropping down on unsuspecting prey from the",
+        "shelves above. These boots are their",
+        "disdainful pride.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Pride Comes Before the Fall: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When falling for",
+            "color": "gray"
+          }
+        ],
+        {
+          "text": "more than four meters, Slow Falling is applied",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for three seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1,
+        "minecraft:feather_falling": 5,
+        "minecraft:fire_protection": 3,
+        "minecraft:mending": 1,
+        "minecraft:protection": 4,
+        "minecraft:soul_speed": 2,
+        "minecraft:unbreaking": 5
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:58,CustomModelData:421951}"
+    }
+  ]
+}

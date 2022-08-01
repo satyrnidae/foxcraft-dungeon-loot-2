@@ -1,0 +1,47 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Absinthe",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "An herbal alcoholic beverage.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ],
+        "",
+        {
+          "text": "Unknown effect",
+          "color": "blue",
+          "italic": true
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:8708645,CustomPotionEffects:[{Id:8,Duration:2400,Amplifier:2},{Id:16,Duration:2400},{Id:19,Duration:60}],HideFlags:32}"
+    }
+  ]
+}

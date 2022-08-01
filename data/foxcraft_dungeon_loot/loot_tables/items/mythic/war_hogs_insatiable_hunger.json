@@ -1,0 +1,127 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_chestplate"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 8,
+          "operation": "addition",
+          "id": "e1295899-562c-4bf0-b5f4-becd1312d217",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.5,
+          "operation": "addition",
+          "id": "bc97a23f-6cbc-42d9-a4a2-66f826182eb2",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:generic.armor_toughness",
+          "name": "generic.armor_toughness",
+          "amount": 3,
+          "operation": "addition",
+          "id": "5509a2fd-a74e-4fcf-96f0-25c6bd05cf92",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 2,
+          "operation": "addition",
+          "id": "d729dc6e-6786-4693-83cf-9df50c7e2d32",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": -0.1,
+          "operation": "multiply_total",
+          "id": "4e3cf985-5504-4262-983a-9e663b3816e9",
+          "slot": "chest"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Insatiable Hunger",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Long ago, piglins fought against Wither Skeletons",
+        "in a bid for dominion over the Nether. The",
+        "generals of their army wore ancient armors imbued",
+        "with the powers of their slain enemies. This",
+        "chestplate is their insatiable hunger.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "War Hog's Hunger: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "The hunger of the armor's",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "previous owner still resides within this chestplate,",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "cursing the wearer with Hunger II.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 3,
+        "minecraft:fire_protection": 3,
+        "minecraft:mending": 1,
+        "minecraft:projectile_protection": 3,
+        "minecraft:protection": 5,
+        "minecraft:thorns": 3,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:59,CustomModelData:421950}"
+    }
+  ]
+}

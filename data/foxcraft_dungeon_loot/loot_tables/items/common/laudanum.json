@@ -1,0 +1,47 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Laudanum",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A questionable medical tincture.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ],
+        "",
+        {
+          "text": "Unknown effect",
+          "color": "blue",
+          "italic": true
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:9843200,CustomPotionEffects:[{Id:4,Duration:100,Amplifier:1},{Id:9,Duration:100},{Id:10,Duration:160,Amplifier:2},{Id:2,Duration:100,Amplifier:1},{Id:18,Duration:100,Amplifier:1}],\nHideFlags:32}"
+    }
+  ]
+}

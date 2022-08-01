@@ -1,0 +1,58 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:trident"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Melimonas' Guile",
+          "color": "light_purple",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "And thus spake Melimonas as the trader:",
+        "\"Take this spear, and toss it at the Dæmon",
+        "King, and it shall surely pierce his brow.\"",
+        "And Palomina, being none the wiser, accepted",
+        "the trickster's tainted gift.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1,
+        "minecraft:fire_aspect": 2,
+        "minecraft:riptide": 5,
+        "minecraft:sharpness": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:3}"
+    }
+  ]
+}

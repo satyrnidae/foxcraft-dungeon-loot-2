@@ -1,0 +1,90 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 6,
+          "operation": "addition",
+          "id": "dd044554-c7ca-4587-a352-452f192447ef",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "name": "generic.knockback_resistance",
+          "amount": 0.6,
+          "operation": "addition",
+          "id": "ee565134-6914-4626-b1d1-7979c6d96483",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.max_health",
+          "name": "generic.max_health",
+          "amount": 4,
+          "operation": "addition",
+          "id": "070f49f2-03a7-4f8b-950d-dc9796af4aab",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 6,
+          "operation": "addition",
+          "id": "f2dd1127-af06-49da-b348-9376e9d0650b",
+          "slot": "offhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Shield of the Juggernaut",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "You are immovable.",
+        "You are impenetrable.",
+        "You are unbreachable.",
+        "You are the wall.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:16}"
+    }
+  ]
+}

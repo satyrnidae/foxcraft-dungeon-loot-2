@@ -1,0 +1,47 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Stout",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Nothing like a hearty stout, eh?",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ],
+        "",
+        {
+          "text": "Unknown effect",
+          "color": "blue",
+          "italic": true
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:3287060,HideFlags:32,CustomPotionEffects:[{Id:21,Duration:2400,Amplifier:1},{Id:10,Duration:100},{Id:11,Duration:2400},{Id:23,Duration:10,Amplifier:1}]}"
+    }
+  ]
+}

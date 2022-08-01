@@ -1,0 +1,104 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_sword"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_sword"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Dawncleaver",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "May Mysteria shine upon thee and drench",
+        "thou in her holy, cleansing light!",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 3,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 5,
+        "minecraft:smite": 5,
+        "minecraft:unbreaking": 5
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:2}"
+    }
+  ]
+}
