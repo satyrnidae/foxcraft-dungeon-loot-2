@@ -1,0 +1,115 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_sword"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Estudinae's Sorrow",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A weapon wielded by Guardians of Dinidae during",
+        "their battle with Poncho Sanchez. Their lack of",
+        "natural desire for combat had... unintended",
+        "consequences.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Estudinae's Regret: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "Damaging an entity will apply",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "a short burst of nausea to you. Killing an",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "entity will apply a longer burst of Nausea",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "II to you.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:knockback": 5,
+        "minecraft:luck_of_the_sea": 10,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 5,
+        "minecraft:smite": 3,
+        "minecraft:unbreaking": 5
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:31}"
+    }
+  ]
+}

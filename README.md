@@ -20,6 +20,8 @@ After cloning this repository, run `mcb` in the directory to generate the functi
 ## Acknowledgements
 This pack contains code derived from utility packs and examples provided by [CloudWolf](https://www.youtube.com/c/CloudWolfMinecraft) and [WASD Build Team](https://www.youtube.com/c/WASDBuildTeam), as well as code derived from Siscu's [Evoker Charm](https://www.planetminecraft.com/data-pack/evoker-charm-functions-datapack/download/file/14409645/) datapack.
 
+Some items are loosely based on the potions from Greymerk's wonderful [Roguelike](https://github.com/Greymerk/minecraft-roguelike) mod.
+
 ### Wolfgun
 Older commits of assets may include a set of custom music disc sound files which are mixed-down mono versions of Wolfgun's album [RUNNING](https://wolfgun.bandcamp.com/album/running). These files are excluded in more recent versions. The album can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
 

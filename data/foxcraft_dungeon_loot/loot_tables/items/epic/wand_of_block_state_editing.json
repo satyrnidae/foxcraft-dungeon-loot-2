@@ -1,0 +1,91 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:debug_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Wand of Block State Editing",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Finally, you can make the perfect table.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Debug Stick:",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Break any block with an",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "editable state to select the state that you",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "wish to edit. Right-click the block to set",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "the value of the state after selecting it.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Creative Mode: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants high-level Haste to",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "you when the item is wielded in your",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "main hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:57,CustomModelData:421950}"
+    }
+  ]
+}

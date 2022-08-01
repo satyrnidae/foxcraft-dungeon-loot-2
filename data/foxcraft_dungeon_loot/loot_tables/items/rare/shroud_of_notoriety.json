@@ -1,0 +1,89 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.armor",
+          "name": "generic.armor",
+          "amount": 3,
+          "operation": "addition",
+          "id": "f7a21249-8f95-41b8-ab28-b497579ce4e9",
+          "slot": "head"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.1,
+          "operation": "multiply_total",
+          "id": "af4551fc-418b-4b60-8784-490ec1aa8c4e",
+          "slot": "head"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Shroud of Notoriety",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Oh, it's you!",
+        [
+          {
+            "text": "Rarity: ",
+            "italic": true
+          },
+          {
+            "text": "Epic",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Ephemeral: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "The effects applied to this item",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "will be lost if the item is placed.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:thorns": 4
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:15,SkullOwner:Technoblade}"
+    }
+  ]
+}

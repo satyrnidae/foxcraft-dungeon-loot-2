@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
+    "foxcraft_dungeon_loot:items/palominas_gift/give",
     "foxcraft_dungeon_loot:items/peerless_yewhewn/give",
     "foxcraft_dungeon_loot:items/dawncleaver/give",
     "foxcraft_dungeon_loot:items/melimonas_guile/give",
+    "foxcraft_dungeon_loot:items/kobolds_vengeance/give",
     "foxcraft_dungeon_loot:items/skullbasher/give",
-    "foxcraft_dungeon_loot:items/yoyo_mans_revenge/give",
-    "foxcraft_dungeon_loot:items/armor_of_the_golem/give",
-    "foxcraft_dungeon_loot:items/shroud_of_notoriety/give",
+    "foxcraft_dungeon_loot:items/yo_yo_mans_revenge/give",
     "foxcraft_dungeon_loot:items/rogues_dagger/give",
     "foxcraft_dungeon_loot:items/fortune_500/give",
     "foxcraft_dungeon_loot:items/estudinaes_script/give",
