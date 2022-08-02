@@ -14,7 +14,7 @@
       "functions": [
         {
           "function": "minecraft:set_nbt",
-          "tag": "{\"Tags\":[\"dice\"]}"
+          "tag": "{Dice:1b}"
         }
       ]
     }
