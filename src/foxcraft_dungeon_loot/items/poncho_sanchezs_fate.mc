@@ -38,7 +38,7 @@ function on_tick {
 
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:poncho_sanchezs_fate/damage
 
-                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421950}
                 }
             }

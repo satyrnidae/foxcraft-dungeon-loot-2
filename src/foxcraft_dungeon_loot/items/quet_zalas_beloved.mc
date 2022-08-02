@@ -5,8 +5,8 @@ function give {
 }
 
 function on_tick {
-    execute if score @s satyrn.fdl.custom.fallOneCm matches 400.. if score @s satyrn.fdl.itemId.chestplate matches 50 if score @s satyrn.fdl.custom.fallFlying matches 0 run {
-        execute unless entity @s[nbt={Inventory:[{Slot:102b,tag:{Damage:431}}]}] run {
+    execute if score @s satyrn.fdl.custom.fallOneCm matches 400.. if score @s satyrn.fdl.itemId.chestplate matches 50 unless entity @s[predicate=foxcraft_dungeon_loot:is_fall_flying] run {
+        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/elytra_broken] run {
             effect give @s minecraft:slow_falling 3
 
             execute unless entity @s[gamemode=creative] run {
