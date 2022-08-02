@@ -33,29 +33,34 @@ function on_tick {
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
     execute if entity @e[tag=satyrn.fdl.titanHammerTracker] as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
         execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
+            kill @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest,distance=..2.8]
+
             # Set motion instead of tp
             data modify entity @s Motion set from entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] Motion
             particle minecraft:small_flame ~ ~ ~ 0.1 0.1 0.1 0 1
             particle minecraft:smoke ~ ~ ~ 0.1 0.1 0.1 0 1
+
+            summon minecraft:area_effect_cloud ~ ~ ~ {Duration:100,Tags:[satyrn.fdl.titanHammer.raycastTarget]}
+
         # If tracker cannot find a hammer, it hit something and was destroyed.
         } else {
             # Search for entity to damage
             execute (anchored feet if entity @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] as @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] at @s) {
-                playsound foxcraft_dungeon_loot:item.hammer_of_sol.hit player @a ~ ~ ~ 10
-                # Set on fire for 5 seconds (100 ticks)
-                data merge entity @s {Fire:100}
-                # Deal damage via potion effects for both living and undead targets
-                execute (if entity @s[type=#foxcraft_dungeon_loot:undead] at @s) {
-                    effect give @s minecraft:instant_health 10
-                } else {
-                    effect give @s minecraft:instant_damage 10
-                }
+                function foxcraft_dungeon_loot:items/hammer_of_sol/hit_target
             } else {
-                playsound foxcraft_dungeon_loot:item.hammer_of_sol.miss player @a ~ ~ ~ 20
+                # Perform a raycast to find the entity
+                execute anchored feet facing entity @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest] feet run function foxcraft_dungeon_loot:items/hammer_of_sol/start_raycast_forward
+
+                execute unless entity @s[tag=satyrn.fdl.titanHammer.raycastSuccess] run {
+                    execute anchored feet facing entity @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest] feet run function foxcraft_dungeon_loot:items/hammer_of_sol/start_raycast_backward
+                    execute unless entity @s[tag=satyrn.fdl.titanHammer.raycastSuccess] run {
+                        playsound foxcraft_dungeon_loot:item.hammer_of_sol.miss player @a ~ ~ ~ 20
+                    }
+                }
             }
 
             # Spawn new hammer that will disappear after 5 seconds (100 ticks)
-            loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:items/mythic/hammer_of_sol
+            loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:items/mythic/hammer_of_sol
             data merge entity @e[type=item, limit=1, sort=nearest] {Age: 5900, Tags:[satyrn.fdl.titanHammerSpawnedItem]}
 
             # Destroy tracker, play hit sound, and hit particle effects
@@ -65,10 +70,13 @@ function on_tick {
                 data modify entity @s Motion set value [0f,0f,0f]
                 data modify entity @s NoGravity set value 1b
                 tag @s remove satyrn.fdl.titanHammerTracker
+                tag @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest] remove satyrn.fdl.titanHammer.raycastTarget
             }
             !IF(!config.dev) {
                 kill @s
+                kill @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest]
             }
+
         }
     }
 
@@ -81,6 +89,70 @@ function on_tick {
             particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
             playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 20
             tag @s remove satyrn.fdl.titanHammerSpawnedItem
+        }
+    }
+}
+
+function hit_target {
+    playsound foxcraft_dungeon_loot:item.hammer_of_sol.hit player @a ~ ~ ~ 10
+    # Set on fire for 5 seconds (100 ticks)
+    data merge entity @s {Fire:100}
+    # Deal damage via potion effects for both living and undead targets
+    execute (if entity @s[type=#foxcraft_dungeon_loot:undead] at @s) {
+        effect give @s minecraft:instant_health 10
+    } else {
+        effect give @s minecraft:instant_damage 10
+    }
+}
+
+function start_raycast_forward {
+    tag @s add satyrn.fdl.titanHammer.raycastSource
+
+    scoreboard players reset #step <%config.internalScoreboard%>
+
+    execute positioned ^ ^ ^ run function foxcraft_dungeon_loot:items/hammer_of_sol/raycast_forward
+
+    tag @s remove satyrn.fdl.titanHammer.raycastSource
+}
+
+function raycast_forward {
+    execute (as @e[tag=!satyrn.fdl.titanHammer.raycastSource,dx=0,type=!#foxcraft_dungeon_loot:non_living] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0] positioned ~0.99 ~0.99 ~0.99) {
+        function foxcraft_dungeon_loot:items/hammer_of_sol/hit_target
+        tag @e[tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
+    } else {
+        !IF(config.dev) {
+            particle minecraft:witch ~ ~ ~
+        }
+        scoreboard players add #step <%config.internalScoreboard%> 1
+
+        execute positioned ^ ^ ^-0.1 rotated ~ ~ if score #step <%config.internalScoreboard%> matches ..5 if block ~ ~ ~ #foxcraft_dungeon_loot:raycast_pass run {
+            function foxcraft_dungeon_loot:items/hammer_of_sol/raycast_forward
+        }
+    }
+}
+
+function start_raycast_backward {
+    tag @s add satyrn.fdl.titanHammer.raycastSource
+
+    scoreboard players reset #step <%config.internalScoreboard%>
+
+    execute positioned ^ ^ ^ run function foxcraft_dungeon_loot:items/hammer_of_sol/raycast_backward
+
+    tag @s remove satyrn.fdl.titanHammer.raycastSource
+}
+
+function raycast_backward {
+    execute (as @e[tag=!satyrn.fdl.titanHammer.raycastSource,dx=0,type=!#foxcraft_dungeon_loot:non_living] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0] positioned ~0.99 ~0.99 ~0.99) {
+        function foxcraft_dungeon_loot:items/hammer_of_sol/hit_target
+        tag @e[tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
+    } else {
+        !IF(config.dev) {
+            particle minecraft:witch ~ ~ ~
+        }
+        scoreboard players add #step <%config.internalScoreboard%> 1
+
+        execute positioned ^ ^ ^0.1 rotated ~ ~ if score #step <%config.internalScoreboard%> matches ..5 if block ~ ~ ~ #foxcraft_dungeon_loot:raycast_pass run {
+            function foxcraft_dungeon_loot:items/hammer_of_sol/raycast_backward
         }
     }
 }
