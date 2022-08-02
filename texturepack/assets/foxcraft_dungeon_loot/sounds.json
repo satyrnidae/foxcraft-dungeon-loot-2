@@ -25,6 +25,12 @@
       "mob/evocation_illager/prepare_wololo"
     ]
   },
+  "event.roll.fail": {
+    "subtitle": "subtitles.event.roll.fail",
+    "sounds": [
+      "mob/evocation_illager/prepare_summon"
+    ]
+  },
   "event.roll.hero": {
     "subtitle": "subtitles.event.roll.hero",
     "sounds": [
@@ -32,6 +38,12 @@
         "name": "ui/toast/challenge_complete",
         "volume": 0.6
       }
+    ]
+  },
+  "event.roll.pure_heart": {
+    "subtitle": "subtitles.event.roll.pure_heart",
+    "sounds": [
+      "random/levelup"
     ]
   },
   "item.dice.d4": {
@@ -124,6 +136,26 @@
       "foxcraft_dungeon_loot:items/dice/d20/roll7"
     ]
   },
+  "item.eye_cream.apply": {
+    "subtitle": "subtitles.item.eye_cream.apply",
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ]
+  },
+  "item.gift_of_sheep_island.equip": {
+    "subtitle": "subtitles.item.gift_of_sheep_island.equip",
+    "sounds": [
+      "item/armor/equip_leather1",
+      "item/armor/equip_leather2",
+      "item/armor/equip_leather3",
+      "item/armor/equip_leather4",
+      "item/armor/equip_leather5",
+      "item/armor/equip_leather6"
+    ]
+  },
   "item.grab_bag.open": {
     "subtitle": "subtitles.item.grab_bag.open",
     "sounds": [
@@ -190,6 +222,26 @@
       "entity/shulker_bullet/hit2",
       "entity/shulker_bullet/hit3",
       "entity/shulker_bullet/hit4"
+    ]
+  },
+  "item.ima_leaf.pop": {
+    "subtitle": "subtitles.item.ima_leaf.pop",
+    "sounds": [
+      "entity/shulker_bullet/hit1",
+      "entity/shulker_bullet/hit2",
+      "entity/shulker_bullet/hit3",
+      "entity/shulker_bullet/hit4"
+    ]
+  },
+  "item.quet_zalas_beloved.wings_flap": {
+    "subtitle": "subtitles.item.quet_zalas_beloved.wings_flap",
+    "sounds": [
+      "mob/enderdragon/wings1",
+      "mob/enderdragon/wings2",
+      "mob/enderdragon/wings3",
+      "mob/enderdragon/wings4",
+      "mob/enderdragon/wings5",
+      "mob/enderdragon/wings6"
     ]
   }
 }

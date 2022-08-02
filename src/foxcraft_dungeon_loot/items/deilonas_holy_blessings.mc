@@ -15,11 +15,17 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
+            tag @s add satyrn.fdl.deilonasHolyBlessings.initiator
             # Apply the effects for using Deilona's Holy Blessings
-            effect give @e[distance=0.0001..20,type=!#foxcraft_dungeon_loot:non_living] minecraft:instant_health 3 5
-            playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @s ~ ~ ~ 20.0
+            execute as @e[tag=!satyrn.fdl.deilonasHolyBlessings.initiator,distance=0.0001..20,type=!#foxcraft_dungeon_loot:non_living] at @s anchored eyes run {
+                effect give @s minecraft:instant_health 3 5
+                particle minecraft:heart ^ ^0.5 ^ 0 0 0 0.2 1 force @a[tag=satyrn.fdl.deilonasHolyBlessings.initiator]
+            }
+            tag @s remove satyrn.fdl.deilonasHolyBlessings.initiator
+
+            playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @a ~ ~ ~ 1.125
             particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10 normal @s
-            particle minecraft:heart ~ ~1 ~ 20 0.5 20 0.1 50 normal @a[distance=0.0001..20]
+
 
             # Break the item and set cooldown for players who are not creative enough ;P
             execute unless entity @s[gamemode=creative] run {

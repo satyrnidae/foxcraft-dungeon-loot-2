@@ -11,11 +11,11 @@ function on_load {
 function on_tick {
     execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 63 run {
         execute (if score @s satyrn.fdl.silverfishEscapeArtist.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Silverfish Escape Artist is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            playsound minecraft:entity.generic.eat player @s
-            playsound minecraft:entity.player.burp player @s
+            playsound minecraft:entity.generic.eat player @a
+            playsound minecraft:entity.player.burp player @a
             particle minecraft:item minecraft:warped_fungus_on_a_stick{CustomModelData:4219510} ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
 
             effect give @s minecraft:saturation 3 0 true

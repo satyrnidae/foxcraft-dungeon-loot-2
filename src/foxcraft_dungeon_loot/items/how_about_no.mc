@@ -14,7 +14,8 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"How About No is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 2.0
+            # playsound to players in a 50-block radius
+            playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a ~ ~ ~ 3.125
             kill @e[type=#foxcraft_dungeon_loot:hostile,distance=..50,predicate=!foxcraft_dungeon_loot:is_persistent]
 
             execute unless entity @s[gamemode=creative] run {
