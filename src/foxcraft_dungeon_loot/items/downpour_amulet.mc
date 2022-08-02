@@ -25,10 +25,10 @@ function on_tick {
             # If the sender is crouching, set the weather to thunder. Otherwise, set it to rain.
             execute (if score @s satyrn.fdl.custom.sneakTime matches 1..) {
                 weather thunder 300
-                say {"text":"Set the weather to Thunder for 5 minutes.","italic":true}
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 5 minutes.","italic":true}]
             } else {
                 weather rain 300
-                say {"text":"Set the weather to Rain for 5 minutes.","italic":true}
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Rain for 5 minutes.","italic":true}]
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
@@ -42,7 +42,7 @@ function on_tick {
                 }
 
                 # Break item if damage is maxed out.
-                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421954}
                 }
             }

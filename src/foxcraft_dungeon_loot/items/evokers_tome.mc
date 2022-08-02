@@ -19,7 +19,7 @@ function on_tick {
 
             execute unless entity @s[gamemode=creative] run {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
-                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
                 }
             }
@@ -29,7 +29,7 @@ function on_tick {
 
             execute unless entity @s[gamemode=creative] run {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
-                execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
                 }
             }
@@ -111,7 +111,7 @@ function on_tick {
 
     # Spawn the evoker fangs
     execute if entity @e[tag=satyrn.fdl.fang] as @e[tag=satyrn.fdl.fang] at @s run {
-        execute if entity @s[nbt={OnGround:1b}] if score @s satyrn.fdl.evokersTome.fangLife matches 1 run {
+        execute if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground] if score @s satyrn.fdl.evokersTome.fangLife matches 1 run {
             summon minecraft:evoker_fangs ~ ~ ~ {Tags:[satyrn.fdl.playerEvokerFang]}
             execute as @e[tag=satyrn.fdl.playerEvokerFang,type=minecraft:evoker_fangs,limit=1,sort=nearest] at @s run {
                 data modify entity @s Owner set from entity @p[scores={satyrn.fdl.evokersTome.cooldown=1..}] UUID

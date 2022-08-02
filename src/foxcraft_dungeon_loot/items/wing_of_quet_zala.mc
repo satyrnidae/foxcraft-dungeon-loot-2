@@ -7,7 +7,7 @@ function clock_2s {
 
 function clock_60s {
     schedule function foxcraft_dungeon_loot:items/wing_of_quet_zala/clock_60s 60s
-    execute as @r if entity @s[nbt={Inventory:[{tag:{DungeonLootId:62}}]}] run effect give @s minecraft:levitation 5 0 true
+    execute as @r if entity @s[predicate=foxcraft_dungeon_loot:items/wing_of_quet_zala/in_inventory] run effect give @s minecraft:levitation 5 0 true
 }
 
 function give {

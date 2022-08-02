@@ -147,7 +147,7 @@ function on_tick {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
                 } else {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
-                    execute if entity @s[nbt={SelectedItem:{tag:{Damage:100}}}] run {
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                         # 19950421 was too large a number to prepend or I would have gone with the ISO date format. Curse you single-precision floating point limitations!!!
                         macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
                     }

@@ -9,7 +9,7 @@ function clock_10t {
         # Check if we successfully cleared the levitation effect
         execute if score #test <%config.internalScoreboard%> matches 1 run {
             # NBT scan is only performed when levitation effect is removed.
-            execute (if score @s satyrn.fdl.custom.onGround matches 1) {
+            execute (if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground]) {
                 playsound foxcraft_dungeon_loot:item.gravilock_boots.spark player @s ~ ~ ~ 1.0 1.0
             } else {
                 playsound foxcraft_dungeon_loot:item.gravilock_boots.zap player @s ~ ~ ~ 1.0 0.5
@@ -20,20 +20,20 @@ function clock_10t {
             # NBT Scan is probably better here than in the main tick.
             execute unless entity @s[gamemode=creative] run {
                 # NBT scan needed to determine the amount of damage to apply to the boots.
-                execute (if entity @s[nbt={Inventory:[{Slot:100b,id:"minecraft:iron_boots"}]}]) {
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_iron]) {
                     item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron
-                    execute if entity @s[nbt={Inventory:[{Slot:100b,tag:{Damage:195}}]}] run {
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
                         macro break_item armor.feet minecraft:iron_boots{CustomModelData:421953}
                     }
-                } else execute (if entity @s[nbt={Inventory:[{Slot:100b,id:"minecraft:diamond_boots"}]}]) {
+                } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_diamond]) {
                     item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_diamond
-                    execute if entity @s[nbt={Inventory:[{Slot:100b,tag:{Damage:429}}]}] run {
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
                         macro break_item armor.feet minecraft:diamond_boots{CustomModelData:421953}
                     }
                 } else {
                     # We'll just assume this is netherite to save on NBT scans.
                     item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_netherite
-                    execute if entity @s[nbt={Inventory:[{Slot:100b,tag:{Damage:481}}]}] run {
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
                         macro break_item armor.feet minecraft:netherite_boots{CustomModelData:421953}
                     }
                 }

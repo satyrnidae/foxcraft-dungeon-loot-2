@@ -82,14 +82,12 @@ function on_tick {
 
     # Track newly spawned hammers after they were destroyed.
     # If one is about to disappear, play sound, spawn particle effects, and delete the tag so it only happens once.
-    execute if entity @e[tag=satyrn.fdl.titanHammerSpawnedItem] as @e[tag=satyrn.fdl.titanHammerSpawnedItem] at @s run {
-        execute if entity @s[nbt={Age: 5999s}] run {
-            particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
-            particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
-            particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
-            playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 20
-            tag @s remove satyrn.fdl.titanHammerSpawnedItem
-        }
+    execute if entity @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:items/hammer_of_sol/should_expire] as @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:items/hammer_of_sol/should_expire] at @s run {
+        particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
+        particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
+        particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
+        playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 20
+        tag @s remove satyrn.fdl.titanHammerSpawnedItem
     }
 }
 

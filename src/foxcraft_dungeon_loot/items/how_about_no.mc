@@ -15,7 +15,7 @@ function on_tick {
             title @s actionbar {"text":"How About No is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @s ~ ~ ~ 2.0
-            kill @e[type=#foxcraft_dungeon_loot:hostile,distance=..50,nbt=!{PersistenceRequired:1b}]
+            kill @e[type=#foxcraft_dungeon_loot:hostile,distance=..50,predicate=!foxcraft_dungeon_loot:is_persistent]
 
             execute unless entity @s[gamemode=creative] run {
                 scoreboard players set @s satyrn.fdl.howAboutNo.cooldown 1

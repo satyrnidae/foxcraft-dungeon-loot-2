@@ -4,6 +4,8 @@ function load {
     execute unless score version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run {
         # Remove scoreboards which were updated during testing
         scoreboard objectives remove satyrn.fdl.loot.variant
+        scoreboard objectives remove satyrn.fdl.custom.fallFlying
+        scoreboard objectives remove satyrn.fdl.custom.onGround
 
         scoreboard players set version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
     }
@@ -12,8 +14,6 @@ function load {
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick
     scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball
     scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
-    scoreboard objectives add satyrn.fdl.custom.fallFlying dummy
-    scoreboard objectives add satyrn.fdl.custom.onGround dummy
     scoreboard objectives add satyrn.fdl.itemId.mainHand dummy
     scoreboard objectives add satyrn.fdl.itemId.offHand dummy
     scoreboard objectives add satyrn.fdl.itemId.boots dummy
@@ -49,8 +49,6 @@ function tick {
         execute store result score @s satyrn.fdl.itemId.chestplate run data get entity @s Inventory[{Slot:102b}].tag.DungeonLootId
         execute store result score @s satyrn.fdl.itemId.helmet run data get entity @s Inventory[{Slot:103b}].tag.DungeonLootId
         execute store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
-        execute store result score @s satyrn.fdl.custom.fallFlying run data get entity @s FallFlying
-        execute store result score @s satyrn.fdl.custom.onGround run data get entity @s OnGround
     }
 
     # Tick functions are executed with a player in context at the player's location.
