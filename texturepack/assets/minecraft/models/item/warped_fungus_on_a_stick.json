@@ -126,9 +126,9 @@
     },
     {
       "predicate": {
-        "custom_model_data": 4219525
+        "custom_model_data": 4219520
       },
-      "model": "foxcraft_dungeon_loot:item/ima_leave"
+      "model": "foxcraft_dungeon_loot:item/ima_leaf"
     }
   ]
 }

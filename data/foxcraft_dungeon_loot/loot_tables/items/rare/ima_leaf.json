@@ -14,7 +14,7 @@
     {
       "function": "minecraft:set_name",
       "name": {
-        "text": "Ima Leave",
+        "text": "I'ma Leaf",
         "color": "aqua",
         "italic": false
       }
@@ -22,7 +22,7 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "Ight, Ima head out",
+        "Aight, I'ma head out.",
         [
           "Rarity: ",
           {
@@ -75,7 +75,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:77,CustomModelData:4219525,HideFlags:5}"
+      "tag": "{DungeonLootId:77,CustomModelData:4219520,HideFlags:5}"
     }
   ]
 }
