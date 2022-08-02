@@ -12,15 +12,14 @@ function on_tick {
     # Executes this block if the user has used Poncho Sanchez's Fate
     execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 48 run {
         execute (if score @s satyrn.fdl.ponchoSanchezsFate.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 1.0 1.0
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Poncho Sanchez's Fate is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            macro random 1 9
+            macro random 1 8
 
             LOOP(8,i) {
-                execute if score #random <%config.internalScoreboard%> matches <%i%> run playsound minecraft:item.goat_horn.sound.<%i%> ambient @s ~ ~ ~ 100.0
+                execute if score #random <%config.internalScoreboard%> matches <%i%> run playsound minecraft:item.goat_horn.sound.<%i%> player @a ~ ~ ~ 6.25
             }
-            execute if score #random <%config.internalScoreboard%> matches 9 run playsound minecraft:event.raid.horn ambient @s ~ ~ ~ 100.0
 
             execute as @e[type=!#foxcraft_dungeon_loot:non_living,type=!#foxcraft_dungeon_loot:hostile,distance=..100] run {
                 effect give @s minecraft:slow_falling 180

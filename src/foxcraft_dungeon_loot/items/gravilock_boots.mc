@@ -10,9 +10,9 @@ function clock_10t {
         execute if score #test <%config.internalScoreboard%> matches 1 run {
             # NBT scan is only performed when levitation effect is removed.
             execute (if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground]) {
-                playsound foxcraft_dungeon_loot:item.gravilock_boots.spark player @s ~ ~ ~ 1.0 1.0
+                playsound foxcraft_dungeon_loot:item.gravilock_boots.spark player @a
             } else {
-                playsound foxcraft_dungeon_loot:item.gravilock_boots.zap player @s ~ ~ ~ 1.0 0.5
+                playsound foxcraft_dungeon_loot:item.gravilock_boots.zap player @a ~ ~ ~ 1.0 0.5
             }
             # Spawn a particle effect at the player's feet
             particle minecraft:effect ~ ~ ~ 0.1 0 0.1 0.25 5

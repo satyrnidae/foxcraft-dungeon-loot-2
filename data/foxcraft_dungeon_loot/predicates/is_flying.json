@@ -2,17 +2,6 @@
   "condition": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "nbt": "{FallFlying:1b}",
-    "equipment": {
-      "chest": {
-        "items": [
-          "minecraft:elytra"
-        ],
-        "durability": {
-          "min": 2,
-          "max": 432
-        }
-      }
-    }
+    "nbt": "{FallFlying:1b}"
   }
 }

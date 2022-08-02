@@ -12,10 +12,10 @@ function on_tick {
     # Execute the following if the sender has the Bringer of Fear equipped in their main hand
     execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 34 run {
         execute (if score @s satyrn.fdl.bringerOfFear.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5 1
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200.0
+            playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
 
             macro random 1 20
 

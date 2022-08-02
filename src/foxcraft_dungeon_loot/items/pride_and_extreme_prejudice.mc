@@ -12,25 +12,25 @@ function on_load {
 function on_tick {
     execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 49 run {
         execute (if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 1.0
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
         } else {
             macro random 1 10
 
             execute (if score #random <%config.internalScoreboard%> matches 1) {
-                playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200.0
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
                 effect give @s minecraft:bad_omen 1200 3
                 tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
             } else execute (if score #random <%config.internalScoreboard%> matches 2) {
-                playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200.0
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
                 effect give @s minecraft:bad_omen 1200 2
                 tellraw @s {"text":"A fell wind sweeps the land.","color":"gray","italic":true}
             } else execute (if score #random <%config.internalScoreboard%> matches 3..8) {
-                playsound minecraft:event.raid.horn hostile @s ~ ~ ~ 200.0
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
                 effect give @s minecraft:bad_omen 1200
                 tellraw @s {"text":"A chill trickles down your spine.","color":"gray","italic":true}
             } else {
-                playsound foxcraft_dungeon_loot:event.roll.hero player @s ~ ~ ~ 1.0
+                playsound foxcraft_dungeon_loot:event.roll.hero player @a
                 effect give @s minecraft:hero_of_the_village 1200
                 tellraw @s {"text":"A warm breeze calms your nerves.","color":"gray","italic":true}
             }

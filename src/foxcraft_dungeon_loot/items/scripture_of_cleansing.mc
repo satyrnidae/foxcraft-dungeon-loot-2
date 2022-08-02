@@ -24,7 +24,7 @@ function on_load {
 function on_tick {
     execute if score @s satyrn.fdl.itemId.mainHand matches 51 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
         execute (if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1..) {
-            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 1.0
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"The Scripture of Cleansing is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
             summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1b,Invulnerable:1b,NoGravity:1b,Tags:[satyrn.fdl.cleaner]}
@@ -131,11 +131,11 @@ function on_tick {
             }
             kill @e[type=minecraft:armor_stand,tag=satyrn.fdl.cleaner,limit=1,sort=nearest]
             execute (if score #test <%config.internalScoreboard%> matches 1) {
-                playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @p ~ ~ ~ 1.0
+                playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @a
                 particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10
                 summon minecraft:experience_orb ~ ~ ~ {Value:6}
             } else {
-                playsound minecraft:block.fire.extinguish player @s ~ ~ ~ 1.0 2.0
+                playsound minecraft:block.fire.extinguish player @a ~ ~ ~ 1.0 2.0
                 particle minecraft:smoke ^ ^1.5 ^0.5 0.05 0.05 0.05 0 5 normal @s
                 tellraw @s {"text":"The Scripture of Cleansing was unable to uncurse any of your items.","color":"gray","italic":true}
             }
