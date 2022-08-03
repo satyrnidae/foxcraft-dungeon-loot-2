@@ -22,7 +22,7 @@ function give {
 
 # Schedules the clock function with an offset of 13 ticks.
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/totem_of_deilona/clock_2s 13t
+    schedule function foxcraft_dungeon_loot:items/totem_of_deilona/clock_2s 3t
 }
 
 # Grants a burst of instant health when the player has the Totem of Deilona in their main hand.

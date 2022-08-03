@@ -1,0 +1,32 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "effects": {
+      "minecraft:haste": {
+        "amplifier": {
+          "min": 1,
+          "max": 255
+        }
+      },
+      "minecraft:resistance": {
+        "amplifier": {
+          "min": 3,
+          "max": 255
+        }
+      },
+      "minecraft:night_vision": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      },
+      "minecraft:glowing": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    }
+  }
+}

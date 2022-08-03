@@ -42,7 +42,7 @@
           "attribute": "minecraft:generic.movement_speed",
           "name": "generic.movement_speed",
           "amount": -0.1,
-          "operation": "addition",
+          "operation": "multiply_total",
           "id": "e7349caa-db06-4fdc-9b0d-ac4ce981ed56",
           "slot": "legs"
         },

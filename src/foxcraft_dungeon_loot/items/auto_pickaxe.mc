@@ -1,11 +1,5 @@
 import ../../macros.mcm
 
-# Main clock for the item.
-function clock_2s {
-    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock_2s 2s
-    execute as @a if score @s satyrn.fdl.itemId.mainHand matches 32 run effect give @s minecraft:haste 3 1 true
-}
-
 # Gives a copy of the item to the sender.
 function give {
     macro give_as_loot mythic/auto_pickaxe
@@ -23,7 +17,15 @@ dir give {
     }
 }
 
-# Sets up item-specific clocks, counters, etc.
-function on_load {
-    function foxcraft_dungeon_loot:items/auto_pickaxe/clock_2s
+# Occurs each tick.
+function on_tick {
+    execute (if score @s satyrn.fdl.itemId.mainHand matches 32) {
+        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/has_effects] run {
+            effect give @s minecraft:haste 1000000 1 true
+            tag @s add satyrn.fdl.autoPickaxe.effectsApplied
+        }
+    } else execute (if entity @s[tag=satyrn.fdl.autoPickaxe.effectsApplied]) {
+        effect clear @s minecraft:haste
+        tag @s remove satyrn.fdl.autoPickaxe.effectsApplied
+    }
 }

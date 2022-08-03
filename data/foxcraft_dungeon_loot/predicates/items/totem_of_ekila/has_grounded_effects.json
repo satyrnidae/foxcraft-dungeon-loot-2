@@ -1,0 +1,20 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "effects": {
+      "minecraft:jump_boost": {
+        "amplifier": {
+          "min": 2,
+          "max": 255
+        }
+      },
+      "minecraft:slow_falling": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    }
+  }
+}
