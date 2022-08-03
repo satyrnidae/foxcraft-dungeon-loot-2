@@ -1,0 +1,90 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Hail of Arrows",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Spell Scroll",
+          "color": "gray",
+          "italic": false
+        },
+        "On your command, spectral archers",
+        "rain hell and fury down from the",
+        "heavens.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Loose: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Right-click to throw this scroll.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Arrows rain down onto the area where",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "it lands. Just don't throw it too close!",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed on use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:78,CustomModelData:421951,HideFlags:1}"
+    }
+  ]
+}
