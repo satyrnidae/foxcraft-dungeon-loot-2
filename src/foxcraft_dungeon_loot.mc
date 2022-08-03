@@ -23,10 +23,6 @@ function load {
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
     scoreboard players reset * satyrn.fdl.loot.variant
 
-    !IF(!config.dev) {
-        scoreboard players disable @s satyrn.fdl.loot.variant
-    }
-
     # Reset item utility advancements for online players
     advancement revoke @a from foxcraft_dungeon_loot:items
 

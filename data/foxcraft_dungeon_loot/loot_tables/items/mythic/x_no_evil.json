@@ -1,0 +1,86 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "X No Evil",
+          "color": "green",
+          "bold": false,
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "There is only safety here. There is no war",
+        "within these walls.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Long in the Fang: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When thrown, rolls a D10.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Depending on the outcome, a detrimental ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "potion effect is applied to all entities in a",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "10-block radius from where the projectile",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "landed.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:79,CustomModelData:421952,HideFlags:1}"
+    }
+  ]
+}

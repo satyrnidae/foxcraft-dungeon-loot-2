@@ -42,12 +42,6 @@
     },
     {
       "predicate": {
-        "custom_model_data": 421956
-      },
-      "model": "foxcraft_dungeon_loot:item/x_no_evil"
-    },
-    {
-      "predicate": {
         "custom_model_data": 421957
       },
       "model": "foxcraft_dungeon_loot:item/eye_cream"

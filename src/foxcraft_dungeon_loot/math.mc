@@ -30,7 +30,7 @@ function random {
     scoreboard players remove @s satyrn.fdl.math.input2 1
 
     !IF(config.dev) {
-        tellraw @s ["", {"text":"Result: ","color":"gray","italic":true},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"@s","objective":"satyrn.fdl.math.input2"},"color":"gray","italic":true}]
+        tellraw @a ["", {"text":"Result: ","color":"gray","italic":true},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"@s","objective":"satyrn.fdl.math.input2"},"color":"gray","italic":true}]
     }
 
     # Reset RNG scoreboard
