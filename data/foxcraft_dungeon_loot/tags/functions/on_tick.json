@@ -28,6 +28,7 @@
     "foxcraft_dungeon_loot:items/hammer_of_sol/on_tick",
     "foxcraft_dungeon_loot:items/totem_of_mysteria/on_tick",
     "foxcraft_dungeon_loot:items/ima_leaf/on_tick",
-    "foxcraft_dungeon_loot:items/totem_of_deilona/on_tick"
+    "foxcraft_dungeon_loot:items/totem_of_deilona/on_tick",
+    "foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/on_tick"
   ]
 }
