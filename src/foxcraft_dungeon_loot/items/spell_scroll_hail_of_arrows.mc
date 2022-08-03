@@ -17,7 +17,7 @@ function on_tick {
 
     execute if score @s[tag=satyrn.fdl.holdingSC_HOA] satyrn.fdl.used.snowball matches 1.. run {
         stopsound @s * entity.snowball.throw
-        ##playsound minecraft:entity.blaze.shoot player @a ~ ~ ~ 10
+        playsound minecraft:entity.evoker.cast_spell player @a ~ ~ ~ 10
 
         # Add tag to thrown scroll so we can track it.
         data merge entity @e[type=snowball, limit=1, sort=nearest] {Tags:[satyrn.fdl.SC_HOA]}
@@ -43,13 +43,13 @@ function on_tick {
         # If tracker cannot find a scroll, it hit something and was destroyed.
         } else {
             # Launch Hail of Arrows
-            ##playsound minecraft:entity.blaze.shoot player @a ~ ~ ~ 10
+            playsound minecraft:entity.evoker.prepare_attack player @a ~ ~ ~ 10
             particle minecraft:enchant ~ ~ ~ 1 0.5 1 0 100
-            function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows
-            # schedule function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows 1s
-            # schedule function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows 2s
+            function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows_1
+            function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows_2
+            function foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/spawn_arrows_3
 
-            # Destroy tracker
+            #Destroy tracker
             !IF(config.dev) {
                 data modify entity @s Motion set value [0f,0f,0f]
                 data modify entity @s NoGravity set value 1b
@@ -62,11 +62,31 @@ function on_tick {
     }
 }
 
-function spawn_arrows {
-    LOOP(11,x) {
-        LOOP(11,z) {
-            !IF(!(Math.abs(x-5)==5 && Math.abs(z-5)==5) && !(x==z&&z==5)) {
-                summon arrow ~<%x-5%> ~25 ~<%z-5%>
+function spawn_arrows_1 {
+    LOOP(13,x) {
+        LOOP(13,z) {
+            !IF(!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
+                summon arrow ~<%x-6%> ~30 ~<%z-6%>
+            }
+        }
+    }
+}
+
+function spawn_arrows_2 {
+    LOOP(13,x) {
+        LOOP(13,z) {
+            !IF(!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
+                summon arrow ~<%x-6%> ~45 ~<%z-6%>
+            }
+        }
+    }
+}
+
+function spawn_arrows_3 {
+    LOOP(13,x) {
+        LOOP(13,z) {
+            !IF(!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
+                summon arrow ~<%x-6%> ~60 ~<%z-6%>
             }
         }
     }

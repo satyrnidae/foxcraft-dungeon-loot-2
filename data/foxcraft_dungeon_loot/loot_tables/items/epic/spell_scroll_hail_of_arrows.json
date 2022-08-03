@@ -13,22 +13,20 @@
   "functions": [
     {
       "function": "minecraft:set_name",
-      "name": [
-        {
-          "text": "Spell Scroll: ",
-          "color": "gray",
-          "italic": true
-        },
-        {
-          "text": "Hail of Arrows",
-          "color": "light_purple",
-          "italic": false
-        }
-      ]
+      "name": {
+        "text": "Hail of Arrows",
+        "color": "light_purple",
+        "italic": false
+      }
     },
     {
       "function": "minecraft:set_lore",
       "lore": [
+        {
+          "text": "Spell Scroll",
+          "color": "gray",
+          "italic": false
+        },
         "On your command, spectral archers",
         "rain hell and fury down from the",
         "heavens.",
@@ -59,12 +57,7 @@
           "italic": false
         },
         {
-          "text": "it lands, skillfully avoiding you. You'll",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "want to be outside.",
+          "text": "it lands. Just don't throw it too close!",
           "color": "gray",
           "italic": false
         },
