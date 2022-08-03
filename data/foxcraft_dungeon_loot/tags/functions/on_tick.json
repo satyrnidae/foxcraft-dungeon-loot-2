@@ -28,6 +28,19 @@
     "foxcraft_dungeon_loot:items/hammer_of_sol/on_tick",
     "foxcraft_dungeon_loot:items/totem_of_mysteria/on_tick",
     "foxcraft_dungeon_loot:items/ima_leaf/on_tick",
-    "foxcraft_dungeon_loot:items/totem_of_deilona/on_tick"
+    "foxcraft_dungeon_loot:items/totem_of_deilona/on_tick",
+    "foxcraft_dungeon_loot:items/estudinaes_guidance/on_tick",
+    "foxcraft_dungeon_loot:items/estudinaes_patience/on_tick",
+    "foxcraft_dungeon_loot:items/estudinaes_survival/on_tick",
+    "foxcraft_dungeon_loot:items/auto_pickaxe/on_tick",
+    "foxcraft_dungeon_loot:items/idol_of_melimonas/on_tick",
+    "foxcraft_dungeon_loot:items/stompies/on_tick",
+    "foxcraft_dungeon_loot:items/talking_stick/on_tick",
+    "foxcraft_dungeon_loot:items/totem_of_dendris/on_tick",
+    "foxcraft_dungeon_loot:items/totem_of_ekila/on_tick",
+    "foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/on_tick",
+    "foxcraft_dungeon_loot:items/war_hogs_seething_hatred/on_tick",
+    "foxcraft_dungeon_loot:items/wing_of_ouet_zala/on_tick",
+    "foxcraft_dungeon_loot:items/wing_of_quet_zala/on_tick"
   ]
 }

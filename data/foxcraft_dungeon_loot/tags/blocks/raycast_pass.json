@@ -1,10 +1,7 @@
 {
   "values": [
-    "minecraft:air",
-    "minecraft:void_air",
-    "minecraft:cave_air",
-    "minecraft:water",
-    "minecraft:lava",
+    "#foxcraft_dungeon_loot:air",
+    "#foxcraft_dungeon_loot:fluids",
     "minecraft:grass",
     "#minecraft:small_flowers",
     "#minecraft:tall_flowers",

@@ -1,21 +1,24 @@
 import ../../macros.mcm
 
-# Adds the effects of the item on an offset 2 second clock.
-function clock_2s {
-    schedule function foxcraft_dungeon_loot:items/talking_stick/clock_2s 2s
-    execute as @a if score @s satyrn.fdl.itemId.offHand matches 53 run {
-        effect give @s minecraft:haste 3 1
-        effect give @s minecraft:resistance 3 3
-        effect give @s minecraft:night_vision 15
-        effect give @s minecraft:glowing 3
-    }
-}
-
 # Gives the sender a copy of the item.
 function give {
     macro give_as_loot mythic/talking_stick
 }
 
-function on_load {
-    schedule function foxcraft_dungeon_loot:items/talking_stick/clock_2s 11t
+# Occurs once per player per tick
+function on_tick {
+    execute (if score @s satyrn.fdl.itemId.offHand matches 53) {
+        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/talking_stick/has_effects] run {
+            effect give @s minecraft:haste 1000000 1
+            effect give @s minecraft:resistance 1000000 3
+            effect give @s minecraft:night_vision 1000000
+            effect give @s minecraft:glowing 1000000
+        }
+    } else execute (if entity @s[tag=satyrn.fdl.talkingStick.effectsApplied]) {
+        effect clear @s minecraft:haste
+        effect clear @s minecraft:resistance
+        effect clear @s minecraft:night_vision
+        effect clear @s minecraft:glowing
+        tag @s remove satyrn.fdl.talkingStick.effectsApplied
+    }
 }

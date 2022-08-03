@@ -18,5 +18,5 @@ function give {
 }
 
 function on_load {
-    schedule function foxcraft_dungeon_loot:items/love_wheat/clock_3s 22t
+    schedule function foxcraft_dungeon_loot:items/love_wheat/clock_3s 9t
 }

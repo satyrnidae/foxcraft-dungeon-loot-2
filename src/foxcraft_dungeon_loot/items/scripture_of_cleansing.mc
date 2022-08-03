@@ -1,26 +1,27 @@
 import ../../macros.mcm
 
+# Summons a particle every ten ticks
 function clock_10t {
     schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 10t
     execute as @a at @s run {
         execute (if score @s satyrn.fdl.itemId.mainHand matches 51) {
             particle minecraft:enchant ~ ~1 ~ 0.5 0.5 0.5 0.0 1
-        } else execute (if score @s satyrn.fdl.itemId.offHand matches 51) {
-            particle minecraft:enchant ~ ~1 ~ 0.5 0.5 0.5 0.0 1
         }
     }
 }
 
+# Gives a copy of the item to the sender.
 function give {
     macro give_as_loot mythic/scripture_of_cleansing
 }
 
+# Starts the clock function with a 2 tick offset and creates the cooldown timer
 function on_load {
-    # Start clock with a 9 tick offset
-    schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 9t
+    schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 2t
     scoreboard objectives add satyrn.fdl.scriptureOfCleansing.cooldown dummy
 }
 
+# Executes once per player per tick
 function on_tick {
     execute if score @s satyrn.fdl.itemId.mainHand matches 51 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
         execute (if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1..) {

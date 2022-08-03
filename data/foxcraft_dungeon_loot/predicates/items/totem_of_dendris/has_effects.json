@@ -1,0 +1,26 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "effects": {
+      "minecraft:night_vision": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      },
+      "minecraft:water_breathing": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      },
+      "minecraft:resistance": {
+        "amplifier": {
+          "min": 4,
+          "max": 255
+        }
+      }
+    }
+  }
+}
