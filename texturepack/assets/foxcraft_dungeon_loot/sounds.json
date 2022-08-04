@@ -233,6 +233,13 @@
       "entity/shulker_bullet/hit4"
     ]
   },
+  "item.torenhias_fist.thunder": {
+    "subtitle": "subtitles.item.mjolnir.thunder",
+    "sounds": [
+      "item/trident/thunder1",
+      "item/trident/thunder2"
+    ]
+  },
   "item.quet_zalas_beloved.wings_flap": {
     "subtitle": "subtitles.item.quet_zalas_beloved.wings_flap",
     "sounds": [

@@ -26,6 +26,9 @@ function load {
     # Reset item utility advancements for online players
     advancement revoke @a from foxcraft_dungeon_loot:items
 
+    scoreboard objectives add satyrn.fdl.const dummy
+    scoreboard players set 5 satyrn.fdl.const 5
+
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:on_load
 

@@ -19,6 +19,7 @@
     "foxcraft_dungeon_loot:items/wing_of_ouet_zala/on_load",
     "foxcraft_dungeon_loot:items/wing_of_quet_zala/on_load",
     "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_load",
-    "foxcraft_dungeon_loot:items/love_wheat/on_load"
+    "foxcraft_dungeon_loot:items/love_wheat/on_load",
+    "foxcraft_dungeon_loot:items/torenhias_fist/on_load"
   ]
 }

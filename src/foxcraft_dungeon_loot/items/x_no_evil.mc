@@ -9,16 +9,14 @@ function give {
 # satyrn.fdl.xNoEvil.heldItem - A player that is holding the X No Evil item
 # satyrn.fdl.xNoEvil.projectile - The snowball thrown by a player who used X No Evil
 # satyrn.fdl.xNoEvil.projectileTracker - An armor stand which tracks the projectile. Has a snowball passenger which saves the throwing player's UUID.
+# satyrn.fdl.xNoEvil.ownerId - The snowball passenger which saves the throwing player's UUID.
 # satyrn.fdl.xNoEvil.areaOfEffect - The area of effect cloud created by the projectile.
-
 
 # Occurs once per player per tick.
 function on_tick {
 
     # Execute if a tagged player threw a snowball.
     execute if score @s[tag=satyrn.fdl.xNoEvil.heldItem] satyrn.fdl.used.snowball matches 1.. run {
-        tag @s add satyrn.fdl.xNoEvil.source
-
         # Execute the following as the nearest snowball, presumably the one thrown by the player.
         execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
             # Tag the snowball as the projectile.
@@ -80,8 +78,7 @@ function on_tick {
             # Clean up tracking entity
             kill @e[tag=satyrn.fdl.xNoEvil.ownerId,limit=1,sort=nearest]
             !IF(config.dev) {
-                data modify entity @s Motion set value [0.0f,0.0f,0.0f]
-                data modify entity @s NoGravity set value 1b
+                data merge entity @s {Motion:[0.0f,0.0f,0.0f],NoGravity:1b}
                 tag @s remove satyrn.fdl.xNoEvil.projectileTracker
             }
             !IF(!config.dev) {
