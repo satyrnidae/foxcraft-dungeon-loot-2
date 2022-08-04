@@ -31,7 +31,7 @@ function on_tick {
     }
 
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
-    execute if entity @e[tag=satyrn.fdl.titanHammerTracker] as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
+    execute as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
         execute (if entity @e[tag=satyrn.fdl.titanHammer, distance=..1, limit=1, sort=nearest] at @e[tag=satyrn.fdl.titanHammer, limit=1, sort=nearest]) {
             kill @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest,distance=..2.8]
 
@@ -45,7 +45,7 @@ function on_tick {
         # If tracker cannot find a hammer, it hit something and was destroyed.
         } else {
             # Search for entity to damage
-            execute (anchored feet if entity @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] as @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] at @s) {
+            execute (anchored feet as @e[type=!#foxcraft_dungeon_loot:non_living, dx=0, limit=1, sort=nearest] at @s) {
                 function foxcraft_dungeon_loot:items/hammer_of_sol/hit_target
             } else {
                 # Perform a raycast to find the entity
@@ -82,7 +82,7 @@ function on_tick {
 
     # Track newly spawned hammers after they were destroyed.
     # If one is about to disappear, play sound, spawn particle effects, and delete the tag so it only happens once.
-    execute if entity @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:items/hammer_of_sol/should_expire] as @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:items/hammer_of_sol/should_expire] at @s run {
+    execute as @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:items/hammer_of_sol/should_expire] at @s run {
         particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
         particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
         particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30

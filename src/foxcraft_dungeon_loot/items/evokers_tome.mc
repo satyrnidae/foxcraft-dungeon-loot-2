@@ -66,7 +66,7 @@ function on_tick {
     #    is not supported for this item.
 
     # Process fang beams. This is the default activation mode for the item.
-    execute if entity @e[tag=satyrn.fdl.fangBeam] as @e[tag=satyrn.fdl.fangBeam] at @s run {
+    execute as @e[tag=satyrn.fdl.fangBeam] at @s run {
         scoreboard players add @s satyrn.fdl.evokersTome.spawnerLife 1
         execute (if score @s satyrn.fdl.evokersTome.spawnerLife matches 1) {
             data modify entity @s Rotation set from entity @p[scores={satyrn.fdl.evokersTome.cooldown=1..}] Rotation
@@ -79,7 +79,7 @@ function on_tick {
     }
 
     # Process the fang pivot for the fang area attack.
-    execute if entity @e[tag=satyrn.fdl.fangPivot] as @e[tag=satyrn.fdl.fangPivot] at @s run {
+    execute as @e[tag=satyrn.fdl.fangPivot] at @s run {
         scoreboard players add @s satyrn.fdl.evokersTome.spawnerLife 1
         execute if score @s satyrn.fdl.evokersTome.spawnerLife matches 2 run {
             summon minecraft:armor_stand ~5 ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1,Tags:[satyrn.fdl.fangSpawn,satyrn.fdl.circleFang,satyrn.fdl.fangLead]}
@@ -98,7 +98,7 @@ function on_tick {
 
         execute if score @s satyrn.fdl.evokersTome.spawnerLife matches 40.. run kill @s
 
-        execute if entity @e[tag=satyrn.fdl.circleFang] as @e[tag=satyrn.fdl.circleFang] at @s run {
+        execute as @e[tag=satyrn.fdl.circleFang] at @s run {
             scoreboard players add @s satyrn.fdl.evokersTome.spawnerLife 1
             execute if entity @e[type=minecraft:evoker_fangs,distance=1..5] run data modify entity @e[type=minecraft:evoker_fangs,limit=1,sort=nearest] Silent set value 1b
             execute if score @s satyrn.fdl.evokersTome.spawnerLife matches 35.. run kill @s
@@ -107,10 +107,10 @@ function on_tick {
     execute if entity @e[tag=satyrn.fdl.fang] run scoreboard players add @e[tag=satyrn.fdl.fang] satyrn.fdl.evokersTome.fangLife 1
 
     # Spawn the armor stand marker for the evoker fangs
-    execute if entity @e[tag=satyrn.fdl.fangSpawn] as @e[tag=satyrn.fdl.fangSpawn] at @s if score @s satyrn.fdl.evokersTome.spawnerLife matches 2.. run summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Silent:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fang],Motion:[0.0,-10.0,0.0]}
+    execute as @e[tag=satyrn.fdl.fangSpawn] at @s if score @s satyrn.fdl.evokersTome.spawnerLife matches 2.. run summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Silent:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fang],Motion:[0.0,-10.0,0.0]}
 
     # Spawn the evoker fangs
-    execute if entity @e[tag=satyrn.fdl.fang] as @e[tag=satyrn.fdl.fang] at @s run {
+    execute as @e[tag=satyrn.fdl.fang] at @s run {
         execute if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground] if score @s satyrn.fdl.evokersTome.fangLife matches 1 run {
             summon minecraft:evoker_fangs ~ ~ ~ {Tags:[satyrn.fdl.playerEvokerFang]}
             execute as @e[tag=satyrn.fdl.playerEvokerFang,type=minecraft:evoker_fangs,limit=1,sort=nearest] at @s run {
