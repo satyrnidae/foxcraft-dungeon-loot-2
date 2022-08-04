@@ -5,11 +5,6 @@ function give {
 }
 
 function on_tick {
-    # Add tag to player to know they have the hammer in their main hand (Since they are throwing it, if they only have 1, the next they wouldn't have it in their hand anymore)
-    execute if score @s satyrn.fdl.itemId.mainHand matches 75 run {
-        tag @s add satyrn.fdl.holdingTitanHammer
-    }
-
     execute if score @s[tag=satyrn.fdl.holdingTitanHammer] satyrn.fdl.used.snowball matches 1.. run {
         stopsound @s * entity.snowball.throw
         playsound foxcraft_dungeon_loot:item.hammer_of_sol.throw player @a ~ ~ ~ 2.0
@@ -25,8 +20,13 @@ function on_tick {
         }
     }
 
+    # Add tag to player to know they have the hammer in their main hand (Since they are throwing it, if they only have 1, the next they wouldn't have it in their hand anymore)
+    execute (if score @s satyrn.fdl.itemId.mainHand matches 75) {
+        tag @s add satyrn.fdl.holdingTitanHammer
+    } else execute (if score @s[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball] satyrn.fdl.itemId.offHand matches 75) {
+        tag @s add satyrn.fdl.holdingTitanHammer
     # Remove the tag that says the player has a hammer if they no longer have one in their main hand.
-    execute unless score @s satyrn.fdl.itemId.mainHand matches 75 run {
+    } else {
         tag @s remove satyrn.fdl.holdingTitanHammer
     }
 
