@@ -32,6 +32,8 @@ function on_tick {
     # A tag is added to the player while they are holding X No Evil and is cleared from any player not holding X No Evil.
     execute (if score @s satyrn.fdl.itemId.mainHand matches 79) {
         tag @s add satyrn.fdl.xNoEvil.heldItem
+    } else execute (if score @s[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball] satyrn.fdl.itemId.offHand matches 79) {
+        tag @s add satyrn.fdl.xNoEvil.heldItem
     } else {
         tag @s remove satyrn.fdl.xNoEvil.heldItem
     }

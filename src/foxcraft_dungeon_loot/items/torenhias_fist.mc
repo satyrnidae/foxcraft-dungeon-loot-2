@@ -39,7 +39,7 @@ function on_tick {
     # Add a tag to players holding Tor'Enhia's Fist, and remove the tag from players who aren't.
     execute (if score @s satyrn.fdl.itemId.mainHand matches 80) {
         tag @s add satyrn.fdl.torenhiasFist.heldItem
-    } else execute (if score @s satyrn.fdl.itemId.offHand matches 80 unless entity @s[predicate=foxcraft_dungeon_loot:items/is_mainhand_snowball]) {
+    } else execute (if score @s[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball] satyrn.fdl.itemId.offHand matches 80) {
         tag @s add satyrn.fdl.torenhiasFist.heldItem
     } else {
         tag @s remove satyrn.fdl.torenhiasFist.heldItem
