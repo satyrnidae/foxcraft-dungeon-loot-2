@@ -1,0 +1,105 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:80,CustomModelData:421953}"
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Tor'Enhia's Fist",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Seems like it's just a shoddy copy, but you",
+        "might get at least one good throw out of it...",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Tor'Enhia's Wrath: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Throw to summon a",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "thunderbolt where it lands. Drops as an",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "item, but may be destroyed by the",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "resulting lightning bolt.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 7,
+          "operation": "addition",
+          "id": "dd2dd6cd-c4f0-4fc3-9918-61f566c3e760",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.movement_speed",
+          "name": "generic.movement_speed",
+          "amount": 0.1,
+          "operation": "multiply_total",
+          "id": "6d4b144a-1bb9-437a-8e03-7e73da96149e",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": -0.75,
+          "operation": "multiply_total",
+          "id": "b180dbf3-4689-46c2-a885-6b5f3d4f69ee",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:knockback": 4
+      }
+    }
+  ]
+}

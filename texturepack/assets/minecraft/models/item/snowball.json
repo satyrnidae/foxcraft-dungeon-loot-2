@@ -27,6 +27,12 @@
         "custom_model_data": 421952
       },
       "model": "foxcraft_dungeon_loot:item/x_no_evil"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421953
+      },
+      "model": "foxcraft_dungeon_loot:item/torenhias_fist"
     }
   ]
 }
