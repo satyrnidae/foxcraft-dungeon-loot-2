@@ -36,7 +36,7 @@ function on_tick {
     }
 
     # Teleport tracker to the scroll and do all the tracking that needs to be tracked
-    execute if entity @e[tag=satyrn.fdl.SC_HOA_tracker] as @e[tag=satyrn.fdl.SC_HOA_tracker] at @s run {
+    execute as @e[tag=satyrn.fdl.SC_HOA_tracker] at @s run {
         execute (if entity @e[tag=satyrn.fdl.SC_HOA, distance=..1, limit=1, sort=nearest] at @e[tag=satyrn.fdl.SC_HOA, limit=1, sort=nearest]) {
             # Set motion instead of tp
             data modify entity @s Motion set from entity @e[tag=satyrn.fdl.SC_HOA, distance=..1, limit=1, sort=nearest] Motion
