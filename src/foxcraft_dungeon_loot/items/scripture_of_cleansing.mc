@@ -23,7 +23,7 @@ function on_load {
 
 # Executes once per player per tick
 function on_tick {
-    execute if score @s satyrn.fdl.itemId.mainHand matches 51 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 51 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
         execute (if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"The Scripture of Cleansing is on cooldown and cannot be used.","color":"dark_purple"}
