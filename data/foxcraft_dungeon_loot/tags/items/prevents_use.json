@@ -1,0 +1,18 @@
+{
+  "values": [
+    "minecraft:snowball",
+    "minecraft:ender_pearl",
+    "minecraft:ender_eye",
+    "minecraft:writable_book",
+    "minecraft:experience_bottle",
+    "minecraft:goat_horn",
+    "minecraft:spyglass",
+    "minecraft:bow",
+    "minecraft:crossbow",
+    "minecraft:egg",
+    "minecraft:trident",
+    "minecraft:shield",
+    "minecraft:splash_potion",
+    "minecraft:lingering_potion"
+  ]
+}

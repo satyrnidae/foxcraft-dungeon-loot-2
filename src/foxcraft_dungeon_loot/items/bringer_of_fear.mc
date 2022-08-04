@@ -10,7 +10,7 @@ function on_load {
 
 function on_tick {
     # Execute the following if the sender has the Bringer of Fear equipped in their main hand
-    execute if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. if score @s satyrn.fdl.itemId.mainHand matches 34 run {
+    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 34 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
         execute (if score @s satyrn.fdl.bringerOfFear.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
