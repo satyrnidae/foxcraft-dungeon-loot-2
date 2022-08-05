@@ -6,138 +6,138 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:mojang_banner_pattern",
-          "weight": 10,
+          "weight": 2,
           "quality": 0
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:dragon_egg",
-          "weight": 5,
-          "quality": 10
+          "weight": 1,
+          "quality": 3
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:enchanted_golden_apple",
-          "weight": 10,
+          "weight": 2,
           "quality": 0
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/dawncleaver"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/estudinaes_guidance"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/estudinaes_patience"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/estudinaes_script"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/estudinaes_sorrow"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/estudinaes_survival"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/fortune_500"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/heros_amulet"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/kobolds_vengeance"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/love_wheat"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/melimonas_guile"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/palominas_gift"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/peerless_yewhewn"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/rogues_dagger"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/silverfish_escape_artist"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/skullbasher"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/spell_scroll_hail_of_arrows"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/torenhias_fist"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/wand_of_block_state_editing"
         },
         {
-          "weight": 15,
-          "quality": 3,
+          "weight": 3,
+          "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge"
         }
