@@ -47,7 +47,7 @@ function on_tick {
     execute if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.prideAndExtremePrejudice.cooldown 1
 
     # Reset the cooldown timer.
-    execute (if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 24000) {
+    execute (if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 24000..) {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
