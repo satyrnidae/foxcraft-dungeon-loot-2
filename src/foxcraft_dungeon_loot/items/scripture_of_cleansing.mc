@@ -163,7 +163,7 @@ function on_tick {
     execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.scriptureOfCleansing.cooldown 1
 
     # Reset scoreboard after 30 seconds.
-    execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 600 run {
+    execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 600.. run {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Scripture of Cleansing is ready to be used once more.","color":"dark_purple"}
