@@ -123,6 +123,36 @@
         "custom_model_data": 4219520
       },
       "model": "foxcraft_dungeon_loot:item/ima_leaf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219521
+      },
+      "model": "foxcraft_dungeon_loot:item/common_grab_bag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219522
+      },
+      "model": "foxcraft_dungeon_loot:item/uncommon_grab_bag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219523
+      },
+      "model": "foxcraft_dungeon_loot:item/rare_grab_bag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219524
+      },
+      "model": "foxcraft_dungeon_loot:item/epic_grab_bag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219525
+      },
+      "model": "foxcraft_dungeon_loot:item/mythic_grab_bag"
     }
   ]
 }

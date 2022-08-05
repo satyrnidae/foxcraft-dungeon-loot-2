@@ -15,7 +15,7 @@
       "function": "minecraft:set_name",
       "name": {
         "text": "Eye Cream",
-        "color": "light_purple",
+        "color": "aqua",
         "italic": false
       }
     },
@@ -28,8 +28,8 @@
         [
           "Rarity: ",
           {
-            "text": "Epic",
-            "color": "light_purple",
+            "text": "Rare",
+            "color": "aqua",
             "italic": true
           }
         ],
@@ -37,7 +37,7 @@
         [
           {
             "text": "It Burns: ",
-            "color": "light_purple",
+            "color": "aqua",
             "italic": false
           },
           {

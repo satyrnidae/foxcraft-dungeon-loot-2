@@ -1,0 +1,42 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:71,CustomModelData:4219522}"
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Glistering Grab-Bag",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A grab bag containing uncommon items.",
+        [
+          "Rarity: ",
+          {
+            "text": "Uncommon",
+            "color": "yellow",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    }
+  ]
+}

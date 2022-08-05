@@ -15,10 +15,9 @@
     "foxcraft_dungeon_loot:items/estudinaes_guidance/give",
     "foxcraft_dungeon_loot:items/estudinaes_patience/give",
     "foxcraft_dungeon_loot:items/estudinaes_survival/give",
-    "foxcraft_dungeon_loot:items/eye_cream/give",
-    "foxcraft_dungeon_loot:items/feather_of_quet_zala/give",
     "foxcraft_dungeon_loot:items/wand_of_block_state_editing/give",
     "foxcraft_dungeon_loot:items/heros_amulet/give",
-    "foxcraft_dungeon_loot:items/silverfish_escape_artist/give"
+    "foxcraft_dungeon_loot:items/silverfish_escape_artist/give",
+    "foxcraft_dungeon_loot:items/epic_grab_bag/give"
   ]
 }

@@ -30,6 +30,7 @@
     "foxcraft_dungeon_loot:items/war_hogs_insatiable_hunger/give",
     "foxcraft_dungeon_loot:items/war_hogs_seething_hatred/give",
     "foxcraft_dungeon_loot:items/wing_of_ouet_zala/give",
-    "foxcraft_dungeon_loot:items/wing_of_quet_zala/give"
+    "foxcraft_dungeon_loot:items/wing_of_quet_zala/give",
+    "foxcraft_dungeon_loot:items/mythic_grab_bag/give"
   ]
 }
