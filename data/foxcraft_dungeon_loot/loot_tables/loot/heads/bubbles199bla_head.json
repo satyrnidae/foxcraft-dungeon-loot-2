@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{SkullOwner:{Id:[I;842492543,-557559728,-1754671771,-132223153],Name:\"Bubbles199bla\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGNjNTEyYTVmM2E4YTkwMDE4NGI3ZjkwOTg3OWFlM2JkZjA1YTNmZjMxNzk0MmE5Mjk1MmQ1MWM0NWFlMzA4NiJ9fX0=\"}]}}}"
+    }
+  ]
+}

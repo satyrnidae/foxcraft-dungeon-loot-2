@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{SkullOwner:{Id:[I;-787761280,-2033100810,-1134572794,1463125654],Name:\"CommunalMind\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjU0MGJiNGIwM2JkZDdiNTRmODZhMGExMzQ1YWMwMmFkYTQzYTkzODIxMzVlOWM2MGE0ODJlZTcyMWJmMWMwYiJ9fX0=\"}]}}}"
+    }
+  ]
+}

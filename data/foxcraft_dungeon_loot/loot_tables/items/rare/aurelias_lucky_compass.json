@@ -43,14 +43,6 @@
           "operation": "addition",
           "id": "b28a6c13-bb60-4b0d-af39-00cd721ef3a9",
           "slot": "mainhand"
-        },
-        {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
-          "amount": 2,
-          "operation": "addition",
-          "id": "c7c078b8-383c-4848-a666-560061c14934",
-          "slot": "offhand"
         }
       ]
     },

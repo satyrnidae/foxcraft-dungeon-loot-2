@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{SkullOwner:{Id:[I;709858396,-1079222998,-1121971448,589076553],Name:\"GunnyStryker\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWFhNzNkZmVkM2FiOWI0Y2QwMzhmNWFlZWRmMDg0MDBjNjk1YzM3Mzg0ODg2OTc5NzcxMWIyY2IzODE1M2I3ZCJ9fX0=\"}]}}}"
+    }
+  ]
+}

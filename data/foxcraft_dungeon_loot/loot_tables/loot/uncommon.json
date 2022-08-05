@@ -1,0 +1,187 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_axe",
+          "weight": 5,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_hoe",
+          "weight": 5,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_pickaxe",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_shovel",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_sword",
+          "weight": 5,
+          "quality": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/uncommon/totem_of_undying",
+          "weight": 4,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 50,
+                "max": 30
+              },
+              "treasure": true
+            }
+          ],
+          "weight": 5,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_star",
+          "weight": 1,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:heart_of_the_sea",
+          "weight": 1,
+          "quality": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:elytra",
+          "weight": 2,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:skeleton_skull",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wither_skeleton_skull",
+          "weight": 2,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:creeper_head",
+          "weight": 2,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:zombie_head",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "weight": 1,
+          "quality": 4,
+          "type": "minecraft:item",
+          "name": "minecraft:player_head",
+          "functions": [
+            {
+              "function": "minecraft:fill_player_head",
+              "entity": "this"
+            }
+          ]
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/analogouspants5_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/bubbles199bla_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/captainzephyrr_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/chickenny127_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/commandercyclops_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/gunnystryker_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/macedonzero_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/maximumchocobo_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/saturniidae_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/shrinerh_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/underbrush_fox_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/yergaderga2_head"
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@
     "foxcraft_dungeon_loot:items/d8/give",
     "foxcraft_dungeon_loot:items/d10/give",
     "foxcraft_dungeon_loot:items/d12/give",
-    "foxcraft_dungeon_loot:items/d20/give"
+    "foxcraft_dungeon_loot:items/d20/give",
+    "foxcraft_dungeon_loot:items/common_grab_bag/give"
   ]
 }

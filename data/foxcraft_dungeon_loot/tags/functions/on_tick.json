@@ -44,6 +44,11 @@
     "foxcraft_dungeon_loot:items/wing_of_quet_zala/on_tick",
     "foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/on_tick",
     "foxcraft_dungeon_loot:items/x_no_evil/on_tick",
-    "foxcraft_dungeon_loot:items/torenhias_fist/on_tick"
+    "foxcraft_dungeon_loot:items/torenhias_fist/on_tick",
+    "foxcraft_dungeon_loot:items/common_grab_bag/on_tick",
+    "foxcraft_dungeon_loot:items/uncommon_grab_bag/on_tick",
+    "foxcraft_dungeon_loot:items/rare_grab_bag/on_tick",
+    "foxcraft_dungeon_loot:items/epic_grab_bag/on_tick",
+    "foxcraft_dungeon_loot:items/mythic_grab_bag/on_tick"
   ]
 }

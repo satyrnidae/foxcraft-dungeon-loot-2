@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/common",
+          "weight": 1,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/uncommon",
+          "weight": 2,
+          "quality": 5
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/rare",
+          "weight": 3,
+          "quality": 10
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/epic",
+          "weight": 60,
+          "quality": 20
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/mythic",
+          "weight": 4,
+          "quality": 40
+        }
+      ]
+    }
+  ]
+}

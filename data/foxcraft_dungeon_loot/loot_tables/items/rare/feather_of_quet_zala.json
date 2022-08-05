@@ -15,7 +15,7 @@
       "function": "minecraft:set_name",
       "name": {
         "text": "Feather of Quet-Zala",
-        "color": "light_purple",
+        "color": "aqua",
         "italic": false
       }
     },
@@ -28,8 +28,8 @@
         [
           "Rarity: ",
           {
-            "text": "Epic",
-            "color": "light_purple",
+            "text": "Rare",
+            "color": "aqua",
             "italic": true
           }
         ],
