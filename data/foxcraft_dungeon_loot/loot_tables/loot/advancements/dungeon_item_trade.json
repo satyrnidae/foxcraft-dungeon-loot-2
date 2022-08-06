@@ -1,0 +1,17 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "min": 5,
+        "max": 10
+      },
+      "bonus_rolls": 0.4,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/coin/copper_coins"
+        }
+      ]
+    }
+  ]
+}

@@ -41,7 +41,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16448000,HideFlags:32,CustomPotionEffects:[{Id:24,Duration:12000}]}"
+      "tag": "{CustomPotionColor:16448000,HideFlags:32,CustomPotionEffects:[{Id:24,Duration:12000}],DungeonItem:1b}"
     }
   ]
 }

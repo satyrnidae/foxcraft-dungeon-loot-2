@@ -13,7 +13,7 @@
   "functions": [
     {
       "function": "minecraft:set_nbt",
-      "tag": "{SkullOwner:{Id:[I;-2139147294,1018318895,-1717169373,-2047032351],Name:\"bored_kitsune\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBhNWM5OWRmMWE4MDBhZjhjNzY4NzIxY2Y2NzU2MWRiMjFmNTg2NDVhZGNjOWVhNGRlMDczMzdhZDExYzE0In19fQ==\"}]}}}"
+      "tag": "{DungeonHead:1b,SkullOwner:{Id:[I;-2139147294,1018318895,-1717169373,-2047032351],Name:\"bored_kitsune\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWJlYWY5NWI0Njc0OGNlNTZjODc1OGU2NGU2ODI3NjA0ZmE4MmZjNGY4ZTMxYjJlYWQ0NGEwMzhjMTNkOWNlIn19fQ==\"}]}}}"
     }
   ]
 }

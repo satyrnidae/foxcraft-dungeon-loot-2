@@ -41,7 +41,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:15086100,HideFlags:32,CustomPotionEffects:[{Id:3,Duration:1200,Amplifier:1},{Id:8,Duration:2400,Amplifier:2},{Id:23,Duration:10,Amplifier:9},{Id:1,Duration:2400,Amplifier:1}]}"
+      "tag": "{CustomPotionColor:15086100,HideFlags:32,CustomPotionEffects:[{Id:3,Duration:1200,Amplifier:1},{Id:8,Duration:2400,Amplifier:2},{Id:23,Duration:10,Amplifier:9},{Id:1,Duration:2400,Amplifier:1}],DungeonItem:1b}"
     }
   ]
 }

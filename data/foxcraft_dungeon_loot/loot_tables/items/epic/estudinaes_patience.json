@@ -183,7 +183,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:39,CustomModelData:421951,display:{color:5215783}}"
+      "tag": "{DungeonLootId:39,CustomModelData:421951,display:{color:5215783},DungeonItem:1b}"
     }
   ]
 }

@@ -62,7 +62,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:61,CustomModelData:421957,HideFlags:1}"
+      "tag": "{DungeonLootId:61,CustomModelData:421957,HideFlags:1,DungeonItem:1b}"
     }
   ]
 }

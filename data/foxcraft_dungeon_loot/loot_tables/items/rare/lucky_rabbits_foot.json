@@ -56,7 +56,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:29,HideFlags:1}"
+      "tag": "{DungeonLootId:29,HideFlags:1,DungeonItem:1b}"
     }
   ]
 }

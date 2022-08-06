@@ -37,7 +37,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{Head:[0f,45f,0f],RightArm:[-90f,45f,0f],LeftArm:[-25f,45f,-15f]}}}"
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{Head:[0f,45f,0f],RightArm:[-90f,45f,0f],LeftArm:[-25f,45f,-15f]}},DungeonItem:1b}"
     }
   ]
 }

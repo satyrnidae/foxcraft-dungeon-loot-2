@@ -110,7 +110,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16445670,HideFlags:32}"
+      "tag": "{CustomPotionColor:16445670,HideFlags:32,DungeonItem:1b}"
     }
   ]
 }

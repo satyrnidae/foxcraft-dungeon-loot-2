@@ -161,7 +161,7 @@
     },
     {
       "function": "set_nbt",
-      "tag": "{DungeonLootId:40,CustomModelData:421951,display:{color:5215783}}"
+      "tag": "{DungeonLootId:40,CustomModelData:421951,display:{color:5215783},DungeonItem:1b}"
     }
   ]
 }

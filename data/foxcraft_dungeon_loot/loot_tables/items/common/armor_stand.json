@@ -32,7 +32,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b}}"
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b},DungeonItem:1b}"
     }
   ]
 }

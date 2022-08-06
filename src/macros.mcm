@@ -36,3 +36,62 @@ macro give_as_variant_loot {
     loot give @s loot foxcraft_dungeon_loot:items/$$0
     scoreboard players reset @s satyrn.fdl.loot.variant
 }
+
+macro loot_trade_setup {
+    # Set the trade result
+    loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:$$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/set_sell_from_item
+}
+
+macro loot_buy_setup {
+    # Set the trade result
+    loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:$$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/set_buy_from_item
+}
+
+macro loot_buyb_setup {
+    # Set the trade result
+    loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:$$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/set_buyb_from_item
+}
+
+macro set_trade_uses {
+    data modify storage foxcraft_dungeon_loot:trades Recipe.maxUses set value $$0
+}
+
+macro set_trade_price {
+    data modify storage foxcraft_dungeon_loot:trades Recipe.buy.Count set value $$0b
+}
+
+macro set_trade_count {
+    data modify storage foxcraft_dungeon_loot:trades Recipe.sell.Count set value $$0b
+}
+
+macro randomize_trade_uses {
+    # Set max uses
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Recipe.maxUses int 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+macro randomize_trade_cost {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Recipe.buy.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+macro randomize_tradeb_cost {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Recipe.buyB.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+macro randomize_trade_count {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Recipe.sell.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+macro random_partial_secondary_cost {
+    macro loot_buyb_setup $$0
+    macro randomize_tradeb_cost 0 9
+}

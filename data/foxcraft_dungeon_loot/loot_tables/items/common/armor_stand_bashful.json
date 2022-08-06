@@ -37,7 +37,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{RightArm:[30.0f,0.0f,-35.0f],Head:[20.0f,25.0f,15.0f],LeftArm:[30.0f,0.0f,35.0f],RightLeg:[10.0f,10.0f,0.0f],Body:[0.0f,3.8545465f,0.0f]}}}"
+      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{RightArm:[30.0f,0.0f,-35.0f],Head:[20.0f,25.0f,15.0f],LeftArm:[30.0f,0.0f,35.0f],RightLeg:[10.0f,10.0f,0.0f],Body:[0.0f,3.8545465f,0.0f]}},DungeonItem:1b}"
     }
   ]
 }

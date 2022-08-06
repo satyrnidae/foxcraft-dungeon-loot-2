@@ -98,7 +98,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:13}"
+      "tag": "{DungeonLootId:13,DungeonItem:1b}"
     }
   ]
 }
