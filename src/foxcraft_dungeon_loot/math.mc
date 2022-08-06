@@ -11,16 +11,16 @@ function random {
 
     # Summon temporary area effect clouds to store math values
     LOOP(2,i) {
-        summon minecraft:area_effect_cloud ~ ~ ~ {Tags:[satyrn.fdl.random],Duration:10}
+        summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.random]}
     }
 
     # Generate a random 32-bit integer number.
     LOOP(31,i) {
-        scoreboard players add @e[type=minecraft:area_effect_cloud,tag=satyrn.fdl.random,distance=..1,sort=random,limit=1] satyrn.fdl.math.input1 <%Math.pow(2,i)%>
+        scoreboard players add @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1,sort=random,limit=1] satyrn.fdl.math.input1 <%Math.pow(2,i)%>
     }
 
     # Set output and limit to the specified range.
-    scoreboard players operation #random <%config.internalScoreboard%> = @e[type=minecraft:area_effect_cloud,tag=satyrn.fdl.random,distance=..1,limit=1] satyrn.fdl.math.input1
+    scoreboard players operation #random <%config.internalScoreboard%> = @e[type=minecraft:marker,tag=satyrn.fdl.random,sort=random,distance=..1,limit=1] satyrn.fdl.math.input1
     # Modulo over range and add lower bound as offset
     scoreboard players operation #random <%config.internalScoreboard%> %= @s satyrn.fdl.math.input2
     scoreboard players operation #random <%config.internalScoreboard%> += @s satyrn.fdl.math.input1
@@ -34,5 +34,8 @@ function random {
     }
 
     # Reset RNG scoreboard
-    scoreboard players reset @e[type=minecraft:area_effect_cloud,tag=satyrn.fdl.random,distance=..1] satyrn.fdl.math.input1
+    scoreboard players reset @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1] satyrn.fdl.math.input1
+
+    # Kill the markers
+    kill @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1]
 }

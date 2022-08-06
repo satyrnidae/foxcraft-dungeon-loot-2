@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_lingering_spite"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "set_nbt",
+      "tag": "{PiglinBarter:1b}"
+    }
+  ]
+}

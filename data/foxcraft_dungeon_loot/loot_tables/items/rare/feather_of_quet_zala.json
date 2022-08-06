@@ -74,7 +74,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:43,Unbreakable:1,CustomModelData:4219513,HideFlags:5}"
+      "tag": "{DungeonLootId:43,Unbreakable:1,CustomModelData:4219513,HideFlags:5,DungeonItem:1b}"
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:netherite_helmet",
+      "nbt": "{Enchantments:[{}]}"
+    },
+    "title": "Remnant of a Bygone Era",
+    "description": "Obtain an interesting item from a piglin.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "foxcraft_dungeon_loot:root",
+  "criteria": {
+    "trade_for_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "nbt": "{DungeonItem:1b,PiglinBarter:1b}"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trade_for_item"
+    ]
+  ]
+}

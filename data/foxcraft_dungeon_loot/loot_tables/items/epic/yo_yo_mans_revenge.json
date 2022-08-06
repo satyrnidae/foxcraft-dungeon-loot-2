@@ -60,7 +60,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:8}"
+      "tag": "{DungeonLootId:8,DungeonItem:1b}"
     }
   ]
 }

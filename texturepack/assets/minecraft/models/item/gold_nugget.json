@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/gold_nugget"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 421950
+      },
+      "model": "foxcraft_dungeon_loot:item/gold_coins"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421951
+      },
+      "model": "foxcraft_dungeon_loot:item/electrum_coins"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421952
+      },
+      "model": "foxcraft_dungeon_loot:item/platinum_coins"
+    }
+  ]
+}

@@ -83,7 +83,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:15,SkullOwner:Technoblade}"
+      "tag": "{DungeonLootId:15,SkullOwner:Technoblade,DungeonItem:1b}"
     }
   ]
 }

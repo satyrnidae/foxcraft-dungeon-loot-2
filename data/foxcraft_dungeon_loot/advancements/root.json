@@ -1,6 +1,6 @@
 {
   "display": {
-    "frame": "challenge",
+    "frame": "task",
     "icon": {
       "item": "minecraft:golden_sword",
       "nbt": "{CustomModelData:421951,Enchantments:[{}]}"

@@ -13,7 +13,7 @@
   "functions": [
     {
       "function": "minecraft:set_nbt",
-      "tag": "{SkullOwner:{Id:[I;-1466732502,-1123525718,-1383383151,468245229],Name:\"MaximumChocobo\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTE2ZTAyZmQ5ZDkwOTNmMjM5MmFhNDc5YTFhMDlmYjAzYjA4Mjk1YmI0YWU3NzRhZGY0MzFkNmQ5YWJlNmNiNyJ9fX0=\"}]}}}"
+      "tag": "{DungeonHead:1b,SkullOwner:{Id:[I;-1466732502,-1123525718,-1383383151,468245229],Name:\"MaximumChocobo\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTE2ZTAyZmQ5ZDkwOTNmMjM5MmFhNDc5YTFhMDlmYjAzYjA4Mjk1YmI0YWU3NzRhZGY0MzFkNmQ5YWJlNmNiNyJ9fX0=\"}]}}}"
     }
   ]
 }

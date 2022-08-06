@@ -1,0 +1,44 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:copper_ingot",
+      "nbt": "{CustomModelData:421950}"
+    },
+    "title": "Macabre Monger",
+    "description": "Trade with a Wandering Trader for a player head.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "foxcraft_dungeon_loot:root",
+  "criteria": {
+    "trade_for_item": {
+      "trigger": "minecraft:villager_trade",
+      "conditions": {
+        "villager": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:wandering_trader"
+            }
+          }
+        ],
+        "item": {
+          "nbt": "{DungeonHead:1b}"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trade_for_item"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "foxcraft_dungeon_loot:loot/advancements/head_trade"
+    ]
+  }
+}
