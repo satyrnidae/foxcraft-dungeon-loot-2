@@ -1,11 +1,8 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot common/d10
-}
-
+# Occurs once per tick
 function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 67 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    execute as @a[predicate=foxcraft_dungeon_loot:items/d10/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
         playsound foxcraft_dungeon_loot:item.dice.d10 player @a
 
         macro random 1 10

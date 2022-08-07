@@ -6,6 +6,9 @@
     "foxcraft_dungeon_loot:items/common_grab_bag/on_tick",
     "foxcraft_dungeon_loot:items/d4/on_tick",
     "foxcraft_dungeon_loot:items/d6/on_tick",
-    "foxcraft_dungeon_loot:items/d8/on_tick"
+    "foxcraft_dungeon_loot:items/d8/on_tick",
+    "foxcraft_dungeon_loot:items/d10/on_tick",
+    "foxcraft_dungeon_loot:items/d12/on_tick",
+    "foxcraft_dungeon_loot:items/d20/on_tick"
   ]
 }
