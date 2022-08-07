@@ -11,8 +11,8 @@
     "minecraft:crossbow",
     "minecraft:egg",
     "minecraft:trident",
-    "minecraft:shield",
     "minecraft:splash_potion",
-    "minecraft:lingering_potion"
+    "minecraft:lingering_potion",
+    "#foxcraft_dungeon_loot:spawn_eggs"
   ]
 }

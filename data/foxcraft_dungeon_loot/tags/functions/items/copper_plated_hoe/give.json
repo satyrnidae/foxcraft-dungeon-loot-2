@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "foxcraft_dungeon_loot:items/copper_plated_hoe/give",
-    "foxcraft_dungeon_loot:items/copper_plated_hoe/give/iron",
-    "foxcraft_dungeon_loot:items/copper_plated_hoe/give/diamond",
-    "foxcraft_dungeon_loot:items/copper_plated_hoe/give/netherite"
-  ]
-}

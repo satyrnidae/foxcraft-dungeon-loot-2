@@ -1,16 +1,14 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/bringer_of_fear
-}
-
+# Occurs once when the datapack is loaded.
 function on_load {
     scoreboard objectives add satyrn.fdl.bringerOfFear.cooldown dummy
 }
 
+# Occurs once per tick.
 function on_tick {
-    # Execute the following if the sender has the Bringer of Fear equipped in their main hand
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 34 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    # Execute the following for all players attempting to use the Bringer of Fear
+    execute as @a[predicate=foxcraft_dungeon_loot:items/bringer_of_fear/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
         execute (if score @s satyrn.fdl.bringerOfFear.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
@@ -40,12 +38,19 @@ function on_tick {
         }
     }
 
-    execute if score @s satyrn.fdl.bringerOfFear.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
+    # Execute for all players with a cooldown score greater than one.
+    execute as @a[scores={satyrn.fdl.bringerOfFear.cooldown=1..}] as @s run scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
 
-    execute if score @s satyrn.fdl.bringerOfFear.cooldown matches 24000.. run {
+    # Execute for all players with a cooldown score greater than 24k ticks.
+    execute as @a[scores={satryn.fdl.bringerOfFear.coooldown=24000..}] as @s run {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"Bringer of Fear is ready to be used once more.","color":"dark_purple"}
         scoreboard players reset @s satyrn.fdl.bringerOfFear.cooldown
     }
+}
+
+# Occurs once when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.bringerOfFear.cooldown
 }

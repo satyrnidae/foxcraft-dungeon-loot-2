@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "foxcraft_dungeon_loot:items/copper_plated_pickaxe/give",
-    "foxcraft_dungeon_loot:items/copper_plated_pickaxe/give/iron",
-    "foxcraft_dungeon_loot:items/copper_plated_pickaxe/give/diamond",
-    "foxcraft_dungeon_loot:items/copper_plated_pickaxe/give/netherite"
-  ]
-}

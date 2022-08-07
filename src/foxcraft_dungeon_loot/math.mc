@@ -4,6 +4,11 @@ function on_load {
     scoreboard objectives add satyrn.fdl.math.input2 dummy
 }
 
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.math.input1
+    scoreboard objectives remove satyrn.fdl.math.input2
+}
+
 function random {
     # Convert lower and upper bounds to lower bounds and a range
     scoreboard players operation @s satyrn.fdl.math.input2 -= @s satyrn.fdl.math.input1

@@ -2,6 +2,9 @@
   "__comment": "Functions that should fire exactly once per tick.",
   "replace": false,
   "values": [
-    "foxcraft_dungeon_loot:trades/on_tick"
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick",
+    "foxcraft_dungeon_loot:items/common_grab_bag/on_tick",
+    "foxcraft_dungeon_loot:items/d4/on_tick",
+    "foxcraft_dungeon_loot:items/d6/on_tick"
   ]
 }
