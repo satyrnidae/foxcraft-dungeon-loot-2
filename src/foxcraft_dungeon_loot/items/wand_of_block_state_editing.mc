@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the user a copy of the item.
-function give {
-    macro give_as_loot epic/wand_of_block_state_editing
-}
-
 # Updates the item on tick.
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.mainHand matches 57) {

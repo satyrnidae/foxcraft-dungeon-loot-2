@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot epic/silverfish_escape_artist
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.silverfishEscapeArtist.cooldown dummy
 }

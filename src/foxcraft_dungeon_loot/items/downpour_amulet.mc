@@ -1,19 +1,13 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the Downpour Amulet item.
-function give {
-    macro give_as_loot mythic/downpour_amulet
-}
-
 # Initializes the Downpour Amulet's cooldown scoreboard.
 function on_load {
     scoreboard objectives add satyrn.fdl.downpourAmulet.cooldown dummy
 }
 
-# Handles events for the item. Executes every tick. Be extra mindful of NBT scans!
-# Executed in the context and at the location of a single player.
+# Runs once per tick.
 function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 37 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    execute as @a[predicate=foxcraft_dungeon_loot:items/downpour_amulet/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
         execute (if score @s satyrn.fdl.downpourAmulet.cooldown matches 1..) {
             # Warn the player that the item cooldown is currently active.
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
@@ -50,14 +44,20 @@ function on_tick {
             }
         }
     }
+
     # Increment cooldown timer
-    execute if score @s satyrn.fdl.downpourAmulet matches 1.. run scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 100
+    execute as @a[scores={satyrn.fdl.downpourAmulet.cooldown=1..}] run scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 100
 
     # Reset cooldown after 5 minutes
-    execute if score @s satyrn.fdl.downpourAmulet.cooldown matches 6000.. run {
+    execute as @a[scores={satyrn.fdl.downpourAmulet.cooldown=6000..}] at @s run {
         playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
         particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
         title @s actionbar {"text":"The Downpour Amulet is ready to be used once more.","color":"dark_purple"}
         scoreboard players reset @s satyrn.fdl.downpourAmulet.cooldown
     }
+}
+
+# Runs when the datapack is uninstalled using the uninstall function.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.downpourAmulet.cooldown
 }

@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the user a copy of the item.
-function give {
-    macro give_as_loot rare/gift_of_sheep_island
-}
-
 # Updates the item every tick.
 function on_tick {
     execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 44 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {

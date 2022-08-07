@@ -1,11 +1,6 @@
-import ../../macros.mcm
-
-function give {
-    macro give_as_loot common_grab_bag
-}
-
-function on_tick {
-    execute as @a[predicate=foxcraft_dungeon_loot:items/common_grab_bag/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
+# Occurs on ticks where a player used a warped fungus item.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/common_grab_bag/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.grab_bag.open player @a
 
         execute unless entity @s[gamemode=creative] run {

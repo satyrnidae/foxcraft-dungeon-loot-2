@@ -5,10 +5,6 @@ function clock_60s {
     execute as @r if entity @s[predicate=foxcraft_dungeon_loot:items/wing_of_ouet_zala/in_inventory] run effect give @s minecraft:levitation 5 0 true
 }
 
-function give {
-    macro give_as_loot mythic/wing_of_ouet_zala
-}
-
 function on_load {
     schedule function foxcraft_dungeon_loot:items/wing_of_ouet_zala/clock_60s 7t
 }

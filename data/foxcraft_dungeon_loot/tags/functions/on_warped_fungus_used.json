@@ -1,0 +1,9 @@
+{
+  "__comments": "These functions are called on ticks where a player has used a warped fungus on a stick. Commands are executed per player, at the player's current position.",
+  "values": [
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:items/common_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:items/d4/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:items/d6/on_warped_fungus_used"
+  ]
+}

@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the item, obtained through a loot table
-function give {
-    macro give_as_loot mythic/x_no_evil
-}
-
 # Relevant Entity Tags:
 # satyrn.fdl.xNoEvil.heldItem - A player that is holding the X No Evil item
 # satyrn.fdl.xNoEvil.projectile - The snowball thrown by a player who used X No Evil

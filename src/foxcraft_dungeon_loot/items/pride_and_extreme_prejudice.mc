@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the item.
-function give {
-    macro give_as_loot mythic/pride_and_extreme_prejudice
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.prideAndExtremePrejudice.cooldown dummy
 }

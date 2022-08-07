@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the item.
-function give {
-    macro give_as_loot mythic/talking_stick
-}
-
 # Occurs once per player per tick
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.offHand matches 53) {

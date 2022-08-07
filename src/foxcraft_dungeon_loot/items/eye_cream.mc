@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the item.
-function give {
-    macro give_as_loot rare/eye_cream
-}
-
 # Handles the item updates each tick. Executed in the context of a single player.
 function on_tick {
     execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 42 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {

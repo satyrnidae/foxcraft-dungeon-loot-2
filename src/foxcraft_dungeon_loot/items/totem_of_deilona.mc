@@ -14,12 +14,6 @@ function clock_2s {
     }
 }
 
-
-# Gives the sender a copy of the Totem of Deilona
-function give {
-    macro give_as_loot mythic/totem_of_deilona
-}
-
 # Schedules the clock function with an offset of 13 ticks.
 function on_load {
     schedule function foxcraft_dungeon_loot:items/totem_of_deilona/clock_2s 3t

@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/evokers_tome
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.evokersTome.cooldown dummy
     scoreboard objectives add satyrn.fdl.evokersTome.spawnerLife dummy

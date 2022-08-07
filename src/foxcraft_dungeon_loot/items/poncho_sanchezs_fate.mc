@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/poncho_sanchezs_fate
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.ponchoSanchezsFate.cooldown dummy
 }

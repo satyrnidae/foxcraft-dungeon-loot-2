@@ -16,10 +16,6 @@ function clock_2s {
     }
 }
 
-function give {
-    macro give_as_loot mythic/totem_of_mysteria
-}
-
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.offHand matches 56) {
         execute unless entity @s[predicate=foxcraft_dungeon_loot:items/totem_of_mysteria/has_effects] run {

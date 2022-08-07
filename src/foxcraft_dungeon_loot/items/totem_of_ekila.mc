@@ -1,10 +1,5 @@
 import ../../macros.mcm
 
-# Gives the player the totem
-function give {
-    macro give_as_loot mythic/totem_of_ekila
-}
-
 # Occurs once per player per tick
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.offHand matches 19) {

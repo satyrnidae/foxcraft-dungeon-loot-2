@@ -1,8 +1,8 @@
 import ../../macros.mcm
 
-# Occurs once per tick
-function on_tick {
-    execute as @a[predicate=foxcraft_dungeon_loot:items/d4/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
+# Runs on ticks where a player has used a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/d4/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d4 player @a
 
         macro random 1 4

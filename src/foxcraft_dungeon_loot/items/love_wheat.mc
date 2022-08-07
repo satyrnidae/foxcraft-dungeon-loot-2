@@ -13,10 +13,6 @@ function clock_3s {
     }
 }
 
-function give {
-    macro give_as_loot epic/love_wheat
-}
-
 function on_load {
     schedule function foxcraft_dungeon_loot:items/love_wheat/clock_3s 9t
 }

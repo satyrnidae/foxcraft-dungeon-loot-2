@@ -1,16 +1,5 @@
 import ../../macros.mcm
 
-# Gives the sender a copy of the item, obtained via a loot table.
-function give {
-    macro give_as_loot epic/torenhias_fist
-}
-
-# Creates scoreboards for the item
-function on_load {
-    scoreboard objectives add satyrn.fdl.torenhiasFist.cooldown dummy
-    scoreboard objectives add satyrn.fdl.torenhiasFist.particle dummy
-}
-
 # Relevant Entity Tags:
 # satyrn.fdl.torenhiasFist.heldItem - A player that was holding Tor'Enhia's Fist
 # satyrn.fdl.torenhiasFist.projectile - The snowball projectile

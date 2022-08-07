@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/war_hogs_insatiable_hunger
-}
-
 # Occurs once per player per tick
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.chestplate matches 59) {

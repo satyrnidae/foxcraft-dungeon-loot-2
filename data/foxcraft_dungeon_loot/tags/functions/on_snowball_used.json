@@ -1,0 +1,4 @@
+{
+  "__comments": "These functions are called on ticks when a player has used a snowball item. Commands are executed per player, at the player's current position.",
+  "values": [ ]
+}

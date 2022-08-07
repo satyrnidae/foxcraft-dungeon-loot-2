@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot rare/ima_leaf
-}
-
 function on_tick {
     # Execute the following if the sender has Deilona's Holy Blessings equipped in their main hand
     execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 77 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {

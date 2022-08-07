@@ -1,5 +1,3 @@
-import ../../macros.mcm
-
 # Occurs once every ten ticks
 function clock_10t {
     # Schedule the function to run again in 10 ticks.

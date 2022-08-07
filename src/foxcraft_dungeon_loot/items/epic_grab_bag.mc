@@ -1,11 +1,8 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot epic_grab_bag
-}
-
+# Occurs once per tick
 function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 73 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    execute as @a[predicate=foxcraft_dungeon_loot:items/epic_grab_bag/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
         playsound foxcraft_dungeon_loot:item.grab_bag.open player @a
 
         execute unless entity @s[gamemode=creative] run {

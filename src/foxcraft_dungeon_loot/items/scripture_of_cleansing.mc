@@ -10,11 +10,6 @@ function clock_10t {
     }
 }
 
-# Gives a copy of the item to the sender.
-function give {
-    macro give_as_loot mythic/scripture_of_cleansing
-}
-
 # Starts the clock function with a 2 tick offset and creates the cooldown timer
 function on_load {
     schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 2t

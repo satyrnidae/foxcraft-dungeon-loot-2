@@ -1,5 +1,3 @@
-import ../../macros.mcm
-
 # A clock function that runs once every 10 seconds.
 function clock_10s {
     schedule function foxcraft_dungeon_loot:items/constantines_gift/clock_10s 10s

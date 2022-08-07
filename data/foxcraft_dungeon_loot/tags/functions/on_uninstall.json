@@ -2,6 +2,8 @@
   "__comment": "Functions that should be run when the plugin is uninstalled, to clean up scoreboards.",
   "values": [
     "foxcraft_dungeon_loot:math/on_uninstall",
-    "foxcraft_dungeon_loot:items/bringer_of_fear/on_uninstall"
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_uninstall",
+    "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_uninstall",
+    "foxcraft_dungeon_loot:items/downpour_amulet/on_uninstall"
   ]
 }

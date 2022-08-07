@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/totem_of_gnumoch
-}
-
 function on_tick {
     execute (if score @s satyrn.fdl.itemId.offHand matches 20 if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground] if score @s satyrn.fdl.custom.sneakTime matches 1..) {
         execute unless entity @s[tag=satyrn.fdl.totemOfGnumoch.healthApplied] run {

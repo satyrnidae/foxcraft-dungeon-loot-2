@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot epic/spell_scroll_hail_of_arrows
-}
-
 # TAGS
 # Holding Spell Scroll Hail of Arrows:      satyrn.fdl.holdingSC_HOA
 # Snowball entity representing the scroll:  satyrn.fdl.SC_HOA

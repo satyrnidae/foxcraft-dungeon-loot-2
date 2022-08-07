@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot mythic/how_about_no
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.howAboutNo.cooldown dummy
 }

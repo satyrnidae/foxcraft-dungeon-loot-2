@@ -1,9 +1,5 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot rare/feather_of_quet_zala
-}
-
 function on_load {
     scoreboard objectives add satyrn.fdl.featherOfQuetZala.cooldown dummy
 }
