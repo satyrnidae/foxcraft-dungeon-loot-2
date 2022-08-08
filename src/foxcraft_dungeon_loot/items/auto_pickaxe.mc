@@ -1,14 +1,15 @@
+# TAGS USED
+# satyrn.fdl.autoPickaxe.effectsApplied - Refers to a player who has had the effects of the auto pickaxe applied to them.
+
 # Occurs once every ten ticks
 function clock_10t {
     # Schedule the function to run again in 10 ticks.
     schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock_10t 10t
 
     # Execute for every player holding the pickaxe in their main hand.
-    execute as @a[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/in_main_hand] at @s run {
-        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/has_effects] run {
-            effect give @s minecraft:haste 1000000 1 true
-            tag @s add satyrn.fdl.autoPickaxe.effectsApplied
-        }
+    execute as @a[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/in_main_hand,predicate=!foxcraft_dungeon_loot:items/auto_pickaxe/has_effects] at @s run {
+        effect give @s minecraft:haste 1000000 1 true
+        tag @s add satyrn.fdl.autoPickaxe.effectsApplied
     }
 
     # Execute for every player not holding the pickaxe in their main hand, but tagged as having the pickaxe's effects.

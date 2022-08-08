@@ -8,14 +8,17 @@ function on_load {
 # Occurs once per tick.
 function on_tick {
     # Execute for all players with a cooldown score greater than one.
-    execute as @a[scores={satyrn.fdl.bringerOfFear.cooldown=1..}] run scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
+    execute as @a[scores={satyrn.fdl.bringerOfFear.cooldown=1..}] run {
 
-    # Execute for all players with a cooldown score greater than 24k ticks.
-    execute as @a[scores={satryn.fdl.bringerOfFear.coooldown=24000..}] at @s run {
-        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
-        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
-        title @s actionbar {"text":"Bringer of Fear is ready to be used once more.","color":"dark_purple"}
-        scoreboard players reset @s satyrn.fdl.bringerOfFear.cooldown
+        scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
+
+        # Execute for all players with a cooldown score greater than 24k ticks.
+        execute at @s[scores={satryn.fdl.bringerOfFear.coooldown=24000..}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"Bringer of Fear is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.bringerOfFear.cooldown
+        }
     }
 }
 
@@ -31,7 +34,7 @@ function on_warped_fungus_used {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Bringer of Fear is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
+            playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
 
             macro random 1 20
 

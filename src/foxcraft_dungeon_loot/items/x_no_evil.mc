@@ -7,11 +7,9 @@ import ../../macros.mcm
 # satyrn.fdl.xNoEvil.ownerId - The snowball passenger which saves the throwing player's UUID.
 # satyrn.fdl.xNoEvil.areaOfEffect - The area of effect cloud created by the projectile.
 
-# Occurs once per player per tick.
-function on_tick {
-
+function on_snowball_used {
     # Execute if a tagged player threw a snowball.
-    execute if score @s[tag=satyrn.fdl.xNoEvil.heldItem] satyrn.fdl.used.snowball matches 1.. run {
+    execute if entity @s[tag=satyrn.fdl.xNoEvil.heldItem] run {
         # Execute the following as the nearest snowball, presumably the one thrown by the player.
         execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
             # Tag the snowball as the projectile.
@@ -23,15 +21,18 @@ function on_tick {
             data modify entity @e[tag=satyrn.fdl.xNoEvil.ownerId,limit=1,sort=nearest] Owner set from entity @s Owner
         }
     }
+}
 
+# Occurs once per player per tick.
+function on_tick {
     # A tag is added to the player while they are holding X No Evil and is cleared from any player not holding X No Evil.
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 79) {
-        tag @s add satyrn.fdl.xNoEvil.heldItem
-    } else execute (if score @s[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball] satyrn.fdl.itemId.offHand matches 79) {
-        tag @s add satyrn.fdl.xNoEvil.heldItem
-    } else {
-        tag @s remove satyrn.fdl.xNoEvil.heldItem
-    }
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_main_hand,predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_off_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
+
+    execute as @a[predicate=foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_main_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
+
+    execute as @a[predicate=foxcraft_dungeon_loot:items/x_no_evil/in_main_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
+
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:items/x_no_evil/in_off_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
 
     execute as @e[tag=satyrn.fdl.xNoEvil.projectileTracker] at @s run {
         # If the projectile tracker is near a projectile, set its motion from that projectile.

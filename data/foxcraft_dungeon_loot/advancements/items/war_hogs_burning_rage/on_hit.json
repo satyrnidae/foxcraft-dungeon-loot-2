@@ -1,0 +1,28 @@
+{
+  "parent": "foxcraft_dungeon_loot:items/root",
+  "criteria": {
+    "player_hurt_by_entity": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "damage": {
+          "blocked": false,
+          "source_entity": {
+            "equipment": {
+              "mainhand": {
+                "nbt": "{DungeonLootId:28}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_hurt_by_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/on_hit"
+  }
+}

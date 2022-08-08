@@ -1,5 +1,8 @@
 import ../../macros.mcm
 
+# TAGS USED
+# satyrn.fdl.deilonasHolyBlessings.source - The player who is the source of a healing burst.
+
 # Runs once when the datapack is loaded or reloaded.
 function on_load {
     scoreboard objectives add satyrn.fdl.deilonasHolyBlessings.cooldown dummy
@@ -7,8 +10,28 @@ function on_load {
 
 # Runs once per tick
 function on_tick {
-    # Execute the following for every player attempting to use Deilona's Holy Blessings
-    execute as @a[predicate=foxcraft_dungeon_loot:items/deilonas_holy_blessings/in_main_hand,predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use,scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] at @s run {
+    # Increment the item's cooldown timer for all players on cooldown.
+    execute as @a[scores={satyrn.fdl.deilonasHolyBlessings.cooldown=1..}] run {
+        scoreboard players add @s satyrn.fdl.deilonasHolyBlessings.cooldown 1
+
+        # Reset the cooldown timer for all players whose cooldown has been incremented for 200 ticks.
+        execute at @s[scores={satyrn.fdl.deilonasHolyBlessings.cooldown=200..}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"Deilona's Holy Blessings is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.deilonasHolyBlessings.cooldown
+        }
+    }
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.deilonasHolyBlessings.cooldown
+}
+
+# Runs on ticks where a player is attempting to use a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/deilonas_holy_blessings/in_main_hand] run {
         execute (if score @s satyrn.fdl.deilonasHolyBlessings.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple"}
@@ -34,20 +57,4 @@ function on_tick {
             }
         }
     }
-
-    # Increment the item's cooldown timer for all players on cooldown.
-    execute as @a[scores={satyrn.fdl.deilonasHolyBlessings.cooldown=1..}] run scoreboard players add @s satyrn.fdl.deilonasHolyBlessings.cooldown 1
-
-    # Reset the cooldown timer for all players whose cooldown has been incremented for 200 ticks.
-    execute as @a[scores={satyrn.fdl.deilonasHolyBlessings.cooldown=200..}] at @s run {
-        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
-        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
-        title @s actionbar {"text":"Deilona's Holy Blessings is ready to be used once more.","color":"dark_purple"}
-        scoreboard players reset @s satyrn.fdl.deilonasHolyBlessings.cooldown
-    }
-}
-
-# Runs when the datapack is uninstalled.
-function on_uninstall {
-    scoreboard objectives remove satyrn.fdl.deilonasHolyBlessings.cooldown
 }

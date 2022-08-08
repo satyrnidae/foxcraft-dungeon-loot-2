@@ -1,10 +1,11 @@
-import ../../macros.mcm
+# Runs once every four ticks, or five times per second.
+function clock_4t {
+    schedule function foxcraft_dungeon_loot:items/totem_of_gnumoch/clock_4t 4t
 
-function on_tick {
-    execute (if score @s satyrn.fdl.itemId.offHand matches 20 if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground] if score @s satyrn.fdl.custom.sneakTime matches 1..) {
+    execute as @a[predicate=foxcraft_dungeon_loot:items/totem_of_gnumoch/should_apply_effects] run {
         execute unless entity @s[tag=satyrn.fdl.totemOfGnumoch.healthApplied] run {
-            effect give @s minecraft:absorption 1000000 2 true
-            effect give @s minecraft:health_boost 1000000 1 true
+            effect give @s minecraft:absorption 1000000 1 true
+            effect give @s minecraft:health_boost 1000000 2 true
             tag @s add satyrn.fdl.totemOfGnumoch.healthApplied
         }
         execute unless entity @s[predicate=foxcraft_dungeon_loot:items/totem_of_gnumoch/has_effects] run {
@@ -12,7 +13,9 @@ function on_tick {
             effect give @s minecraft:slowness 1000000 1
             tag @s add satyrn.fdl.totemOfGnumoch.effectsApplied
         }
-    } else {
+    }
+
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/totem_of_gnumoch/should_apply_effects] run {
         execute if entity @s[tag=satyrn.fdl.totemOfGnumoch.healthApplied] run {
             effect clear @s minecraft:absorption
             effect clear @s minecraft:health_boost
@@ -24,4 +27,9 @@ function on_tick {
             tag @s remove satyrn.fdl.totemOfGnumoch.effectsApplied
         }
     }
+}
+
+# Runs when the datapack is loaded.
+function on_load {
+    schedule function foxcraft_dungeon_loot:items/totem_of_gnumoch/clock_4t 4t
 }

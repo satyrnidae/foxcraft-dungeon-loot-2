@@ -35,11 +35,8 @@ function random {
     scoreboard players remove @s satyrn.fdl.math.input2 1
 
     !IF(config.dev) {
-        tellraw @a ["", {"text":"Result: ","color":"gray","italic":true},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"@s","objective":"satyrn.fdl.math.input2"},"color":"gray","italic":true}]
+        tellraw @a ["", {"text":"Result: ","color":"gray","italic":true},{"score":{"name":"@s","objective":"satyrn.fdl.math.input1"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"@s","objective":"satyrn.fdl.math.input2"},"color":"gray","italic":true}]
     }
-
-    # Reset RNG scoreboard
-    scoreboard players reset @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1] satyrn.fdl.math.input1
 
     # Kill the markers
     kill @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1]

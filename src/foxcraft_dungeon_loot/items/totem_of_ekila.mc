@@ -1,9 +1,10 @@
 import ../../macros.mcm
 
-# Occurs once per player per tick
-function on_tick {
-    execute (if score @s satyrn.fdl.itemId.offHand matches 19) {
-        execute (if entity @s[predicate=foxcraft_dungeon_loot:is_flying]) {
+# Occurs every four ticks
+function clock_4t {
+    schedule function foxcraft_dungeon_loot:items/totem_of_ekila/clock_4t 4t
+    execute as @a[predicate=foxcraft_dungeon_loot:items/totem_of_ekila/in_off_hand] run {
+         execute (if entity @s[predicate=foxcraft_dungeon_loot:is_flying]) {
             # Apply absorption once
             execute unless entity @s[tag=satyrn.fdl.totemOfEkila.healthApplied] run {
                 effect give @s minecraft:absorption 1000000 1 true
@@ -36,7 +37,8 @@ function on_tick {
                 tag @s add satyrn.fdl.totemOfEkila.groundedApplied
             }
         }
-    } else {
+    }
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/totem_of_ekila/in_off_hand] run {
         execute if entity @s[tag=satyrn.fdl.totemOfEkila.healthApplied] run {
             effect clear @s minecraft:absorption
             effect clear @s minecraft:health_boost
@@ -52,4 +54,9 @@ function on_tick {
             tag @s remove satyrn.fdl.totemOfEkila.flyingApplied
         }
     }
+}
+
+# Runs on load
+function on_load {
+    schedule function foxcraft_dungeon_loot:items/totem_of_ekila/clock_4t 3t
 }

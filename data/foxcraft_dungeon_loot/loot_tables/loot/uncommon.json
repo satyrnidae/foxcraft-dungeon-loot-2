@@ -161,7 +161,7 @@
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/saturniidae_head"
+          "name": "foxcraft_dungeon_loot:loot/heads/satyrnidae_head"
         },
         {
           "weight": 2,

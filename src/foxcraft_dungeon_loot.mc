@@ -3,11 +3,10 @@ function load {
     scoreboard objectives add <%config.internalScoreboard%> dummy
     execute unless score version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run function foxcraft_dungeon_loot:update_scoreboards
 
-    scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick
-    scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball
-    scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
+    scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick "Player used warped fungus"
+    scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball "Player used snowball"
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
-    scoreboard objectives add satyrn.fdl.const dummy
+    scoreboard objectives add satyrn.fdl.const dummy "Constants"
 
     scoreboard players reset * satyrn.fdl.loot.variant
     scoreboard players set 5 satyrn.fdl.const 5
@@ -22,8 +21,6 @@ function load {
 }
 
 function tick {
-    execute as @a at @s run execute store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
-
     !IF(config.dev) {
         # For dev, reenable the loot variant trigger
         scoreboard players enable @a satyrn.fdl.loot.variant
@@ -32,9 +29,8 @@ function tick {
     function #foxcraft_dungeon_loot:on_tick
 
     # Reset statistics scoreboards
-    execute as @a unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0
-    execute as @a unless score @s satyrn.fdl.used.warpedFungusOnAStick matches 0 run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
-    execute as @a unless score @s satyrn.fdl.used.snowball matches 0 run scoreboard players set @s satyrn.fdl.used.snowball 0
+    execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
+    execute as @a[scores={satyrn.fdl.used.snowball=1..}] run scoreboard players set @s satyrn.fdl.used.snowball 0
 }
 
 function uninstall {
@@ -42,7 +38,6 @@ function uninstall {
 
     scoreboard objectives remove satyrn.fdl.used.warpedFungusOnAStick
     scoreboard objectives remove satyrn.fdl.used.snowball
-    scoreboard objectives remove satyrn.fdl.custom.fallOneCm
     scoreboard objectives remove satyrn.fdl.loot.variant
     scoreboard objectives remove satyrn.fdl.const
 
@@ -68,7 +63,7 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.itemId.chestplate
     scoreboard objectives remove satyrn.fdl.itemId.helmet
     scoreboard objectives remove satyrn.fdl.custom.sneakTime
-
+    scoreboard objectives remove satyrn.fdl.custom.fallOneCm
 
     scoreboard players set version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
 }

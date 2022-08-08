@@ -1,8 +1,20 @@
 {
   "__comment": "Functions that should fire exactly once per tick.",
-  "replace": false,
   "values": [
-    "foxcraft_dungeon_loot:items/on_tick",
-    "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick"
+    "foxcraft_dungeon_loot:events/on_tick",
+    "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick",
+    "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_tick",
+    "foxcraft_dungeon_loot:items/downpour_amulet/on_tick",
+    "foxcraft_dungeon_loot:items/evokers_tome/on_tick",
+    "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_tick",
+    "foxcraft_dungeon_loot:items/hammer_of_sol/on_tick",
+    "foxcraft_dungeon_loot:items/how_about_no/on_tick",
+    "foxcraft_dungeon_loot:items/poncho_sanchezs_fate/on_tick",
+    "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_tick",
+    "foxcraft_dungeon_loot:items/scripture_of_cleansing/on_tick",
+    "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_tick",
+    "foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/on_tick",
+    "foxcraft_dungeon_loot:items/torenhias_fist/on_tick",
+    "foxcraft_dungeon_loot:items/x_no_evil/on_tick"
   ]
 }

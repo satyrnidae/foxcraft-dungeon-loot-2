@@ -114,13 +114,14 @@
       {
         "function": "minecraft:set_enchantments",
         "enchantments": {
-            "minecraft:knockback": 2
+            "minecraft:knockback": 2,
+            "minecraft:fire_aspect": 1
         },
         "add": true
       },
       {
         "function": "minecraft:set_nbt",
-        "tag": "{DungeonLootId:75,CustomModelData:421950,DungeonItem:1b}"
+        "tag": "{DungeonLootId:75,CustomModelData:421950,DungeonItem:1b,ProcessOnUsed:1b}"
       }
     ]
   }
