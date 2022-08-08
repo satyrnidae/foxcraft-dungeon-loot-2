@@ -11,7 +11,7 @@ function on_load {
 function on_tick {
     # Increment cooldown timer.
     execute as @a[scores={satyrn.fdl.evokersTome.cooldown=1..}] run {
-        execute at @s[predicate=foxcraft_dungeon_loot:items/evokers_tome/in_main_hand,scores={satryn.fdl.evokersTome.cooldown=1}] run {
+        execute at @s[predicate=foxcraft_dungeon_loot:items/evokers_tome/in_main_hand,scores={satyrn.fdl.evokersTome.cooldown=1}] run {
             summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 

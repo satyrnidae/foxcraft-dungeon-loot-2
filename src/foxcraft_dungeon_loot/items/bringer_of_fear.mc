@@ -13,7 +13,7 @@ function on_tick {
         scoreboard players add @s satyrn.fdl.bringerOfFear.cooldown 1
 
         # Execute for all players with a cooldown score greater than 24k ticks.
-        execute at @s[scores={satryn.fdl.bringerOfFear.coooldown=24000..}] run {
+        execute at @s[scores={satyrn.fdl.bringerOfFear.coooldown=24000..}] run {
             playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
             particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
             title @s actionbar {"text":"Bringer of Fear is ready to be used once more.","color":"dark_purple"}
