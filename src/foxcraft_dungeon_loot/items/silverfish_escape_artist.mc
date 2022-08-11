@@ -1,15 +1,30 @@
-import ../../macros.mcm
-
-function give {
-    macro give_as_loot epic/silverfish_escape_artist
-}
-
+# Runs when the datapack is loaded
 function on_load {
     scoreboard objectives add satyrn.fdl.silverfishEscapeArtist.cooldown dummy
 }
 
+# Runs once per tick
 function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 63 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    execute as @a[scores={satyrn.fdl.silverfishEscapeArtist.cooldown=1..}] run {
+        scoreboard players add @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
+
+        execute at @s[scores={satyrn.fdl.silverfishEscapeArtist.cooldown=600..}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"Silverfish Escape Artist is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.silverfishEscapeArtist.cooldown
+        }
+    }
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.silverfishEscapeArtist.cooldown
+}
+
+# Runs when a player uses a warped fungus on a stick
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/silverfish_escape_artist/in_main_hand] run {
         execute (if score @s satyrn.fdl.silverfishEscapeArtist.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"Silverfish Escape Artist is on cooldown and cannot be used.","color":"dark_purple"}
@@ -39,13 +54,5 @@ function on_tick {
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
             }
         }
-    }
-
-    execute if score @s satyrn.fdl.silverfishEscapeArtist.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
-
-    execute if score @s satyrn.fdl.silverfishEscapeArtist.cooldown matches 600.. run {
-        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
-        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
-        title @s actionbar {"text":"Silverfish Escape Artist is ready to be used once more.","color":"dark_purple"}
     }
 }

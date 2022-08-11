@@ -1,17 +1,14 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot epic/heros_amulet
-}
-
-function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 45 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+# Executed on ticks where a player used a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/heros_amulet/in_main_hand] run {
         macro random 1 20
 
         execute (if score #random <%config.internalScoreboard%> matches 1) {
             # Crit fail. Player gets a bad omen.
             title @s actionbar {"text":"You are no hero.","color":"dark_purple"}
-            playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 6.25
+            playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
             effect give @s minecraft:bad_omen 24000 0 false
         } else execute (if score #random <%config.internalScoreboard%> matches ..9) {
             # Fail. Player gets a vex summoned at their location.

@@ -1,19 +1,19 @@
-import ../../macros.mcm
+# Occurs once every ten ticks
+function clock_10t {
+    schedule function foxcraft_dungeon_loot:items/war_hogs_seething_hatred/clock_10t 10t
 
-# Gives the sender a copy of the item
-function give {
-    macro give_as_loot mythic/war_hogs_seething_hatred
-}
-
-# Occurs once per player per tick
-function on_tick {
-    execute (if score @s satyrn.fdl.itemId.leggings matches 60) {
-        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/war_hogs_seething_hatred/has_effects] run {
-            effect give @s minecraft:fire_resistance 1000000
-            tag @s add satyrn.fdl.warHogsSeethingHatred.effectsApplied
-        }
-    } else execute (if entity @s[tag=satyrn.fdl.warHogsSeethingHatred.effectsApplied]) {
+    execute as @a[tag=satyrn.fdl.warHogsSeethingHatred.effectsApplied,predicate=!foxcraft_dungeon_loot:items/war_hogs_seething_hatred/worn] run {
         effect clear @s minecraft:fire_resistance
         tag @s remove satyrn.fdl.warHogsSeethingHatred.effectsApplied
     }
+
+    execute as @a[predicate=foxcraft_dungeon_loot:items/war_hogs_seething_hatred/worn,predicate=!foxcraft_dungeon_loot:items/war_hogs_seething_hatred/has_effects] run {
+        effect give @s minecraft:fire_resistance 1000000
+            tag @s add satyrn.fdl.warHogsSeethingHatred.effectsApplied
+    }
+}
+
+# Runs when the datapack is loaded.
+function on_load {
+    schedule function foxcraft_dungeon_loot:items/war_hogs_seething_hatred/clock_10t 3t
 }

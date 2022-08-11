@@ -1,49 +1,24 @@
-import ../../macros.mcm
+###
 
-# Gives the sender a copy of the item, obtained via a loot table.
-function give {
-    macro give_as_loot epic/torenhias_fist
-}
+TAGS USED
 
-# Creates scoreboards for the item
-function on_load {
-    scoreboard objectives add satyrn.fdl.torenhiasFist.cooldown dummy
-    scoreboard objectives add satyrn.fdl.torenhiasFist.particle dummy
-}
+satyrn.fdl.torenhiasFist.heldItem - A player that was holding Tor'Enhia's Fist
+satyrn.fdl.torenhiasFist.projectile - The snowball projectile
+satyrn.fdl.torenhiasFist.projectileTracker - The armor stand tracking the projectile
+satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawning lighting
 
-# Relevant Entity Tags:
-# satyrn.fdl.torenhiasFist.heldItem - A player that was holding Tor'Enhia's Fist
-# satyrn.fdl.torenhiasFist.projectile - The snowball projectile
-# satyrn.fdl.torenhiasFist.projectileTracker - The armor stand tracking the projectile
-# satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawning lighting
+###
 
-# Occurs once per player per tick.
+# Occurs once per tick.
 function on_tick {
-    # Execute if a player who was holding Tor'Enhia's Fist threw the item from their main hand.
-    execute if score @s[tag=satyrn.fdl.torenhiasFist.heldItem] satyrn.fdl.used.snowball matches 1.. run {
-        execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
-            # Tag the snowball as the projectile.
-            tag @s add satyrn.fdl.torenhiasFist.projectile
-
-            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.torenhiasFist.projectileTracker]}
-            data modify entity @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,limit=1,sort=nearest] Motion set from entity @s Motion
-        }
-    }
-
-    # Execute if a player who was holding Tor'Enhia's Fist threw the item from their off hand.
-    # Need to make sure they aren't tagged for a main-hand snowball item from ANY OTHER DUNGEON LOOT ITEM
-    # which is executed AFTER this one in the on-tick tag.
-
-
-
     # Add a tag to players holding Tor'Enhia's Fist, and remove the tag from players who aren't.
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 80) {
-        tag @s add satyrn.fdl.torenhiasFist.heldItem
-    } else execute (if score @s[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball] satyrn.fdl.itemId.offHand matches 80) {
-        tag @s add satyrn.fdl.torenhiasFist.heldItem
-    } else {
-        tag @s remove satyrn.fdl.torenhiasFist.heldItem
-    }
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/torenhias_fist/in_main_hand,predicate=!foxcraft_dungeon_loot:items/torenhias_fist/in_off_hand] run tag @s remove satyrn.fdl.torenhiasFist.heldItem
+
+    execute as @a[predicate=foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:items/torenhias_fist/in_main_hand] run tag @s remove satyrn.fdl.torenhiasFist.heldItem
+
+    execute as @a[predicate=foxcraft_dungeon_loot:items/torenhias_fist/in_main_hand] run tag @s add satyrn.fdl.torenhiasFist.heldItem
+
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:items/torenhias_fist/in_off_hand] run tag @s add satyrn.fdl.torenhiasFist.heldItem
 
     # Update the projectile tracker
     execute as @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,type=#foxcraft_dungeon_loot:markers] at @s run {
@@ -82,6 +57,20 @@ function on_tick {
             playsound foxcraft_dungeon_loot:item.torenhias_fist.thunder player @a ~ ~ ~ 4.0
             # Clean up lightning spawner
             kill @s
+        }
+    }
+}
+
+# Runs when a player uses a snowball.
+function on_snowball_used {
+    # Execute if a player who was holding Tor'Enhia's Fist threw the item from their main hand.
+    execute if entity @s[tag=satyrn.fdl.torenhiasFist.heldItem] run {
+        execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
+            # Tag the snowball as the projectile.
+            tag @s add satyrn.fdl.torenhiasFist.projectile
+
+            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.torenhiasFist.projectileTracker]}
+            data modify entity @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,limit=1,sort=nearest] Motion set from entity @s Motion
         }
     }
 }

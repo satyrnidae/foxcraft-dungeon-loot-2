@@ -13,7 +13,7 @@
   "functions": [
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:73,CustomModelData:4219524,GrabBag:1b}"
+      "tag": "{DungeonLootId:73,CustomModelData:4219524,GrabBag:1b,ProcessOnUsed:1b}"
     },
     {
       "function": "minecraft:set_name",

@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "foxcraft_dungeon_loot:items/auto_pickaxe/give",
-    "foxcraft_dungeon_loot:items/auto_pickaxe/give/diamond",
-    "foxcraft_dungeon_loot:items/auto_pickaxe/give/netherite"
-  ]
-}

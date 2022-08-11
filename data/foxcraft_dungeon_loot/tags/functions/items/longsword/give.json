@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "foxcraft_dungeon_loot:items/longsword/give",
-    "foxcraft_dungeon_loot:items/longsword/give/diamond",
-    "foxcraft_dungeon_loot:items/longsword/give/netherite"
-  ]
-}

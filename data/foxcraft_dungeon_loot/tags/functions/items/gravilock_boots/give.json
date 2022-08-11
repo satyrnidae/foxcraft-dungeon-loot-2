@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "foxcraft_dungeon_loot:items/gravilock_boots/give",
-    "foxcraft_dungeon_loot:items/gravilock_boots/give/diamond",
-    "foxcraft_dungeon_loot:items/gravilock_boots/give/netherite"
-  ]
-}

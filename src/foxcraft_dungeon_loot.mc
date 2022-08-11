@@ -3,24 +3,16 @@ function load {
     scoreboard objectives add <%config.internalScoreboard%> dummy
     execute unless score version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run function foxcraft_dungeon_loot:update_scoreboards
 
-    scoreboard objectives add satyrn.fdl.custom.sneakTime minecraft.custom:minecraft.sneak_time
-    scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick
-    scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball
-    scoreboard objectives add satyrn.fdl.custom.fallOneCm minecraft.custom:minecraft.fall_one_cm
-    scoreboard objectives add satyrn.fdl.itemId.mainHand dummy
-    scoreboard objectives add satyrn.fdl.itemId.offHand dummy
-    scoreboard objectives add satyrn.fdl.itemId.boots dummy
-    scoreboard objectives add satyrn.fdl.itemId.leggings dummy
-    scoreboard objectives add satyrn.fdl.itemId.chestplate dummy
-    scoreboard objectives add satyrn.fdl.itemId.helmet dummy
+    scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick "Player used warped fungus"
+    scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball "Player used snowball"
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
+    scoreboard objectives add satyrn.fdl.const dummy "Constants"
+
     scoreboard players reset * satyrn.fdl.loot.variant
+    scoreboard players set 5 satyrn.fdl.const 5
 
     # Reset item utility advancements for online players
     advancement revoke @a from foxcraft_dungeon_loot:items
-
-    scoreboard objectives add satyrn.fdl.const dummy
-    scoreboard players set 5 satyrn.fdl.const 5
 
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:on_load
@@ -29,38 +21,27 @@ function load {
 }
 
 function tick {
-    function #foxcraft_dungeon_loot:on_tick
-
-    execute as @a at @s run function foxcraft_dungeon_loot:player_tick
-}
-
-function player_tick {
-
-    # Select item IDs for each slot and update fall distance score
-    execute store result score @s satyrn.fdl.itemId.mainHand run data get entity @s SelectedItem.tag.DungeonLootId
-    execute store result score @s satyrn.fdl.itemId.offHand run data get entity @s Inventory[{Slot:-106b}].tag.DungeonLootId
-    execute store result score @s satyrn.fdl.itemId.boots run data get entity @s Inventory[{Slot:100b}].tag.DungeonLootId
-    execute store result score @s satyrn.fdl.itemId.leggings run data get entity @s Inventory[{Slot:101b}].tag.DungeonLootId
-    execute store result score @s satyrn.fdl.itemId.chestplate run data get entity @s Inventory[{Slot:102b}].tag.DungeonLootId
-    execute store result score @s satyrn.fdl.itemId.helmet run data get entity @s Inventory[{Slot:103b}].tag.DungeonLootId
-    execute store result score @s satyrn.fdl.custom.fallOneCm run data get entity @s FallDistance 100
-
     !IF(config.dev) {
         # For dev, reenable the loot variant trigger
-        scoreboard players enable @s satyrn.fdl.loot.variant
+        scoreboard players enable @a satyrn.fdl.loot.variant
     }
 
-    # Tick functions are executed with a player in context at the player's location.
-    function #foxcraft_dungeon_loot:on_player_tick
+    function #foxcraft_dungeon_loot:on_tick
 
     # Reset statistics scoreboards
-    execute unless score @s satyrn.fdl.custom.sneakTime matches 0 run scoreboard players set @s satyrn.fdl.custom.sneakTime 0
-    execute unless score @s satyrn.fdl.used.warpedFungusOnAStick matches 0 run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
-    execute unless score @s satyrn.fdl.used.snowball matches 0 run scoreboard players set @s satyrn.fdl.used.snowball 0
+    execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..}] run scoreboard players set @s satyrn.fdl.used.warpedFungusOnAStick 0
+    execute as @a[scores={satyrn.fdl.used.snowball=1..}] run scoreboard players set @s satyrn.fdl.used.snowball 0
 }
 
 function uninstall {
     tellraw @a {"text":"Uninstalling Foxcraft Dungeon Loot v<%config.version%>..."}
+
+    scoreboard objectives remove satyrn.fdl.used.warpedFungusOnAStick
+    scoreboard objectives remove satyrn.fdl.used.snowball
+    scoreboard objectives remove satyrn.fdl.loot.variant
+    scoreboard objectives remove satyrn.fdl.const
+
+    function #foxcraft_dungeon_loot:on_uninstall
 
     execute store success score #uninstall <%config.internalScoreboard%> run datapack disable "file/<%config.baseArchiveName%>-<%config.version%>.zip"
 
@@ -75,6 +56,14 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.loot.variant
     scoreboard objectives remove satyrn.fdl.custom.fallFlying
     scoreboard objectives remove satyrn.fdl.custom.onGround
+    scoreboard objectives remove satyrn.fdl.itemId.mainHand
+    scoreboard objectives remove satyrn.fdl.itemId.offHand
+    scoreboard objectives remove satyrn.fdl.itemId.boots
+    scoreboard objectives remove satyrn.fdl.itemId.leggings
+    scoreboard objectives remove satyrn.fdl.itemId.chestplate
+    scoreboard objectives remove satyrn.fdl.itemId.helmet
+    scoreboard objectives remove satyrn.fdl.custom.sneakTime
+    scoreboard objectives remove satyrn.fdl.custom.fallOneCm
 
     scoreboard players set version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
 }

@@ -1,11 +1,8 @@
 import ../../macros.mcm
 
-function give {
-    macro give_as_loot common/d10
-}
-
-function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 67 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+# Runs on ticks where a player has used a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/d10/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d10 player @a
 
         macro random 1 10

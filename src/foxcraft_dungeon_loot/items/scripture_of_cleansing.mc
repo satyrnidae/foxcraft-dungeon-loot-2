@@ -10,11 +10,6 @@ function clock_10t {
     }
 }
 
-# Gives a copy of the item to the sender.
-function give {
-    macro give_as_loot mythic/scripture_of_cleansing
-}
-
 # Starts the clock function with a 2 tick offset and creates the cooldown timer
 function on_load {
     schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 2t
@@ -23,7 +18,28 @@ function on_load {
 
 # Executes once per player per tick
 function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 51 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+    # Increment tick timer
+    execute as @a[scores={satyrn.fdl.scriptureOfCleansing.cooldown=1..}] run {
+        scoreboard players add @s satyrn.fdl.scriptureOfCleansing.cooldown 1
+
+        # Reset scoreboard after 30 seconds.
+        execute at @s[scores={satyrn.fdl.scriptureOfCleansing.cooldown=600..}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"The Scripture of Cleansing is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.scriptureOfCleansing.cooldown
+        }
+    }
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.scriptureOfCleansing.cooldown
+}
+
+# Runs when the player uses a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/scripture_of_cleansing/in_main_hand] run {
         execute (if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1..) {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"The Scripture of Cleansing is on cooldown and cannot be used.","color":"dark_purple"}
@@ -144,7 +160,7 @@ function on_tick {
             # Really banking on #test's value in the internal scoreboard being set to 1 or 0 at this point :)
             execute unless entity @s[gamemode=creative] run {
                 execute (if score #test <%config.internalScoreboard%> matches 1) {
-                    # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me :)))))
+                    # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me (:
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
                 } else {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
@@ -157,16 +173,5 @@ function on_tick {
                 title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 30 seconds.","color":"dark_purple"}
             }
         }
-    }
-
-    # Increment tick timer
-    execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1.. run scoreboard players add @s satyrn.fdl.scriptureOfCleansing.cooldown 1
-
-    # Reset scoreboard after 30 seconds.
-    execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 600.. run {
-        playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
-        particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
-        title @s actionbar {"text":"The Scripture of Cleansing is ready to be used once more.","color":"dark_purple"}
-        scoreboard players reset @s satyrn.fdl.scriptureOfCleansing.cooldown
     }
 }

@@ -1,0 +1,7 @@
+{
+  "__comment": "Events that are fired when a player falls more than 4 meters.",
+  "values": [
+    "foxcraft_dungeon_loot:items/quet_zalas_beloved/on_fall",
+    "foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/on_fall"
+  ]
+}

@@ -41,23 +41,52 @@
             "italic": false
           },
           {
-            "text": "Right-click to apply to your eyes.",
+            "text": "Rolls a D10. The roll determines",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "Has an 80% chance to apply Night Vision for",
+          "text": "the outcome:",
           "color": "gray",
           "italic": false
         },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "1-2: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Inflicts Blindness for 5 minutes.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "3-10: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Applies Night Vision for 20",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "for 20 minutes, or a 20% chance to apply",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Blindness for 5 minutes.",
+          "text": "   minutes.",
           "color": "gray",
           "italic": false
         },
@@ -84,7 +113,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:42,Unbreakable:1,CustomModelData:421957,HideFlags:5,DungeonItem:1b}"
+      "tag": "{DungeonLootId:42,Unbreakable:1,CustomModelData:421957,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]
 }

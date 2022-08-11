@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonHead:1b,SkullOwner:{Id:[I;-521584946,-778546826,-1686193592,838642649],Name:\"satyrnidae\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjE4MmNjZTgxODZlZjA3OWRmNmZlMGViOWY4MGJmYzM0NDJmMGI5OTE1YTY3YmQ1YjE1YTRlMWI2NzI4OGE3NiJ9fX0=\"}]}}}"
+    }
+  ]
+}

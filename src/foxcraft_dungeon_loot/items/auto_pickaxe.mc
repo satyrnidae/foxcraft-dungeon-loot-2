@@ -1,31 +1,25 @@
-import ../../macros.mcm
+# TAGS USED
+# satyrn.fdl.autoPickaxe.effectsApplied - Refers to a player who has had the effects of the auto pickaxe applied to them.
 
-# Gives a copy of the item to the sender.
-function give {
-    macro give_as_loot mythic/auto_pickaxe
-}
+# Occurs once every ten ticks
+function clock_10t {
+    # Schedule the function to run again in 10 ticks.
+    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock_10t 10t
 
-dir give {
-    # Gives a copy of this item to the sender. The item is upgraded to a diamond pickaxe.
-    function diamond {
-        macro give_as_variant_loot mythic/auto_pickaxe 1
+    # Execute for every player holding the pickaxe in their main hand.
+    execute as @a[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/in_main_hand,predicate=!foxcraft_dungeon_loot:items/auto_pickaxe/has_effects] at @s run {
+        effect give @s minecraft:haste 1000000 1 true
+        tag @s add satyrn.fdl.autoPickaxe.effectsApplied
     }
 
-    # Gives a copy of this item to the sender. The item is upgraded to a netherite pickaxe.
-    function netherite {
-        macro give_as_variant_loot mythic/auto_pickaxe 2
-    }
-}
-
-# Occurs each tick.
-function on_tick {
-    execute (if score @s satyrn.fdl.itemId.mainHand matches 32) {
-        execute unless entity @s[predicate=foxcraft_dungeon_loot:items/auto_pickaxe/has_effects] run {
-            effect give @s minecraft:haste 1000000 1 true
-            tag @s add satyrn.fdl.autoPickaxe.effectsApplied
-        }
-    } else execute (if entity @s[tag=satyrn.fdl.autoPickaxe.effectsApplied]) {
+    # Execute for every player not holding the pickaxe in their main hand, but tagged as having the pickaxe's effects.
+    execute as @a[predicate=!foxcraft_dungeon_loot:items/auto_pickaxe/in_main_hand,tag=satyrn.fdl.autoPickaxe.effectsApplied] at @s run {
         effect clear @s minecraft:haste
         tag @s remove satyrn.fdl.autoPickaxe.effectsApplied
     }
+}
+
+# Occurs once as the data pack is loaded.
+function on_load {
+    schedule function foxcraft_dungeon_loot:items/auto_pickaxe/clock_10t 1t
 }

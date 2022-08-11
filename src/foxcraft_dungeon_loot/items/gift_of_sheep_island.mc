@@ -1,13 +1,6 @@
-import ../../macros.mcm
-
-# Gives the user a copy of the item.
-function give {
-    macro give_as_loot rare/gift_of_sheep_island
-}
-
-# Updates the item every tick.
-function on_tick {
-    execute if score @s[predicate=!foxcraft_dungeon_loot:items/offhand_prevents_use] satyrn.fdl.itemId.mainHand matches 44 if score @s satyrn.fdl.used.warpedFungusOnAStick matches 1.. run {
+# Runs on ticks when a player has used a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/gift_of_sheep_island/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.gift_of_sheep_island.equip player @s
         effect give @s minecraft:hunger 60
         effect give @s minecraft:fire_resistance 600

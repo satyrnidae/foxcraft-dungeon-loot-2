@@ -1,0 +1,83 @@
+import ../macros.mcm
+
+# Pulls a recipe from the index.
+macro get_offer_from_index {
+    data modify storage foxcraft_dungeon_loot:trades Current set from storage foxcraft_dungeon_loot:trades Index[$$0]
+}
+
+# Sets the current recipe's sell item from a loot table
+macro set_sell_from_loot {
+    loot spawn ~ ~ ~ loot $$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/recipes/set_sell_from_item
+}
+
+# Sets the current recipe's buy item from a loot table
+macro set_buy_from_loot {
+    loot spawn ~ ~ ~ loot $$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/recipes/set_buy_from_item
+}
+
+# Sets the current recipe's secondary buy item from a loot table
+macro set_buyb_from_loot {
+    loot spawn ~ ~ ~ loot $$0
+    execute as @e[tag=!satyrn.fdl.trades.item,type=minecraft:item,limit=1,sort=nearest] at @s run function foxcraft_dungeon_loot:trades/recipes/set_buyb_from_item
+}
+
+macro set_sell_item_id {
+    data modify storage foxcraft_dungeon_loot:trades Current.sell.id set value $$0
+}
+
+macro set_buy_item_id {
+    data modify storage foxcraft_dungeon_loot:trades Current.buy.id set value $$0
+}
+
+macro set_buyb_item_id {
+    data modify storage foxcraft_dungeon_loot:trades Current.buyB.id set value $$0
+}
+
+# Sets the current recipe's max uses to a constant value
+macro set_max_uses {
+    data modify storage foxcraft_dungeon_loot:trades Current.maxUses set value $$0
+}
+
+# Sets the current recipe's buy item count to a constant value
+macro set_buy_price {
+    data modify storage foxcraft_dungeon_loot:trades Current.buy.Count set value $$0b
+}
+
+# Sets the current recipe's secondary buy item count to a constant value
+macro set_buyb_price {
+    data modify storage foxcraft_dungeon_loot:trades Current.buyB.Count set value $$0b
+}
+
+# Sets the current recipe's item count per sale to a constant value
+macro set_sell_count {
+    data modify storage foxcraft_dungeon_loot:trades Current.sell.Count set value $$0b
+}
+
+# Sets the current recipe's max uses to a random value
+macro randomize_max_uses {
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Current.maxUses int 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+# Sets the current recipe's buy item count to a random value
+macro randomize_buy_price {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Current.buy.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+# Sets the current recipe's secondary buy item count to a random value
+macro randomize_buyb_price {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Current.buyB.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
+
+# Sets the current recipe's item count per sale to a random value
+macro randomize_sell_count {
+    # Set price
+    macro random $$0 $$1
+    execute store result storage foxcraft_dungeon_loot:trades Current.sell.Count byte 1 run scoreboard players get #random <%config.internalScoreboard%>
+}
