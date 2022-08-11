@@ -307,7 +307,7 @@ function build {
         macro set_sell_from_loot foxcraft_dungeon_loot:items/mythic/x_no_evil
         function foxcraft_dungeon_loot:trades/recipes/push
 
-# Epic Items 61-80
+# Epic Items 61-81
         # Trade Index 61: Buckwheat
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/buckwheat
         macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
@@ -388,6 +388,10 @@ function build {
 
         # Trade Index 80: Yo-Yo Man's Revenge
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 81: Tithe to Uthiir
+        macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/tithe_to_uthiir
         function foxcraft_dungeon_loot:trades/recipes/push
 
         tellraw @a {"text":"Trade index built!","color":"gray"}

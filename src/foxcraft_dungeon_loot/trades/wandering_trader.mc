@@ -78,7 +78,7 @@ function on_tick {
             tag @s remove satyrn.fdl.tradeAdded
 
             execute (unless score @s satyrn.fdl.tradesAdded.dungeonLoot matches 1..) {
-                macro random 61 80
+                macro random 61 81
             } else {
                 macro random 29 60
             }
@@ -160,7 +160,7 @@ function recursive_check {
 }
 
 function add_trade {
-    LOOP(80,i) {
+    LOOP(81,i) {
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             macro get_offer_from_index <%i%>
             !IF(i==0) {

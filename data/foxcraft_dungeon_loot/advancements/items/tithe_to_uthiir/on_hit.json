@@ -1,0 +1,70 @@
+{
+  "criteria": {
+    "player_hurt_arthropod": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "mainhand": {
+                  "nbt": "{DungeonLootId:81}"
+                }
+              }
+            }
+          }
+        ],
+        "damage": {
+          "blocked": false
+        },
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#foxcraft_dungeon_loot:arthropods"
+            }
+          }
+        ]
+      }
+    },
+    "player_killed_arthropod": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "mainhand": {
+                  "nbt": "{DungeonLootId:81}"
+                }
+              }
+            }
+          }
+        ],
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#foxcraft_dungeon_loot:arthropods"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_hurt_arthropod",
+      "player_killed_arthropod"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit"
+  }
+}

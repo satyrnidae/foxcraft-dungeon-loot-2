@@ -1,0 +1,124 @@
+{
+  "__comments": "Tithe to Uthiir item loot table",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:81,DungeonItem:1b,CustomModelData:421950,ProcessSpiderEye:1b}"
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Tithe to Uthiir",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "replace": true,
+      "lore": [
+        "Uthiir, God of Arthropods, kindly asks that you",
+        "thin the herd.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Hemolymph Sacrifice: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Gain 10 seconds of Speed",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "II, five seconds of Resistance III, and a burst",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "of Regeneration when you kill an arthropod.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Aura of Uthiir: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Rolls a D20 on each hit against",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "an arthropod. On a critical hit, an aura of",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Wither III inflicts all hostile mobs in a 10-meter",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "radius for 5 seconds.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Balm of the Spider God: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Eating a spider eye will",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "remove any active poison effects as long as",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "the Tithe to Uthiir is in your main or off-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:bane_of_arthropods": 5,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5
+      }
+    }
+  ]
+}

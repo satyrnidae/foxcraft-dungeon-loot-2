@@ -6,9 +6,12 @@
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "baseArchiveName": "foxcraft-dungeon-loot-resources",
     "changelog": {
+      "1.1.0": [
+        "Add Tithe to Uthiir resources"
+      ],
       "1.0.0": [
         "Initial Version"
       ]
