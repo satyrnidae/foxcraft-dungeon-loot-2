@@ -140,6 +140,12 @@
           "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge"
+        },
+        {
+          "weight": 2,
+          "quality": 2,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/epic/tithe_to_uthiir"
         }
       ]
     }
