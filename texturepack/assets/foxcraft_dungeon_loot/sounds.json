@@ -46,6 +46,13 @@
       "random/levelup"
     ]
   },
+  "item.beta_iron_sword.block": {
+    "subtitle": "subtitles.item.beta_iron_sword.block",
+    "sounds": [
+      "foxcraft_dungeon_loot:items/beta_iron_sword/block1",
+      "foxcraft_dungeon_loot:items/beta_iron_sword/block2"
+    ]
+  },
   "item.dice.d4": {
     "subtitle": "subtitles.item.dice.d4",
     "sounds": [

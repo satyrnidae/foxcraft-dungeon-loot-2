@@ -5,6 +5,7 @@
     "foxcraft_dungeon_loot:math/on_load",
     "foxcraft_dungeon_loot:trades/on_load",
     "foxcraft_dungeon_loot:items/auto_pickaxe/on_load",
+    "foxcraft_dungeon_loot:items/beta_iron_sword/on_load",
     "foxcraft_dungeon_loot:items/buckwheat/on_load",
     "foxcraft_dungeon_loot:items/constantines_gift/on_load",
     "foxcraft_dungeon_loot:items/estudinaes_guidance/on_load",

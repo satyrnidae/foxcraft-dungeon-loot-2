@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "player_hit_entity": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "mainhand": {
+                  "nbt": "{DungeonLootId:82}"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_hit_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:items/beta_iron_sword/on_hit"
+  }
+}
