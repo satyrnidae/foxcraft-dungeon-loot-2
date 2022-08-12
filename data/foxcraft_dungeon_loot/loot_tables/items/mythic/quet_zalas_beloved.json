@@ -73,7 +73,7 @@
           }
         ],
         {
-          "text": "four meters, Slow Falling is applied for three",
+          "text": "seven meters, Slow Falling is applied for three",
           "color": "gray",
           "italic": false
         },
@@ -99,7 +99,7 @@
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:50,CustomModelData:421951,DungeonItem:1b}"
+      "tag": "{DungeonLootId:50,CustomModelData:421951,DungeonItem:1b,ProcessFall:1b}"
     }
   ]
 }

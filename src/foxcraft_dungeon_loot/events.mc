@@ -1,14 +1,15 @@
 # TAGS USED
 # satyrn.fdl.events.processSnowballUsed - Refers to a player who is holding a snowball item.
 
-# TODO: Tune this so it feels nice
-# Clock that executes once per 5 ticks. Updates the fallOnCm scoreboard based on player fall distance.
+# Clock that executes once per 3 ticks. Updates the fallOnCm scoreboard based on player fall distance if they are wearing a fall-event-subscribed item.
 function clock_3t {
     schedule function foxcraft_dungeon_loot:events/clock_3t 3t
-    execute as @a store result score @s satyrn.fdl.events.fallOneCm run data get entity @s FallDistance 100
+    execute as @a[predicate=foxcraft_dungeon_loot:events/process_fall,predicate=!foxcraft_dungeon_loot:is_flying] run {
+        execute store result score @s satyrn.fdl.events.fallOneCm run data get entity @s FallDistance 100
 
-    # Calls the on_fall event when a player is falling for a great distance.
-    execute as @a[scores={satyrn.fdl.events.fallOneCm=300..},predicate=!foxcraft_dungeon_loot:is_flying] at @s run function #foxcraft_dungeon_loot:on_fall
+        # Calls the on_fall event when a player is falling for a great distance.
+        execute at @s[scores={satyrn.fdl.events.fallOneCm=700..}] run function #foxcraft_dungeon_loot:on_fall
+    }
 }
 
 # Runs when the datapack is loaded.
