@@ -19,14 +19,14 @@ function on_tick {
         tag @s add satyrn.fdl.wanderingTrader.initialized
         data merge entity @s {NoAI:1b,NoGravity:1b}
 
-        execute as @e[type=minecraft:trader_llama,limit=2,sort=nearest,tag=!satyrn.fdl.wanderingTrader.llama,distance=..3] run {
+        execute as @e[type=minecraft:trader_llama,limit=2,sort=nearest,tag=!satyrn.fdl.wanderingTrader.llama,distance=..10] run {
             tag @s add satyrn.fdl.wanderingTrader.llama
             data merge entity @s {NoAI:1b,NoGravity:1b}
         }
 
         summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],HandItems:[{id:"minecraft:snowball",tag:{CustomModelData:42195,AddedTrades:[],ScanTrades:[],CurrentTrade:0},Count:1}],HandDropChances:[0.00f]}
 
-        macro random 3 5
+        macro random 4 5
         scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #random <%config.internalScoreboard%>
 
         macro random 2 3
@@ -113,12 +113,14 @@ function on_tick {
 
         data merge entity @s {NoAI:0b,NoGravity:0b}
 
-        execute as @e[tag=satyrn.fdl.wanderingTrader.llama,limit=2,sort=nearest,distance=..3] run {
+        scoreboard players reset @s
+
+        execute as @e[tag=satyrn.fdl.wanderingTrader.llama,limit=2,sort=nearest,distance=..10] run {
             tag @s remove satyrn.fdl.wanderingTrader.llama
             data merge entity @s {NoAI:0b,NoGravity:0b}
+            data modify entity @s Leash.UUID set from entity @e[type=minecraft:wandering_trader,limit=1,sort=nearest,distance=..5] UUID
+            data modify entity @s Owner set from entity @e[type=minecraft:wandering_trader,limit=1,sort=nearest,distance=..5] UUID
         }
-
-        scoreboard players reset @s
     }
 }
 
