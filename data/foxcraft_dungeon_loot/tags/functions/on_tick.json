@@ -2,6 +2,7 @@
   "__comment": "Functions that should fire exactly once per tick.",
   "values": [
     "foxcraft_dungeon_loot:events/on_tick",
+    "foxcraft_dungeon_loot:items/beta_iron_sword/on_tick",
     "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick",
     "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_tick",
     "foxcraft_dungeon_loot:items/downpour_amulet/on_tick",

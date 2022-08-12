@@ -47,6 +47,12 @@
         },
         {
           "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/rare/beta_iron_sword",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/rare/aurelias_lucky_compass",
           "weight": 5,
           "quality": 4

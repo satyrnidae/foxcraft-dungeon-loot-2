@@ -15,6 +15,7 @@ function clock_3t {
 function on_load {
     scoreboard objectives add satyrn.fdl.events.fallOneCm dummy "Fall distance (cm)"
     scoreboard objectives add satyrn.fdl.events.ateSpiderEye minecraft.used:minecraft.spider_eye
+    scoreboard objectives add satyrn.fdl.events.blockedAttack minecraft.used:minecraft.shield
     function foxcraft_dungeon_loot:events/clock_3t
 }
 
@@ -39,11 +40,16 @@ function on_tick {
     # Updates players who ate a spider eye while holding an item that intercepts that event.
     execute as @a[scores={satyrn.fdl.events.ateSpiderEye=1..},predicate=foxcraft_dungeon_loot:events/process_spider_eye] at @s run function #foxcraft_dungeon_loot:on_spider_eye_eaten
 
+    # Updates players who blocked an attack.
+    execute as @a[scores={satyrn.fdl.events.blockedAttack=1..},predicate=foxcraft_dungeon_loot:events/process_block] at @s run function #foxcraft_dungeon_loot:on_block
+
     scoreboard players reset @a satyrn.fdl.events.ateSpiderEye
+    scoreboard players reset @a satyrn.fdl.events.blockedAttack
 }
 
 # Called when the datapack is uninstalled.
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.events.fallOneCm
     scoreboard objectives remove satyrn.fdl.events.ateSpiderEye
+    scoreboard objectives remove satyrn.fdl.events.blockedAttack
 }

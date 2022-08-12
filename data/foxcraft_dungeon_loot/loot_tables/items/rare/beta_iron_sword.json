@@ -1,0 +1,105 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:82,DungeonLoot:1b,CustomModelData:421950,ProcessBlock:1b}"
+    },
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Beta Iron Sword",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A blast from the past.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Pre-Combat Tuning: ",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": "Allows the user to attack",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "very quickly. Also allows the user to block",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "by holding ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "keybind": "key.use",
+            "color": "yellow",
+            "italic": false
+          },
+          {
+            "text": ".",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 5,
+          "operation": "addition",
+          "id": "cda9e766-35a0-4f50-84b2-254965d432d1",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": 10,
+          "operation": "addition",
+          "id": "9ec47970-da2c-467c-bfea-938e75d8c7f6",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:unbreaking": 3,
+        "minecraft:vanishing_curse": 1
+      }
+    }
+  ]
+}
