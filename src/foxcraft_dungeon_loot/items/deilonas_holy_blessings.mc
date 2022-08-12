@@ -37,6 +37,8 @@ function on_warped_fungus_used {
             title @s actionbar {"text":"Deilona's Holy Blessings is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
             tag @s add satyrn.fdl.deilonasHolyBlessings.source
+            # Summon a short-lived area effect cloud to show the effect radius
+            summon minecraft:area_effect_cloud ~ ~0.1 ~ {Duration:2,Color:16262179,Radius:20}
             # Apply the effects for using Deilona's Holy Blessings
             execute as @e[tag=!satyrn.fdl.deilonasHolyBlessings.source,distance=0.0001..20,type=!#foxcraft_dungeon_loot:non_living] at @s anchored eyes run {
                 effect give @s minecraft:instant_health 3 5
