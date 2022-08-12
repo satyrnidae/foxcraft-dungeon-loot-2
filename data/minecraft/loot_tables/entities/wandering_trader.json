@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/coin/copper_coins",
+          "name": "foxcraft_dungeon_loot:loot/coins/copper_coins",
           "functions": [
             {
               "function": "minecraft:looting_enchant",
