@@ -83,6 +83,7 @@ function on_snowball_used {
     }
 }
 
+# Runs when the datapack is uninstalled
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.torenhiasFist.cooldown
     scoreboard objectives remove satyrn.fdl.torenhiasFist.particle
