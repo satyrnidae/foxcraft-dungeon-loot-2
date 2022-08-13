@@ -9,6 +9,12 @@ satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawn
 
 ###
 
+# Runs when the datapack is loaded.
+function on_load {
+    scoreboard objectives add satyrn.fdl.torenhiasFist.cooldown dummy
+    scoreboard objectives add satyrn.fdl.torenhiasFist.particle dummy
+}
+
 # Occurs once per tick.
 function on_tick {
     # Add a tag to players holding Tor'Enhia's Fist, and remove the tag from players who aren't.
@@ -73,4 +79,10 @@ function on_snowball_used {
             data modify entity @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,limit=1,sort=nearest] Motion set from entity @s Motion
         }
     }
+}
+
+# Runs when the datapack is uninstalled
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.torenhiasFist.cooldown
+    scoreboard objectives remove satyrn.fdl.torenhiasFist.particle
 }

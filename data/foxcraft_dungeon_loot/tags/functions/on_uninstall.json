@@ -17,6 +17,7 @@
     "foxcraft_dungeon_loot:items/pride_and_extreme_prejudice/on_uninstall",
     "foxcraft_dungeon_loot:items/scripture_of_cleansing/on_uninstall",
     "foxcraft_dungeon_loot:items/silverfish_escape_artist/on_uninstall",
-    "foxcraft_dungeon_loot:items/totem_of_mysteria/on_uninstall"
+    "foxcraft_dungeon_loot:items/totem_of_mysteria/on_uninstall",
+    "foxcraft_dungeon_loot:items/torenhias_fist/on_uninstall"
   ]
 }
