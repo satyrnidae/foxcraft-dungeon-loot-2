@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:written_book"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{pages: ['{\"text\":\"In Time Immemorial, the Sun God Mysteria fought the Dæmon Lord Melimonas and sealed them away deep below the earth.\\\\n\\\\nFor a long time, Humanity prospered under Mysteria\\'s light, building great civilizations and filling many libraries with the tales of their exploits.\"}', '{\"text\":\"But Humanity, in their endless search for knowledge, discovered the prison of the Dæmon Lord, and in doing so, loosed them upon the unsuspecting Earth once more.\\\\n\\\\nWasting no time, Melimonas struck out at the Sun God Mysteria, driving them from the sky. The\"}', '{\"text\":\"Dæmon, victorious, took the Earth as their trophy, swallowing it and blackening the sky.\\\\n\\\\nGenerations passed, and Humanity dwindled. The forces of Melimonas were relentless in their campaign against all that was blessed with Mysteria\\'s Light. Cities\"}', '{\"text\":\"fell. Libraries burned. So much, lost to the Fires of Melimonas. But all was not lost. When Humanity was at its lowest, a Hero was chosen by Mysteria themself. She was a Knight, and her name was Palomina.\\\\n\\\\nMysteria appeared before Palomina, diminished, but still\"}', '{\"text\":\"brilliant in their Glory. \\\\\"Fear not, child,\\\\\" they said, \\\\\"for Humanity is not yet lost. You are their hope.\\\\\" And Mysteria bestowed upon her a Gift, a spear infused with their own Light. And Mysteria instructed, \\\\\"Thou must take my Light to the highest point, and loose it upon the Sky. Should\"}', '{\"text\":\"its aim be true, and its bearer pure, it shall strike the Dæmon Lord, and drive them from this place.\\\\\" Thus spake Mysteria.\\\\n\\\\nSo Palomina set out towards the tallest peak, steadfast in her duty. But Melimonas sensed Mysteria\\'s light, and set upon Palomina with their\"}', '{\"text\":\"forces. Wave after wave of enemies drained Palomina of her strength, and her resolve. And just when Palomina could continue no longer, she met the Merchant.\\\\n\\\\nBut this was no ordinary Merchant. This Merchant was none other than the Dæmon Lord themself,\"}', '{\"text\":\"disguised as a mere traveler. \\\\\"Ho, Knight,\\\\\" called Melimonas to the beleaguered Palomina. \\\\\"You seem troubled. Perhaps I may provide something to ease thy passage?\\\\\" And Melimonas presented her with a new Spear, infused with Dark intent. \\\\\"Perhaps this will aid your quest.\\\\\" Thus\"}', '{\"text\":\"spake Melimonas.\\\\n\\\\nPalomina, being none the wiser, accepted the offer, and bade the Merchant farewell. The forces of Melimonas thinned as her travel continued, and though she thought it because of her strength, it was simply that Melimonas knew they already had\"}', '{\"text\":\"her.\\\\n\\\\nUpon reaching the highest peak, she called out, \\\\\"Melimonas! I have beaten back your forces! I have reached this, the highest peak in all the land, and will do battle with you!\\\\\"\\\\n\\\\nMelimonas simply laughed. \\\\\"You seek to\"}', '{\"text\":\"do battle with me? Fine then, Human. Level thy spear at me, and we shall see who is victorious.\\\\\" But when Palomina took Mysteria\\'s spear, and hefted it above her head to loose it, it shattered like glass. For Melimonas was clever; they knew Mysteria would not let any of their forces\"}', '{\"text\":\"wield the spear. So little by little, their tainted spear had corrupted Palomina, making her appear as one of the Dæmon Lord\\'s own.\\\\n\\\\nMelimonas erupted into laughter as the mortified Palomina scrambled to pick up the shards. \\\\\"See now what little power you\"}', '{\"text\":\"hold over me, Human. But thou hast another spear, dost thou not? Perhaps it shall be more... successful.\\\\\" Palomina, out of options, decided to try it, but when she loosed the spear, it held onto her and pulled her high into the sky. \\\\\"Foolish little insect!\\\\\" exclaimed the Dæmon Lord, \\\\\"Thou\"}', '{\"text\":\"thought to best me? Now you are mine, suspended in my Night! Now you must watch as thy precious humanity burns, along with the rest of Mysteria\\'s wretched Light!\\\\\"\\\\n\\\\nAnd Melimonas besieged Palomina with horrors. Towns abandoned. Children orphaned. The fall of\"}', '{\"text\":\"Humanity itself. It almost broke her.\\\\n\\\\nBut the voice of Mysteria whispered from the shards of light, \\\\\"Fear not, child,   for Humanity is not yet lost. You are their hope,\\\\\" they repeated. \\\\\"Thou must take what remains of my Light, and loose it upon the sky, and it shall strike\"}', '{\"text\":\"the Dæmon Lord as a thousand piercing bolts, and drive them from this place.\\\\\" Slowly, Palomina understood: she needed not a Spear, for the Dæmon Lord was much closer now.\\\\n\\\\n\\\\\"Fine, Dæmon,\\\\\" she said, her resolve returning, \\\\\"if you seek our destruction, then\"}', '{\"text\":\"I must not waver.\\\\\" And she loosed the thousands of shards from her grasp.\\\\n\\\\nMelimonas screamed, as Mysteria\\'s searing Light tore through their night, dotting its surface with a thousand-thousand bright, shimmering stars. As Mysteria\\'s light poured through,\"}', '{\"text\":\"Palomina brandished the Dæmon Lord\\'s own spear, and Melimonas\\' darkness was rent from it by the glory of Mysteria\\'s light. Palomina took aim at the Dæmon Lord, and once again loosed herself upon them, tearing a shimmering hole straight through the night, large enough to dwarf the\"}','{\"text\":\"others; a moon to mark her sacrifice.\\\\n\\\\nNever again was Melimonas\\' night so dark that Mysteria, though weakened, could not push them from the sky. And as a new dawn rose upon Humanity, and as Melimonas\\' forces burned, they all sung the name of their\"}','{\"text\":\"Hero, Palomina: Wielder of the Spears of Light and Dark; the Goddess of the Moon.\"}'], title: \"Palomina and the Dæmon Lord\", author: \"Unknown\", resolved: 1b}"
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "A faded, leather-bound bible. It seems",
+        "familiar, somehow...",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ]
+      ]
+    }
+  ]
+}

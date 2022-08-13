@@ -14,14 +14,14 @@
     {
       "function": "minecraft:set_name",
       "name": {
-        "text": "Splash Potion of Calamity",
+        "text": "Splash Potion of Blindness",
         "color": "yellow",
         "italic": false
       }
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:2039587,CustomPotionEffects:[{Id:15,Duration:3600}]}"
+      "tag": "{CustomPotionColor:2039587,CustomPotionEffects:[{Id:15,Duration:600}]}"
     }
   ]
 }

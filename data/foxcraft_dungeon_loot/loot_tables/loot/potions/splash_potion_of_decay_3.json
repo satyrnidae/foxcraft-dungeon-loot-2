@@ -14,14 +14,14 @@
     {
       "function": "minecraft:set_name",
       "name": {
-        "text": "Splash Potion of Calamity",
+        "text": "Splash Potion of Decay",
         "color": "aqua",
         "italic": false
       }
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:745784,CustomPotionEffects:[{Id:31,Amplifier:3,Duration:600}]}"
+      "tag": "{CustomPotionColor:3484199,CustomPotionEffects:[{Id:20,Amplifier:2,Duration:100}]}"
     }
   ]
 }

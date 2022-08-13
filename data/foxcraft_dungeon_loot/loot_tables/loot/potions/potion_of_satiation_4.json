@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:splash_potion"
+          "name": "minecraft:potion"
         }
       ]
     }
@@ -14,14 +14,14 @@
     {
       "function": "minecraft:set_name",
       "name": {
-        "text": "Splash Potion of Calamity",
+        "text": "Potion of Satiation",
         "color": "aqua",
         "italic": false
       }
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:745784,CustomPotionEffects:[{Id:31,Amplifier:3,Duration:600}]}"
+      "tag": "{CustomPotionColor:16262177,CustomPotionEffects:[{Id:23,Amplifier:3}]}"
     }
   ]
 }
