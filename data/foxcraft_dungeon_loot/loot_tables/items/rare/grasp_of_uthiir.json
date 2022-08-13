@@ -1,0 +1,83 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snowball"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Grasp of Uthiir",
+          "color": "aqua",
+          "bold": false,
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "Uthiir grants you the ability to ensnare your",
+        "enemies at a distance.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Grasp of the Spider God: ",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": "Throw the item to place",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "a cobweb where it lands.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed upon use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:83,CustomModelData:421954,HideFlags:1,DungeonItem:1b,ProcessOnUsed:1b}"
+    }
+  ]
+}
