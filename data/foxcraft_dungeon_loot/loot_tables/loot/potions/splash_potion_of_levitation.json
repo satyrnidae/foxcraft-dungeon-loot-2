@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:splash_potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Levitation",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:13565951,CustomPotionEffects:[{Id:25,Duration:900}]}"
+    }
+  ]
+}
