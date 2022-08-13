@@ -9,6 +9,7 @@ function load {
     scoreboard objectives add satyrn.fdl.const dummy "Constants"
 
     scoreboard players reset * satyrn.fdl.loot.variant
+    scoreboard players set 1 satyrn.fdl.const 1
     scoreboard players set 5 satyrn.fdl.const 5
 
     # Reset item utility advancements for online players

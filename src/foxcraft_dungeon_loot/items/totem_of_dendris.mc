@@ -13,7 +13,7 @@ function clock_10t {
     execute as @a[predicate=foxcraft_dungeon_loot:items/totem_of_dendris/in_off_hand,predicate=!foxcraft_dungeon_loot:items/totem_of_dendris/has_effects] run {
         effect give @s minecraft:night_vision 1000000
         effect give @s minecraft:water_breathing 1000000
-        effect give @s minecraft:resistance 1000000 4
+        effect give @s minecraft:resistance 1000000 1
         tag @s add satyrn.fdl.totemOfDendris.effectsApplied
     }
 }

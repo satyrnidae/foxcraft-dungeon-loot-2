@@ -9,7 +9,7 @@ function clock_4t {
             tag @s add satyrn.fdl.totemOfGnumoch.healthApplied
         }
         execute unless entity @s[predicate=foxcraft_dungeon_loot:items/totem_of_gnumoch/has_effects] run {
-            effect give @s minecraft:resistance 1000000 2
+            effect give @s minecraft:resistance 1000000 1
             effect give @s minecraft:slowness 1000000 1
             tag @s add satyrn.fdl.totemOfGnumoch.effectsApplied
         }

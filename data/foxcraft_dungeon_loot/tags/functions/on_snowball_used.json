@@ -1,6 +1,7 @@
 {
   "__comments": "These functions are called on ticks when a player has used a snowball item. Commands are executed per player, at the player's current position.",
   "values": [
+    "foxcraft_dungeon_loot:items/grasp_of_uthiir/on_snowball_used",
     "foxcraft_dungeon_loot:items/hammer_of_sol/on_snowball_used",
     "foxcraft_dungeon_loot:items/spell_scroll_hail_of_arrows/on_snowball_used",
     "foxcraft_dungeon_loot:items/torenhias_fist/on_snowball_used",

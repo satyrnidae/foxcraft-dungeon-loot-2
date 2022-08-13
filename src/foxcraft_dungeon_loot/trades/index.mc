@@ -33,8 +33,8 @@ function build {
         # Trade Index 1: Grab-Bag
         function foxcraft_dungeon_loot:trades/recipes/new
         macro set_sell_from_loot foxcraft_dungeon_loot:items/common_grab_bag
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
-        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coin/copper_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
+        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 2: Glistering Grab-Bag
@@ -47,8 +47,8 @@ function build {
 
         # Trade Index 4: Shining Grab-Bag
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic_grab_bag
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
-        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
+        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
         macro set_buy_price 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
@@ -60,7 +60,7 @@ function build {
 # Heads 6-21
         # Trade Index 6: AnalogousPants5 head
         macro set_sell_from_loot foxcraft_dungeon_loot:loot/heads/analogouspants5_head
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/copper_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
         macro set_buyb_item_id "minecraft:air"
         macro set_max_uses 3
         function foxcraft_dungeon_loot:trades/recipes/push
@@ -127,48 +127,48 @@ function build {
 
 # Exchange 22-28
         # Trade Index 22: Exchange copper for silver
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/copper_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
         macro set_buy_price 10
         macro set_max_uses 2147483647
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 23: Exchange silver for copper
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/copper_coins
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
         macro set_buy_price 1
         macro set_sell_count 10
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 24: Exchange silver for gold
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
         macro set_buy_price 10
         macro set_sell_count 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 25: Exchange gold for silver
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
         macro set_buy_price 1
         macro set_sell_count 10
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 26: Exchange gold for platinum
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/platinum_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/platinum_coins
         macro set_buy_price 10
         macro set_sell_count 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 27: Exchange platinum for gold
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/platinum_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/platinum_coins
         macro set_buy_price 1
         macro set_sell_count 10
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 28: Exchange electrum for silver
-        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/electrum_coins
+        macro set_sell_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/electrum_coins
         macro set_max_uses 64
         macro set_sell_count 5
         function foxcraft_dungeon_loot:trades/recipes/push
@@ -176,8 +176,8 @@ function build {
 # Mythic Items 29-60
         # Trade Index 29: Albatross Heavy Industries Auto-Pickaxe
         macro set_sell_from_loot foxcraft_dungeon_loot:items/mythic/auto_pickaxe
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/platinum_coins
-        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/platinum_coins
+        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
         macro set_buy_price 1
         macro set_buyb_price 1
         macro set_max_uses 1
@@ -307,11 +307,11 @@ function build {
         macro set_sell_from_loot foxcraft_dungeon_loot:items/mythic/x_no_evil
         function foxcraft_dungeon_loot:trades/recipes/push
 
-# Epic Items 61-80
+# Epic Items 61-81
         # Trade Index 61: Buckwheat
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/buckwheat
-        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coin/gold_coins
-        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coin/silver_coins
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
+        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 62: Dawncleaver
@@ -388,6 +388,10 @@ function build {
 
         # Trade Index 80: Yo-Yo Man's Revenge
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 81: Tithe to Uthiir
+        macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/tithe_to_uthiir
         function foxcraft_dungeon_loot:trades/recipes/push
 
         tellraw @a {"text":"Trade index built!","color":"gray"}

@@ -1,19 +1,22 @@
 # TAGS USED
 # satyrn.fdl.events.processSnowballUsed - Refers to a player who is holding a snowball item.
 
-# TODO: Tune this so it feels nice
-# Clock that executes once per 5 ticks. Updates the fallOnCm scoreboard based on player fall distance.
+# Clock that executes once per 3 ticks. Updates the fallOnCm scoreboard based on player fall distance if they are wearing a fall-event-subscribed item.
 function clock_3t {
     schedule function foxcraft_dungeon_loot:events/clock_3t 3t
-    execute as @a store result score @s satyrn.fdl.events.fallOneCm run data get entity @s FallDistance 100
+    execute as @a[predicate=foxcraft_dungeon_loot:events/process_fall,predicate=!foxcraft_dungeon_loot:is_flying] run {
+        execute store result score @s satyrn.fdl.events.fallOneCm run data get entity @s FallDistance 100
 
-    # Calls the on_fall event when a player is falling for a great distance.
-    execute as @a[scores={satyrn.fdl.events.fallOneCm=300..},predicate=!foxcraft_dungeon_loot:is_flying] at @s run function #foxcraft_dungeon_loot:on_fall
+        # Calls the on_fall event when a player is falling for a great distance.
+        execute at @s[scores={satyrn.fdl.events.fallOneCm=700..}] run function #foxcraft_dungeon_loot:on_fall
+    }
 }
 
 # Runs when the datapack is loaded.
 function on_load {
     scoreboard objectives add satyrn.fdl.events.fallOneCm dummy "Fall distance (cm)"
+    scoreboard objectives add satyrn.fdl.events.ateSpiderEye minecraft.used:minecraft.spider_eye
+    scoreboard objectives add satyrn.fdl.events.blockedAttack minecraft.used:minecraft.shield
     function foxcraft_dungeon_loot:events/clock_3t
 }
 
@@ -34,9 +37,20 @@ function on_tick {
 
     # Add snowball tag to players holding an event-enabled snowball.
     execute as @a[predicate=foxcraft_dungeon_loot:events/process_snowball] run tag @s add satyrn.fdl.events.processSnowballUsed
+
+    # Updates players who ate a spider eye while holding an item that intercepts that event.
+    execute as @a[scores={satyrn.fdl.events.ateSpiderEye=1..},predicate=foxcraft_dungeon_loot:events/process_spider_eye] at @s run function #foxcraft_dungeon_loot:on_spider_eye_eaten
+
+    # Updates players who blocked an attack.
+    execute as @a[scores={satyrn.fdl.events.blockedAttack=1..},predicate=foxcraft_dungeon_loot:events/process_block] at @s run function #foxcraft_dungeon_loot:on_block
+
+    scoreboard players reset @a satyrn.fdl.events.ateSpiderEye
+    scoreboard players reset @a satyrn.fdl.events.blockedAttack
 }
 
 # Called when the datapack is uninstalled.
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.events.fallOneCm
+    scoreboard objectives remove satyrn.fdl.events.ateSpiderEye
+    scoreboard objectives remove satyrn.fdl.events.blockedAttack
 }

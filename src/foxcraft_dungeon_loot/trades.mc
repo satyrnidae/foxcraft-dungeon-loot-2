@@ -17,5 +17,5 @@ function on_uninstall {
 function scheduled_tick {
     schedule function foxcraft_dungeon_loot:trades/scheduled_tick 1t
 
-    execute as @e[type=minecraft:wandering_trader,tag=!satyrn.fdl.wanderingTrader.hasTrades] at @s run function foxcraft_dungeon_loot:trades/wandering_trader/on_tick
+    execute as @e[type=minecraft:wandering_trader,tag=!satyrn.fdl.trades.hasTrades] at @s run function foxcraft_dungeon_loot:trades/wandering_trader/on_tick
 }

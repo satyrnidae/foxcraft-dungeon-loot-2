@@ -1,0 +1,6 @@
+{
+  "__comments": "Events that occur when a player eats a spider eye while holding an item that intercepts that event.",
+  "values": [
+    "foxcraft_dungeon_loot:items/tithe_to_uthiir/on_spider_eye_eaten"
+  ]
+}

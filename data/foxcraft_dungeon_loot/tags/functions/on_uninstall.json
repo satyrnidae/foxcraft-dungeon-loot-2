@@ -4,6 +4,7 @@
     "foxcraft_dungeon_loot:events/on_uninstall",
     "foxcraft_dungeon_loot:math/on_uninstall",
     "foxcraft_dungeon_loot:trades/on_uninstall",
+    "foxcraft_dungeon_loot:items/beta_iron_sword/on_uninstall",
     "foxcraft_dungeon_loot:items/bringer_of_fear/on_uninstall",
     "foxcraft_dungeon_loot:items/buckwheat/on_uninstall",
     "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_uninstall",
