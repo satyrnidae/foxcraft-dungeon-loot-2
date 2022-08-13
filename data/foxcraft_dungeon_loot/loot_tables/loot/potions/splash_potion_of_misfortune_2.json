@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:splash_potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Misfortune",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:12624973,CustomPotionEffects:[{Id:27,Amplifier:1,Duration:1800}]}"
+    }
+  ]
+}

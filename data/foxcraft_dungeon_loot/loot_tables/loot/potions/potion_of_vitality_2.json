@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Potion of Vitality",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:16284963,CustomPotionEffects:[{Id:21,Amplifier:1,Duration:1800}]}"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:splash_potion"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Calamity",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomPotionColor:745784,CustomPotionEffects:[{Id:31,Amplifier:3,Duration:600}]}"
+    }
+  ]
+}

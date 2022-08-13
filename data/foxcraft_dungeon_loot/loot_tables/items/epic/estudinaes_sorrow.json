@@ -78,7 +78,7 @@
           }
         ],
         {
-          "text": "a short burst of nausea to you. Killing an",
+          "text": "a short burst of Nausea to you. Killing an",
           "color": "gray",
           "italic": false
         },
@@ -88,7 +88,7 @@
           "italic": false
         },
         {
-          "text": "II to you.",
+          "text": "and 10 seconds of Hunger to you.",
           "color": "gray",
           "italic": false
         }
@@ -102,7 +102,8 @@
         "minecraft:luck_of_the_sea": 10,
         "minecraft:mending": 1,
         "minecraft:sharpness": 5,
-        "minecraft:smite": 3,
+        "minecraft:impaling": 4,
+        "minecraft:smite": 4,
         "minecraft:unbreaking": 5
       },
       "add": false
