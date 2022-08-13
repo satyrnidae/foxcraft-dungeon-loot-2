@@ -20,7 +20,7 @@ function clock_10t {
 
     execute as @a[predicate=foxcraft_dungeon_loot:items/talking_stick/in_off_hand,predicate=!foxcraft_dungeon_loot:items/talking_stick/has_effects] run {
         effect give @s minecraft:haste 1000000 1
-        effect give @s minecraft:resistance 1000000 3
+        effect give @s minecraft:resistance 1000000 1
         effect give @s minecraft:night_vision 1000000
         effect give @s minecraft:glowing 1000000
         tag @s add satyrn.fdl.talkingStick.effectsApplied
