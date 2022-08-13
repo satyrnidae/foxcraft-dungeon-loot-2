@@ -1,24 +1,46 @@
+###
+Contains various macros for use throughout the datapack, including:
+ - Item breaking
+ - Random number generation
+ - Removing a single enchantment from an item
+###
+
+###
+Breaks an item in a specific inventory slot, plays the item break noise, and displays the item break particle.
+Does not check if the item is actually broken.
+
+Parameters:
+0 - The non-numeric slot ID of the item.
+1 - The item that the particle will display as.
+###
 macro break_item {
     playsound minecraft:entity.item.break player @s ~ ~ ~ 2.0 1.0
     particle minecraft:item $$1 ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
     item modify entity @s $$0 foxcraft_dungeon_loot:remove
 }
 
-macro roll {
-    execute as @s store result score #random <%config.internalScoreboard%> run loot spawn ~ -128 ~ loot foxcraft_dungeon_loot:util/dice/roll_$$0
-    !IF(config.dev) {
-        tellraw @s ["",{"text":"You rolled a ","color":"gray","italic":true},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" on a $$0.","color":"gray","italic":true}]
-    }
-    kill @e[predicate=foxcraft_dungeon_loot:items/is_dice]
-}
+###
+Generates a random number between a lower and upper bound.
 
+Parameters:
+0 - The lower bound of the random result.
+1 - The upper bound of the random result.
+###
 macro random {
-    scoreboard players set @s satyrn.fdl.math.input1 $$0
-    scoreboard players set @s satyrn.fdl.math.input2 $$1
+    scoreboard players set #math.input1 <%config.internalScoreboard%> $$0
+    scoreboard players set #math.input2 <%config.internalScoreboard%> $$1
 
     function foxcraft_dungeon_loot:math/random
 }
 
+###
+Removes a single enchantment from a single inventory slot.
+Must be executed from the sender context of an armor stand positioned closest to the target player.
+
+Parameters:
+0 - The non-numeric slot ID of the item.
+1 - The ID of the enchantment to remove.
+###
 macro remove_enchantment {
     item replace entity @s weapon.mainhand from entity @p $$0
     data remove entity @s HandItems[0].tag.Enchantments[{id:"$$1"}]

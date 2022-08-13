@@ -47,22 +47,22 @@ function on_tick {
             # Randomly select an effect and summon an area effect cloud where the projectile landed.
             macro random 1 10
 
-            execute (if score #random <%config.internalScoreboard%> matches 1) {
+            execute (if score #math.result <%config.internalScoreboard%> matches 1) {
                 # Summon a 10-foot radius AOE for one minute of blindness
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:1200,Id:15,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
-            } else execute(if score #random <%config.internalScoreboard%> matches ..3) {
+            } else execute(if score #math.result <%config.internalScoreboard%> matches ..3) {
                 # Summon a 10-radius AOE for 20 seconds of hunger
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:400,Id:17,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
-            } else execute(if score #random <%config.internalScoreboard%> matches 4) {
+            } else execute(if score #math.result <%config.internalScoreboard%> matches 4) {
                 # Summon a 10-radius AOE for 30 seconds of wither
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:600,Id:20,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
-            } else execute(if score #random <%config.internalScoreboard%> matches ..6) {
+            } else execute(if score #math.result <%config.internalScoreboard%> matches ..6) {
                 # Summon a 10-radius AOE for 3 minutes of poison
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:3600,Id:19,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
-            } else execute(if score #random <%config.internalScoreboard%> matches ..8) {
+            } else execute(if score #math.result <%config.internalScoreboard%> matches ..8) {
                 # Summon a 10-radius AOE for 60 seconds of nausea
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:1200,Id:9,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
-            } else execute(if score #random <%config.internalScoreboard%> matches ..9) {
+            } else execute(if score #math.result <%config.internalScoreboard%> matches ..9) {
                 # Summon a 10-radius AOE for instant damage V
                 summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:3b,Id:7,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else {

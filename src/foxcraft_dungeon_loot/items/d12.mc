@@ -7,6 +7,6 @@ function on_warped_fungus_used {
 
         macro random 1 12
 
-        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled a "},{"score":{"name":"#random","objective":"<%config.internalScoreboard%>"}}]
+        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled a "},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"}}]
     }
 }

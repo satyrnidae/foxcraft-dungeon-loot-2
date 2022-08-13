@@ -16,7 +16,14 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    function foxcraft_dungeon_loot:math/should_damage_tool
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
+                } else {
+                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
+                }
+
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
                 }
@@ -27,7 +34,14 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    function foxcraft_dungeon_loot:math/should_damage_tool
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
+                } else {
+                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
+                }
+
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
                 }

@@ -36,7 +36,7 @@ function on_warped_fungus_used {
             macro random 1 8
 
             LOOP(8,i) {
-                execute if score #random <%config.internalScoreboard%> matches <%i%> run playsound minecraft:item.goat_horn.sound.<%i%> player @a ~ ~ ~ 6.25
+                execute if score #math.result <%config.internalScoreboard%> matches <%i%> run playsound minecraft:item.goat_horn.sound.<%i%> player @a ~ ~ ~ 6.25
             }
 
             execute as @e[type=!#foxcraft_dungeon_loot:non_living,type=!#foxcraft_dungeon_loot:hostile,distance=..100] run {
@@ -53,7 +53,13 @@ function on_warped_fungus_used {
                 scoreboard players set @s satyrn.fdl.ponchoSanchezsFate.cooldown 1
                 title @s actionbar {"text":"Poncho Sanchez's Fate is now on cooldown for 5 minutes.","color":"dark_purple"}
 
-                item modify entity @s weapon.mainhand foxcraft_dungeon_loot:poncho_sanchezs_fate/damage
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    function foxcraft_dungeon_loot:math/should_damage_tool
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:poncho_sanchezs_fate/damage
+                } else {
+                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:poncho_sanchezs_fate/damage
+                }
 
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421950}

@@ -10,7 +10,7 @@ function on_warped_fungus_used {
         # Roll a D5. If you roll a 1, blindness is applied for 5 minutes.
         #   Otherwise, applies night vision for 20 seconds.
         macro random 1 5
-        execute (if score #random <%config.internalScoreboard%> matches 1) {
+        execute (if score #math.result <%config.internalScoreboard%> matches 1) {
             effect give @s minecraft:blindness 300
         } else {
             effect give @s minecraft:night_vision 1200

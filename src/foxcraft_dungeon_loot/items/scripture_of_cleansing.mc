@@ -44,7 +44,7 @@ function on_warped_fungus_used {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"The Scripture of Cleansing is on cooldown and cannot be used.","color":"dark_purple"}
         } else {
-            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1b,Invulnerable:1b,NoGravity:1b,Tags:[satyrn.fdl.cleaner]}
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,Tags:[satyrn.fdl.cleaner]}
 
             # Who's ready for an awful horrible no good nested if statement...
             execute store success score #test <%config.internalScoreboard%> run data get entity @s Inventory[{Slot:-106b}].tag.Enchantments[{id:"minecraft:vanishing_curse"}]
@@ -163,7 +163,14 @@ function on_warped_fungus_used {
                     # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me (:
                     macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
                 } else {
-                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
+                    execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+                        execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                        function foxcraft_dungeon_loot:math/should_damage_tool
+                        execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
+                    } else {
+                        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
+                    }
+
                     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                         # 19950421 was too large a number to prepend or I would have gone with the ISO date format. Curse you single-precision floating point limitations!!!
                         macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}

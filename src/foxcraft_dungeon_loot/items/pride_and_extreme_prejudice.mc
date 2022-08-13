@@ -35,15 +35,15 @@ function on_warped_fungus_used {
         } else {
             macro random 1 10
 
-            execute (if score #random <%config.internalScoreboard%> matches 1) {
+            execute (if score #math.result <%config.internalScoreboard%> matches 1) {
                 playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
                 effect give @s minecraft:bad_omen 1200 3
                 tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
-            } else execute (if score #random <%config.internalScoreboard%> matches 2) {
+            } else execute (if score #math.result <%config.internalScoreboard%> matches 2) {
                 playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
                 effect give @s minecraft:bad_omen 1200 2
                 tellraw @s {"text":"A fell wind sweeps the land.","color":"gray","italic":true}
-            } else execute (if score #random <%config.internalScoreboard%> matches 3..8) {
+            } else execute (if score #math.result <%config.internalScoreboard%> matches 3..8) {
                 playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
                 effect give @s minecraft:bad_omen 1200
                 tellraw @s {"text":"A chill trickles down your spine.","color":"gray","italic":true}

@@ -14,7 +14,7 @@ function on_hit {
 function on_hit_arthropod {
     macro random 1 20
 
-    execute if score #random <%config.internalScoreboard%> matches 20 run {
+    execute if score #math.result <%config.internalScoreboard%> matches 20 run {
         playsound minecraft:entity.player.attack.crit player @a
         execute positioned ^ ^1 ^2 at @e[type=#foxcraft_dungeon_loot:arthropods,sort=nearest,limit=1] anchored eyes run particle minecraft:crit ^ ^1 ^1 0.5 0.5 0.5 0.01 20 force
 
