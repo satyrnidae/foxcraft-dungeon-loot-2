@@ -4,7 +4,7 @@ import ../../macros.mcm
 function on_hit {
     execute if entity @s[gamemode=!creative,predicate=!foxcraft_dungeon_loot:items/is_mainhand_empty] run {
         macro random 1 20
-        execute if score #random <%config.internalScoreboard%> matches 20 run {
+        execute if score #math.result <%config.internalScoreboard%> matches 20 run {
             playsound minecraft:entity.player.attack.crit player @a
             particle minecraft:crit ~ ~ ~ 0.5 0.85 0.5 0.01 20 force
 

@@ -50,17 +50,27 @@ function on_warped_fungus_used {
             execute unless entity @s[gamemode=creative] run {
                 scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
                 title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
-                execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
-                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_thunder
-                } else {
-                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_rain
-                }
 
-                # Break item if damage is maxed out.
-                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
-                    macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421954}
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    function foxcraft_dungeon_loot:math/should_damage_tool
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run function foxcraft_dungeon_loot:items/downpour_amulet/damage
+                } else {
+                    function foxcraft_dungeon_loot:items/downpour_amulet/damage
                 }
             }
         }
+    }
+}
+
+function damage {
+    execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
+        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_thunder
+    } else {
+        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_rain
+    }
+    # Break item if damage is maxed out.
+    execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
+        macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421954}
     }
 }

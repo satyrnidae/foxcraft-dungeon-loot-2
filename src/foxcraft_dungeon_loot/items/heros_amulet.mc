@@ -5,18 +5,18 @@ function on_warped_fungus_used {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/heros_amulet/in_main_hand] run {
         macro random 1 20
 
-        execute (if score #random <%config.internalScoreboard%> matches 1) {
+        execute (if score #math.result <%config.internalScoreboard%> matches 1) {
             # Crit fail. Player gets a bad omen.
             title @s actionbar {"text":"You are no hero.","color":"dark_purple"}
             playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
             effect give @s minecraft:bad_omen 24000 0 false
-        } else execute (if score #random <%config.internalScoreboard%> matches ..9) {
+        } else execute (if score #math.result <%config.internalScoreboard%> matches ..9) {
             # Fail. Player gets a vex summoned at their location.
             title @s actionbar {"text":"You are not a true hero.","color":"dark_purple"}
             playsound foxcraft_dungeon_loot:event.roll.fail player @a
             particle minecraft:smoke ^ ^1 ^1.5 0 0.5 0.5 0.1 20
             summon minecraft:vex ^ ^1 ^2
-        } else execute (if score #random <%config.internalScoreboard%> matches ..19) {
+        } else execute (if score #math.result <%config.internalScoreboard%> matches ..19) {
             # Success. Player gets some random loot.
             title @s actionbar {"text":"You are pure of heart, but you are not a true hero.","color":"dark_purple"}
             playsound foxcraft_dungeon_loot:event.roll.pure_heart player @a

@@ -13,25 +13,13 @@ function on_block {
 # Damage the sword when it is used to hit an entity. This takes unbreaking into effect.
 function on_hit {
     execute unless entity @s[gamemode=creative] run {
-        # Get unbreaking level from the tool.
-        execute store result score #result <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
-
-        # Only execute the following if the score is equal to 1 or more
-        execute (if score #result <%config.internalScoreboard%> matches 1..) {
-            macro random 1 100
-
-            # We are OK to use math inputs after the randomizer has run.
-            scoreboard players set @s satyrn.fdl.math.input1 100
-            scoreboard players operation @s satyrn.fdl.math.input2 = #result <%config.internalScoreboard%>
-            scoreboard players operation @s satyrn.fdl.math.input2 += 1 satyrn.fdl.const
-            scoreboard players operation @s satyrn.fdl.math.input1 /= @s satyrn.fdl.math.input2
-
-            execute if score #random <%config.internalScoreboard%> < @s satyrn.fdl.math.input1 run {
-                # Damage the item.
-                item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
-            }
+        execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
+            # Get unbreaking level from the tool.
+            execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+            function foxcraft_dungeon_loot:math/should_damage_tool
+            # Only execute the following if the score is equal to 1 or more
+            execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
         } else {
-            # Execute the following if the score is equal to 0
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
         }
 

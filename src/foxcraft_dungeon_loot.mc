@@ -6,11 +6,8 @@ function load {
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick "Player used warped fungus"
     scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball "Player used snowball"
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
-    scoreboard objectives add satyrn.fdl.const dummy "Constants"
 
     scoreboard players reset * satyrn.fdl.loot.variant
-    scoreboard players set 1 satyrn.fdl.const 1
-    scoreboard players set 5 satyrn.fdl.const 5
 
     # Reset item utility advancements for online players
     advancement revoke @a from foxcraft_dungeon_loot:items
@@ -40,13 +37,12 @@ function uninstall {
     scoreboard objectives remove satyrn.fdl.used.warpedFungusOnAStick
     scoreboard objectives remove satyrn.fdl.used.snowball
     scoreboard objectives remove satyrn.fdl.loot.variant
-    scoreboard objectives remove satyrn.fdl.const
 
     function #foxcraft_dungeon_loot:on_uninstall
 
     execute store success score #uninstall <%config.internalScoreboard%> run datapack disable "file/<%config.baseArchiveName%>-<%config.version%>.zip"
 
-    execute unless score #uninstall <%config.internalScoreboard%> matches 1 run tellraw @a ["", {"text":"Default file name has been changed!","color":"red"},{"text":"\n"},{"text":"To complete the uninstall process please use the following command:"},{"text":"\n"},{"text":"/datapack disable \"file/<pack_name>\"","color":"aqua"}]
+    execute unless score #uninstall <%config.internalScoreboard%> matches 1 run tellraw @s ["", {"text":"Default file name has been changed!","color":"red"},{"text":"\n"},{"text":"To complete the uninstall process please use the following command:"},{"text":"\n"},{"text":"/datapack disable \"file/<pack_name>\"","color":"aqua"}]
     execute if score #uninstall <%config.internalScoreboard%> matches 1 run tellraw @s {"text":"Foxcraft Dungeon Loot successfully uninstalled.","color":"green"}
 
     scoreboard players reset #uninstall <%config.internalScoreboard%>
@@ -65,6 +61,9 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.itemId.helmet
     scoreboard objectives remove satyrn.fdl.custom.sneakTime
     scoreboard objectives remove satyrn.fdl.custom.fallOneCm
+    scoreboard objectives remove satyrn.fdl.math.input1
+    scoreboard objectives remove satyrn.fdl.math.input2
+    scoreboard objectives remove satyrn.fdl.const
 
     scoreboard players set version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
 }

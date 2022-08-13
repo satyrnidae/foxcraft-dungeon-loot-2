@@ -27,16 +27,16 @@ function on_tick {
         summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],HandItems:[{id:"minecraft:snowball",tag:{CustomModelData:42195,AddedTrades:[],ScanTrades:[],CurrentTrade:0},Count:1}],HandDropChances:[0.00f]}
 
         macro random 4 5
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #random <%config.internalScoreboard%>
+        scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #math.result <%config.internalScoreboard%>
 
         macro random 2 3
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.head = #random <%config.internalScoreboard%>
+        scoreboard players operation @s satyrn.fdl.tradesToAdd.head = #math.result <%config.internalScoreboard%>
 
         macro random 0 2
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.dungeonLoot = #random <%config.internalScoreboard%>
+        scoreboard players operation @s satyrn.fdl.tradesToAdd.dungeonLoot = #math.result <%config.internalScoreboard%>
 
         macro random 6 7
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #random <%config.internalScoreboard%>
+        scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #math.result <%config.internalScoreboard%>
     }
 
 # Head trades
@@ -47,7 +47,7 @@ function on_tick {
             tag @s remove satyrn.fdl.tradeAdded
 
             macro random 6 21
-            scoreboard players operation @s satyrn.fdl.selectedTrade = #random <%config.internalScoreboard%>
+            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
 
             execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trades/wandering_trader/check_existing_trades
 
@@ -82,7 +82,7 @@ function on_tick {
             } else {
                 macro random 29 60
             }
-            scoreboard players operation @s satyrn.fdl.selectedTrade = #random <%config.internalScoreboard%>
+            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
 
             execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trades/wandering_trader/check_existing_trades
 

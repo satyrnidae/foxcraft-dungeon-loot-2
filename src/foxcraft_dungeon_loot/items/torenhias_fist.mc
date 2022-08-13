@@ -9,10 +9,12 @@ satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawn
 
 ###
 
-# Runs when the datapack is loaded.
+# Sets up scoreboards and constants on load.
 function on_load {
     scoreboard objectives add satyrn.fdl.torenhiasFist.cooldown dummy
     scoreboard objectives add satyrn.fdl.torenhiasFist.particle dummy
+
+    scoreboard players set #5 <%config.internalScoreboard%> 5
 }
 
 # Occurs once per tick.
@@ -47,7 +49,7 @@ function on_tick {
         } else execute (unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0) {
             scoreboard players remove @s satyrn.fdl.torenhiasFist.cooldown 1
             scoreboard players operation @s satyrn.fdl.torenhiasFist.particle = @s satyrn.fdl.torenhiasFist.cooldown
-            scoreboard players operation @s satyrn.fdl.torenhiasFist.particle %= 5 satyrn.fdl.const
+            scoreboard players operation @s satyrn.fdl.torenhiasFist.particle %= #5 <%config.internalScoreboard%>
 
             execute if score @s satyrn.fdl.torenhiasFist.particle matches 0 run {
                 particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 3

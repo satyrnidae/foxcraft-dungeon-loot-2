@@ -38,10 +38,10 @@ function on_warped_fungus_used {
 
             macro random 1 20
 
-            execute (if score #random <%config.internalScoreboard%> matches 1..10) {
+            execute (if score #math.result <%config.internalScoreboard%> matches 1..10) {
                 effect give @s minecraft:bad_omen 1200
                 tellraw @s {"text":"A chill trickles down your spine.","color":"gray","italic":true}
-            } else execute (if score #random <%config.internalScoreboard%> matches 11..17) {
+            } else execute (if score #math.result <%config.internalScoreboard%> matches 11..17) {
                 effect give @s minecraft:bad_omen 1200 2
                 tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
             } else {

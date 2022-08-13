@@ -15,27 +15,17 @@ function clock_10t {
                 playsound foxcraft_dungeon_loot:item.gravilock_boots.zap player @a ~ ~ ~ 1.0 0.5
             }
             # Spawn a particle effect at the player's feet
-            particle minecraft:effect ~ ~ ~ 0.1 0 0.1 0.25 5
+            particle minecraft:electric_spark ~ ~ ~ 0.1 0 0.1 0.25 5
 
             # NBT Scan is probably better here than in the main tick.
             execute unless entity @s[gamemode=creative] run {
-                # NBT scan needed to determine the amount of damage to apply to the boots.
-                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_iron]) {
-                    item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron
-                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-                        macro break_item armor.feet minecraft:iron_boots{CustomModelData:421953}
-                    }
-                } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_diamond]) {
-                    item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_diamond
-                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-                        macro break_item armor.feet minecraft:diamond_boots{CustomModelData:421953}
-                    }
+                execute (if entity @s[predicate=foxcraft_dungeon_loot:items/feet_have_unbreaking]) {
+                    # NBT scan to determine unbreaking level.
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s Inventory[{Slot:100b}].tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    function foxcraft_dungeon_loot:math/should_damage_armor
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run function foxcraft_dungeon_loot:items/gravilock_boots/damage
                 } else {
-                    # We'll just assume this is netherite to save on NBT scans.
-                    item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_netherite
-                    execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-                        macro break_item armor.feet minecraft:netherite_boots{CustomModelData:421953}
-                    }
+                    function foxcraft_dungeon_loot:items/gravilock_boots/damage
                 }
             }
         }
@@ -49,6 +39,26 @@ function clock_10t {
     execute as @a[predicate=!foxcraft_dungeon_loot:items/gravilock_boots/worn,tag=satyrn.fdl.gravilockBoots.effectsApplied] run {
         effect clear @s minecraft:slowness
         tag @s remove satyrn.fdl.gravilockBoots.effectsApplied
+    }
+}
+
+function damage {
+    execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_iron]) {
+        item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron
+        execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
+            macro break_item armor.feet minecraft:iron_boots{CustomModelData:421953}
+        }
+    } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_diamond]) {
+        item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_diamond
+        execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
+            macro break_item armor.feet minecraft:diamond_boots{CustomModelData:421953}
+        }
+    } else {
+        # We'll just assume this is netherite to save on NBT scans.
+        item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_netherite
+        execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
+            macro break_item armor.feet minecraft:netherite_boots{CustomModelData:421953}
+        }
     }
 }
 
