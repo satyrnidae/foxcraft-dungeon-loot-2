@@ -11,7 +11,7 @@ $ConfigFile = "$PSScriptRoot/config.json"
 if (Test-Path $ConfigFile) {
     $Config = (Get-Content $ConfigFile | Out-String | ConvertFrom-Json)
     if ($Config.mc.baseArchiveName -and $Config.mc.version) {
-        $OutFile = "$BuildDir/$($Config.mc.baseArchiveName)-$($Config.mc.version).zip"
+        $OutFile = "$BuildDir/$($Config.mc.baseArchiveName)-$($Config.mc.version)$(if($Config.mc.dev){"+dev"}).zip"
         $ExistingTest = 0
 
         while (Test-Path $OutFile) {
