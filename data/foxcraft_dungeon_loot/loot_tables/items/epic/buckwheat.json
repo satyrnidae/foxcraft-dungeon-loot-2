@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:wheat"
+          "name": "minecraft:warped_fungus_on_a_stick"
         }
       ]
     }
@@ -22,7 +22,7 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "But with an \"F\"",
+        "...But if it started with an \"F\" instead.",
         [
           "Rarity: ",
           {
@@ -64,13 +64,13 @@
     {
       "function": "minecraft:set_enchantments",
       "enchantments": {
-        "minecraft:mending": 1
+        "minecraft:unbreaking": 1
       },
       "add": true
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:76,CustomModelData:421950,HideFlags:1,DungeonItem:1b}"
+      "tag": "{DungeonLootId:76,CustomModelData:4219526,DungeonItem:1b}"
     }
   ]
 }
