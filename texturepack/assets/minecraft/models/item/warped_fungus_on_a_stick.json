@@ -153,6 +153,12 @@
         "custom_model_data": 4219525
       },
       "model": "foxcraft_dungeon_loot:item/mythic_grab_bag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4219526
+      },
+      "model": "foxcraft_dungeon_loot:item/buckwheat"
     }
   ]
 }
