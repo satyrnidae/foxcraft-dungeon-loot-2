@@ -23,7 +23,7 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
-        "Make it rain.",
+        "Tor'Enhia implores you to make it rain.",
         [
           "Rarity: ",
           {
@@ -75,9 +75,9 @@
           }
         ],
         {
-          "text": "summons a thunderstorm for five minutes.",
+          "text": "summons a thunderstorm for 2½ minutes.",
           "color": "gray",
-          "italic": true
+          "italic": false
         },
         [
           {
