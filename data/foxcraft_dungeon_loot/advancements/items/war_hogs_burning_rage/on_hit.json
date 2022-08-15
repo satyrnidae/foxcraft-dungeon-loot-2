@@ -1,25 +1,31 @@
 {
   "parent": "foxcraft_dungeon_loot:items/root",
   "criteria": {
-    "player_hurt_by_entity": {
-      "trigger": "minecraft:entity_hurt_player",
+    "player_hurt_entity": {
+      "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "damage": {
-          "blocked": false,
-          "source_entity": {
-            "equipment": {
-              "mainhand": {
-                "nbt": "{DungeonLootId:28}"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "mainhand": {
+                  "nbt": "{DungeonLootId:28}"
+                }
               }
             }
           }
+        ],
+        "damage": {
+          "blocked": false
         }
       }
     }
   },
   "requirements": [
     [
-      "player_hurt_by_entity"
+      "player_hurt_entity"
     ]
   ],
   "rewards": {
