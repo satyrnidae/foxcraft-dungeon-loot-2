@@ -1,4 +1,5 @@
 {
+  "parent": "foxcraft_dungeon_loot:items/root",
   "criteria": {
     "player_hurt_arthropod": {
       "trigger": "minecraft:player_hurt_entity",

@@ -32,7 +32,62 @@
             "color": "green",
             "italic": true
           }
-        ]
+        ],
+        "",
+        [
+          {
+            "text": "Disarming Strike: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When hitting an entity",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "that is holding an item, has a one in ten",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "chance to force the entity to drop said",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "item.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "For players, the chance to disarm is",
+            "color": "red",
+            "italic": false
+          }
+        ],
+        {
+          "text": " reduced to one in twenty. Player items",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": " cannot be picked up except by the",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": " owner.",
+          "color": "red",
+          "italic": false
+        }
       ]
     },
     {
