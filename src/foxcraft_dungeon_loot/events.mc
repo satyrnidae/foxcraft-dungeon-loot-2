@@ -8,7 +8,7 @@ function clock_3t {
         execute store result score @s satyrn.fdl.events.fallOneCm run data get entity @s FallDistance 100
 
         # Calls the on_fall event when a player is falling for a great distance.
-        execute at @s[scores={satyrn.fdl.events.fallOneCm=700..}] run function #foxcraft_dungeon_loot:on_fall
+        execute at @s[scores={satyrn.fdl.events.fallOneCm=500..}] run function #foxcraft_dungeon_loot:on_fall
     }
 }
 
