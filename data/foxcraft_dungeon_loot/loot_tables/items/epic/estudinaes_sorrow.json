@@ -91,6 +91,28 @@
           "text": "and 10 seconds of Hunger to you.",
           "color": "gray",
           "italic": false
+        },
+        [
+          {
+            "text": "The Poison of Poncho Sanchez: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Attacking a",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "target has a one in ten chance to apply a short",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "burst of Wither II to the target.",
+          "color": "gray",
+          "italic": false
         }
       ],
       "replace": true
