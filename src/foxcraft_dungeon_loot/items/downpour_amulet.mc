@@ -39,11 +39,11 @@ function on_warped_fungus_used {
 
             # If the sender is crouching, set the weather to thunder. Otherwise, set it to rain.
             execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
-                weather thunder 300
-                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 5 minutes.","italic":true}]
+                weather thunder 150
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 2½ minutes."}]
             } else {
                 weather rain 300
-                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Rain for 5 minutes.","italic":true}]
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Rain for 5 minutes."}]
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
