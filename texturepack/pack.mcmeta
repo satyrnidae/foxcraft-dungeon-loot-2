@@ -6,9 +6,12 @@
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "baseArchiveName": "foxcraft-dungeon-loot-resources",
     "changelog": {
+      "1.1.2": [
+        "Reduce specular on gold coins."
+      ],
       "1.1.1": [
         "Add Buckwheat model and override."
       ],
