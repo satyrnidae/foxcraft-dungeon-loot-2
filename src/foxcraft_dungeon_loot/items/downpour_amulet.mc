@@ -9,7 +9,7 @@ function on_load {
 function on_tick {
     # Increment cooldown timer
     execute as @a[scores={satyrn.fdl.downpourAmulet.cooldown=1..}] run {
-        scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 100
+        scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 1
 
         # Reset cooldown after 5 minutes
         execute at @s[scores={satyrn.fdl.downpourAmulet.cooldown=6000..}] run {
