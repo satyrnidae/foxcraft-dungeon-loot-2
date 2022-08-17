@@ -1,17 +1,17 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:gold_nugget",
-      "nbt": "{CustomModelData:421950}"
+      "item": "minecraft:goat_horn",
+      "nbt": "{CustomModelData:42195}"
     },
-    "title": "\"This Belongs in a Museum!\"",
-    "description": "Trade with a Wandering Trader for some dungeon loot.",
+    "title": "Instrumentalist",
+    "description": "Trade with a Wandering Trader for a copper goat horn.",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
-  "parent": "foxcraft_dungeon_loot:grab_bag_trade",
+  "parent": "foxcraft_dungeon_loot:root",
   "criteria": {
     "trade_for_item": {
       "trigger": "minecraft:villager_trade",
@@ -26,7 +26,7 @@
           }
         ],
         "item": {
-          "nbt": "{DungeonItem:1b}"
+          "nbt": "{CopperGoatHorn:1b}"
         }
       }
     }
@@ -35,10 +35,5 @@
     [
       "trade_for_item"
     ]
-  ],
-  "rewards": {
-    "loot": [
-      "foxcraft_dungeon_loot:loot/advancements/dungeon_item_trade"
-    ]
-  }
+  ]
 }

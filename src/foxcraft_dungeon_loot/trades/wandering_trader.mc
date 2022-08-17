@@ -10,6 +10,8 @@ function on_load {
     scoreboard objectives add satyrn.fdl.tradesAdded.dungeonLoot dummy
     scoreboard objectives add satyrn.fdl.tradesToAdd.exchange dummy
     scoreboard objectives add satyrn.fdl.tradesAdded.exchange dummy
+    scoreboard objectives add satyrn.fdl.tradesToAdd.goatHorns dummy
+    scoreboard objectives add satyrn.fdl.tradesAdded.goatHorns dummy
     scoreboard objectives add satyrn.fdl.selectedTrade dummy
 }
 
@@ -37,6 +39,9 @@ function on_tick {
 
         macro random 6 7
         scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #math.result <%config.internalScoreboard%>
+
+        macro random 0 3
+        scoreboard players operation @s satyrn.fdl.tradesToAdd.goatHorns = #math.result <%config.internalScoreboard%>
     }
 
 # Head trades
@@ -55,6 +60,26 @@ function on_tick {
                 function foxcraft_dungeon_loot:trades/wandering_trader/append_current_trade_to_index
                 function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
                 scoreboard players add @s satyrn.fdl.tradesAdded.head 1
+            }
+        }
+# Goat Horns
+    } else execute (unless entity @s[tag=satyrn.fdl.trades.hasTrades.goatHorns]) {
+        execute (if score @s satyrn.fdl.tradesToAdd.goatHorns matches 0) {
+            tag @s add satyrn.fdl.trades.hasTrades.goatHorns
+        } else execute (if score @s satyrn.fdl.tradesAdded.goatHorns >= @s satyrn.fdl.tradesToAdd.goatHorns) {
+            tag @s add satyrn.fdl.trades.hasTrades.goatHorns
+        } else {
+            tag @s remove satyrn.fdl.tradeAdded
+
+            macro random 82 91
+            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
+
+            execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trades/wandering_trader/check_existing_trades
+
+            execute if entity @s[tag=satyrn.fdl.tradeAdded] run {
+                function foxcraft_dungeon_loot:trades/wandering_trader/append_current_trade_to_index
+                function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
+                scoreboard players add @s satyrn.fdl.tradesAdded.goatHorns 1
             }
         }
 # Grab Bag trades
@@ -134,6 +159,8 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.selectedTrade
     scoreboard objectives remove satyrn.fdl.tradesToAdd.exchange
     scoreboard objectives remove satyrn.fdl.tradesAdded.exchange
+    scoreboard objectives remove satyrn.fdl.tradesToAdd.goatHorns
+    scoreboard objectives remove satyrn.fdl.tradesAdded.goatHorns
 }
 
 function append_current_trade_to_index {
@@ -162,7 +189,7 @@ function recursive_check {
 }
 
 function add_trade {
-    LOOP(81,i) {
+    LOOP(91,i) {
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             macro get_offer_from_index <%i%>
             !IF(i==0) {
@@ -204,13 +231,17 @@ function add_trade {
             # Exchange trades do not have custom pricing
             !IF(i>=28 && i <=59) {
                 # Mythic item custom pricing
-                macro randomize_buy_price 1 2
+                macro randomize_buy_price 1 3
                 macro randomize_buyb_price 0 9
             }
-            !IF(i > 59) {
+            !IF(i > 59 && i <= 80) {
                 # Epic items custom pricing
                 macro randomize_buy_price 1 9
                 macro randomize_buyb_price 0 9
+            }
+            !IF(i > 80 && i <= 91) {
+                macro randomize_buy_price 1 3
+                macro set_buyb_from_loot foxcraft_dungeon_loot:goat_horns/random_goat_horn
             }
         }
     }
