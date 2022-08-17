@@ -1,0 +1,272 @@
+{
+  "item.copper_goat_horn.bass.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass0",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass1",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass2",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass3",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass4",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass5",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass6",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass7",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass8",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/bass9",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody0",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody1",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody2",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody3",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody4",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody5",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody6",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody7",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody8",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/melody9",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony0",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony1",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony2",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony3",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony4",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony5",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony6",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony7",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony8",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "minecraft:item/copper_goat_horn/harmony9",
+        "stream": true
+      }
+    ]
+  }
+}

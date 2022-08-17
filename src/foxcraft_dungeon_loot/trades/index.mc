@@ -394,6 +394,50 @@ function build {
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/tithe_to_uthiir
         function foxcraft_dungeon_loot:trades/recipes/push
 
+# Copper Goat Horns
+        # Trade Index 82: Clear Temper Journey
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/clear_temper_journey
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
+        macro set_buyb_item_id "minecraft:goat_horn"
+        macro set_buyb_price 1
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 83: Dry Urge Anger
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/dry_urge_anger
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 84: Fearless River Gift
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fearless_river_gift
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 85: Fresh Nest Thought
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fresh_nest_thought
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 86: Great Sky Falling
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/great_sky_falling
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 87: Mumble Fire Memory
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/mumble_fire_memory
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 88: Old Hymn Resting
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/old_hymn_resting
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 89: Pure Water Desire
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/pure_water_desire
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 90: Secret Lake Tear
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/secret_lake_tear
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 91: Sweet Moon Love
+        macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/sweet_moon_love
+        function foxcraft_dungeon_loot:trades/recipes/push
+
         tellraw @a {"text":"Trade index built!","color":"gray"}
         schedule function foxcraft_dungeon_loot:trades/index/release_chunk 1t
     }

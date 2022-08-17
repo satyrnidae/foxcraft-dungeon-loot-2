@@ -1,0 +1,132 @@
+{
+  "parent": "foxcraft_dungeon_loot:items/root",
+  "criteria": {
+    "great_sky_falling": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:great_sky_falling}"
+        }
+      }
+    },
+    "old_hymn_resting": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:old_hymn_resting}"
+        }
+      }
+    },
+    "pure_water_desire": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:pure_water_desire}"
+        }
+      }
+    },
+    "mumble_fire_memory": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:mumble_fire_memory}"
+        }
+      }
+    },
+    "dry_urge_anger": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:dry_urge_anger}"
+        }
+      }
+    },
+    "clear_temper_journey": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:clear_temper_journey}"
+        }
+      }
+    },
+    "fresh_nest_thought": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:fresh_nest_thought}"
+        }
+      }
+    },
+    "secret_lake_tear": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:secret_lake_tear}"
+        }
+      }
+    },
+    "fearless_river_gift": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:fearless_river_gift}"
+        }
+      }
+    },
+    "sweet_moon_love": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "nbt": "{CopperGoatHorn:1b,CustomInstrument:sweet_moon_love}"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "great_sky_falling",
+      "old_hymn_resting",
+      "pure_water_desire",
+      "mumble_fire_memory",
+      "dry_urge_anger",
+      "clear_temper_journey",
+      "fresh_nest_thought",
+      "secret_lake_tear",
+      "fearless_river_gift",
+      "sweet_moon_love"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:items/copper_goat_horn/on_using_item"
+  }
+}

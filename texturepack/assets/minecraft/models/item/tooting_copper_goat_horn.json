@@ -1,0 +1,6 @@
+{
+    "parent": "item/tooting_goat_horn",
+    "textures": {
+        "layer0": "item/copper_goat_horn"
+    }
+}

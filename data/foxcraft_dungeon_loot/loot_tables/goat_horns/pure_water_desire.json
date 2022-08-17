@@ -1,0 +1,54 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:goat_horn",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{instrument:\"minecraft:admire_goat_horn\",HideFlags:32}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Copper Goat Horn",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{CustomModelData:42195,CopperGoatHorn:1b,CustomInstrument:pure_water_desire}"
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pure Water Desire",
+          "color": "gray",
+          "italic": false
+        },
+        "Plays a different tune when crouching or",
+        "looking upwards.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    }
+  ]
+}

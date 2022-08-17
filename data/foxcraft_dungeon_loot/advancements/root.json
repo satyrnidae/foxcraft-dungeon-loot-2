@@ -1,23 +1,22 @@
 {
   "display": {
-    "frame": "task",
+    "frame": "challenge",
     "icon": {
       "item": "minecraft:golden_sword",
       "nbt": "{CustomModelData:421951,Enchantments:[{}]}"
     },
     "title": [
       {
-        "text": "Foxcraft Dungeon Loot",
-        "color": "green"
+        "text": "Foxcraft Dungeon Loot"
       }
     ],
     "description": [
       {
-        "text": "Customized dungeon loot for the Foxcraft server!"
+        "text": "Customized, powerful dungeon loot!"
       }
     ],
     "announce_to_chat": false,
-    "show_toast": false,
+    "show_toast": true,
     "hidden": false
   },
   "parent": "global:satyrnidae/author",
