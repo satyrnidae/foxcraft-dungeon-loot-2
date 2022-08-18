@@ -1,7 +1,7 @@
 function load {
     # Set up scoreboards
     scoreboard objectives add <%config.internalScoreboard%> dummy
-    execute unless score version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run function foxcraft_dungeon_loot:update_scoreboards
+    execute unless score #version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run function foxcraft_dungeon_loot:update_scoreboards
 
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick "Player used warped fungus"
     scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball "Player used snowball"
@@ -65,5 +65,5 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.math.input2
     scoreboard objectives remove satyrn.fdl.const
 
-    scoreboard players set version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
+    scoreboard players set #version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
 }

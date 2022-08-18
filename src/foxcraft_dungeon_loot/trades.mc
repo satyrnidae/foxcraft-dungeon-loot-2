@@ -6,12 +6,15 @@ function on_load {
     function foxcraft_dungeon_loot:trades/index/on_load
     function foxcraft_dungeon_loot:trades/wandering_trader/on_load
 
-    scoreboard players set trader.enableWelcomeMsg <%config.internalScoreboard%> 1
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get trader.enableWelcomeMsg <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set trader.enableWelcomeMsg <%config.internalScoreboard%> 1
 }
 
 function on_uninstall {
     function foxcraft_dungeon_loot:trades/index/on_uninstall
     function foxcraft_dungeon_loot:trades/wandering_trader/on_uninstall
+
+    scoreboard players reset trader.enableWelcomeMsg <%config.internalScoreboard%>
 }
 
 # Populating loot tables occurs over multiple ticks
