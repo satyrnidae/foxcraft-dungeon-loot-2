@@ -1,0 +1,69 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 5,
+          "quality": 2,
+          "name": "foxcraft_dungeon_loot:items/common/absinthe"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 6,
+          "quality": 1,
+          "name": "foxcraft_dungeon_loot:items/common/animus"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 4,
+          "quality": 3,
+          "name": "foxcraft_dungeon_loot:items/common/coffee"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 6,
+          "quality": 1,
+          "name": "foxcraft_dungeon_loot:items/common/laudanum"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 5,
+          "quality": 2,
+          "name": "foxcraft_dungeon_loot:items/common/luma"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 7,
+          "quality": 0,
+          "name": "foxcraft_dungeon_loot:items/common/moonshine"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 3,
+          "quality": 4,
+          "name": "foxcraft_dungeon_loot:items/common/nectar"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 5,
+          "quality": 2,
+          "name": "foxcraft_dungeon_loot:items/common/stout"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 7,
+          "quality": 0,
+          "name": "foxcraft_dungeon_loot:items/common/tequila"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 6,
+          "quality": 1,
+          "name": "foxcraft_dungeon_loot:items/common/vitae"
+        }
+      ]
+    }
+  ]
+}

@@ -4,251 +4,46 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "weight": 10,
+          "type": "minecraft:loot_table",
+          "weight": 220,
           "quality": 0,
-          "name": "minecraft:emerald"
+          "name": "foxcraft_dungeon_loot:single_resource"
         },
         {
-          "type": "minecraft:item",
-          "weight": 8,
+          "type": "minecraft:loot_table",
+          "weight": 70,
           "quality": 0,
-          "name": "minecraft:diamond"
+          "name": "foxcraft_dungeon_loot:single_armor_stand"
         },
         {
-          "type": "minecraft:item",
-          "weight": 6,
-          "quality": 0,
-          "name": "minecraft:netherite_ingot"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 9,
-          "quality": 0,
-          "name": "minecraft:iron_sword"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 7,
-          "quality": 1,
-          "name": "minecraft:diamond_sword"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
+          "type": "minecraft:loot_table",
+          "weight": 120,
           "quality": 2,
-          "name": "minecraft:netherite_sword"
+          "name": "foxcraft_dungeon_loot:single_drink"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 10,
+          "weight": 140,
           "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand"
+          "name": "foxcraft_dungeon_loot:single_die"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_baby"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_bashful"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_cancan"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_gallant"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_greyskull"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_skeleton"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/armor_stand_zombie"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 5,
-          "quality": 2,
-          "name": "foxcraft_dungeon_loot:items/common/absinthe"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 6,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/animus"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
+          "weight": 40,
           "quality": 3,
-          "name": "foxcraft_dungeon_loot:items/common/coffee"
+          "name": "foxcraft_dungeon_loot:single_spawn_egg"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 6,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/laudanum"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 5,
+          "weight": 70,
           "quality": 2,
-          "name": "foxcraft_dungeon_loot:items/common/luma"
+          "name": "foxcraft_dungeon_loot:single_copper_goat_horn"
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 7,
+          "weight": 200,
           "quality": 0,
-          "name": "foxcraft_dungeon_loot:items/common/moonshine"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 3,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:items/common/nectar"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 5,
-          "quality": 2,
-          "name": "foxcraft_dungeon_loot:items/common/stout"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 7,
-          "quality": 0,
-          "name": "foxcraft_dungeon_loot:items/common/tequila"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 6,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/vitae"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d4"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d6"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d8"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d10"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d12"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 12,
-          "quality": 1,
-          "name": "foxcraft_dungeon_loot:items/common/d20"
-        },
-        {
-          "type": "minecraft:tag",
-          "weight": 1,
-          "quality": 2,
-          "name": "foxcraft_dungeon_loot:spawn_eggs",
-          "expand": true
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/clear_temper_journey"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/dry_urge_anger"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/fearless_river_gift"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/fresh_nest_thought"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/great_sky_falling"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/mumble_fire_memory"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/old_hymn_resting"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/pure_water_desire"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/secret_lake_tear"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 4,
-          "quality": 4,
-          "name": "foxcraft_dungeon_loot:goat_horns/sweet_moon_love"
+          "name": "foxcraft_dungeon_loot:single_tool"
         }
       ]
     }

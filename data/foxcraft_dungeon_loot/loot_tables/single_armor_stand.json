@@ -1,0 +1,41 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_baby"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_bashful"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_cancan"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_gallant"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_greyskull"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_skeleton"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/armor_stand_zombie"
+        }
+      ]
+    }
+  ]
+}

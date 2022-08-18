@@ -1,0 +1,33 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d4"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d6"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d8"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d10"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d12"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/common/d20"
+        }
+      ]
+    }
+  ]
+}
