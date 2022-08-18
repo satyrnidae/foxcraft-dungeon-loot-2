@@ -1,0 +1,49 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/clear_temper_journey"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/dry_urge_anger"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/fearless_river_gift"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/fresh_nest_thought"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/great_sky_falling"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/mumble_fire_memory"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/old_hymn_resting"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/pure_water_desire"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/secret_lake_tear"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:goat_horns/sweet_moon_love"
+        }
+      ]
+    }
+  ]
+}

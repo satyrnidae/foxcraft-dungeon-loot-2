@@ -6,32 +6,32 @@
         {
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/common",
-          "weight": 1,
-          "quality": 1
+          "weight": 2,
+          "quality": 0
         },
         {
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/uncommon",
           "weight": 80,
-          "quality": 5
+          "quality": 1
         },
         {
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/rare",
-          "weight": 4,
-          "quality": 10
+          "weight": 8,
+          "quality": 3
         },
         {
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/epic",
-          "weight": 3,
-          "quality": 20
+          "weight": 6,
+          "quality": 5
         },
         {
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/mythic",
-          "weight": 2,
-          "quality": 40
+          "weight": 4,
+          "quality": 9
         }
       ]
     }

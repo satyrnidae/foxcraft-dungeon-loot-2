@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:tag",
+          "name": "foxcraft_dungeon_loot:spawn_eggs",
+          "expand": true
+        }
+      ]
+    }
+  ]
+}
