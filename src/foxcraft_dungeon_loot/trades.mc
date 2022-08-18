@@ -5,6 +5,8 @@ function on_load {
     # Init the trade index.
     function foxcraft_dungeon_loot:trades/index/on_load
     function foxcraft_dungeon_loot:trades/wandering_trader/on_load
+
+    scoreboard players set trader.enableWelcomeMsg <%config.internalScoreboard%> 1
 }
 
 function on_uninstall {
