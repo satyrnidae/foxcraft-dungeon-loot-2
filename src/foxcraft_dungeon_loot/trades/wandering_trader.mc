@@ -13,6 +13,9 @@ function on_load {
     scoreboard objectives add satyrn.fdl.tradesToAdd.goatHorns dummy
     scoreboard objectives add satyrn.fdl.tradesAdded.goatHorns dummy
     scoreboard objectives add satyrn.fdl.selectedTrade dummy
+
+    team add satyrn.fdl.traders "Wandering Traders"
+    team modify satyrn.fdl.traders color dark_aqua
 }
 
 # Multi-tick function, adds trades to the wandering trader.
@@ -146,6 +149,20 @@ function on_tick {
             data modify entity @s Leash.UUID set from entity @e[type=minecraft:wandering_trader,limit=1,sort=nearest,distance=..5] UUID
             data modify entity @s Owner set from entity @e[type=minecraft:wandering_trader,limit=1,sort=nearest,distance=..5] UUID
         }
+
+        execute if score trader.enableWelcomeMsg <%config.internalScoreboard%> matches 1 run {
+            team join satyrn.fdl.traders @s
+
+            execute store result score #x <%config.internalScoreboard%> run data get entity @s Pos[0]
+            execute store result score #z <%config.internalScoreboard%> run data get entity @s Pos[2]
+
+            effect give @s minecraft:glowing 10
+
+            tag @s add satyrn.fdl.wanderingTrader.announce
+            tellraw @a ["[",{"selector":"@s"},"] Hello! I offer exotic wares at fair prices. Find me near ",{"selector":"@p"},", at ",{"score":{"name":"#x","objective":"<%config.internalScoreboard%>"}},"x ",{"score":{"name":"#z","objective":"<%config.internalScoreboard%>"}},"z!"]
+            execute as @a at @s facing entity @e[type=minecraft:wandering_trader,limit=1,tag=satyrn.fdl.wanderingTrader.announce] eyes run playsound minecraft:entity.wandering_trader.yes neutral @s ^ ^ ^1
+            tag @s remove satyrn.fdl.wanderingTrader.announce
+        }
     }
 }
 
@@ -161,6 +178,8 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.tradesAdded.exchange
     scoreboard objectives remove satyrn.fdl.tradesToAdd.goatHorns
     scoreboard objectives remove satyrn.fdl.tradesAdded.goatHorns
+
+    team remove satyrn.fdl.traders
 }
 
 function append_current_trade_to_index {
