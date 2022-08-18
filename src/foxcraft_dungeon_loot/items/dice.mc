@@ -46,39 +46,49 @@ function on_uninstall {
 
 # Runs when a warped fungus is used.
 function on_warped_fungus_used {
+    scoreboard players set #test <%config.internalScoreboard%> 0
+
     execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d4/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d4 player @a
         macro random 1 4
+        scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d6/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d6 player @a
         macro random 1 6
+        scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d8/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d8 player @a
         macro random 1 8
+        scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d10/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d10 player @a
         macro random 1 10
+        scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d12/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d12 player @a
         macro random 1 12
+        scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute (if entity @s[predicate=foxcraft_dungeon_loot:items/d20/in_main_hand]) {
         playsound foxcraft_dungeon_loot:item.dice.d20 player @a
         macro random 1 20
+        scoreboard players set #test <%config.internalScoreboard%> 1
     }
 
-    execute (unless entity @s[tag=satyrn.fdl.dice.spamLockout]) {
-        execute (if score @s satyrn.fdl.dice.spamCounter >= dice.spamLockoutThresh <%config.internalScoreboard%>) {
-            tellraw @s {"text":"Spam protection is now active; your rolls will not be broadcast to the server for a while.","color":"red"}
-            function foxcraft_dungeon_loot:items/dice/notify_result
+    execute if score #test <%config.internalScoreboard%> matches 1 run {
+        execute (unless entity @s[tag=satyrn.fdl.dice.spamLockout]) {
+            execute (if score @s satyrn.fdl.dice.spamCounter >= dice.spamLockoutThresh <%config.internalScoreboard%>) {
+                tellraw @s {"text":"Spam protection is now active; your rolls will not be broadcast to the server for a while.","color":"red"}
+                function foxcraft_dungeon_loot:items/dice/notify_result
 
-            scoreboard players operation @s satyrn.fdl.dice.spamCooldown = dice.spamLockoutTimer <%config.internalScoreboard%>
-            tag @s add satyrn.fdl.dice.spamLockout
+                scoreboard players operation @s satyrn.fdl.dice.spamCooldown = dice.spamLockoutTimer <%config.internalScoreboard%>
+                tag @s add satyrn.fdl.dice.spamLockout
+            } else {
+                scoreboard players add @s satyrn.fdl.dice.spamCounter 1
+                function foxcraft_dungeon_loot:items/dice/broadcast_result
+            }
         } else {
-            scoreboard players add @s satyrn.fdl.dice.spamCounter 1
-            function foxcraft_dungeon_loot:items/dice/broadcast_result
+            function foxcraft_dungeon_loot:items/dice/notify_result
         }
-    } else {
-        function foxcraft_dungeon_loot:items/dice/notify_result
     }
 }
 
