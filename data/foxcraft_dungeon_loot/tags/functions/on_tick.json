@@ -6,6 +6,7 @@
     "foxcraft_dungeon_loot:items/bringer_of_fear/on_tick",
     "foxcraft_dungeon_loot:items/copper_goat_horn/on_tick",
     "foxcraft_dungeon_loot:items/deilonas_holy_blessings/on_tick",
+    "foxcraft_dungeon_loot:items/dice/on_tick",
     "foxcraft_dungeon_loot:items/downpour_amulet/on_tick",
     "foxcraft_dungeon_loot:items/evokers_tome/on_tick",
     "foxcraft_dungeon_loot:items/feather_of_quet_zala/on_tick",
