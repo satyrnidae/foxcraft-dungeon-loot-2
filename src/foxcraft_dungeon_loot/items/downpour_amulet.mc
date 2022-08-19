@@ -3,16 +3,19 @@ import ../../macros.mcm
 # Initializes the Downpour Amulet's cooldown scoreboard.
 function on_load {
     scoreboard objectives add satyrn.fdl.downpourAmulet.cooldown dummy
+
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get downpourAmulet.cooldown <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set downpourAmulet.cooldown <%config.internalScoreboard%> 6000
 }
 
 # Runs once per tick.
 function on_tick {
     # Increment cooldown timer
     execute as @a[scores={satyrn.fdl.downpourAmulet.cooldown=1..}] run {
-        scoreboard players add @s satyrn.fdl.downpourAmulet.cooldown 1
+        scoreboard players remove @s satyrn.fdl.downpourAmulet.cooldown 1
 
         # Reset cooldown after 5 minutes
-        execute at @s[scores={satyrn.fdl.downpourAmulet.cooldown=6000..}] run {
+        execute at @s[scores={satyrn.fdl.downpourAmulet.cooldown=..0}] run {
             playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
             particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
             title @s actionbar {"text":"The Downpour Amulet is ready to be used once more.","color":"dark_purple"}
@@ -24,6 +27,8 @@ function on_tick {
 # Runs when the datapack is uninstalled using the uninstall function.
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.downpourAmulet.cooldown
+
+    scoreboard players reset downpourAmulet.cooldown <%config.internalScoreboard%>
 }
 
 function on_warped_fungus_used {
@@ -40,7 +45,7 @@ function on_warped_fungus_used {
             # If the sender is crouching, set the weather to thunder. Otherwise, set it to rain.
             execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
                 weather thunder 150
-                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 2½ minutes."}]
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 2 minutes, 30 seconds."}]
             } else {
                 weather rain 300
                 tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Rain for 5 minutes."}]
@@ -48,8 +53,37 @@ function on_warped_fungus_used {
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
             execute unless entity @s[gamemode=creative] run {
-                scoreboard players set @s satyrn.fdl.downpourAmulet.cooldown 1
-                title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 5 minutes.","color":"dark_purple"}
+                scoreboard players operation @s satyrn.fdl.downpourAmulet.cooldown = downpourAmulet.cooldown <%config.internalScoreboard%>
+                scoreboard players operation #math.input1 <%config.internalScoreboard%> = downpourAmulet.cooldown <%config.internalScoreboard%>
+                function foxcraft_dungeon_loot:math/ticks_to_min_sec
+
+                execute (if score #math.minutes <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 1 second.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"The Downpour Amulet is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                    }
+                } else execute (if score #math.seconds <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 1 minute.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"The Downpour Amulet is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes."]
+                    }
+                } else {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar {"text":"The Downpour Amulet is now on cooldown for 1 minute, 1 second.","color":"dark_purple"}
+                        } else {
+                        title @s actionbar [{"text":"The Downpour Amulet is now on cooldown for 1 minute, ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    } else {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar [{"text":"The Downpour Amulet is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, 1 second."]
+                        } else {
+                            title @s actionbar [{"text":"The Downpour Amulet is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, ",{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    }
+                }
 
                 execute (if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking]) {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl

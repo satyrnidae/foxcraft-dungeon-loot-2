@@ -37,7 +37,9 @@ function disarm_player {
 
 # Reward function for the advancement
 function on_hit {
-    function foxcraft_dungeon_loot:items/war_hogs_burning_rage/raycast/start
+
+    execute if entity @s[advancements={foxcraft_dungeon_loot:items/war_hogs_burning_rage/on_hit={player_hurt_entity=true}}] run function foxcraft_dungeon_loot:items/war_hogs_burning_rage/raycast/start
+    execute if entity @s[advancements={foxcraft_dungeon_loot:items/war_hogs_burning_rage/on_hit={entity_hurt_player=true}},predicate=!foxcraft_dungeon_loot:items/is_mainhand_empty,gamemode=!creative] run function foxcraft_dungeon_loot:items/war_hogs_burning_rage/disarm_player
 
     advancement revoke @s only foxcraft_dungeon_loot:items/war_hogs_burning_rage/on_hit
 }

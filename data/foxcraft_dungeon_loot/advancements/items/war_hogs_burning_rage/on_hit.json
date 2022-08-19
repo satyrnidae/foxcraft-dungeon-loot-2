@@ -21,11 +21,29 @@
           "blocked": false
         }
       }
+    },
+    "entity_hurt_player": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "player": [],
+        "damage": {
+          "blocked": false,
+          "source_entity": {
+            "type": "minecraft:piglin_brute",
+            "equipment": {
+              "mainhand": {
+                "nbt": "{DungeonLootId:28}"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "requirements": [
     [
-      "player_hurt_entity"
+      "player_hurt_entity",
+      "entity_hurt_player"
     ]
   ],
   "rewards": {

@@ -16,6 +16,9 @@ The score of #math.result in the internal scoreboard is undefined unless checked
 function on_load {
     # Create math input scoreboards
     scoreboard objectives add satyrn.fdl.math.temp dummy
+
+    scoreboard players set #1200 <%config.internalScoreboard%> 1200
+    scoreboard players set #20 <%config.internalScoreboard%> 20
 }
 
 function on_uninstall {
@@ -104,4 +107,20 @@ function should_damage_armor {
             scoreboard players set #math.result <%config.internalScoreboard%> 0
         }
     }
+}
+
+###
+This function converts the input value into both minutes and seconds.
+Use #math.input1 for input, #math.minutes and #math.seconds for results.
+###
+function ticks_to_min_sec {
+    scoreboard players operation #math.minutes <%config.internalScoreboard%> = #math.input1 <%config.internalScoreboard%>
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> = #math.input1 <%config.internalScoreboard%>
+
+    # Convert input to rough minutes.
+    scoreboard players operation #math.minutes <%config.internalScoreboard%> /= #1200 <%config.internalScoreboard%>
+
+    # Convert remainder to rough seconds.
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> %= #1200 <%config.internalScoreboard%>
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> /= #20 <%config.internalScoreboard%>
 }
