@@ -14,16 +14,19 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:items/scripture_of_cleansing/clock_10t 2t
     scoreboard objectives add satyrn.fdl.scriptureOfCleansing.cooldown dummy
+
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set scriptureOfCleansing.cooldown <%config.internalScoreboard%> 1200
 }
 
 # Executes once per player per tick
 function on_tick {
     # Increment tick timer
     execute as @a[scores={satyrn.fdl.scriptureOfCleansing.cooldown=1..}] run {
-        scoreboard players add @s satyrn.fdl.scriptureOfCleansing.cooldown 1
+        scoreboard players remove @s satyrn.fdl.scriptureOfCleansing.cooldown 1
 
         # Reset scoreboard after 30 seconds.
-        execute at @s[scores={satyrn.fdl.scriptureOfCleansing.cooldown=600..}] run {
+        execute at @s[scores={satyrn.fdl.scriptureOfCleansing.cooldown=..0}] run {
             playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
             particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
             title @s actionbar {"text":"The Scripture of Cleansing is ready to be used once more.","color":"dark_purple"}
@@ -35,6 +38,8 @@ function on_tick {
 # Runs when the datapack is uninstalled.
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.scriptureOfCleansing.cooldown
+
+    scoreboard players reset scriptureOfCleansing.cooldown <%config.internalScoreboard%>
 }
 
 # Runs when the player uses a warped fungus on a stick.
@@ -176,8 +181,37 @@ function on_warped_fungus_used {
                         macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
                     }
                 }
-                scoreboard players set @s satyrn.fdl.scriptureOfCleansing.cooldown 1
-                title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 30 seconds.","color":"dark_purple"}
+                scoreboard players operation @s satyrn.fdl.scriptureOfCleansing.cooldown = scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+                scoreboard players operation #math.input1 <%config.internalScoreboard%> = scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+                function foxcraft_dungeon_loot:math/ticks_to_min_sec
+
+                execute (if score #math.minutes <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 second.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                    }
+                } else execute (if score #math.seconds <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 minute.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes."]
+                    }
+                } else {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 minute, 1 second.","color":"dark_purple"}
+                        } else {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for 1 minute, ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    } else {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, 1 second."]
+                        } else {
+                            title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, ",{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    }
+                }
             }
         }
     }

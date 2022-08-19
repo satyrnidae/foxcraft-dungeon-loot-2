@@ -1,14 +1,17 @@
 # Runs when the datapack is loaded
 function on_load {
     scoreboard objectives add satyrn.fdl.silverfishEscapeArtist.cooldown dummy
+
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get silverfishEscapeArtist.cooldown <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set silverfishEscapeArtist.cooldown <%config.internalScoreboard%> 600
 }
 
 # Runs once per tick
 function on_tick {
     execute as @a[scores={satyrn.fdl.silverfishEscapeArtist.cooldown=1..}] run {
-        scoreboard players add @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
+        scoreboard players remove @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
 
-        execute at @s[scores={satyrn.fdl.silverfishEscapeArtist.cooldown=600..}] run {
+        execute at @s[scores={satyrn.fdl.silverfishEscapeArtist.cooldown=..0}] run {
             playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
             particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
             title @s actionbar {"text":"Silverfish Escape Artist is ready to be used once more.","color":"dark_purple"}
@@ -20,6 +23,8 @@ function on_tick {
 # Runs when the datapack is uninstalled.
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.silverfishEscapeArtist.cooldown
+
+    scoreboard players reset silverfishEscapeArtist.cooldown <%config.internalScoreboard%>
 }
 
 # Runs when a player uses a warped fungus on a stick
@@ -49,8 +54,38 @@ function on_warped_fungus_used {
             effect give @s minecraft:hunger 30 2
 
             execute unless entity @s[gamemode=creative] run {
-                scoreboard players add @s satyrn.fdl.silverfishEscapeArtist.cooldown 1
-                title @s actionbar {"text":"Silverfish Escape Artist is now on cooldown for 30 seconds.","color":"dark_purple"}
+                scoreboard players operation @s satyrn.fdl.silverfishEscapeArtist.cooldown = silverfishEscapeArtist.cooldown <%config.internalScoreboard%>
+                scoreboard players operation #math.input1 <%config.internalScoreboard%> = silverfishEscapeArtist.cooldown <%config.internalScoreboard%>
+                function foxcraft_dungeon_loot:math/ticks_to_min_sec
+
+                execute (if score #math.minutes <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"Silverfish Escape Artist is now on cooldown for 1 second.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"Silverfish Escape Artist is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                    }
+                } else execute (if score #math.seconds <%config.internalScoreboard%> matches 0) {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        title @s actionbar {"text":"Silverfish Escape Artist is now on cooldown for 1 minute.","color":"dark_purple"}
+                    } else {
+                        title @s actionbar [{"text":"Silverfish Escape Artist is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes."]
+                    }
+                } else {
+                    execute (if score #math.minutes <%config.internalScoreboard%> matches 1) {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar {"text":"Silverfish Escape Artist is now on cooldown for 1 minute, 1 second.","color":"dark_purple"}
+                        } else {
+                        title @s actionbar [{"text":"Silverfish Escape Artist is now on cooldown for 1 minute, ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    } else {
+                        execute (if score #math.seconds <%config.internalScoreboard%> matches 1) {
+                            title @s actionbar [{"text":"Silverfish Escape Artist is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, 1 second."]
+                        } else {
+                            title @s actionbar [{"text":"Silverfish Escape Artist is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, ",{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    }
+                }
+
                 item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
             }
         }
