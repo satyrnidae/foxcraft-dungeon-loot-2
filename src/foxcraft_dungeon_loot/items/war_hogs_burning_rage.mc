@@ -46,7 +46,7 @@ function on_hit {
 
 # Occurs when the raycast succeeds.
 function on_raycast_success {
-    execute if entity @s[type=!minecraft:player,predicate=!foxcraft_dungeon_loot:items/is_mainhand_empty] run function foxcraft_dungeon_loot:items/war_hogs_burning_rage/disarm_entity
+    execute if entity @s[type=!minecraft:player,predicate=!foxcraft_dungeon_loot:items/is_mainhand_empty,predicate=!foxcraft_dungeon_loot:is_war_hog] run function foxcraft_dungeon_loot:items/war_hogs_burning_rage/disarm_entity
 
     execute if entity @s[gamemode=!creative,predicate=!foxcraft_dungeon_loot:items/is_mainhand_empty] run function foxcraft_dungeon_loot:items/war_hogs_burning_rage/disarm_player
 }

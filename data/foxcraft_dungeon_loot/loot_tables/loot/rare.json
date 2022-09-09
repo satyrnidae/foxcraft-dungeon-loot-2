@@ -127,6 +127,22 @@
         },
         {
           "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/rare/flawless_ashenhewn",
+          "weight": 6,
+          "quality": 4,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "max": 50,
+                "min": 30
+              },
+              "treasure": true
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/rare/shroud_of_notoriety",
           "weight": 4,
           "quality": 4

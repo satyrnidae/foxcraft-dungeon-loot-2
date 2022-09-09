@@ -95,17 +95,17 @@ function on_warped_fungus_used {
 # Tells the server the result of the sender's roll.
 function broadcast_result {
     execute (unless score #math.result <%config.internalScoreboard%> matches 8 unless score #math.result <%config.internalScoreboard%> matches 11 unless score #math.result <%config.internalScoreboard%> matches 18) {
-        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled a "},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"}}]
+        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled a "},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"}}," out of ",{"score":{"name":"#math.input2","objective":"<%config.internalScoreboard%>"}}]
     } else {
-        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled an "},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"}}]
+        tellraw @a ["[", {"selector":"@s"}, {"text": "] Rolled an "},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"}}," out of ",{"score":{"name":"#math.input2","objective":"<%config.internalScoreboard%>"}}]
     }
 }
 
 # Tells only the sender the result of their roll.
 function notify_result {
     execute (unless score #math.result <%config.internalScoreboard%> matches 8 unless score #math.result <%config.internalScoreboard%> matches 11 unless score #math.result <%config.internalScoreboard%> matches 18) {
-        tellraw @s [{"text":"[","color":"gray"}, {"selector":"@s","color":"gray"}, {"text": "] Rolled a ","color":"gray"},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"},"color":"gray"}]
+        tellraw @s [{"text":"[","color":"gray"}, {"selector":"@s","color":"gray"}, {"text": "] Rolled a ","color":"gray"},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"},"color":"gray"}," out of ",{"score":{"name":"#math.input2","objective":"<%config.internalScoreboard%>"}}]
     } else {
-        tellraw @s [{"text":"[","color":"gray"}, {"selector":"@s","color":"gray"}, {"text": "] Rolled an ","color":"gray"},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"},"color":"gray"}]
+        tellraw @s [{"text":"[","color":"gray"}, {"selector":"@s","color":"gray"}, {"text": "] Rolled an ","color":"gray"},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"},"color":"gray"}," out of ",{"score":{"name":"#math.input2","objective":"<%config.internalScoreboard%>"}}]
     }
 }

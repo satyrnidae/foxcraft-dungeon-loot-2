@@ -3,6 +3,7 @@ import ../../macros.mcm
 # Occurs when a player falls.
 function on_fall {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/war_hogs_disdainful_pride/worn] run {
+        playsound foxcraft_dungeon_loot:item.war_hogs_disdainful_pride.parachute_activation player @a ~ ~ ~ 1.0 1.5
         effect give @s minecraft:slow_falling 3 1
 
         execute unless entity @s[gamemode=creative] run {

@@ -25,6 +25,15 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.math.temp
 }
 
+###
+Sets #math.result in the internal scoreboard to a random 31-bit number within the range between #math.input1 and #math.input2.
+Math inputs are preserved at the end of the function, but will be in an undefined state during processing.
+The resultant number is unsigned and positive; thus, inputs must be positive as well.
+#math.input1 is the lower bound of the range (inclusive).
+#math.input2 is the upper bound of the range (inclusive).
+Requires a loaded chunk at the execution position and may create a negligible amount of lag as markers are spawned. If markers are not ticked by the server this function should still work.
+Execution is synchronous and completes within the same tick that it was started. Any spawned markers are removed at the end of execution.
+###
 function random {
     # Convert lower and upper bounds to lower bounds and a range
     scoreboard players operation #math.input2 <%config.internalScoreboard%> -= #math.input1 <%config.internalScoreboard%>
@@ -46,11 +55,11 @@ function random {
     scoreboard players operation #math.result <%config.internalScoreboard%> %= #math.input2 <%config.internalScoreboard%>
     scoreboard players operation #math.result <%config.internalScoreboard%> += #math.input1 <%config.internalScoreboard%>
 
-    !IF(config.dev) {
-        # Reset inputs to their original values for debug
-        scoreboard players operation #math.input2 <%config.internalScoreboard%> += #math.input1 <%config.internalScoreboard%>
-        scoreboard players remove #math.input2 <%config.internalScoreboard%> 1
+    # Reset inputs to their original values.
+    scoreboard players operation #math.input2 <%config.internalScoreboard%> += #math.input1 <%config.internalScoreboard%>
+    scoreboard players remove #math.input2 <%config.internalScoreboard%> 1
 
+    !IF(config.dev) {
         tellraw @a ["", {"text":"Result: ","color":"gray","italic":true},{"score":{"name":"#math.input1","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"#math.result","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true},{"text":" / ","color":"gray","italic":true},{"score":{"name":"#math.input2","objective":"<%config.internalScoreboard%>"},"color":"gray","italic":true}]
     }
 
@@ -58,9 +67,11 @@ function random {
     kill @e[type=minecraft:marker,tag=satyrn.fdl.random,distance=..1]
 }
 
-# Sets #math.result in the internal scoreboard to a boolean int based on the values of #math.input1 in the internal scoreboard.
-# If the function returns a 0, the tool should not be damaged.
-# If the function returns a 1, the tool should be damaged.
+###
+Sets #math.result in the internal scoreboard to a boolean int based on the values of #math.input1 in the internal scoreboard.
+If the function returns a 0, the tool should not be damaged.
+If the function returns a 1, the tool should be damaged.
+###
 function should_damage_tool {
     execute (unless score #math.input1 <%config.internalScoreboard%> matches 1..) {
         scoreboard players set #math.result 1

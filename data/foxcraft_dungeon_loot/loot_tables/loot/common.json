@@ -30,13 +30,13 @@
         {
           "type": "minecraft:loot_table",
           "weight": 40,
-          "quality": 3,
+          "quality": 25,
           "name": "foxcraft_dungeon_loot:single_spawn_egg"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 70,
-          "quality": 2,
+          "quality": 10,
           "name": "foxcraft_dungeon_loot:single_copper_goat_horn"
         },
         {

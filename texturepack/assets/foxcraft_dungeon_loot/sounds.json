@@ -257,5 +257,16 @@
       "mob/enderdragon/wings5",
       "mob/enderdragon/wings6"
     ]
+  },
+  "item.war_hogs_disdainful_pride.parachute_activation": {
+    "subtitle": "subtitles.war_hogs_disdainful_pride.parachute_activation",
+    "sounds": [
+      "mob/enderdragon/wings1",
+      "mob/enderdragon/wings2",
+      "mob/enderdragon/wings3",
+      "mob/enderdragon/wings4",
+      "mob/enderdragon/wings5",
+      "mob/enderdragon/wings6"
+    ]
   }
 }

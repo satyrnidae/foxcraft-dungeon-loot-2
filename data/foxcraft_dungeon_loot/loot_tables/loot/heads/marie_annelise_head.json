@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonHead:1b,SkullOwner:{Name:\"Marie_Annelise\",Id:[I;-65192064,-1233756268,-1756918752,554884094],Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmM4ODJiZWI1ZWIxNDQ4YmYyYmJlNmRiMTEyOTk0NGQ2ODkwNjVmMmU4YmRlZTJmODA3N2VjZWI2NjNiZjk4ZiJ9fX0=\"}]}}}"
+    }
+  ]
+}

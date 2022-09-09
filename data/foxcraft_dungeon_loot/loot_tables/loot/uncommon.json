@@ -180,6 +180,24 @@
           "quality": 1,
           "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:loot/heads/yergaderga2_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/communalmind_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/marie_annelise_head"
+        },
+        {
+          "weight": 2,
+          "quality": 1,
+          "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:loot/heads/hyosoryu_head"
         }
       ]
     }

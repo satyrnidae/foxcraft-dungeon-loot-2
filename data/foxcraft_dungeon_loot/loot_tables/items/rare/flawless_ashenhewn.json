@@ -1,0 +1,53 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Flawless Ashenhewn",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "In ages long past, bowsmiths knew how to make",
+        "a bow which could fire endlessly. Their",
+        "techniques are lost to history, but some bows",
+        "still remain.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ]
+      ],
+      "replace": true
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:infinity": 1,
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:85,CustomModelData:421951,DungeonItem:1b}"
+    }
+  ]
+}
