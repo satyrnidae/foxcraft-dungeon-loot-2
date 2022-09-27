@@ -245,7 +245,7 @@ function add_trade {
                 macro randomize_buy_price 1 9
             }
             !IF(i==27) {
-                macro randomize_sell_count 3 7
+                macro randomize_sell_count 1 10
             }
             # Exchange trades do not have custom pricing
             !IF(i>=28 && i <=59) {
