@@ -1,0 +1,159 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_hoe"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Blighted Harvest",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "When the Nether was opened to the Overworld,",
+        "piglins flooded forth to reap the bountiful",
+        "resources. This scythe is their blighted",
+        "harvest.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Sweeping Edge: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When hitting an entity,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "other entities in close proximity will",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "also be hit.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Nether's Blight: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When hitting an entity,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "has a one in twenty chance to inflict",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "all nearby hostile mobs in a five",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "block radius with Wither III for 10",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "seconds.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Dark Harvest: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Using this scythe to till",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "farmland or harvest crops such as wheat,",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "carrots, beets, and potatoes will also",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "till or harvest nearby blocks.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:generic.attack_speed",
+          "name": "generic.attack_speed",
+          "amount": 0.6,
+          "operation": "addition",
+          "id": "52174f7e-f702-4800-875b-cde7c7a6de7e",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:generic.attack_damage",
+          "name": "generic.attack_damage",
+          "amount": 15,
+          "operation": "addition",
+          "id": "965c6ef1-d8b8-45f1-9e35-745abc29d7fd",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:sweeping": 3,
+        "minecraft:silk_touch": 5,
+        "minecraft:fortune": 5,
+        "minecraft:sharpness": 15
+      },
+      "add": true
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:130,CustomModelData:42195,DungeonItem:1b,Rarity:\"Mythic\"}"
+    }
+  ]
+}
