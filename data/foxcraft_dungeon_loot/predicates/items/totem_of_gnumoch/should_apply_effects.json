@@ -8,7 +8,10 @@
     "nbt": "{OnGround:1b}",
     "equipment": {
       "offhand": {
-        "nbt": "{DungeonLootId:20}"
+        "nbt": "{DungeonLootId:20}",
+        "count": {
+          "min": 1
+        }
       }
     }
   }

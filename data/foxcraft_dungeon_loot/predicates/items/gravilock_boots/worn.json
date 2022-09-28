@@ -4,7 +4,10 @@
   "predicate": {
     "equipment": {
       "feet": {
-        "nbt": "{DungeonLootId:33}"
+        "nbt": "{DungeonLootId:33}",
+        "count": {
+          "min": 1
+        }
       }
     }
   }

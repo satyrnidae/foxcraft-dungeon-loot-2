@@ -7,7 +7,10 @@
     },
     "equipment": {
       "offhand": {
-        "nbt": "{DungeonLootId:17}"
+        "nbt": "{DungeonLootId:17}",
+        "count": {
+          "min": 1
+        }
       }
     }
   }

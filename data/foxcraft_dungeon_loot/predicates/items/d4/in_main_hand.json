@@ -4,7 +4,10 @@
   "predicate": {
     "equipment": {
       "mainhand": {
-        "nbt": "{DungeonLootId:64}"
+        "nbt": "{DungeonLootId:64}",
+        "count": {
+          "min": 1
+        }
       }
     }
   }

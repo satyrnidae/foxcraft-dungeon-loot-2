@@ -8,7 +8,10 @@
           {
             "enchantment": "minecraft:unbreaking"
           }
-        ]
+        ],
+        "count": {
+          "min": 1
+        }
       }
     }
   }

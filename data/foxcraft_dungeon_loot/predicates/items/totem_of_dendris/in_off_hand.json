@@ -4,7 +4,10 @@
   "predicate": {
     "equipment": {
       "offhand": {
-        "nbt": "{DungeonLootId:54}"
+        "nbt": "{DungeonLootId:54}",
+        "count": {
+          "min": 1
+        }
       }
     }
   }
