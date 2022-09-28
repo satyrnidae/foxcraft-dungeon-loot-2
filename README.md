@@ -30,3 +30,8 @@ Some sound effects were downloaded from Freesound.org. Those are listed here:
  - [Electric zap](https://freesound.org/people/michael_grinnell/sounds/512471/) by michael_grinnell, CC-0
  - [Spark](https://freesound.org/people/elliott.klein/sounds/189630/) by elliot.klein, CC-0
  - [Sword Block](https://freesound.org/people/LukeSharples/sounds/209096/) and [Sword Block 2](https://freesound.org/people/LukeSharples/sounds/209099/) by LukeSharples (CC-BY)
+ - [Chainsaw Idle Loops](https://freesound.org/people/Audionautics/sounds/171652/) by Audionautics (CC-BY)
+ - [Chainsaw Start Attempts.wav](https://freesound.org/people/lonemonk/sounds/185580/) by lonemonk (CC-BY)
+
+## Other Acknowledgements
+Chainsaw shutdown sound created with [AngeTheGreat's engine simulator](), though it is only a placeholder for now.
