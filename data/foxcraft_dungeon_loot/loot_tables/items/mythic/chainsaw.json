@@ -1,0 +1,132 @@
+{
+  "__comment": "Albatross Heavy Industries® LumberJACKED™ 8.5hp - All Variants",
+  "pools": [
+    {
+      "__comment": "Iron variant, default",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_scores",
+            "entity": "this",
+            "scores": {
+              "satyrn.fdl.loot.variant": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_axe"
+        }
+      ]
+    },
+    {
+      "__comment": "Diamond variant, loot variant score = 1",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_axe"
+        }
+      ]
+    },
+    {
+      "__comment": "Netherite variant, loot variant score = 2",
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 2
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_axe"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_name",
+      "name": {
+        "text": "Albatross Heavy Industries® LumberJACKED™ 8.5hp",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "function": "minecraft:set_lore",
+      "lore": [
+        "The new Albatross Heavy Industries®",
+        "LumberJACKED™ 8.5hp really puts the",
+        "\"cut\" in cutting-edge!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "High-Speed Chain: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Tears through the",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "gnarliest wood with ease. Grants Haste",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "II when held in main-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "function": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:efficiency": 10,
+        "minecraft:mending": 1,
+        "minecraft:silk_touch": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:smite": 10
+      },
+      "add": false
+    },
+    {
+      "function": "minecraft:set_nbt",
+      "tag": "{DungeonLootId:87,Rarity:Mythic,CustomModelData:421953,DungeonItem:1b}"
+    }
+  ]
+}

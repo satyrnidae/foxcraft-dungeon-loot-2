@@ -33,18 +33,34 @@ function on_tick {
 
         macro random 4 5
         scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #math.result <%config.internalScoreboard%>
+        !IF(config.dev) {
+            scoreboard players set @s satyrn.fdl.tradesToAdd.grabBag 5
+        }
+
 
         macro random 2 3
         scoreboard players operation @s satyrn.fdl.tradesToAdd.head = #math.result <%config.internalScoreboard%>
+        !IF(config.dev) {
+            scoreboard players set @s satyrn.fdl.tradesToAdd.head 3
+        }
 
         macro random 0 2
         scoreboard players operation @s satyrn.fdl.tradesToAdd.dungeonLoot = #math.result <%config.internalScoreboard%>
+        !IF(config.dev) {
+            scoreboard players set @s satyrn.fdl.tradesToAdd.dungeonLoot 2
+        }
 
         macro random 6 7
         scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #math.result <%config.internalScoreboard%>
+        !IF(config.dev) {
+            scoreboard players set @s satyrn.fdl.tradesToAdd.exchange 7
+        }
 
         macro random 0 3
         scoreboard players operation @s satyrn.fdl.tradesToAdd.goatHorns = #math.result <%config.internalScoreboard%>
+        !IF(config.dev) {
+            scoreboard players set @s satyrn.fdl.tradesToAdd.goatHorns 3
+        }
     }
 
 # Head trades
@@ -74,7 +90,7 @@ function on_tick {
         } else {
             tag @s remove satyrn.fdl.tradeAdded
 
-            macro random 82 91
+            macro random 84 93
             scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
 
             execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trades/wandering_trader/check_existing_trades
@@ -106,9 +122,9 @@ function on_tick {
             tag @s remove satyrn.fdl.tradeAdded
 
             execute (unless score @s satyrn.fdl.tradesAdded.dungeonLoot matches 1..) {
-                macro random 61 81
+                macro random 63 83
             } else {
-                macro random 29 60
+                macro random 29 62
             }
             scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
 
@@ -208,7 +224,7 @@ function recursive_check {
 }
 
 function add_trade {
-    LOOP(91,i) {
+    LOOP(93,i) {
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             macro get_offer_from_index <%i%>
             !IF(i==0) {
@@ -253,12 +269,12 @@ function add_trade {
                 macro randomize_buy_price 1 3
                 macro randomize_buyb_price 0 9
             }
-            !IF(i > 59 && i <= 80) {
+            !IF(i > 60 && i <= 81) {
                 # Epic items custom pricing
                 macro randomize_buy_price 1 9
                 macro randomize_buyb_price 0 9
             }
-            !IF(i > 80 && i <= 91) {
+            !IF(i > 81 && i <= 92) {
                 macro randomize_buy_price 1 3
                 macro set_buyb_from_loot foxcraft_dungeon_loot:goat_horns/random_goat_horn
             }

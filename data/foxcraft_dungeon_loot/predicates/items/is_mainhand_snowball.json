@@ -6,7 +6,10 @@
       "mainhand": {
         "items": [
           "minecraft:snowball"
-        ]
+        ],
+        "count": {
+          "min": 1
+        }
       }
     }
   }

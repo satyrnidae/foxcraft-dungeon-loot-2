@@ -306,135 +306,140 @@ function build {
         # Trade Index 60: X No Evil
         macro set_sell_from_loot foxcraft_dungeon_loot:items/mythic/x_no_evil
         function foxcraft_dungeon_loot:trades/recipes/push
+        function foxcraft_dungeon_loot:trades/recipes/push
 
-# Epic Items 61-81
-        # Trade Index 61: Buckwheat
+        # Trade Index 61: LumberJACKED chainsaw
+        macro set_sell_from_loot foxcraft_dungeon_loot:items/mythic/chainsaw
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+# Epic Items 62-82
+        # Trade Index 62: Buckwheat
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/buckwheat
         macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
         macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/silver_coins
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 62: Dawncleaver
+        # Trade Index 63: Dawncleaver
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/dawncleaver
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 63: Estudinae's Guidance
+        # Trade Index 64: Estudinae's Guidance
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/estudinaes_guidance
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 64: Estudinae's Patience
+        # Trade Index 65: Estudinae's Patience
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/estudinaes_patience
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 65: Estudinae's Script
+        # Trade Index 66: Estudinae's Script
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/estudinaes_script
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 66: Estudinae's Sorrow
+        # Trade Index 67: Estudinae's Sorrow
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/estudinaes_sorrow
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 67: Estudinae's Survival
+        # Trade Index 68: Estudinae's Survival
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/estudinaes_survival
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 68: Fortune 500
+        # Trade Index 69: Fortune 500
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/fortune_500
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 69: Hero's Amulet
+        # Trade Index 70: Hero's Amulet
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/heros_amulet
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 70: Kobold's Vengeance
+        # Trade Index 71: Kobold's Vengeance
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/kobolds_vengeance
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 71: Melimonas' Guile
+        # Trade Index 72: Melimonas' Guile
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/melimonas_guile
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 72: Palomina's Gift
+        # Trade Index 73: Palomina's Gift
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/palominas_gift
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 73: Peerless Yewhewn
+        # Trade Index 74: Peerless Yewhewn
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/peerless_yewhewn
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 74: Rogue's Dagger
+        # Trade Index 75: Rogue's Dagger
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/rogues_dagger
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 75: Silverfish Escape Artist
+        # Trade Index 76: Silverfish Escape Artist
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/silverfish_escape_artist
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 76: Skullbasher
+        # Trade Index 77: Skullbasher
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/skullbasher
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 77: Spell Scroll: Hail of Arrows
+        # Trade Index 78: Spell Scroll: Hail of Arrows
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/spell_scroll_hail_of_arrows
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 78: Tor'Enhia's Fist
+        # Trade Index 79: Tor'Enhia's Fist
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/torenhias_fist
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 79: Wand of Block State Editing
+        # Trade Index 80: Wand of Block State Editing
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/wand_of_block_state_editing
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 80: Yo-Yo Man's Revenge
+        # Trade Index 81: Yo-Yo Man's Revenge
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 81: Tithe to Uthiir
+        # Trade Index 82: Tithe to Uthiir
         macro set_sell_from_loot foxcraft_dungeon_loot:items/epic/tithe_to_uthiir
         function foxcraft_dungeon_loot:trades/recipes/push
 
-# Copper Goat Horns
-        # Trade Index 82: Clear Temper Journey
+# Copper Goat Horns 83-92
+        # Trade Index 83: Clear Temper Journey
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/clear_temper_journey
         macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
         macro set_buyb_item_id "minecraft:goat_horn"
         macro set_buyb_price 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 83: Dry Urge Anger
+        # Trade Index 84: Dry Urge Anger
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/dry_urge_anger
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 84: Fearless River Gift
+        # Trade Index 85: Fearless River Gift
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fearless_river_gift
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 85: Fresh Nest Thought
+        # Trade Index 86: Fresh Nest Thought
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fresh_nest_thought
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 86: Great Sky Falling
+        # Trade Index 87: Great Sky Falling
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/great_sky_falling
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 87: Mumble Fire Memory
+        # Trade Index 88: Mumble Fire Memory
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/mumble_fire_memory
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 88: Old Hymn Resting
+        # Trade Index 89: Old Hymn Resting
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/old_hymn_resting
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 89: Pure Water Desire
+        # Trade Index 90: Pure Water Desire
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/pure_water_desire
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 90: Secret Lake Tear
+        # Trade Index 91: Secret Lake Tear
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/secret_lake_tear
         function foxcraft_dungeon_loot:trades/recipes/push
 
-        # Trade Index 91: Sweet Moon Love
+        # Trade Index 92: Sweet Moon Love
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/sweet_moon_love
         function foxcraft_dungeon_loot:trades/recipes/push
 

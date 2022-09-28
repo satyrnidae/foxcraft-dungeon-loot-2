@@ -1,0 +1,7 @@
+{
+  "parent": "foxcraft_dungeon_loot:item/template_chainsaw",
+  "textures": {
+    "layer0": "foxcraft_dungeon_loot:item/netherite_chainsaw",
+    "particle": "foxcraft_dungeon_loot:item/netherite_chainsaw"
+  }
+}
