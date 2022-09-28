@@ -9,6 +9,12 @@
         "custom_model_data": 421952
       },
       "model": "foxcraft_dungeon_loot:item/copper_axe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 421953
+      },
+      "model": "foxcraft_dungeon_loot:item/netherite_chainsaw"
     }
   ]
 }

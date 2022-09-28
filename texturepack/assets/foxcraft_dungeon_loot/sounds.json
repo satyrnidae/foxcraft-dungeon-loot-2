@@ -53,6 +53,33 @@
       "foxcraft_dungeon_loot:items/beta_iron_sword/block2"
     ]
   },
+  "item.chainsaw.idle": {
+    "subtitle": "subtitles.item.chainsaw.idle",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:items/chainsaw/idle",
+        "stream": true
+      }
+    ]
+  },
+  "item.chainsaw.start": {
+    "subtitle": "subtitles.item.chainsaw.start",
+    "sounds": [
+      "foxcraft_dungeon_loot:items/chainsaw/start1",
+      "foxcraft_dungeon_loot:items/chainsaw/start2",
+      "foxcraft_dungeon_loot:items/chainsaw/start3",
+      "foxcraft_dungeon_loot:items/chainsaw/start4"
+    ]
+  },
+  "item.chainsaw.stop": {
+    "subtitle": "subtitles.item.chainsaw.stop",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:items/chainsaw/stop",
+        "stream": true
+      }
+    ]
+  },
   "item.dice.d4": {
     "subtitle": "subtitles.item.dice.d4",
     "sounds": [
