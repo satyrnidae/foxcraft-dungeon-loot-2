@@ -21,6 +21,9 @@ assignees: satyrnidae
 **Enchantments**
 *List any enchantments that should be baked into the item. Includes vanilla curses, Enchantments which don't apply to the item may be ignored unless specifically noted to be included for flavor reasons.*
 
+**Item rarity**
+*Common (white), Uncommon (yellow), Rare (aqua), Epic (magenta), Mythic (green), or Cursed (red). Custom rarities may also be specified in the same format as "Rarity (color)".*
+
 **Item Lore**
 *Lore for the item. Appears after enchantments and before item attributes.*
 
