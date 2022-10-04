@@ -63,6 +63,12 @@ function on_tick {
         }
     }
 
+# Isabel 2022/10/04:
+#  So this is kind of annoying, but trade generation must use 1-indexed values instead of zero-indexed values, unless the
+#  function increments satyrn.fdl.selectedTrade after assigning it (exchange rates, grab bags).
+#  Just set the randomizer to 1-index values, as it's one argument less than incrementing the scoreboard immediately
+#  afterwards.
+
 # Head trades
     execute (if entity @s[tag=!satyrn.fdl.trades.hasTrades.head]) {
         execute (if score @s satyrn.fdl.tradesAdded.head >= @s satyrn.fdl.tradesToAdd.head) {
@@ -107,9 +113,11 @@ function on_tick {
             tag @s add satyrn.fdl.trades.hasTrades.grabBag
         } else {
             execute unless score @s satyrn.fdl.tradesAdded.grabBag matches 0.. run scoreboard players set @s satyrn.fdl.selectedTrade 0
-            scoreboard players add @s satyrn.fdl.selectedTrade 1
-            function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
             # Increments trades to add by one each time
+            scoreboard players add @s satyrn.fdl.selectedTrade 1
+
+            function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
+
             scoreboard players add @s satyrn.fdl.tradesAdded.grabBag 1
         }
 # Dungeon Loot Trades
@@ -142,9 +150,9 @@ function on_tick {
             tag @s add satyrn.fdl.trades.hasTrades.exchange
         } else {
             execute unless score @s satyrn.fdl.tradesAdded.exchange matches 0.. run scoreboard players set @s satyrn.fdl.selectedTrade 21
+            # Increments trades to add by one each time
             scoreboard players add @s satyrn.fdl.selectedTrade 1
             function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
-            # Increments trades to add by one each time
             scoreboard players add @s satyrn.fdl.tradesAdded.exchange 1
         }
 # Finalize entity
@@ -214,6 +222,7 @@ function check_existing_trades {
 }
 
 function recursive_check {
+    # The recursive check continues if the trade number is zero, so satyrn.fdl.selectedTrade must be 1-indexed.
     execute store result score @s satyrn.fdl.selectedTrade run data get entity @s HandItems[0].tag.ScanTrades[0]
 
     execute if score @e[type=minecraft:wandering_trader,sort=nearest,limit=1] satyrn.fdl.selectedTrade = @s satyrn.fdl.selectedTrade run scoreboard players set @s satyrn.fdl.selectedTrade -127
@@ -224,57 +233,69 @@ function recursive_check {
 }
 
 function add_trade {
+    # i value should loop through entire size of the trade index
     LOOP(93,i) {
+        # i values are zero indexed but selectedTrade is 1-indexed. Add 1 to i in the check.
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             macro get_offer_from_index <%i%>
+
+            # Grab-Bag randomized pricing
             !IF(i==0) {
-                # Grab-Bag custom pricing
                 macro randomize_max_uses 3 5
                 macro randomize_buy_price 1 3
                 macro randomize_buyb_price 0 9
             }
+
+            # Glistering Grab-Bag randomized pricing
             !IF(i==1) {
-                # Glistering Grab-Bag custom pricing
                 macro randomize_max_uses 2 4
                 macro randomize_buy_price 4 6
                 macro randomize_buyb_price 0 9
             }
+
+            # Sparkling Grab-Bag randomized pricing
             !IF(i==2) {
-                # Sparkling Grab-Bag custom pricing
                 macro randomize_max_uses 1 3
                 macro randomize_buy_price 7 9
                 macro randomize_buyb_price 0 9
             }
+
+            # Shining Grab-Bag randomized pricing
             !IF(i==3) {
-                # Shining Grab-Bag custom pricing
                 macro randomize_max_uses 1 2
                 macro randomize_buy_price 1 4
                 macro randomize_buyb_price 0 9
             }
+
+            # Radiant Grab-Bag randomized pricing
             !IF(i==4) {
-                # Radiant Grab-Bag custom pricing
                 macro randomize_buy_price 5 9
                 macro randomize_buyb_price 0 9
             }
+
+            # Player heads randomized pricing
             !IF(i>=5 && i<=20) {
-                # Head custom pricing
                 macro randomize_buy_price 1 9
             }
+
+            # Randomize electrum value per silver
             !IF(i==27) {
                 macro randomize_sell_count 1 10
             }
-            # Exchange trades do not have custom pricing
-            !IF(i>=28 && i <=59) {
-                # Mythic item custom pricing
-                macro randomize_buy_price 1 3
+
+            # Mythic item random pricing
+            !IF(i>=28 && i<=61) {
                 macro randomize_buyb_price 0 9
             }
-            !IF(i > 60 && i <= 81) {
-                # Epic items custom pricing
+
+            # Epic item random pricing
+            !IF(i>=62 && i<=82) {
                 macro randomize_buy_price 1 9
                 macro randomize_buyb_price 0 9
             }
-            !IF(i > 81 && i <= 92) {
+
+            # Goat horn random pricing / exchange
+            !IF(i>=83 && i<=92) {
                 macro randomize_buy_price 1 3
                 macro set_buyb_from_loot foxcraft_dungeon_loot:goat_horns/random_goat_horn
             }
