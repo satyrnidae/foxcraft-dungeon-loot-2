@@ -1,16 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:allay",
-    "minecraft:cat",
-    "minecraft:donkey",
-    "minecraft:fox",
-    "minecraft:horse",
-    "minecraft:mule",
-    "minecraft:parrot",
-    "minecraft:player",
-    "minecraft:villager",
-    "minecraft:wandering_trader",
-    "minecraft:wolf"
+    "#foxcraft_dungeon_loot:non_player_ally",
+    "minecraft:player"
   ]
 }

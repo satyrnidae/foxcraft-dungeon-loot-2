@@ -33,28 +33,28 @@
 		},
 		{
 			"name": "war_hogs_blighted_harvest_2",
-			"from": [12, 8.5, 8],
+			"from": [11.5, 8.5, 8],
 			"to": [13.5, 9.5, 8.5],
 			"faces": {
-				"north": {"uv": [9, 2, 10, 3.5], "rotation": 270, "texture": "#0"},
+				"north": {"uv": [9, 2, 10, 4], "rotation": 270, "texture": "#0"},
 				"east": {"uv": [10, 2, 9, 2.5], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [9, 3.5, 10, 2], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [9, 3, 10, 3.5], "rotation": 270, "texture": "#0"},
-				"up": {"uv": [9.5, 2, 10, 3.5], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [9, 2, 9.5, 3.5], "rotation": 90, "texture": "#0"}
+				"south": {"uv": [9, 4, 10, 2], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [9, 3.5, 10, 4], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [9.5, 2, 10, 4], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [9, 2, 9.5, 4], "rotation": 90, "texture": "#0"}
 			}
 		},
 		{
 			"name": "war_hogs_blighted_harvest_3",
-			"from": [11, 9.5, 8],
+			"from": [9, 9.5, 8],
 			"to": [13, 10, 8.5],
 			"faces": {
-				"north": {"uv": [10, 2.5, 10.5, 4.5], "rotation": 270, "texture": "#0"},
+				"north": {"uv": [10, 2.5, 10.5, 6.5], "rotation": 270, "texture": "#0"},
 				"east": {"uv": [10.5, 2.5, 10, 3], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [10, 4.5, 10.5, 2.5], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [10, 4, 10.5, 4.5], "rotation": 270, "texture": "#0"},
-				"up": {"uv": [10, 2.5, 10.5, 4.5], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [10, 2.5, 10.5, 4.5], "rotation": 90, "texture": "#0"}
+				"south": {"uv": [10, 6.5, 10.5, 2.5], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [10, 6, 10.5, 6.5], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [10, 2.5, 10.5, 6.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [10, 2.5, 10.5, 6.5], "rotation": 90, "texture": "#0"}
 			}
 		},
 		{
@@ -71,55 +71,68 @@
 			}
 		},
 		{
-			"name": "war_hogs_blighted_harvest_5",
-			"from": [11.5, 9, 8],
-			"to": [12, 9.5, 8.5],
+			"name": "war_hogs_blighted_harvest_4",
+			"from": [9.5, 10.5, 8],
+			"to": [12, 11, 8.5],
 			"faces": {
-				"north": {"uv": [9.5, 3.5, 10, 4], "rotation": 270, "texture": "#0"},
-				"east": {"uv": [10, 3.5, 9.5, 4], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [9.5, 4, 10, 3.5], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [9.5, 3.5, 10, 4], "rotation": 270, "texture": "#0"},
-				"up": {"uv": [9.5, 3.5, 10, 4], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [9.5, 3.5, 10, 4], "rotation": 90, "texture": "#0"}
+				"north": {"uv": [11, 3.5, 11.5, 6], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [11.5, 3.5, 11, 4], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11, 6, 11.5, 3.5], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [11, 5.5, 11.5, 6], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [11, 3.5, 11.5, 6], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [11, 3.5, 11.5, 6], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "war_hogs_blighted_harvest_5",
+			"from": [11, 9, 8],
+			"to": [11.5, 9.5, 8.5],
+			"faces": {
+				"north": {"uv": [9.5, 4, 10, 4.5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [10, 4, 9.5, 4.5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [9.5, 4.5, 10, 4], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [9.5, 4, 10, 4.5], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [9.5, 4, 10, 4.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [9.5, 4, 10, 4.5], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "war_hogs_blighted_harvest_5",
+			"from": [12, 8, 8],
+			"to": [12.5, 8.5, 8.5],
+			"faces": {
+				"north": {"uv": [8.5, 3, 9, 3.5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [9, 3, 8.5, 3.5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [8.5, 3.5, 9, 3], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [8.5, 3, 9, 3.5], "rotation": 270, "texture": "#0"},
+				"up": {"uv": [8.5, 3, 9, 3.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [8.5, 3, 9, 3.5], "rotation": 90, "texture": "#0"}
 			}
 		},
 		{
 			"name": "war_hogs_blighted_harvest_6",
-			"from": [10.5, 10.5, 8],
+			"from": [10.5, 11, 8],
 			"to": [12, 12, 8.5],
 			"faces": {
-				"north": {"uv": [11, 3.5, 12.5, 5], "rotation": 270, "texture": "#0"},
-				"east": {"uv": [12.5, 3.5, 11, 4], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [11, 5, 12.5, 3.5], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [11, 4.5, 12.5, 5], "rotation": 270, "texture": "#0"},
+				"north": {"uv": [11.5, 3.5, 12.5, 5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [12.5, 3.5, 11.5, 4], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11.5, 5, 12.5, 3.5], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [11.5, 4.5, 12.5, 5], "rotation": 270, "texture": "#0"},
 				"up": {"uv": [12, 3.5, 12.5, 5], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [11, 3.5, 11.5, 5], "rotation": 90, "texture": "#0"}
-			}
-		},
-		{
-			"name": "war_hogs_blighted_harvest_7",
-			"from": [9, 9.5, 8],
-			"to": [10.5, 10, 8.5],
-			"faces": {
-				"north": {"uv": [10, 5, 10.5, 6.5], "rotation": 270, "texture": "#0"},
-				"east": {"uv": [10.5, 5, 10, 5.5], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [10, 6.5, 10.5, 5], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [10, 6, 10.5, 6.5], "rotation": 270, "texture": "#0"},
-				"up": {"uv": [10, 5, 10.5, 6.5], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [10, 5, 10.5, 6.5], "rotation": 90, "texture": "#0"}
+				"down": {"uv": [11.5, 3.5, 12, 5], "rotation": 90, "texture": "#0"}
 			}
 		},
 		{
 			"name": "war_hogs_blighted_harvest_8",
-			"from": [10, 10.5, 8],
+			"from": [10, 11, 8],
 			"to": [10.5, 11.5, 8.5],
 			"faces": {
-				"north": {"uv": [11, 5, 12, 5.5], "rotation": 270, "texture": "#0"},
-				"east": {"uv": [12, 5, 11, 5.5], "rotation": 90, "texture": "#0"},
-				"south": {"uv": [11, 5.5, 12, 5], "rotation": 270, "texture": "#0"},
-				"west": {"uv": [11, 5, 12, 5.5], "rotation": 270, "texture": "#0"},
+				"north": {"uv": [11.5, 5, 12, 5.5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [12, 5, 11.5, 5.5], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [11.5, 5.5, 12, 5], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [11.5, 5, 12, 5.5], "rotation": 270, "texture": "#0"},
 				"up": {"uv": [11.5, 5, 12, 5.5], "rotation": 90, "texture": "#0"},
-				"down": {"uv": [11, 5, 11.5, 5.5], "rotation": 90, "texture": "#0"}
+				"down": {"uv": [11.5, 5, 12, 5.5], "rotation": 90, "texture": "#0"}
 			}
 		},
 		{
@@ -432,13 +445,12 @@
 		},
 		"ground": {
 			"rotation": [0, 0, 89],
-			"translation": [0, 11.5, 0],
-			"scale": [1.5, 1.5, 1.5]
+			"translation": [0, 4, 0],
+			"scale": [0.75, 0.75, 0.75]
 		},
 		"gui": {
 			"rotation": [0, 180, 90],
-			"translation": [2, 1, 0],
-			"scale": [1.1, 1.1, 1.1]
+			"translation": [1.5, 1, 0]
 		},
 		"head": {
 			"rotation": [178.5, 0, -90],
@@ -456,7 +468,7 @@
 			"name": "war_hogs_blighted_harvest",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
 		}
 	]
 }

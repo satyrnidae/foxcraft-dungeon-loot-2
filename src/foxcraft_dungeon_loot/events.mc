@@ -17,14 +17,11 @@ function on_load {
     scoreboard objectives add satyrn.fdl.events.fallOneCm dummy "Fall distance (cm)"
     scoreboard objectives add satyrn.fdl.events.ateSpiderEye minecraft.used:minecraft.spider_eye "Event: Ate Spider Eye"
     scoreboard objectives add satyrn.fdl.events.blockedAttack minecraft.used:minecraft.shield "Event: Blocked Attack"
-    scoreboard objectives add satyrn.fdl.events.tilledBlock.netherite minecraft.used:minecraft.netherite_hoe "Event: Tilled Block with Netherite Hoe"
     function foxcraft_dungeon_loot:events/clock_3t
 }
 
 # Occurs once per tick.
 function on_tick {
-    execute as @a[scores={satyrn.fdl.events.tilledBlock=1..},predicate=foxcraft_dungeon_loot:events/process_tilled_dirt] run #foxcraft_dungeon_loot:on_tilled
-
     # Updates players who are attempting to use a warped fungus, as long as the offhand item doesn't take activation precedence.
     execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..},predicate=foxcraft_dungeon_loot:events/process_mainhand_warped_fungus,predicate=!foxcraft_dungeon_loot:events/offhand_prevents_stick_use] at @s run function #foxcraft_dungeon_loot:on_warped_fungus_used
 
@@ -49,7 +46,6 @@ function on_tick {
 
     scoreboard players reset @a satyrn.fdl.events.ateSpiderEye
     scoreboard players reset @a satyrn.fdl.events.blockedAttack
-    scoreboard players reset @a satyrn.fdl.events.tilledBlock.netherite
 }
 
 # Called when the datapack is uninstalled.
@@ -57,11 +53,4 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.events.fallOneCm
     scoreboard objectives remove satyrn.fdl.events.ateSpiderEye
     scoreboard objectives remove satyrn.fdl.events.blockedAttack
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.wooden
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.stone
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.golden
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.iron
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.diamond
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock.netherite
-    scoreboard objectives remove satyrn.fdl.events.tilledBlock
 }

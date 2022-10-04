@@ -1,0 +1,31 @@
+{
+  "parent": "foxcraft_dungeon_loot:items/root",
+  "criteria": {
+    "item_used_on_block": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:reference",
+            "name": "foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/in_main_hand"
+          },
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:reference",
+              "name": "foxcraft_dungeon_loot:is_sneaking"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "item_used_on_block"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/on_till"
+  }
+}

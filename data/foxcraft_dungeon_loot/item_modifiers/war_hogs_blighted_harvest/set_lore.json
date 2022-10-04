@@ -1,0 +1,88 @@
+{
+  "function": "minecraft:set_lore",
+  "entity": "this",
+  "lore": [
+    "",
+    [
+      {
+        "text": "Souls Collected: ",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "score": {
+          "name": "@s",
+          "objective": "satyrn.fdl.souls"
+        },
+        "color": "green"
+      },
+      {
+        "text": " / 10",
+        "color": "dark_green"
+      }
+    ],
+    "",
+    "When the Nether was opened to the Overworld,",
+    "piglins flooded forth to reap the bountiful",
+    "resources. This scythe is their blighted harvest.",
+    [
+      "Rarity: ",
+      {
+        "text": "Mythic",
+        "color": "green",
+        "italic": true
+      }
+    ],
+    "",
+    [
+      {
+        "text": "Reaper's Curse: ",
+        "color": "green",
+        "italic": false
+      },
+      {
+        "text": "Each entity killed fills this item",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    {
+      "text": "with a single soul. Upon reaching 10 souls, a blast",
+      "color": "gray",
+      "italic": false
+    },
+    {
+      "text": "of Wither III is released in a 10 block radius.",
+      "color": "gray",
+      "italic": false
+    },
+    [
+      {
+        "text": "Dark Harvest: ",
+        "color": "green",
+        "italic": false
+      },
+      {
+        "text": "Using this scythe to till farmland or",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    {
+      "text": "to harvest crops (such as wheat, carrots, beets,",
+      "color": "gray",
+      "italic": false
+    },
+    {
+      "text": "and potatoes) will also till or harvest nearby",
+      "color": "gray",
+      "italic": false
+    },
+    {
+      "text": "blocks or full-grown crops.",
+      "color": "gray",
+      "italic": false
+    }
+  ],
+  "replace": true
+}

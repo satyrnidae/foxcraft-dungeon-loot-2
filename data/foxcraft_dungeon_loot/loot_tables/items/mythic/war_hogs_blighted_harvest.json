@@ -22,10 +22,26 @@
     {
       "function": "minecraft:set_lore",
       "lore": [
+        "",
+        [
+          {
+            "text": "Souls Collected: ",
+            "color": "dark_green",
+            "italic": false
+          },
+          {
+            "text": "0",
+            "color": "green"
+          },
+          {
+            "text": " / 10",
+            "color": "gray"
+          }
+        ],
+        "",
         "When the Nether was opened to the Overworld,",
         "piglins flooded forth to reap the bountiful",
-        "resources. This scythe is their blighted",
-        "harvest.",
+        "resources. This scythe is their blighted harvest.",
         [
           "Rarity: ",
           {
@@ -37,55 +53,23 @@
         "",
         [
           {
-            "text": "Sweeping Edge: ",
+            "text": "Reaper's Curse: ",
             "color": "green",
             "italic": false
           },
           {
-            "text": "When hitting an entity,",
+            "text": "Each entity killed fills this item",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "other entities in close proximity will",
+          "text": "with a single soul. Upon reaching 10 souls, a blast",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "also be hit.",
-          "color": "gray",
-          "italic": false
-        },
-        [
-          {
-            "text": "Nether's Blight: ",
-            "color": "green",
-            "italic": false
-          },
-          {
-            "text": "When hitting an entity,",
-            "color": "gray",
-            "italic": false
-          }
-        ],
-        {
-          "text": "has a one in twenty chance to inflict",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "all nearby hostile mobs in a five",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "block radius with Wither III for 10",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "seconds.",
+          "text": "of Wither III is released in a 10 block radius.",
           "color": "gray",
           "italic": false
         },
@@ -96,46 +80,25 @@
             "italic": false
           },
           {
-            "text": "Using this scythe to till",
+            "text": "Using this scythe to till farmland or",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "farmland or harvest crops such as wheat,",
+          "text": "to harvest crops (such as wheat, carrots, beets,",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "carrots, beets, and potatoes will also",
+          "text": "and potatoes) will also till or harvest nearby",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "till or harvest nearby blocks.",
+          "text": "blocks or full-grown crops.",
           "color": "gray",
           "italic": false
-        }
-      ]
-    },
-    {
-      "function": "minecraft:set_attributes",
-      "modifiers": [
-        {
-          "attribute": "minecraft:generic.attack_speed",
-          "name": "generic.attack_speed",
-          "amount": 0.6,
-          "operation": "addition",
-          "id": "52174f7e-f702-4800-875b-cde7c7a6de7e",
-          "slot": "mainhand"
-        },
-        {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
-          "amount": 15,
-          "operation": "addition",
-          "id": "965c6ef1-d8b8-45f1-9e35-745abc29d7fd",
-          "slot": "mainhand"
         }
       ]
     },
@@ -144,16 +107,16 @@
       "enchantments": {
         "minecraft:mending": 1,
         "minecraft:unbreaking": 5,
-        "minecraft:sweeping": 3,
         "minecraft:silk_touch": 5,
         "minecraft:fortune": 5,
-        "minecraft:sharpness": 15
+        "minecraft:sharpness": 15,
+        "minecraft:smite": 5
       },
       "add": true
     },
     {
       "function": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:130,CustomModelData:42195,DungeonItem:1b,Rarity:\"Mythic\"}"
+      "tag": "{Souls:0,DungeonLootId:86,CustomModelData:42195,DungeonItem:1b,Rarity:\"Mythic\"}"
     }
   ]
 }
