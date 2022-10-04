@@ -40,13 +40,13 @@
             "italic": false
           },
           {
-            "text": "When used, summons a rainstorm",
+            "text": "When used while skies are clear, summons",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "for five minutes.",
+          "text": "a rainstorm for five minutes.",
           "color": "gray",
           "italic": false
         },
@@ -69,13 +69,18 @@
             "italic": false
           },
           {
-            "text": "When used while crouching,",
+            "text": "While the skies are not thundering, and",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "summons a thunderstorm for 2½ minutes.",
+          "text": "if used while crouching, summons a thunderstorm",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for 2½ minutes.",
           "color": "gray",
           "italic": false
         },
@@ -87,6 +92,35 @@
           },
           {
             "text": "Durability is decreased by 13%.",
+            "color": "red",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "Sunburn: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "If used while the skies are not clear,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "clears all active weather effects.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "Durability is decreased by 25%.",
             "color": "red",
             "italic": false
           }
