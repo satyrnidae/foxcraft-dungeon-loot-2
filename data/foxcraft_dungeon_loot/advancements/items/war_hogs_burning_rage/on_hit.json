@@ -6,15 +6,8 @@
       "conditions": {
         "player": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "nbt": "{DungeonLootId:28}"
-                }
-              }
-            }
+            "condition": "minecraft:reference",
+            "name": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/in_main_hand"
           }
         ],
         "damage": {
@@ -32,7 +25,10 @@
             "type": "minecraft:piglin_brute",
             "equipment": {
               "mainhand": {
-                "nbt": "{DungeonLootId:28}"
+                "nbt": "{DungeonLootId:28}",
+                "count": {
+                  "min": 1
+                }
               }
             }
           }

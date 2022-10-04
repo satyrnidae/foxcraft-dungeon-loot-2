@@ -6,15 +6,8 @@
       "conditions": {
         "player": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "nbt": "{DungeonLootId:81}"
-                }
-              }
-            }
+            "condition": "minecraft:reference",
+            "name": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand"
           }
         ],
         "damage": {
@@ -36,15 +29,8 @@
       "conditions": {
         "player": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "nbt": "{DungeonLootId:81}"
-                }
-              }
-            }
+            "condition": "minecraft:reference",
+            "name": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand"
           }
         ],
         "entity": [
