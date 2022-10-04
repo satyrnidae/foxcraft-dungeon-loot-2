@@ -9,7 +9,7 @@
     "generatedDirectory": "__generated__",
     "rootNamespace": null,
     "baseArchiveName":"foxcraft-dungeon-loot",
-    "version": "1.2.0-SHAPSHOT",
+    "version": "1.2.0+alpha.2",
     "scoreboardsVersion": 4
   }
 }
