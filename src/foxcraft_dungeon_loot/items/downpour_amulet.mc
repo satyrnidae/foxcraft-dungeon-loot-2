@@ -42,13 +42,21 @@ function on_warped_fungus_used {
             playsound minecraft:entity.lightning_bolt.thunder weather @a ~ ~ ~ 6.0
             particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10 normal @s
 
+            scoreboard players set #test <%config.internalScoreboard%> 0
+
             # If the sender is crouching, set the weather to thunder. Otherwise, set it to rain.
-            execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
+            execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking] unless predicate foxcraft_dungeon_loot:is_thundering) {
+                scoreboard players set #test <%config.internalScoreboard%> 2
                 weather thunder 150
                 tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Thunder for 2 minutes, 30 seconds."}]
-            } else {
+            } else execute (if predicate foxcraft_dungeon_loot:is_weather_clear) {
+                scoreboard players set #test <%config.internalScoreboard%> 1
                 weather rain 300
                 tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Set the weather to Rain for 5 minutes."}]
+            } else {
+                scoreboard players set #test <%config.internalScoreboard%> 3
+                weather clear
+                tellraw @a ["[",{"selector":"@s"},"] ",{"text":"Cleared the skies of rain."}]
             }
 
             # Set cooldown, damage, and potentially break the item for non-creative players.
@@ -98,10 +106,12 @@ function on_warped_fungus_used {
 }
 
 function damage {
-    execute (if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking]) {
+    execute (if score #test <%config.internalScoreboard%> matches 2) {
         item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_thunder
-    } else {
+    } else execute (if score #test <%config.internalScoreboard%> matches ..1) {
         item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_rain
+    } else {
+        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:downpour_amulet/damage_clear
     }
     # Break item if damage is maxed out.
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {

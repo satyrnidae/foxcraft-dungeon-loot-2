@@ -45,14 +45,14 @@ function on_tick {
         execute (unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0..) {
             # 3 seconds until lightning spawns
             scoreboard players set @s satyrn.fdl.torenhiasFist.cooldown 70
-            weather thunder 7
+            execute if predicate foxcraft_dungeon_loot:is_weather_clear run weather thunder 7
         } else execute (unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0) {
             scoreboard players remove @s satyrn.fdl.torenhiasFist.cooldown 1
             scoreboard players operation @s satyrn.fdl.torenhiasFist.particle = @s satyrn.fdl.torenhiasFist.cooldown
             scoreboard players operation @s satyrn.fdl.torenhiasFist.particle %= #5 <%config.internalScoreboard%>
 
             execute if score @s satyrn.fdl.torenhiasFist.particle matches 0 run {
-                particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 3
+                particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 3 force
             }
             execute if score @s satyrn.fdl.torenhiasFist.cooldown matches 10 run {
                 summon minecraft:lightning_bolt ^0.25 ^ ^-0.25

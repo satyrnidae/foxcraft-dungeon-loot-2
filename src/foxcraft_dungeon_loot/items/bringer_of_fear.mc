@@ -51,7 +51,7 @@ function on_warped_fungus_used {
                 tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
             } else {
                 effect give @s minecraft:bad_omen 1200 4
-                weather thunder 15
+                execute if predicate foxcraft_dungeon_loot:is_weather_clear run weather thunder 15
                 tellraw @s {"text":"The sky darkens as the horns blare. What have you done?","color":"gray","italic":true}
             }
 
