@@ -34,4 +34,4 @@ Some sound effects were downloaded from Freesound.org. Those are listed here:
  - [Chainsaw Start Attempts.wav](https://freesound.org/people/lonemonk/sounds/185580/) by lonemonk (CC-BY)
 
 ## Other Acknowledgements
-Chainsaw shutdown sound created with [AngeTheGreat's engine simulator](), though it is only a placeholder for now.
+Chainsaw shutdown sound created with [AngeTheGreat's engine simulator](https://github.com/ange-yaghi/engine-sim), though it is only a placeholder for now.
