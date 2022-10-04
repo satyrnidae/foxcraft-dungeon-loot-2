@@ -9,6 +9,9 @@ data/minecraft/tags/functions/tick.json
 texturepack/assets/custom_music_discs
 texturepack/assets/minecraft/models/item/music_disc_11.json
 
+# Node modules
+node_modules/
+
 # Build output
 .build
 

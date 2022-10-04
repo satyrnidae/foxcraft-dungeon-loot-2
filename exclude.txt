@@ -1,6 +1,10 @@
 .*
-build.ps1
+*.ps1
+README.md
 config.json
 exclude.txt
+package*.json
 src/
 texturepack/
+node_modules/
+
