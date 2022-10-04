@@ -6,15 +6,8 @@
       "conditions": {
         "player": [
           {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "nbt": "{DungeonLootId:82}"
-                }
-              }
-            }
+            "condition": "minecraft:reference",
+            "name": "foxcraft_dungeon_loot:items/beta_iron_sword/in_main_hand"
           }
         ]
       }
