@@ -1,11 +1,12 @@
 function load {
     # Set up scoreboards
-    scoreboard objectives add <%config.internalScoreboard%> dummy
+    scoreboard objectives add <%config.internalScoreboard%> dummy "Options"
     execute unless score #version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run function foxcraft_dungeon_loot:update_scoreboards
 
     scoreboard objectives add satyrn.fdl.used.warpedFungusOnAStick minecraft.used:warped_fungus_on_a_stick "Player used warped fungus"
     scoreboard objectives add satyrn.fdl.used.snowball minecraft.used:snowball "Player used snowball"
     scoreboard objectives add satyrn.fdl.loot.variant trigger "Loot Variant"
+    scoreboard objectives add satyrn.fdl.souls dummy "Souls Harvested"
 
     scoreboard players reset * satyrn.fdl.loot.variant
 
@@ -37,6 +38,8 @@ function uninstall {
     scoreboard objectives remove satyrn.fdl.used.warpedFungusOnAStick
     scoreboard objectives remove satyrn.fdl.used.snowball
     scoreboard objectives remove satyrn.fdl.loot.variant
+    scoreboard objectives remove satyrn.fdl.souls
+
 
     function #foxcraft_dungeon_loot:on_uninstall
 
@@ -46,6 +49,8 @@ function uninstall {
     execute if score #uninstall <%config.internalScoreboard%> matches 1 run tellraw @s {"text":"Foxcraft Dungeon Loot successfully uninstalled.","color":"green"}
 
     scoreboard players reset #uninstall <%config.internalScoreboard%>
+
+    scoreboard objectives remove <%config.internalScoreboard%>
 }
 
 function update_scoreboards {

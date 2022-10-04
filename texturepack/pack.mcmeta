@@ -6,13 +6,15 @@
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.2.0+alpha.1",
+    "version": "1.2.0+alpha.2",
     "baseArchiveName": "foxcraft-dungeon-loot-resources",
     "changelog": {
       "1.2.0": [
         "Add copper goat horns.",
         "Add parachute activation sound for War Hog's Disdainful Pride.",
-        "Add oxidation states for copper tools"
+        "Add oxidation states for copper tools",
+        "Add war hog's blighted harvest",
+        "Add chainsaws"
       ],
       "1.1.2": [
         "Reduce specular on gold coins."

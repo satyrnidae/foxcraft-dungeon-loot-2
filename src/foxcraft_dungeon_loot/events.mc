@@ -15,8 +15,8 @@ function clock_3t {
 # Runs when the datapack is loaded.
 function on_load {
     scoreboard objectives add satyrn.fdl.events.fallOneCm dummy "Fall distance (cm)"
-    scoreboard objectives add satyrn.fdl.events.ateSpiderEye minecraft.used:minecraft.spider_eye
-    scoreboard objectives add satyrn.fdl.events.blockedAttack minecraft.used:minecraft.shield
+    scoreboard objectives add satyrn.fdl.events.ateSpiderEye minecraft.used:minecraft.spider_eye "Event: Ate Spider Eye"
+    scoreboard objectives add satyrn.fdl.events.blockedAttack minecraft.used:minecraft.shield "Event: Blocked Attack"
     function foxcraft_dungeon_loot:events/clock_3t
 }
 
