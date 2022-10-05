@@ -5,6 +5,10 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
+          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_blighted_harvest"
+        },
+        {
+          "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage"
         },
         {

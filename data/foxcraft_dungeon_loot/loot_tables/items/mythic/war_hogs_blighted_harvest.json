@@ -35,7 +35,7 @@
           },
           {
             "text": " / 10",
-            "color": "gray"
+            "color": "dark_green"
           }
         ],
         "",
@@ -107,9 +107,9 @@
       "enchantments": {
         "minecraft:mending": 1,
         "minecraft:unbreaking": 5,
-        "minecraft:silk_touch": 5,
+        "minecraft:silk_touch": 1,
         "minecraft:fortune": 5,
-        "minecraft:sharpness": 15,
+        "minecraft:sharpness": 20,
         "minecraft:smite": 5
       },
       "add": true
