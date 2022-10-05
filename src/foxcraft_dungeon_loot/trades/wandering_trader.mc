@@ -22,52 +22,64 @@ function on_load {
 function on_tick {
     execute if entity @s[tag=!satyrn.fdl.wanderingTrader.initialized] run {
         tag @s add satyrn.fdl.wanderingTrader.initialized
-        data merge entity @s {NoAI:1b,NoGravity:1b}
+        # Wandering trader "not spawned naturally" check
+        execute store result score #test <%config.internalScoreboard%> run data get entity @s DespawnDelay
 
-        execute as @e[type=minecraft:trader_llama,limit=2,sort=nearest,tag=!satyrn.fdl.wanderingTrader.llama,distance=..10] run {
-            tag @s add satyrn.fdl.wanderingTrader.llama
-            data merge entity @s {NoAI:1b,NoGravity:1b}
-        }
+        execute (if score #test <%config.internalScoreboard%> matches 1..) {
+            data merge entity @s {NoAI:1b,NoGravity:1b,DeathLootTable:"foxcraft_dungeon_loot:entities/wandering_trader"}
 
-        summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],HandItems:[{id:"minecraft:snowball",tag:{CustomModelData:42195,AddedTrades:[],ScanTrades:[],CurrentTrade:0},Count:1}],HandDropChances:[0.00f]}
+            execute as @e[type=minecraft:trader_llama,limit=2,sort=nearest,tag=!satyrn.fdl.wanderingTrader.llama,distance=..10] run {
+                tag @s add satyrn.fdl.wanderingTrader.llama
+                data merge entity @s {NoAI:1b,NoGravity:1b}
+            }
 
-        macro random 4 5
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #math.result <%config.internalScoreboard%>
-        !IF(config.dev) {
-            scoreboard players set @s satyrn.fdl.tradesToAdd.grabBag 5
-        }
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],HandItems:[{id:"minecraft:snowball",tag:{CustomModelData:42195,AddedTrades:[],ScanTrades:[],CurrentTrade:0},Count:1}],HandDropChances:[0.00f]}
+
+            macro random 4 5
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.grabBag 5
+            }
 
 
-        macro random 2 3
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.head = #math.result <%config.internalScoreboard%>
-        !IF(config.dev) {
-            scoreboard players set @s satyrn.fdl.tradesToAdd.head 3
-        }
+            macro random 2 3
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.head = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.head 3
+            }
 
-        macro random 0 2
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.dungeonLoot = #math.result <%config.internalScoreboard%>
-        !IF(config.dev) {
-            scoreboard players set @s satyrn.fdl.tradesToAdd.dungeonLoot 2
-        }
+            macro random 0 2
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.dungeonLoot = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.dungeonLoot 2
+            }
 
-        macro random 6 7
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #math.result <%config.internalScoreboard%>
-        !IF(config.dev) {
-            scoreboard players set @s satyrn.fdl.tradesToAdd.exchange 7
-        }
+            macro random 6 7
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.exchange = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.exchange 7
+            }
 
-        macro random 0 3
-        scoreboard players operation @s satyrn.fdl.tradesToAdd.goatHorns = #math.result <%config.internalScoreboard%>
-        !IF(config.dev) {
-            scoreboard players set @s satyrn.fdl.tradesToAdd.goatHorns 3
+            macro random 0 3
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.goatHorns = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.goatHorns 3
+            }
+        } else {
+            tag @s add satyrn.fdl.trades.hasTrades.head
+            tag @s add satyrn.fdl.trades.hasTrades.goatHorns
+            tag @s add satyrn.fdl.trades.hasTrades.grabBag
+            tag @s add satyrn.fdl.trades.hasTrades.dungeonLoot
+            tag @s add satyrn.fdl.trades.hasTrades.exchange
+            tag @s add satyrn.fdl.trades.hasTrades
         }
     }
 
-# Isabel 2022/10/04:
-#  So this is kind of annoying, but trade generation must use 1-indexed values instead of zero-indexed values, unless the
-#  function increments satyrn.fdl.selectedTrade after assigning it (exchange rates, grab bags).
-#  Just set the randomizer to 1-index values, as it's one argument less than incrementing the scoreboard immediately
-#  afterwards.
+    # Isabel 2022/10/04:
+    #  So this is kind of annoying, but trade generation must use 1-indexed values instead of zero-indexed values, unless the
+    #  function increments satyrn.fdl.selectedTrade after assigning it (exchange rates, grab bags).
+    #  Just set the randomizer to 1-index values, as it's one argument less than incrementing the scoreboard immediately
+    #  afterwards.
 
 # Head trades
     execute (if entity @s[tag=!satyrn.fdl.trades.hasTrades.head]) {
