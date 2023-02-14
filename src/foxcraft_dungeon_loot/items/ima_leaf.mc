@@ -6,7 +6,7 @@ function on_warped_fungus_used {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/ima_leaf/in_main_hand] run {
         particle minecraft:smoke ~ ~ ~ 0.5 1 0.5 0 100
         playsound foxcraft_dungeon_loot:item.ima_leaf.pop player @a
-        tp @s ~ 10000 ~
+        tp @s ~ ~10000 ~
 
         # Break the item
         execute unless entity @s[gamemode=creative] run {
