@@ -11,7 +11,7 @@ function on_warped_fungus_used {
 
         # Break the item
         execute unless entity @s[gamemode=creative] run {
-            playsound minecraft:entity.item.break player @s ~ ~10000 ~
+            playsound minecraft:entity.item.break player @s ~ ~ ~
             macro break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:4219520}
         }
     }
