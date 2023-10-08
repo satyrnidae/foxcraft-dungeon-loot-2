@@ -447,6 +447,31 @@ function build {
         macro set_sell_from_loot foxcraft_dungeon_loot:goat_horns/sweet_moon_love
         function foxcraft_dungeon_loot:trades/recipes/push
 
+        # Trade Index 93: Nether Star
+        macro set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        macro set_sell_item_id "minecraft:nether_star"
+        macro set_buy_from_loot foxcraft_dungeon_loot:loot/coins/platinum_coins
+        macro set_buyb_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 94: End Crystal
+        macro set_sell_item_id "minecraft:end_crystal"
+        macro set_sell_count 1
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 95: Dragon Head
+        macro set_sell_item_id "minecraft:dragon_head"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 96: Dragon Egg
+        macro set_sell_item_id "minecraft:dragon_egg"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 97: Sculk Catalyst
+        macro set_sell_item_id "minecraft:sculk_catalyst"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+
         tellraw @a {"text":"Trade index built!","color":"gray"}
         schedule function foxcraft_dungeon_loot:trades/index/release_chunk 1t
     }

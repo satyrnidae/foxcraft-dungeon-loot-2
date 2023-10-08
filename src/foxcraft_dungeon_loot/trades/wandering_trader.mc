@@ -8,6 +8,8 @@ function on_load {
     scoreboard objectives add satyrn.fdl.tradesAdded.head dummy
     scoreboard objectives add satyrn.fdl.tradesToAdd.dungeonLoot dummy
     scoreboard objectives add satyrn.fdl.tradesAdded.dungeonLoot dummy
+    scoreboard objectives add satyrn.fdl.tradesToAdd.endgame dummy
+    scoreboard objectives add satyrn.fdl.tradesAdded.endgame dummy
     scoreboard objectives add satyrn.fdl.tradesToAdd.exchange dummy
     scoreboard objectives add satyrn.fdl.tradesAdded.exchange dummy
     scoreboard objectives add satyrn.fdl.tradesToAdd.goatHorns dummy
@@ -65,12 +67,20 @@ function on_tick {
             !IF(config.dev) {
                 scoreboard players set @s satyrn.fdl.tradesToAdd.goatHorns 3
             }
+
+            macro random 0 2
+            scoreboard players operation @s satyrn.fdl.tradesToAdd.endgame = #math.result <%config.internalScoreboard%>
+            !IF(config.dev) {
+                scoreboard players set @s satyrn.fdl.tradesToAdd.endgame 2
+            }
+
         } else {
             tag @s add satyrn.fdl.trades.hasTrades.head
             tag @s add satyrn.fdl.trades.hasTrades.goatHorns
             tag @s add satyrn.fdl.trades.hasTrades.grabBag
             tag @s add satyrn.fdl.trades.hasTrades.dungeonLoot
             tag @s add satyrn.fdl.trades.hasTrades.exchange
+            tag @s add satyrn.fdl.trades.hasTrades.endgame
             tag @s add satyrn.fdl.trades.hasTrades
         }
     }
@@ -156,6 +166,27 @@ function on_tick {
                 scoreboard players add @s satyrn.fdl.tradesAdded.dungeonLoot 1
             }
         }
+# Endgame Item Trades
+    } else execute (if entity @s[tag=!satyrn.fdl.trades.hasTrades.endgame]) {
+        execute (if score @s satyrn.fdl.tradesToAdd.endgame matches 0) {
+            tag @s add satyrn.fdl.trades.hasTrades.endgame
+        } else execute (if score @s satyrn.fdl.tradesAdded.endgame >= @s satyrn.fdl.tradesToAdd.endgame) {
+            tag @s add satyrn.fdl.trades.hasTrades.endgame
+        } else {
+            tag @s remove satyrn.fdl.tradeAdded
+
+            # Remember: These are 1-indexed, not 0-indexed, due to the search function
+            macro random 94 98
+            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
+
+            execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trades/wandering_trader/check_existing_trades
+
+            execute if entity @s[tag=satyrn.fdl.tradeAdded] run {
+                function foxcraft_dungeon_loot:trades/wandering_trader/append_current_trade_to_index
+                function foxcraft_dungeon_loot:trades/wandering_trader/add_trade
+                scoreboard players add @s satyrn.fdl.tradesAdded.endgame 1
+        }
+    }
 # Exchange Loot Trades
     } else execute (if entity @s[tag=!satyrn.fdl.trades.hasTrades.exchange]) {
         execute (if score @s satyrn.fdl.tradesAdded.exchange >= @s satyrn.fdl.tradesToAdd.exchange) {
@@ -214,6 +245,8 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.tradesAdded.exchange
     scoreboard objectives remove satyrn.fdl.tradesToAdd.goatHorns
     scoreboard objectives remove satyrn.fdl.tradesAdded.goatHorns
+    scoreboard objectives remove satyrn.fdl.tradesToAdd.endgame
+    scoreboard objectives remove satyrn.fdl.tradesAdded.endgame
 
     team remove satyrn.fdl.traders
 }
@@ -246,7 +279,7 @@ function recursive_check {
 
 function add_trade {
     # i value should loop through entire size of the trade index
-    LOOP(93,i) {
+    LOOP(98,i) {
         # i values are zero indexed but selectedTrade is 1-indexed. Add 1 to i in the check.
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             macro get_offer_from_index <%i%>
@@ -310,6 +343,23 @@ function add_trade {
             !IF(i>=83 && i<=92) {
                 macro randomize_buy_price 1 3
                 macro set_buyb_from_loot foxcraft_dungeon_loot:goat_horns/random_goat_horn
+            }
+
+            # Platinum coins for endgame items
+            !IF(i==93 || i==96) {
+                macro randomize_buy_price 2 10
+                macro randomize_buyb_price 0 9
+            }
+            !IF(i==94 || i==95 || i==97) {
+                macro randomize_max_uses 1 5
+                macro randomize_buy_price 1 2
+                macro randomize_buyb_price 0 9
+            }
+            !IF(i==95) {
+                macro randomize_sell_count 1 4
+            }
+            !IF(i==97) {
+                macro randomize_sell_count 1 10
             }
         }
     }
