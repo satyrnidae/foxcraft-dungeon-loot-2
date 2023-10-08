@@ -6,9 +6,13 @@
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.2.1+alpha.1",
+    "version": "1.2.1+alpha.2",
     "baseArchiveName": "foxcraft-dungeon-loot",
     "changelog": {
+      "1.2.1+alpha.2": [
+        "Ima Leaf now plants a sapling when the user uses it to teleport.",
+        "Ima Leaf now teleports the player relative to their current position instead of a fixed height."
+      ],
       "1.2.1+alpha.1": [
         "Add new Platinum trades for endgame items to Wandering Traders"
       ],
