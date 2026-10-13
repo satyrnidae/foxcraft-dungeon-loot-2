@@ -1,7 +1,7 @@
 ---
 name: Item request
 about: Suggest an idea for a new item
-title: "[ITEM REQUEST] "
+title: "feat: "
 labels: enhancement
 assignees: satyrnidae
 
