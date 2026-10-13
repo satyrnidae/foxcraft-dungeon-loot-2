@@ -1,6 +1,8 @@
 .*
 *.ps1
 README.md
+CLAUDE.md
+docs/
 config.json
 exclude.txt
 package*.json
