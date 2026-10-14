@@ -5,36 +5,6 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_axe",
-          "weight": 5,
-          "quality": 1
-        },
-        {
-          "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_hoe",
-          "weight": 5,
-          "quality": 0
-        },
-        {
-          "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_pickaxe",
-          "weight": 5,
-          "quality": 2
-        },
-        {
-          "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_shovel",
-          "weight": 5,
-          "quality": 2
-        },
-        {
-          "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/copper_plated_sword",
-          "weight": 5,
-          "quality": 3
-        },
-        {
-          "type": "minecraft:loot_table",
           "name": "foxcraft_dungeon_loot:items/uncommon/totem_of_undying",
           "weight": 4,
           "quality": 4

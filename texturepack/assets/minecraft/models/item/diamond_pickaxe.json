@@ -9,12 +9,6 @@
         "custom_model_data": 421951
       },
       "model": "foxcraft_dungeon_loot:item/diamond_auto_pickaxe"
-    },
-    {
-      "predicate": {
-        "custom_model_data": 421952
-      },
-      "model": "foxcraft_dungeon_loot:item/exposed_copper_pickaxe"
     }
   ]
 }

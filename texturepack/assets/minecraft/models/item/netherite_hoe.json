@@ -9,12 +9,6 @@
         "custom_model_data": 42195
       },
       "model": "foxcraft_dungeon_loot:item/war_hogs_blighted_harvest"
-    },
-    {
-      "predicate": {
-        "custom_model_data": 421952
-      },
-      "model": "foxcraft_dungeon_loot:item/copper_hoe"
     }
   ]
 }
