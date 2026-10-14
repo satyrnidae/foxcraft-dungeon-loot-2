@@ -18,3 +18,9 @@ node_modules/
 # MCB Cross Run and Project info
 .mcproject
 .mcb/
+
+# Wolfgun disc audio, attribution only, copied once from matchaoverrides
+texturepack/assets/foxcraft_dungeon_loot/sounds/records/wolfgun/
+
+# C418 disc audio, copied once from the old custom_music_discs folder
+texturepack/assets/foxcraft_dungeon_loot/sounds/records/c418/
