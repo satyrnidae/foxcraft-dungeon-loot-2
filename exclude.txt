@@ -4,6 +4,7 @@ README.md
 CLAUDE.md
 docs/
 config.json
+mcb.config.js
 exclude.txt
 package*.json
 src/

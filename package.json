@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "mc-build": "^2.15.0"
+    "mc-build": "4.2.0"
   }
 }

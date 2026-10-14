@@ -17,3 +17,4 @@ node_modules/
 
 # MCB Cross Run and Project info
 .mcproject
+.mcb/

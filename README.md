@@ -15,7 +15,7 @@ A full list of IDs and item variants can be found in this [Google Sheets doc](ht
 This project uses MC-Build to simplify creating the massive number of mcfunctions needed to handle all of the unique item interactions.
 Follow their install instructions here: https://mcbuild.dev/docs/
 
-After cloning this repository, run `mcb` in the directory to generate the functions.
+After cloning this repository, run `npm install` and then `npx mcb build` in the directory to generate the functions. The project is pinned to mc-build 4.2.0.
 
 ## Acknowledgements
 This pack contains code derived from utility packs and examples provided by [CloudWolf](https://www.youtube.com/c/CloudWolfMinecraft) and [WASD Build Team](https://www.youtube.com/c/WASDBuildTeam), as well as code derived from Siscu's [Evoker Charm](https://www.planetminecraft.com/data-pack/evoker-charm-functions-datapack/download/file/14409645/) datapack.

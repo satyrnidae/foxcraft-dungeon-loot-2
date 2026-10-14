@@ -32,7 +32,7 @@ def load(root, namespace):
     for dirpath, _dirs, files in os.walk(base):
         for name in files:
             if name.endswith(".mcfunction"):
-                rel = os.path.relpath(os.path.join(dirpath, name), base)[:-len(".mcfunction")]
+                rel = os.path.relpath(os.path.join(dirpath, name), base)[:-len(".mcfunction")].replace(os.sep, "/")
                 with open(os.path.join(dirpath, name), encoding="utf-8") as handle:
                     functions[rel] = [line.rstrip() for line in handle.read().split("\n")]
     return functions
