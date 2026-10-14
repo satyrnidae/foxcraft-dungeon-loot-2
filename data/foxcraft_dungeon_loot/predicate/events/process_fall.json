@@ -1,24 +1,28 @@
 {
-  "condition": "minecraft:alternative",
+  "type": "minecraft:any_of",
   "terms": [
     {
-      "condition": "minecraft:entity_properties",
+      "type": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "chest": {
-            "nbt": "{ProcessFall:1b}"
+            "predicates": {
+              "minecraft:custom_data": "{ProcessFall:1b}"
+            }
           }
         }
       }
     },
     {
-      "condition": "minecraft:entity_properties",
+      "type": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "feet": {
-            "nbt": "{ProcessFall:1b}"
+            "predicates": {
+              "minecraft:custom_data": "{ProcessFall:1b}"
+            }
           }
         }
       }

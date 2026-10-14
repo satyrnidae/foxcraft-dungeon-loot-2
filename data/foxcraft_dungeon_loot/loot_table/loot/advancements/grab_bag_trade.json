@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/common_grab_bag"
+          "value": "foxcraft_dungeon_loot:items/common_grab_bag"
         }
       ]
     }

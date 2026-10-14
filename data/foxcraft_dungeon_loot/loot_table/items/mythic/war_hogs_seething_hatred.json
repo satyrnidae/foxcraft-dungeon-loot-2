@@ -10,54 +10,49 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred/armor",
           "amount": 8,
-          "operation": "addition",
-          "id": "1167c954-0f13-42f1-a19f-cffe12a450c9",
+          "operation": "add_value",
           "slot": "legs"
         },
         {
-          "attribute": "minecraft:generic.armor_toughness",
-          "name": "generic.armor_toughness",
+          "attribute": "minecraft:armor_toughness",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred/armor_toughness",
           "amount": 3,
-          "operation": "addition",
-          "id": "f1d72d50-08c6-4b9c-aa51-45dd1ddabc03",
+          "operation": "add_value",
           "slot": "legs"
         },
         {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "name": "generic.knockback_resistance",
+          "attribute": "minecraft:knockback_resistance",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred/knockback_resistance",
           "amount": 0.2,
-          "operation": "addition",
-          "id": "8402122d-0d54-4ffc-8af0-b18acee2c53b",
+          "operation": "add_value",
           "slot": "legs"
         },
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred/movement_speed",
           "amount": -0.1,
-          "operation": "multiply_total",
-          "id": "e7349caa-db06-4fdc-9b0d-ac4ce981ed56",
+          "operation": "add_multiplied_total",
           "slot": "legs"
         },
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred/max_health",
           "amount": 2,
-          "operation": "addition",
-          "id": "b5d8491e-2afe-42c4-a093-50014e236847",
+          "operation": "add_value",
           "slot": "legs"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "War Hog's Seething Hatred",
         "color": "green",
@@ -65,11 +60,11 @@
       }
     },
     {
-      "function": "minecraft:set_count",
+      "type": "minecraft:set_count",
       "count": 1
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Today, the Piglin Brutes guard the Bastions,",
         "but long ago, their ancestors staged campaigns",
@@ -101,10 +96,11 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:blast_protection": 4,
         "minecraft:binding_curse": 1,
@@ -117,7 +113,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:60,CustomModelData:421950,DungeonItem:1b}"
     }
   ]

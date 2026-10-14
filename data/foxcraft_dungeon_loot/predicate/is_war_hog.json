@@ -1,8 +1,8 @@
 {
-  "condition": "minecraft:entity_properties",
+  "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "type": "minecraft:piglin_brute",
-    "nbt": "{Tags:[war_hog]}"
+    "minecraft:entity_type": "minecraft:piglin_brute",
+    "minecraft:nbt": "{Tags:[war_hog]}"
   }
 }

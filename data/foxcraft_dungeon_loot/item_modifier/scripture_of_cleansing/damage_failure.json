@@ -1,5 +1,5 @@
 {
-  "function": "set_damage",
+  "type": "set_damage",
   "damage": {
     "type": "constant",
     "value": -0.205

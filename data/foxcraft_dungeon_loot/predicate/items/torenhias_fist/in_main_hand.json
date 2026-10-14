@@ -1,10 +1,12 @@
 {
-  "condition": "minecraft:entity_properties",
+  "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "equipment": {
+    "minecraft:equipment": {
       "mainhand": {
-        "nbt": "{DungeonLootId:80}"
+        "predicates": {
+          "minecraft:custom_data": "{DungeonLootId:80}"
+        }
       }
     }
   }

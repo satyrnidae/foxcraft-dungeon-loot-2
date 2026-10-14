@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Splash Potion of Fatigue",
         "color": "yellow",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:4866583,CustomPotionEffects:[{Id:4,Duration:1800}]}"
     }
   ]

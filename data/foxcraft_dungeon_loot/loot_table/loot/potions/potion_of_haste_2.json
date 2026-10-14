@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Potion of Haste",
         "color": "yellow",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:14270531,CustomPotionEffects:[{Id:3,Amplifier:1,Duration:1800}]}"
     }
   ]

@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Hero's Amulet",
         "color": "light_purple",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "\"Shouldst thou be a True Hero, I shall grant",
         "thee a boon unparalleled.\"",
@@ -135,16 +135,16 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:45,Unbreakable:1,CustomModelData:421952,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

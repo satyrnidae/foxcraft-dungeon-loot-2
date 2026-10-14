@@ -8,18 +8,16 @@
           "name": "minecraft:diamond_sword"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": 1
-            }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
           }
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -29,20 +27,18 @@
           "name": "minecraft:netherite_sword"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ]
+      }
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Estudinae's Sorrow",
         "color": "light_purple",
@@ -50,7 +46,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A weapon wielded by Guardians of Dinidae during",
         "their battle with Poncho Sanchez. Their lack of",
@@ -115,10 +111,10 @@
           "italic": false
         }
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:knockback": 5,
         "minecraft:luck_of_the_sea": 10,
@@ -131,7 +127,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:31,DungeonItem:1b}"
     }
   ]

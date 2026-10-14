@@ -10,30 +10,28 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/rare/shroud_of_notoriety/armor",
           "amount": 3,
-          "operation": "addition",
-          "id": "f7a21249-8f95-41b8-ab28-b497579ce4e9",
+          "operation": "add_value",
           "slot": "head"
         },
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/rare/shroud_of_notoriety/movement_speed",
           "amount": 0.1,
-          "operation": "multiply_total",
-          "id": "af4551fc-418b-4b60-8784-490ec1aa8c4e",
+          "operation": "add_multiplied_total",
           "slot": "head"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Shroud of Notoriety",
         "color": "aqua",
@@ -41,7 +39,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Oh, it's you!",
         [
@@ -73,16 +71,17 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:thorns": 4
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:15,SkullOwner:Technoblade,DungeonItem:1b}"
     }
   ]

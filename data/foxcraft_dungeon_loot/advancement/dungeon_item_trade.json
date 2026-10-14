@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:gold_nugget",
+      "id": "minecraft:gold_nugget",
       "nbt": "{CustomModelData:421950}"
     },
     "title": "\"This Belongs in a Museum!\"",
@@ -16,17 +16,17 @@
     "trade_for_item": {
       "trigger": "minecraft:villager_trade",
       "conditions": {
-        "villager": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "minecraft:wandering_trader"
-            }
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
           }
-        ],
+        },
         "item": {
-          "nbt": "{DungeonItem:1b}"
+          "predicates": {
+            "minecraft:custom_data": "{DungeonItem:1b}"
+          }
         }
       }
     }

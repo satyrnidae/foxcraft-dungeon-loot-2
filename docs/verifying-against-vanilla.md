@@ -230,3 +230,20 @@ Notes from the 4.2.0 test (details in the issue #130 comments):
   still needs a manual test in game.
 - Registry entries are added programmatically in the harness; loading `item_modifier` or `instrument` files from a datapack on disk is not exercised.
 - The checks are specific to 26.3's class and method names; expect to adjust them for each release.
+
+## 9. Scanning the pack's own data
+
+Two tools check the repository's JSON under `data/`, because 26.3 loads unconverted files without an error and silently drops the old keys.
+
+- `docs/tools/check_old_keys.py [DATA_DIR]` is a plain Python scan for pre-26.3 keys in loot tables, item modifiers, predicates and advancements
+  (`function`, `functions`, `conditions`, old `condition` type names, removed types). It needs no jar. Exit status 1 means something is left to convert.
+- `docs/tools/Scan.java DATA_DIR` parses every loot table, predicate, item modifier and advancement with the game's own codecs, re-encodes what the game
+  kept, and reports any key that was lost. Compile and run it like the harness, from a scratch directory, with an absolute `DATA_DIR`:
+  ```bash
+  javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/Scan.java
+  java -cp "$WORK/classes:$JAR:$CP" Scan "$(pwd)/data"
+  ```
+  `-Dscan.skip=minecraft:set_nbt,set_nbt` removes functions of those types before parsing, for constructs a later migration step still has to convert.
+  Pack predicates are inlined before parsing because the vanilla lookup already owns the predicate registry, and loot table references are checked
+  for existence and parsed as empty tables. Known harmless re-encodings (default `weight`, `quality`, `add`, constant number providers, `__comment` keys,
+  advancement defaults) are not reported.

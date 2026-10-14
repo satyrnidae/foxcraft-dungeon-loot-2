@@ -10,13 +10,13 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:71,CustomModelData:4219522,GrabBag:1b,ProcessOnUsed:1b}"
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Glistering Grab-Bag",
         "color": "yellow",
@@ -24,7 +24,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A grab bag containing uncommon items.",
         [
@@ -36,7 +36,7 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     }
   ]
 }

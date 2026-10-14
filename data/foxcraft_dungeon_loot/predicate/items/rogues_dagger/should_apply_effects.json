@@ -1,15 +1,17 @@
 {
-  "condition": "minecraft:entity_properties",
+  "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "flags": {
+    "minecraft:flags": {
       "is_sneaking": true
     },
-    "equipment": {
+    "minecraft:equipment": {
       "offhand": {
-        "nbt": "{DungeonLootId:17}",
         "count": {
           "min": 1
+        },
+        "predicates": {
+          "minecraft:custom_data": "{DungeonLootId:17}"
         }
       }
     }

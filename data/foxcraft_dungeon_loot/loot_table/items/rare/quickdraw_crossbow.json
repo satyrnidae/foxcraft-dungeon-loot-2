@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Quickdraw Crossbow",
         "color": "aqua",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "3. 2. 1. Draw.",
         [
@@ -32,17 +32,17 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:quick_charge": 5
       },
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:12,DungeonItem:1b}"
     }
   ]

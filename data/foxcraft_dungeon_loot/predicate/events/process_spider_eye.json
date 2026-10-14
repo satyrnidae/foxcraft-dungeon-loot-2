@@ -1,24 +1,28 @@
 {
-  "condition": "minecraft:alternative",
+  "type": "minecraft:any_of",
   "terms": [
     {
-      "condition": "minecraft:entity_properties",
+      "type": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "mainhand": {
-            "nbt": "{ProcessSpiderEye:1b}"
+            "predicates": {
+              "minecraft:custom_data": "{ProcessSpiderEye:1b}"
+            }
           }
         }
       }
     },
     {
-      "condition": "minecraft:entity_properties",
+      "type": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "equipment": {
+        "minecraft:equipment": {
           "offhand": {
-            "nbt": "{ProcessSpiderEye:1b}"
+            "predicates": {
+              "minecraft:custom_data": "{ProcessSpiderEye:1b}"
+            }
           }
         }
       }

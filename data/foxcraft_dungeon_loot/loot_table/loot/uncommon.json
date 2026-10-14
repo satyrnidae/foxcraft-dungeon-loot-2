@@ -5,21 +5,22 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/uncommon/totem_of_undying",
+          "value": "foxcraft_dungeon_loot:items/uncommon/totem_of_undying",
           "weight": 4,
           "quality": 4
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:book",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:enchant_with_levels",
+              "type": "minecraft:enchant_with_levels",
               "levels": {
+                "type": "minecraft:uniform",
                 "min": 10,
                 "max": 50
               },
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "weight": 5,
@@ -72,9 +73,9 @@
           "quality": 4,
           "type": "minecraft:item",
           "name": "minecraft:player_head",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:fill_player_head",
+              "type": "minecraft:fill_player_head",
               "entity": "this"
             }
           ]
@@ -83,85 +84,85 @@
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/analogouspants5_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/analogouspants5_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/bubbles199bla_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/bubbles199bla_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/captainzephyrr_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/captainzephyrr_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/chickenny127_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/chickenny127_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/commandercyclops_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/commandercyclops_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/gunnystryker_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/gunnystryker_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/macedonzero_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/macedonzero_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/maximumchocobo_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/maximumchocobo_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/satyrnidae_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/satyrnidae_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/shrinerh_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/shrinerh_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/underbrush_fox_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/underbrush_fox_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/yergaderga2_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/yergaderga2_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/marie_annelise_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/marie_annelise_head"
         },
         {
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/heads/hyosoryu_head"
+          "value": "foxcraft_dungeon_loot:loot/heads/hyosoryu_head"
         }
       ]
     }

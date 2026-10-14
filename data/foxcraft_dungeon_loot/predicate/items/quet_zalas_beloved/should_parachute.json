@@ -1,19 +1,23 @@
 {
-  "condition": "minecraft:entity_properties",
+  "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "equipment": {
+    "minecraft:equipment": {
       "chest": {
         "items": [
           "minecraft:elytra"
         ],
-        "durability": {
-          "min": 2,
-          "max": 432
-        },
-        "nbt": "{DungeonLootId:50}",
         "count": {
           "min": 1
+        },
+        "predicates": {
+          "minecraft:damage": {
+            "durability": {
+              "min": 2,
+              "max": 432
+            }
+          },
+          "minecraft:custom_data": "{DungeonLootId:50}"
         }
       }
     }

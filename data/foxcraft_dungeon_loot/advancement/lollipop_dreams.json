@@ -2,7 +2,7 @@
   "parent": "foxcraft_dungeon_loot:root",
   "display": {
     "icon": {
-      "item": "minecraft:iron_axe",
+      "id": "minecraft:iron_axe",
       "nbt": "{CustomModelData:421953}"
     },
     "title": "Lollipop Dreams",
@@ -15,31 +15,29 @@
     "player_killed_entity": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "nbt": "{DungeonLootId:87}",
-                  "count": {
-                    "min": 1
-                  }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "#foxcraft_dungeon_loot:undead"
-            }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#foxcraft_dungeon_loot:undead"
           }
-        ]
+        }
       }
     }
   },

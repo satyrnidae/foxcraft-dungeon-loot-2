@@ -4,21 +4,19 @@
     {
       "__comment": "Iron variant, default",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": {
-                "min": 1,
-                "max": 2
-              }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 2
             }
           }
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -29,15 +27,13 @@
     {
       "__comment": "Diamond variant, loot variant score = 1",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -48,15 +44,13 @@
     {
       "__comment": "Netherite variant, loot variant score = 2",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 2
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -65,9 +59,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Albatross Heavy Industries® LumberJACKED™ 8.5hp",
         "color": "green",
@@ -75,7 +69,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "The new Albatross Heavy Industries®",
         "LumberJACKED™ 8.5hp really puts the",
@@ -111,10 +105,11 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:efficiency": 10,
         "minecraft:mending": 1,
@@ -125,7 +120,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:87,Rarity:Mythic,CustomModelData:421953,DungeonItem:1b}"
     }
   ]

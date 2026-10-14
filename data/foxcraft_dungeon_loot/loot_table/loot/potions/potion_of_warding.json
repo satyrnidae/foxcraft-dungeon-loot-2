@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Potion of Warding",
         "color": "yellow",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:2445989,CustomPotionEffects:[{Id:22,Duration:3600}]}"
     }
   ]

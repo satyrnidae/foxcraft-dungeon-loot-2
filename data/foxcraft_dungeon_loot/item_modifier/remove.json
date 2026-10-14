@@ -1,5 +1,5 @@
 {
-  "function": "set_count",
+  "type": "set_count",
   "count": {
     "type": "constant",
     "value": 0

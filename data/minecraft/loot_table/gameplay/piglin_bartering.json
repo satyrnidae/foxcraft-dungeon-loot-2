@@ -6,12 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "enchantments": [
+              "type": "minecraft:enchant_randomly",
+              "options": [
                 "minecraft:soul_speed"
-              ],
-              "function": "minecraft:enchant_randomly"
+              ]
             }
           ],
           "name": "minecraft:book",
@@ -19,12 +19,12 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "enchantments": [
+              "type": "minecraft:enchant_randomly",
+              "options": [
                 "minecraft:soul_speed"
-              ],
-              "function": "minecraft:enchant_randomly"
+              ]
             }
           ],
           "name": "minecraft:iron_boots",
@@ -32,9 +32,9 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_potion",
+              "type": "minecraft:set_potion",
               "id": "minecraft:fire_resistance"
             }
           ],
@@ -43,9 +43,9 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_potion",
+              "type": "minecraft:set_potion",
               "id": "minecraft:fire_resistance"
             }
           ],
@@ -54,9 +54,9 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_potion",
+              "type": "minecraft:set_potion",
               "id": "minecraft:water"
             }
           ],
@@ -65,7 +65,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -73,7 +73,7 @@
                 "max": 36.0,
                 "min": 10.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:iron_nugget",
@@ -81,7 +81,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -89,7 +89,7 @@
                 "max": 4.0,
                 "min": 2.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:ender_pearl",
@@ -97,7 +97,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -105,7 +105,7 @@
                 "max": 9.0,
                 "min": 3.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:string",
@@ -113,7 +113,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -121,7 +121,7 @@
                 "max": 12.0,
                 "min": 5.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:quartz",
@@ -134,7 +134,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -142,7 +142,7 @@
                 "max": 3.0,
                 "min": 1.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:crying_obsidian",
@@ -155,7 +155,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -163,7 +163,7 @@
                 "max": 4.0,
                 "min": 2.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:leather",
@@ -171,7 +171,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -179,7 +179,7 @@
                 "max": 8.0,
                 "min": 2.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:soul_sand",
@@ -187,7 +187,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -195,7 +195,7 @@
                 "max": 8.0,
                 "min": 2.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:nether_brick",
@@ -203,7 +203,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -211,7 +211,7 @@
                 "max": 12.0,
                 "min": 6.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:spectral_arrow",
@@ -219,7 +219,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -227,7 +227,7 @@
                 "max": 16.0,
                 "min": 8.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:gravel",
@@ -235,7 +235,7 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
               "add": false,
               "count": {
@@ -243,7 +243,7 @@
                 "max": 16.0,
                 "min": 8.0
               },
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count"
             }
           ],
           "name": "minecraft:blackstone",
@@ -251,7 +251,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/war_hog_set",
+          "value": "foxcraft_dungeon_loot:loot/war_hog_set",
           "weight": 1
         }
       ],

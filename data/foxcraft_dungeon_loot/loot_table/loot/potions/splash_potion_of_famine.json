@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Splash Potion of Famine",
         "color": "yellow",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:5797459,CustomPotionEffects:[{Id:17,Duration:900}]}"
     }
   ]

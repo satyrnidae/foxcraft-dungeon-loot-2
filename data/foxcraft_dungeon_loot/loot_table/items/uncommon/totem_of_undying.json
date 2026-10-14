@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": [
         {
           "text": "Totem of Undying",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Pick yourself up and try again.",
         [
@@ -33,10 +33,11 @@
             "color": "yellow"
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:21,DungeonItem:1b}"
     }
   ]

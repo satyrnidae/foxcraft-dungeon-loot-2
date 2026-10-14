@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Palomina's Gift",
         "color": "light_purple",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "The sun god Mysteria imparted unto her a spear,",
         "which would burn away the Dæmon King's endless",
@@ -34,10 +34,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:fire_aspect": 5,
         "minecraft:loyalty": 5,
@@ -49,7 +49,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:5,DungeonItem:1b}"
     }
   ]

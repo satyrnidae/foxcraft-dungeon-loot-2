@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Aurelia's Lucky Compass",
         "color": "aqua",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Find yerself some nice booty",
         [
@@ -31,30 +31,30 @@
             "italic": true
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/rare/aurelias_lucky_compass/luck",
           "amount": 2,
-          "operation": "addition",
-          "id": "b28a6c13-bb60-4b0d-af39-00cd721ef3a9",
+          "operation": "add_value",
           "slot": "mainhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:18,HideFlags:1,DungeonItem:1b}"
     }
   ]

@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Pierce the Sky",
         "color": "green",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Let arrows fall upon mine enemies as a",
         "piercing, unrelenting rain.",
@@ -33,10 +33,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:unbreaking": 5,
         "minecraft:mending": 1,
@@ -47,7 +47,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:7,DungeonItem:1b}"
     }
   ]

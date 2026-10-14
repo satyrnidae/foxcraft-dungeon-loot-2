@@ -10,22 +10,21 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/epic/yo_yo_mans_revenge/attack_damage",
           "amount": 4,
-          "operation": "addition",
-          "id": "0be90dfc-3689-433d-a5c6-242d29515f36",
+          "operation": "add_value",
           "slot": "mainhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Yo-Yo Man's Revenge",
         "color": "light_purple",
@@ -33,7 +32,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "\"I wanna be a yo-yo man!\" he cried, \"Make me",
         "a yo-yo man!\" But the Yo-Yo Master did not",
@@ -47,10 +46,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:knockback": 10,
         "minecraft:mending": 1,
@@ -59,7 +58,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:8,DungeonItem:1b}"
     }
   ]

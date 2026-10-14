@@ -3,32 +3,34 @@
   "pools": [
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 0,
         "max": 3
       },
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/coins/copper_coins",
+          "value": "foxcraft_dungeon_loot:loot/coins/copper_coins",
           "weight": 500
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/coins/silver_coins",
+          "value": "foxcraft_dungeon_loot:loot/coins/silver_coins",
           "weight": 50,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:loot/coins/gold_coins",
+          "value": "foxcraft_dungeon_loot:loot/coins/gold_coins",
           "weight": 5,
           "quality": 2
         }
       ],
-      "functions": [
+      "modifier": [
         {
-          "function": "minecraft:looting_enchant",
-          "count": 1
+          "type": "minecraft:enchanted_count_increase",
+          "count": 1,
+          "enchantment": "minecraft:looting"
         }
       ]
     }

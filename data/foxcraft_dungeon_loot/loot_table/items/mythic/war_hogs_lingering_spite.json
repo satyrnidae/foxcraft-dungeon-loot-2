@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "War Hog's Lingering Spite",
         "color": "green",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "In ages long past, fearsome warriors roamed the",
         "Nether. This blade is their lingering spite.",
@@ -32,22 +32,23 @@
             "italic": true
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:fire_aspect": 5,
         "minecraft:knockback": 2,
         "minecraft:mending": 1,
         "minecraft:sharpness": 15,
-        "minecraft:sweeping": 3,
+        "minecraft:sweeping_edge": 3,
         "minecraft:looting": 3,
         "minecraft:unbreaking": 5
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:9,DungeonItem:1b}"
     }
   ]

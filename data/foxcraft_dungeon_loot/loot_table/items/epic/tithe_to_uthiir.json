@@ -11,13 +11,13 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:81,DungeonItem:1b,CustomModelData:421950,ProcessSpiderEye:1b}"
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Tithe to Uthiir",
         "color": "light_purple",
@@ -25,8 +25,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
-      "replace": true,
+      "type": "minecraft:set_lore",
       "lore": [
         "Uthiir, God of Arthropods, kindly asks that you",
         "thin the herd.",
@@ -110,10 +109,11 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:bane_of_arthropods": 5,
         "minecraft:mending": 1,

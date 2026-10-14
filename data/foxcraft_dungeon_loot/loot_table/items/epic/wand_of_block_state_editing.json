@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Wand of Block State Editing",
         "color": "light_purple",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Finally, you can make the perfect table.",
         [
@@ -81,10 +81,11 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:57,CustomModelData:421950,DungeonItem:1b}"
     }
   ]

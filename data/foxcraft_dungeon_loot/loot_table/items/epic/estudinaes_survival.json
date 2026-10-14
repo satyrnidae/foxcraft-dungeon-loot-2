@@ -4,21 +4,19 @@
     {
       "__comment": "Leather variant, default",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": {
-                "min": 1,
-                "max": 4
-              }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 4
             }
           }
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -29,15 +27,13 @@
     {
       "__comment": "Chainmail variant, loot variant score = 1",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -48,15 +44,13 @@
     {
       "__comment": "Iron variant, loot variant score = 2",
       "rolls": 2,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 2
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -67,15 +61,13 @@
     {
       "__comment": "Diamond variant, loot variant score = 3",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 3
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -86,15 +78,13 @@
     {
       "__comment": "Netherite variant, loot variant score = 4",
       "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 4
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 4
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -103,9 +93,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Estudinae's Survival",
         "italic": false,
@@ -113,7 +103,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Scientists of Dinidae developed equipment to",
         "keep survivors alive as they fled their",
@@ -146,10 +136,11 @@
             "color": "gray"
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:blast_protection": 4,
         "minecraft:fire_protection": 4,
@@ -160,7 +151,7 @@
       }
     },
     {
-      "function": "set_nbt",
+      "type": "set_nbt",
       "tag": "{DungeonLootId:40,CustomModelData:421951,display:{color:5215783},DungeonItem:1b}"
     }
   ]

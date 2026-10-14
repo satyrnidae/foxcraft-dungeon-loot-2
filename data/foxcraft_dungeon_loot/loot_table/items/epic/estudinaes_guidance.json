@@ -8,21 +8,19 @@
           "name": "minecraft:leather_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": {
-                "min": 1,
-                "max": 4
-              }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 4
             }
           }
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -32,15 +30,13 @@
           "name": "minecraft:chainmail_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -50,15 +46,13 @@
           "name": "minecraft:iron_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 2
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -68,15 +62,13 @@
           "name": "minecraft:diamond_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 3
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -86,20 +78,18 @@
           "name": "minecraft:netherite_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 4
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 4
         }
-      ]
+      }
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Estudinae's Guidance",
         "color": "light_purple",
@@ -107,7 +97,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Survivors of Dinidae were aided by fellow tribes",
         "as they escaped the dangers of Poncho Sanchez.",
@@ -137,47 +127,44 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/epic/estudinaes_guidance/luck",
           "amount": 1,
-          "operation": "addition",
-          "id": "57317025-3079-49dc-a477-dfa49a02edfb",
+          "operation": "add_value",
           "slot": "feet"
         },
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/epic/estudinaes_guidance/max_health",
           "amount": 4,
-          "operation": "addition",
-          "id": "7ab1e91d-a139-4fb1-9065-f4e39e1daebd",
+          "operation": "add_value",
           "slot": "feet"
         },
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/epic/estudinaes_guidance/armor",
           "amount": 2,
-          "operation": "addition",
-          "id": "73c566f0-7048-4fab-a467-610ab97718b5",
+          "operation": "add_value",
           "slot": "feet"
         },
         {
-          "attribute": "minecraft:generic.armor_toughness",
-          "name": "generic.armor_toughness",
+          "attribute": "minecraft:armor_toughness",
+          "id": "foxcraft_dungeon_loot:items/epic/estudinaes_guidance/armor_toughness",
           "amount": 0.5,
-          "operation": "addition",
-          "id": "4846f25f-ab1b-420e-b7ed-ad3561d76a0f",
+          "operation": "add_value",
           "slot": "feet"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:blast_protection": 4,
         "minecraft:depth_strider": 3,
@@ -189,7 +176,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:38,CustomModelData:421952,display:{color:5215783},DungeonItem:1b}"
     }
   ]

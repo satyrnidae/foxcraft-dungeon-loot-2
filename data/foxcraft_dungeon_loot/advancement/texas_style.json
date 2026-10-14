@@ -1,1071 +1,1247 @@
 {
   "parent": "foxcraft_dungeon_loot:lollipop_dreams",
   "display": {
-      "icon": {
-          "item": "minecraft:diamond_axe",
-          "nbt": "{CustomModelData:421953}"
-      },
-      "title": "Texas Style",
-      "description": "Massacre every neutral or friendly mob with a chainsaw.",
-      "announce_to_chat": true,
-      "frame": "challenge",
-      "show_toast": true,
-      "hidden": false
+    "icon": {
+      "id": "minecraft:diamond_axe",
+      "nbt": "{CustomModelData:421953}"
+    },
+    "title": "Texas Style",
+    "description": "Massacre every neutral or friendly mob with a chainsaw.",
+    "announce_to_chat": true,
+    "frame": "challenge",
+    "show_toast": true,
+    "hidden": false
   },
   "criteria": {
     "minecraft:bee": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:bee"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:bee"
+          }
         }
       }
     },
     "minecraft:cave_spider": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:cave_spider"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cave_spider"
+          }
         }
       }
     },
     "minecraft:dolphin": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:dolphin"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:dolphin"
+          }
         }
       }
     },
     "minecraft:enderman": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:enderman"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:enderman"
+          }
         }
       }
     },
     "minecraft:goat": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:goat"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:goat"
+          }
         }
       }
     },
     "minecraft:iron_golem": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:iron_golem"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:iron_golem"
+          }
         }
       }
     },
     "minecraft:llama": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:llama"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:llama"
+          }
         }
       }
     },
     "minecraft:trader_llama": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:trader_llama"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:trader_llama"
+          }
         }
       }
     },
     "minecraft:panda": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:panda"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:panda"
+          }
         }
       }
     },
     "minecraft:piglin": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:piglin"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:piglin"
+          }
         }
       }
     },
     "minecraft:polar_bear": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:polar_bear"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:polar_bear"
+          }
         }
       }
     },
     "minecraft:spider": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:spider"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:spider"
+          }
         }
       }
     },
     "minecraft:wolf": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:wolf"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wolf"
+          }
         }
       }
     },
     "minecraft:zombified_piglin": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:zombified_piglin"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:zombified_piglin"
+          }
         }
       }
     },
     "minecraft:allay": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:allay"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:allay"
+          }
         }
       }
     },
     "minecraft:axolotl": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:axolotl"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:axolotl"
+          }
         }
       }
     },
     "minecraft:bat": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:bat"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:bat"
+          }
         }
       }
     },
     "minecraft:cat": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:cat"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cat"
+          }
         }
       }
     },
     "minecraft:chicken": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:chicken"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:chicken"
+          }
         }
       }
     },
     "minecraft:cod": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:cod"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cod"
+          }
         }
       }
     },
     "minecraft:cow": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:cow"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cow"
+          }
         }
       }
     },
     "minecraft:donkey": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:donkey"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:donkey"
+          }
         }
       }
     },
     "minecraft:fox": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:fox"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:fox"
+          }
         }
       }
     },
     "minecraft:frog": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:frog"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:frog"
+          }
         }
       }
     },
     "minecraft:glow_squid": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:glow_squid"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:glow_squid"
+          }
         }
       }
     },
     "minecraft:horse": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:horse"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:horse"
+          }
         }
       }
     },
     "minecraft:mooshroom": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:mooshroom"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:mooshroom"
+          }
         }
       }
     },
     "minecraft:mule": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:mule"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:mule"
+          }
         }
       }
     },
     "minecraft:ocelot": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:ocelot"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:ocelot"
+          }
         }
       }
     },
     "minecraft:parrot": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:parrot"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:parrot"
+          }
         }
       }
     },
     "minecraft:pig": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:pig"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:pig"
+          }
         }
       }
     },
     "minecraft:pufferfish": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:pufferfish"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:pufferfish"
+          }
         }
       }
     },
     "minecraft:rabbit": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:rabbit"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:rabbit"
+          }
         }
       }
     },
     "minecraft:salmon": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:salmon"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:salmon"
+          }
         }
       }
     },
     "minecraft:sheep": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:sheep"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:sheep"
+          }
         }
       }
     },
     "minecraft:skeleton_horse": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:skeleton_horse"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:skeleton_horse"
+          }
         }
       }
     },
     "minecraft:snow_golem": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:snow_golem"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:snow_golem"
+          }
         }
       }
     },
     "minecraft:squid": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:squid"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:squid"
+          }
         }
       }
     },
     "minecraft:strider": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:strider"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:strider"
+          }
         }
       }
     },
     "minecraft:tadpole": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:tadpole"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:tadpole"
+          }
         }
       }
     },
     "minecraft:tropical_fish": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:tropical_fish"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:tropical_fish"
+          }
         }
       }
     },
     "minecraft:turtle": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:turtle"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:turtle"
+          }
         }
       }
     },
     "minecraft:villager": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:villager"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:villager"
+          }
         }
       }
     },
     "minecraft:wandering_trader": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "equipment": {
-                "mainhand": {
-                  "count": {
-                    "min": 1
-                  },
-                  "nbt": "{DungeonLootId:87}"
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
                 }
               }
             }
           }
-        ],
+        },
         "entity": {
-          "type": "minecraft:wandering_trader"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
+          }
         }
       }
     }

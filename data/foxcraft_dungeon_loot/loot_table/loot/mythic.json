@@ -5,135 +5,135 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/auto_pickaxe"
+          "value": "foxcraft_dungeon_loot:items/mythic/auto_pickaxe"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/bringer_of_fear"
+          "value": "foxcraft_dungeon_loot:items/mythic/bringer_of_fear"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/chainsaw"
+          "value": "foxcraft_dungeon_loot:items/mythic/chainsaw"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/constantines_gift"
+          "value": "foxcraft_dungeon_loot:items/mythic/constantines_gift"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/deilonas_holy_blessings"
+          "value": "foxcraft_dungeon_loot:items/mythic/deilonas_holy_blessings"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/downpour_amulet"
+          "value": "foxcraft_dungeon_loot:items/mythic/downpour_amulet"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/evokers_tome"
+          "value": "foxcraft_dungeon_loot:items/mythic/evokers_tome"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/gravilock_boots"
+          "value": "foxcraft_dungeon_loot:items/mythic/gravilock_boots"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/hammer_of_sol"
+          "value": "foxcraft_dungeon_loot:items/mythic/hammer_of_sol"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/how_about_no"
+          "value": "foxcraft_dungeon_loot:items/mythic/how_about_no"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas"
+          "value": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/pierce_the_sky"
+          "value": "foxcraft_dungeon_loot:items/mythic/pierce_the_sky"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/poncho_sanchezs_fate"
+          "value": "foxcraft_dungeon_loot:items/mythic/poncho_sanchezs_fate"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/pride_and_extreme_prejudice"
+          "value": "foxcraft_dungeon_loot:items/mythic/pride_and_extreme_prejudice"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/quet_zalas_beloved"
+          "value": "foxcraft_dungeon_loot:items/mythic/quet_zalas_beloved"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/scripture_of_cleansing"
+          "value": "foxcraft_dungeon_loot:items/mythic/scripture_of_cleansing"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut"
+          "value": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/stompies"
+          "value": "foxcraft_dungeon_loot:items/mythic/stompies"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/talking_stick"
+          "value": "foxcraft_dungeon_loot:items/mythic/talking_stick"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona"
+          "value": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/totem_of_dendris"
+          "value": "foxcraft_dungeon_loot:items/mythic/totem_of_dendris"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila"
+          "value": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch"
+          "value": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/totem_of_mysteria"
+          "value": "foxcraft_dungeon_loot:items/mythic/totem_of_mysteria"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_lingering_spite"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_lingering_spite"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred"
+          "value": "foxcraft_dungeon_loot:items/mythic/war_hogs_seething_hatred"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/wing_of_ouet_zala"
+          "value": "foxcraft_dungeon_loot:items/mythic/wing_of_ouet_zala"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/wing_of_quet_zala"
+          "value": "foxcraft_dungeon_loot:items/mythic/wing_of_quet_zala"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:items/mythic/x_no_evil"
+          "value": "foxcraft_dungeon_loot:items/mythic/x_no_evil"
         }
       ]
     }

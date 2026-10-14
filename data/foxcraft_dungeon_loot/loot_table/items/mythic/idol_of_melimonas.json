@@ -10,30 +10,28 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/movement_speed",
           "amount": 0.4,
-          "operation": "multiply_base",
-          "id": "d71dbb1c-0a65-4019-abc6-3820ccb8eae0",
+          "operation": "add_multiplied_base",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/luck",
           "amount": 1,
-          "operation": "addition",
-          "id": "978773dd-ae5e-42b2-b75b-87920c895a86",
+          "operation": "add_value",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Idol of Melimonas",
         "color": "green",
@@ -41,7 +39,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Weep, for Melimonas smiles upon thee.",
         [
@@ -97,17 +95,18 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:47,CustomModelData:421956,HideFlags:1,DungeonItem:1b}"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:goat_horn",
+      "id": "minecraft:goat_horn",
       "nbt": "{CustomModelData:42195}"
     },
     "title": "Instrumentalist",
@@ -16,17 +16,17 @@
     "trade_for_item": {
       "trigger": "minecraft:villager_trade",
       "conditions": {
-        "villager": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "minecraft:wandering_trader"
-            }
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
           }
-        ],
+        },
         "item": {
-          "nbt": "{CopperGoatHorn:1b}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b}"
+          }
         }
       }
     }

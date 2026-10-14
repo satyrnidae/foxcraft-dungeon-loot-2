@@ -4,12 +4,7 @@
     "player_hit_entity": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "foxcraft_dungeon_loot:items/beta_iron_sword/in_main_hand"
-          }
-        ]
+        "player": "foxcraft_dungeon_loot:items/beta_iron_sword/in_main_hand"
       }
     }
   },

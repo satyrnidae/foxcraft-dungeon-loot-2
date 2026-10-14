@@ -10,30 +10,28 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/luck",
           "amount": 2,
-          "operation": "addition",
-          "id": "73139761-a274-4bda-a559-9dced3bfe6d1",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/max_health",
           "amount": 10,
-          "operation": "addition",
-          "id": "b78243e6-d894-4ab0-8337-bd00de41545f",
+          "operation": "add_value",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Totem of Deilona",
         "color": "green",
@@ -41,7 +39,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "May Deilona, God of Health and Good",
         "Fortune, smile upon thee!",
@@ -98,16 +96,17 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:55,CustomModelData:421951,HideFlags:1,DungeonItem:1b}"
     }
   ]

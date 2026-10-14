@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "D6",
         "italic": false,
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A simple six-sided die.",
         [
@@ -31,10 +31,11 @@
             "color": "white"
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:65,Unbreakable:1,CustomModelData:4219515,HideFlags:4,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

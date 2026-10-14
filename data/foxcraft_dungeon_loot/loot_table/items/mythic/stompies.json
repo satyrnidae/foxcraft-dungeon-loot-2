@@ -8,21 +8,19 @@
           "name": "minecraft:leather_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": {
-                "min": 1,
-                "max": 4
-              }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 4
             }
           }
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -32,15 +30,13 @@
           "name": "minecraft:chainmail_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -50,15 +46,13 @@
           "name": "minecraft:iron_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 2
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -68,15 +62,13 @@
           "name": "minecraft:diamond_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 3
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -86,20 +78,18 @@
           "name": "minecraft:netherite_boots"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 4
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 4
         }
-      ]
+      }
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "St0mp-EE5",
         "color": "gold",
@@ -107,7 +97,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "\"I call them the Stompies! For when you need that",
         "extra kick.\" - Marcus Ren",
@@ -163,31 +153,30 @@
             "italic": false
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/stompies/armor",
           "amount": 3,
-          "operation": "addition",
-          "id": "5717a7f8-5fe5-4c0a-9d27-7fb97fde08df",
+          "operation": "add_value",
           "slot": "feet"
         },
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/stompies/movement_speed",
           "amount": 0.4,
-          "operation": "multiply_total",
-          "id": "d46b1ef1-b7ff-49be-9214-7bf39ae91e97",
+          "operation": "add_multiplied_total",
           "slot": "feet"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:feather_falling": 4,
         "minecraft:protection": 5,
@@ -196,7 +185,7 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:52,CustomModelData:421950,Unbreakable:1,display:{color:14605273},DungeonItem:1b}"
     }
   ]

@@ -10,7 +10,7 @@ A Minecraft 26.3 datapack (data pack format 121, `min_format`/`max_format` in `p
 
 - `npm i mc-build` installs the compiler (dependency in `package.json`); run `npx mcb build` in the repo root to compile `src/` into `data/`, or `npx mcb watch` to rebuild on change. `mcb.config.js` holds the compiler options. mc-build 4.x does not clean stale output, so delete the generated function folders before a rebuild after renaming or removing sources.
 - `build.ps1` (PowerShell + 7-Zip) zips the datapack into `.build/<baseArchiveName>-<version>[+dev].zip`, then runs `texturepack/build.ps1` to zip the resource pack. `exclude.txt` keeps `src/`, `texturepack/`, scripts, and config out of the datapack zip.
-- There are no tests or linters. Verify changes by loading the pack in a Minecraft 26.3 world.
+- There are no automated tests. `python docs/tools/check_old_keys.py` flags pre-26.3 keys in the JSON under `data/`, and `docs/tools/Scan.java` parses it with the game's own codecs (needs the 26.3 client jar and Java 25, see `docs/verifying-against-vanilla.md`). Verify behavior by loading the pack in a Minecraft 26.3 world.
 - Version lives in two places that must be kept in sync: `config.json` (`mc.version`, used by templates and the zip name) and `pack.mcmeta` (`meta.version` and `meta.changelog`). `config.json` `mc.dev: true` enables dev-only code (e.g. re-enabling the `satyrn.fdl.loot.variant` trigger every tick via `IF (config.dev)`).
 
 ## Source vs. generated output

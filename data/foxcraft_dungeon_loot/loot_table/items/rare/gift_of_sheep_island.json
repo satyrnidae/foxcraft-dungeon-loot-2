@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "The Gift of Sheep Island",
         "color": "aqua",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Keeping someone warm is basically like keeping",
         "them protected from external temperatures,",
@@ -63,17 +63,18 @@
             "italic": false
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:44,Unbreakable:1,CustomModelData:421958,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

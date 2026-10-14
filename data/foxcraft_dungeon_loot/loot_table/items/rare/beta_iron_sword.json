@@ -10,13 +10,13 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:82,DungeonLoot:1b,CustomModelData:421950,ProcessBlock:1b}"
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Beta Iron Sword",
         "color": "aqua",
@@ -24,7 +24,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A blast from the past.",
         [
@@ -71,31 +71,29 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/rare/beta_iron_sword/attack_damage",
           "amount": 5,
-          "operation": "addition",
-          "id": "cda9e766-35a0-4f50-84b2-254965d432d1",
+          "operation": "add_value",
           "slot": "mainhand"
         },
         {
-          "attribute": "minecraft:generic.attack_speed",
-          "name": "generic.attack_speed",
+          "attribute": "minecraft:attack_speed",
+          "id": "foxcraft_dungeon_loot:items/rare/beta_iron_sword/attack_speed",
           "amount": 10,
-          "operation": "addition",
-          "id": "9ec47970-da2c-467c-bfea-938e75d8c7f6",
+          "operation": "add_value",
           "slot": "mainhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:unbreaking": 3,
         "minecraft:vanishing_curse": 1

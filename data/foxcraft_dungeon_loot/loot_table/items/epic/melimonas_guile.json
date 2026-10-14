@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": [
         {
           "text": "Melimonas' Guile",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "And thus spake Melimonas as the trader:",
         "\"Take this spear, and toss it at the Dæmon",
@@ -38,10 +38,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:vanishing_curse": 1,
         "minecraft:fire_aspect": 2,
@@ -51,7 +51,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:3,DungeonItem:1b}"
     }
   ]

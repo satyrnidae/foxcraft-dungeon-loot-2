@@ -1,8 +1,8 @@
 {
-  "condition": "minecraft:entity_properties",
+  "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "type": "minecraft:item",
-    "nbt": "{Age:5999s}"
+    "minecraft:entity_type": "minecraft:item",
+    "minecraft:nbt": "{Age:5999s}"
   }
 }

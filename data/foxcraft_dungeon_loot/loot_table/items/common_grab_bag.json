@@ -10,13 +10,13 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:70,CustomModelData:4219521,GrabBag:1b,ProcessOnUsed:1b}"
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Grab-Bag",
         "color": "white",
@@ -24,7 +24,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A grab bag containing common items.",
         [
@@ -36,7 +36,7 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     }
   ]
 }

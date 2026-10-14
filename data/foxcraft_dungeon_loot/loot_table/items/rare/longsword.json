@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_sword",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_name",
+              "type": "minecraft:set_name",
               "name": {
                 "text": "Iron Longsword",
                 "color": "aqua",
@@ -18,21 +18,19 @@
           ]
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_scores",
-            "entity": "this",
-            "scores": {
-              "satyrn.fdl.loot.variant": {
-                "min": 1,
-                "max": 2
-              }
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 2
             }
           }
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -40,9 +38,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond_sword",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_name",
+              "type": "minecraft:set_name",
               "name": {
                 "text": "Diamond Longsword",
                 "color": "aqua",
@@ -52,15 +50,13 @@
           ]
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 1
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
         }
-      ]
+      }
     },
     {
       "rolls": 1,
@@ -68,9 +64,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_sword",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_name",
+              "type": "minecraft:set_name",
               "name": {
                 "text": "Netherite Longsword",
                 "color": "aqua",
@@ -80,20 +76,18 @@
           ]
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_scores",
-          "entity": "this",
-          "scores": {
-            "satyrn.fdl.loot.variant": 2
-          }
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
         }
-      ]
+      }
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A blade with exceptional reach.",
         [
@@ -105,17 +99,17 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
-        "minecraft:sweeping": 5
+        "minecraft:sweeping_edge": 5
       },
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:10,DungeonItem:1b}"
     }
   ]

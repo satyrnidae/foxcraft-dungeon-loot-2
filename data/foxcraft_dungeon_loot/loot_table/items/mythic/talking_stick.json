@@ -10,30 +10,28 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/talking_stick/movement_speed",
           "amount": 0.2,
-          "operation": "multiply_total",
-          "id": "f89107ea-7316-4c04-851e-0896b11d9ff5",
+          "operation": "add_multiplied_total",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/mythic/talking_stick/attack_damage",
           "amount": -0.2,
-          "operation": "multiply_total",
-          "id": "9c767d48-2031-4dfb-b2cb-8190337f7bf9",
+          "operation": "add_multiplied_total",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "The Talking Stick",
         "color": "green",
@@ -41,7 +39,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Hey! Hey! Shut up! You look here, I have",
         "the stick, so you have to shut up! Shut up",
@@ -83,17 +81,17 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:53,CustomModelData:421951,HideFlags:1,DungeonItem:1b}"
     }
   ]

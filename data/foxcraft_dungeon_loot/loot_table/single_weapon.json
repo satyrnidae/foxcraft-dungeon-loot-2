@@ -29,7 +29,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "foxcraft_dungeon_loot:single_sword",
+          "value": "foxcraft_dungeon_loot:single_sword",
           "weight": 30,
           "quality": 1
         }

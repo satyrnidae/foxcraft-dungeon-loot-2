@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:goat_horn",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{instrument:\"minecraft:admire_goat_horn\",HideFlags:32}"
             }
           ]
@@ -16,9 +16,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Copper Goat Horn",
         "color": "white",
@@ -26,11 +26,11 @@
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomModelData:42195,CopperGoatHorn:1b,CustomInstrument:sweet_moon_love}"
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         {
           "text": "Sweet Moon Love",
@@ -48,7 +48,7 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     }
   ]
 }

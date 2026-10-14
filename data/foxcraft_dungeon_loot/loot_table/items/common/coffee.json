@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Coffee",
         "color": "white",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "It's an artisan dark roast, but who knows",
         "how long it's been sitting here...",
@@ -38,10 +38,11 @@
           "color": "blue",
           "italic": true
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:3154963,HideFlags:32,CustomPotionEffects:[{Id:3,Duration:12000,Amplifier:1},{Id:1,Duration:12000}],DungeonItem:1b}"
     }
   ]

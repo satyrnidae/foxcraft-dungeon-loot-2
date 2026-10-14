@@ -4,12 +4,7 @@
     "player_hurt_entity": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/in_main_hand"
-          }
-        ],
+        "player": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/in_main_hand",
         "damage": {
           "blocked": false
         }
@@ -18,16 +13,21 @@
     "entity_hurt_player": {
       "trigger": "minecraft:entity_hurt_player",
       "conditions": {
-        "player": [],
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": []
+        },
         "damage": {
           "blocked": false,
           "source_entity": {
-            "type": "minecraft:piglin_brute",
-            "equipment": {
+            "minecraft:entity_type": "minecraft:piglin_brute",
+            "minecraft:equipment": {
               "mainhand": {
-                "nbt": "{DungeonLootId:28}",
                 "count": {
                   "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:28}"
                 }
               }
             }

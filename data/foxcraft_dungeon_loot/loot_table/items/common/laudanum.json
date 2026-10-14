@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Laudanum",
         "color": "white",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A questionable medical tincture.",
         [
@@ -37,10 +37,11 @@
           "color": "blue",
           "italic": true
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:9843200,CustomPotionEffects:[{Id:4,Duration:100,Amplifier:1},{Id:9,Duration:100},{Id:10,Duration:160,Amplifier:2},{Id:2,Duration:100,Amplifier:1},{Id:18,Duration:100,Amplifier:1}],HideFlags:32,DungeonItem:1b}"
     }
   ]

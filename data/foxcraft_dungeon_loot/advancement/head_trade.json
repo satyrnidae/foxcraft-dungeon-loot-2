@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:copper_ingot",
+      "id": "minecraft:copper_ingot",
       "nbt": "{CustomModelData:421950}"
     },
     "title": "Macabre Monger",
@@ -16,17 +16,17 @@
     "trade_for_item": {
       "trigger": "minecraft:villager_trade",
       "conditions": {
-        "villager": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "minecraft:wandering_trader"
-            }
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
           }
-        ],
+        },
         "item": {
-          "nbt": "{DungeonHead:1b}"
+          "predicates": {
+            "minecraft:custom_data": "{DungeonHead:1b}"
+          }
         }
       }
     }

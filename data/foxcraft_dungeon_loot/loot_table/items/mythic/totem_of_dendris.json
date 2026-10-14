@@ -10,22 +10,21 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.attack_speed",
-          "name": "generic.attack_speed",
+          "attribute": "minecraft:attack_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_dendris/attack_speed",
           "amount": -0.2,
-          "operation": "multiply_base",
-          "id": "bfb85417-2099-4323-a9d1-e9286814c5c9",
+          "operation": "add_multiplied_base",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Totem of Dendris",
         "color": "green",
@@ -33,7 +32,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "May Dendris, the God of Dreams, Darkness,",
         "and the Deep Things, smile upon thee!",
@@ -97,16 +96,17 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:54,CustomModelData:421955,HideFlags:1,DungeonItem:1b}"
     }
   ]

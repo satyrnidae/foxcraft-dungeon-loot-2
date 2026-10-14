@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "War Hog's Burning Rage",
         "color": "green",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "In a time long past, fearsome warriors",
         "roamed the Nether. This axe is their",
@@ -88,31 +88,30 @@
           "color": "red",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.attack_speed",
-          "name": "generic.attack_speed",
+          "attribute": "minecraft:attack_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage/attack_speed",
           "amount": 0.6,
-          "operation": "addition",
-          "id": "52174f7e-f702-4800-875b-cde7c7a6de7e",
+          "operation": "add_value",
           "slot": "mainhand"
         },
         {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_burning_rage/attack_damage",
           "amount": 15,
-          "operation": "addition",
-          "id": "965c6ef1-d8b8-45f1-9e35-745abc29d7fd",
+          "operation": "add_value",
           "slot": "mainhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:fire_aspect": 3,
         "minecraft:impaling": 3,
@@ -123,7 +122,7 @@
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:28,CustomModelData:421951,DungeonItem:1b}"
     }
   ]

@@ -10,30 +10,28 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila/max_health",
           "amount": -0.2,
-          "operation": "multiply_base",
-          "id": "601d7a86-58e1-4a64-93c2-9741759c1877",
+          "operation": "add_multiplied_base",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila/movement_speed",
           "amount": 0.4,
-          "operation": "multiply_total",
-          "id": "1fa1f215-be02-4aa2-b6e2-2268f063aaac",
+          "operation": "add_multiplied_total",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Totem of Ekila",
         "color": "green",
@@ -41,7 +39,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "May Ekila, the God of the Sky, smile upon thee!",
         [
@@ -87,16 +85,17 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:19,CustomModelData:421953,HideFlags:1,DungeonItem:1b}"
     }
   ]

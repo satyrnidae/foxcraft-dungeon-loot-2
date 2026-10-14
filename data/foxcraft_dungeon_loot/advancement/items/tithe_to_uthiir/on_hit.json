@@ -4,44 +4,30 @@
     "player_hurt_arthropod": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand"
-          }
-        ],
+        "player": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand",
         "damage": {
           "blocked": false
         },
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "#foxcraft_dungeon_loot:arthropods"
-            }
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#foxcraft_dungeon_loot:arthropods"
           }
-        ]
+        }
       }
     },
     "player_killed_arthropod": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand"
+        "player": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand",
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#foxcraft_dungeon_loot:arthropods"
           }
-        ],
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "#foxcraft_dungeon_loot:arthropods"
-            }
-          }
-        ]
+        }
       }
     }
   },

@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": [
         {
           "text": "D4",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A simple four-sided die.",
         [
@@ -33,10 +33,11 @@
             "color": "white"
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:64,Unbreakable:1,CustomModelData:4219514,HideFlags:4,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

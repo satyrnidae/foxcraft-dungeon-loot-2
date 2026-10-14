@@ -7,43 +7,43 @@
           "type": "minecraft:loot_table",
           "weight": 220,
           "quality": 0,
-          "name": "foxcraft_dungeon_loot:single_resource"
+          "value": "foxcraft_dungeon_loot:single_resource"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 80,
           "quality": 0,
-          "name": "foxcraft_dungeon_loot:single_armor_stand"
+          "value": "foxcraft_dungeon_loot:single_armor_stand"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 120,
           "quality": 2,
-          "name": "foxcraft_dungeon_loot:single_drink"
+          "value": "foxcraft_dungeon_loot:single_drink"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 140,
           "quality": 1,
-          "name": "foxcraft_dungeon_loot:single_die"
+          "value": "foxcraft_dungeon_loot:single_die"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 80,
           "quality": 15,
-          "name": "foxcraft_dungeon_loot:single_spawn_egg"
+          "value": "foxcraft_dungeon_loot:single_spawn_egg"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 80,
           "quality": 10,
-          "name": "foxcraft_dungeon_loot:single_copper_goat_horn"
+          "value": "foxcraft_dungeon_loot:single_copper_goat_horn"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 200,
           "quality": 0,
-          "name": "foxcraft_dungeon_loot:single_tool"
+          "value": "foxcraft_dungeon_loot:single_tool"
         }
       ]
     }

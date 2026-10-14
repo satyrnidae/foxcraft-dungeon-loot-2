@@ -10,54 +10,49 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/armor",
           "amount": 5,
-          "operation": "addition",
-          "id": "1684efe2-011b-4260-ad56-cdd2d0a4ad07",
+          "operation": "add_value",
           "slot": "head"
         },
         {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "name": "generic.knockback_resistance",
+          "attribute": "minecraft:knockback_resistance",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/knockback_resistance",
           "amount": 0.6,
-          "operation": "addition",
-          "id": "92da65d0-eaab-492c-92d8-23eb0e4531f6",
+          "operation": "add_value",
           "slot": "head"
         },
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/max_health",
           "amount": 4,
-          "operation": "addition",
-          "id": "2cfdbaec-1128-4100-bd9b-563603868507",
+          "operation": "add_value",
           "slot": "head"
         },
         {
-          "attribute": "minecraft:generic.armor_toughness",
-          "name": "generic.armor_toughness",
+          "attribute": "minecraft:armor_toughness",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/armor_toughness",
           "amount": 3,
-          "operation": "addition",
-          "id": "7ca93405-501a-45a4-a87b-b25dd62a2051",
+          "operation": "add_value",
           "slot": "head"
         },
         {
-          "attribute": "minecraft:generic.movement_speed",
-          "name": "generic.movement_speed",
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/movement_speed",
           "amount": -0.1,
-          "operation": "multiply_total",
-          "id": "383e6af2-c334-43cf-8925-42b147b66eca",
+          "operation": "add_multiplied_total",
           "slot": "head"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "War Hog's Festering Wrath",
         "color": "green",
@@ -65,7 +60,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "In ancient times, a war broke out between the",
         "Overworld and the Nether. The armor that the",
@@ -81,10 +76,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:blast_protection": 3,
         "minecraft:binding_curse": 1,
@@ -97,7 +92,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:13,DungeonItem:1b}"
     }
   ]

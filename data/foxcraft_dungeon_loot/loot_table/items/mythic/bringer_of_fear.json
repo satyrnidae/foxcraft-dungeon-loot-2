@@ -11,9 +11,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Bringer of Fear",
         "color": "red",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Those who whisper into the darkness had",
         "best be prepared for the consequences.",
@@ -119,17 +119,18 @@
             "italic": false
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:34,Unbreakable:1,CustomModelData:4219512,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

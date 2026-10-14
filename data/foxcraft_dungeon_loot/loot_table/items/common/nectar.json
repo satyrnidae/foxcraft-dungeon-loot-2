@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Nectar",
         "color": "white",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A floral extract.",
         [
@@ -37,10 +37,11 @@
           "color": "blue",
           "italic": true
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:15915073,HideFlags:32,CustomPotionEffects:[{Id:22,Duration:400,Amplifier:9},{Id:6,Duration:10,Amplifier:1},{Id:11,Duration:400,Amplifier:2}],DungeonItem:1b}"
     }
   ]

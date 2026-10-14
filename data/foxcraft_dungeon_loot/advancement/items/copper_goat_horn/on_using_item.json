@@ -8,7 +8,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:great_sky_falling}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:great_sky_falling}"
+          }
         }
       }
     },
@@ -19,7 +21,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:old_hymn_resting}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:old_hymn_resting}"
+          }
         }
       }
     },
@@ -30,7 +34,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:pure_water_desire}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:pure_water_desire}"
+          }
         }
       }
     },
@@ -41,7 +47,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:mumble_fire_memory}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:mumble_fire_memory}"
+          }
         }
       }
     },
@@ -52,7 +60,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:dry_urge_anger}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:dry_urge_anger}"
+          }
         }
       }
     },
@@ -63,7 +73,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:clear_temper_journey}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:clear_temper_journey}"
+          }
         }
       }
     },
@@ -74,7 +86,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:fresh_nest_thought}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:fresh_nest_thought}"
+          }
         }
       }
     },
@@ -85,7 +99,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:secret_lake_tear}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:secret_lake_tear}"
+          }
         }
       }
     },
@@ -96,7 +112,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:fearless_river_gift}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:fearless_river_gift}"
+          }
         }
       }
     },
@@ -107,7 +125,9 @@
           "items": [
             "minecraft:goat_horn"
           ],
-          "nbt": "{CopperGoatHorn:1b,CustomInstrument:sweet_moon_love}"
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b,CustomInstrument:sweet_moon_love}"
+          }
         }
       }
     }

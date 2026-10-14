@@ -4,19 +4,16 @@
     "item_used_on_block": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/in_main_hand"
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:reference",
-              "name": "foxcraft_dungeon_loot:is_sneaking"
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": [
+            "foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/in_main_hand",
+            {
+              "type": "minecraft:inverted",
+              "term": "foxcraft_dungeon_loot:is_sneaking"
             }
-          }
-        ]
+          ]
+        }
       }
     }
   },

@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Stout",
         "color": "white",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Nothing like a hearty stout, eh?",
         [
@@ -37,10 +37,11 @@
           "color": "blue",
           "italic": true
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:3287060,HideFlags:32,CustomPotionEffects:[{Id:21,Duration:2400,Amplifier:1},{Id:10,Duration:100},{Id:11,Duration:2400},{Id:23,Duration:10,Amplifier:1}],DungeonItem:1b}"
     }
   ]

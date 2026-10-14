@@ -8,9 +8,9 @@
           "weight": 7,
           "quality": 0,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:1800,Amplifier:1},{Id:5,Duration:600,Amplifier:2}]}"
             }
           ]
@@ -20,9 +20,9 @@
           "weight": 6,
           "quality": 1,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:1600,Amplifier:1},{Id:5,Duration:800,Amplifier:2}]}"
             }
           ]
@@ -32,9 +32,9 @@
           "weight": 5,
           "quality": 2,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:1400,Amplifier:1},{Id:5,Duration:1000,Amplifier:2}]}"
             }
           ]
@@ -44,9 +44,9 @@
           "weight": 4,
           "quality": 3,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:1200,Amplifier:1},{Id:5,Duration:1200,Amplifier:2}]}"
             }
           ]
@@ -56,9 +56,9 @@
           "weight": 3,
           "quality": 4,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:1000,Amplifier:1},{Id:5,Duration:1400,Amplifier:2}]}"
             }
           ]
@@ -68,9 +68,9 @@
           "weight": 2,
           "quality": 5,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:800,Amplifier:1},{Id:5,Duration:1600,Amplifier:2}]}"
             }
           ]
@@ -80,9 +80,9 @@
           "weight": 1,
           "quality": 6,
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_nbt",
+              "type": "minecraft:set_nbt",
               "tag": "{CustomPotionEffects:[{Id:4,Duration:600,Amplifier:1},{Id:5,Duration:1800,Amplifier:2}]}"
             }
           ]
@@ -90,16 +90,16 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Tequila",
         "italic": false
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "A tasty alcoholic beverage.",
         [
@@ -116,10 +116,11 @@
           "color": "blue",
           "italic": true
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomPotionColor:15447907,HideFlags:32,DungeonItem:1b}"
     }
   ]

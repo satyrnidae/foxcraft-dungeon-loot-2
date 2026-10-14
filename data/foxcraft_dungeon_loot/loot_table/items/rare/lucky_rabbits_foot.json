@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Lucky Rabbit's Foot",
         "color": "aqua",
@@ -20,7 +20,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "You'd honestly think these would just",
         "do this normally.",
@@ -32,30 +32,30 @@
             "italic": true
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.luck",
-          "name": "generic.luck",
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/rare/lucky_rabbits_foot/luck",
           "amount": 2,
-          "operation": "addition",
-          "id": "975174c0-4f88-4abd-8150-0b761216c352",
+          "operation": "add_value",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": true
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:29,HideFlags:1,DungeonItem:1b}"
     }
   ]

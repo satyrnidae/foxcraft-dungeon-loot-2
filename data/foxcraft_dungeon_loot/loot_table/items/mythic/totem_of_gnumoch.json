@@ -10,38 +10,35 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "name": "generic.knockback_resistance",
+          "attribute": "minecraft:knockback_resistance",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/knockback_resistance",
           "amount": 1,
-          "operation": "addition",
-          "id": "2bcdad90-7498-4788-942e-30d3e8f45981",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/armor",
           "amount": 10,
-          "operation": "addition",
-          "id": "f301efcb-a389-4198-b12f-6dab07120020",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.armor_toughness",
-          "name": "generic.armor_toughness",
+          "attribute": "minecraft:armor_toughness",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/armor_toughness",
           "amount": 5,
-          "operation": "addition",
-          "id": "e4426144-5263-4312-aa45-17ae7d605e77",
+          "operation": "add_value",
           "slot": "mainhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Totem of Gnumoch",
         "color": "green",
@@ -49,7 +46,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "May Gnumoch, the God of the Earth, smile",
         "upon thee!",
@@ -94,16 +91,17 @@
           "color": "gray",
           "italic": false
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:20,CustomModelData:421954,HideFlags:1,DungeonItem:1b}"
     }
   ]

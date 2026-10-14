@@ -10,33 +10,34 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": [
         {
           "text": "Armor Stand",
           "italic": false
         },
         {
-          "text":" (Baby)",
-          "color":"gray",
-          "italic":false
+          "text": " (Baby)",
+          "color": "gray",
+          "italic": false
         }
       ]
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         {
           "text": "Pose: Baby",
           "italic": false,
           "color": "gray"
         }
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Small:1b},DungeonItem:1b}"
     }
   ]

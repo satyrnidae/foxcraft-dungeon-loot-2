@@ -11,9 +11,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Deilona's Holy Blessings",
         "color": "green",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "When enemies need to be friends, why not try",
         "helping them out?",
@@ -72,16 +72,17 @@
             "color": "gray"
           }
         ]
-      ]
+      ],
+      "mode": "append"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       }
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:36,Unbreakable:1,CustomModelData:421955,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]

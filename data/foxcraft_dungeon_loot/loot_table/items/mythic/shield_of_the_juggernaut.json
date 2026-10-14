@@ -10,46 +10,42 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_attributes",
+      "type": "minecraft:set_attributes",
       "modifiers": [
         {
-          "attribute": "minecraft:generic.armor",
-          "name": "generic.armor",
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut/armor",
           "amount": 6,
-          "operation": "addition",
-          "id": "dd044554-c7ca-4587-a352-452f192447ef",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "name": "generic.knockback_resistance",
+          "attribute": "minecraft:knockback_resistance",
+          "id": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut/knockback_resistance",
           "amount": 0.6,
-          "operation": "addition",
-          "id": "ee565134-6914-4626-b1d1-7979c6d96483",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.max_health",
-          "name": "generic.max_health",
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut/max_health",
           "amount": 4,
-          "operation": "addition",
-          "id": "070f49f2-03a7-4f8b-950d-dc9796af4aab",
+          "operation": "add_value",
           "slot": "offhand"
         },
         {
-          "attribute": "minecraft:generic.attack_damage",
-          "name": "generic.attack_damage",
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/mythic/shield_of_the_juggernaut/attack_damage",
           "amount": 6,
-          "operation": "addition",
-          "id": "f2dd1127-af06-49da-b348-9376e9d0650b",
+          "operation": "add_value",
           "slot": "offhand"
         }
       ]
     },
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": {
         "text": "Shield of the Juggernaut",
         "color": "green",
@@ -57,7 +53,7 @@
       }
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "You are immovable.",
         "You are impenetrable.",
@@ -72,10 +68,10 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1,
         "minecraft:unbreaking": 5
@@ -83,7 +79,7 @@
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:16,DungeonItem:1b}"
     }
   ]

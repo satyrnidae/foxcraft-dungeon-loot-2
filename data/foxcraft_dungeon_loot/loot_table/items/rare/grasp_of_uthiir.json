@@ -10,9 +10,9 @@
       ]
     }
   ],
-  "functions": [
+  "modifier": [
     {
-      "function": "minecraft:set_name",
+      "type": "minecraft:set_name",
       "name": [
         {
           "text": "Grasp of Uthiir",
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "function": "minecraft:set_lore",
+      "type": "minecraft:set_lore",
       "lore": [
         "Uthiir grants you the ability to ensnare your",
         "enemies at a distance.",
@@ -66,17 +66,17 @@
           }
         ]
       ],
-      "replace": true
+      "mode": "replace_all"
     },
     {
-      "function": "minecraft:set_enchantments",
+      "type": "minecraft:set_enchantments",
       "enchantments": {
         "minecraft:mending": 1
       },
       "add": false
     },
     {
-      "function": "minecraft:set_nbt",
+      "type": "minecraft:set_nbt",
       "tag": "{DungeonLootId:83,CustomModelData:421954,HideFlags:1,DungeonItem:1b,ProcessOnUsed:1b}"
     }
   ]
