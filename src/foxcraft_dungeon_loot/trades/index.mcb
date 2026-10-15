@@ -472,6 +472,322 @@ function build {
         set_sell_item_id "minecraft:sculk_catalyst"
         function foxcraft_dungeon_loot:trades/recipes/push
 
+# Discs: custom discs first, then the base game discs. Each one has its own trade index.
+        # Trade Index 98: music_disc_mdoadq_acornman
+        function foxcraft_dungeon_loot:trades/recipes/new
+        set_buy_from_loot foxcraft_dungeon_loot:loot/coins/gold_coins
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornman
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 99: music_disc_mdoadq_acornman_am
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornman_am
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 100: music_disc_mdoadq_acornmanreskinbd5
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornmanreskinbd5
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 101: music_disc_mdoadq_aeon
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_aeon
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 102: music_disc_mdoadq_aeonorch190bpm
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_aeonorch190bpm
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 103: music_disc_mdoadq_avidit_e
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_avidit_e
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 104: music_disc_mdoadq_drown
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_drown
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 105: music_disc_mdoadq_duma
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_duma
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 106: music_disc_mdoadq_flutes
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_flutes
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 107: music_disc_mdoadq_gutturalis
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_gutturalis
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 108: music_disc_mdoadq_kotyledon
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_kotyledon
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 109: music_disc_mdoadq_locker
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_locker
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 110: music_disc_mdoadq_lost
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_lost
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 111: music_disc_mdoadq_minimalist
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_minimalist
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 112: music_disc_mdoadq_nematode
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_nematode
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 113: music_disc_mdoadq_nighttime_transit
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_nighttime_transit
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 114: music_disc_mdoadq_old_white_straight_road
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_old_white_straight_road
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 115: music_disc_mdoadq_outskirts
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_outskirts
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 116: music_disc_mdoadq_pathetic_mario
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pathetic_mario
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 117: music_disc_mdoadq_pet_the_dog
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pet_the_dog
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 118: music_disc_mdoadq_pies_e
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pies_e
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 119: music_disc_mdoadq_reboot
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_reboot
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 120: music_disc_mdoadq_rhapsodymini2
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_rhapsodymini2
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 121: music_disc_mdoadq_rigmarole
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_rigmarole
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 122: music_disc_mdoadq_slither
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_slither
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 123: music_disc_mdoadq_sparkplugs
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_sparkplugs
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 124: music_disc_mdoadq_the_scone_song
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_the_scone_song
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 125: music_disc_mdoadq_wanderer
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_wanderer
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 126: music_disc_wolfgun_after_another
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_after_another
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 127: music_disc_wolfgun_between_layers
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_between_layers
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 128: music_disc_wolfgun_black_dawn
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_black_dawn
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 129: music_disc_wolfgun_cliff_where
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_cliff_where
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 130: music_disc_wolfgun_dark_southern_sky
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_dark_southern_sky
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 131: music_disc_wolfgun_deer
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_deer
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 132: music_disc_wolfgun_every_morning
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_every_morning
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 133: music_disc_wolfgun_far_away
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_far_away
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 134: music_disc_wolfgun_into_stars
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_into_stars
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 135: music_disc_wolfgun_lightform
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_lightform
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 136: music_disc_wolfgun_moon_beams
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_moon_beams
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 137: music_disc_wolfgun_moon_rays
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_moon_rays
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 138: music_disc_wolfgun_mt_ennui
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_mt_ennui
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 139: music_disc_wolfgun_night_i
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_night_i
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 140: music_disc_wolfgun_night_ii
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_night_ii
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 141: music_disc_wolfgun_of_plains
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_of_plains
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 142: music_disc_wolfgun_pale_star
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_pale_star
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 143: music_disc_wolfgun_passing
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_passing
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 144: music_disc_wolfgun_peaks
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_peaks
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 145: music_disc_wolfgun_throughout
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_throughout
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 146: music_disc_wolfgun_tropic
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_tropic
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 147: music_disc_wolfgun_unseen_land
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_unseen_land
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 148: music_disc_c418_dog
+        set_sell_from_loot foxcraft_dungeon_loot:items/discs/music_disc_c418_dog
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 149: music_disc_5
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_5"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 150: music_disc_11
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_11"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 151: music_disc_13
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_13"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 152: music_disc_blocks
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_blocks"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 153: music_disc_bounce
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_bounce"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 154: music_disc_cat
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_cat"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 155: music_disc_chirp
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_chirp"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 156: music_disc_creator
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_creator"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 157: music_disc_creator_music_box
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_creator_music_box"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 158: music_disc_far
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_far"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 159: music_disc_lava_chicken
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_lava_chicken"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 160: music_disc_mall
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_mall"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 161: music_disc_mellohi
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_mellohi"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 162: music_disc_otherside
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_otherside"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 163: music_disc_pigstep
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_pigstep"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 164: music_disc_precipice
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_precipice"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 165: music_disc_relic
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_relic"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 166: music_disc_stal
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_stal"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 167: music_disc_strad
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_strad"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 168: music_disc_tears
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_tears"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 169: music_disc_wait
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_wait"
+        function foxcraft_dungeon_loot:trades/recipes/push
+
+        # Trade Index 170: music_disc_ward
+        set_sell_from_loot foxcraft_dungeon_loot:util/reset
+        set_sell_item_id "minecraft:music_disc_ward"
+        function foxcraft_dungeon_loot:trades/recipes/push
 
         tellraw @a {"text":"Trade index built!","color":"gray"}
         schedule function foxcraft_dungeon_loot:trades/index/release_chunk 1t

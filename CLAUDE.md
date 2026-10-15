@@ -38,7 +38,7 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 ## Trades
 
-`src/foxcraft_dungeon_loot/trades*.mcb{,t}` and `trades/` implement custom Wandering Trader offers. A trade **index** is built into storage `foxcraft_dungeon_loot:trades` by spawning loot-table items in a force-loaded chunk of the End (264, 64, 264). It runs over multiple ticks (`wait_for_chunk` then `build`), and `scheduled_tick` only starts once it's populated. Recipes are appended in `trades/index.mcb` using the `set_*_from_loot` macros in `trades.mcbt`; the position in the index (the `Trade Index N` comments) matters because offers are selected by index.
+`src/foxcraft_dungeon_loot/trades*.mcb{,t}` and `trades/` implement custom Wandering Trader offers. A trade **index** is built into storage `foxcraft_dungeon_loot:trades` by spawning loot-table items in a force-loaded chunk of the End (264, 64, 264). It runs over multiple ticks (`wait_for_chunk` then `build`), and `scheduled_tick` only starts once it's populated. Recipes are appended in `trades/index.mcb` using the `set_*_from_loot` macros in `trades.mcbt`; the position in the index (the `Trade Index N` comments) matters because offers are selected by index. Offers are added in sections (heads, horns, grab bags, dungeon loot, endgame, exchange, discs), each with a count of random distinct trades picked from its index range. Disc trades are index 98 to 170, priced 2 to 10 gold coins.
 
 ## Scoreboards
 

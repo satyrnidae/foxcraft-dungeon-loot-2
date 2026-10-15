@@ -124,8 +124,19 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] `/loot give @s loot foxcraft_dungeon_loot:items/discs/<id>` works and the item carries `DungeonLootId` 88 to 138.
 - [ ] Credits in the README match the tracks.
 
+## Phase 8c - disc distribution
+
+- [ ] Trader: spawn several wandering traders (dev mode forces 2 disc trades). Each shows 0 to 2 disc trades in a separate group of offers, never the same disc twice on one trader.
+- [ ] Disc trades cost 2 to 10 gold coins, no second cost, and accept real gold coins from loot. Sold discs are a mix of custom discs and base game discs, base game ones show their normal look.
+- [ ] A bought custom disc plays in a jukebox and carries its `DungeonLootId`.
+- [ ] Trades from the other groups (heads, grab bags, horns, dungeon loot, exchange, endgame) still appear and keep their price ranges. The trade count per group is unchanged.
+- [ ] No duplicate offers and no empty or broken offers anywhere after the index grew from 98 to 171 entries.
+- [ ] Chests: open many simple dungeon, ancient city, stronghold and woodland mansion chests (or `/loot` them). Disc slots that were 13, cat or otherside now give the vanilla disc about half the time and a random custom disc otherwise. Other loot in those chests is unchanged.
+- [ ] Creeper killed by a skeleton drops either a base game disc or a custom disc, about half each. Gunpowder drop is unchanged, and creepers killed by anything else drop no disc.
+- [ ] Unique discs stay vanilla: pigstep (bastion), relic (trail ruins), creator and precipice (trial chambers), creator music box (trial pot), bounce, tears (ghast), lava chicken (zombie).
+- [ ] The overrides in `data/minecraft/loot_table/` match the 26.3 vanilla tables apart from the disc entries; diff them again after a Minecraft update.
+
 ## Not yet testable (later phases)
 
 
 - Variants with their own `item_model` (phase 7).
-- Disc distribution: trader, structure loot, creeper drops.
