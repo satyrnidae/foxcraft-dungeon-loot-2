@@ -17,7 +17,7 @@ function on_snowball_used {
             tag @s add satyrn.fdl.xNoEvil.projectile
 
             # Summon a tracker armor stand and set its motion relative to the projectile.
-            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.xNoEvil.projectileTracker],Passengers:[{id:"minecraft:snowball",Item:{id:"minecraft:snowball",Count:1b,tag:{CustomModelData:42195}},Owner:[I;0,0,0,0],Tags:[satyrn.fdl.xNoEvil.ownerId]}]}
+            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.xNoEvil.projectileTracker],Passengers:[{id:"minecraft:snowball",Item:{id:"minecraft:snowball",count:1,components:{"minecraft:item_model":"foxcraft_dungeon_loot:x_no_evil"}},Owner:[I;0,0,0,0],Tags:[satyrn.fdl.xNoEvil.ownerId]}]}
             data modify entity @e[tag=satyrn.fdl.xNoEvil.projectileTracker,limit=1,sort=nearest] Motion set from entity @s Motion
             data modify entity @e[tag=satyrn.fdl.xNoEvil.ownerId,limit=1,sort=nearest] Owner set from entity @s Owner
         }
@@ -50,25 +50,25 @@ function on_tick {
 
             execute if score #math.result <%config.internalScoreboard%> matches 1 run {
                 # Summon a 10-foot radius AOE for one minute of blindness
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:1200,Id:15,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:blindness",amplifier:0,duration:1200,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else execute if score #math.result satyrn.fdl.internal matches ..3 run {
                 # Summon a 10-radius AOE for 20 seconds of hunger
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:400,Id:17,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:hunger",amplifier:0,duration:400,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else execute if score #math.result satyrn.fdl.internal matches 4 run {
                 # Summon a 10-radius AOE for 30 seconds of wither
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:600,Id:20,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:wither",amplifier:0,duration:600,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else execute if score #math.result satyrn.fdl.internal matches ..6 run {
                 # Summon a 10-radius AOE for 3 minutes of poison
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:3600,Id:19,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:poison",amplifier:0,duration:3600,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else execute if score #math.result satyrn.fdl.internal matches ..8 run {
                 # Summon a 10-radius AOE for 60 seconds of nausea
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:0b,Duration:1200,Id:9,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:nausea",amplifier:0,duration:1200,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else execute if score #math.result satyrn.fdl.internal matches ..9 run {
                 # Summon a 10-radius AOE for instant damage V
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:3b,Id:7,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:instant_damage",amplifier:3,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             } else run {
                 # Summon a 10-radius AOE for 1:30 of slowness
-                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,Effects:[{Amplifier:2b,Duration:1800,Id:2,ShowIcon:1b}],Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
+                summon minecraft:area_effect_cloud ^ ^0.1 ^ {Duration:60,potion_contents:{custom_effects:[{id:"minecraft:slowness",amplifier:2,duration:1800,show_icon:1b}]},Radius:10,Tags:[satyrn.fdl.xNoEvil.areaOfEffect],Owner:[I;0,0,0,0]}
             }
 
             # Set the area of effect's owner to the owner contained in the snowball riding the tracker

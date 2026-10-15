@@ -79,7 +79,7 @@ function on_kill_entity {
         playsound minecraft:particle.soul_escape player @a
 
         # Summon a short-lived area effect cloud to show the effect radius
-        summon minecraft:area_effect_cloud ~ ~0.1 ~ {Duration:5,Color:16777215,Radius:10,Particle:"minecraft:soul"}
+        summon minecraft:area_effect_cloud ~ ~0.1 ~ {Duration:5,Radius:10,custom_particle:{type:"minecraft:soul"}}
 
         execute if score warHogsBlightedHarvest.pvp <%config.internalScoreboard%> matches 1.. run {
             tag @s add satyrn.fdl.warHogsBlightedHarvest.blightSource

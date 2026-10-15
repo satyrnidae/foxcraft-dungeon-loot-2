@@ -36,7 +36,7 @@ function on_tick {
                 data merge entity @s {NoAI:1b,NoGravity:1b}
             }
 
-            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],HandItems:[{id:"minecraft:snowball",tag:{CustomModelData:42195,AddedTrades:[],ScanTrades:[],CurrentTrade:0},Count:1}],HandDropChances:[0.00f]}
+            summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Marker:1b,NoGravity:1b,Tags:[satyrn.fdl.wanderingTrader.tradeIndex],equipment:{mainhand:{id:"minecraft:snowball",count:1,components:{"minecraft:custom_data":{AddedTrades:[],ScanTrades:[],CurrentTrade:0}}}}}
 
             rng 4 5
             scoreboard players operation @s satyrn.fdl.tradesToAdd.grabBag = #math.result <%config.internalScoreboard%>
@@ -254,13 +254,13 @@ function on_uninstall {
 
 function append_current_trade_to_index {
     execute as @e[tag=satyrn.fdl.wanderingTrader.tradeIndex,limit=1,sort=nearest] run {
-        execute store result entity @s HandItems[0].tag.CurrentTrade int 1 run scoreboard players get @e[type=minecraft:wandering_trader,sort=nearest,limit=1] satyrn.fdl.selectedTrade
-        data modify entity @s HandItems[0].tag.AddedTrades append from entity @s HandItems[0].tag.CurrentTrade
+        execute store result entity @s equipment.mainhand.components."minecraft:custom_data".CurrentTrade int 1 run scoreboard players get @e[type=minecraft:wandering_trader,sort=nearest,limit=1] satyrn.fdl.selectedTrade
+        data modify entity @s equipment.mainhand.components."minecraft:custom_data".AddedTrades append from entity @s equipment.mainhand.components."minecraft:custom_data".CurrentTrade
     }
 }
 
 function check_existing_trades {
-    data modify entity @s HandItems[0].tag.ScanTrades set from entity @s HandItems[0].tag.AddedTrades
+    data modify entity @s equipment.mainhand.components."minecraft:custom_data".ScanTrades set from entity @s equipment.mainhand.components."minecraft:custom_data".AddedTrades
 
     function foxcraft_dungeon_loot:trades/wandering_trader/recursive_check
 
@@ -269,11 +269,11 @@ function check_existing_trades {
 
 function recursive_check {
     # The recursive check continues if the trade number is zero, so satyrn.fdl.selectedTrade must be 1-indexed.
-    execute store result score @s satyrn.fdl.selectedTrade run data get entity @s HandItems[0].tag.ScanTrades[0]
+    execute store result score @s satyrn.fdl.selectedTrade run data get entity @s equipment.mainhand.components."minecraft:custom_data".ScanTrades[0]
 
     execute if score @e[type=minecraft:wandering_trader,sort=nearest,limit=1] satyrn.fdl.selectedTrade = @s satyrn.fdl.selectedTrade run scoreboard players set @s satyrn.fdl.selectedTrade -127
 
-    data remove entity @s HandItems[0].tag.ScanTrades[0]
+    data remove entity @s equipment.mainhand.components."minecraft:custom_data".ScanTrades[0]
 
     execute if score @s satyrn.fdl.selectedTrade matches 1.. run function foxcraft_dungeon_loot:trades/wandering_trader/recursive_check
 }

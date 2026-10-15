@@ -15,7 +15,7 @@ function set_buyb_from_item {
 
 # Creates a new recipe, initializing the current trade to a constant value.
 function new {
-    data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:3,buy:{id:"minecraft:emerald",Count:1b},buyB:{id:"minecraft:air",Count:1b},sell:{id:"minecraft:emerald",Count:1b}}
+    data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:3,buy:{id:"minecraft:emerald",count:1},buyB:{id:"minecraft:air",count:1},sell:{id:"minecraft:emerald",count:1}}
 }
 
 # Appends the current recipe to the end of the trade index, and initializes a new current trade.
