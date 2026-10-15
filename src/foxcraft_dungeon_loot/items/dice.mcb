@@ -52,26 +52,32 @@ function on_warped_fungus_used {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/d4/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d4 player @a
         rng 1 4
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 4
         scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/d6/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d6 player @a
         rng 1 6
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 6
         scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/d8/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d8 player @a
         rng 1 8
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 8
         scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/d10/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d10 player @a
         rng 1 10
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 10
         scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/d12/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d12 player @a
         rng 1 12
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 12
         scoreboard players set #test <%config.internalScoreboard%> 1
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/d20/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.dice.d20 player @a
         rng 1 20
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 20
         scoreboard players set #test <%config.internalScoreboard%> 1
     }
 

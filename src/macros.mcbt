@@ -23,7 +23,8 @@ template break_item {
 }
 
 ###
-Generates a random number between a lower and upper bound.
+Generates a random number between a lower and upper bound, both inclusive, and stores it in #math.result.
+Wraps /random; bounds must be literals and differ, since /random rejects a range of one.
 
 Parameters:
 0 - The lower bound of the random result.
@@ -31,10 +32,7 @@ Parameters:
 ###
 template rng {
     with a0:word a1:word {
-        scoreboard players set #math.input1 <%config.internalScoreboard%> <%a0%>
-        scoreboard players set #math.input2 <%config.internalScoreboard%> <%a1%>
-
-        function foxcraft_dungeon_loot:math/random
+        execute store result score #math.result <%config.internalScoreboard%> run random value <%a0%>..<%a1%>
     }
 }
 
