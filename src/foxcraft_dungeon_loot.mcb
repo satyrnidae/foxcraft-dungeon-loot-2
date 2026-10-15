@@ -12,7 +12,7 @@ function load minecraft:load {
     scoreboard players reset * satyrn.fdl.loot.variant
 
     # Reset item utility advancements for online players
-    advancement revoke @a from foxcraft_dungeon_loot:items
+    advancement revoke @a from foxcraft_dungeon_loot:item
 
     # Load functions are executed with no sender in context.
     function #foxcraft_dungeon_loot:on_load

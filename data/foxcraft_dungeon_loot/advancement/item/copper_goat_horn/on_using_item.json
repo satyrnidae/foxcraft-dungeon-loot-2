@@ -1,5 +1,5 @@
 {
-  "parent": "foxcraft_dungeon_loot:items/root",
+  "parent": "foxcraft_dungeon_loot:item/root",
   "criteria": {
     "using_copper_horn": {
       "trigger": "minecraft:using_item",

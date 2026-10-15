@@ -98,7 +98,7 @@ function on_kill_entity {
         scoreboard players add @s satyrn.fdl.souls 1
         function foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/update_soul_count
     }
-    advancement revoke @s only foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/on_kill_entity
+    advancement revoke @s only foxcraft_dungeon_loot:item/war_hogs_blighted_harvest/on_kill_entity
 }
 
 # Sets the soul count on the weapon to the
@@ -158,7 +158,7 @@ function on_till {
     function foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/raycast/block/start
     tag @s remove satyrn.fdl.warHogsBlightedHarvest.tilling
 
-    advancement revoke @s only foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/on_till
+    advancement revoke @s only foxcraft_dungeon_loot:item/war_hogs_blighted_harvest/on_till
 }
 
 # Runs when the data pack is uninstalled.

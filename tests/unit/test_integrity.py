@@ -97,6 +97,14 @@ class References(unittest.TestCase):
                             problems.append("%s: %s" % (pk.rel(path), issue))
         self.assertEqual(sorted(set(problems)), [])
 
+    def test_every_advancement_parent_exists(self):
+        missing = []
+        for path in all_json(pk.DATA / "advancement"):
+            parent = pk.load_json(path).get("parent")
+            if parent and parent.startswith(NS + ":") and not (pk.DATA / "advancement" / (parent.split(":", 1)[1] + ".json")).exists():
+                missing.append("%s -> %s" % (pk.rel(path), parent))
+        self.assertEqual(missing, [])
+
     def test_every_advancement_function_exists(self):
         if not pk.build_exists():
             self.skipTest("no build output, run npx mcb build for this check")

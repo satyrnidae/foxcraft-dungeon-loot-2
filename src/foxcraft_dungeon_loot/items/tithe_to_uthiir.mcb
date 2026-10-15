@@ -4,12 +4,12 @@ import ../../macros.mcbt
 # Occurs when a player hits a valid entity with the Tithe to Uthiir.
 function on_hit {
     # Occurs when the player hurts an arthropod.
-    execute if entity @s[advancements={foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit={player_killed_arthropod=false}}] run function foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit_arthropod
+    execute if entity @s[advancements={foxcraft_dungeon_loot:item/tithe_to_uthiir/on_hit={player_killed_arthropod=false}}] run function foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit_arthropod
 
     # Occurs when the player kills an arthropod.
-    execute if entity @s[advancements={foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit={player_killed_arthropod=true}}] run function foxcraft_dungeon_loot:items/tithe_to_uthiir/on_killed_arthropod
+    execute if entity @s[advancements={foxcraft_dungeon_loot:item/tithe_to_uthiir/on_hit={player_killed_arthropod=true}}] run function foxcraft_dungeon_loot:items/tithe_to_uthiir/on_killed_arthropod
 
-    advancement revoke @s only foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit
+    advancement revoke @s only foxcraft_dungeon_loot:item/tithe_to_uthiir/on_hit
 }
 
 function on_hit_arthropod {

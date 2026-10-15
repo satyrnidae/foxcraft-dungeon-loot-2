@@ -52,7 +52,7 @@ data/foxcraft_dungeon_loot/
   predicate/event/             event gating, the process_* predicates
   predicate/entity/, world/    shared entity and world checks
   predicate/random_chance/     random chance predicates
-  advancement/items/         use-detection advancements
+  advancement/item/          use-detection advancements
   tags/function/             event bus, hand-maintained
   instrument/, jukebox_song/ copper horns and music discs
 data/minecraft/loot_table/   vanilla overrides that inject loot

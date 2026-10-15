@@ -29,7 +29,7 @@ function on_hit {
         }
     }
 
-    advancement revoke @s only foxcraft_dungeon_loot:items/beta_iron_sword/on_hit
+    advancement revoke @s only foxcraft_dungeon_loot:item/beta_iron_sword/on_hit
 }
 
 # Executes when the plugin is loaded.

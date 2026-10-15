@@ -12,21 +12,21 @@ function apply_wither {
     }
 }
 
-# Reward function for the foxcraft_dungeon_loot:items/estudinaes_sorrow_on_hit advancement
+# Reward function for the foxcraft_dungeon_loot:item/estudinaes_sorrow/on_hit advancement
 function on_hit {
     # Execute for players who only damaged an entity
-    execute if entity @s[advancements={foxcraft_dungeon_loot:items/estudinaes_sorrow/on_hit={player_killed_entity=false}}] run {
+    execute if entity @s[advancements={foxcraft_dungeon_loot:item/estudinaes_sorrow/on_hit={player_killed_entity=false}}] run {
         effect give @s minecraft:nausea 10
         function foxcraft_dungeon_loot:items/estudinaes_sorrow/raycast/start
     }
 
     # Execute for players who killed an entity
-    execute if entity @s[advancements={foxcraft_dungeon_loot:items/estudinaes_sorrow/on_hit={player_killed_entity=true}}] run {
+    execute if entity @s[advancements={foxcraft_dungeon_loot:item/estudinaes_sorrow/on_hit={player_killed_entity=true}}] run {
         effect give @s minecraft:nausea 20
         effect give @s minecraft:hunger 10
     }
 
-    advancement revoke @s only foxcraft_dungeon_loot:items/estudinaes_sorrow/on_hit
+    advancement revoke @s only foxcraft_dungeon_loot:item/estudinaes_sorrow/on_hit
 }
 
 # Occurs when the raycast hits an entity.

@@ -1,5 +1,5 @@
 {
-  "parent": "foxcraft_dungeon_loot:items/root",
+  "parent": "foxcraft_dungeon_loot:item/root",
   "criteria": {
     "item_used_on_block": {
       "trigger": "minecraft:item_used_on_block",

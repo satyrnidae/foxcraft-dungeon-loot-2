@@ -8,7 +8,7 @@ import ../copper_horn.mcbt
 function on_using_item {
     execute if predicate foxcraft_dungeon_loot:random_chance/10_percent at @s anchored eyes run particle minecraft:note ^ ^0.5 ^
 
-    advancement revoke @s only foxcraft_dungeon_loot:items/copper_goat_horn/on_using_item
+    advancement revoke @s only foxcraft_dungeon_loot:item/copper_goat_horn/on_using_item
 }
 
 function on_load {
