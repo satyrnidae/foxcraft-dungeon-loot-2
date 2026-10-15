@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic/rogues_dagger"
+  "modifier": "foxcraft_dungeon_loot:epic/rogues_dagger/define"
 }

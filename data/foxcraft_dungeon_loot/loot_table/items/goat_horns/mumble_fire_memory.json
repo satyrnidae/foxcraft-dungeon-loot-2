@@ -23,5 +23,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/goat_horns/mumble_fire_memory"
+  "modifier": "foxcraft_dungeon_loot:special/mumble_fire_memory/define"
 }

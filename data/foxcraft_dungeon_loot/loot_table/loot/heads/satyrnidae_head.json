@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/heads/satyrnidae_head"
+  "modifier": "foxcraft_dungeon_loot:random_loot/player_head/satyrnidae_head"
 }

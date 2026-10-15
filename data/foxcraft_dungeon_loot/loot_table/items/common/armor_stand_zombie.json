@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/armor_stand_zombie"
+  "modifier": "foxcraft_dungeon_loot:common/armor_stand_zombie/define"
 }

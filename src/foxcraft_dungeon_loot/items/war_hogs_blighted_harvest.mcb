@@ -112,7 +112,7 @@ function update_soul_count {
         kill @s
     }
 
-    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:war_hogs_blighted_harvest/set_lore
+    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/war_hogs_blighted_harvest/set_lore
 }
 
 # Called when the datapack is loaded or reloaded.

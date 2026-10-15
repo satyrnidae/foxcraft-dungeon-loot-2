@@ -33,11 +33,11 @@ function clock_3s {
 }
 
 function damage_tool {
-    execute if score #test <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:buckwheat/damage_1
+    execute if score #test <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_1
     REPEAT(0, 3) as i {
-        execute if score #test <%config.internalScoreboard%> matches <%2*(i+1)%>..<%2*(i+1)+1%> run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:buckwheat/damage_<%2*(i+1)%>
+        execute if score #test <%config.internalScoreboard%> matches <%2*(i+1)%>..<%2*(i+1)+1%> run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_<%2*(i+1)%>
     }
-    execute if score #test <%config.internalScoreboard%> matches 10.. run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:buckwheat/damage_10
+    execute if score #test <%config.internalScoreboard%> matches 10.. run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_10
 }
 
 # Runs when the datapack is loaded.

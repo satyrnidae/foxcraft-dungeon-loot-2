@@ -12,11 +12,11 @@ template horn_swap {
     with a0:word a1:word {
         execute if items entity @s <%a0%> minecraft:goat_horn[minecraft:custom_data~{CustomInstrument:"<%a1%>"}] run {
             execute if predicate foxcraft_dungeon_loot:is_sneaking run {
-                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_bass"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:copper_horn/<%a1%>_bass
+                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_bass"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/<%a1%>/bass
             } else execute if score @s satyrn.fdl.copperGoatHorn.currentPitch >= copperGoatHorn.minHarmonyPitch satyrn.fdl.internal run {
-                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_harmony"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:copper_horn/<%a1%>_harmony
+                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_harmony"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/<%a1%>/harmony
             } else run {
-                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_melody"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:copper_horn/<%a1%>_melody
+                execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:<%a1%>_melody"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/<%a1%>/melody
             }
         }
     }

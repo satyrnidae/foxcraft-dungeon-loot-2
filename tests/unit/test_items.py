@@ -86,6 +86,28 @@ def check_identity(case, item, spec):
             case.assertEqual(rarity.lower(), folder)
 
 
+def expected_define_id(name):
+    """Where an item's define.json lives: <rarity>/<item>, special/<item> for discs and horns."""
+    parts = name.split("/")
+    if len(parts) == 3 and parts[1] in ("discs", "goat_horns"):
+        return "%s:special/%s/define" % (pk.NS, parts[2])
+    if len(parts) == 3:
+        return "%s:%s/%s/define" % (pk.NS, parts[1], parts[2])
+    if len(parts) == 2 and parts[1].endswith("_grab_bag"):
+        return "%s:%s/%s/define" % (pk.NS, parts[1].split("_")[0], parts[1])
+    return None
+
+
+def check_layout(case, item):
+    expected = expected_define_id(item.name)
+    with case.subTest("define.json is where the layout says"):
+        if expected is None or not item.modifier_ids:
+            return
+        case.assertIn(expected, item.modifier_ids)
+        path = pk.modifier_path(expected)
+        case.assertTrue(path.exists(), "missing " + pk.rel(path))
+
+
 def check_content(case, item, spec):
     with case.subTest("base items match spec"):
         case.assertEqual(sorted(item.base_items), spec["base_items"])
@@ -161,7 +183,7 @@ def check_horn(case, item):
         with case.subTest("%s part" % part):
             inst = pk.DATA / "instrument" / ("%s_%s.json" % (song, part))
             case.assertTrue(inst.exists(), "missing " + pk.rel(inst))
-            case.assertTrue((pk.DATA / "item_modifier" / "copper_horn" / ("%s_%s.json" % (song, part))).exists(), "missing swap modifier")
+            case.assertTrue((pk.DATA / "item_modifier" / "special" / song / (part + ".json")).exists(), "missing swap modifier")
             body = pk.load_json(inst)
             case.assertEqual(body["use_duration"], 4.0)
             case.assertEqual(body["range"], 256.0)
@@ -178,6 +200,7 @@ def make_test(name, path):
         spec = check_spec_present(self, name)
         item = pk.build_item(name, path)
         check_identity(self, item, spec)
+        check_layout(self, item)
         check_content(self, item, spec)
         check_source(self, item, spec)
         check_disc(self, item)

@@ -19,9 +19,9 @@ function on_hit {
             execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
             function foxcraft_dungeon_loot:math/should_damage_tool
             # Only execute the following if the score is equal to 1 or more
-            execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
+            execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit
         } else run {
-            item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
+            item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit
         }
 
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {

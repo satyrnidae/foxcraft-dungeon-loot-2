@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/coins/silver_coins"
+  "modifier": "foxcraft_dungeon_loot:random_loot/coin/silver_coins"
 }

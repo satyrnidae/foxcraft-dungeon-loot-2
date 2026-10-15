@@ -11,5 +11,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/d20"
+  "modifier": "foxcraft_dungeon_loot:common/d20/define"
 }

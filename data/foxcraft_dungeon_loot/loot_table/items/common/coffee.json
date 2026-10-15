@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/coffee"
+  "modifier": "foxcraft_dungeon_loot:common/coffee/define"
 }

@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/coins/copper_coins"
+  "modifier": "foxcraft_dungeon_loot:random_loot/coin/copper_coins"
 }

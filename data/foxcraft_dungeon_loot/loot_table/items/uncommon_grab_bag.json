@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/uncommon_grab_bag"
+  "modifier": "foxcraft_dungeon_loot:uncommon/uncommon_grab_bag/define"
 }

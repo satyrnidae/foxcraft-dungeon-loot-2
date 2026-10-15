@@ -23,5 +23,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/goat_horns/old_hymn_resting"
+  "modifier": "foxcraft_dungeon_loot:special/old_hymn_resting/define"
 }

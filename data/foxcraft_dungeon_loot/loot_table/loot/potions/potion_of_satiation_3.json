@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/potions/potion_of_satiation_3"
+  "modifier": "foxcraft_dungeon_loot:random_loot/potion/potion_of_satiation_3"
 }

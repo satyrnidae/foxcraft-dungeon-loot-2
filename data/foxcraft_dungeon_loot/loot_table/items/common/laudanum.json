@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/laudanum"
+  "modifier": "foxcraft_dungeon_loot:common/laudanum/define"
 }

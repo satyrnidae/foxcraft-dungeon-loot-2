@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_moon_rays"
+  "modifier": "foxcraft_dungeon_loot:special/music_disc_wolfgun_moon_rays/define"
 }

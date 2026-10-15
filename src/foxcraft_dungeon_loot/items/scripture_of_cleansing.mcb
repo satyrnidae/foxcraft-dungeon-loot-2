@@ -53,65 +53,65 @@ function on_warped_fungus_used {
             # First matching curse wins: equipped slots first, then the rest of the inventory. Vanishing before binding in each pass.
             scoreboard players set #test <%config.internalScoreboard%> 0
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s weapon.offhand *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s weapon.offhand foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s weapon.offhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your offhand item.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s weapon.offhand *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s weapon.offhand foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s weapon.offhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your offhand item.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.head *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s armor.head foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s armor.head foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your helmet.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.head *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s armor.head foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s armor.head foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your helmet.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.chest *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s armor.chest foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s armor.chest foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your chestplate.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.chest *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s armor.chest foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s armor.chest foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your chestplate.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.legs *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s armor.legs foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s armor.legs foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your leggings.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.legs *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s armor.legs foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s armor.legs foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your leggings.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.feet *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s armor.feet foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s armor.feet foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your boots.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.feet *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s armor.feet foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s armor.feet foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your boots.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             REPEAT(0, 35) as i {
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s container.<%i%> *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
-                item modify entity @s container.<%i%> foxcraft_dungeon_loot:scripture_of_cleansing/remove_vanishing
+                item modify entity @s container.<%i%> foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
                 tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from an item in your inventory.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
             }
             REPEAT(0, 35) as i {
             execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s container.<%i%> *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
-                item modify entity @s container.<%i%> foxcraft_dungeon_loot:scripture_of_cleansing/remove_binding
+                item modify entity @s container.<%i%> foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
                 tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from an item in your inventory.","color":"gray","italic":true}
                 scoreboard players set #test <%config.internalScoreboard%> 1
             }
@@ -135,9 +135,9 @@ function on_warped_fungus_used {
                     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
                         execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                         function foxcraft_dungeon_loot:math/should_damage_tool
-                        execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
+                        execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/damage_failure
                     } else run {
-                        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:scripture_of_cleansing/damage_failure
+                        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/damage_failure
                     }
 
                     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {

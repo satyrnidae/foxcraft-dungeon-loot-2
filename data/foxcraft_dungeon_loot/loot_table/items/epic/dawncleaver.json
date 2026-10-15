@@ -55,5 +55,5 @@
       }
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic/dawncleaver"
+  "modifier": "foxcraft_dungeon_loot:epic/dawncleaver/define"
 }

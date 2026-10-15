@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/potions/splash_potion_of_luminance"
+  "modifier": "foxcraft_dungeon_loot:random_loot/potion/splash_potion_of_luminance"
 }

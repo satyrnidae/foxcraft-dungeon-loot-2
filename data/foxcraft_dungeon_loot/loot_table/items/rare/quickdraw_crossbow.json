@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/rare/quickdraw_crossbow"
+  "modifier": "foxcraft_dungeon_loot:rare/quickdraw_crossbow/define"
 }

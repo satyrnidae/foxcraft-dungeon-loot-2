@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/vitae"
+  "modifier": "foxcraft_dungeon_loot:common/vitae/define"
 }

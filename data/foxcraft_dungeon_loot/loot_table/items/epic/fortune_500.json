@@ -55,5 +55,5 @@
       }
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic/fortune_500"
+  "modifier": "foxcraft_dungeon_loot:epic/fortune_500/define"
 }

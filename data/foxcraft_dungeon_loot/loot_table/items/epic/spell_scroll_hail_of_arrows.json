@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic/spell_scroll_hail_of_arrows"
+  "modifier": "foxcraft_dungeon_loot:epic/spell_scroll_hail_of_arrows/define"
 }

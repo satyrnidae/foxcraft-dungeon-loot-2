@@ -20,9 +20,9 @@ function on_tick {
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
-                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
                 } else run {
-                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_jaw_trap
+                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
                 }
 
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
@@ -38,9 +38,9 @@ function on_tick {
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
-                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
+                    execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
                 } else run {
-                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:evokers_tome/damage_sharknado
+                    item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
                 }
 
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {

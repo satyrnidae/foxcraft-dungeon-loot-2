@@ -52,7 +52,7 @@ Data flow for one item: a loot table rolls the base item and runs a modifier cha
 ## 4. Strengths
 
 - Decoupled core. `load`, `tick` and `uninstall` know no item. Adding an item is one file plus tag entries.
-- Thin loot tables. Item definitions live in `item_modifier/` mirroring the loot table path, so there is one place to edit an item.
+- Thin loot tables. Item definitions live in `item_modifier/<rarity>/<item>/define.json`, with the item's other modifiers beside it, so there is one place to edit an item.
 - Strict identity. `DungeonLootId` uniqueness holds across all modifier files, checked by script. SNBT string form is used everywhere so ints never turn into bytes.
 - Lifecycle symmetry. Every objective added has a removal, and `scoreboardsVersion` plus `update_scoreboards` handle renames.
 - Real verification tools, now under `tests/`. `Scan.java` parses data with the game's own codecs, `CmdCheck.java` parses generated commands with the game's dispatcher, `check_old_keys.py` flags removed keys, and a `unittest` suite generates one test per item and per item source file. These caught real bugs during the port.

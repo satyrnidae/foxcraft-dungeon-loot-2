@@ -85,5 +85,5 @@
       }
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/rare/longsword"
+  "modifier": "foxcraft_dungeon_loot:rare/longsword/define"
 }

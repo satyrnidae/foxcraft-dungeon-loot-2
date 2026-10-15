@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/rare/lucky_rabbits_foot"
+  "modifier": "foxcraft_dungeon_loot:rare/lucky_rabbits_foot/define"
 }

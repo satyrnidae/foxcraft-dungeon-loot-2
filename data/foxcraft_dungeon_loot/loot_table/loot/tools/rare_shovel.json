@@ -42,5 +42,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/tools/rare_shovel"
+  "modifier": "foxcraft_dungeon_loot:random_loot/tool/rare_shovel"
 }

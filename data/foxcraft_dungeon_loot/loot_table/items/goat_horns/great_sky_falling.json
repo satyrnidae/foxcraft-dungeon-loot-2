@@ -23,5 +23,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/goat_horns/great_sky_falling"
+  "modifier": "foxcraft_dungeon_loot:special/great_sky_falling/define"
 }

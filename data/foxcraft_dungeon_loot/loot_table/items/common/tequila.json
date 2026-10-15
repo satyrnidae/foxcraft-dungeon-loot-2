@@ -195,5 +195,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/tequila"
+  "modifier": "foxcraft_dungeon_loot:common/tequila/define"
 }

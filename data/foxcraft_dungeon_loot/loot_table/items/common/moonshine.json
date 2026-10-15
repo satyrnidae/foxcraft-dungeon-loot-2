@@ -186,5 +186,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/moonshine"
+  "modifier": "foxcraft_dungeon_loot:common/moonshine/define"
 }

@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic_grab_bag"
+  "modifier": "foxcraft_dungeon_loot:epic/epic_grab_bag/define"
 }

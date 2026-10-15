@@ -42,5 +42,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:loot/armor/rare_chestplate"
+  "modifier": "foxcraft_dungeon_loot:random_loot/armor/rare_chestplate"
 }

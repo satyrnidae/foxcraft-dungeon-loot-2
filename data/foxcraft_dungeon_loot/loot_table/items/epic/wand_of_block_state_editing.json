@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/epic/wand_of_block_state_editing"
+  "modifier": "foxcraft_dungeon_loot:epic/wand_of_block_state_editing/define"
 }

@@ -10,5 +10,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:items/common/armor_stand_greyskull"
+  "modifier": "foxcraft_dungeon_loot:common/armor_stand_greyskull/define"
 }
