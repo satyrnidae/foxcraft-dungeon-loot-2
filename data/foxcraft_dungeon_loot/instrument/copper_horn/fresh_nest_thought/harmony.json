@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.fresh_nest_thought"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.fresh_nest_thought"
   },
   "range": 256.0,
   "sound_event": {

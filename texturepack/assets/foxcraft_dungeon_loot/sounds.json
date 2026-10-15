@@ -47,7 +47,6 @@
     ]
   },
   "item.beta_iron_sword.block": {
-    "subtitle": "subtitles.item.beta_iron_sword.block",
     "sounds": [
       "foxcraft_dungeon_loot:items/beta_iron_sword/block1",
       "foxcraft_dungeon_loot:items/beta_iron_sword/block2"
@@ -268,7 +267,7 @@
     ]
   },
   "item.torenhias_fist.thunder": {
-    "subtitle": "subtitles.item.mjolnir.thunder",
+    "subtitle": "subtitles.item.torenhias_fist.thunder",
     "sounds": [
       "item/trident/thunder1",
       "item/trident/thunder2"
@@ -286,7 +285,7 @@
     ]
   },
   "item.war_hogs_disdainful_pride.parachute_activation": {
-    "subtitle": "subtitles.war_hogs_disdainful_pride.parachute_activation",
+    "subtitle": "subtitles.item.war_hogs_disdainful_pride.parachute_activation",
     "sounds": [
       "mob/enderdragon/wings1",
       "mob/enderdragon/wings2",

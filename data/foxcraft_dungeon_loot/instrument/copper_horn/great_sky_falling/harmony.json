@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.great_sky_falling"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.great_sky_falling"
   },
   "range": 256.0,
   "sound_event": {

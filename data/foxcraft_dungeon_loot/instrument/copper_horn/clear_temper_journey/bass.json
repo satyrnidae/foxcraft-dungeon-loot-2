@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.clear_temper_journey"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.clear_temper_journey"
   },
   "range": 256.0,
   "sound_event": {

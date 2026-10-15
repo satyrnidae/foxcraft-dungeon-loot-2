@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.fearless_river_gift"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.fearless_river_gift"
   },
   "range": 256.0,
   "sound_event": {

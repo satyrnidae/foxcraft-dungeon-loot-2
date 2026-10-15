@@ -160,6 +160,20 @@ describe('resource pack', () => {
     assert.deepEqual(sorted([...a].filter((x) => !b.has(x)).concat([...b].filter((x) => !a.has(x)))), []);
   });
 
+  it('every subtitle a sound event names is in lang, and every lang subtitle is used', () => {
+    const lang = pk.loadJson(path.join(pk.TP_MC, 'lang', 'en_us.json'));
+    const used = new Set(Object.values(SOUNDS).map((e) => e.subtitle).filter(Boolean));
+    const missing = [...used].filter((k) => !(k in lang));
+    const unused = Object.keys(lang).filter((k) => k.startsWith('subtitles.') && !used.has(k));
+    assert.deepEqual({ missing, unused }, { missing: [], unused: [] });
+  });
+
+  it('every instrument description has a lang entry', () => {
+    const lang = pk.loadJson(path.join(pk.TP_MC, 'lang', 'en_us.json'));
+    const missing = pk.walk(dataFile('instrument'), '.json').map((f) => pk.loadJson(f).description.translate).filter((k) => !(k in lang));
+    assert.deepEqual([...new Set(missing)], []);
+  });
+
   it('lang has every song title', () => {
     const lang = pk.loadJson(path.join(pk.TP_MC, 'lang', 'en_us.json'));
     const missing = [];

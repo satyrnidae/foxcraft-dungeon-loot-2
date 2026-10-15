@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.mumble_fire_memory"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.mumble_fire_memory"
   },
   "range": 256.0,
   "sound_event": {

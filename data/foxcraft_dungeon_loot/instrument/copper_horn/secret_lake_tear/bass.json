@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "instrument.foxcraft_dungeon_loot.secret_lake_tear"
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.secret_lake_tear"
   },
   "range": 256.0,
   "sound_event": {
