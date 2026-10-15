@@ -86,11 +86,23 @@ def check_identity(case, item, spec):
             case.assertEqual(rarity.lower(), folder)
 
 
+def disc_folder(disc):
+    """Folder name of a disc modifier: no music_disc_ prefix, and mdoadq replaced by the artist from the song title."""
+    rest = disc.replace("music_disc_", "", 1)
+    if rest.startswith("mdoadq_"):
+        title = LANG.get("jukebox_song.%s.%s" % (pk.NS, disc), "")
+        artist = re.sub(r"[^a-z0-9]", "", title.split(" - ")[0].lower())
+        return artist + rest[len("mdoadq"):]
+    return rest
+
+
 def expected_define_id(name):
     """Where an item's define.json lives: <rarity>/<item>, special/<item> for discs and horns."""
     parts = name.split("/")
     if len(parts) == 4 and parts[1] == "special":
-        return "%s:special/%s/define" % (pk.NS, parts[3])
+        if parts[2] == "disc":
+            return "%s:special/music_disc/%s/define" % (pk.NS, disc_folder(parts[3]))
+        return "%s:special/copper_horn/%s/define" % (pk.NS, parts[3])
     if len(parts) == 3:
         return "%s:%s/%s/define" % (pk.NS, parts[1], parts[2])
     return None
@@ -181,7 +193,7 @@ def check_horn(case, item):
         with case.subTest("%s part" % part):
             inst = pk.DATA / "instrument" / ("%s_%s.json" % (song, part))
             case.assertTrue(inst.exists(), "missing " + pk.rel(inst))
-            case.assertTrue((pk.DATA / "item_modifier" / "special" / song / (part + ".json")).exists(), "missing swap modifier")
+            case.assertTrue((pk.DATA / "item_modifier" / "special" / "copper_horn" / song / (part + ".json")).exists(), "missing swap modifier")
             body = pk.load_json(inst)
             case.assertEqual(body["use_duration"], 4.0)
             case.assertEqual(body["range"], 256.0)

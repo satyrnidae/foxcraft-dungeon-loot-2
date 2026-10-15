@@ -143,7 +143,7 @@ class ResourcePack(unittest.TestCase):
 
     def test_every_instrument_has_a_swap_modifier(self):
         names = {p.stem for p in (pk.DATA / "instrument").glob("*.json")}
-        swaps = {"%s_%s" % (p.parent.name, p.stem) for p in (pk.DATA / "item_modifier" / "special").glob("*/*.json") if p.stem in ("bass", "harmony", "melody")}
+        swaps = {"%s_%s" % (p.parent.name, p.stem) for p in (pk.DATA / "item_modifier" / "special" / "copper_horn").glob("*/*.json") if p.stem in ("bass", "harmony", "melody")}
         self.assertEqual(sorted(names ^ swaps), [])
 
     def test_lang_has_every_song_title(self):

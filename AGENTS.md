@@ -45,7 +45,8 @@ data/foxcraft_dungeon_loot/
   loot_table/item/random_loot/ pickers, pools and groups for random drops
   loot_table/entity/           loot for entities, such as the Wandering Trader
   item_modifier/<rarity>/<item>/define.json   the real item definition, plus the item's other modifiers beside it
-  item_modifier/special/<item>/               discs and copper horns
+  item_modifier/special/music_disc/<disc>/    disc items, <artist>_<title> without the music_disc_ prefix
+  item_modifier/special/copper_horn/<song>/   copper horn items and their swap modifiers
   item_modifier/random_loot/<group>/          modifiers for random loot: armor, book, coin, player_head, potion, tool
   predicate/item/<rarity>/<item>/  item predicates such as in_main_hand and worn
   predicate/item/              shared item predicates, durability and snowball checks
