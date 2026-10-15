@@ -1,0 +1,7 @@
+# Use LF for all text files
+* text=lf
+
+# Binary files
+*.png binary
+*.ase binary
+*.ogg binary
