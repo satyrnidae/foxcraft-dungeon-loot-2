@@ -1,7 +1,8 @@
 {
   "pack": {
-    "pack_format": 9,
-    "description": "Foxcraft Dungeon Loot 1.19"
+    "min_format": [97, 1],
+    "max_format": [97, 1],
+    "description": "Foxcraft Dungeon Loot 2"
   },
   "meta": {
     "author": "satyrnidae",

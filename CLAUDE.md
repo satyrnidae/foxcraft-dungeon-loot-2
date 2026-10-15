@@ -46,4 +46,4 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 ## Resource pack
 
-`texturepack/` is a separate pack (own `pack.mcmeta`, built by `texturepack/build.ps1`) with models, textures, sounds, and shaders. Custom music-disc assets are gitignored; credits and licenses are in `README.md`.
+`texturepack/` is a separate pack (own `pack.mcmeta`, format 97.1, built by `texturepack/build.ps1`) with models, textures, sounds, and post effects. An item picks its model through the `item_model` component, which names a definition in `assets/foxcraft_dungeon_loot/items/<name>.json`; the definition points at a model in `models/item/` and holds state switches such as the bow pull stages. Do not add `custom_model_data` overrides to vanilla item models, 26.3 ignores them. Custom music-disc assets are gitignored; credits and licenses are in `README.md`.

@@ -86,8 +86,21 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Trader state stand is removed after trades are added, and the trader's AI turns back on.
 - [ ] Trade welcome message and glow on spawn.
 
+## Phase 6 - resource pack
+
+- [ ] Pack loads on 26.3 with no "unsupported pack format" warning and no missing model, texture or definition errors in the log.
+- [ ] Every custom item shows its own model in inventory, hand, ground, item frame and GUI. Walk through `/loot give` for each rarity folder and the coin, potion-free tool and horn tables.
+- [ ] Peerless Yewhewn: idle model, then pulling stages at the bow's 0.65 and 0.9 charge thresholds.
+- [ ] Shield item (iron_sword model): shows the sword idle and the blocking sword while blocking. A plain vanilla shield still renders normally, in hand and blocking.
+- [ ] Copper goat horn: normal model, tooting model while sounding.
+- [ ] Vanilla look unchanged: bow, goat horn, snowball, totem, feather, nuggets, tools and books without the pack's items.
+- [ ] Silverfish Escape Artist uses the 26.3 silverfish texture (`entity/silverfish/silverfish`), not a purple-black square.
+- [ ] Tiered items (chainsaw, auto pickaxe) show the tier model. Higher armor tiers of Estudinae's sets and similar still use the vanilla look; decide if they need their own models.
+- [ ] Music disc 11 base item still looks like vanilla disc 11. Its custom disc models are phase 8.
+- [ ] War Hog wrath post effect: `/effect`-free check, `war_hog_wrath` loads as a post effect. It is not referenced by anything yet.
+
 ## Not yet testable (later phases)
 
-- Item definitions and state models (phase 6).
+
 - Variants with their own `item_model` (phase 7).
 - Discs and copper horn (phase 8).
