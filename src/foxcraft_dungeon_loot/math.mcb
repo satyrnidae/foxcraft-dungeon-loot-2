@@ -32,6 +32,7 @@ function on_uninstall {
 Sets #math.result in the internal scoreboard to a boolean int based on the values of #math.input1 in the internal scoreboard.
 If the function returns a 0, the tool should not be damaged.
 If the function returns a 1, the tool should be damaged.
+Damage chance is 1/(level+1), the vanilla Unbreaking rule for tools: threshold 32767/(level+1) against a roll of 1..32767.
 ###
 function should_damage_tool {
     execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
@@ -53,14 +54,14 @@ function should_damage_tool {
 }
 
 
-# This function operates identically to the should_damage_tool function above, but uses a slightly different function tuned to armor and other wearable items.
+# This function operates identically to the should_damage_tool function above, but uses the armor rule: 60% base chance plus 40% scaled by Unbreaking.
 # If the function returns a 0, the tool should not be damaged.
 # If the function returns a 1, the tool should be damaged.
 function should_damage_armor {
     execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
         scoreboard players set #math.result <%config.internalScoreboard%> 1
     } else run {
-        # Approximates a limit of chance not to break approaching 40%
+        # Vanilla Unbreaking rule for armor: damage chance is 60% + 40%/(level+1), as 19660 + 13107/(level+1) out of 32767
         scoreboard players set #math.input2 <%config.internalScoreboard%> 13107
         scoreboard players add #math.input1 <%config.internalScoreboard%> 1
         scoreboard players operation #math.input2 <%config.internalScoreboard%> /= #math.input1 <%config.internalScoreboard%>

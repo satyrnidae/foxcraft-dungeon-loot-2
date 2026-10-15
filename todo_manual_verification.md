@@ -58,6 +58,13 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] No stray `satyrn.fdl.cleaner` armor stand appears.
 - [ ] Log shows no `set_enchantments` or `item modify` errors.
 
+## Phase 4c.3 - durability odds
+
+- [ ] Use a tool item (Scripture of Cleansing or Evoker's Tome) 50+ times with Unbreaking III, then with none. Expect roughly 1 in 4 uses to cost durability with it, every use without.
+- [ ] Armor item (Gravilock Boots) with Unbreaking III: roughly 70% of triggers cost durability (60% + 40%/4); without Unbreaking, always.
+- [ ] Item at 1 durability breaks with the break sound and particle, and is removed from the slot.
+- [ ] Durability bar fraction per use looks right for each base item (boots tiers, elytra, warped fungus on a stick).
+
 ## Not yet testable (later phases)
 
 - Trader `Offers` item format (phase 5).
