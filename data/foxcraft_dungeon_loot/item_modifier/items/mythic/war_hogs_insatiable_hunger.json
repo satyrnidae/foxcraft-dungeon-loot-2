@@ -1,0 +1,109 @@
+[
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:armor",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger/armor",
+        "amount": 8,
+        "operation": "add_value",
+        "slot": "chest"
+      },
+      {
+        "attribute": "minecraft:knockback_resistance",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger/knockback_resistance",
+        "amount": 0.5,
+        "operation": "add_value",
+        "slot": "chest"
+      },
+      {
+        "attribute": "minecraft:armor_toughness",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger/armor_toughness",
+        "amount": 3,
+        "operation": "add_value",
+        "slot": "chest"
+      },
+      {
+        "attribute": "minecraft:max_health",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger/max_health",
+        "amount": 2,
+        "operation": "add_value",
+        "slot": "chest"
+      },
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_insatiable_hunger/movement_speed",
+        "amount": -0.1,
+        "operation": "add_multiplied_total",
+        "slot": "chest"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "War Hog's Insatiable Hunger",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Long ago, piglins fought against Wither Skeletons",
+      "in a bid for dominion over the Nether. The",
+      "generals of their army wore ancient armors imbued",
+      "with the powers of their slain enemies. This",
+      "chestplate is their insatiable hunger.",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "War Hog's Hunger: ",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": "The hunger of the armor's",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "previous owner still resides within this chestplate,",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "text": "cursing the wearer with Hunger II.",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    "mode": "replace_all"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:blast_protection": 3,
+      "minecraft:fire_protection": 3,
+      "minecraft:mending": 1,
+      "minecraft:projectile_protection": 3,
+      "minecraft:protection": 5,
+      "minecraft:thorns": 3,
+      "minecraft:unbreaking": 5
+    },
+    "add": false
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:59,DungeonItem:1b}"
+  }
+]

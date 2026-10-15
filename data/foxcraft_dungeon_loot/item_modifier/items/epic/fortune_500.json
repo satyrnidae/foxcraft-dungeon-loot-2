@@ -1,0 +1,52 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": [
+      {
+        "text": "Fortune 5",
+        "color": "light_purple",
+        "italic": false
+      },
+      {
+        "text": "00",
+        "strikethrough": true
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      [
+        "One of those famous top-rated ",
+        {
+          "text": "companies",
+          "italic": true,
+          "strikethrough": true
+        }
+      ],
+      "pickaxes that everyone is talking about.",
+      [
+        "Rarity: ",
+        {
+          "text": "Epic",
+          "color": "light_purple",
+          "italic": true
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:efficiency": 5,
+      "minecraft:fortune": 5,
+      "minecraft:mending": 1,
+      "minecraft:unbreaking": 5
+    }
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:22,DungeonItem:1b}"
+  }
+]

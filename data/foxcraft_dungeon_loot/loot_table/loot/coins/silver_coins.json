@@ -10,21 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Silver Coins",
-        "color": "yellow",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:silver_coins",
-        "minecraft:max_stack_size": 99
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/coins/silver_coins"
 }

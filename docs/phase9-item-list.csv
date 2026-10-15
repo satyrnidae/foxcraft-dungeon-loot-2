@@ -1,9 +1,8 @@
 id,rarity,item,base,flags,hooks,decision,reason
 4,epic,kobolds_vengeance,bone,,,review,Passive. bone has no food or consumable component. Potato only for uniformity.
 29,rare,lucky_rabbits_foot,rabbit_foot,,,review,Passive. rabbit_foot has no food or consumable component. Potato only for uniformity.
-35,mythic,constantines_gift,(loot table ref),,,review,"Passive offhand effect. Base is enchanted_golden_apple, which is consumable by default. Moving to the potato still needs !consumable, so no gain over keeping the apple and removing consumable."
 53,mythic,talking_stick,stick,,,review,"Passive. stick has no food or consumable component, nothing to strip. Potato only for uniformity."
-76,epic,buckwheat,warped_fungus_on_a_stick,,,review,"Held-item tool on warped_fungus_on_a_stick, but it uses the durability bar on purpose. Stays unless durability moves to another scheme."
+76,epic,buckwheat,warped_fungus_on_a_stick,,,review,"Move. Durability moves to components: max_damage 100 and max_stack_size 1 set on the potato, !food and !consumable removed. damage_tool modifiers and the break_item call keep working."
 ,common,absinthe,potion,,,stay,drinkable
 ,common,animus,potion,,,stay,drinkable
 ,common,armor_stand,armor_stand,,,stay,placeable entity item
@@ -50,6 +49,7 @@ id,rarity,item,base,flags,hooks,decision,reason
 32,mythic,auto_pickaxe,diamond_pickaxe / iron_pickaxe / netherite_pickaxe,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
 33,mythic,gravilock_boots,diamond_boots / iron_boots / netherite_boots,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
 34,mythic,bringer_of_fear,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+35,mythic,constantines_gift,(loot table ref),,,stay,"enchanted_golden_apple, eating it is a feature"
 36,mythic,deilonas_holy_blessings,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
 37,mythic,downpour_amulet,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
 38,epic,estudinaes_guidance,chainmail_boots / diamond_boots / iron_boots / leather_boots / netherite_boots,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"

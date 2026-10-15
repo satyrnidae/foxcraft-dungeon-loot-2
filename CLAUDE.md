@@ -33,7 +33,7 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 - Each custom item is identified by an integer `DungeonLootId` in its `custom_data` component, written by `minecraft:set_custom_data` with an SNBT string tag such as `"{DungeonLootId:87,DungeonItem:1b}"`. Always use the SNBT string form: a JSON compound turns small ints into bytes and never matches. `DungeonLootId` must be unique (master list is a Google Sheet linked in `README.md`). The model comes from the `item_model` component (set in `set_components`), not a `CustomModelData` number.
 - Item definitions are loot tables in `data/foxcraft_dungeon_loot/loot_table/items/<rarity>/...` (common, uncommon, rare, epic, mythic), with per-rarity `*_grab_bag.json` tables. Variants (e.g. chainsaw diamond/netherite upgrade) are selected by setting the `satyrn.fdl.loot.variant` score before `loot give`, then resetting it.
-- `data/foxcraft_dungeon_loot/item_modifier/` and `advancement/items/` hold per-item modifiers and use-detection advancements. `advancement revoke @a from foxcraft_dungeon_loot:items` runs on load to reset them.
+- Each loot table keeps only its pools plus a root `"modifier": "foxcraft_dungeon_loot:<table path>"`; the name, lore, components and custom data chain lives in `item_modifier/<table path>.json`, so edit the item there. Other folders in `item_modifier/` are per-item modifiers run by `item modify` in `src/`. `advancement/items/` holds use-detection advancements. `advancement revoke @a from foxcraft_dungeon_loot:items` runs on load to reset them.
 - `data/minecraft/loot_table` overrides vanilla tables to inject the loot.
 
 ## Trades

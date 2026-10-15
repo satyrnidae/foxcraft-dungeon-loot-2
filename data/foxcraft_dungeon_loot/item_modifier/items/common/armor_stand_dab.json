@@ -1,0 +1,63 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": [
+      {
+        "text": "Armor Stand",
+        "italic": false
+      },
+      {
+        "text": " (Dabbing)",
+        "color": "gray",
+        "italic": false
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      {
+        "text": "Pose: Dabbing",
+        "italic": false,
+        "color": "gray"
+      }
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:armor_stand",
+      "minecraft:entity_data": {
+        "id": "minecraft:armor_stand",
+        "ShowArms": 1,
+        "Pose": {
+          "LeftArm": [
+            -50.0,
+            20.0,
+            90.0
+          ],
+          "RightArm": [
+            0.0,
+            20.0,
+            100.0
+          ],
+          "Head": [
+            0.0,
+            -65.0,
+            43.0
+          ],
+          "Body": [
+            0.0,
+            -3.822199,
+            0.0
+          ]
+        }
+      }
+    }
+  }
+]

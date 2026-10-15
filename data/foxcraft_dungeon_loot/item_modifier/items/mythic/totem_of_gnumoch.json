@@ -1,0 +1,106 @@
+[
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:knockback_resistance",
+        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/knockback_resistance",
+        "amount": 1,
+        "operation": "add_value",
+        "slot": "offhand"
+      },
+      {
+        "attribute": "minecraft:armor",
+        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/armor",
+        "amount": 10,
+        "operation": "add_value",
+        "slot": "offhand"
+      },
+      {
+        "attribute": "minecraft:armor_toughness",
+        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_gnumoch/armor_toughness",
+        "amount": 5,
+        "operation": "add_value",
+        "slot": "mainhand"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Totem of Gnumoch",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "May Gnumoch, the God of the Earth, smile",
+      "upon thee!",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Feet Firmly Planted: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "While on the ground",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "and crouching with the totem in your",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "text": "off-hand, grants Resistance II, Health",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "text": "Boost, and Absorption III at the cost of",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "text": "Slowness II.",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    }
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:20,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:totem_of_gnumoch",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments"
+        ]
+      }
+    }
+  }
+]

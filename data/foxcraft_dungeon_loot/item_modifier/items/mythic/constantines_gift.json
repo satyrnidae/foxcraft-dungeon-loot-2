@@ -1,0 +1,72 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Constantine's Gift",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Don't look a gift h- uh, donkey... in the... uh...",
+      "You know what? Just roll with it.",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Full on Love and Sugar Cubes: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "When held in",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "off-hand, applies Saturation once every ten",
+        "color": "gray",
+        "italic": false
+      },
+      {
+        "text": "seconds.",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:luck",
+        "id": "foxcraft_dungeon_loot:items/mythic/constantines_gift/luck",
+        "amount": 2,
+        "operation": "add_value",
+        "slot": "offhand"
+      },
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/constantines_gift/movement_speed",
+        "amount": 0.2,
+        "operation": "add_multiplied_base",
+        "slot": "offhand"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:35,DungeonItem:1b}"
+  }
+]

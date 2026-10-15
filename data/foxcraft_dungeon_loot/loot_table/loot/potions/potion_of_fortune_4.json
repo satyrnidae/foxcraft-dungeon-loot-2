@@ -10,29 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Potion of Fortune",
-        "color": "yellow",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:potion_contents": {
-          "custom_color": 3381504,
-          "custom_effects": [
-            {
-              "id": "minecraft:luck",
-              "amplifier": 3,
-              "duration": 600
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/potions/potion_of_fortune_4"
 }

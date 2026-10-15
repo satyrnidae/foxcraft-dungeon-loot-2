@@ -2,9 +2,9 @@
 
 Draft for review. Nothing is moved yet. Moving an item to `poisonous_potato` means removing `!minecraft:food` and `!minecraft:consumable` and changing its loot table, `src/` readers and predicates in the same step. Coins and snowballs never move. Interactive items stay on their current base.
 
-Counts: 95 items, 5 to review, 90 stay.
+Counts: 95 items, 4 to review (1 proposed move, 3 optional), 91 stay.
 
-Result of the survey: almost nothing qualifies. Every item on `warped_fungus_on_a_stick` has a use hook except buckwheat, which relies on the durability bar. Everything else sits on a base item that provides its function. The only real candidates are passive items already on a clean base, where the move gains nothing but uniformity.
+Result of the survey: almost nothing qualifies. Every item on `warped_fungus_on_a_stick` has a use hook except buckwheat. Durability does not need the fungus, it comes from the `max_damage` and `damage` components, so buckwheat can move. The Constantine gift stays on the golden apple, eating it is a feature. Everything else sits on a base item that provides its function. The remaining candidates are passive items already on a clean base, where the move gains nothing but uniformity.
 
 Not listed: coins (never move), the per-rarity grab bags (fungus use hook, stay), the `loot/` tables for potions, heads, armor and tools.
 
@@ -14,9 +14,8 @@ Not listed: coins (never move), the per-rarity grab bags (fungus use hook, stay)
 |---|---|---|---|---|
 | 4 | kobolds_vengeance | epic | bone | Passive. bone has no food or consumable component. Potato only for uniformity. |
 | 29 | lucky_rabbits_foot | rare | rabbit_foot | Passive. rabbit_foot has no food or consumable component. Potato only for uniformity. |
-| 35 | constantines_gift | mythic | (loot table ref) | Passive offhand effect. Base is enchanted_golden_apple, which is consumable by default. Moving to the potato still needs !consumable, so no gain over keeping the apple and removing consumable. |
 | 53 | talking_stick | mythic | stick | Passive. stick has no food or consumable component, nothing to strip. Potato only for uniformity. |
-| 76 | buckwheat | epic | warped_fungus_on_a_stick | Held-item tool on warped_fungus_on_a_stick, but it uses the durability bar on purpose. Stays unless durability moves to another scheme. |
+| 76 | buckwheat | epic | warped_fungus_on_a_stick | Move. Durability moves to components: max_damage 100 and max_stack_size 1 set on the potato, !food and !consumable removed. damage_tool modifiers and the break_item call keep working. |
 
 ## Stay
 
@@ -68,6 +67,7 @@ Not listed: coins (never move), the per-rarity grab bags (fungus use hook, stay)
 | 32 | auto_pickaxe | mythic | diamond_pickaxe / iron_pickaxe / netherite_pickaxe | - | base item provides the function (equipment, weapon, totem, tool or wearable) |
 | 33 | gravilock_boots | mythic | diamond_boots / iron_boots / netherite_boots | - | base item provides the function (equipment, weapon, totem, tool or wearable) |
 | 34 | bringer_of_fear | mythic | warped_fungus_on_a_stick | on_tick on_warped_fungus_used | interactive, uses the fungus use event |
+| 35 | constantines_gift | mythic | (loot table ref) | - | enchanted_golden_apple, eating it is a feature |
 | 36 | deilonas_holy_blessings | mythic | warped_fungus_on_a_stick | on_tick on_warped_fungus_used | interactive, uses the fungus use event |
 | 37 | downpour_amulet | mythic | warped_fungus_on_a_stick | on_tick on_warped_fungus_used | interactive, uses the fungus use event |
 | 38 | estudinaes_guidance | epic | chainmail_boots / diamond_boots / iron_boots / leather_boots / netherite_boots | - | base item provides the function (equipment, weapon, totem, tool or wearable) |

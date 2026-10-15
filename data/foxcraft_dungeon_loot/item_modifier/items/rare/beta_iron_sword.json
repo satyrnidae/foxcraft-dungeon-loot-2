@@ -1,0 +1,96 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:82,DungeonLoot:1b,ProcessBlock:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:iron_sword"
+    }
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Beta Iron Sword",
+      "color": "aqua",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "A blast from the past.",
+      [
+        "Rarity: ",
+        {
+          "text": "Rare",
+          "color": "aqua",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Pre-Combat Tuning: ",
+          "color": "aqua",
+          "italic": false
+        },
+        {
+          "text": "Allows the user to attack",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "very quickly. Also allows the user to block",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": "by holding ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "keybind": "key.use",
+          "color": "yellow",
+          "italic": false
+        },
+        {
+          "text": ".",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "replace_all"
+  },
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:attack_damage",
+        "id": "foxcraft_dungeon_loot:items/rare/beta_iron_sword/attack_damage",
+        "amount": 5,
+        "operation": "add_value",
+        "slot": "mainhand"
+      },
+      {
+        "attribute": "minecraft:attack_speed",
+        "id": "foxcraft_dungeon_loot:items/rare/beta_iron_sword/attack_speed",
+        "amount": 10,
+        "operation": "add_value",
+        "slot": "mainhand"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:unbreaking": 3,
+      "minecraft:vanishing_curse": 1
+    }
+  }
+]

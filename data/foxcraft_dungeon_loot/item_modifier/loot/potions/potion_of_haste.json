@@ -1,0 +1,24 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Potion of Haste",
+      "color": "yellow",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 14270531,
+        "custom_effects": [
+          {
+            "id": "minecraft:haste",
+            "duration": 3600
+          }
+        ]
+      }
+    }
+  }
+]

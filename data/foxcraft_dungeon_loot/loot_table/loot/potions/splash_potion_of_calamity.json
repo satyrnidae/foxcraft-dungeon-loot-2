@@ -10,28 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Splash Potion of Calamity",
-        "color": "aqua",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:potion_contents": {
-          "custom_color": 745784,
-          "custom_effects": [
-            {
-              "id": "minecraft:bad_omen",
-              "duration": 3600
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/potions/splash_potion_of_calamity"
 }

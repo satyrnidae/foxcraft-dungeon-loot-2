@@ -1,0 +1,41 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "D12",
+      "color": "white",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "A simple twelve-sided die.",
+      [
+        "Rarity: ",
+        {
+          "text": "Common",
+          "color": "white",
+          "italic": true
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:68,DungeonItem:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:item_model": "foxcraft_dungeon_loot:d12",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:unbreakable"
+        ]
+      }
+    }
+  }
+]

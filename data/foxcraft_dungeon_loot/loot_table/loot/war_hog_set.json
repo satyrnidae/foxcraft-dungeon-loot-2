@@ -34,10 +34,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_custom_data",
-      "tag": "{PiglinBarter:1b}"
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/war_hog_set"
 }

@@ -10,40 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": [
-        {
-          "text": "Armor Stand",
-          "italic": false
-        }
-      ]
-    },
-    {
-      "type": "minecraft:set_lore",
-      "lore": [
-        {
-          "text": "Pose: None",
-          "italic": false,
-          "color": "gray"
-        }
-      ],
-      "mode": "append"
-    },
-    {
-      "type": "minecraft:set_custom_data",
-      "tag": "{DungeonItem:1b}"
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:armor_stand",
-        "minecraft:entity_data": {
-          "id": "minecraft:armor_stand",
-          "ShowArms": 1
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:items/common/armor_stand"
 }

@@ -1,0 +1,95 @@
+[
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/talking_stick/movement_speed",
+        "amount": 0.2,
+        "operation": "add_multiplied_total",
+        "slot": "offhand"
+      },
+      {
+        "attribute": "minecraft:attack_damage",
+        "id": "foxcraft_dungeon_loot:items/mythic/talking_stick/attack_damage",
+        "amount": -0.2,
+        "operation": "add_multiplied_total",
+        "slot": "offhand"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "The Talking Stick",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Hey! Hey! Shut up! You look here, I have",
+      "the stick, so you have to shut up! Shut up",
+      "shut up shut up! Now... What were we",
+      "supposed to be doing again?",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Pay Attention to Me: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "Applies Night Vision,",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "Glowing, Resistance II, and Haste II when in",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "the off-hand.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "replace_all"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    },
+    "add": true
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:53,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments"
+        ]
+      }
+    }
+  }
+]

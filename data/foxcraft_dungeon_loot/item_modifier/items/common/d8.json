@@ -1,0 +1,40 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "D8",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "A simple eight-sided die.",
+      [
+        "Rarity: ",
+        {
+          "text": "Common",
+          "italic": true,
+          "color": "white"
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:66,DungeonItem:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:item_model": "foxcraft_dungeon_loot:d8",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:unbreakable"
+        ]
+      }
+    }
+  }
+]

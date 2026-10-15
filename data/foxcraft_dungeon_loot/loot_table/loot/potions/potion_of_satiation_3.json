@@ -10,28 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Potion of Satiation",
-        "color": "yellow",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:potion_contents": {
-          "custom_color": 16262177,
-          "custom_effects": [
-            {
-              "id": "minecraft:saturation",
-              "amplifier": 2
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/potions/potion_of_satiation_3"
 }

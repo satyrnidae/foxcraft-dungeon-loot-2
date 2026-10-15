@@ -10,28 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Splash Potion of Blindness",
-        "color": "yellow",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:potion_contents": {
-          "custom_color": 2039587,
-          "custom_effects": [
-            {
-              "id": "minecraft:blindness",
-              "duration": 600
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/potions/splash_potion_of_blindness"
 }

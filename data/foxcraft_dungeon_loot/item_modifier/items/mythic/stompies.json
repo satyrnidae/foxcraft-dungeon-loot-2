@@ -1,0 +1,109 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "St0mp-EE5",
+      "color": "gold",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "\"I call them the Stompies! For when you need that",
+      "extra kick.\" - Marcus Ren",
+      [
+        "Rarity: ",
+        {
+          "text": "Exotic",
+          "color": "gold",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Hydraulic Boosters: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "Increases movement speed",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "and jump height. Grants Jump Boost II.",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": "Exotic Item: ",
+          "color": "gold",
+          "italic": false
+        },
+        {
+          "text": "Cannot be equipped while wearing",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "another piece of Exotic armor. Good thing there's",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "only one, huh?",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:armor",
+        "id": "foxcraft_dungeon_loot:items/mythic/stompies/armor",
+        "amount": 3,
+        "operation": "add_value",
+        "slot": "feet"
+      },
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/stompies/movement_speed",
+        "amount": 0.4,
+        "operation": "add_multiplied_total",
+        "slot": "feet"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:feather_falling": 4,
+      "minecraft:protection": 5,
+      "minecraft:soul_speed": 1,
+      "minecraft:binding_curse": 1
+    }
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:52,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:dyed_color": 14605273
+    }
+  }
+]

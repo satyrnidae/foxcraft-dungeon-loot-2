@@ -1,0 +1,136 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Bringer of Fear",
+      "color": "red",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Those who whisper into the darkness had",
+      "best be prepared for the consequences.",
+      [
+        "Rarity: ",
+        {
+          "text": "Cursed",
+          "color": "red",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "The Darkness Whispers Back: ",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": "Rolls a D20. The",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "result will determine the outcome:",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": " - ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "1-10: ",
+          "color": "white",
+          "italic": false
+        },
+        {
+          "text": "Inflicts Bad Omen I.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": " - ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "11-17: ",
+          "color": "white",
+          "italic": false
+        },
+        {
+          "text": "Inflicts Bad Omen III.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": " - ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "18-20: ",
+          "color": "white",
+          "italic": false
+        },
+        {
+          "text": "Inflicts Bad Omen V.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "All effects are applied for 20 minutes.",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": "Fragile: ",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": "The item will be consumed upon use.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    },
+    "add": true
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:34,DungeonItem:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:item_model": "foxcraft_dungeon_loot:bringer_of_fear",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments",
+          "minecraft:unbreakable"
+        ]
+      }
+    }
+  }
+]

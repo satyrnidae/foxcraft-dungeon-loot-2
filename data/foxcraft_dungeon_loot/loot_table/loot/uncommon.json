@@ -156,12 +156,6 @@
           "weight": 2,
           "quality": 1,
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/heads/marie_annelise_head"
-        },
-        {
-          "weight": 2,
-          "quality": 1,
-          "type": "minecraft:loot_table",
           "value": "foxcraft_dungeon_loot:loot/heads/hyosoryu_head"
         }
       ]

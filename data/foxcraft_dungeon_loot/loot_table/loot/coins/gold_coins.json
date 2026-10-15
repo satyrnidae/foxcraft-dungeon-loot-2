@@ -10,21 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Gold Coins",
-        "color": "aqua",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:gold_coins",
-        "minecraft:max_stack_size": 99
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/coins/gold_coins"
 }

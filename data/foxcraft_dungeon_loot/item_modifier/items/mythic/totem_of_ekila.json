@@ -1,0 +1,100 @@
+[
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:max_health",
+        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila/max_health",
+        "amount": -0.2,
+        "operation": "add_multiplied_base",
+        "slot": "offhand"
+      },
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_ekila/movement_speed",
+        "amount": 0.4,
+        "operation": "add_multiplied_total",
+        "slot": "offhand"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Totem of Ekila",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "May Ekila, the God of the Sky, smile upon thee!",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Smooth Landing: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "While flying, gain Resistance",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "III and Absorption II.",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": "Headed Skyward: ",
+          "color": "green",
+          "italic": false
+        },
+        {
+          "text": "While grounded, gain Jump",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "Boost III and Slow Falling.",
+        "color": "gray",
+        "italic": false
+      }
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    }
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:19,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:totem_of_ekila",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments"
+        ]
+      }
+    }
+  }
+]

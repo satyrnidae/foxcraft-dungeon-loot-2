@@ -1,0 +1,80 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "I'ma Leaf",
+      "color": "aqua",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Aight, I'ma head out.",
+      [
+        "Rarity: ",
+        {
+          "text": "Rare",
+          "color": "aqua",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "Make Like A Tree: ",
+          "color": "aqua",
+          "italic": false
+        },
+        {
+          "text": "Instantly teleports",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "you 10,000 meters into the sky",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": "Fragile: ",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": "This item is consumed on use.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    },
+    "add": true
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:77,DungeonItem:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:ima_leaf",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments",
+          "minecraft:unbreakable"
+        ]
+      }
+    }
+  }
+]

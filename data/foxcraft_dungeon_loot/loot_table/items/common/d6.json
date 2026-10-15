@@ -10,45 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "D6",
-        "italic": false,
-        "color": "white"
-      }
-    },
-    {
-      "type": "minecraft:set_lore",
-      "lore": [
-        "A simple six-sided die.",
-        [
-          "Rarity: ",
-          {
-            "text": "Common",
-            "italic": true,
-            "color": "white"
-          }
-        ]
-      ],
-      "mode": "append"
-    },
-    {
-      "type": "minecraft:set_custom_data",
-      "tag": "{DungeonLootId:65,DungeonItem:1b,ProcessOnUsed:1b}"
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:unbreakable": {},
-        "minecraft:item_model": "foxcraft_dungeon_loot:d6",
-        "minecraft:tooltip_display": {
-          "hidden_components": [
-            "minecraft:unbreakable"
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:items/common/d6"
 }

@@ -10,47 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Palomina's Gift",
-        "color": "light_purple",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_lore",
-      "lore": [
-        "The sun god Mysteria imparted unto her a spear,",
-        "which would burn away the Dæmon King's endless",
-        "night and shepherd light into the sky once more.",
-        [
-          "Rarity: ",
-          {
-            "text": "Epic",
-            "color": "light_purple",
-            "italic": true
-          }
-        ]
-      ],
-      "mode": "replace_all"
-    },
-    {
-      "type": "minecraft:set_enchantments",
-      "enchantments": {
-        "minecraft:fire_aspect": 5,
-        "minecraft:loyalty": 5,
-        "minecraft:mending": 1,
-        "minecraft:sharpness": 5,
-        "minecraft:smite": 5,
-        "minecraft:unbreaking": 5
-      },
-      "add": false
-    },
-    {
-      "type": "minecraft:set_custom_data",
-      "tag": "{DungeonLootId:5,DungeonItem:1b}"
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:items/epic/palominas_gift"
 }

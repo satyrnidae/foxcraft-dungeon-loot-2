@@ -10,53 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Peerless Yewhewn",
-        "color": "light_purple",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_lore",
-      "lore": [
-        "In ages long past, bowsmiths knew how to make",
-        "a bow which could fire endlessly. Their",
-        "techniques are lost to history, but some bows",
-        "still remain.",
-        [
-          "Rarity: ",
-          {
-            "text": "Epic",
-            "color": "light_purple",
-            "italic": true
-          }
-        ]
-      ],
-      "mode": "replace_all"
-    },
-    {
-      "type": "minecraft:set_enchantments",
-      "enchantments": {
-        "minecraft:flame": 1,
-        "minecraft:infinity": 1,
-        "minecraft:mending": 1,
-        "minecraft:power": 5,
-        "minecraft:unbreaking": 5
-      },
-      "add": false
-    },
-    {
-      "type": "minecraft:set_custom_data",
-      "tag": "{DungeonLootId:1,DungeonItem:1b}"
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:peerless_yewhewn"
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:items/epic/peerless_yewhewn"
 }

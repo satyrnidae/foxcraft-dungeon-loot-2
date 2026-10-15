@@ -1,0 +1,120 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Eye Cream",
+      "color": "aqua",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "Look, stop asking where I got it, and just",
+      "rub it in your eyes. It totally works...",
+      "Most of the time... trust me!",
+      [
+        "Rarity: ",
+        {
+          "text": "Rare",
+          "color": "aqua",
+          "italic": true
+        }
+      ],
+      "",
+      [
+        {
+          "text": "It Burns: ",
+          "color": "aqua",
+          "italic": false
+        },
+        {
+          "text": "Rolls a D10. The roll determines",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "the outcome:",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": " - ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "1-2: ",
+          "color": "white",
+          "italic": false
+        },
+        {
+          "text": "Inflicts Blindness for 5 minutes.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      [
+        {
+          "text": " - ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "3-10: ",
+          "color": "white",
+          "italic": false
+        },
+        {
+          "text": "Applies Night Vision for 20",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      {
+        "text": "   minutes.",
+        "color": "gray",
+        "italic": false
+      },
+      [
+        {
+          "text": "Fragile: ",
+          "color": "red",
+          "italic": false
+        },
+        {
+          "text": "This item is consumed on use.",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    ],
+    "mode": "append"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:mending": 1
+    },
+    "add": true
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:42,DungeonItem:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:item_model": "foxcraft_dungeon_loot:eye_cream",
+      "minecraft:tooltip_display": {
+        "hidden_components": [
+          "minecraft:enchantments",
+          "minecraft:unbreakable"
+        ]
+      }
+    }
+  }
+]

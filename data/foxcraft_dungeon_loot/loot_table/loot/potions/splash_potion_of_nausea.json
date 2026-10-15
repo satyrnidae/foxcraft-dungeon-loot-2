@@ -10,28 +10,5 @@
       ]
     }
   ],
-  "modifier": [
-    {
-      "type": "minecraft:set_name",
-      "name": {
-        "text": "Splash Potion of Nausea",
-        "color": "yellow",
-        "italic": false
-      }
-    },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:potion_contents": {
-          "custom_color": 5578058,
-          "custom_effects": [
-            {
-              "id": "minecraft:nausea",
-              "duration": 900
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "modifier": "foxcraft_dungeon_loot:loot/potions/splash_potion_of_nausea"
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:71,GrabBag:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:uncommon_grab_bag"
+    }
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Glistering Grab-Bag",
+      "color": "yellow",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "A grab bag containing uncommon items.",
+      [
+        "Rarity: ",
+        {
+          "text": "Uncommon",
+          "color": "yellow",
+          "italic": true
+        }
+      ]
+    ],
+    "mode": "replace_all"
+  }
+]

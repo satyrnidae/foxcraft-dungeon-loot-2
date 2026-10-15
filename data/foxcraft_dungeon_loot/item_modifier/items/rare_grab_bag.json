@@ -1,0 +1,35 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:72,GrabBag:1b,ProcessOnUsed:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare_grab_bag"
+    }
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Sparkling Grab-Bag",
+      "color": "aqua",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "A grab bag containing rare items.",
+      [
+        "Rarity: ",
+        {
+          "text": "Rare",
+          "color": "aqua",
+          "italic": true
+        }
+      ]
+    ],
+    "mode": "replace_all"
+  }
+]

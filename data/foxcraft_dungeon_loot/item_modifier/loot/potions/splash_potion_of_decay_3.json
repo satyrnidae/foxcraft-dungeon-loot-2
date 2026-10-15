@@ -1,0 +1,25 @@
+[
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "Splash Potion of Decay",
+      "color": "aqua",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 3484199,
+        "custom_effects": [
+          {
+            "id": "minecraft:wither",
+            "amplifier": 2,
+            "duration": 100
+          }
+        ]
+      }
+    }
+  }
+]

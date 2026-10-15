@@ -1,0 +1,86 @@
+[
+  {
+    "type": "minecraft:set_attributes",
+    "modifiers": [
+      {
+        "attribute": "minecraft:armor",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/armor",
+        "amount": 5,
+        "operation": "add_value",
+        "slot": "head"
+      },
+      {
+        "attribute": "minecraft:knockback_resistance",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/knockback_resistance",
+        "amount": 0.6,
+        "operation": "add_value",
+        "slot": "head"
+      },
+      {
+        "attribute": "minecraft:max_health",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/max_health",
+        "amount": 4,
+        "operation": "add_value",
+        "slot": "head"
+      },
+      {
+        "attribute": "minecraft:armor_toughness",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/armor_toughness",
+        "amount": 3,
+        "operation": "add_value",
+        "slot": "head"
+      },
+      {
+        "attribute": "minecraft:movement_speed",
+        "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_festering_wrath/movement_speed",
+        "amount": -0.1,
+        "operation": "add_multiplied_total",
+        "slot": "head"
+      }
+    ]
+  },
+  {
+    "type": "minecraft:set_name",
+    "name": {
+      "text": "War Hog's Festering Wrath",
+      "color": "green",
+      "italic": false
+    }
+  },
+  {
+    "type": "minecraft:set_lore",
+    "lore": [
+      "In ancient times, a war broke out between the",
+      "Overworld and the Nether. The armor that the",
+      "enemy's generals wore remains in scattered",
+      "pieces to this day. This helmet is their",
+      "festering wrath.",
+      [
+        "Rarity: ",
+        {
+          "text": "Mythic",
+          "color": "green",
+          "italic": true
+        }
+      ]
+    ],
+    "mode": "replace_all"
+  },
+  {
+    "type": "minecraft:set_enchantments",
+    "enchantments": {
+      "minecraft:blast_protection": 3,
+      "minecraft:binding_curse": 1,
+      "minecraft:fire_protection": 3,
+      "minecraft:projectile_protection": 3,
+      "minecraft:protection": 5,
+      "minecraft:mending": 1,
+      "minecraft:unbreaking": 5
+    },
+    "add": false
+  },
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:13,DungeonItem:1b}"
+  }
+]
