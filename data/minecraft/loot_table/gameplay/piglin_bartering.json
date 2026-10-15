@@ -251,7 +251,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/war_hog_set",
+          "value": "foxcraft_dungeon_loot:item/random_loot/war_hog_armor_bartering",
           "weight": 1
         }
       ],

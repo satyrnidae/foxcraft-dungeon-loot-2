@@ -1,5 +1,5 @@
 {
-  "items/common/absinthe": {
+  "item/common/absinthe": {
     "base_items": [
       "minecraft:potion"
     ],
@@ -18,7 +18,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/animus": {
+  "item/common/animus": {
     "base_items": [
       "minecraft:potion"
     ],
@@ -37,7 +37,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand": {
+  "item/common/armor_stand": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -58,7 +58,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_baby": {
+  "item/common/armor_stand_baby": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -79,7 +79,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_bashful": {
+  "item/common/armor_stand_bashful": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -100,7 +100,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_cancan": {
+  "item/common/armor_stand_cancan": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -121,7 +121,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_dab": {
+  "item/common/armor_stand_dab": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -142,7 +142,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_gallant": {
+  "item/common/armor_stand_gallant": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -163,7 +163,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_greyskull": {
+  "item/common/armor_stand_greyskull": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -184,7 +184,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_skeleton": {
+  "item/common/armor_stand_skeleton": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -205,7 +205,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/armor_stand_zombie": {
+  "item/common/armor_stand_zombie": {
     "base_items": [
       "minecraft:armor_stand"
     ],
@@ -226,7 +226,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/coffee": {
+  "item/common/coffee": {
     "base_items": [
       "minecraft:potion"
     ],
@@ -245,290 +245,7 @@
     "rarity": null,
     "src": null
   },
-  "items/common/d10": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d10"
-    ],
-    "loot_ids": [
-      67
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/d12": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d12"
-    ],
-    "loot_ids": [
-      68
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/d20": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d20"
-    ],
-    "loot_ids": [
-      69
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/d4": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d4"
-    ],
-    "loot_ids": [
-      64
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/d6": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d6"
-    ],
-    "loot_ids": [
-      65
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/d8": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:d8"
-    ],
-    "loot_ids": [
-      66
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/laudanum": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/luma": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/moonshine": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/nectar": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/stout": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/tequila": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common/vitae": {
-    "base_items": [
-      "minecraft:potion"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/common_grab_bag": {
+  "item/common/common_grab_bag": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -555,1078 +272,290 @@
     "rarity": null,
     "src": "common_grab_bag"
   },
-  "items/discs/music_disc_c418_dog": {
+  "item/common/d10": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_c418_dog"
+      "foxcraft_dungeon_loot:d10"
     ],
     "loot_ids": [
-      138
+      67
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_acornman": {
+  "item/common/d12": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman"
+      "foxcraft_dungeon_loot:d12"
     ],
     "loot_ids": [
-      88
+      68
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_acornman_am": {
+  "item/common/d20": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman_am"
+      "foxcraft_dungeon_loot:d20"
     ],
     "loot_ids": [
-      89
+      69
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_acornmanreskinbd5": {
+  "item/common/d4": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornmanreskinbd5"
+      "foxcraft_dungeon_loot:d4"
     ],
     "loot_ids": [
-      90
+      64
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_aeon": {
+  "item/common/d6": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_aeon"
+      "foxcraft_dungeon_loot:d6"
     ],
     "loot_ids": [
-      91
+      65
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_aeonorch190bpm": {
+  "item/common/d8": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:warped_fungus_on_a_stick"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_aeonorch190bpm"
+      "foxcraft_dungeon_loot:d8"
     ],
     "loot_ids": [
-      92
+      66
     ],
-    "named": false,
-    "predicates": [],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_avidit_e": {
+  "item/common/laudanum": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_avidit_e"
-    ],
-    "loot_ids": [
-      93
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_drown": {
+  "item/common/luma": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_drown"
-    ],
-    "loot_ids": [
-      94
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_duma": {
+  "item/common/moonshine": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_duma"
-    ],
-    "loot_ids": [
-      95
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_flutes": {
+  "item/common/nectar": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_flutes"
-    ],
-    "loot_ids": [
-      96
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_gutturalis": {
+  "item/common/stout": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_gutturalis"
-    ],
-    "loot_ids": [
-      97
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_kotyledon": {
+  "item/common/tequila": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_kotyledon"
-    ],
-    "loot_ids": [
-      98
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_locker": {
+  "item/common/vitae": {
     "base_items": [
-      "minecraft:music_disc_cat"
+      "minecraft:potion"
     ],
     "dungeon_item": true,
     "function_types": [
       "set_components",
-      "set_custom_data"
+      "set_custom_data",
+      "set_lore",
+      "set_name"
     ],
     "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_locker"
-    ],
-    "loot_ids": [
-      99
-    ],
-    "named": false,
+    "item_models": [],
+    "loot_ids": [],
+    "named": true,
     "predicates": [],
     "rarity": null,
     "src": null
   },
-  "items/discs/music_disc_mdoadq_lost": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_lost"
-    ],
-    "loot_ids": [
-      100
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_minimalist": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_minimalist"
-    ],
-    "loot_ids": [
-      101
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_nematode": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_nematode"
-    ],
-    "loot_ids": [
-      102
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_nighttime_transit": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_nighttime_transit"
-    ],
-    "loot_ids": [
-      103
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_old_white_straight_road": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_old_white_straight_road"
-    ],
-    "loot_ids": [
-      104
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_outskirts": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_outskirts"
-    ],
-    "loot_ids": [
-      105
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_pathetic_mario": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pathetic_mario"
-    ],
-    "loot_ids": [
-      106
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_pet_the_dog": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pet_the_dog"
-    ],
-    "loot_ids": [
-      107
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_pies_e": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pies_e"
-    ],
-    "loot_ids": [
-      108
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_reboot": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_reboot"
-    ],
-    "loot_ids": [
-      109
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_rhapsodymini2": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_rhapsodymini2"
-    ],
-    "loot_ids": [
-      110
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_rigmarole": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_rigmarole"
-    ],
-    "loot_ids": [
-      111
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_slither": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_slither"
-    ],
-    "loot_ids": [
-      112
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_sparkplugs": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_sparkplugs"
-    ],
-    "loot_ids": [
-      113
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_the_scone_song": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_the_scone_song"
-    ],
-    "loot_ids": [
-      114
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_mdoadq_wanderer": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_wanderer"
-    ],
-    "loot_ids": [
-      115
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_after_another": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_after_another"
-    ],
-    "loot_ids": [
-      116
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_between_layers": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_between_layers"
-    ],
-    "loot_ids": [
-      117
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_black_dawn": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_black_dawn"
-    ],
-    "loot_ids": [
-      118
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_cliff_where": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_cliff_where"
-    ],
-    "loot_ids": [
-      119
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_dark_southern_sky": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_dark_southern_sky"
-    ],
-    "loot_ids": [
-      120
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_deer": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_deer"
-    ],
-    "loot_ids": [
-      121
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_every_morning": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_every_morning"
-    ],
-    "loot_ids": [
-      122
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_far_away": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_far_away"
-    ],
-    "loot_ids": [
-      123
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_into_stars": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_into_stars"
-    ],
-    "loot_ids": [
-      124
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_lightform": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_lightform"
-    ],
-    "loot_ids": [
-      125
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_moon_beams": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_beams"
-    ],
-    "loot_ids": [
-      126
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_moon_rays": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_rays"
-    ],
-    "loot_ids": [
-      127
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_mt_ennui": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_mt_ennui"
-    ],
-    "loot_ids": [
-      128
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_night_i": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_night_i"
-    ],
-    "loot_ids": [
-      129
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_night_ii": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_night_ii"
-    ],
-    "loot_ids": [
-      130
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_of_plains": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_of_plains"
-    ],
-    "loot_ids": [
-      131
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_pale_star": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_pale_star"
-    ],
-    "loot_ids": [
-      132
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_passing": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_passing"
-    ],
-    "loot_ids": [
-      133
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_peaks": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_peaks"
-    ],
-    "loot_ids": [
-      134
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_throughout": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_throughout"
-    ],
-    "loot_ids": [
-      135
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_tropic": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_tropic"
-    ],
-    "loot_ids": [
-      136
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/discs/music_disc_wolfgun_unseen_land": {
-    "base_items": [
-      "minecraft:music_disc_cat"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_components",
-      "set_custom_data"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_unseen_land"
-    ],
-    "loot_ids": [
-      137
-    ],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/epic/buckwheat": {
+  "item/epic/buckwheat": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -1658,7 +587,7 @@
     "rarity": null,
     "src": "buckwheat"
   },
-  "items/epic/dawncleaver": {
+  "item/epic/dawncleaver": {
     "base_items": [
       "minecraft:diamond_sword",
       "minecraft:iron_sword",
@@ -1681,7 +610,34 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/estudinaes_guidance": {
+  "item/epic/epic_grab_bag": {
+    "base_items": [
+      "minecraft:warped_fungus_on_a_stick"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [
+      "on_warped_fungus_used"
+    ],
+    "item_models": [
+      "foxcraft_dungeon_loot:epic_grab_bag"
+    ],
+    "loot_ids": [
+      73
+    ],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
+    "rarity": null,
+    "src": "epic_grab_bag"
+  },
+  "item/epic/estudinaes_guidance": {
     "base_items": [
       "minecraft:chainmail_boots",
       "minecraft:diamond_boots",
@@ -1714,7 +670,7 @@
     "rarity": null,
     "src": "estudinaes_guidance"
   },
-  "items/epic/estudinaes_patience": {
+  "item/epic/estudinaes_patience": {
     "base_items": [
       "minecraft:chainmail_chestplate",
       "minecraft:diamond_chestplate",
@@ -1746,7 +702,7 @@
     "rarity": null,
     "src": "estudinaes_patience"
   },
-  "items/epic/estudinaes_script": {
+  "item/epic/estudinaes_script": {
     "base_items": [
       "minecraft:chainmail_leggings",
       "minecraft:diamond_leggings",
@@ -1773,7 +729,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/estudinaes_sorrow": {
+  "item/epic/estudinaes_sorrow": {
     "base_items": [
       "minecraft:diamond_sword",
       "minecraft:netherite_sword"
@@ -1801,7 +757,7 @@
     "rarity": null,
     "src": "estudinaes_sorrow"
   },
-  "items/epic/estudinaes_survival": {
+  "item/epic/estudinaes_survival": {
     "base_items": [
       "minecraft:chainmail_helmet",
       "minecraft:diamond_helmet",
@@ -1834,7 +790,7 @@
     "rarity": null,
     "src": "estudinaes_survival"
   },
-  "items/epic/fortune_500": {
+  "item/epic/fortune_500": {
     "base_items": [
       "minecraft:diamond_pickaxe",
       "minecraft:iron_pickaxe",
@@ -1857,7 +813,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/heros_amulet": {
+  "item/epic/heros_amulet": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -1885,7 +841,7 @@
     "rarity": null,
     "src": "heros_amulet"
   },
-  "items/epic/kobolds_vengeance": {
+  "item/epic/kobolds_vengeance": {
     "base_items": [
       "minecraft:bone"
     ],
@@ -1907,7 +863,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/melimonas_guile": {
+  "item/epic/melimonas_guile": {
     "base_items": [
       "minecraft:trident"
     ],
@@ -1928,7 +884,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/palominas_gift": {
+  "item/epic/palominas_gift": {
     "base_items": [
       "minecraft:trident"
     ],
@@ -1949,7 +905,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/peerless_yewhewn": {
+  "item/epic/peerless_yewhewn": {
     "base_items": [
       "minecraft:bow"
     ],
@@ -1973,7 +929,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/rogues_dagger": {
+  "item/epic/rogues_dagger": {
     "base_items": [
       "minecraft:golden_sword"
     ],
@@ -2004,7 +960,7 @@
     "rarity": null,
     "src": "rogues_dagger"
   },
-  "items/epic/silverfish_escape_artist": {
+  "item/epic/silverfish_escape_artist": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2035,7 +991,7 @@
     "rarity": null,
     "src": "silverfish_escape_artist"
   },
-  "items/epic/skullbasher": {
+  "item/epic/skullbasher": {
     "base_items": [
       "minecraft:shield"
     ],
@@ -2057,7 +1013,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic/spell_scroll_hail_of_arrows": {
+  "item/epic/spell_scroll_hail_of_arrows": {
     "base_items": [
       "minecraft:snowball"
     ],
@@ -2090,7 +1046,7 @@
     "rarity": null,
     "src": "spell_scroll_hail_of_arrows"
   },
-  "items/epic/tithe_to_uthiir": {
+  "item/epic/tithe_to_uthiir": {
     "base_items": [
       "minecraft:netherite_sword"
     ],
@@ -2121,7 +1077,7 @@
     "rarity": null,
     "src": "tithe_to_uthiir"
   },
-  "items/epic/torenhias_fist": {
+  "item/epic/torenhias_fist": {
     "base_items": [
       "minecraft:snowball"
     ],
@@ -2154,7 +1110,7 @@
     "rarity": null,
     "src": "torenhias_fist"
   },
-  "items/epic/wand_of_block_state_editing": {
+  "item/epic/wand_of_block_state_editing": {
     "base_items": [
       "minecraft:debug_stick"
     ],
@@ -2183,7 +1139,7 @@
     "rarity": null,
     "src": "wand_of_block_state_editing"
   },
-  "items/epic/yo_yo_mans_revenge": {
+  "item/epic/yo_yo_mans_revenge": {
     "base_items": [
       "minecraft:fishing_rod"
     ],
@@ -2205,260 +1161,7 @@
     "rarity": null,
     "src": null
   },
-  "items/epic_grab_bag": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [
-      "on_warped_fungus_used"
-    ],
-    "item_models": [
-      "foxcraft_dungeon_loot:epic_grab_bag"
-    ],
-    "loot_ids": [
-      73
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": "epic_grab_bag"
-  },
-  "items/goat_horns/clear_temper_journey": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/dry_urge_anger": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/fearless_river_gift": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/fresh_nest_thought": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/great_sky_falling": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/mumble_fire_memory": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/old_hymn_resting": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/pure_water_desire": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/random_goat_horn": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_instrument"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [],
-    "named": false,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/secret_lake_tear": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/goat_horns/sweet_moon_love": {
-    "base_items": [
-      "minecraft:goat_horn"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
-    ],
-    "loot_ids": [],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/mythic/auto_pickaxe": {
+  "item/mythic/auto_pickaxe": {
     "base_items": [
       "minecraft:diamond_pickaxe",
       "minecraft:iron_pickaxe",
@@ -2492,7 +1195,7 @@
     "rarity": null,
     "src": "auto_pickaxe"
   },
-  "items/mythic/bringer_of_fear": {
+  "item/mythic/bringer_of_fear": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2523,7 +1226,7 @@
     "rarity": null,
     "src": "bringer_of_fear"
   },
-  "items/mythic/chainsaw": {
+  "item/mythic/chainsaw": {
     "base_items": [
       "minecraft:diamond_axe",
       "minecraft:iron_axe",
@@ -2561,7 +1264,7 @@
     "rarity": "Mythic",
     "src": "chainsaw"
   },
-  "items/mythic/constantines_gift": {
+  "item/mythic/constantines_gift": {
     "base_items": [
       "minecraft:enchanted_golden_apple"
     ],
@@ -2587,7 +1290,7 @@
     "rarity": null,
     "src": "constantines_gift"
   },
-  "items/mythic/deilonas_holy_blessings": {
+  "item/mythic/deilonas_holy_blessings": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2618,7 +1321,7 @@
     "rarity": null,
     "src": "deilonas_holy_blessings"
   },
-  "items/mythic/downpour_amulet": {
+  "item/mythic/downpour_amulet": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2650,7 +1353,7 @@
     "rarity": null,
     "src": "downpour_amulet"
   },
-  "items/mythic/evokers_tome": {
+  "item/mythic/evokers_tome": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2682,7 +1385,7 @@
     "rarity": null,
     "src": "evokers_tome"
   },
-  "items/mythic/gravilock_boots": {
+  "item/mythic/gravilock_boots": {
     "base_items": [
       "minecraft:diamond_boots",
       "minecraft:iron_boots",
@@ -2716,7 +1419,7 @@
     "rarity": null,
     "src": "gravilock_boots"
   },
-  "items/mythic/hammer_of_sol": {
+  "item/mythic/hammer_of_sol": {
     "base_items": [
       "minecraft:snowball"
     ],
@@ -2751,7 +1454,7 @@
     "rarity": null,
     "src": "hammer_of_sol"
   },
-  "items/mythic/how_about_no": {
+  "item/mythic/how_about_no": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2782,7 +1485,7 @@
     "rarity": null,
     "src": "how_about_no"
   },
-  "items/mythic/idol_of_melimonas": {
+  "item/mythic/idol_of_melimonas": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -2813,7 +1516,34 @@
     "rarity": null,
     "src": "idol_of_melimonas"
   },
-  "items/mythic/pierce_the_sky": {
+  "item/mythic/mythic_grab_bag": {
+    "base_items": [
+      "minecraft:warped_fungus_on_a_stick"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [
+      "on_warped_fungus_used"
+    ],
+    "item_models": [
+      "foxcraft_dungeon_loot:mythic_grab_bag"
+    ],
+    "loot_ids": [
+      74
+    ],
+    "named": true,
+    "predicates": [
+      "in_main_hand"
+    ],
+    "rarity": null,
+    "src": "mythic_grab_bag"
+  },
+  "item/mythic/pierce_the_sky": {
     "base_items": [
       "minecraft:crossbow"
     ],
@@ -2834,7 +1564,7 @@
     "rarity": null,
     "src": null
   },
-  "items/mythic/poncho_sanchezs_fate": {
+  "item/mythic/poncho_sanchezs_fate": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2865,7 +1595,7 @@
     "rarity": null,
     "src": "poncho_sanchezs_fate"
   },
-  "items/mythic/pride_and_extreme_prejudice": {
+  "item/mythic/pride_and_extreme_prejudice": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2896,7 +1626,7 @@
     "rarity": null,
     "src": "pride_and_extreme_prejudice"
   },
-  "items/mythic/quet_zalas_beloved": {
+  "item/mythic/quet_zalas_beloved": {
     "base_items": [
       "minecraft:elytra"
     ],
@@ -2923,7 +1653,7 @@
     "rarity": null,
     "src": "quet_zalas_beloved"
   },
-  "items/mythic/scripture_of_cleansing": {
+  "item/mythic/scripture_of_cleansing": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -2955,7 +1685,7 @@
     "rarity": null,
     "src": "scripture_of_cleansing"
   },
-  "items/mythic/shield_of_the_juggernaut": {
+  "item/mythic/shield_of_the_juggernaut": {
     "base_items": [
       "minecraft:shield"
     ],
@@ -2977,7 +1707,7 @@
     "rarity": null,
     "src": null
   },
-  "items/mythic/stompies": {
+  "item/mythic/stompies": {
     "base_items": [
       "minecraft:chainmail_boots",
       "minecraft:diamond_boots",
@@ -3010,7 +1740,7 @@
     "rarity": null,
     "src": "stompies"
   },
-  "items/mythic/talking_stick": {
+  "item/mythic/talking_stick": {
     "base_items": [
       "minecraft:stick"
     ],
@@ -3039,7 +1769,7 @@
     "rarity": null,
     "src": "talking_stick"
   },
-  "items/mythic/totem_of_deilona": {
+  "item/mythic/totem_of_deilona": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3072,7 +1802,7 @@
     "rarity": null,
     "src": "totem_of_deilona"
   },
-  "items/mythic/totem_of_dendris": {
+  "item/mythic/totem_of_dendris": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3103,7 +1833,7 @@
     "rarity": null,
     "src": "totem_of_dendris"
   },
-  "items/mythic/totem_of_ekila": {
+  "item/mythic/totem_of_ekila": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3135,7 +1865,7 @@
     "rarity": null,
     "src": "totem_of_ekila"
   },
-  "items/mythic/totem_of_gnumoch": {
+  "item/mythic/totem_of_gnumoch": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3166,7 +1896,7 @@
     "rarity": null,
     "src": "totem_of_gnumoch"
   },
-  "items/mythic/totem_of_mysteria": {
+  "item/mythic/totem_of_mysteria": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3199,7 +1929,7 @@
     "rarity": null,
     "src": "totem_of_mysteria"
   },
-  "items/mythic/war_hogs_blighted_harvest": {
+  "item/mythic/war_hogs_blighted_harvest": {
     "base_items": [
       "minecraft:netherite_hoe"
     ],
@@ -3238,7 +1968,7 @@
     "rarity": "Mythic",
     "src": "war_hogs_blighted_harvest"
   },
-  "items/mythic/war_hogs_burning_rage": {
+  "item/mythic/war_hogs_burning_rage": {
     "base_items": [
       "minecraft:netherite_axe"
     ],
@@ -3267,7 +1997,7 @@
     "rarity": null,
     "src": "war_hogs_burning_rage"
   },
-  "items/mythic/war_hogs_disdainful_pride": {
+  "item/mythic/war_hogs_disdainful_pride": {
     "base_items": [
       "minecraft:netherite_boots"
     ],
@@ -3293,7 +2023,7 @@
     "rarity": null,
     "src": "war_hogs_disdainful_pride"
   },
-  "items/mythic/war_hogs_festering_wrath": {
+  "item/mythic/war_hogs_festering_wrath": {
     "base_items": [
       "minecraft:netherite_helmet"
     ],
@@ -3315,7 +2045,7 @@
     "rarity": null,
     "src": null
   },
-  "items/mythic/war_hogs_insatiable_hunger": {
+  "item/mythic/war_hogs_insatiable_hunger": {
     "base_items": [
       "minecraft:netherite_chestplate"
     ],
@@ -3343,7 +2073,7 @@
     "rarity": null,
     "src": "war_hogs_insatiable_hunger"
   },
-  "items/mythic/war_hogs_lingering_spite": {
+  "item/mythic/war_hogs_lingering_spite": {
     "base_items": [
       "minecraft:netherite_sword"
     ],
@@ -3364,7 +2094,7 @@
     "rarity": null,
     "src": null
   },
-  "items/mythic/war_hogs_seething_hatred": {
+  "item/mythic/war_hogs_seething_hatred": {
     "base_items": [
       "minecraft:netherite_leggings"
     ],
@@ -3393,7 +2123,7 @@
     "rarity": null,
     "src": "war_hogs_seething_hatred"
   },
-  "items/mythic/wing_of_ouet_zala": {
+  "item/mythic/wing_of_ouet_zala": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3425,7 +2155,7 @@
     "rarity": null,
     "src": "wing_of_ouet_zala"
   },
-  "items/mythic/wing_of_quet_zala": {
+  "item/mythic/wing_of_quet_zala": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3457,7 +2187,7 @@
     "rarity": null,
     "src": "wing_of_quet_zala"
   },
-  "items/mythic/x_no_evil": {
+  "item/mythic/x_no_evil": {
     "base_items": [
       "minecraft:snowball"
     ],
@@ -3488,34 +2218,7 @@
     "rarity": null,
     "src": "x_no_evil"
   },
-  "items/mythic_grab_bag": {
-    "base_items": [
-      "minecraft:warped_fungus_on_a_stick"
-    ],
-    "dungeon_item": false,
-    "function_types": [
-      "set_components",
-      "set_custom_data",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [
-      "on_warped_fungus_used"
-    ],
-    "item_models": [
-      "foxcraft_dungeon_loot:mythic_grab_bag"
-    ],
-    "loot_ids": [
-      74
-    ],
-    "named": true,
-    "predicates": [
-      "in_main_hand"
-    ],
-    "rarity": null,
-    "src": "mythic_grab_bag"
-  },
-  "items/rare/admire_me_from_afar": {
+  "item/rare/admire_me_from_afar": {
     "base_items": [
       "minecraft:spyglass"
     ],
@@ -3536,7 +2239,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/armor_of_the_golem": {
+  "item/rare/armor_of_the_golem": {
     "base_items": [
       "minecraft:carved_pumpkin"
     ],
@@ -3558,7 +2261,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/aurelias_lucky_compass": {
+  "item/rare/aurelias_lucky_compass": {
     "base_items": [
       "minecraft:compass"
     ],
@@ -3581,7 +2284,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/beta_iron_sword": {
+  "item/rare/beta_iron_sword": {
     "base_items": [
       "minecraft:shield"
     ],
@@ -3614,7 +2317,7 @@
     "rarity": null,
     "src": "beta_iron_sword"
   },
-  "items/rare/eye_cream": {
+  "item/rare/eye_cream": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -3642,7 +2345,7 @@
     "rarity": null,
     "src": "eye_cream"
   },
-  "items/rare/feather_of_quet_zala": {
+  "item/rare/feather_of_quet_zala": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -3673,7 +2376,7 @@
     "rarity": null,
     "src": "feather_of_quet_zala"
   },
-  "items/rare/flawless_ashenhewn": {
+  "item/rare/flawless_ashenhewn": {
     "base_items": [
       "minecraft:bow"
     ],
@@ -3697,7 +2400,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/gift_of_sheep_island": {
+  "item/rare/gift_of_sheep_island": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -3725,7 +2428,7 @@
     "rarity": null,
     "src": "gift_of_sheep_island"
   },
-  "items/rare/grasp_of_uthiir": {
+  "item/rare/grasp_of_uthiir": {
     "base_items": [
       "minecraft:snowball"
     ],
@@ -3755,7 +2458,7 @@
     "rarity": null,
     "src": "grasp_of_uthiir"
   },
-  "items/rare/ima_leaf": {
+  "item/rare/ima_leaf": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -3784,7 +2487,7 @@
     "rarity": null,
     "src": "ima_leaf"
   },
-  "items/rare/longsword": {
+  "item/rare/longsword": {
     "base_items": [
       "minecraft:diamond_sword",
       "minecraft:iron_sword",
@@ -3807,7 +2510,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/lucky_rabbits_foot": {
+  "item/rare/lucky_rabbits_foot": {
     "base_items": [
       "minecraft:rabbit_foot"
     ],
@@ -3830,7 +2533,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/quickdraw_crossbow": {
+  "item/rare/quickdraw_crossbow": {
     "base_items": [
       "minecraft:crossbow"
     ],
@@ -3851,30 +2554,7 @@
     "rarity": null,
     "src": null
   },
-  "items/rare/shroud_of_notoriety": {
-    "base_items": [
-      "minecraft:player_head"
-    ],
-    "dungeon_item": true,
-    "function_types": [
-      "set_attributes",
-      "set_components",
-      "set_custom_data",
-      "set_enchantments",
-      "set_lore",
-      "set_name"
-    ],
-    "hooks": [],
-    "item_models": [],
-    "loot_ids": [
-      15
-    ],
-    "named": true,
-    "predicates": [],
-    "rarity": null,
-    "src": null
-  },
-  "items/rare_grab_bag": {
+  "item/rare/rare_grab_bag": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],
@@ -3901,7 +2581,1327 @@
     "rarity": null,
     "src": "rare_grab_bag"
   },
-  "items/uncommon/totem_of_undying": {
+  "item/rare/shroud_of_notoriety": {
+    "base_items": [
+      "minecraft:player_head"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_attributes",
+      "set_components",
+      "set_custom_data",
+      "set_enchantments",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [],
+    "loot_ids": [
+      15
+    ],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_c418_dog": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_c418_dog"
+    ],
+    "loot_ids": [
+      138
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_acornman": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman"
+    ],
+    "loot_ids": [
+      88
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_acornman_am": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman_am"
+    ],
+    "loot_ids": [
+      89
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_acornmanreskinbd5": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_acornmanreskinbd5"
+    ],
+    "loot_ids": [
+      90
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_aeon": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_aeon"
+    ],
+    "loot_ids": [
+      91
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_aeonorch190bpm": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_aeonorch190bpm"
+    ],
+    "loot_ids": [
+      92
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_avidit_e": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_avidit_e"
+    ],
+    "loot_ids": [
+      93
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_drown": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_drown"
+    ],
+    "loot_ids": [
+      94
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_duma": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_duma"
+    ],
+    "loot_ids": [
+      95
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_flutes": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_flutes"
+    ],
+    "loot_ids": [
+      96
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_gutturalis": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_gutturalis"
+    ],
+    "loot_ids": [
+      97
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_kotyledon": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_kotyledon"
+    ],
+    "loot_ids": [
+      98
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_locker": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_locker"
+    ],
+    "loot_ids": [
+      99
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_lost": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_lost"
+    ],
+    "loot_ids": [
+      100
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_minimalist": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_minimalist"
+    ],
+    "loot_ids": [
+      101
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_nematode": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_nematode"
+    ],
+    "loot_ids": [
+      102
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_nighttime_transit": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_nighttime_transit"
+    ],
+    "loot_ids": [
+      103
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_old_white_straight_road": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_old_white_straight_road"
+    ],
+    "loot_ids": [
+      104
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_outskirts": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_outskirts"
+    ],
+    "loot_ids": [
+      105
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_pathetic_mario": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_pathetic_mario"
+    ],
+    "loot_ids": [
+      106
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_pet_the_dog": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_pet_the_dog"
+    ],
+    "loot_ids": [
+      107
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_pies_e": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_pies_e"
+    ],
+    "loot_ids": [
+      108
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_reboot": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_reboot"
+    ],
+    "loot_ids": [
+      109
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_rhapsodymini2": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_rhapsodymini2"
+    ],
+    "loot_ids": [
+      110
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_rigmarole": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_rigmarole"
+    ],
+    "loot_ids": [
+      111
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_slither": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_slither"
+    ],
+    "loot_ids": [
+      112
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_sparkplugs": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_sparkplugs"
+    ],
+    "loot_ids": [
+      113
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_the_scone_song": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_the_scone_song"
+    ],
+    "loot_ids": [
+      114
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_mdoadq_wanderer": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_mdoadq_wanderer"
+    ],
+    "loot_ids": [
+      115
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_after_another": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_after_another"
+    ],
+    "loot_ids": [
+      116
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_between_layers": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_between_layers"
+    ],
+    "loot_ids": [
+      117
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_black_dawn": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_black_dawn"
+    ],
+    "loot_ids": [
+      118
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_cliff_where": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_cliff_where"
+    ],
+    "loot_ids": [
+      119
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_dark_southern_sky": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_dark_southern_sky"
+    ],
+    "loot_ids": [
+      120
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_deer": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_deer"
+    ],
+    "loot_ids": [
+      121
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_every_morning": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_every_morning"
+    ],
+    "loot_ids": [
+      122
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_far_away": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_far_away"
+    ],
+    "loot_ids": [
+      123
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_into_stars": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_into_stars"
+    ],
+    "loot_ids": [
+      124
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_lightform": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_lightform"
+    ],
+    "loot_ids": [
+      125
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_moon_beams": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_beams"
+    ],
+    "loot_ids": [
+      126
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_moon_rays": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_rays"
+    ],
+    "loot_ids": [
+      127
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_mt_ennui": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_mt_ennui"
+    ],
+    "loot_ids": [
+      128
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_night_i": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_night_i"
+    ],
+    "loot_ids": [
+      129
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_night_ii": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_night_ii"
+    ],
+    "loot_ids": [
+      130
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_of_plains": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_of_plains"
+    ],
+    "loot_ids": [
+      131
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_pale_star": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_pale_star"
+    ],
+    "loot_ids": [
+      132
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_passing": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_passing"
+    ],
+    "loot_ids": [
+      133
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_peaks": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_peaks"
+    ],
+    "loot_ids": [
+      134
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_throughout": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_throughout"
+    ],
+    "loot_ids": [
+      135
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_tropic": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_tropic"
+    ],
+    "loot_ids": [
+      136
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/disc/music_disc_wolfgun_unseen_land": {
+    "base_items": [
+      "minecraft:music_disc_cat"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:music_disc_wolfgun_unseen_land"
+    ],
+    "loot_ids": [
+      137
+    ],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/clear_temper_journey": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/dry_urge_anger": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/fearless_river_gift": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/fresh_nest_thought": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/great_sky_falling": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/mumble_fire_memory": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/old_hymn_resting": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/pure_water_desire": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/random_goat_horn": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_instrument"
+    ],
+    "hooks": [],
+    "item_models": [],
+    "loot_ids": [],
+    "named": false,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/secret_lake_tear": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/special/goat_horn/sweet_moon_love": {
+    "base_items": [
+      "minecraft:goat_horn"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [],
+    "item_models": [
+      "foxcraft_dungeon_loot:copper_goat_horn"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": null
+  },
+  "item/uncommon/totem_of_undying": {
     "base_items": [
       "minecraft:totem_of_undying"
     ],
@@ -3921,7 +3921,7 @@
     "rarity": null,
     "src": null
   },
-  "items/uncommon_grab_bag": {
+  "item/uncommon/uncommon_grab_bag": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
     ],

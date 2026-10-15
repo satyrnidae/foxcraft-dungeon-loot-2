@@ -8,6 +8,6 @@ function on_warped_fungus_used {
         }
 
         particle minecraft:smoke ^ ^1.0 ^0.25 0.25 0.25 0.25 0.01 10
-        loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:loot/grab_bag/uncommon
+        loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/grab_bag/uncommon
     }
 }

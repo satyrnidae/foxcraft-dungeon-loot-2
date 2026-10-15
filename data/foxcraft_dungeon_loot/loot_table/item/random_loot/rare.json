@@ -5,91 +5,91 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/tools/rare_axe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_axe",
           "weight": 3,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/tools/rare_pickaxe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_pickaxe",
           "weight": 3,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/tools/rare_sword",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_sword",
           "weight": 4,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/tools/rare_shovel",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_shovel",
           "weight": 2,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/tools/rare_hoe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_hoe",
           "weight": 2,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/admire_me_from_afar",
+          "value": "foxcraft_dungeon_loot:item/rare/admire_me_from_afar",
           "weight": 5,
           "quality": 4
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/armor_of_the_golem",
+          "value": "foxcraft_dungeon_loot:item/rare/armor_of_the_golem",
           "weight": 5,
           "quality": 2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/beta_iron_sword",
+          "value": "foxcraft_dungeon_loot:item/rare/beta_iron_sword",
           "weight": 5,
           "quality": 2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/aurelias_lucky_compass",
+          "value": "foxcraft_dungeon_loot:item/rare/aurelias_lucky_compass",
           "weight": 5,
           "quality": 4
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/grasp_of_uthiir",
+          "value": "foxcraft_dungeon_loot:item/rare/grasp_of_uthiir",
           "weight": 5,
           "quality": 4
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/gift_of_sheep_island",
+          "value": "foxcraft_dungeon_loot:item/rare/gift_of_sheep_island",
           "weight": 5,
           "quality": 4
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/ima_leaf",
+          "value": "foxcraft_dungeon_loot:item/rare/ima_leaf",
           "weight": 2,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/eye_cream",
+          "value": "foxcraft_dungeon_loot:item/rare/eye_cream",
           "weight": 4,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/feather_of_quet_zala",
+          "value": "foxcraft_dungeon_loot:item/rare/feather_of_quet_zala",
           "weight": 4,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/longsword",
+          "value": "foxcraft_dungeon_loot:item/rare/longsword",
           "weight": 6,
           "quality": 4,
           "modifier": [
@@ -106,13 +106,13 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/lucky_rabbits_foot",
+          "value": "foxcraft_dungeon_loot:item/rare/lucky_rabbits_foot",
           "weight": 5,
           "quality": 4
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/quickdraw_crossbow",
+          "value": "foxcraft_dungeon_loot:item/rare/quickdraw_crossbow",
           "weight": 6,
           "quality": 4,
           "modifier": [
@@ -129,7 +129,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/flawless_ashenhewn",
+          "value": "foxcraft_dungeon_loot:item/rare/flawless_ashenhewn",
           "weight": 6,
           "quality": 4,
           "modifier": [
@@ -146,7 +146,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:items/rare/shroud_of_notoriety",
+          "value": "foxcraft_dungeon_loot:item/rare/shroud_of_notoriety",
           "weight": 4,
           "quality": 4
         },
@@ -275,25 +275,25 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/armor/rare_boots",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_boots",
           "weight": 3,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/armor/rare_chestplate",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_chestplate",
           "weight": 3,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/armor/rare_helmet",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_helmet",
           "weight": 3,
           "quality": 0
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/armor/rare_leggings",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_leggings",
           "weight": 3,
           "quality": 0
         },

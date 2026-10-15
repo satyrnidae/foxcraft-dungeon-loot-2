@@ -50,7 +50,7 @@ function on_tick {
             execute if score #test <%config.internalScoreboard%> matches 0 store success score #test <%config.internalScoreboard%> run setblock ~-1 ~ ~-1 minecraft:cobweb keep
             execute if score #test <%config.internalScoreboard%> matches 0 store success score #test <%config.internalScoreboard%> run setblock ~1 ~ ~1 minecraft:cobweb keep
             execute if score #test <%config.internalScoreboard%> matches 0 store success score #test <%config.internalScoreboard%> run setblock ~-1 ~ ~1 minecraft:cobweb keep
-            execute if score #test <%config.internalScoreboard%> matches 0 store success score #test <%config.internalScoreboard%> run loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:items/rare/grasp_of_uthiir
+            execute if score #test <%config.internalScoreboard%> matches 0 store success score #test <%config.internalScoreboard%> run loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/rare/grasp_of_uthiir
 
 
             # Clean up tracking entity

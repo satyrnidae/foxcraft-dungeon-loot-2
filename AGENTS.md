@@ -40,7 +40,10 @@ src/                         mc-build sources, the source of truth for functions
     copper_horn.mcbt         horn swap template
     items/<item>.mcb         one file per item
 data/foxcraft_dungeon_loot/
-  loot_table/items/<rarity>/ item loot tables, thin
+  loot_table/item/<rarity>/    item loot tables, thin, one file per item
+  loot_table/item/special/     disc/ and goat_horn/ loot tables
+  loot_table/item/random_loot/ pickers, pools and groups for random drops
+  loot_table/entity/           loot for entities, such as the Wandering Trader
   item_modifier/<rarity>/<item>/define.json   the real item definition, plus the item's other modifiers beside it
   item_modifier/special/<item>/               discs and copper horns
   item_modifier/random_loot/<group>/          modifiers for random loot: armor, book, coin, player_head, potion, tool
@@ -56,7 +59,7 @@ tests/                       run_all.py, unit tests, Java and Python checks
 
 ## How an item is built
 
-1. A loot table in `loot_table/items/<rarity>/<item>.json` holds only pools and a root `"modifier": "foxcraft_dungeon_loot:<rarity>/<item>/define"`.
+1. A loot table in `loot_table/item/<rarity>/<item>.json` holds only pools and a root `"modifier": "foxcraft_dungeon_loot:<rarity>/<item>/define"`.
 2. The modifier in `item_modifier/<rarity>/<item>/define.json` sets name, lore, `set_custom_data`, `set_components` with `minecraft:item_model`, enchantments and attributes.
 3. Predicates under `predicate/items/<item>/` match on the `custom_data` `DungeonLootId`.
 4. `src/foxcraft_dungeon_loot/items/<item>.mcb` holds hooks. A `function x` in `<item>.mcb` becomes `foxcraft_dungeon_loot:items/<item>/x`.

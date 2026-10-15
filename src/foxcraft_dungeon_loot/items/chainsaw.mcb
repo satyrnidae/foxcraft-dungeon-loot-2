@@ -21,13 +21,13 @@ function clock_10t {
 
 function give_netherite_upgrade {
     scoreboard players set @s satyrn.fdl.loot.variant 2
-    loot give @s loot foxcraft_dungeon_loot:items/mythic/chainsaw
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
     scoreboard players reset @s satyrn.fdl.loot.variant
 }
 
 function give_diamond_upgrade {
     scoreboard players set @s satyrn.fdl.loot.variant 1
-    loot give @s loot foxcraft_dungeon_loot:items/mythic/chainsaw
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
     scoreboard players reset @s satyrn.fdl.loot.variant
 }
 

@@ -22,7 +22,7 @@ function on_warped_fungus_used {
             title @s actionbar {"text":"You are pure of heart, but you are not a true hero.","color":"dark_purple"}
             playsound foxcraft_dungeon_loot:event.roll.pure_heart player @a
             particle minecraft:smoke ^ ^1 ^1.5 0 0.5 0.5 0.1 20
-            loot spawn ^ ^1 ^1 loot foxcraft_dungeon_loot:loot/heros_amulet
+            loot spawn ^ ^1 ^1 loot foxcraft_dungeon_loot:item/random_loot/heros_amulet
         } else run {
             # Success. Player gets Hero of the Village.
             title @s actionbar {"text":"You are a true hero.","color":"dark_purple"}

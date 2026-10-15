@@ -40,7 +40,7 @@
   ],
   "rewards": {
     "loot": [
-      "foxcraft_dungeon_loot:loot/advancements/head_trade"
+      "foxcraft_dungeon_loot:item/random_loot/advancement/head_trade"
     ]
   }
 }

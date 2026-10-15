@@ -94,7 +94,7 @@ function on_tick {
             }
 
             # Spawn new hammer that will disappear after 5 seconds (100 ticks)
-            loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:items/mythic/hammer_of_sol
+            loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol
             data merge entity @e[type=minecraft:item,limit=1,sort=nearest] {Age:5900,Tags:[satyrn.fdl.titanHammerSpawnedItem]}
 
             # Destroy tracker, play hit sound, and hit particle effects

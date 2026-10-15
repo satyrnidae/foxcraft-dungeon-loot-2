@@ -311,7 +311,7 @@ def _apply_modifier(item, modifier_id):
 
 
 def build_item(name, table_path):
-    """name is the path under loot_table/, such as items/mythic/chainsaw."""
+    """name is the path under loot_table/, such as item/mythic/chainsaw."""
     item = Item(name)
     table = load_json(table_path)
     item.table_ids.append("%s:%s" % (NS, name))
@@ -322,11 +322,14 @@ def build_item(name, table_path):
 
 
 def item_tables():
-    """Every item the pack hands out as a unit: loot_table/items/**, which includes the copper horn variants."""
+    """Every item the pack hands out as a unit: loot_table/item/** except random_loot, which holds pickers and pools.
+    Discs and copper horn variants are under item/special/."""
     out = {}
-    base = DATA / "loot_table" / "items"
+    base = DATA / "loot_table" / "item"
     for path in sorted(base.rglob("*.json")):
-        out["items/" + path.relative_to(base).as_posix()[:-5]] = path
+        rel_path = path.relative_to(base).as_posix()[:-5]
+        if not rel_path.startswith("random_loot/"):
+            out["item/" + rel_path] = path
     return out
 
 # endregion

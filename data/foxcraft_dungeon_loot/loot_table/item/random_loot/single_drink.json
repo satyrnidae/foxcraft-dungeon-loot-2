@@ -7,61 +7,61 @@
           "type": "minecraft:loot_table",
           "weight": 5,
           "quality": 2,
-          "value": "foxcraft_dungeon_loot:items/common/absinthe"
+          "value": "foxcraft_dungeon_loot:item/common/absinthe"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 6,
           "quality": 1,
-          "value": "foxcraft_dungeon_loot:items/common/animus"
+          "value": "foxcraft_dungeon_loot:item/common/animus"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 4,
           "quality": 3,
-          "value": "foxcraft_dungeon_loot:items/common/coffee"
+          "value": "foxcraft_dungeon_loot:item/common/coffee"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 6,
           "quality": 1,
-          "value": "foxcraft_dungeon_loot:items/common/laudanum"
+          "value": "foxcraft_dungeon_loot:item/common/laudanum"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 5,
           "quality": 2,
-          "value": "foxcraft_dungeon_loot:items/common/luma"
+          "value": "foxcraft_dungeon_loot:item/common/luma"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 7,
           "quality": 0,
-          "value": "foxcraft_dungeon_loot:items/common/moonshine"
+          "value": "foxcraft_dungeon_loot:item/common/moonshine"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 3,
           "quality": 4,
-          "value": "foxcraft_dungeon_loot:items/common/nectar"
+          "value": "foxcraft_dungeon_loot:item/common/nectar"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 5,
           "quality": 2,
-          "value": "foxcraft_dungeon_loot:items/common/stout"
+          "value": "foxcraft_dungeon_loot:item/common/stout"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 7,
           "quality": 0,
-          "value": "foxcraft_dungeon_loot:items/common/tequila"
+          "value": "foxcraft_dungeon_loot:item/common/tequila"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 6,
           "quality": 1,
-          "value": "foxcraft_dungeon_loot:items/common/vitae"
+          "value": "foxcraft_dungeon_loot:item/common/vitae"
         }
       ]
     }

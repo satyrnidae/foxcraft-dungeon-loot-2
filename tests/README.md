@@ -35,7 +35,7 @@ Unit tests alone: `python -m unittest discover -s tests/unit -t tests/unit`.
 
 ## What the item tests check
 
-For every loot table under `loot_table/items/`, including `items/goat_horns/`:
+For every loot table under `loot_table/item/` except `item/random_loot/`, which includes the discs and horns under `item/special/`:
 
 - The loot table, its modifiers and any loot tables it references exist, and every `set_custom_data` tag is valid SNBT.
 - The item matches its entry in `specs/items.json`: `DungeonLootId`, `DungeonItem` flag, rarity, base items, modifier function types, `item_model` values, source hooks and predicates.

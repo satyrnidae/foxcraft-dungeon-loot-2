@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:loot/coins/copper_coins"
+          "value": "foxcraft_dungeon_loot:item/random_loot/coin/copper_coins"
         }
       ]
     }

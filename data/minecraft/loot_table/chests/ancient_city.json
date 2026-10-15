@@ -29,7 +29,7 @@
                   },
                   {
                     "type": "minecraft:loot_table",
-                    "value": "foxcraft_dungeon_loot:loot/music_discs",
+                    "value": "foxcraft_dungeon_loot:item/random_loot/music_discs",
                     "weight": 1
                   }
                 ]
@@ -132,7 +132,7 @@
                   },
                   {
                     "type": "minecraft:loot_table",
-                    "value": "foxcraft_dungeon_loot:loot/music_discs",
+                    "value": "foxcraft_dungeon_loot:item/random_loot/music_discs",
                     "weight": 1
                   }
                 ]
@@ -155,7 +155,7 @@
                   },
                   {
                     "type": "minecraft:loot_table",
-                    "value": "foxcraft_dungeon_loot:loot/music_discs",
+                    "value": "foxcraft_dungeon_loot:item/random_loot/music_discs",
                     "weight": 1
                   }
                 ]

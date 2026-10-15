@@ -53,31 +53,31 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:single_weapon",
+          "value": "foxcraft_dungeon_loot:item/random_loot/single_weapon",
           "weight": 20,
           "quality": 2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:single_axe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/single_axe",
           "weight": 20,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:single_pickaxe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/single_pickaxe",
           "weight": 20,
           "quality": 2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:single_shovel",
+          "value": "foxcraft_dungeon_loot:item/random_loot/single_shovel",
           "weight": 20,
           "quality": 1
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:single_hoe",
+          "value": "foxcraft_dungeon_loot:item/random_loot/single_hoe",
           "weight": 20,
           "quality": 0
         },

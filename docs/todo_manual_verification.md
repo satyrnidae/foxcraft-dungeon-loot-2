@@ -8,7 +8,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 3 - items as components
 
-- [ ] `/loot give @s loot foxcraft_dungeon_loot:items/<rarity>/<item>` for a sample of each rarity: name, lore, enchantments, attributes, hidden tooltip parts look right.
+- [ ] `/loot give @s loot foxcraft_dungeon_loot:item/<rarity>/<item>` for a sample of each rarity: name, lore, enchantments, attributes, hidden tooltip parts look right.
 - [ ] Items with a tier (chainsaw, auto pickaxe, etc.): the `satyrn.fdl.loot.variant` score picks the right tier and base item.
 - [ ] Potions (`loot/potions`): effects, color and name correct.
 - [ ] Player heads (`loot/heads`): skin textures load. Marie_Annelise head is gone from the uncommon pool.
@@ -121,7 +121,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Comparator output next to a jukebox with each disc matches the value in its `jukebox_song`. Dog is set to 6, adjust if you want another.
 - [ ] No leftover `music_disc_11` override: a vanilla disc 11 and a vanilla cat disc look and play normally.
 - [ ] Every disc texture renders (inventory and ground), none purple-black.
-- [ ] `/loot give @s loot foxcraft_dungeon_loot:items/discs/<id>` works and the item carries `DungeonLootId` 88 to 138.
+- [ ] `/loot give @s loot foxcraft_dungeon_loot:item/special/disc/<id>` works and the item carries `DungeonLootId` 88 to 138.
 - [ ] Credits in the README match the tracks.
 
 ## Phase 8c - disc distribution
