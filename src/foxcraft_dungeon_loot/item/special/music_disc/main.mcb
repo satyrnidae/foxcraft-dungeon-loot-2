@@ -1,0 +1,205 @@
+# Give functions for the custom music discs, one per disc. Run as the target with /function.
+
+function give_captainzephyrr_acornman {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman
+}
+
+function give_captainzephyrr_acornman_am {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman_am
+}
+
+function give_captainzephyrr_acornmanreskinbd5 {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornmanreskinbd5
+}
+
+function give_captainzephyrr_aeon {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeon
+}
+
+function give_captainzephyrr_aeonorch190bpm {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeonorch190bpm
+}
+
+function give_captainzephyrr_avidit_e {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_avidit_e
+}
+
+function give_captainzephyrr_drown {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_drown
+}
+
+function give_captainzephyrr_duma {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_duma
+}
+
+function give_captainzephyrr_flutes {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_flutes
+}
+
+function give_captainzephyrr_gutturalis {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_gutturalis
+}
+
+function give_captainzephyrr_kotyledon {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_kotyledon
+}
+
+function give_satyrnidae_locker {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_locker
+}
+
+function give_satyrnidae_lost {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_lost
+}
+
+function give_satyrnidae_minimalist {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_minimalist
+}
+
+function give_captainzephyrr_nematode {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nematode
+}
+
+function give_captainzephyrr_nighttime_transit {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nighttime_transit
+}
+
+function give_captainzephyrr_old_white_straight_road {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_old_white_straight_road
+}
+
+function give_satyrnidae_outskirts {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_outskirts
+}
+
+function give_captainzephyrr_pathetic_mario {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_pathetic_mario
+}
+
+function give_satyrnidae_pet_the_dog {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pet_the_dog
+}
+
+function give_satyrnidae_pies_e {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pies_e
+}
+
+function give_satyrnidae_reboot {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_reboot
+}
+
+function give_captainzephyrr_rhapsodymini2 {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rhapsodymini2
+}
+
+function give_captainzephyrr_rigmarole {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rigmarole
+}
+
+function give_satyrnidae_slither {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_slither
+}
+
+function give_captainzephyrr_sparkplugs {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_sparkplugs
+}
+
+function give_captainzephyrr_the_scone_song {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_the_scone_song
+}
+
+function give_satyrnidae_wanderer {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_wanderer
+}
+
+function give_wolfgun_after_another {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_after_another
+}
+
+function give_wolfgun_between_layers {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_between_layers
+}
+
+function give_wolfgun_black_dawn {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_black_dawn
+}
+
+function give_wolfgun_cliff_where {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_cliff_where
+}
+
+function give_wolfgun_dark_southern_sky {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_dark_southern_sky
+}
+
+function give_wolfgun_deer {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_deer
+}
+
+function give_wolfgun_every_morning {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_every_morning
+}
+
+function give_wolfgun_far_away {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_far_away
+}
+
+function give_wolfgun_into_stars {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_into_stars
+}
+
+function give_wolfgun_lightform {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_lightform
+}
+
+function give_wolfgun_moon_beams {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_beams
+}
+
+function give_wolfgun_moon_rays {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_rays
+}
+
+function give_wolfgun_mt_ennui {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_mt_ennui
+}
+
+function give_wolfgun_night_i {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_i
+}
+
+function give_wolfgun_night_ii {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_ii
+}
+
+function give_wolfgun_of_plains {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_of_plains
+}
+
+function give_wolfgun_pale_star {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_pale_star
+}
+
+function give_wolfgun_passing {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_passing
+}
+
+function give_wolfgun_peaks {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_peaks
+}
+
+function give_wolfgun_throughout {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_throughout
+}
+
+function give_wolfgun_tropic {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_tropic
+}
+
+function give_wolfgun_unseen_land {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_unseen_land
+}
+
+function give_c418_dog {
+    loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/c418_dog
+}

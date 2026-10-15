@@ -21,6 +21,6 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:items/copper_goat_horn/on_using_item"
+    "function": "foxcraft_dungeon_loot:item/special/copper_horn/main/on_using_item"
   }
 }

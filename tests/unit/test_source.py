@@ -1,4 +1,4 @@
-"""One generated test per item source file in src/foxcraft_dungeon_loot/items/.
+"""One generated test per item source file in src/foxcraft_dungeon_loot/item/.
 
 Checks what the compiler and the game would only reveal at runtime: a hook that is not listed in its function tag never
 runs, a clock that nothing schedules never ticks, and a predicate, modifier, loot table, advancement, tag or sound named in
@@ -49,17 +49,17 @@ def check_hooks(case, name, text, code):
     with case.subTest("event hooks are listed in their function tag"):
         for fn in top:
             if fn in TAGS:
-                case.assertIn("%s:items/%s/%s" % (NS, name, fn), TAGS[fn], "%s defined but not in tags/function/%s.json" % (fn, fn))
+                case.assertIn("%s:%s/%s" % (NS, name, fn), TAGS[fn], "%s defined but not in tags/function/%s.json" % (fn, fn))
     with case.subTest("function tag entries for this item are defined"):
         for tag, values in TAGS.items():
             for value in values:
-                prefix = "%s:items/%s/" % (NS, name)
+                prefix = "%s:%s/" % (NS, name)
                 if value.startswith(prefix) and value.count("/") == prefix.count("/"):
                     case.assertIn(value[len(prefix):], top, "tags/function/%s.json lists %s, which has no function" % (tag, value))
     with case.subTest("clock functions are scheduled"):
         for fn in top:
             if fn.startswith("clock_"):
-                scheduled = re.search(r"schedule function %s:items/%s/%s\b" % (NS, name, fn), without_function(code, fn))
+                scheduled = re.search(r"schedule function %s:%s/%s\b" % (NS, name, fn), without_function(code, fn))
                 case.assertTrue(scheduled, "%s is never started outside itself, so it never runs" % fn)
     with case.subTest("scoreboard objectives added here are removed"):
         for objective in re.findall(r"scoreboard objectives add ([\w.]+)", code):
@@ -101,7 +101,7 @@ def check_references(case, code):
 
 
 def make_test(path):
-    name = path.stem
+    name = pk.src_function_prefix(path)
 
     def test(self):
         text = pk.read_text(path)
@@ -112,7 +112,7 @@ def make_test(path):
 
 
 for _path in pk.src_item_files():
-    setattr(SourceItemTests, "test_" + _path.stem, make_test(_path))
+    setattr(SourceItemTests, "test_" + "_".join(_path.relative_to(pk.SRC_ITEMS).with_suffix("").parts), make_test(_path))
 
 
 class SourceCoverage(unittest.TestCase):

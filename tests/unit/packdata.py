@@ -14,7 +14,7 @@ DATA = ROOT / "data" / NS
 MC_DATA = ROOT / "data" / "minecraft"
 SRC = ROOT / "src"
 SRC_NS = SRC / NS
-SRC_ITEMS = SRC_NS / "items"
+SRC_ITEMS = SRC_NS / "item"
 GEN_FUNCTIONS = DATA / "function"
 TP = ROOT / "texturepack" / "assets" / NS
 TP_MC = ROOT / "texturepack" / "assets" / "minecraft"
@@ -439,7 +439,17 @@ def function_tags():
 
 
 def src_item_files():
-    return sorted(SRC_ITEMS.glob("*.mcb"))
+    return sorted(SRC_ITEMS.rglob("*.mcb"))
+
+
+def src_item_for(name):
+    """Source file for an item loot table name like item/mythic/chainsaw. The src tree mirrors loot_table/item."""
+    return SRC_NS / (name + ".mcb")
+
+
+def src_function_prefix(path):
+    """Function id path of a source file, like item/mythic/chainsaw."""
+    return path.relative_to(SRC_NS).with_suffix("").as_posix()
 
 
 def strip_comments(text):

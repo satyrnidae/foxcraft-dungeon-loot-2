@@ -23,7 +23,7 @@ def basename(name):
 def spec_for(name, path):
     item = pk.build_item(name, path)
     base = basename(name)
-    src = pk.SRC_ITEMS / (base + ".mcb")
+    src = pk.src_item_for(name)
     pred_dir = pk.predicate_dir(name)
     rarity = item.custom_data.get("Rarity")
     dungeon_item = item.custom_data.get("DungeonItem") == ("byte", 1)

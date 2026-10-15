@@ -38,6 +38,6 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:items/tithe_to_uthiir/on_hit"
+    "function": "foxcraft_dungeon_loot:item/epic/tithe_to_uthiir/on_hit"
   }
 }

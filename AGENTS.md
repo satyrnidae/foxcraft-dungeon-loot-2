@@ -33,12 +33,11 @@ src/                         mc-build sources, the source of truth for functions
   foxcraft_dungeon_loot.mcb  load, tick, uninstall, update_scoreboards
   macros.mcbt                shared templates: break_item, rng
   foxcraft_dungeon_loot/
-    events.mcb               turns stats and predicates into event tags
+    event.mcb                turns stats and predicates into event tags
     math.mcb                 helpers: durability odds, ticks to text
-    trades.mcb, trades.mcbt  Wandering Trader macros
-    trades/                  index.mcb (hand-written trade index), wandering_trader.mcb
-    copper_horn.mcbt         horn swap template
-    items/<item>.mcb         one file per item
+    trading/                 main.mcb, template.mcbt (Wandering Trader macros), index.mcb (hand-written trade index), recipes.mcb, wandering_trader.mcb
+    item/<rarity>/<item>.mcb one file per item, mirrors loot_table/item
+    item/special/            copper_horn/ (main.mcb, template.mcbt) and music_disc/main.mcb
 data/foxcraft_dungeon_loot/
   loot_table/item/<rarity>/    item loot tables, thin, one file per item
   loot_table/item/special/     music_disc/ and copper_horn/ loot tables, named like their modifier folders
@@ -68,12 +67,12 @@ tests/                       run_all.py, unit tests, Java and Python checks
 1. A loot table in `loot_table/item/<rarity>/<item>.json` holds only pools and a root `"modifier": "foxcraft_dungeon_loot:<rarity>/<item>/define"`.
 2. The modifier in `item_modifier/<rarity>/<item>/define.json` sets name, lore, `set_custom_data`, `set_components` with `minecraft:item_model`, enchantments and attributes.
 3. Predicates under `predicate/item/<rarity>/<item>/` match on the `custom_data` `DungeonLootId`.
-4. `src/foxcraft_dungeon_loot/items/<item>.mcb` holds hooks. A `function x` in `<item>.mcb` becomes `foxcraft_dungeon_loot:items/<item>/x`.
+4. `src/foxcraft_dungeon_loot/item/<rarity>/<item>.mcb` holds hooks. A `function x` in it becomes `foxcraft_dungeon_loot:item/<rarity>/<item>/x`.
 5. The hook name is listed in `tags/function/<event>.json`.
 6. A model definition `texturepack/assets/foxcraft_dungeon_loot/items/<model>.json` points at `models/item/<model>.json`, which points at a texture.
 7. Variants, like chainsaw tiers, pick a pool by the `satyrn.fdl.loot.variant` score and set their own `item_model`.
 
-To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a lang key, an item definition, a model, a texture, a loot table, a modifier, a give function in `items/music_discs.mcb`, and trade index entries in `trades/index.mcb`. The trade index numbers matter, they are used by position.
+To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a lang key, an item definition, a model, a texture, a loot table, a modifier, a give function in `item/special/music_disc/main.mcb`, and trade index entries in `trading/index.mcb`. The trade index numbers matter, they are used by position.
 
 ## Build and verify
 
@@ -81,7 +80,7 @@ Run from the repo root. Do all of this before claiming a change works.
 
 1. `python tests/run_all.py`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when the 26.3 client jar and Java 25 exist. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
 2. If a unit test fails because you changed an item on purpose, run `python tests/unit/gen_specs.py`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
-3. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/items/` is also found automatically.
+3. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
 4. For a new hook, the tests fail until its entry is in the function tag.
 
 There is no CI. The tests are static, so you cannot test gameplay. State plainly which checks ran and which did not, and list what a human must test in game. `docs/todo_manual_verification.md` is the running checklist; add the new item to it.

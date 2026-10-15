@@ -24,9 +24,9 @@ A Minecraft 26.3 datapack (data pack format 121, `min_format`/`max_format` in `p
 
 Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninstall` call function tags such as `#foxcraft_dungeon_loot:on_load`, `on_tick`, `on_uninstall`, `on_fall`, `on_snowball_used`, `on_warped_fungus_used`, `on_spider_eye_eaten`, `on_block`. These are hand-maintained JSON lists in `data/foxcraft_dungeon_loot/tags/function/`.
 
-- Each item has `src/foxcraft_dungeon_loot/items/<item>.mcb`; each `function x` inside compiles to `items/<item>/x`. Items implement whichever hooks they need (`on_load`, `on_tick`, `on_snowball_used`, ...).
-- **Adding or removing an item hook means also adding/removing its `foxcraft_dungeon_loot:items/<item>/<hook>` entry in the matching tag JSON**, otherwise it never runs.
-- `src/foxcraft_dungeon_loot/events.mcb` turns vanilla stats and predicates such as fall distance, a used snowball or warped fungus on a stick, an eaten spider eye and a shield block into those events. Item-specific events are only dispatched to players matching `predicate/event/process_*`, for example holding an event-enabled item, which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `events.mcb`, and a tag file.
+- Each item has `src/foxcraft_dungeon_loot/item/<rarity>/<item>.mcb`, mirroring `loot_table/item`; each `function x` inside compiles to `item/<rarity>/<item>/x`. The copper horn and the discs are `item/special/copper_horn/main.mcb` and `item/special/music_disc/main.mcb`. Items implement whichever hooks they need (`on_load`, `on_tick`, `on_snowball_used`, ...).
+- **Adding or removing an item hook means also adding/removing its `foxcraft_dungeon_loot:item/<rarity>/<item>/<hook>` entry in the matching tag JSON**, otherwise it never runs.
+- `src/foxcraft_dungeon_loot/event.mcb` turns vanilla stats and predicates such as fall distance, a used snowball or warped fungus on a stick, an eaten spider eye and a shield block into those events. Item-specific events are only dispatched to players matching `predicate/event/process_*`, for example holding an event-enabled item, which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `event.mcb`, and a tag file.
 - Items use scoreboards/tags prefixed `satyrn.fdl.*`. Periodic work uses self-rescheduling `schedule function ... Nt` clocks started from `on_load`.
 
 ## Items and loot
@@ -38,7 +38,7 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 ## Trades
 
-`src/foxcraft_dungeon_loot/trades*.mcb{,t}` and `trades/` implement custom Wandering Trader offers. A trade **index** is built into storage `foxcraft_dungeon_loot:trades` by spawning loot-table items in a force-loaded chunk of the End (264, 64, 264). It runs over multiple ticks (`wait_for_chunk` then `build`), and `scheduled_tick` only starts once it's populated. Recipes are appended in `trades/index.mcb` using the `set_*_from_loot` macros in `trades.mcbt`; the position in the index (the `Trade Index N` comments) matters because offers are selected by index. Offers are added in sections (heads, horns, grab bags, dungeon loot, endgame, exchange, discs), each with a count of random distinct trades picked from its index range. Disc trades are index 98 to 170, priced 2 to 10 gold coins.
+`src/foxcraft_dungeon_loot/trading/` implements custom Wandering Trader offers. A trade **index** is built into storage `foxcraft_dungeon_loot:trades` by spawning loot-table items in a force-loaded chunk of the End (264, 64, 264). It runs over multiple ticks (`wait_for_chunk` then `build`), and `scheduled_tick` only starts once it's populated. Recipes are appended in `trading/index.mcb` using the `set_*_from_loot` macros in `trading/template.mcbt`; the position in the index (the `Trade Index N` comments) matters because offers are selected by index. Offers are added in sections (heads, horns, grab bags, dungeon loot, endgame, exchange, discs), each with a count of random distinct trades picked from its index range. Disc trades are index 98 to 170, priced 2 to 10 gold coins.
 
 ## Scoreboards
 

@@ -65,6 +65,6 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:items/estudinaes_sorrow/on_hit"
+    "function": "foxcraft_dungeon_loot:item/epic/estudinaes_sorrow/on_hit"
   }
 }

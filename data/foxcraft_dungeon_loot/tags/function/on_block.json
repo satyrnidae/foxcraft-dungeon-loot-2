@@ -1,6 +1,6 @@
 {
   "__comment": "Called when a player blocks an attack.",
   "values": [
-    "foxcraft_dungeon_loot:items/beta_iron_sword/on_block"
+    "foxcraft_dungeon_loot:item/rare/beta_iron_sword/on_block"
   ]
 }

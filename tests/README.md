@@ -24,7 +24,7 @@ Unit tests alone: `python -m unittest discover -s tests/unit -t tests/unit`.
 | `unit/` | Standard-library `unittest` suite, no dependencies |
 | `unit/packdata.py` | Loader for the pack's JSON, SNBT strings and sources, shared by the tests |
 | `unit/test_items.py` | One generated test per item, 162 of them |
-| `unit/test_source.py` | One generated test per file in `src/foxcraft_dungeon_loot/items/` |
+| `unit/test_source.py` | One generated test per file in `src/foxcraft_dungeon_loot/item/` |
 | `unit/test_integrity.py` | Whole-pack checks: ids, references, resources, scoreboards, versions, old keys |
 | `unit/specs/items.json` | Snapshot of the facts each item test pins down |
 | `unit/gen_specs.py` | Regenerates the snapshot |
@@ -46,7 +46,7 @@ For every loot table under `loot_table/item/` except `item/random_loot/`, which 
 - Discs: the `jukebox_playable` song exists, its sound event and audio exist, the lang title exists, the comparator output is 0 to 15.
 - Copper horns: all three parts of the song exist as instruments with a swap modifier, with use duration 4.0 and range 256.0.
 
-For every file under `src/foxcraft_dungeon_loot/items/`:
+For every file under `src/foxcraft_dungeon_loot/item/`:
 
 - Each hook that has a function tag is listed in it, and each tag entry for the item has a function.
 - Each `clock_*` function is started from somewhere other than itself.

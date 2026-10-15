@@ -483,7 +483,7 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:items/chainsaw/give_netherite_upgrade",
+    "function": "foxcraft_dungeon_loot:item/mythic/chainsaw/give_netherite_upgrade",
     "experience": 2500
   }
 }

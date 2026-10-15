@@ -127,7 +127,7 @@ def check_content(case, item, spec):
 
 def check_source(case, item, spec):
     base = basename(item.name)
-    src = pk.SRC_ITEMS / (base + ".mcb")
+    src = pk.src_item_for(item.name)
     with case.subTest("source file matches spec"):
         case.assertEqual(base if src.exists() else None, spec["src"])
     with case.subTest("hooks match spec"):

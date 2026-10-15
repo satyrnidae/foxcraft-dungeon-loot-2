@@ -43,6 +43,6 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/on_hit"
+    "function": "foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/on_hit"
   }
 }
