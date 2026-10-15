@@ -5,31 +5,33 @@ Static checks for the datapack and resource pack. Nothing here launches Minecraf
 ## Run
 
 ```
-python tests/run_all.py                build, unit tests, then the Java checks if a client jar is found
-python tests/run_all.py --no-java      skip the Java checks
-python tests/run_all.py --no-build     reuse the current generated functions
-python tests/run_all.py --release      also run the release checks, such as mc.dev being false
-python tests/run_all.py -k chainsaw    only unit tests whose name contains chainsaw
+npm test                               same as node tests/run_all.mjs
+node tests/run_all.mjs                 build, unit tests, then the Java checks if a client jar is found
+node tests/run_all.mjs --no-java       skip the Java checks
+node tests/run_all.mjs --no-build      reuse the current generated functions
+node tests/run_all.mjs --release       also run the release checks, such as mc.dev being false
+node tests/run_all.mjs -k chainsaw     only unit tests whose name matches chainsaw
 ```
 
-Needs Python 3.11 and Node with `npm ci` done. The Java checks also need Java 25 and the 26.3 client jar, see `run_all.py` for how it finds them. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
+Needs Node 22 or newer with `npm ci` done. The Java checks also need Java 25 and the 26.3 client jar, see `run_all.mjs` for how it finds them. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
 
-Unit tests alone: `python -m unittest discover -s tests/unit -t tests/unit`.
+Unit tests alone: `node --test tests/unit/*.test.mjs`.
 
 ## Layout
 
 | Path | What it is |
 |---|---|
-| `run_all.py` | Runs the build, the unit tests and the Java checks, then prints a summary |
-| `unit/` | Standard-library `unittest` suite, no dependencies |
-| `unit/packdata.py` | Loader for the pack's JSON, SNBT strings and sources, shared by the tests |
-| `unit/test_items.py` | One generated test per item, 162 of them |
-| `unit/test_source.py` | One generated test per file in `src/foxcraft_dungeon_loot/item/` |
-| `unit/test_integrity.py` | Whole-pack checks: ids, references, resources, scoreboards, versions, old keys |
+| `run_all.mjs` | Runs the build, the unit tests and the Java checks, then prints a summary |
+| `unit/` | `node:test` suite, no dependencies |
+| `unit/packdata.mjs` | Loader for the pack's JSON, SNBT strings and sources, shared by the tests |
+| `unit/items.test.mjs` | One generated test per item, 162 of them |
+| `unit/source.test.mjs` | One generated test per file in `src/foxcraft_dungeon_loot/item/` |
+| `unit/integrity.test.mjs` | Whole-pack checks: ids, references, resources, scoreboards, versions, old keys |
 | `unit/specs/items.json` | Snapshot of the facts each item test pins down |
-| `unit/gen_specs.py` | Regenerates the snapshot |
+| `unit/gen_specs.mjs` | Regenerates the snapshot |
+| `unit/checks.mjs` | Lets one test report several failed checks together |
 | `java/` | `Harness`, `Scan` and `CmdCheck`, which run the game's own codecs and command parser |
-| `tools/` | `check_old_keys.py`, `compare_mcfunction.py`, `fetch_mc_libs.py` |
+| `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs` |
 | `verifying-against-vanilla.md` | How the Java checks work and what they found |
 | `.cache/` | Downloaded libraries and compiled classes, gitignored |
 
@@ -57,9 +59,9 @@ The snapshot pins current state, not correctness. Reviewing a diff of `specs/ite
 
 ## Adding things
 
-- New item: add the loot table, modifier and source. The tests find them. Run `python tests/unit/gen_specs.py` and review the new spec entry.
+- New item: add the loot table, modifier and source. The tests find them. Run `node tests/unit/gen_specs.mjs` and review the new spec entry.
 - Changed item on purpose: regenerate the spec and read the diff.
-- New check that applies to every item: add it to `test_items.py`. A check for one item belongs in a spec field.
+- New check that applies to every item: add it to `items.test.mjs`. A check for one item belongs in a spec field.
 
 ## Known limits
 

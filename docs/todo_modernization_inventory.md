@@ -282,7 +282,7 @@ Places that read or write the keys:
 - `execute if items ... [minecraft:custom_data~{...}]` in `src/`, for example the copper horn tick.
 - Trade checks and the trader state stand in `trades/`.
 - Resource pack: none expected, confirm with a grep.
-- Docs and tools: `CLAUDE.md`, `AGENTS.md`, `README.md`, `tests/java/Scan.java`, `tests/tools/check_old_keys.py`.
+- Docs and tools: `CLAUDE.md`, `AGENTS.md`, `README.md`, `tests/java/Scan.java`, `tests/tools/check_old_keys.mjs`.
 
 Format notes:
 
@@ -295,5 +295,5 @@ Cost and risk:
 
 - Breaking for existing items. Anything already in a world keeps the old keys and stops matching every predicate, advancement and hook. The pack is alpha, so the options are: accept the break, or add a one-time migration that rewrites old keys on items in online player inventories and containers at load, which cannot reach items in unloaded chests.
 - Do it in one commit with the mechanical script, before more items and discs are added, so there is one cutover point.
-- Extend `check_old_keys.py` to flag any PascalCase key left in a `custom_data` string, and `Scan.java` to assert every `DungeonLootId` is still unique after the rename.
+- Extend `check_old_keys.mjs` to flag any PascalCase key left in a `custom_data` string, and `Scan.java` to assert every `DungeonLootId` is still unique after the rename.
 - Update the Google Sheet notes and the wording in `README.md` ("custom NBT entry") afterward.

@@ -55,7 +55,7 @@ Data flow for one item: a loot table rolls the base item and runs a modifier cha
 - Thin loot tables. Item definitions live in `item_modifier/<rarity>/<item>/define.json`, with the item's other modifiers beside it, so there is one place to edit an item.
 - Strict identity. `DungeonLootId` uniqueness holds across all modifier files, checked by script. SNBT string form is used everywhere so ints never turn into bytes.
 - Lifecycle symmetry. Every objective added has a removal, and `scoreboardsVersion` plus `update_scoreboards` handle renames.
-- Real verification tools, now under `tests/`. `Scan.java` parses data with the game's own codecs, `CmdCheck.java` parses generated commands with the game's dispatcher, `check_old_keys.py` flags removed keys, and a `unittest` suite generates one test per item and per item source file. These caught real bugs during the port.
+- Real verification tools, now under `tests/`. `Scan.java` parses data with the game's own codecs, `CmdCheck.java` parses generated commands with the game's dispatcher, `check_old_keys.mjs` flags removed keys, and a `node:test` suite generates one test per item and per item source file. These caught real bugs during the port.
 - Event gating. Item events are only dispatched to players matching `process_*` predicates, which keeps idle cost low on slow CPUs.
 - Reproducible build. Compiler pinned to mc-build 4.2.0, output paths deterministic.
 
@@ -102,8 +102,8 @@ Recommendation: keep for interactive items, move non-interactive ones to `poison
 **F10. Stale documentation.** `README.md` says "Customized Dungeon Loot for Minecraft 1.19" and describes `DungeonLootId` as a custom NBT entry. `.gitignore` still lists the deleted `texturepack/assets/custom_music_discs` and `music_disc_11.json`.
 Recommendation: update both.
 
-**F11. Tests exist but no CI runs them.** `tests/run_all.py` builds the pack and runs the unit suite and, with the client jar, the Java checks. Nothing runs it on push. The unit suite needs only Python and Node, so it can run in CI as is; the Java checks need the 26.3 client jar, which is not redistributable.
-Recommendation: a workflow that runs `npm ci` and `python tests/run_all.py --no-java`, plus the release checks with `--release` on a tag.
+**F11. Tests exist but no CI runs them.** `tests/run_all.mjs` builds the pack and runs the unit suite and, with the client jar, the Java checks. Nothing runs it on push. The unit suite needs only Python and Node, so it can run in CI as is; the Java checks need the 26.3 client jar, which is not redistributable.
+Recommendation: a workflow that runs `npm ci` and `node tests/run_all.mjs --no-java`, plus the release checks with `--release` on a tag.
 
 **F12. Mixed line endings.** 63 of 66 source files are LF and 3 are CRLF, JSON is mostly CRLF, and there is no `.gitattributes`. Edits from different tools produce noisy diffs.
 Recommendation: add `.gitattributes` with an explicit rule per extension.

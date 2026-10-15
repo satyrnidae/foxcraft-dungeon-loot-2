@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "mc-build": "4.2.0"
+  },
+  "scripts": {
+    "test": "node tests/run_all.mjs"
   }
 }

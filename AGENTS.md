@@ -17,7 +17,7 @@ A Minecraft Java 26.3 datapack that adds custom dungeon loot items, plus a compa
 2. Never write a `custom_data` tag as a JSON object. Always write the SNBT string, for example `"tag": "{DungeonLootId:87,DungeonItem:1b}"`. A JSON object turns small ints into bytes and never matches.
 3. Never reuse a `DungeonLootId`. IDs 1 to 138 are in use except 23 to 27 and 84. Take the next free number above 138 and say so in the PR.
 4. Never add `custom_model_data` overrides to a vanilla item model. 26.3 ignores them. Use the `item_model` component and an item definition in `texturepack/assets/foxcraft_dungeon_loot/items/`.
-5. Never use pre-1.20.5 keys: `CustomModelData`, `tag:{` on an item, `HideFlags`, `Count` as a byte, `set_nbt`, `conditions`, `functions`, `alternative`, `pack_format`. `python tests/tools/check_old_keys.py` flags most of them.
+5. Never use pre-1.20.5 keys: `CustomModelData`, `tag:{` on an item, `HideFlags`, `Count` as a byte, `set_nbt`, `conditions`, `functions`, `alternative`, `pack_format`. `node tests/tools/check_old_keys.mjs` flags most of them.
 6. Never end an `if / else` chain in `.mcb` without a plain final `else run {`. mc-build 4.2.0 can run an outer `else` otherwise.
 7. Never use `<%config.x%>` on a `} else execute ... run {` line. Write the literal value, for example `satyrn.fdl.internal`.
 8. Never add an item hook without adding its entry to the matching function tag in `data/foxcraft_dungeon_loot/tags/function/`, and never remove one without removing the entry. An unlisted hook never runs.
@@ -59,7 +59,7 @@ data/foxcraft_dungeon_loot/
 data/minecraft/loot_table/   vanilla overrides that inject loot
 texturepack/                 resource pack, own pack.mcmeta and build.ps1
 docs/                        notes, audits, todo lists
-tests/                       run_all.py, unit tests, Java and Python checks
+tests/                       run_all.mjs, unit tests, Java checks, Node tools
 ```
 
 ## How an item is built
@@ -78,8 +78,8 @@ To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a 
 
 Run from the repo root. Do all of this before claiming a change works.
 
-1. `python tests/run_all.py`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when the 26.3 client jar and Java 25 exist. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
-2. If a unit test fails because you changed an item on purpose, run `python tests/unit/gen_specs.py`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
+1. `node tests/run_all.mjs`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when the 26.3 client jar and Java 25 exist. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
+2. If a unit test fails because you changed an item on purpose, run `node tests/unit/gen_specs.mjs`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
 3. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each, usable by players tagged `satyrn.fdl.giver`. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
 4. For a new hook, the tests fail until its entry is in the function tag.
 

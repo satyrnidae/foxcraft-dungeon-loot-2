@@ -3,7 +3,7 @@
 How to check what Minecraft 26.3 actually does, instead of relying on the wiki or on what loads without an error. It was used for
 the 1.19 to 26.3 port research (issue #130) and is meant as the starting point for repeatable unit tests.
 
-`python tests/run_all.py` runs these checks together with the unit suite, see `tests/README.md`. The rest of this file explains how each Java check works.
+`node tests/run_all.mjs` runs these checks together with the unit suite, see `tests/README.md`. The rest of this file explains how each Java check works.
 
 Nothing here launches the game, needs a Mojang account, accepts the EULA or starts a server. It runs the game's own classes from the
 client jar in a short-lived Java process, and reads vanilla's own data.
@@ -27,8 +27,8 @@ A parse that returns OK does not mean the data was applied. Re-encode what the g
 
 - Java 25 (26.3 requires it) with `javac`.
 - The client jar for the version under test, for example `.minecraft/versions/26.3/26.3.jar`, and its version JSON next to it.
-- Python 3 (library download and output comparison scripts).
-- Optional, for the mc-build comparison in section 7: Node.js and `npm`.
+- Node.js 22 or newer, for the library download and output comparison scripts.
+- Optional, for the mc-build comparison in section 7: `npm ci`.
 
 Use a scratch directory for everything generated (extracted assets, libraries, compiled classes); none of it belongs in the repository.
 
@@ -47,16 +47,12 @@ mkdir -p "$WORK"
 1. **Download the libraries the jar needs** and capture the classpath (the launcher's `libraries/` folder is often not readable, and a
    script should not depend on a launcher install):
    ```bash
-   CP=$(python3 tests/tools/fetch_mc_libs.py --version-json "$MC_DIR/versions/$VER/$VER.json" --out "$WORK/libs")
+   CP=$(node tests/tools/fetch_mc_libs.mjs --version-json "$MC_DIR/versions/$VER/$VER.json" --out "$WORK/libs")
    ```
 2. **Extract vanilla's own data and assets for reference** (read-only; this is how the 26.3 folder names, trade sets and shaders were checked):
    ```bash
    mkdir -p "$WORK/vanilla" && cd "$WORK/vanilla"
-   python3 - "$JAR" <<'EOF'
-   import sys, zipfile
-   z = zipfile.ZipFile(sys.argv[1])
-   z.extractall('.', [n for n in z.namelist() if n.startswith(('assets/', 'data/')) or n in ('pack.mcmeta', 'version.json')])
-   EOF
+   jar xf "$JAR" assets data pack.mcmeta version.json
    ```
    `version.json` in the jar states the pack formats (26.3: data 121.0, resource 97.1).
 3. **Dump every item's default components** with vanilla's own data generator:
@@ -166,7 +162,7 @@ Things the harness had to get right, and which any new check must keep:
 - **Use the reloadable lookup** (`createReloadableLookup`) so loot, predicate and number-provider registries exist.
 - **Run it from a scratch directory.** The game writes a `logs/` folder into the current working directory; run `java` from `$WORK`, not from inside the repository.
 - **Print through `Bootstrap.STDOUT`.** The game replaces `System.out` with a logger that prefixes every line.
-- **Library paths are version specific.** Re-run `fetch_mc_libs.py` for each version; Java version and library set change between releases.
+- **Library paths are version specific.** Re-run `fetch_mc_libs.mjs` for each version; Java version and library set change between releases.
 - **API names change between releases.** 26.x uses unobfuscated names (`Identifier`, `ItemStack.CODEC`, `LootPool.CODEC`). When a call
   stops compiling after an update, use `javap -cp "$JAR" -p <class>` to find the new name.
 
@@ -213,7 +209,7 @@ Used to check a source conversion: build the old sources with mc-build 2.15.0, t
 commands per user-named function, ignoring how each version splits blocks:
 
 ```bash
-python3 tests/tools/compare_mcfunction.py OLD_BUILD_ROOT NEW_BUILD_ROOT --namespace foxcraft_dungeon_loot --diffs diffs.json
+node tests/tools/compare_mcfunction.mjs OLD_BUILD_ROOT NEW_BUILD_ROOT --namespace foxcraft_dungeon_loot --diffs diffs.json
 ```
 
 `OLD_BUILD_ROOT` and `NEW_BUILD_ROOT` each contain `data/<namespace>/function(s)/`. The script inlines generated helper functions, drops the internal
@@ -237,7 +233,7 @@ Notes from the 4.2.0 test (details in the issue #130 comments):
 
 Two tools check the repository's JSON under `data/`, because 26.3 loads unconverted files without an error and silently drops the old keys.
 
-- `tests/tools/check_old_keys.py [DATA_DIR]` is a plain Python scan for pre-26.3 keys in loot tables, item modifiers, predicates and advancements
+- `tests/tools/check_old_keys.mjs [DATA_DIR]` is a plain Node scan for pre-26.3 keys in loot tables, item modifiers, predicates and advancements
   (`function`, `functions`, `conditions`, old `condition` type names, removed types). It needs no jar. Exit status 1 means something is left to convert.
 - `tests/java/Scan.java DATA_DIR` parses every loot table, predicate, item modifier and advancement with the game's own codecs, re-encodes what the game
   kept, and reports any key that was lost. Compile and run it like the harness, from a scratch directory, with an absolute `DATA_DIR`:
