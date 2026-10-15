@@ -1,6 +1,6 @@
 {
   "type": "minecraft:set_components",
   "components": {
-    "minecraft:instrument": "foxcraft_dungeon_loot:old_hymn_resting_bass"
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting/bass"
   }
 }

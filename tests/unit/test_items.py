@@ -179,7 +179,7 @@ def check_horn(case, item):
         case.assertEqual(item.custom_data.get("CopperGoatHorn"), ("byte", 1))
     for part in ("bass", "harmony", "melody"):
         with case.subTest("%s part" % part):
-            inst = pk.DATA / "instrument" / ("%s_%s.json" % (song, part))
+            inst = pk.DATA / "instrument" / "copper_horn" / song / (part + ".json")
             case.assertTrue(inst.exists(), "missing " + pk.rel(inst))
             case.assertTrue((pk.DATA / "item_modifier" / "special" / "copper_horn" / song / (part + ".json")).exists(), "missing swap modifier")
             body = pk.load_json(inst)

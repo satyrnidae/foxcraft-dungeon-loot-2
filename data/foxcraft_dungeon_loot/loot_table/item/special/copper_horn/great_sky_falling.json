@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:great_sky_falling_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/great_sky_falling/melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"

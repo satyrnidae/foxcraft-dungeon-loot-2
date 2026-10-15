@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:fearless_river_gift_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift/melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"

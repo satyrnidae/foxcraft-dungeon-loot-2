@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:fresh_nest_thought_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought/melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"

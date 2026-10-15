@@ -1,6 +1,6 @@
 {
   "type": "minecraft:set_components",
   "components": {
-    "minecraft:instrument": "foxcraft_dungeon_loot:dry_urge_anger_harmony"
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger/harmony"
   }
 }

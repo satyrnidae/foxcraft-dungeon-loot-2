@@ -1,6 +1,6 @@
 {
   "type": "minecraft:set_components",
   "components": {
-    "minecraft:instrument": "foxcraft_dungeon_loot:sweet_moon_love_bass"
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love/bass"
   }
 }

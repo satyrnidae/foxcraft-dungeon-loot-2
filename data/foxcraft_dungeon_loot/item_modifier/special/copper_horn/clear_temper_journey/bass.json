@@ -1,6 +1,6 @@
 {
   "type": "minecraft:set_components",
   "components": {
-    "minecraft:instrument": "foxcraft_dungeon_loot:clear_temper_journey_bass"
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey/bass"
   }
 }

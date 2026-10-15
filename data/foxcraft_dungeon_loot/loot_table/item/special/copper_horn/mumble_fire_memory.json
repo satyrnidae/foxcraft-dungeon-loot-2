@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:mumble_fire_memory_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory/melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"

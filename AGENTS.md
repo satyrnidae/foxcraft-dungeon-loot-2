@@ -55,7 +55,8 @@ data/foxcraft_dungeon_loot/
   predicate/random_chance/     random chance predicates
   advancement/item/          use-detection advancements
   tags/function/             event bus, hand-maintained
-  instrument/, jukebox_song/ copper horns and music discs
+  instrument/copper_horn/<song>/ bass, harmony and melody per copper horn song
+  jukebox_song/                  music discs
 data/minecraft/loot_table/   vanilla overrides that inject loot
 texturepack/                 resource pack, own pack.mcmeta and build.ps1
 docs/                        notes, audits, todo lists

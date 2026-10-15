@@ -1,6 +1,6 @@
 {
   "type": "minecraft:set_components",
   "components": {
-    "minecraft:instrument": "foxcraft_dungeon_loot:secret_lake_tear_bass"
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear/bass"
   }
 }
