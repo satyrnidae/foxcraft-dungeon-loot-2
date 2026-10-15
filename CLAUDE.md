@@ -26,7 +26,7 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 - Each item has `src/foxcraft_dungeon_loot/items/<item>.mcb`; each `function x` inside compiles to `items/<item>/x`. Items implement whichever hooks they need (`on_load`, `on_tick`, `on_snowball_used`, ...).
 - **Adding or removing an item hook means also adding/removing its `foxcraft_dungeon_loot:items/<item>/<hook>` entry in the matching tag JSON**, otherwise it never runs.
-- `src/foxcraft_dungeon_loot/events.mcb` turns vanilla stats and predicates such as fall distance, a used snowball or warped fungus on a stick, an eaten spider eye and a shield block into those events. Item-specific events are only dispatched to players matching `predicate/events/process_*`, for example holding an event-enabled item, which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `events.mcb`, and a tag file.
+- `src/foxcraft_dungeon_loot/events.mcb` turns vanilla stats and predicates such as fall distance, a used snowball or warped fungus on a stick, an eaten spider eye and a shield block into those events. Item-specific events are only dispatched to players matching `predicate/event/process_*`, for example holding an event-enabled item, which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `events.mcb`, and a tag file.
 - Items use scoreboards/tags prefixed `satyrn.fdl.*`. Periodic work uses self-rescheduling `schedule function ... Nt` clocks started from `on_load`.
 
 ## Items and loot

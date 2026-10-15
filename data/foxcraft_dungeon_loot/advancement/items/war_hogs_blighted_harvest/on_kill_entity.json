@@ -4,7 +4,7 @@
     "player_killed_entity": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": "foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/in_main_hand",
+        "player": "foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/in_main_hand",
         "entity": {
           "type": "minecraft:inverted",
           "term": {

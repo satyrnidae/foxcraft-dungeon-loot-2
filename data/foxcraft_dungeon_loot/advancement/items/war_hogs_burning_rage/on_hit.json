@@ -4,7 +4,7 @@
     "player_hurt_entity": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "player": "foxcraft_dungeon_loot:items/war_hogs_burning_rage/in_main_hand",
+        "player": "foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/in_main_hand",
         "damage": {
           "blocked": false
         }

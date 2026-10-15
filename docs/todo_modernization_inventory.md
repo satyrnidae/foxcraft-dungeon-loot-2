@@ -277,7 +277,7 @@ Rename every `custom_data` key from PascalCase to a namespaced snake_case key, `
 Places that read or write the keys:
 
 - `set_custom_data` tags in every `item_modifier/` file.
-- `minecraft:custom_data` item predicates under `predicate/`, including the `events/process_*` ones and `in_main_hand`, `in_off_hand`, `worn` and `in_inventory`.
+- `minecraft:custom_data` item predicates under `predicate/`, including the `event/process_*` ones and `in_main_hand`, `in_off_hand`, `worn` and `in_inventory`.
 - Advancement criteria under `advancement/items/`.
 - `execute if items ... [minecraft:custom_data~{...}]` in `src/`, for example the copper horn tick.
 - Trade checks and the trader state stand in `trades/`.

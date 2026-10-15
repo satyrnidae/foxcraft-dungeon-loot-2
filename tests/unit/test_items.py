@@ -133,12 +133,12 @@ def check_source(case, item, spec):
     with case.subTest("hooks match spec"):
         hooks = sorted(pk.top_level_functions(pk.read_text(src))) if src.exists() else []
         case.assertEqual(hooks, spec["hooks"])
-    pred_dir = pk.DATA / "predicate" / "items" / base
+    pred_dir = pk.predicate_dir(item.name)
     with case.subTest("predicates match spec"):
-        found = sorted(p.stem for p in pred_dir.glob("*.json")) if pred_dir.is_dir() else []
+        found = sorted(p.stem for p in pred_dir.glob("*.json")) if pred_dir and pred_dir.is_dir() else []
         case.assertEqual(found, spec["predicates"])
     with case.subTest("predicates ask for this item's custom_data"):
-        if pred_dir.is_dir():
+        if pred_dir and pred_dir.is_dir():
             for path in sorted(pred_dir.glob("*.json")):
                 for text in predicate_patterns(pk.load_json(path)):
                     pattern = pk.parse_snbt(text)

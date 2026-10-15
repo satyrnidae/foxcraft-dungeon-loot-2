@@ -1,6 +1,6 @@
 # Occurs on ticks where a player used a warped fungus item.
 function on_warped_fungus_used {
-    execute if entity @s[predicate=foxcraft_dungeon_loot:items/common_grab_bag/in_main_hand] run {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/common/common_grab_bag/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.grab_bag.open player @a
 
         execute unless entity @s[gamemode=creative] run {

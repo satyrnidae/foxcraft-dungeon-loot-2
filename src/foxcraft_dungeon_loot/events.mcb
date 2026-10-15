@@ -4,7 +4,7 @@
 # Clock that executes once per 3 ticks. Updates the fallOnCm scoreboard based on player fall distance if they are wearing a fall-event-subscribed item.
 function clock_3t {
     schedule function foxcraft_dungeon_loot:events/clock_3t 3t
-    execute as @a[predicate=foxcraft_dungeon_loot:events/process_fall,predicate=!foxcraft_dungeon_loot:is_flying] run {
+    execute as @a[predicate=foxcraft_dungeon_loot:event/process_fall,predicate=!foxcraft_dungeon_loot:entity/is_flying] run {
         execute store result score @s satyrn.fdl.events.fallOneCm run data get entity @s fall_distance 100
 
         # Calls the on_fall event when a player is falling for a great distance.
@@ -23,26 +23,26 @@ function on_load {
 # Occurs once per tick.
 function on_tick {
     # Updates players who are attempting to use a warped fungus, as long as the offhand item doesn't take activation precedence.
-    execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..},predicate=foxcraft_dungeon_loot:events/process_mainhand_warped_fungus,predicate=!foxcraft_dungeon_loot:events/offhand_prevents_stick_use] at @s run function #foxcraft_dungeon_loot:on_warped_fungus_used
+    execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..},predicate=foxcraft_dungeon_loot:event/process_mainhand_warped_fungus,predicate=!foxcraft_dungeon_loot:event/offhand_prevents_stick_use] at @s run function #foxcraft_dungeon_loot:on_warped_fungus_used
 
     # Updates players who are attempting to use a warped fungus in their offhand, provided they don't have a warped fungus in their mainhand.
     # TODO: This requires refactoring all the warped fungus items quite a bit, so its disabled for now.
-    # execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..},predicate=foxcraft_dungeon_loot:events/process_offhand_warped_fungus,predicate=!foxcraft_dungeon_loot:events/has_mainhand_warped_fungus] at @s run function #foxcraft_dungeon_loot:on_warped_fungus_used
+    # execute as @a[scores={satyrn.fdl.used.warpedFungusOnAStick=1..},predicate=foxcraft_dungeon_loot:event/process_offhand_warped_fungus,predicate=!foxcraft_dungeon_loot:event/has_mainhand_warped_fungus] at @s run function #foxcraft_dungeon_loot:on_warped_fungus_used
 
     # Updates players who are attempting to use a snowball.
     execute as @a[scores={satyrn.fdl.used.snowball=1..},tag=satyrn.fdl.events.processSnowballUsed] at @s run function #foxcraft_dungeon_loot:on_snowball_used
 
     # Remove snowball tag from players not holding an event-enabled snowball.
-    execute as @a[tag=satyrn.fdl.events.processSnowballUsed,predicate=!foxcraft_dungeon_loot:events/process_snowball] run tag @s remove satyrn.fdl.events.processSnowballUsed
+    execute as @a[tag=satyrn.fdl.events.processSnowballUsed,predicate=!foxcraft_dungeon_loot:event/process_snowball] run tag @s remove satyrn.fdl.events.processSnowballUsed
 
     # Add snowball tag to players holding an event-enabled snowball.
-    execute as @a[predicate=foxcraft_dungeon_loot:events/process_snowball] run tag @s add satyrn.fdl.events.processSnowballUsed
+    execute as @a[predicate=foxcraft_dungeon_loot:event/process_snowball] run tag @s add satyrn.fdl.events.processSnowballUsed
 
     # Updates players who ate a spider eye while holding an item that intercepts that event.
-    execute as @a[scores={satyrn.fdl.events.ateSpiderEye=1..},predicate=foxcraft_dungeon_loot:events/process_spider_eye] at @s run function #foxcraft_dungeon_loot:on_spider_eye_eaten
+    execute as @a[scores={satyrn.fdl.events.ateSpiderEye=1..},predicate=foxcraft_dungeon_loot:event/process_spider_eye] at @s run function #foxcraft_dungeon_loot:on_spider_eye_eaten
 
     # Updates players who blocked an attack.
-    execute as @a[scores={satyrn.fdl.events.blockedAttack=1..},predicate=foxcraft_dungeon_loot:events/process_block] at @s run function #foxcraft_dungeon_loot:on_block
+    execute as @a[scores={satyrn.fdl.events.blockedAttack=1..},predicate=foxcraft_dungeon_loot:event/process_block] at @s run function #foxcraft_dungeon_loot:on_block
 
     scoreboard players reset @a satyrn.fdl.events.ateSpiderEye
     scoreboard players reset @a satyrn.fdl.events.blockedAttack

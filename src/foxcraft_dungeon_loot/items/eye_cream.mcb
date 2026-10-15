@@ -3,7 +3,7 @@ import ../../macros.mcbt
 
 # Executes on ticks where a player has used a warped fungus on a stick.
 function on_warped_fungus_used {
-    execute if entity @s[predicate=foxcraft_dungeon_loot:items/eye_cream/in_main_hand] run {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/rare/eye_cream/in_main_hand] run {
         playsound foxcraft_dungeon_loot:item.eye_cream.apply player @a ~ ~ ~ 0.5 1.5
 
         effect give @s minecraft:blindness 3 0 true

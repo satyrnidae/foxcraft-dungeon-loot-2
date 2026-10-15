@@ -14,7 +14,7 @@ function on_block {
 # Damage the sword when it is used to hit an entity. This takes unbreaking into effect.
 function on_hit {
     execute unless entity @s[gamemode=creative] run {
-        execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
+        execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
             # Get unbreaking level from the tool.
             execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
             function foxcraft_dungeon_loot:math/should_damage_tool
@@ -24,7 +24,7 @@ function on_hit {
             item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit
         }
 
-        execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
+        execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
             break_item weapon.mainhand {id:"minecraft:shield",components:{"minecraft:item_model":"foxcraft_dungeon_loot:iron_sword"}}
         }
     }

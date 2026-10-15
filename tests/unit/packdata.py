@@ -321,6 +321,14 @@ def build_item(name, table_path):
     return item
 
 
+def predicate_dir(item_name):
+    """predicate/item/<rarity>/<item>/ for an item named item/<rarity>/<item>, or None for discs and horns."""
+    parts = item_name.split("/")
+    if len(parts) == 3 and parts[1] in ("common", "uncommon", "rare", "epic", "mythic"):
+        return DATA / "predicate" / "item" / parts[1] / parts[2]
+    return None
+
+
 def item_tables():
     """Every item the pack hands out as a unit: loot_table/item/** except random_loot, which holds pickers and pools.
     Discs and copper horn variants are under item/special/."""

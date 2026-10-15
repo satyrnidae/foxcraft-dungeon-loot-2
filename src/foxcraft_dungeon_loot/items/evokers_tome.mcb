@@ -12,12 +12,12 @@ function on_load {
 function on_tick {
     # Increment cooldown timer.
     execute as @a[scores={satyrn.fdl.evokersTome.cooldown=1..}] run {
-        execute at @s[predicate=foxcraft_dungeon_loot:items/evokers_tome/in_main_hand,scores={satyrn.fdl.evokersTome.cooldown=1}] run {
+        execute at @s[predicate=foxcraft_dungeon_loot:item/mythic/evokers_tome/in_main_hand,scores={satyrn.fdl.evokersTome.cooldown=1}] run {
             summon minecraft:armor_stand ^ ^ ^1 {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangBeam,satyrn.fdl.fangSpawn]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
                     execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
@@ -25,17 +25,17 @@ function on_tick {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
                 }
 
-                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
                     break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:evoker_tome"}}
                 }
             }
         }
-        execute at @s[predicate=foxcraft_dungeon_loot:items/evokers_tome/in_main_hand,scores={satyrn.fdl.evokersTome.cooldown=100}] run {
+        execute at @s[predicate=foxcraft_dungeon_loot:item/mythic/evokers_tome/in_main_hand,scores={satyrn.fdl.evokersTome.cooldown=100}] run {
             summon minecraft:armor_stand ~ ~2 ~ {Invisible:<%config.dev?0:1%>b,NoGravity:1b,Small:1b,Tags:[satyrn.fdl.evokerFangs,satyrn.fdl.fangPivot]}
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
                     execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
@@ -43,7 +43,7 @@ function on_tick {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
                 }
 
-                execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
                     break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:evoker_tome"}}
                 }
             }
@@ -106,7 +106,7 @@ function on_tick {
 
     # Spawn the evoker fangs
     execute as @e[tag=satyrn.fdl.fang,scores={satyrn.fdl.evokersTome.fangLife=1..}] at @s run {
-        execute if entity @s[predicate=foxcraft_dungeon_loot:is_on_ground] run {
+        execute if entity @s[predicate=foxcraft_dungeon_loot:entity/is_on_ground] run {
             summon minecraft:evoker_fangs ~ ~ ~ {Tags:[satyrn.fdl.playerEvokerFang]}
             execute as @e[tag=satyrn.fdl.playerEvokerFang,type=minecraft:evoker_fangs,limit=1,sort=nearest] at @s run {
                 data modify entity @s Owner set from entity @p[scores={satyrn.fdl.evokersTome.cooldown=1..}] UUID
@@ -128,11 +128,11 @@ function on_uninstall {
 function on_warped_fungus_used {
     # We want to check if the player is using the Evoker's Tome after the cooldown has incremented since processing is
     # offset into the next tick.
-    execute if entity @s[predicate=foxcraft_dungeon_loot:items/evokers_tome/in_main_hand] run {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/mythic/evokers_tome/in_main_hand] run {
         execute if score @s satyrn.fdl.evokersTome.cooldown matches 1.. run {
             playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
             title @s actionbar {"text":"The Evoker's Tome is on cooldown and cannot be used.","color":"dark_purple"}
-        } else execute if entity @s[predicate=foxcraft_dungeon_loot:is_sneaking] run {
+        } else execute if entity @s[predicate=foxcraft_dungeon_loot:entity/is_sneaking] run {
                 scoreboard players set @s satyrn.fdl.evokersTome.cooldown 100
                 title @s actionbar {"text":"The Evoker's Tome is now on cooldown for 5 seconds.","color":"dark_purple"}
         } else run {

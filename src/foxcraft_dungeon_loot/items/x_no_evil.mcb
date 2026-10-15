@@ -27,13 +27,13 @@ function on_snowball_used {
 # Occurs once per player per tick.
 function on_tick {
     # A tag is added to the player while they are holding X No Evil and is cleared from any player not holding X No Evil.
-    execute as @a[predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_main_hand,predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_off_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
+    execute as @a[predicate=!foxcraft_dungeon_loot:item/mythic/x_no_evil/in_main_hand,predicate=!foxcraft_dungeon_loot:item/mythic/x_no_evil/in_off_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
 
-    execute as @a[predicate=foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:items/x_no_evil/in_main_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
+    execute as @a[predicate=foxcraft_dungeon_loot:item/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:item/mythic/x_no_evil/in_main_hand] run tag @s remove satyrn.fdl.xNoEvil.heldItem
 
-    execute as @a[predicate=foxcraft_dungeon_loot:items/x_no_evil/in_main_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
+    execute as @a[predicate=foxcraft_dungeon_loot:item/mythic/x_no_evil/in_main_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
 
-    execute as @a[predicate=!foxcraft_dungeon_loot:items/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:items/x_no_evil/in_off_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
+    execute as @a[predicate=!foxcraft_dungeon_loot:item/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/mythic/x_no_evil/in_off_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
 
     execute as @e[tag=satyrn.fdl.xNoEvil.projectileTracker] at @s run {
         # If the projectile tracker is near a projectile, set its motion from that projectile.
@@ -72,7 +72,7 @@ function on_tick {
             }
 
             # Set the area of effect's owner to the owner contained in the snowball riding the tracker
-            data modify entity @e[tag=satyrn.fdl.xNoEvil.areaOfEffect,predicate=foxcraft_dungeon_loot:items/x_no_evil/is_new_aoe_cloud,limit=1,sort=nearest] Owner set from entity @s Passengers[0].Owner
+            data modify entity @e[tag=satyrn.fdl.xNoEvil.areaOfEffect,predicate=foxcraft_dungeon_loot:item/mythic/x_no_evil/is_new_aoe_cloud,limit=1,sort=nearest] Owner set from entity @s Passengers[0].Owner
 
             # Clean up tracking entity
             kill @e[tag=satyrn.fdl.xNoEvil.ownerId,limit=1,sort=nearest]

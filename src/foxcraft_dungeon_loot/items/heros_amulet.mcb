@@ -3,7 +3,7 @@ import ../../macros.mcbt
 
 # Executed on ticks where a player used a warped fungus on a stick.
 function on_warped_fungus_used {
-    execute if entity @s[predicate=foxcraft_dungeon_loot:items/heros_amulet/in_main_hand] run {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/epic/heros_amulet/in_main_hand] run {
         rng 1 20
 
         execute if score #math.result <%config.internalScoreboard%> matches 1 run {

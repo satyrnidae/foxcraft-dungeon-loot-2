@@ -6,13 +6,13 @@ function clock_10t {
     schedule function foxcraft_dungeon_loot:items/stompies/clock_10t 10t
 
     # Remove the effects from players who aren't wearing the stompies.
-    execute as @a[tag=satyrn.fdl.stompies.effectsApplied,predicate=!foxcraft_dungeon_loot:items/stompies/worn] run {
+    execute as @a[tag=satyrn.fdl.stompies.effectsApplied,predicate=!foxcraft_dungeon_loot:item/mythic/stompies/worn] run {
         effect clear @s minecraft:jump_boost
         tag @s remove satyrn.fdl.stompies.effectsApplied
     }
 
     # Add the effects to players who are wearing the stompies.
-    execute as @a[predicate=foxcraft_dungeon_loot:items/stompies/worn,predicate=!foxcraft_dungeon_loot:items/stompies/has_effects] run {
+    execute as @a[predicate=foxcraft_dungeon_loot:item/mythic/stompies/worn,predicate=!foxcraft_dungeon_loot:item/mythic/stompies/has_effects] run {
         effect give @s minecraft:jump_boost 1000000 1 true
         tag @s add satyrn.fdl.stompies.effectsApplied
     }

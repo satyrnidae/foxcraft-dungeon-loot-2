@@ -24,7 +24,7 @@ def spec_for(name, path):
     item = pk.build_item(name, path)
     base = basename(name)
     src = pk.SRC_ITEMS / (base + ".mcb")
-    pred_dir = pk.DATA / "predicate" / "items" / base
+    pred_dir = pk.predicate_dir(name)
     rarity = item.custom_data.get("Rarity")
     dungeon_item = item.custom_data.get("DungeonItem") == ("byte", 1)
     return {
@@ -37,7 +37,7 @@ def spec_for(name, path):
         "item_models": sorted(item.item_models),
         "src": base if src.exists() else None,
         "hooks": sorted(pk.top_level_functions(pk.read_text(src))) if src.exists() else [],
-        "predicates": sorted(p.stem for p in pred_dir.glob("*.json")) if pred_dir.is_dir() else [],
+        "predicates": sorted(p.stem for p in pred_dir.glob("*.json")) if pred_dir and pred_dir.is_dir() else [],
     }
 
 

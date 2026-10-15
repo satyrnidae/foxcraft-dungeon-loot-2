@@ -83,10 +83,10 @@ function on_kill_entity {
 
         execute if score warHogsBlightedHarvest.pvp <%config.internalScoreboard%> matches 1.. run {
             tag @s add satyrn.fdl.warHogsBlightedHarvest.blightSource
-            execute as @e[type=!#foxcraft_dungeon_loot:non_player_ally,tag=!satyrn.fdl.warHogsBlightedHarvest.blightSource,predicate=!foxcraft_dungeon_loot:is_persistent,distance=..10] run effect give @s minecraft:wither 10 2
+            execute as @e[type=!#foxcraft_dungeon_loot:non_player_ally,tag=!satyrn.fdl.warHogsBlightedHarvest.blightSource,predicate=!foxcraft_dungeon_loot:entity/is_persistent,distance=..10] run effect give @s minecraft:wither 10 2
             tag @s remove satyrn.fdl.warHogsBlightedHarvest.blightSource
         } else run {
-            execute as @e[type=!#foxcraft_dungeon_loot:ally,tag=!satyrn.fdl.warHogsBlightedHarvest.blightSource,predicate=!foxcraft_dungeon_loot:is_persistent,distance=..10] run effect give @s minecraft:wither 10 2
+            execute as @e[type=!#foxcraft_dungeon_loot:ally,tag=!satyrn.fdl.warHogsBlightedHarvest.blightSource,predicate=!foxcraft_dungeon_loot:entity/is_persistent,distance=..10] run effect give @s minecraft:wither 10 2
         }
 
         scoreboard players operation @s satyrn.fdl.souls -= #10 <%config.internalScoreboard%>
@@ -131,7 +131,7 @@ function on_load {
 
 # Occurs each tick
 function on_tick {
-    execute as @a[predicate=foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/in_main_hand] run {
+    execute as @a[predicate=foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/in_main_hand] run {
         execute if score @s satyrn.fdl.warHogsBlightedHarvest.harvestWheat matches 1.. run {
             function foxcraft_dungeon_loot:items/war_hogs_blighted_harvest/on_harvest
         } else execute if score @s satyrn.fdl.warHogsBlightedHarvest.harvestCarrots matches 1.. run {

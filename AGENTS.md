@@ -47,7 +47,11 @@ data/foxcraft_dungeon_loot/
   item_modifier/<rarity>/<item>/define.json   the real item definition, plus the item's other modifiers beside it
   item_modifier/special/<item>/               discs and copper horns
   item_modifier/random_loot/<group>/          modifiers for random loot: armor, book, coin, player_head, potion, tool
-  predicate/                 item and event predicates
+  predicate/item/<rarity>/<item>/  item predicates such as in_main_hand and worn
+  predicate/item/              shared item predicates, durability and snowball checks
+  predicate/event/             event gating, the process_* predicates
+  predicate/entity/, world/    shared entity and world checks
+  predicate/random_chance/     random chance predicates
   advancement/items/         use-detection advancements
   tags/function/             event bus, hand-maintained
   instrument/, jukebox_song/ copper horns and music discs
@@ -61,7 +65,7 @@ tests/                       run_all.py, unit tests, Java and Python checks
 
 1. A loot table in `loot_table/item/<rarity>/<item>.json` holds only pools and a root `"modifier": "foxcraft_dungeon_loot:<rarity>/<item>/define"`.
 2. The modifier in `item_modifier/<rarity>/<item>/define.json` sets name, lore, `set_custom_data`, `set_components` with `minecraft:item_model`, enchantments and attributes.
-3. Predicates under `predicate/items/<item>/` match on the `custom_data` `DungeonLootId`.
+3. Predicates under `predicate/item/<rarity>/<item>/` match on the `custom_data` `DungeonLootId`.
 4. `src/foxcraft_dungeon_loot/items/<item>.mcb` holds hooks. A `function x` in `<item>.mcb` becomes `foxcraft_dungeon_loot:items/<item>/x`.
 5. The hook name is listed in `tags/function/<event>.json`.
 6. A model definition `texturepack/assets/foxcraft_dungeon_loot/items/<model>.json` points at `models/item/<model>.json`, which points at a texture.
@@ -101,7 +105,7 @@ There is no CI. The tests are static, so you cannot test gameplay. State plainly
 ## Known traps
 
 - `warped_fungus_on_a_stick` is the base of most interactive items. It carries default components, such as a durability bar. Setting a component never removes a default, remove with `!minecraft:<component>`.
-- Use detection reads `minecraft.used:*` stats. A hook runs only if the player matches its `events/process_*` predicate.
+- Use detection reads `minecraft.used:*` stats. A hook runs only if the player matches its `event/process_*` predicate.
 - Item entities spawned for the trade index live in a force-loaded End chunk at 264, 64, 264.
 - Scratch scores `#test` and `#math.*` are shared. Do not call a helper that uses them from inside another chain that also uses them.
 - The uninstall function disables `file/<baseArchiveName>-<version>.zip`. A dev build or a duplicate name breaks that match.
