@@ -16,7 +16,7 @@ A Minecraft Java 26.3 datapack that adds custom dungeon loot items, plus a compa
 1. Never edit `data/foxcraft_dungeon_loot/function/`, `data/minecraft/tags/function/load.json` or `tick.json`. They are generated and gitignored. Edit `src/` instead.
 2. Never write a `custom_data` tag as a JSON object. Always write the SNBT string, for example `"tag": "{DungeonLootId:87,DungeonItem:1b}"`. A JSON object turns small ints into bytes and never matches.
 3. Never reuse a `DungeonLootId`. IDs 1 to 138 are in use except 23 to 27 and 84. Take the next free number above 138 and say so in the PR.
-4. Never add `custom_model_data` overrides to a vanilla item model. 26.3 ignores them. Use the `item_model` component and an item definition in `texturepack/assets/foxcraft_dungeon_loot/items/`.
+4. Never add `custom_model_data` overrides to a vanilla item model. 26.3 ignores them. Use the `item_model` component and an item definition in `texturepack/assets/foxcraft_dungeon_loot/items/<group>/`.
 5. Never use pre-1.20.5 keys: `CustomModelData`, `tag:{` on an item, `HideFlags`, `Count` as a byte, `set_nbt`, `conditions`, `functions`, `alternative`, `pack_format`. `node tests/tools/check_old_keys.mjs` flags most of them.
 6. Never end an `if / else` chain in `.mcb` without a plain final `else run {`. mc-build 4.2.0 can run an outer `else` otherwise.
 7. Never use `<%config.x%>` on a `} else execute ... run {` line. Write the literal value, for example `satyrn.fdl.internal`.
@@ -69,7 +69,7 @@ tests/                       run_all.mjs, unit tests, Java checks, Node tools
 3. Predicates under `predicate/item/<rarity>/<item>/` match on the `custom_data` `DungeonLootId`.
 4. `src/foxcraft_dungeon_loot/item/<rarity>/<item>.mcb` holds hooks. A `function x` in it becomes `foxcraft_dungeon_loot:item/<rarity>/<item>/x`.
 5. The hook name is listed in `tags/function/<event>.json`.
-6. A model definition `texturepack/assets/foxcraft_dungeon_loot/items/<model>.json` points at `models/item/<model>.json`, which points at a texture.
+6. A model definition `texturepack/assets/foxcraft_dungeon_loot/items/<group>/<model>.json` points at `models/item/<group>/<model>.json`, where group is the rarity, special/music_disc, special/copper_horn or random_loot/coin, like the loot table folders. The id is `foxcraft_dungeon_loot:<group>/<model>`. The model points at a texture in `textures/item/<group>/<model>.png`.
 7. Variants, like chainsaw tiers, pick a pool by the `satyrn.fdl.loot.variant` score and set their own `item_model`.
 
 To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a lang key, an item definition, a model, a texture, a loot table, a modifier, a give function in `item/special/music_disc/main.mcb`, and trade index entries in `trading/index.mcb`. The trade index numbers matter, they are used by position.

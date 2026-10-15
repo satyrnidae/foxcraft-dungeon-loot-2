@@ -6,7 +6,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:common_grab_bag"
+      "minecraft:item_model": "foxcraft_dungeon_loot:common/common_grab_bag"
     }
   },
   {

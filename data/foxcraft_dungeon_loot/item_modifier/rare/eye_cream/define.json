@@ -108,7 +108,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:eye_cream",
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare/eye_cream",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

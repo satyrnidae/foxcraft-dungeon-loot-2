@@ -70,7 +70,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:grasp_of_uthiir",
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare/grasp_of_uthiir",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

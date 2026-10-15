@@ -56,7 +56,7 @@
       "give_armor_stand"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -79,7 +79,7 @@
       "give_armor_stand_baby"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -102,7 +102,7 @@
       "give_armor_stand_bashful"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -125,7 +125,7 @@
       "give_armor_stand_cancan"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -148,7 +148,7 @@
       "give_armor_stand_dab"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -171,7 +171,7 @@
       "give_armor_stand_gallant"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -194,7 +194,7 @@
       "give_armor_stand_greyskull"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -217,7 +217,7 @@
       "give_armor_stand_skeleton"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -240,7 +240,7 @@
       "give_armor_stand_zombie"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:armor_stand"
+      "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
@@ -285,7 +285,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:common_grab_bag"
+      "foxcraft_dungeon_loot:common/common_grab_bag"
     ],
     "loot_ids": [
       70
@@ -312,7 +312,7 @@
       "give_d10"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d10"
+      "foxcraft_dungeon_loot:common/d10"
     ],
     "loot_ids": [
       67
@@ -339,7 +339,7 @@
       "give_d12"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d12"
+      "foxcraft_dungeon_loot:common/d12"
     ],
     "loot_ids": [
       68
@@ -366,7 +366,7 @@
       "give_d20"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d20"
+      "foxcraft_dungeon_loot:common/d20"
     ],
     "loot_ids": [
       69
@@ -393,7 +393,7 @@
       "give_d4"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d4"
+      "foxcraft_dungeon_loot:common/d4"
     ],
     "loot_ids": [
       64
@@ -420,7 +420,7 @@
       "give_d6"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d6"
+      "foxcraft_dungeon_loot:common/d6"
     ],
     "loot_ids": [
       65
@@ -447,7 +447,7 @@
       "give_d8"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:d8"
+      "foxcraft_dungeon_loot:common/d8"
     ],
     "loot_ids": [
       66
@@ -626,7 +626,7 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:buckwheat"
+      "foxcraft_dungeon_loot:epic/buckwheat"
     ],
     "loot_ids": [
       76
@@ -682,7 +682,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:epic_grab_bag"
+      "foxcraft_dungeon_loot:epic/epic_grab_bag"
     ],
     "loot_ids": [
       73
@@ -915,7 +915,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:hero_amulet"
+      "foxcraft_dungeon_loot:epic/hero_amulet"
     ],
     "loot_ids": [
       45
@@ -1013,7 +1013,7 @@
       "give_peerless_yewhewn"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:peerless_yewhewn"
+      "foxcraft_dungeon_loot:epic/peerless_yewhewn"
     ],
     "loot_ids": [
       1
@@ -1042,7 +1042,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:rogues_dagger"
+      "foxcraft_dungeon_loot:epic/rogues_dagger"
     ],
     "loot_ids": [
       17
@@ -1075,7 +1075,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:silverfish_escape_artist"
+      "foxcraft_dungeon_loot:epic/silverfish_escape_artist"
     ],
     "loot_ids": [
       63
@@ -1132,7 +1132,7 @@
       "spawn_arrows_3"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:spell_scroll_hail_of_arrows"
+      "foxcraft_dungeon_loot:epic/spell_scroll_hail_of_arrows"
     ],
     "loot_ids": [
       78
@@ -1165,7 +1165,7 @@
       "on_spider_eye_eaten"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:tithe_to_uthiir"
+      "foxcraft_dungeon_loot:epic/tithe_to_uthiir"
     ],
     "loot_ids": [
       81
@@ -1198,7 +1198,7 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:torenhias_fist"
+      "foxcraft_dungeon_loot:epic/torenhias_fist"
     ],
     "loot_ids": [
       80
@@ -1228,7 +1228,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:debug_stick"
+      "foxcraft_dungeon_loot:epic/debug_stick"
     ],
     "loot_ids": [
       57
@@ -1287,9 +1287,9 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:diamond_auto_pickaxe",
-      "foxcraft_dungeon_loot:iron_auto_pickaxe",
-      "foxcraft_dungeon_loot:netherite_auto_pickaxe"
+      "foxcraft_dungeon_loot:mythic/diamond_auto_pickaxe",
+      "foxcraft_dungeon_loot:mythic/iron_auto_pickaxe",
+      "foxcraft_dungeon_loot:mythic/netherite_auto_pickaxe"
     ],
     "loot_ids": [
       32
@@ -1322,7 +1322,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:bringer_of_fear"
+      "foxcraft_dungeon_loot:mythic/bringer_of_fear"
     ],
     "loot_ids": [
       34
@@ -1358,9 +1358,9 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:diamond_chainsaw",
-      "foxcraft_dungeon_loot:iron_chainsaw",
-      "foxcraft_dungeon_loot:netherite_chainsaw"
+      "foxcraft_dungeon_loot:mythic/diamond_chainsaw",
+      "foxcraft_dungeon_loot:mythic/iron_chainsaw",
+      "foxcraft_dungeon_loot:mythic/netherite_chainsaw"
     ],
     "loot_ids": [
       87
@@ -1420,7 +1420,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:deilonas_holy_blessings"
+      "foxcraft_dungeon_loot:mythic/deilonas_holy_blessings"
     ],
     "loot_ids": [
       36
@@ -1453,7 +1453,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:downpour_amulet"
+      "foxcraft_dungeon_loot:mythic/downpour_amulet"
     ],
     "loot_ids": [
       37
@@ -1486,7 +1486,7 @@
       "reset_cooldown"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:evoker_tome"
+      "foxcraft_dungeon_loot:mythic/evoker_tome"
     ],
     "loot_ids": [
       41
@@ -1557,7 +1557,7 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:hammer_of_sol"
+      "foxcraft_dungeon_loot:mythic/hammer_of_sol"
     ],
     "loot_ids": [
       75
@@ -1591,7 +1591,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:how_about_no"
+      "foxcraft_dungeon_loot:mythic/how_about_no"
     ],
     "loot_ids": [
       46
@@ -1622,7 +1622,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:idol_of_melimonas"
+      "foxcraft_dungeon_loot:mythic/idol_of_melimonas"
     ],
     "loot_ids": [
       47
@@ -1651,7 +1651,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:mythic_grab_bag"
+      "foxcraft_dungeon_loot:mythic/mythic_grab_bag"
     ],
     "loot_ids": [
       74
@@ -1706,7 +1706,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:poncho_sanchezs_fate"
+      "foxcraft_dungeon_loot:mythic/poncho_sanchezs_fate"
     ],
     "loot_ids": [
       48
@@ -1738,7 +1738,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:pride_and_extreme_prejudice"
+      "foxcraft_dungeon_loot:mythic/pride_and_extreme_prejudice"
     ],
     "loot_ids": [
       49
@@ -1799,7 +1799,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:scripture_of_cleansing"
+      "foxcraft_dungeon_loot:mythic/scripture_of_cleansing"
     ],
     "loot_ids": [
       51
@@ -1923,7 +1923,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:totem_of_deilona"
+      "foxcraft_dungeon_loot:mythic/totem_of_deilona"
     ],
     "loot_ids": [
       55
@@ -1956,7 +1956,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:totem_of_dendris"
+      "foxcraft_dungeon_loot:mythic/totem_of_dendris"
     ],
     "loot_ids": [
       54
@@ -1988,7 +1988,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:totem_of_ekila"
+      "foxcraft_dungeon_loot:mythic/totem_of_ekila"
     ],
     "loot_ids": [
       19
@@ -2021,7 +2021,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:totem_of_gnumoch"
+      "foxcraft_dungeon_loot:mythic/totem_of_gnumoch"
     ],
     "loot_ids": [
       20
@@ -2055,7 +2055,7 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:totem_of_mysteria"
+      "foxcraft_dungeon_loot:mythic/totem_of_mysteria"
     ],
     "loot_ids": [
       56
@@ -2096,7 +2096,7 @@
       "update_soul_count"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:war_hogs_blighted_harvest"
+      "foxcraft_dungeon_loot:mythic/war_hogs_blighted_harvest"
     ],
     "loot_ids": [
       86
@@ -2290,7 +2290,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:wing_of_quet_zala"
+      "foxcraft_dungeon_loot:mythic/wing_of_ouet_zala"
     ],
     "loot_ids": [
       61
@@ -2323,7 +2323,7 @@
       "on_load"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:wing_of_quet_zala"
+      "foxcraft_dungeon_loot:mythic/wing_of_quet_zala"
     ],
     "loot_ids": [
       62
@@ -2355,7 +2355,7 @@
       "on_tick"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:x_no_evil"
+      "foxcraft_dungeon_loot:mythic/x_no_evil"
     ],
     "loot_ids": [
       79
@@ -2463,7 +2463,7 @@
       "on_uninstall"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:iron_sword"
+      "foxcraft_dungeon_loot:rare/iron_sword"
     ],
     "loot_ids": [
       82
@@ -2492,7 +2492,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:eye_cream"
+      "foxcraft_dungeon_loot:rare/eye_cream"
     ],
     "loot_ids": [
       42
@@ -2524,7 +2524,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:feather_of_quet_zala"
+      "foxcraft_dungeon_loot:rare/feather_of_quet_zala"
     ],
     "loot_ids": [
       43
@@ -2552,7 +2552,7 @@
       "give_flawless_ashenhewn"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:peerless_yewhewn"
+      "foxcraft_dungeon_loot:rare/flawless_ashenhewn"
     ],
     "loot_ids": [
       85
@@ -2579,7 +2579,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:gift_of_sheep_island"
+      "foxcraft_dungeon_loot:rare/gift_of_sheep_island"
     ],
     "loot_ids": [
       44
@@ -2609,7 +2609,7 @@
       "on_tick"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:grasp_of_uthiir"
+      "foxcraft_dungeon_loot:rare/grasp_of_uthiir"
     ],
     "loot_ids": [
       83
@@ -2640,7 +2640,7 @@
       "plant_sapling"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:ima_leaf"
+      "foxcraft_dungeon_loot:rare/ima_leaf"
     ],
     "loot_ids": [
       77
@@ -2743,7 +2743,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:rare_grab_bag"
+      "foxcraft_dungeon_loot:rare/rare_grab_bag"
     ],
     "loot_ids": [
       72
@@ -2793,7 +2793,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2814,7 +2814,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2835,7 +2835,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2856,7 +2856,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2877,7 +2877,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2898,7 +2898,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2919,7 +2919,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2940,7 +2940,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2977,7 +2977,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -2998,7 +2998,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:copper_goat_horn"
+      "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
@@ -3017,7 +3017,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_c418_dog"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_c418_dog"
     ],
     "loot_ids": [
       138
@@ -3038,7 +3038,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornman"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornman"
     ],
     "loot_ids": [
       88
@@ -3059,7 +3059,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornman_am"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornman_am"
     ],
     "loot_ids": [
       89
@@ -3080,7 +3080,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornmanreskinbd5"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornmanreskinbd5"
     ],
     "loot_ids": [
       90
@@ -3101,7 +3101,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_aeon"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_aeon"
     ],
     "loot_ids": [
       91
@@ -3122,7 +3122,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_aeonorch190bpm"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_aeonorch190bpm"
     ],
     "loot_ids": [
       92
@@ -3143,7 +3143,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_avidit_e"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_avidit_e"
     ],
     "loot_ids": [
       93
@@ -3164,7 +3164,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_drown"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_drown"
     ],
     "loot_ids": [
       94
@@ -3185,7 +3185,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_duma"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_duma"
     ],
     "loot_ids": [
       95
@@ -3206,7 +3206,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_flutes"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_flutes"
     ],
     "loot_ids": [
       96
@@ -3227,7 +3227,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_gutturalis"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_gutturalis"
     ],
     "loot_ids": [
       97
@@ -3248,7 +3248,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_kotyledon"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_kotyledon"
     ],
     "loot_ids": [
       98
@@ -3269,7 +3269,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_nematode"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nematode"
     ],
     "loot_ids": [
       102
@@ -3290,7 +3290,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_nighttime_transit"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nighttime_transit"
     ],
     "loot_ids": [
       103
@@ -3311,7 +3311,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_old_white_straight_road"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_old_white_straight_road"
     ],
     "loot_ids": [
       104
@@ -3332,7 +3332,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_pathetic_mario"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_pathetic_mario"
     ],
     "loot_ids": [
       106
@@ -3353,7 +3353,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_rhapsodymini2"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_rhapsodymini2"
     ],
     "loot_ids": [
       110
@@ -3374,7 +3374,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_rigmarole"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_rigmarole"
     ],
     "loot_ids": [
       111
@@ -3395,7 +3395,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_sparkplugs"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_sparkplugs"
     ],
     "loot_ids": [
       113
@@ -3416,7 +3416,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_captainzephyrr_the_scone_song"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_the_scone_song"
     ],
     "loot_ids": [
       114
@@ -3437,7 +3437,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_locker"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_locker"
     ],
     "loot_ids": [
       99
@@ -3458,7 +3458,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_lost"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_lost"
     ],
     "loot_ids": [
       100
@@ -3479,7 +3479,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_minimalist"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_minimalist"
     ],
     "loot_ids": [
       101
@@ -3500,7 +3500,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_outskirts"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_outskirts"
     ],
     "loot_ids": [
       105
@@ -3521,7 +3521,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_pet_the_dog"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_pet_the_dog"
     ],
     "loot_ids": [
       107
@@ -3542,7 +3542,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_pies_e"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_pies_e"
     ],
     "loot_ids": [
       108
@@ -3563,7 +3563,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_reboot"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_reboot"
     ],
     "loot_ids": [
       109
@@ -3584,7 +3584,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_slither"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_slither"
     ],
     "loot_ids": [
       112
@@ -3605,7 +3605,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_satyrnidae_wanderer"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_wanderer"
     ],
     "loot_ids": [
       115
@@ -3626,7 +3626,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_after_another"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_after_another"
     ],
     "loot_ids": [
       116
@@ -3647,7 +3647,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_between_layers"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_between_layers"
     ],
     "loot_ids": [
       117
@@ -3668,7 +3668,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_black_dawn"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_black_dawn"
     ],
     "loot_ids": [
       118
@@ -3689,7 +3689,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_cliff_where"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_cliff_where"
     ],
     "loot_ids": [
       119
@@ -3710,7 +3710,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_dark_southern_sky"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_dark_southern_sky"
     ],
     "loot_ids": [
       120
@@ -3731,7 +3731,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_deer"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_deer"
     ],
     "loot_ids": [
       121
@@ -3752,7 +3752,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_every_morning"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_every_morning"
     ],
     "loot_ids": [
       122
@@ -3773,7 +3773,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_far_away"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_far_away"
     ],
     "loot_ids": [
       123
@@ -3794,7 +3794,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_into_stars"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_into_stars"
     ],
     "loot_ids": [
       124
@@ -3815,7 +3815,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_lightform"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_lightform"
     ],
     "loot_ids": [
       125
@@ -3836,7 +3836,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_beams"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_beams"
     ],
     "loot_ids": [
       126
@@ -3857,7 +3857,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_moon_rays"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_rays"
     ],
     "loot_ids": [
       127
@@ -3878,7 +3878,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_mt_ennui"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_mt_ennui"
     ],
     "loot_ids": [
       128
@@ -3899,7 +3899,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_night_i"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_night_i"
     ],
     "loot_ids": [
       129
@@ -3920,7 +3920,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_night_ii"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_night_ii"
     ],
     "loot_ids": [
       130
@@ -3941,7 +3941,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_of_plains"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_of_plains"
     ],
     "loot_ids": [
       131
@@ -3962,7 +3962,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_pale_star"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_pale_star"
     ],
     "loot_ids": [
       132
@@ -3983,7 +3983,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_passing"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_passing"
     ],
     "loot_ids": [
       133
@@ -4004,7 +4004,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_peaks"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_peaks"
     ],
     "loot_ids": [
       134
@@ -4025,7 +4025,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_throughout"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_throughout"
     ],
     "loot_ids": [
       135
@@ -4046,7 +4046,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_tropic"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_tropic"
     ],
     "loot_ids": [
       136
@@ -4067,7 +4067,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_wolfgun_unseen_land"
+      "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_unseen_land"
     ],
     "loot_ids": [
       137
@@ -4115,7 +4115,7 @@
       "on_warped_fungus_used"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:uncommon_grab_bag"
+      "foxcraft_dungeon_loot:uncommon/uncommon_grab_bag"
     ],
     "loot_ids": [
       71

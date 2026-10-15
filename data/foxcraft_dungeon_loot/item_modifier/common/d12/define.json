@@ -30,7 +30,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:d12",
+      "minecraft:item_model": "foxcraft_dungeon_loot:common/d12",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:unbreakable"

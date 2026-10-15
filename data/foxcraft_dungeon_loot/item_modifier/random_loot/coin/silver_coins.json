@@ -10,7 +10,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:silver_coins",
+      "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/silver_coins",
       "minecraft:max_stack_size": 99
     }
   }

@@ -3,7 +3,7 @@
     "icon": {
       "id": "minecraft:iron_nugget",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:silver_coins"
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/silver_coins"
       }
     },
     "title": "Gacha Gotcha",

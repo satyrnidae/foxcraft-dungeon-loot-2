@@ -89,7 +89,7 @@ function on_warped_fungus_used {
                     }
                 }
 
-                break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:deilonas_holy_blessings"}}
+                break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/deilonas_holy_blessings"}}
             }
         }
     }

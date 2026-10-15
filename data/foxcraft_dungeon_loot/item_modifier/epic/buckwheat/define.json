@@ -64,7 +64,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:buckwheat"
+      "minecraft:item_model": "foxcraft_dungeon_loot:epic/buckwheat"
     }
   }
 ]

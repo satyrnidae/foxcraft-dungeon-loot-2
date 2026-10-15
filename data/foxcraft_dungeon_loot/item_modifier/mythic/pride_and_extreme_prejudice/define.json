@@ -141,7 +141,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:pride_and_extreme_prejudice",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/pride_and_extreme_prejudice",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

@@ -17,7 +17,7 @@ function on_snowball_used {
             tag @s add satyrn.fdl.xNoEvil.projectile
 
             # Summon a tracker armor stand and set its motion relative to the projectile.
-            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.xNoEvil.projectileTracker],Passengers:[{id:"minecraft:snowball",Item:{id:"minecraft:snowball",count:1,components:{"minecraft:item_model":"foxcraft_dungeon_loot:x_no_evil"}},Owner:[I;0,0,0,0],Tags:[satyrn.fdl.xNoEvil.ownerId]}]}
+            summon minecraft:armor_stand ^ ^ ^ {Invisible:<%config.dev?0:1%>b,Invulnerable:1b,Small:1b,Silent:1b,Tags:[satyrn.fdl.xNoEvil.projectileTracker],Passengers:[{id:"minecraft:snowball",Item:{id:"minecraft:snowball",count:1,components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/x_no_evil"}},Owner:[I;0,0,0,0],Tags:[satyrn.fdl.xNoEvil.ownerId]}]}
             data modify entity @e[tag=satyrn.fdl.xNoEvil.projectileTracker,limit=1,sort=nearest] Motion set from entity @s Motion
             data modify entity @e[tag=satyrn.fdl.xNoEvil.ownerId,limit=1,sort=nearest] Owner set from entity @s Owner
         }
@@ -42,7 +42,7 @@ function on_tick {
         } else run {
             # Bottle break sound and particles
             playsound minecraft:entity.splash_potion.break player @a ~ ~ ~ 1.5
-            particle minecraft:item{item:{id:"minecraft:snowball",components:{"minecraft:item_model":"foxcraft_dungeon_loot:x_no_evil"}}} ^ ^ ^ 0.25 0.05 0.25 0.1 5
+            particle minecraft:item{item:{id:"minecraft:snowball",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/x_no_evil"}}} ^ ^ ^ 0.25 0.05 0.25 0.1 5
             particle minecraft:effect ^ ^ ^ 0.25 0.05 0.25 0.1 10
 
             # Randomly select an effect and summon an area effect cloud where the projectile landed.

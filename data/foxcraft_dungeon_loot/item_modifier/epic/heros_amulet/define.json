@@ -139,7 +139,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:hero_amulet",
+      "minecraft:item_model": "foxcraft_dungeon_loot:epic/hero_amulet",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

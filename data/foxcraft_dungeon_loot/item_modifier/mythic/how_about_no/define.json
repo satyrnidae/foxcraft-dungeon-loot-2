@@ -69,7 +69,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:how_about_no",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/how_about_no",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

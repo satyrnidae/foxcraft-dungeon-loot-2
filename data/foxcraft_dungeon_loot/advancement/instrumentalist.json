@@ -3,7 +3,7 @@
     "icon": {
       "id": "minecraft:goat_horn",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:copper_goat_horn"
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
       }
     },
     "title": "Instrumentalist",

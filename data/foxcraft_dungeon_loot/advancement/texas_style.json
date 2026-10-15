@@ -4,7 +4,7 @@
     "icon": {
       "id": "minecraft:diamond_axe",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:diamond_chainsaw"
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/diamond_chainsaw"
       }
     },
     "title": "Texas Style",

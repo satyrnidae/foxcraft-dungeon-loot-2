@@ -6,7 +6,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:tithe_to_uthiir"
+      "minecraft:item_model": "foxcraft_dungeon_loot:epic/tithe_to_uthiir"
     }
   },
   {

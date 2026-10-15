@@ -124,7 +124,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:bringer_of_fear",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/bringer_of_fear",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

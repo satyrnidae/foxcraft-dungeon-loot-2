@@ -90,7 +90,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:scripture_of_cleansing",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/scripture_of_cleansing",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

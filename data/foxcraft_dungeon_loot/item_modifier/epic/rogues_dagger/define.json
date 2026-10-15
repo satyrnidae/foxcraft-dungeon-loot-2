@@ -95,7 +95,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:rogues_dagger"
+      "minecraft:item_model": "foxcraft_dungeon_loot:epic/rogues_dagger"
     }
   }
 ]

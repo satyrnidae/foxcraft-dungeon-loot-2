@@ -4,7 +4,7 @@
     "icon": {
       "id": "minecraft:golden_sword",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:rogues_dagger",
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/rogues_dagger",
         "minecraft:enchantment_glint_override": true
       }
     },

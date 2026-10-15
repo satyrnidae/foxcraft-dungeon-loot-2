@@ -100,7 +100,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:idol_of_melimonas",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/idol_of_melimonas",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

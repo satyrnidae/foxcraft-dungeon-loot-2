@@ -64,7 +64,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:poncho_sanchezs_fate"
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/poncho_sanchezs_fate"
     }
   }
 ]

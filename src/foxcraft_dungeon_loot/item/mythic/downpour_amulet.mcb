@@ -116,7 +116,7 @@ function damage {
     }
     # Break item if damage is maxed out.
     execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
-        break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:downpour_amulet"}}
+        break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/downpour_amulet"}}
     }
 }
 

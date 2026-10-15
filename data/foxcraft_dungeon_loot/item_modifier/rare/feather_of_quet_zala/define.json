@@ -69,7 +69,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:feather_of_quet_zala",
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare/feather_of_quet_zala",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

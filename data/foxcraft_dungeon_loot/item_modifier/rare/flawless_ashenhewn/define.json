@@ -40,7 +40,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:peerless_yewhewn"
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare/flawless_ashenhewn"
     }
   }
 ]

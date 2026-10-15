@@ -4,7 +4,7 @@
     "icon": {
       "id": "minecraft:iron_axe",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:iron_chainsaw"
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/iron_chainsaw"
       }
     },
     "title": "Lollipop Dreams",

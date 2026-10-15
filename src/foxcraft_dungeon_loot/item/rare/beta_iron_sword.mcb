@@ -25,7 +25,7 @@ function on_hit {
         }
 
         execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
-            break_item weapon.mainhand {id:"minecraft:shield",components:{"minecraft:item_model":"foxcraft_dungeon_loot:iron_sword"}}
+            break_item weapon.mainhand {id:"minecraft:shield",components:{"minecraft:item_model":"foxcraft_dungeon_loot:rare/iron_sword"}}
         }
     }
 

@@ -31,7 +31,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:armor_stand",
+      "minecraft:item_model": "foxcraft_dungeon_loot:common/armor_stand",
       "minecraft:entity_data": {
         "id": "minecraft:armor_stand",
         "ShowArms": 1,

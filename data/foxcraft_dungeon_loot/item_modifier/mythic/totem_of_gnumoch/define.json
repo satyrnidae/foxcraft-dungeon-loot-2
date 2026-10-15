@@ -95,7 +95,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:totem_of_gnumoch",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/totem_of_gnumoch",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

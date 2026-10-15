@@ -72,7 +72,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:silverfish_escape_artist",
+      "minecraft:item_model": "foxcraft_dungeon_loot:epic/silverfish_escape_artist",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

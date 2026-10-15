@@ -26,7 +26,7 @@
       "modifier": {
         "type": "minecraft:set_components",
         "components": {
-          "minecraft:item_model": "foxcraft_dungeon_loot:iron_chainsaw"
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/iron_chainsaw"
         }
       }
     },
@@ -49,7 +49,7 @@
       "modifier": {
         "type": "minecraft:set_components",
         "components": {
-          "minecraft:item_model": "foxcraft_dungeon_loot:diamond_chainsaw"
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/diamond_chainsaw"
         }
       }
     },
@@ -72,7 +72,7 @@
       "modifier": {
         "type": "minecraft:set_components",
         "components": {
-          "minecraft:item_model": "foxcraft_dungeon_loot:netherite_chainsaw"
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/netherite_chainsaw"
         }
       }
     }

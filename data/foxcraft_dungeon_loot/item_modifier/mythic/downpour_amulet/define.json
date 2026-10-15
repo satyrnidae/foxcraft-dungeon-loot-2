@@ -128,7 +128,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:downpour_amulet"
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/downpour_amulet"
     }
   }
 ]

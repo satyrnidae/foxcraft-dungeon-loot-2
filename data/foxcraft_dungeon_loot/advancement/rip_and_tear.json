@@ -3,7 +3,7 @@
     "icon": {
       "id": "minecraft:netherite_axe",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:netherite_chainsaw"
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/netherite_chainsaw"
       }
     },
     "title": "Rip and Tear",

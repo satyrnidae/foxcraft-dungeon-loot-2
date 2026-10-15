@@ -3,7 +3,7 @@
     "icon": {
       "id": "minecraft:copper_ingot",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:copper_coins"
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/copper_coins"
       }
     },
     "title": "Macabre Monger",

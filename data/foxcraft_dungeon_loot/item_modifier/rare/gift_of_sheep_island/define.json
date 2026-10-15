@@ -69,7 +69,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:gift_of_sheep_island",
+      "minecraft:item_model": "foxcraft_dungeon_loot:rare/gift_of_sheep_island",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",

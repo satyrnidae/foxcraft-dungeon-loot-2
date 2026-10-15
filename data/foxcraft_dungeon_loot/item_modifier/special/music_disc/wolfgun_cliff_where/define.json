@@ -6,7 +6,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_wolfgun_cliff_where",
+      "minecraft:item_model": "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_cliff_where",
       "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_wolfgun_cliff_where"
     }
   }

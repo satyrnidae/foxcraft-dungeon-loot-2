@@ -56,7 +56,7 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:wing_of_quet_zala",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/wing_of_ouet_zala",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments"

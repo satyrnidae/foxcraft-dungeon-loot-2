@@ -76,7 +76,7 @@
     "type": "minecraft:set_components",
     "components": {
       "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:deilonas_holy_blessings",
+      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/deilonas_holy_blessings",
       "minecraft:tooltip_display": {
         "hidden_components": [
           "minecraft:enchantments",
