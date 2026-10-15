@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:2696993,CustomPotionEffects:[{Id:33,Duration:600}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 2696993,
+          "custom_effects": [
+            {
+              "id": "minecraft:darkness",
+              "duration": 600
+            }
+          ]
+        }
+      }
     }
   ]
 }

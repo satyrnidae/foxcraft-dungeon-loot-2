@@ -2,7 +2,9 @@
   "display": {
     "icon": {
       "id": "minecraft:netherite_axe",
-      "nbt": "{CustomModelData:421953}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:netherite_chainsaw"
+      }
     },
     "title": "Rip and Tear",
     "description": "Kill each of the denizens of the Nether and the End with a chainsaw.",

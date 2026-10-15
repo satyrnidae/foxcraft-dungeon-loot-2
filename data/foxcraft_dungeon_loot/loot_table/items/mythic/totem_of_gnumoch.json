@@ -101,8 +101,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:20,CustomModelData:421954,HideFlags:1,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:20,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:totem_of_gnumoch",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

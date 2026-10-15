@@ -12,8 +12,14 @@
   ],
   "modifier": [
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:80,CustomModelData:421953,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:80,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:torenhias_fist"
+      }
     },
     {
       "type": "minecraft:set_name",

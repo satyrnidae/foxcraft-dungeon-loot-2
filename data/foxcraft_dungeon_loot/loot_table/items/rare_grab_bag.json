@@ -12,8 +12,14 @@
   ],
   "modifier": [
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:72,CustomModelData:4219523,GrabBag:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:72,GrabBag:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:rare_grab_bag"
+      }
     },
     {
       "type": "minecraft:set_name",

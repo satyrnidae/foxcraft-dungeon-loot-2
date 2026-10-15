@@ -20,8 +20,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:13565951,CustomPotionEffects:[{Id:25,Amplifier:2,Duration:300}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 13565951,
+          "custom_effects": [
+            {
+              "id": "minecraft:levitation",
+              "amplifier": 2,
+              "duration": 300
+            }
+          ]
+        }
+      }
     }
   ]
 }

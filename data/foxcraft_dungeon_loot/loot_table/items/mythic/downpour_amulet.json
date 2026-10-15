@@ -135,8 +135,14 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:37,CustomModelData:421954,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:37,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:downpour_amulet"
+      }
     }
   ]
 }

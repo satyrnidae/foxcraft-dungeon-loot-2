@@ -10,8 +10,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:1800,Amplifier:1},{Id:5,Duration:600,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 1800
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 600
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -22,8 +37,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:1600,Amplifier:1},{Id:5,Duration:800,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 1600
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 800
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -34,8 +64,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:1400,Amplifier:1},{Id:5,Duration:1000,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 1400
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 1000
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -46,8 +91,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:1200,Amplifier:1},{Id:5,Duration:1200,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 1200
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 1200
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -58,8 +118,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:1000,Amplifier:1},{Id:5,Duration:1400,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 1000
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 1400
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -70,8 +145,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:800,Amplifier:1},{Id:5,Duration:1600,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 800
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 1600
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -82,8 +172,23 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:4,Duration:600,Amplifier:1},{Id:5,Duration:1800,Amplifier:2}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:mining_fatigue",
+                      "amplifier": 1,
+                      "duration": 600
+                    },
+                    {
+                      "id": "minecraft:strength",
+                      "amplifier": 2,
+                      "duration": 1800
+                    }
+                  ]
+                }
+              }
             }
           ]
         }
@@ -120,8 +225,21 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:15447907,HideFlags:32,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 15447907
+        }
+      }
     }
   ]
 }

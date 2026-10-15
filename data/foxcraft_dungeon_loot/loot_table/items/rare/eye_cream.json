@@ -113,8 +113,21 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:42,Unbreakable:1,CustomModelData:421957,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:42,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:unbreakable": {},
+        "minecraft:item_model": "foxcraft_dungeon_loot:eye_cream",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments",
+            "minecraft:unbreakable"
+          ]
+        }
+      }
     }
   ]
 }

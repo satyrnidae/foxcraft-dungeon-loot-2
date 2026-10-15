@@ -41,8 +41,43 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:15086100,HideFlags:32,CustomPotionEffects:[{Id:3,Duration:1200,Amplifier:1},{Id:8,Duration:2400,Amplifier:2},{Id:23,Duration:10,Amplifier:9},{Id:1,Duration:2400,Amplifier:1}],DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 15086100,
+          "custom_effects": [
+            {
+              "id": "minecraft:haste",
+              "amplifier": 1,
+              "duration": 1200
+            },
+            {
+              "id": "minecraft:jump_boost",
+              "amplifier": 2,
+              "duration": 2400
+            },
+            {
+              "id": "minecraft:saturation",
+              "amplifier": 9,
+              "duration": 10
+            },
+            {
+              "id": "minecraft:speed",
+              "amplifier": 1,
+              "duration": 2400
+            }
+          ]
+        }
+      }
     }
   ]
 }

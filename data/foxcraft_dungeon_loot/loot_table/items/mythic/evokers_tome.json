@@ -82,8 +82,14 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:41,CustomModelData:421951,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:41,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:evoker_tome"
+      }
     }
   ]
 }

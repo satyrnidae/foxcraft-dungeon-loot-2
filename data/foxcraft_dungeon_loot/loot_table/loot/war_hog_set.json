@@ -36,7 +36,7 @@
   ],
   "modifier": [
     {
-      "type": "set_nbt",
+      "type": "minecraft:set_custom_data",
       "tag": "{PiglinBarter:1b}"
     }
   ]

@@ -37,8 +37,20 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:64,Unbreakable:1,CustomModelData:4219514,HideFlags:4,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:64,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:unbreakable": {},
+        "minecraft:item_model": "foxcraft_dungeon_loot:d4",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:unbreakable"
+          ]
+        }
+      }
     }
   ]
 }

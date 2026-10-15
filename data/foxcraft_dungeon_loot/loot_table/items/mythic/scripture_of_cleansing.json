@@ -96,8 +96,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:51,CustomModelData:421953,HideFlags:1,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:51,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:scripture_of_cleansing",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

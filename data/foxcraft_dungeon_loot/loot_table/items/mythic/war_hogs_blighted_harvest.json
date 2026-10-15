@@ -116,8 +116,14 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{Souls:0,DungeonLootId:86,CustomModelData:42195,DungeonItem:1b,Rarity:\"Mythic\"}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{Souls:0,DungeonLootId:86,DungeonItem:1b,Rarity:\"Mythic\"}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:war_hogs_blighted_harvest"
+      }
     }
   ]
 }

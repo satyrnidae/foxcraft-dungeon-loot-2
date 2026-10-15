@@ -20,8 +20,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:3484199,CustomPotionEffects:[{Id:20,Amplifier:1,Duration:300}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 3484199,
+          "custom_effects": [
+            {
+              "id": "minecraft:wither",
+              "amplifier": 1,
+              "duration": 300
+            }
+          ]
+        }
+      }
     }
   ]
 }

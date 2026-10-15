@@ -82,8 +82,21 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:36,Unbreakable:1,CustomModelData:421955,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:36,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:unbreakable": {},
+        "minecraft:item_model": "foxcraft_dungeon_loot:deilonas_holy_blessings",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments",
+            "minecraft:unbreakable"
+          ]
+        }
+      }
     }
   ]
 }

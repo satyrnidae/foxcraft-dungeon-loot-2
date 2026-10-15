@@ -8,8 +8,15 @@
           "name": "minecraft:goat_horn",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{instrument:\"minecraft:admire_goat_horn\",HideFlags:32}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:instrument": "minecraft:admire_goat_horn",
+                "minecraft:tooltip_display": {
+                  "hidden_components": [
+                    "minecraft:instrument"
+                  ]
+                }
+              }
             }
           ]
         }
@@ -26,8 +33,14 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomModelData:42195,CopperGoatHorn:1b,CustomInstrument:fearless_river_gift}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{CopperGoatHorn:1b,CustomInstrument:\"fearless_river_gift\"}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:copper_goat_horn"
+      }
     },
     {
       "type": "minecraft:set_lore",

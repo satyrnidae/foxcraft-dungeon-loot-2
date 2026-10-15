@@ -74,8 +74,20 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:77,CustomModelData:4219520,HideFlags:5,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:77,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:ima_leaf",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments",
+            "minecraft:unbreakable"
+          ]
+        }
+      }
     }
   ]
 }

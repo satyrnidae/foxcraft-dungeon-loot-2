@@ -106,8 +106,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:54,CustomModelData:421955,HideFlags:1,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:54,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:totem_of_dendris",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

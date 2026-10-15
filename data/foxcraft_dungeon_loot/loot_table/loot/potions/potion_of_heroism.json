@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:4521796,CustomPotionEffects:[{Id:32,Duration:300}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 4521796,
+          "custom_effects": [
+            {
+              "id": "minecraft:hero_of_the_village",
+              "duration": 300
+            }
+          ]
+        }
+      }
     }
   ]
 }

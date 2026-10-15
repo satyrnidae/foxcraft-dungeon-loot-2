@@ -12,8 +12,14 @@
   ],
   "modifier": [
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:82,DungeonLoot:1b,CustomModelData:421950,ProcessBlock:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:82,DungeonLoot:1b,ProcessBlock:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:iron_sword"
+      }
     },
     {
       "type": "minecraft:set_name",

@@ -41,8 +41,27 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16448000,HideFlags:32,CustomPotionEffects:[{Id:24,Duration:12000}],DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 16448000,
+          "custom_effects": [
+            {
+              "id": "minecraft:glowing",
+              "duration": 12000
+            }
+          ]
+        }
+      }
     }
   ]
 }

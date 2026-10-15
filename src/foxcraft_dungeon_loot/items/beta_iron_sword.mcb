@@ -25,7 +25,7 @@ function on_hit {
         }
 
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
-            break_item weapon.mainhand minecraft:shield{CustomModelData:421950}
+            break_item weapon.mainhand minecraft:shield[item_model="foxcraft_dungeon_loot:iron_sword"]
         }
     }
 

@@ -106,8 +106,19 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:47,CustomModelData:421956,HideFlags:1,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:47,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:idol_of_melimonas",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

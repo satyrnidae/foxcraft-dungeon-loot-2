@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16262177,CustomPotionEffects:[{Id:23,Amplifier:4}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 16262177,
+          "custom_effects": [
+            {
+              "id": "minecraft:saturation",
+              "amplifier": 4
+            }
+          ]
+        }
+      }
     }
   ]
 }

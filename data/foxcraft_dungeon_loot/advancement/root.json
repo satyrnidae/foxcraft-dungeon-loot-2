@@ -3,7 +3,10 @@
     "frame": "challenge",
     "icon": {
       "id": "minecraft:golden_sword",
-      "nbt": "{CustomModelData:421951,Enchantments:[{}]}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:rogues_dagger",
+        "minecraft:enchantment_glint_override": true
+      }
     },
     "title": [
       {

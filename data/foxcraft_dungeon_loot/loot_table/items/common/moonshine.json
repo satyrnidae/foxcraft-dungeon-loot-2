@@ -10,8 +10,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:1800},{Id:7,Duration:10},{Id:11,Duration:600,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1800
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 600
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -22,8 +40,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:1560},{Id:7,Duration:10},{Id:11,Duration:700,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1560
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 700
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -34,8 +70,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:1320},{Id:7,Duration:10},{Id:11,Duration:800,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1320
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 800
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -46,8 +100,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:1080},{Id:7,Duration:10},{Id:11,Duration:900,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1080
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 900
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -58,8 +130,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:840},{Id:7,Duration:10},{Id:11,Duration:1000,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 840
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 1000
+                    }
+                  ]
+                }
+              }
             }
           ]
         },
@@ -70,8 +160,26 @@
           "name": "minecraft:potion",
           "modifier": [
             {
-              "type": "minecraft:set_nbt",
-              "tag": "{CustomPotionEffects:[{Id:15,Duration:600},{Id:7,Duration:10},{Id:11,Duration:1200,Amplifier:1}]}"
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 600
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 1200
+                    }
+                  ]
+                }
+              }
             }
           ]
         }
@@ -109,8 +217,21 @@
       "mode": "replace_all"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16445670,HideFlags:32,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 16445670
+        }
+      }
     }
   ]
 }

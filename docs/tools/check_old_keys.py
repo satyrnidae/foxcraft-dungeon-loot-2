@@ -21,7 +21,7 @@ OLD_CONDITION_NAMES = {
     "value_check", "location_check", "damage_source_properties", "random_chance_with_looting", "entity_scores",
 }
 # Type values that no longer exist.
-REMOVED_TYPES = {"alternative", "reference", "looting_enchant", "random_chance_with_looting"}
+REMOVED_TYPES = {"alternative", "reference", "looting_enchant", "random_chance_with_looting", "set_nbt"}
 LOOT_KINDS = {"loot_table", "item_modifier", "predicate"}
 
 
@@ -45,6 +45,10 @@ def walk(node, kind, path, found):
             if key == "type" and isinstance(value, str) and bare(value) in REMOVED_TYPES and value.startswith(
                     ("minecraft:", bare(value))) and ":" not in value.replace("minecraft:", "", 1):
                 found.append("%s: removed type '%s'" % (here, value))
+            if key == "nbt" and isinstance(value, str):
+                found.append("%s: item NBT string, use components or custom_data" % here)
+            if isinstance(value, str) and ("CustomModelData" in value or "HideFlags" in value):
+                found.append("%s: item NBT key in '%s'" % (here, value[:40]))
             walk(value, kind, here, found)
     elif isinstance(node, list):
         for i, value in enumerate(node):

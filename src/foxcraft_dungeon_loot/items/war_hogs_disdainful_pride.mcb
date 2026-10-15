@@ -17,7 +17,7 @@ function on_fall {
             }
 
             execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-                break_item armor.feet minecraft:netherite_boots{CustomModelData:421951}
+                break_item armor.feet minecraft:netherite_boots
             }
         }
     }

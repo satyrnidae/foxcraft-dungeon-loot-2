@@ -84,8 +84,19 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:78,CustomModelData:421951,HideFlags:1,DungeonItem:1b,ProcessOnUsed:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:78,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:spell_scroll_hail_of_arrows",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

@@ -167,7 +167,7 @@ function on_warped_fungus_used {
             execute unless entity @s[gamemode=creative] run {
                 execute if score #test <%config.internalScoreboard%> matches 1 run {
                     # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me (:
-                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
+                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick[item_model="foxcraft_dungeon_loot:scripture_of_cleansing"]
                 } else run {
                     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
                         execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
@@ -179,7 +179,7 @@ function on_warped_fungus_used {
 
                     execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
                         # 19950421 was too large a number to prepend or I would have gone with the ISO date format. Curse you single-precision floating point limitations!!!
-                        break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421953}
+                        break_item weapon.mainhand minecraft:warped_fungus_on_a_stick[item_model="foxcraft_dungeon_loot:scripture_of_cleansing"]
                     }
                 }
                 scoreboard players operation @s satyrn.fdl.scriptureOfCleansing.cooldown = scriptureOfCleansing.cooldown <%config.internalScoreboard%>

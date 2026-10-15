@@ -22,7 +22,13 @@
           "type": "minecraft:item",
           "name": "minecraft:iron_pickaxe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:iron_auto_pickaxe"
+        }
+      }
     },
     {
       "__comment": "Diamond variant, loot variant score = 1",
@@ -39,7 +45,13 @@
           "type": "minecraft:item",
           "name": "minecraft:diamond_pickaxe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:diamond_auto_pickaxe"
+        }
+      }
     },
     {
       "__comment": "Netherite variant, loot variant score = 2",
@@ -56,7 +68,13 @@
           "type": "minecraft:item",
           "name": "minecraft:netherite_pickaxe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:netherite_auto_pickaxe"
+        }
+      }
     }
   ],
   "modifier": [
@@ -118,8 +136,8 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:32,CustomModelData:421951,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:32,DungeonItem:1b}"
     }
   ]
 }

@@ -37,8 +37,30 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421950,EntityTag:{ShowArms:1b,Pose:{Head:[-20.0f,75.0f,0.0f],RightArm:[-180.0f,110.0f,-50.0f]}},DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:armor_stand",
+        "minecraft:entity_data": {
+          "id": "minecraft:armor_stand",
+          "ShowArms": 1,
+          "Pose": {
+            "Head": [
+              -20.0,
+              75.0,
+              0.0
+            ],
+            "RightArm": [
+              -180.0,
+              110.0,
+              -50.0
+            ]
+          }
+        }
+      }
     }
   ]
 }

@@ -26,7 +26,7 @@ function on_tick {
                 }
 
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
-                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
+                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick[item_model="foxcraft_dungeon_loot:evoker_tome"]
                 }
             }
         }
@@ -44,7 +44,7 @@ function on_tick {
                 }
 
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
-                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421951}
+                    break_item weapon.mainhand minecraft:warped_fungus_on_a_stick[item_model="foxcraft_dungeon_loot:evoker_tome"]
                 }
             }
         }

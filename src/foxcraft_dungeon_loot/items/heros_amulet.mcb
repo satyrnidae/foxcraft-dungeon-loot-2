@@ -31,7 +31,7 @@ function on_warped_fungus_used {
         }
 
         execute unless entity @s[gamemode=creative] run {
-            break_item weapon.mainhand minecraft:warped_fungus_on_a_stick{CustomModelData:421952}
+            break_item weapon.mainhand minecraft:warped_fungus_on_a_stick[item_model="foxcraft_dungeon_loot:hero_amulet"]
         }
     }
 }

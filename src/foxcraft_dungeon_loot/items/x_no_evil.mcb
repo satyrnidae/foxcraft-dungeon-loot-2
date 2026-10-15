@@ -42,7 +42,7 @@ function on_tick {
         } else run {
             # Bottle break sound and particles
             playsound minecraft:entity.splash_potion.break player @a ~ ~ ~ 1.5
-            particle minecraft:item minecraft:snowball{CustomModelData:421952} ^ ^ ^ 0.25 0.05 0.25 0.1 5
+            particle minecraft:item minecraft:snowball[item_model="foxcraft_dungeon_loot:x_no_evil"] ^ ^ ^ 0.25 0.05 0.25 0.1 5
             particle minecraft:effect ^ ^ ^ 0.25 0.05 0.25 0.1 10
 
             # Randomly select an effect and summon an area effect cloud where the projectile landed.

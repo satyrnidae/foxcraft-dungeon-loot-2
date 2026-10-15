@@ -151,8 +151,14 @@
       }
     },
     {
-      "type": "set_nbt",
-      "tag": "{DungeonLootId:40,CustomModelData:421951,display:{color:5215783},DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:40,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:dyed_color": 5215783
+      }
     }
   ]
 }

@@ -41,8 +41,36 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16711680,HideFlags:32,CustomPotionEffects:[{Id:15,Duration:200},{Id:5,Duration:400,Amplifier:2},{Id:20,Duration:60}],DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 16711680,
+          "custom_effects": [
+            {
+              "id": "minecraft:blindness",
+              "duration": 200
+            },
+            {
+              "id": "minecraft:strength",
+              "amplifier": 2,
+              "duration": 400
+            },
+            {
+              "id": "minecraft:wither",
+              "duration": 60
+            }
+          ]
+        }
+      }
     }
   ]
 }

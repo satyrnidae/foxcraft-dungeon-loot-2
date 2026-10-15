@@ -2,7 +2,9 @@
   "display": {
     "icon": {
       "id": "minecraft:goat_horn",
-      "nbt": "{CustomModelData:42195}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:copper_goat_horn"
+      }
     },
     "title": "Instrumentalist",
     "description": "Trade with a Wandering Trader for a copper goat horn.",

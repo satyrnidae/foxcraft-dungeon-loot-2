@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:4866583,CustomPotionEffects:[{Id:4,Duration:1800}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 4866583,
+          "custom_effects": [
+            {
+              "id": "minecraft:mining_fatigue",
+              "duration": 1800
+            }
+          ]
+        }
+      }
     }
   ]
 }

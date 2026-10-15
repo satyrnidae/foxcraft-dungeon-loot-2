@@ -2,7 +2,9 @@
   "display": {
     "icon": {
       "id": "minecraft:iron_nugget",
-      "nbt": "{CustomModelData:421950}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:silver_coins"
+      }
     },
     "title": "Gacha Gotcha",
     "description": "Trade with a Wandering Trader for a Grab-Bag.",

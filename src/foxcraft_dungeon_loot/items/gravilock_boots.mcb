@@ -47,18 +47,18 @@ function damage {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_iron] run {
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:iron_boots{CustomModelData:421953}
+            break_item armor.feet minecraft:iron_boots
         }
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_diamond] run {
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_diamond
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:diamond_boots{CustomModelData:421953}
+            break_item armor.feet minecraft:diamond_boots
         }
     } else run {
         # We'll just assume this is netherite to save on NBT scans.
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_netherite
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:netherite_boots{CustomModelData:421953}
+            break_item armor.feet minecraft:netherite_boots
         }
     }
 }

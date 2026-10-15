@@ -20,8 +20,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:16284963,CustomPotionEffects:[{Id:21,Amplifier:1,Duration:1800}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 16284963,
+          "custom_effects": [
+            {
+              "id": "minecraft:health_boost",
+              "amplifier": 1,
+              "duration": 1800
+            }
+          ]
+        }
+      }
     }
   ]
 }

@@ -3,7 +3,9 @@
   "display": {
     "icon": {
       "id": "minecraft:diamond_axe",
-      "nbt": "{CustomModelData:421953}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:diamond_chainsaw"
+      }
     },
     "title": "Texas Style",
     "description": "Massacre every neutral or friendly mob with a chainsaw.",

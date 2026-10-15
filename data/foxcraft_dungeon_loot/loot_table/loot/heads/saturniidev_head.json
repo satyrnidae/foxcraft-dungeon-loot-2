@@ -12,8 +12,28 @@
   ],
   "modifier": [
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonHead:1b,SkullOwner:{Id:[I;840815617,185095579,-1656930520,1522430339],Name:\"saturniidev\",Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk0ZjYxODE0ZTY2NDkwY2ZlYjNlMTU5ZmY3ZWM0YWY4ZWFiYWJlODBhYjBkYjRiZTk0YTM3NTgyMGNiODZkMiJ9fX0=\"}]}}}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonHead:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:profile": {
+          "name": "saturniidev",
+          "id": [
+            840815617,
+            185095579,
+            -1656930520,
+            1522430339
+          ],
+          "properties": [
+            {
+              "name": "textures",
+              "value": "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk0ZjYxODE0ZTY2NDkwY2ZlYjNlMTU5ZmY3ZWM0YWY4ZWFiYWJlODBhYjBkYjRiZTk0YTM3NTgyMGNiODZkMiJ9fX0="
+            }
+          ]
+        }
+      }
     }
   ]
 }

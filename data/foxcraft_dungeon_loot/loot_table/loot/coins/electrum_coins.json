@@ -36,8 +36,11 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421951}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:electrum_coins",
+        "minecraft:max_stack_size": 99
+      }
     }
   ]
 }

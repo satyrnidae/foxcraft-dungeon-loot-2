@@ -41,8 +41,47 @@
       "mode": "append"
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:9843200,CustomPotionEffects:[{Id:4,Duration:100,Amplifier:1},{Id:9,Duration:100},{Id:10,Duration:160,Amplifier:2},{Id:2,Duration:100,Amplifier:1},{Id:18,Duration:100,Amplifier:1}],HideFlags:32,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 9843200,
+          "custom_effects": [
+            {
+              "id": "minecraft:mining_fatigue",
+              "amplifier": 1,
+              "duration": 100
+            },
+            {
+              "id": "minecraft:nausea",
+              "duration": 100
+            },
+            {
+              "id": "minecraft:regeneration",
+              "amplifier": 2,
+              "duration": 160
+            },
+            {
+              "id": "minecraft:slowness",
+              "amplifier": 1,
+              "duration": 100
+            },
+            {
+              "id": "minecraft:weakness",
+              "amplifier": 1,
+              "duration": 100
+            }
+          ]
+        }
+      }
     }
   ]
 }

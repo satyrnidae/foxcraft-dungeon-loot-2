@@ -122,8 +122,8 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:28,CustomModelData:421951,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:28,DungeonItem:1b}"
     }
   ]
 }

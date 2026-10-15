@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:8954814,CustomPotionEffects:[{Id:30,Duration:1800}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 8954814,
+          "custom_effects": [
+            {
+              "id": "minecraft:dolphins_grace",
+              "duration": 1800
+            }
+          ]
+        }
+      }
     }
   ]
 }

@@ -62,8 +62,19 @@
       "add": false
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:62,CustomModelData:421957,HideFlags:1,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:62,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:wing_of_quet_zala",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
     }
   ]
 }

@@ -97,8 +97,8 @@
       "add": true
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:50,CustomModelData:421951,DungeonItem:1b,ProcessFall:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:50,DungeonItem:1b,ProcessFall:1b}"
     }
   ]
 }

@@ -22,7 +22,13 @@
           "type": "minecraft:item",
           "name": "minecraft:iron_axe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:iron_chainsaw"
+        }
+      }
     },
     {
       "__comment": "Diamond variant, loot variant score = 1",
@@ -39,7 +45,13 @@
           "type": "minecraft:item",
           "name": "minecraft:diamond_axe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:diamond_chainsaw"
+        }
+      }
     },
     {
       "__comment": "Netherite variant, loot variant score = 2",
@@ -56,7 +68,13 @@
           "type": "minecraft:item",
           "name": "minecraft:netherite_axe"
         }
-      ]
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:netherite_chainsaw"
+        }
+      }
     }
   ],
   "modifier": [
@@ -120,8 +138,8 @@
       "add": false
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:87,Rarity:Mythic,CustomModelData:421953,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:87,Rarity:\"Mythic\",DungeonItem:1b}"
     }
   ]
 }

@@ -41,7 +41,7 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
+      "type": "minecraft:set_custom_data",
       "tag": "{DungeonLootId:11,DungeonItem:1b}"
     }
   ]

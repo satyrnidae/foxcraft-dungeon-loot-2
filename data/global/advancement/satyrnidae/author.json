@@ -4,7 +4,9 @@
     "description": "Datapacks Created by satyrnidae!",
     "icon": {
       "id": "minecraft:player_head",
-      "nbt": "{SkullOwner:\"satyrnidae\"}"
+      "components": {
+        "minecraft:profile": "satyrnidae"
+      }
     },
     "show_toast": false,
     "announce_to_chat": false

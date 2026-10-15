@@ -46,8 +46,14 @@
       "add": false
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{DungeonLootId:85,CustomModelData:421951,DungeonItem:1b}"
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:85,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:peerless_yewhewn"
+      }
     }
   ]
 }

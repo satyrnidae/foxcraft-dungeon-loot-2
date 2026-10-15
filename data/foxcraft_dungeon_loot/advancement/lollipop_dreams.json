@@ -3,7 +3,9 @@
   "display": {
     "icon": {
       "id": "minecraft:iron_axe",
-      "nbt": "{CustomModelData:421953}"
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:iron_chainsaw"
+      }
     },
     "title": "Lollipop Dreams",
     "description": "Killed an undead with a chainsaw.",

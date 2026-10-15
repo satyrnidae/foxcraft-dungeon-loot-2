@@ -20,8 +20,18 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:12624973,CustomPotionEffects:[{Id:27,Duration:3600}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 12624973,
+          "custom_effects": [
+            {
+              "id": "minecraft:unluck",
+              "duration": 3600
+            }
+          ]
+        }
+      }
     }
   ]
 }

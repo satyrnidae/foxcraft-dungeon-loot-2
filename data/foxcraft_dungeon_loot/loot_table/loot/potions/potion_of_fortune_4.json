@@ -20,8 +20,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:3381504,CustomPotionEffects:[{Id:26,Amplifier:3,Duration:600}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 3381504,
+          "custom_effects": [
+            {
+              "id": "minecraft:luck",
+              "amplifier": 3,
+              "duration": 600
+            }
+          ]
+        }
+      }
     }
   ]
 }

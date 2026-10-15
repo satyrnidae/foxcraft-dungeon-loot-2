@@ -20,8 +20,19 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomPotionColor:5797459,CustomPotionEffects:[{Id:17,Amplifier:2,Duration:300}]}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 5797459,
+          "custom_effects": [
+            {
+              "id": "minecraft:hunger",
+              "amplifier": 2,
+              "duration": 300
+            }
+          ]
+        }
+      }
     }
   ]
 }

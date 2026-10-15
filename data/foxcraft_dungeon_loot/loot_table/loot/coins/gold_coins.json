@@ -20,8 +20,11 @@
       }
     },
     {
-      "type": "minecraft:set_nbt",
-      "tag": "{CustomModelData:421950}"
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:gold_coins",
+        "minecraft:max_stack_size": 99
+      }
     }
   ]
 }
