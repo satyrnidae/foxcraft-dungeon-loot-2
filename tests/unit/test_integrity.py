@@ -138,7 +138,10 @@ class ResourcePack(unittest.TestCase):
 
     def test_every_jukebox_song_has_an_item(self):
         songs = {p.stem for p in (pk.DATA / "jukebox_song").glob("*.json")}
-        discs = {n.rsplit("/", 1)[-1] for n in ITEMS if n.startswith("item/special/disc/")}
+        discs = set()
+        for name, path in ITEMS.items():
+            if name.startswith("item/special/music_disc/"):
+                discs.add(pk.build_item(name, path).components["minecraft:jukebox_playable"].split(":", 1)[1])
         self.assertEqual(sorted(songs ^ discs), [])
 
     def test_every_instrument_has_a_swap_modifier(self):

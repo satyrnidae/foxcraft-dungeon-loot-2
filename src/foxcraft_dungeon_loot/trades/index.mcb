@@ -406,46 +406,46 @@ function build {
 
 # Copper Goat Horns 83-92
         # Trade Index 83: Clear Temper Journey
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/clear_temper_journey
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/clear_temper_journey
         set_buy_from_loot foxcraft_dungeon_loot:item/random_loot/coin/copper_coins
         set_buyb_item_id "minecraft:goat_horn"
         set_buyb_price 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 84: Dry Urge Anger
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/dry_urge_anger
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/dry_urge_anger
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 85: Fearless River Gift
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/fearless_river_gift
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/fearless_river_gift
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 86: Fresh Nest Thought
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/fresh_nest_thought
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/fresh_nest_thought
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 87: Great Sky Falling
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/great_sky_falling
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/great_sky_falling
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 88: Mumble Fire Memory
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/mumble_fire_memory
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/mumble_fire_memory
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 89: Old Hymn Resting
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/old_hymn_resting
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/old_hymn_resting
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 90: Pure Water Desire
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/pure_water_desire
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/pure_water_desire
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 91: Secret Lake Tear
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/secret_lake_tear
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/secret_lake_tear
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 92: Sweet Moon Love
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/goat_horn/sweet_moon_love
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/copper_horn/sweet_moon_love
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 93: Nether Star
@@ -476,207 +476,207 @@ function build {
         # Trade Index 98: music_disc_mdoadq_acornman
         function foxcraft_dungeon_loot:trades/recipes/new
         set_buy_from_loot foxcraft_dungeon_loot:item/random_loot/coin/gold_coins
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_acornman
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 99: music_disc_mdoadq_acornman_am
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_acornman_am
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman_am
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 100: music_disc_mdoadq_acornmanreskinbd5
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_acornmanreskinbd5
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornmanreskinbd5
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 101: music_disc_mdoadq_aeon
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_aeon
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeon
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 102: music_disc_mdoadq_aeonorch190bpm
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_aeonorch190bpm
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeonorch190bpm
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 103: music_disc_mdoadq_avidit_e
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_avidit_e
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_avidit_e
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 104: music_disc_mdoadq_drown
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_drown
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_drown
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 105: music_disc_mdoadq_duma
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_duma
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_duma
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 106: music_disc_mdoadq_flutes
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_flutes
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_flutes
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 107: music_disc_mdoadq_gutturalis
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_gutturalis
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_gutturalis
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 108: music_disc_mdoadq_kotyledon
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_kotyledon
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_kotyledon
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 109: music_disc_mdoadq_locker
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_locker
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_locker
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 110: music_disc_mdoadq_lost
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_lost
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_lost
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 111: music_disc_mdoadq_minimalist
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_minimalist
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_minimalist
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 112: music_disc_mdoadq_nematode
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_nematode
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nematode
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 113: music_disc_mdoadq_nighttime_transit
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_nighttime_transit
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nighttime_transit
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 114: music_disc_mdoadq_old_white_straight_road
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_old_white_straight_road
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_old_white_straight_road
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 115: music_disc_mdoadq_outskirts
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_outskirts
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_outskirts
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 116: music_disc_mdoadq_pathetic_mario
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_pathetic_mario
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_pathetic_mario
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 117: music_disc_mdoadq_pet_the_dog
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_pet_the_dog
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pet_the_dog
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 118: music_disc_mdoadq_pies_e
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_pies_e
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pies_e
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 119: music_disc_mdoadq_reboot
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_reboot
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_reboot
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 120: music_disc_mdoadq_rhapsodymini2
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_rhapsodymini2
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rhapsodymini2
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 121: music_disc_mdoadq_rigmarole
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_rigmarole
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rigmarole
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 122: music_disc_mdoadq_slither
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_slither
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_slither
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 123: music_disc_mdoadq_sparkplugs
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_sparkplugs
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_sparkplugs
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 124: music_disc_mdoadq_the_scone_song
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_the_scone_song
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_the_scone_song
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 125: music_disc_mdoadq_wanderer
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_mdoadq_wanderer
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_wanderer
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 126: music_disc_wolfgun_after_another
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_after_another
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_after_another
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 127: music_disc_wolfgun_between_layers
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_between_layers
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_between_layers
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 128: music_disc_wolfgun_black_dawn
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_black_dawn
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_black_dawn
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 129: music_disc_wolfgun_cliff_where
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_cliff_where
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_cliff_where
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 130: music_disc_wolfgun_dark_southern_sky
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_dark_southern_sky
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_dark_southern_sky
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 131: music_disc_wolfgun_deer
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_deer
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_deer
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 132: music_disc_wolfgun_every_morning
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_every_morning
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_every_morning
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 133: music_disc_wolfgun_far_away
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_far_away
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_far_away
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 134: music_disc_wolfgun_into_stars
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_into_stars
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_into_stars
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 135: music_disc_wolfgun_lightform
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_lightform
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_lightform
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 136: music_disc_wolfgun_moon_beams
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_moon_beams
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_beams
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 137: music_disc_wolfgun_moon_rays
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_moon_rays
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_rays
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 138: music_disc_wolfgun_mt_ennui
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_mt_ennui
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_mt_ennui
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 139: music_disc_wolfgun_night_i
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_night_i
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_i
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 140: music_disc_wolfgun_night_ii
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_night_ii
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_ii
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 141: music_disc_wolfgun_of_plains
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_of_plains
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_of_plains
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 142: music_disc_wolfgun_pale_star
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_pale_star
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_pale_star
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 143: music_disc_wolfgun_passing
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_passing
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_passing
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 144: music_disc_wolfgun_peaks
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_peaks
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_peaks
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 145: music_disc_wolfgun_throughout
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_throughout
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_throughout
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 146: music_disc_wolfgun_tropic
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_tropic
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_tropic
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 147: music_disc_wolfgun_unseen_land
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_wolfgun_unseen_land
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/wolfgun_unseen_land
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 148: music_disc_c418_dog
-        set_sell_from_loot foxcraft_dungeon_loot:item/special/disc/music_disc_c418_dog
+        set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/c418_dog
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 149: music_disc_5

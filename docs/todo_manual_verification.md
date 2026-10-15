@@ -101,7 +101,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 8a - copper goat horn
 
-- [ ] `/reload` shows no instrument, sound or modifier errors. `/loot give @s loot foxcraft_dungeon_loot:single_copper_goat_horn` gives a horn; all ten songs appear over a few rolls.
+- [ ] `/reload` shows no instrument, sound or modifier errors. `/loot give @s loot foxcraft_dungeon_loot:item/random_loot/single_copper_goat_horn` gives a horn; all ten songs appear over a few rolls.
 - [ ] Holding a horn and standing still looking level: right-click plays the melody part for the full 4 seconds. `/data get entity @s SelectedItem.components."minecraft:instrument"` ends in `_melody`.
 - [ ] Sneaking: the instrument changes to `_bass` and the bass part plays. Looking up 30 degrees or more (not sneaking): `_harmony`. Sneaking wins over looking up.
 - [ ] Changing stance while the horn is held swaps the instrument at the next click, with no inventory flicker.
@@ -121,7 +121,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Comparator output next to a jukebox with each disc matches the value in its `jukebox_song`. Dog is set to 6, adjust if you want another.
 - [ ] No leftover `music_disc_11` override: a vanilla disc 11 and a vanilla cat disc look and play normally.
 - [ ] Every disc texture renders (inventory and ground), none purple-black.
-- [ ] `/loot give @s loot foxcraft_dungeon_loot:item/special/disc/<id>` works and the item carries `DungeonLootId` 88 to 138.
+- [ ] `/loot give @s loot foxcraft_dungeon_loot:item/special/music_disc/<artist>_<title>` works and the item carries `DungeonLootId` 88 to 138.
 - [ ] Credits in the README match the tracks.
 
 ## Phase 8c - disc distribution

@@ -41,7 +41,7 @@ src/                         mc-build sources, the source of truth for functions
     items/<item>.mcb         one file per item
 data/foxcraft_dungeon_loot/
   loot_table/item/<rarity>/    item loot tables, thin, one file per item
-  loot_table/item/special/     disc/ and goat_horn/ loot tables
+  loot_table/item/special/     music_disc/ and copper_horn/ loot tables, named like their modifier folders
   loot_table/item/random_loot/ pickers, pools and groups for random drops
   loot_table/entity/           loot for entities, such as the Wandering Trader
   item_modifier/<rarity>/<item>/define.json   the real item definition, plus the item's other modifiers beside it

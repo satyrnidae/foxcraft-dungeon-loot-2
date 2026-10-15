@@ -1,6 +1,6 @@
 """One generated test per item.
 
-Items are discovered from loot_table/item/**, except item/random_loot. Discs and copper horns are under item/special/. Each test builds the item from its loot table
+Items are discovered from loot_table/item/**, except item/random_loot. Discs and copper horns are under item/special/music_disc/ and item/special/copper_horn/, named like their modifier folders. Each test builds the item from its loot table
 and modifiers, then checks it against its entry in specs/items.json and against rules every item must follow. If a test
 fails because you changed an item on purpose, run `python tests/unit/gen_specs.py` and review the spec diff.
 
@@ -86,23 +86,11 @@ def check_identity(case, item, spec):
             case.assertEqual(rarity.lower(), folder)
 
 
-def disc_folder(disc):
-    """Folder name of a disc modifier: no music_disc_ prefix, and mdoadq replaced by the artist from the song title."""
-    rest = disc.replace("music_disc_", "", 1)
-    if rest.startswith("mdoadq_"):
-        title = LANG.get("jukebox_song.%s.%s" % (pk.NS, disc), "")
-        artist = re.sub(r"[^a-z0-9]", "", title.split(" - ")[0].lower())
-        return artist + rest[len("mdoadq"):]
-    return rest
-
-
 def expected_define_id(name):
     """Where an item's define.json lives: <rarity>/<item>, special/<item> for discs and horns."""
     parts = name.split("/")
     if len(parts) == 4 and parts[1] == "special":
-        if parts[2] == "disc":
-            return "%s:special/music_disc/%s/define" % (pk.NS, disc_folder(parts[3]))
-        return "%s:special/copper_horn/%s/define" % (pk.NS, parts[3])
+        return "%s:special/%s/%s/define" % (pk.NS, parts[2], parts[3])
     if len(parts) == 3:
         return "%s:%s/%s/define" % (pk.NS, parts[1], parts[2])
     return None
@@ -125,7 +113,7 @@ def check_content(case, item, spec):
     with case.subTest("modifier is not silently empty"):
         case.assertEqual(item.has_name, spec["named"])
         pack_item = bool(spec["loot_ids"] or spec["dungeon_item"])
-        if pack_item and not item.name.startswith("item/special/disc/"):
+        if pack_item and not item.name.startswith("item/special/music_disc/"):
             case.assertTrue(item.has_name, "no set_name, the item would spawn unnamed")
         case.assertTrue(item.function_types, "no item functions were found")
     with case.subTest("modifier function types match spec"):
@@ -159,7 +147,7 @@ def check_source(case, item, spec):
 
 
 def check_disc(case, item):
-    if not item.name.startswith("item/special/disc/"):
+    if not item.name.startswith("item/special/music_disc/"):
         return
     song_id = item.components.get("minecraft:jukebox_playable")
     with case.subTest("disc has a jukebox_playable that resolves"):
@@ -180,7 +168,7 @@ def check_disc(case, item):
 
 
 def check_horn(case, item):
-    if not item.name.startswith("item/special/goat_horn/"):
+    if not item.name.startswith("item/special/copper_horn/"):
         return
     song = item.custom_data.get("CustomInstrument")
     if song is None:
