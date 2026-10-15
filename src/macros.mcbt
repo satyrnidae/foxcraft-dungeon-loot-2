@@ -12,12 +12,12 @@ Does not check if the item is actually broken.
 
 Parameters:
 0 - The non-numeric slot ID of the item.
-1 - The item that the particle will display as.
+1 - The item stack that the particle will display as, an SNBT compound such as {id:"minecraft:iron_boots"}.
 ###
 template break_item {
     with a0:word a1:word {
         playsound minecraft:entity.item.break player @s ~ ~ ~ 2.0 1.0
-        particle minecraft:item <%a1%> ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
+        particle minecraft:item{item:<%a1%>} ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
         item modify entity @s <%a0%> foxcraft_dungeon_loot:remove
     }
 }

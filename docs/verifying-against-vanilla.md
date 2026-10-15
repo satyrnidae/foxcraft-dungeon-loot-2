@@ -247,3 +247,17 @@ Two tools check the repository's JSON under `data/`, because 26.3 loads unconver
   Pack predicates are inlined before parsing because the vanilla lookup already owns the predicate registry, and loot table references are checked
   for existence and parsed as empty tables. Known harmless re-encodings (default `weight`, `quality`, `add`, constant number providers, `__comment` keys,
   advancement defaults) are not reported.
+
+
+## 10. Parsing the generated commands
+
+`docs/tools/CmdCheck.java FUNCTION_DIR` runs every command line of every `.mcfunction` under a folder through the game's own command dispatcher.
+It parses only, nothing executes. Renamed arguments, old item and particle syntax, bad text components and incomplete commands show up as errors.
+Build first (`npx mcb build`), then compile and run it from a scratch directory with an absolute path:
+```bash
+javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/CmdCheck.java
+java -cp "$WORK/classes:$JAR:$CP" CmdCheck "$(pwd)/data/foxcraft_dungeon_loot/function"
+```
+Limits: the pack's own loot tables, predicates and item modifiers are not in the vanilla registries, so unresolved ids in the `foxcraft_dungeon_loot`
+namespace are counted and ignored. NBT inside `summon` and `data modify` is only checked as syntax, so an old key such as `HandItems` still parses;
+grep `src/` for those. Macro lines starting with `$` are skipped.

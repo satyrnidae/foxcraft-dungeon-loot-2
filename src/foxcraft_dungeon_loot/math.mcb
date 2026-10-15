@@ -75,7 +75,7 @@ If the function returns a 1, the tool should be damaged.
 ###
 function should_damage_tool {
     execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
-        scoreboard players set #math.result 1
+        scoreboard players set #math.result <%config.internalScoreboard%> 1
     } else run {
         scoreboard players set #math.input2 <%config.internalScoreboard%> 32767
         scoreboard players add #math.input1 <%config.internalScoreboard%> 1
@@ -100,7 +100,7 @@ function should_damage_tool {
 # If the function returns a 1, the tool should be damaged.
 function should_damage_armor {
     execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
-        scoreboard players set #math.result 1
+        scoreboard players set #math.result <%config.internalScoreboard%> 1
     } else run {
         # Approximates a limit of chance not to break approaching 40%
         scoreboard players set #math.input2 <%config.internalScoreboard%> 13107

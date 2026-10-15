@@ -22,7 +22,7 @@ function clock_10t {
             execute unless entity @s[gamemode=creative] run {
                 execute if entity @s[predicate=foxcraft_dungeon_loot:items/feet_have_unbreaking] run {
                     # NBT scan to determine unbreaking level.
-                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s Inventory[{Slot:100b}].tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+                    execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s Inventory[{Slot:100b}].components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_armor
                     execute if score #math.result <%config.internalScoreboard%> matches 1 run function foxcraft_dungeon_loot:items/gravilock_boots/damage
                 } else run {
@@ -47,18 +47,18 @@ function damage {
     execute if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_iron] run {
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_iron
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:iron_boots
+            break_item armor.feet {id:"minecraft:iron_boots"}
         }
     } else execute if entity @s[predicate=foxcraft_dungeon_loot:items/gravilock_boots/is_diamond] run {
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_diamond
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:diamond_boots
+            break_item armor.feet {id:"minecraft:diamond_boots"}
         }
     } else run {
         # We'll just assume this is netherite to save on NBT scans.
         item modify entity @s armor.feet foxcraft_dungeon_loot:gravilock_boots/damage_netherite
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/boots_broken] run {
-            break_item armor.feet minecraft:netherite_boots
+            break_item armor.feet {id:"minecraft:netherite_boots"}
         }
     }
 }

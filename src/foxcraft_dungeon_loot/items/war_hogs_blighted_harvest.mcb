@@ -73,7 +73,7 @@ function on_harvest {
 
 # Occurs when the player defeats an entity
 function on_kill_entity {
-    execute store result score @s satyrn.fdl.souls run data get entity @s SelectedItem.tag.Souls
+    execute store result score @s satyrn.fdl.souls run data get entity @s SelectedItem.components."minecraft:custom_data".Souls
     execute if score @s satyrn.fdl.souls >= #10 <%config.internalScoreboard%> run {
         playsound minecraft:entity.player.attack.crit player @a
         playsound minecraft:particle.soul_escape player @a
@@ -106,7 +106,7 @@ function update_soul_count {
     summon minecraft:armor_stand ~ ~ ~ {Invisible:<%config.dev?0:1%>b,Small:1b,Invulnerable:1b,NoGravity:1b,Marker:1b,Tags:[satyrn.fdl.soulsIncrement]}
     execute as @e[tag=satyrn.fdl.soulsIncrement,sort=nearest,limit=1] run {
         item replace entity @s weapon.mainhand from entity @p weapon.mainhand
-        execute store result entity @s HandItems[0].tag.Souls int 1 run scoreboard players get @p satyrn.fdl.souls
+        execute store result entity @s equipment.mainhand.components."minecraft:custom_data".Souls int 1 run scoreboard players get @p satyrn.fdl.souls
         item replace entity @p weapon.mainhand from entity @s weapon.mainhand
         item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
         kill @s

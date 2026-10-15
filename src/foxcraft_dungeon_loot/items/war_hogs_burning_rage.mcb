@@ -8,8 +8,8 @@ function disarm_entity {
         playsound minecraft:entity.player.attack.crit player @a
         particle minecraft:crit ~ ~ ~ 0.5 0.85 0.5 0.01 20 force
 
-        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",Count:1b},PickupDelay:30}
-        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Item set from entity @s HandItems[0]
+        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",count:1},PickupDelay:30}
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Item set from entity @s equipment.mainhand
         data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Thrower set from entity @s UUID
 
         playsound minecraft:entity.item.pickup player @a ~ ~1.5 ~ 1.0 0.75
@@ -25,7 +25,7 @@ function disarm_player {
         playsound minecraft:entity.player.attack.crit player @a
         particle minecraft:crit ~ ~ ~ 0.5 0.85 0.5 0.01 20 force
 
-        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",Count:1b},PickupDelay:30}
+        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",count:1},PickupDelay:30}
         data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Item set from entity @s SelectedItem
         data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Thrower set from entity @s UUID
         data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Owner set from entity @s UUID

@@ -16,7 +16,7 @@ function on_hit {
     execute unless entity @s[gamemode=creative] run {
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_has_unbreaking] run {
             # Get unbreaking level from the tool.
-            execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.tag.Enchantments[{id:"minecraft:unbreaking"}].lvl
+            execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
             function foxcraft_dungeon_loot:math/should_damage_tool
             # Only execute the following if the score is equal to 1 or more
             execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:beta_iron_sword/on_hit
@@ -25,7 +25,7 @@ function on_hit {
         }
 
         execute if entity @s[predicate=foxcraft_dungeon_loot:items/mainhand_broken] run {
-            break_item weapon.mainhand minecraft:shield[item_model="foxcraft_dungeon_loot:iron_sword"]
+            break_item weapon.mainhand {id:"minecraft:shield",components:{"minecraft:item_model":"foxcraft_dungeon_loot:iron_sword"}}
         }
     }
 
