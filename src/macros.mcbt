@@ -3,7 +3,6 @@ import ./config.js
 Contains various macros for use throughout the datapack, including:
  - Item breaking
  - Random number generation
- - Removing a single enchantment from an item
 ###
 
 ###
@@ -33,22 +32,5 @@ Parameters:
 template rng {
     with a0:word a1:word {
         execute store result score #math.result <%config.internalScoreboard%> run random value <%a0%>..<%a1%>
-    }
-}
-
-###
-Removes a single enchantment from a single inventory slot.
-Must be executed from the sender context of an armor stand positioned closest to the target player.
-
-Parameters:
-0 - The non-numeric slot ID of the item.
-1 - The ID of the enchantment to remove.
-###
-template remove_enchantment {
-    with a0:word a1:word {
-        item replace entity @s weapon.mainhand from entity @p <%a0%>
-        data remove entity @s HandItems[0].tag.Enchantments[{id:"<%a1%>"}]
-        item replace entity @p <%a0%> from entity @s weapon.mainhand
-        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
     }
 }
