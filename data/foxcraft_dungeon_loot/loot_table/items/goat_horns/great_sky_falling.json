@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:fearless_river_gift_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:great_sky_falling_melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"
@@ -23,5 +23,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:goat_horns/fearless_river_gift"
+  "modifier": "foxcraft_dungeon_loot:items/goat_horns/great_sky_falling"
 }

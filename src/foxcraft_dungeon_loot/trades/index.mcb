@@ -406,46 +406,46 @@ function build {
 
 # Copper Goat Horns 83-92
         # Trade Index 83: Clear Temper Journey
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/clear_temper_journey
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/clear_temper_journey
         set_buy_from_loot foxcraft_dungeon_loot:loot/coins/copper_coins
         set_buyb_item_id "minecraft:goat_horn"
         set_buyb_price 1
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 84: Dry Urge Anger
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/dry_urge_anger
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/dry_urge_anger
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 85: Fearless River Gift
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fearless_river_gift
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/fearless_river_gift
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 86: Fresh Nest Thought
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/fresh_nest_thought
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/fresh_nest_thought
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 87: Great Sky Falling
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/great_sky_falling
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/great_sky_falling
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 88: Mumble Fire Memory
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/mumble_fire_memory
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/mumble_fire_memory
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 89: Old Hymn Resting
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/old_hymn_resting
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/old_hymn_resting
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 90: Pure Water Desire
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/pure_water_desire
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/pure_water_desire
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 91: Secret Lake Tear
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/secret_lake_tear
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/secret_lake_tear
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 92: Sweet Moon Love
-        set_sell_from_loot foxcraft_dungeon_loot:goat_horns/sweet_moon_love
+        set_sell_from_loot foxcraft_dungeon_loot:items/goat_horns/sweet_moon_love
         function foxcraft_dungeon_loot:trades/recipes/push
 
         # Trade Index 93: Nether Star

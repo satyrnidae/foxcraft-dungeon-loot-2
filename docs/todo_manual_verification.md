@@ -101,7 +101,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 8a - copper goat horn
 
-- [ ] `/reload` shows no instrument, sound or modifier errors. `/loot give @s loot foxcraft_dungeon_loot:goat_horns/random_goat_horn` gives a horn; all ten songs appear over a few rolls.
+- [ ] `/reload` shows no instrument, sound or modifier errors. `/loot give @s loot foxcraft_dungeon_loot:single_copper_goat_horn` gives a horn; all ten songs appear over a few rolls.
 - [ ] Holding a horn and standing still looking level: right-click plays the melody part for the full 4 seconds. `/data get entity @s SelectedItem.components."minecraft:instrument"` ends in `_melody`.
 - [ ] Sneaking: the instrument changes to `_bass` and the bass part plays. Looking up 30 degrees or more (not sneaking): `_harmony`. Sneaking wins over looking up.
 - [ ] Changing stance while the horn is held swaps the instrument at the next click, with no inventory flicker.
@@ -143,7 +143,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Chainsaw: holding it in the main hand grants haste 2 once, and clears when put away. No unknown predicate errors in the log.
 - [ ] Quet Zala's Beloved: with another mob wearing an Unbreaking chestplate nearby, a player without Unbreaking still takes the always-damage path.
 - [ ] War Hog's Disdainful Pride: boots with Unbreaking use the Unbreaking durability odds on a fall.
-- [ ] Datapack zip built with `build.ps1` does not contain `todo_manual_verification.md`.
+- [ ] Datapack zip built with `build.ps1` does not contain the `docs/` folder.
 
 ## Not yet testable (later phases)
 

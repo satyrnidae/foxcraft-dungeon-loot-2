@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "foxcraft_dungeon_loot:mumble_fire_memory_melody",
+                "minecraft:instrument": "foxcraft_dungeon_loot:dry_urge_anger_melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"
@@ -23,5 +23,5 @@
       ]
     }
   ],
-  "modifier": "foxcraft_dungeon_loot:goat_horns/mumble_fire_memory"
+  "modifier": "foxcraft_dungeon_loot:items/goat_horns/dry_urge_anger"
 }

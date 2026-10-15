@@ -17,7 +17,7 @@ import java.util.stream.*;
  * Parses every command line of every .mcfunction under a folder with the game's own command dispatcher, so a renamed
  * argument or a wrong NBT path shows up without launching the game. Parse only: nothing is executed, and a path that
  * is syntactically valid but names a missing key is not caught. Usage: CmdCheck FUNCTION_DIR
- * Lines starting with $ (macros) are skipped. Needs the 26.3 client jar and Java 25, see docs/verifying-against-vanilla.md.
+ * Lines starting with $ (macros) are skipped. Needs the 26.3 client jar and Java 25, see tests/verifying-against-vanilla.md.
  */
 public class CmdCheck {
     public static void main(String[] args) throws Exception {

@@ -252,3 +252,48 @@ The user supplied a saved copy of https://minecraft.wiki/w/Data_component_format
 
 
 Checked against https://minecraft.wiki/w/Data_component_format: tool, weapon, use_cooldown, piercing_weapon, use_effects, repairable, minimum_attack_charge, villager_food, attack_range, attack_animation, blocks_attacks, consumable, damage_resistant, death_protection, enchantable, equippable, glider, intangible_projectile, food, compostable, cooking_fuel, brewing_fuel, rarity, tooltip_display, use_remainder, attribute_modifiers, max_damage, max_stack_size, unbreakable, potion_contents, lore, profile. Unchecked: the other components in the jar registry that this file does not mention. The wiki fetch returns a model summary of the page, not the raw text, and does not honor anchors, so each fetch needs a page offset.
+
+## 8. custom_data key rename
+
+Rename every `custom_data` key from PascalCase to a namespaced snake_case key, `foxcraft_dungeon_loot:snake_case`. Counts below are from a grep of `data/`, `src/` and `docs/tools`, treat them as approximate.
+
+| Old key | New key | Uses |
+|---|---|---|
+| `DungeonLootId` | `foxcraft_dungeon_loot:dungeon_loot_id` | about 258 in `data/` |
+| `DungeonItem` | `foxcraft_dungeon_loot:dungeon_item` | about 145 |
+| `ProcessOnUsed` | `foxcraft_dungeon_loot:process_on_used` | about 34 |
+| `DungeonHead` | `foxcraft_dungeon_loot:dungeon_head` | 19 |
+| `Rarity` | `foxcraft_dungeon_loot:rarity` | about 104 |
+| `GrabBag` | `foxcraft_dungeon_loot:grab_bag` | 6 |
+| `CopperGoatHorn` | `foxcraft_dungeon_loot:copper_goat_horn` | 10 modifiers plus the two `on_tick` item checks in `copper_goat_horn.mcb` |
+| `ProcessFall` | `foxcraft_dungeon_loot:process_fall` | 4 |
+| `ProcessSpiderEye` | `foxcraft_dungeon_loot:process_spider_eye` | 3 |
+| `ProcessBlock` | `foxcraft_dungeon_loot:process_block` | 3 |
+| `PiglinBarter` | `foxcraft_dungeon_loot:piglin_barter` | 2 |
+| `DungeonLoot` | `foxcraft_dungeon_loot:dungeon_loot` | 1 |
+| `CustomInstrument` | `foxcraft_dungeon_loot:instrument_base` | Not dead. Written by the 10 `item_modifier/items/goat_horns/*.json` files and read by the `horn_swap` template in `copper_horn.mcbt`, which generates 20 checks, 10 songs for each hand. It stores the song name, and the stance swap uses it to pick the `_bass`, `_harmony` or `_melody` instrument. It could be dropped by reading the song from the current `minecraft:instrument` id, but that needs three checks per song per hand instead of one. Rename it with the rest. The new name fits: the value is the song, the base that the `_bass`, `_harmony` and `_melody` instrument ids are built from. |
+| `AddedTrades`, `ScanTrades`, `CurrentTrade` | `foxcraft_dungeon_loot:added_trades`, `scan_trades`, `current_trade` | trader state on the armor stand, internal |
+
+Places that read or write the keys:
+
+- `set_custom_data` tags in every `item_modifier/` file.
+- `minecraft:custom_data` item predicates under `predicate/`, including the `events/process_*` ones and `in_main_hand`, `in_off_hand`, `worn` and `in_inventory`.
+- Advancement criteria under `advancement/items/`.
+- `execute if items ... [minecraft:custom_data~{...}]` in `src/`, for example the copper horn tick.
+- Trade checks and the trader state stand in `trades/`.
+- Resource pack: none expected, confirm with a grep.
+- Docs and tools: `CLAUDE.md`, `AGENTS.md`, `README.md`, `tests/java/Scan.java`, `tests/tools/check_old_keys.py`.
+
+Format notes:
+
+- A key with a colon must be quoted in SNBT, so the tag string becomes `"{\"foxcraft_dungeon_loot:dungeon_loot_id\":87,\"foxcraft_dungeon_loot:dungeon_item\":1b}"` inside JSON. Escaping gets ugly, so the rename needs a script and a round-trip parse of every file, not hand edits.
+- The alternative of one nested compound, `{foxcraft_dungeon_loot:{dungeon_loot_id:87}}`, needs no quotes on the key and still matches with `~` partial comparison. Flat keys were asked for; nesting is worth a look if the quoting causes trouble in `.mcb` sources.
+- Keep the SNBT string form. A JSON compound turns small ints into bytes and never matches.
+- mc-build commands containing quoted keys need the quotes escaped the same way. Check each generated command with `CmdCheck.java`.
+
+Cost and risk:
+
+- Breaking for existing items. Anything already in a world keeps the old keys and stops matching every predicate, advancement and hook. The pack is alpha, so the options are: accept the break, or add a one-time migration that rewrites old keys on items in online player inventories and containers at load, which cannot reach items in unloaded chests.
+- Do it in one commit with the mechanical script, before more items and discs are added, so there is one cutover point.
+- Extend `check_old_keys.py` to flag any PascalCase key left in a `custom_data` string, and `Scan.java` to assert every `DungeonLootId` is still unique after the rename.
+- Update the Google Sheet notes and the wording in `README.md` ("custom NBT entry") afterward.

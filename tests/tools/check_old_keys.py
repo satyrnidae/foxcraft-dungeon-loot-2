@@ -4,9 +4,9 @@
 26.3 loads old keys without an error and silently drops them, so an unconverted file produces bare items with no names,
 components or conditions. This check needs no game jar. Run it from anywhere:
 
-    python docs/tools/check_old_keys.py [DATA_DIR]
+    python tests/tools/check_old_keys.py [DATA_DIR]
 
-Exit status is 1 when anything is found. See docs/verifying-against-vanilla.md for the codec-based Scan tool, which is the
+Exit status is 1 when anything is found. See tests/verifying-against-vanilla.md for the codec-based Scan tool, which is the
 stronger check but needs the client jar and Java 25.
 """
 import glob

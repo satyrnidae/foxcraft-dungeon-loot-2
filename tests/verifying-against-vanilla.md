@@ -3,6 +3,8 @@
 How to check what Minecraft 26.3 actually does, instead of relying on the wiki or on what loads without an error. It was used for
 the 1.19 to 26.3 port research (issue #130) and is meant as the starting point for repeatable unit tests.
 
+`python tests/run_all.py` runs these checks together with the unit suite, see `tests/README.md`. The rest of this file explains how each Java check works.
+
 Nothing here launches the game, needs a Mojang account, accepts the EULA or starts a server. It runs the game's own classes from the
 client jar in a short-lived Java process, and reads vanilla's own data.
 
@@ -45,7 +47,7 @@ mkdir -p "$WORK"
 1. **Download the libraries the jar needs** and capture the classpath (the launcher's `libraries/` folder is often not readable, and a
    script should not depend on a launcher install):
    ```bash
-   CP=$(python3 docs/tools/fetch_mc_libs.py --version-json "$MC_DIR/versions/$VER/$VER.json" --out "$WORK/libs")
+   CP=$(python3 tests/tools/fetch_mc_libs.py --version-json "$MC_DIR/versions/$VER/$VER.json" --out "$WORK/libs")
    ```
 2. **Extract vanilla's own data and assets for reference** (read-only; this is how the 26.3 folder names, trade sets and shaders were checked):
    ```bash
@@ -65,13 +67,13 @@ mkdir -p "$WORK"
    This is the authoritative answer to "what must this item remove or override". `commands.json` is the command syntax tree.
 4. **Compile and run the harness** (section 4):
    ```bash
-   javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/Harness.java
+   javac -cp "$JAR:$CP" -d "$WORK/classes" tests/java/Harness.java
    java  -cp "$WORK/classes:$JAR:$CP" Harness        # prints PASS/FAIL lines, exit code 1 on any FAIL
    ```
 
 ## 4. The harness
 
-`docs/tools/Harness.java` boots the game's registries the way the data generator does, binds every item's default components, and then
+`tests/java/Harness.java` boots the game's registries the way the data generator does, binds every item's default components, and then
 calls the game's own codecs on JSON strings. The five checks it ships with are regression tests for the table in section 1. Full source:
 
 ```java
@@ -90,7 +92,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 
-/** Minimal harness that runs Minecraft's own parsers on test JSON. See docs/verifying-against-vanilla.md. */
+/** Minimal harness that runs Minecraft's own parsers on test JSON. See tests/verifying-against-vanilla.md. */
 public class Harness {
     static HolderLookup.Provider lookup;
     static RegistryOps<JsonElement> ops;
@@ -211,7 +213,7 @@ Used to check a source conversion: build the old sources with mc-build 2.15.0, t
 commands per user-named function, ignoring how each version splits blocks:
 
 ```bash
-python3 docs/tools/compare_mcfunction.py OLD_BUILD_ROOT NEW_BUILD_ROOT --namespace foxcraft_dungeon_loot --diffs diffs.json
+python3 tests/tools/compare_mcfunction.py OLD_BUILD_ROOT NEW_BUILD_ROOT --namespace foxcraft_dungeon_loot --diffs diffs.json
 ```
 
 `OLD_BUILD_ROOT` and `NEW_BUILD_ROOT` each contain `data/<namespace>/function(s)/`. The script inlines generated helper functions, drops the internal
@@ -235,12 +237,12 @@ Notes from the 4.2.0 test (details in the issue #130 comments):
 
 Two tools check the repository's JSON under `data/`, because 26.3 loads unconverted files without an error and silently drops the old keys.
 
-- `docs/tools/check_old_keys.py [DATA_DIR]` is a plain Python scan for pre-26.3 keys in loot tables, item modifiers, predicates and advancements
+- `tests/tools/check_old_keys.py [DATA_DIR]` is a plain Python scan for pre-26.3 keys in loot tables, item modifiers, predicates and advancements
   (`function`, `functions`, `conditions`, old `condition` type names, removed types). It needs no jar. Exit status 1 means something is left to convert.
-- `docs/tools/Scan.java DATA_DIR` parses every loot table, predicate, item modifier and advancement with the game's own codecs, re-encodes what the game
+- `tests/java/Scan.java DATA_DIR` parses every loot table, predicate, item modifier and advancement with the game's own codecs, re-encodes what the game
   kept, and reports any key that was lost. Compile and run it like the harness, from a scratch directory, with an absolute `DATA_DIR`:
   ```bash
-  javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/Scan.java
+  javac -cp "$JAR:$CP" -d "$WORK/classes" tests/java/Scan.java
   java -cp "$WORK/classes:$JAR:$CP" Scan "$(pwd)/data"
   ```
   `-Dscan.skip=minecraft:set_nbt,set_nbt` removes functions of those types before parsing, for constructs a later migration step still has to convert.
@@ -252,11 +254,11 @@ Two tools check the repository's JSON under `data/`, because 26.3 loads unconver
 
 ## 10. Parsing the generated commands
 
-`docs/tools/CmdCheck.java FUNCTION_DIR` runs every command line of every `.mcfunction` under a folder through the game's own command dispatcher.
+`tests/java/CmdCheck.java FUNCTION_DIR` runs every command line of every `.mcfunction` under a folder through the game's own command dispatcher.
 It parses only, nothing executes. Renamed arguments, old item and particle syntax, bad text components and incomplete commands show up as errors.
 Build first (`npx mcb build`), then compile and run it from a scratch directory with an absolute path:
 ```bash
-javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/CmdCheck.java
+javac -cp "$JAR:$CP" -d "$WORK/classes" tests/java/CmdCheck.java
 java -cp "$WORK/classes:$JAR:$CP" CmdCheck "$(pwd)/data/foxcraft_dungeon_loot/function"
 ```
 Limits: the pack's own loot tables, predicates, item modifiers and instruments are not in the vanilla registries, so unresolved ids in the `foxcraft_dungeon_loot`

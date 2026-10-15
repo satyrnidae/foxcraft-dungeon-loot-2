@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 
-/** Minimal harness that runs Minecraft's own parsers on test JSON. See docs/verifying-against-vanilla.md. */
+/** Minimal harness that runs Minecraft's own parsers on test JSON. See tests/verifying-against-vanilla.md. */
 public class Harness {
     static HolderLookup.Provider lookup;
     static RegistryOps<JsonElement> ops;

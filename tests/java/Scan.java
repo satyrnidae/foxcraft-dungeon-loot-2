@@ -21,7 +21,7 @@ import java.util.stream.*;
 /**
  * Parses every loot table, predicate, item modifier and advancement under a data directory with the game's own codecs,
  * re-encodes what the game kept, and reports any object key that appeared in the file but not in the re-encoded data.
- * Old keys parse without an error and are dropped, so a clean parse alone proves nothing. See docs/verifying-against-vanilla.md.
+ * Old keys parse without an error and are dropped, so a clean parse alone proves nothing. See tests/verifying-against-vanilla.md.
  * Usage: Scan DATA_DIR   (the folder that contains the namespace folders)
  */
 public class Scan {
