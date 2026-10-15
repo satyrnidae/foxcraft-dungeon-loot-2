@@ -3,14 +3,16 @@
 //
 //     node tests/run_all.mjs                run the build, the unit tests and, when a client jar is found, the Java checks
 //     node tests/run_all.mjs --no-build     skip npx mcb build and reuse the current data/.../function output
-//     node tests/run_all.mjs --no-java      skip the checks that need the 26.3 client jar and Java 25
+//     node tests/run_all.mjs --no-java      skip the checks that need the client jar and Java 25
+//     node tests/run_all.mjs --no-download  never fetch the client jar from Mojang
 //     node tests/run_all.mjs --release      also run the release checks, such as mc.dev being false
 //     node tests/run_all.mjs -k chainsaw    only unit tests whose name matches, repeatable
 //
 // Exit status is 1 when any step fails. A step that cannot run, such as the Java checks without a jar, is reported as
 // SKIPPED and does not fail the run.
 //
-// Java checks need the client jar. The default is %APPDATA%/.minecraft/versions/26.3/26.3.jar, override it with MC_JAR.
+// Java checks need the client jar. They use MC_JAR if set, else the launcher copy at %APPDATA%/.minecraft/versions/<mc_version>/<mc_version>.jar,
+// else a copy downloaded from Mojang into tests/.cache/mc, which is what happens on CI.
 // Set JAVA25 to a Java 25 executable, otherwise the newest JDK found under ~/.jdks or on PATH is used.
 // Library jars are downloaded once into tests/.cache, which is gitignored.
 import { spawnSync } from 'node:child_process';
@@ -19,12 +21,14 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { fetchClientJar } from './tools/fetch_mc_jar.mjs';
 import { fetchLibs } from './tools/fetch_mc_libs.mjs';
 
 const TESTS = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(TESTS);
 const CACHE = path.join(TESTS, '.cache');
-const MC_VERSION = '26.3';
+// The Minecraft version under test comes from config.json, the same file src/config.js exposes to the sources.
+const MC_VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).mc.mc_version;
 const IS_WINDOWS = process.platform === 'win32';
 
 const say = (text = '') => console.log(text);
@@ -87,12 +91,27 @@ function findJar() {
   return path.join(base, 'versions', MC_VERSION, `${MC_VERSION}.jar`);
 }
 
-/** Returns [name, status] pairs where status is PASS, FAIL or SKIPPED. */
-async function javaChecks() {
-  const java = findJava();
+/** The client jar to test against: MC_JAR, the launcher's copy, or a download. Returns { jar } or { skip }. */
+async function resolveJar(allowDownload) {
   const jar = findJar();
+  const hasJson = (j) => fs.existsSync(j.replace(/\.jar$/, '.json'));
+  if (fs.existsSync(jar) && hasJson(jar)) return { jar };
+  if (process.env.MC_JAR) return { skip: `no client jar at ${jar}, check MC_JAR` };
+  if (!allowDownload) return { skip: `no client jar at ${jar}, drop --no-download or set MC_JAR` };
+  try {
+    return { jar: (await fetchClientJar(MC_VERSION, path.join(CACHE, 'mc'))).jar };
+  } catch (exc) {
+    return { skip: `could not download the client jar: ${exc.message}` };
+  }
+}
+
+/** Returns [name, status] pairs where status is PASS, FAIL or SKIPPED. */
+async function javaChecks(allowDownload) {
+  const java = findJava();
   if (!java) return [['java checks', 'SKIPPED no Java 25 found, set JAVA25']];
-  if (!fs.existsSync(jar)) return [['java checks', `SKIPPED no client jar at ${jar}, set MC_JAR`]];
+  const found = await resolveJar(allowDownload);
+  if (found.skip) return [['java checks', `SKIPPED ${found.skip}`]];
+  const jar = found.jar;
   const versionJson = jar.replace(/\.jar$/, '.json');
   if (!fs.existsSync(versionJson)) return [['java checks', 'SKIPPED no version json next to the jar']];
   const javac = path.join(path.dirname(java), IS_WINDOWS ? 'javac.exe' : 'javac');
@@ -152,13 +171,15 @@ async function main() {
     summary.push(['java checks', 'SKIPPED --no-java']);
   } else {
     say('\n== java checks ==');
-    summary.push(...(await javaChecks()));
+    summary.push(...(await javaChecks(!flag('--no-download'))));
   }
 
   say('\n== summary ==');
   const width = Math.max(...summary.map(([name]) => name.length));
   for (const [name, status] of summary) say(`${name.padEnd(width)}  ${status}`);
-  const failed = summary.filter(([, status]) => status === 'FAIL').map(([name]) => name);
+  // On CI a step that could not run, such as the Java checks without a jar, is a failure unless a flag skipped it.
+  const ci = Boolean(process.env.CI);
+  const failed = summary.filter(([, status]) => status === 'FAIL' || (ci && status.startsWith('SKIPPED') && !status.startsWith('SKIPPED --'))).map(([name]) => name);
   say(`\n${failed.length ? 'FAILED: ' + failed.join(', ') : 'all runnable checks passed'}`);
   return failed.length ? 1 : 0;
 }

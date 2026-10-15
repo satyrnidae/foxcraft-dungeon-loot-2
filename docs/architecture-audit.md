@@ -102,8 +102,7 @@ Recommendation: keep for interactive items, move non-interactive ones to `poison
 **F10. Stale documentation.** `README.md` says "Customized Dungeon Loot for Minecraft 1.19" and describes `DungeonLootId` as a custom NBT entry. `.gitignore` still lists the deleted `texturepack/assets/custom_music_discs` and `music_disc_11.json`.
 Recommendation: update both.
 
-**F11. Tests exist but no CI runs them.** `tests/run_all.mjs` builds the pack and runs the unit suite and, with the client jar, the Java checks. Nothing runs it on push. The unit suite needs only Python and Node, so it can run in CI as is; the Java checks need the 26.3 client jar, which is not redistributable.
-Recommendation: a workflow that runs `npm ci` and `node tests/run_all.mjs --no-java`, plus the release checks with `--release` on a tag.
+**F11. CI.** `.github/workflows/test.yml` runs `npm ci` and `node tests/run_all.mjs` on pushes to main, pull requests and tags, with `--release` on a tag. Temurin 25 comes from `actions/setup-java` and the client jar is downloaded from Mojang by `tests/tools/fetch_mc_jar.mjs`, checked against its sha1 and cached per Minecraft version. The jar is never stored or published. Status: added, not yet run on GitHub.
 
 **F12. Mixed line endings.** 63 of 66 source files are LF and 3 are CRLF, JSON is mostly CRLF, and there is no `.gitattributes`. Edits from different tools produce noisy diffs.
 Recommendation: add `.gitattributes` with an explicit rule per extension.

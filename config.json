@@ -10,6 +10,7 @@
     "rootNamespace": null,
     "baseArchiveName":"foxcraft-dungeon-loot",
     "version": "26.3-alpha.1",
-    "scoreboardsVersion": 5
+    "scoreboardsVersion": 5,
+    "mc_version": "26.3"
   }
 }

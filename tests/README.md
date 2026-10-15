@@ -8,12 +8,13 @@ Static checks for the datapack and resource pack. Nothing here launches Minecraf
 npm test                               same as node tests/run_all.mjs
 node tests/run_all.mjs                 build, unit tests, then the Java checks if a client jar is found
 node tests/run_all.mjs --no-java       skip the Java checks
+node tests/run_all.mjs --no-download   never fetch the client jar from Mojang
 node tests/run_all.mjs --no-build      reuse the current generated functions
 node tests/run_all.mjs --release       also run the release checks, such as mc.dev being false
 node tests/run_all.mjs -k chainsaw     only unit tests whose name matches chainsaw
 ```
 
-Needs Node 22 or newer with `npm ci` done. The Java checks also need Java 25 and the 26.3 client jar, see `run_all.mjs` for how it finds them. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
+Needs Node 22 or newer with `npm ci` done. The Java checks also need Java 25 and the client jar for `mc.mc_version` in `config.json`. The jar is `MC_JAR` if set, else the launcher copy, else a download from Mojang into `tests/.cache/mc` checked against its sha1, so a fresh checkout needs no launcher. `--no-download` turns that off. On CI a skipped step counts as a failure. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
 
 Unit tests alone: `node --test tests/unit/*.test.mjs`.
 
@@ -31,7 +32,7 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 | `unit/gen_specs.mjs` | Regenerates the snapshot |
 | `unit/checks.mjs` | Lets one test report several failed checks together |
 | `java/` | `Harness`, `Scan` and `CmdCheck`, which run the game's own codecs and command parser |
-| `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs` |
+| `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs`, `fetch_mc_jar.mjs` |
 | `verifying-against-vanilla.md` | How the Java checks work and what they found |
 | `.cache/` | Downloaded libraries and compiled classes, gitignored |
 
