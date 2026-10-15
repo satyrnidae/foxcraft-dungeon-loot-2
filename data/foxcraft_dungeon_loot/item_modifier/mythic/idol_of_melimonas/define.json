@@ -1,111 +1,114 @@
-[
-  {
-    "type": "minecraft:set_attributes",
-    "modifiers": [
-      {
-        "attribute": "minecraft:movement_speed",
-        "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/movement_speed",
-        "amount": 0.4,
-        "operation": "add_multiplied_base",
-        "slot": "offhand"
-      },
-      {
-        "attribute": "minecraft:luck",
-        "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/luck",
-        "amount": 1,
-        "operation": "add_value",
-        "slot": "offhand"
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Idol of Melimonas",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "Weep, for Melimonas smiles upon thee.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
         {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Wings of the Devil: ",
-          "color": "green",
-          "italic": false
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/movement_speed",
+          "amount": 0.4,
+          "operation": "add_multiplied_base",
+          "slot": "offhand"
         },
         {
-          "text": "While holding the idol",
-          "color": "gray",
-          "italic": false
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/mythic/idol_of_melimonas/luck",
+          "amount": 1,
+          "operation": "add_value",
+          "slot": "offhand"
         }
-      ],
-      {
-        "text": "in your off hand, you gain Jump Boost",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "II.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Pass Without Trace: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "When held in your",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "off hand, you gain Invisibility for",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "30 seconds.",
-        "color": "gray",
-        "italic": false
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
+      ]
     },
-    "add": true
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:47,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/idol_of_melimonas",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
-        ]
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Idol of Melimonas",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Weep, for Melimonas smiles upon thee.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Wings of the Devil: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "While holding the idol",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "in your off hand, you gain Jump Boost",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "II.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Pass Without Trace: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When held in your",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "off hand, you gain Invisibility for",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "30 seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:47,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/idol_of_melimonas",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

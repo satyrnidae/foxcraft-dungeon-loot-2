@@ -1,41 +1,44 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Copper Goat Horn",
-      "color": "white",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{CopperGoatHorn:1b,CustomInstrument:\"pure_water_desire\"}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      {
-        "text": "Pure Water Desire",
-        "color": "gray",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Copper Goat Horn",
+        "color": "white",
         "italic": false
-      },
-      "Plays a different tune when crouching or",
-      "looking upwards.",
-      [
-        "Rarity: ",
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{CopperGoatHorn:1b,CustomInstrument:\"pure_water_desire\"}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
         {
-          "text": "Common",
-          "color": "white",
-          "italic": true
-        }
-      ]
-    ],
-    "mode": "replace_all"
-  }
-]
+          "text": "Pure Water Desire",
+          "color": "gray",
+          "italic": false
+        },
+        "Plays a different tune when crouching or",
+        "looking upwards.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
+    }
+  ]
+}

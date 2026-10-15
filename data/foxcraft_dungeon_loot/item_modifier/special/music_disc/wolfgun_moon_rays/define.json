@@ -1,13 +1,16 @@
-[
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:127,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_rays",
-      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_wolfgun_moon_rays"
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:127,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_rays",
+        "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_wolfgun_moon_rays"
+      }
     }
-  }
-]
+  ]
+}

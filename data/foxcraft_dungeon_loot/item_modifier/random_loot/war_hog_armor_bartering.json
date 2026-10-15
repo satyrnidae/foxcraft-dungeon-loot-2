@@ -1,6 +1,9 @@
-[
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{PiglinBarter:1b}"
-  }
-]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{PiglinBarter:1b}"
+    }
+  ]
+}

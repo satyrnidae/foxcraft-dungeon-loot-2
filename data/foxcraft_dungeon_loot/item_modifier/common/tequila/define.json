@@ -1,47 +1,50 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Tequila",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "A tasty alcoholic beverage.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Tequila",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "A tasty alcoholic beverage.",
+        [
+          "Rarity: ",
+          {
+            "text": "Common",
+            "color": "white",
+            "italic": true
+          }
+        ],
+        "",
         {
-          "text": "Common",
-          "color": "white",
+          "text": "Unknown effect",
+          "color": "blue",
           "italic": true
         }
       ],
-      "",
-      {
-        "text": "Unknown effect",
-        "color": "blue",
-        "italic": true
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:potion_contents"
-        ]
-      },
-      "minecraft:potion_contents": {
-        "custom_color": 15447907
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:potion_contents"
+          ]
+        },
+        "minecraft:potion_contents": {
+          "custom_color": 15447907
+        }
       }
     }
-  }
-]
+  ]
+}

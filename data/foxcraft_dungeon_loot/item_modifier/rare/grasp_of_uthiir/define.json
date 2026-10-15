@@ -1,81 +1,84 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": [
-      {
-        "text": "Grasp of Uthiir",
-        "color": "aqua",
-        "bold": false,
-        "italic": false
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "Uthiir grants you the ability to ensnare your",
-      "enemies at a distance.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
         {
-          "text": "Rare",
+          "text": "Grasp of Uthiir",
           "color": "aqua",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Grasp of the Spider God: ",
-          "color": "aqua",
-          "italic": false
-        },
-        {
-          "text": "Throw the item to place",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "a cobweb where it lands.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Fragile: ",
-          "color": "red",
-          "italic": false
-        },
-        {
-          "text": "This item is consumed upon use.",
-          "color": "gray",
+          "bold": false,
           "italic": false
         }
       ]
-    ],
-    "mode": "replace_all"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
     },
-    "add": false
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:83,DungeonItem:1b,ProcessOnUsed:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:rare/grasp_of_uthiir",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Uthiir grants you the ability to ensnare your",
+        "enemies at a distance.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Grasp of the Spider God: ",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": "Throw the item to place",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "a cobweb where it lands.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed upon use.",
+            "color": "gray",
+            "italic": false
+          }
         ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:83,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:rare/grasp_of_uthiir",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

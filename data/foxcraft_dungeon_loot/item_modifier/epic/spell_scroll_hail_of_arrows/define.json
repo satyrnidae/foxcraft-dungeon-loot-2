@@ -1,89 +1,92 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Hail of Arrows",
-      "color": "light_purple",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      {
-        "text": "Spell Scroll",
-        "color": "gray",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Hail of Arrows",
+        "color": "light_purple",
         "italic": false
-      },
-      "On your command, spectral archers",
-      "rain hell and fury down from the",
-      "heavens.",
-      [
-        "Rarity: ",
-        {
-          "text": "Epic",
-          "color": "light_purple",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Loose: ",
-          "color": "light_purple",
-          "italic": false
-        },
-        {
-          "text": "Right-click to throw this scroll.",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "Arrows rain down onto the area where",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "it lands. Just don't throw it too close!",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Fragile: ",
-          "color": "red",
-          "italic": false
-        },
-        {
-          "text": "This item is consumed on use.",
-          "color": "gray",
-          "italic": false
-        }
-      ]
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
+      }
     },
-    "add": true
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:78,DungeonItem:1b,ProcessOnUsed:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:epic/spell_scroll_hail_of_arrows",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Spell Scroll",
+          "color": "gray",
+          "italic": false
+        },
+        "On your command, spectral archers",
+        "rain hell and fury down from the",
+        "heavens.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Loose: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Right-click to throw this scroll.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Arrows rain down onto the area where",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "it lands. Just don't throw it too close!",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed on use.",
+            "color": "gray",
+            "italic": false
+          }
         ]
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:78,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/spell_scroll_hail_of_arrows",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

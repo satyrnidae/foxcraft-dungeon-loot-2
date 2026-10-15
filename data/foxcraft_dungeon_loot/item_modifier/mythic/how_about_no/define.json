@@ -1,81 +1,84 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "How About No?",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "\"I can't deal with this right now. Do",
-      "you know how much crap I've got going on?",
-      "I have things to do! I can't be here that",
-      "long! So go on! Get! Or else!\"",
-      [
-        "Rarity: ",
-        {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Beset and Beleaguered: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "Upon use, kills all",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "hostile mobs in a 50-meter radius.",
-        "color": "gray",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "How About No?",
+        "color": "green",
         "italic": false
-      },
-      [
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "\"I can't deal with this right now. Do",
+        "you know how much crap I've got going on?",
+        "I have things to do! I can't be here that",
+        "long! So go on! Get! Or else!\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Beset and Beleaguered: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Upon use, kills all",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Fragile: ",
-          "color": "red",
-          "italic": false
-        },
-        {
-          "text": "This item is consumed upon use.",
+          "text": "hostile mobs in a 50-meter radius.",
           "color": "gray",
           "italic": false
-        }
-      ]
-    ],
-    "mode": "replace_all"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:46,DungeonItem:1b,ProcessOnUsed:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:unbreakable": {},
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/how_about_no",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments",
-          "minecraft:unbreakable"
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "This item is consumed upon use.",
+            "color": "gray",
+            "italic": false
+          }
         ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:46,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:unbreakable": {},
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/how_about_no",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments",
+            "minecraft:unbreakable"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

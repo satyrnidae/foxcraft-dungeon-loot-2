@@ -35,7 +35,9 @@ function walkNode(node, kind, here0, found) {
   } else if (node !== null && typeof node === 'object') {
     for (const [key, value] of Object.entries(node)) {
       const here = `${here0}/${key}`;
-      if (LOOT_KINDS.has(kind) && (key === 'functions' || key === 'conditions')) found.push(`${here}: old key '${key}'`);
+      // minecraft:sequence still takes a functions list, it is the pool and entry key that was renamed
+      const isSequence = key === 'functions' && bare(String(node.type ?? '')) === 'sequence';
+      if (LOOT_KINDS.has(kind) && !isSequence && (key === 'functions' || key === 'conditions')) found.push(`${here}: old key '${key}'`);
       if (kind === 'advancement' && key === 'functions') found.push(`${here}: old key 'functions'`);
       if (LOOT_KINDS.has(kind) && key === 'function' && typeof value === 'string') found.push(`${here}: old key 'function' (now 'type')`);
       if (key === 'condition' && typeof value === 'string' && OLD_CONDITION_NAMES.has(bare(value)) && vanillaName(value)) {

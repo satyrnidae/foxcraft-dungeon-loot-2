@@ -2,10 +2,10 @@
   "values": [
     "#foxcraft_dungeon_loot:air",
     "#foxcraft_dungeon_loot:fluids",
-    "minecraft:grass",
+    "minecraft:short_grass",
     "#minecraft:small_flowers",
-    "#minecraft:tall_flowers",
-    "#minecraft:small_dripleaf_placeable",
+    "#foxcraft_dungeon_loot:tall_flowers",
+    "#minecraft:supports_small_dripleaf",
     "minecraft:fern",
     "minecraft:fire",
     "minecraft:tall_grass",

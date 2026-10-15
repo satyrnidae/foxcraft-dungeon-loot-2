@@ -1,45 +1,48 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": [
-      {
-        "text": "Melimonas' Guile",
-        "color": "light_purple",
-        "italic": false
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "And thus spake Melimonas as the trader:",
-      "\"Take this spear, and toss it at the Dæmon",
-      "King, and it shall surely pierce his brow.\"",
-      "And Palomina, being none the wiser, accepted",
-      "the trickster's tainted gift.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
         {
-          "text": "Epic",
+          "text": "Melimonas' Guile",
           "color": "light_purple",
-          "italic": true
+          "italic": false
         }
       ]
-    ],
-    "mode": "replace_all"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:vanishing_curse": 1,
-      "minecraft:fire_aspect": 2,
-      "minecraft:riptide": 5,
-      "minecraft:sharpness": 5
     },
-    "add": false
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:3,DungeonItem:1b}"
-  }
-]
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "And thus spake Melimonas as the trader:",
+        "\"Take this spear, and toss it at the Dæmon",
+        "King, and it shall surely pierce his brow.\"",
+        "And Palomina, being none the wiser, accepted",
+        "the trickster's tainted gift.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1,
+        "minecraft:fire_aspect": 2,
+        "minecraft:riptide": 5,
+        "minecraft:sharpness": 5
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:3,DungeonItem:1b}"
+    }
+  ]
+}

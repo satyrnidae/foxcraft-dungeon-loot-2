@@ -1,24 +1,27 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Splash Potion of Levitation",
-      "color": "yellow",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:potion_contents": {
-        "custom_color": 13565951,
-        "custom_effects": [
-          {
-            "id": "minecraft:levitation",
-            "duration": 900
-          }
-        ]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Levitation",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 13565951,
+          "custom_effects": [
+            {
+              "id": "minecraft:levitation",
+              "duration": 900
+            }
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

@@ -1,31 +1,34 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": [
-      {
-        "text": "Totem of Undying",
-        "italic": false,
-        "color": "yellow"
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "Pick yourself up and try again.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
         {
-          "text": "Uncommon",
-          "italic": true,
+          "text": "Totem of Undying",
+          "italic": false,
           "color": "yellow"
         }
       ]
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:21,DungeonItem:1b}"
-  }
-]
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Pick yourself up and try again.",
+        [
+          "Rarity: ",
+          {
+            "text": "Uncommon",
+            "italic": true,
+            "color": "yellow"
+          }
+        ]
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:21,DungeonItem:1b}"
+    }
+  ]
+}

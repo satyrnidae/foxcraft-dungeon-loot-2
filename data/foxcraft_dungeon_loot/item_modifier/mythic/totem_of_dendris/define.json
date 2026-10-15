@@ -1,111 +1,114 @@
-[
-  {
-    "type": "minecraft:set_attributes",
-    "modifiers": [
-      {
-        "attribute": "minecraft:attack_speed",
-        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_dendris/attack_speed",
-        "amount": -0.2,
-        "operation": "add_multiplied_base",
-        "slot": "offhand"
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Totem of Dendris",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "May Dendris, the God of Dreams, Darkness,",
-      "and the Deep Things, smile upon thee!",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
         {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
+          "attribute": "minecraft:attack_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_dendris/attack_speed",
+          "amount": -0.2,
+          "operation": "add_multiplied_base",
+          "slot": "offhand"
         }
-      ],
-      "",
-      [
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Dendris",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "May Dendris, the God of Dreams, Darkness,",
+        "and the Deep Things, smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Darkvision: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Night Vision when held in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Darkvision: ",
-          "color": "green",
+          "text": "your off-hand.",
+          "color": "gray",
           "italic": false
         },
+        [
+          {
+            "text": "Crushing Depths: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Resistance II when",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Grants Night Vision when held in",
+          "text": "held in your off-hand.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Arbiter of the Deep: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Grants Water Breathing",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "when held in your off-hand.",
           "color": "gray",
           "italic": false
         }
       ],
-      {
-        "text": "your off-hand.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Crushing Depths: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "Grants Resistance II when",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "held in your off-hand.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Arbiter of the Deep: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "Grants Water Breathing",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "when held in your off-hand.",
-        "color": "gray",
-        "italic": false
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
       }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:54,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/totem_of_dendris",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
-        ]
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:54,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/totem_of_dendris",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

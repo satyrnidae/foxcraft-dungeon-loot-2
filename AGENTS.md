@@ -65,7 +65,7 @@ tests/                       run_all.mjs, unit tests, Java checks, Node tools
 ## How an item is built
 
 1. A loot table in `loot_table/item/<rarity>/<item>.json` holds only pools and a root `"modifier": "foxcraft_dungeon_loot:<rarity>/<item>/define"`.
-2. The modifier in `item_modifier/<rarity>/<item>/define.json` sets name, lore, `set_custom_data`, `set_components` with `minecraft:item_model`, enchantments and attributes.
+2. The modifier in `item_modifier/<rarity>/<item>/define.json` sets name, lore, `set_custom_data`, `set_components` with `minecraft:item_model`, enchantments and attributes. The file is one object, never a bare list: wrap several functions in `{"type": "minecraft:sequence", "functions": [...]}`.
 3. Predicates under `predicate/item/<rarity>/<item>/` match on the `custom_data` `DungeonLootId`.
 4. `src/foxcraft_dungeon_loot/item/<rarity>/<item>.mcb` holds hooks. A `function x` in it becomes `foxcraft_dungeon_loot:item/<rarity>/<item>/x`.
 5. The hook name is listed in `tags/function/<event>.json`.
@@ -80,7 +80,7 @@ Run from the repo root. Do all of this before claiming a change works.
 
 1. `node tests/run_all.mjs`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when Java 25 exists. The client jar is the launcher copy or a download from Mojang, so a missing launcher no longer skips them unless the download fails. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
 2. If a unit test fails because you changed an item on purpose, run `node tests/unit/gen_specs.mjs`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
-3. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each, usable by players tagged `satyrn.fdl.giver`. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
+3. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each, in dev builds only, for any player. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
 4. For a new hook, the tests fail until its entry is in the function tag.
 
 There is no CI. The tests are static, so you cannot test gameplay. State plainly which checks ran and which did not, and list what a human must test in game. `docs/todo_manual_verification.md` is the running checklist; add the new item to it.

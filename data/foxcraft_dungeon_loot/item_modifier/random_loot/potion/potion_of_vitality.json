@@ -1,24 +1,27 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Potion of Vitality",
-      "color": "yellow",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:potion_contents": {
-        "custom_color": 16284963,
-        "custom_effects": [
-          {
-            "id": "minecraft:health_boost",
-            "duration": 3600
-          }
-        ]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Potion of Vitality",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 16284963,
+          "custom_effects": [
+            {
+              "id": "minecraft:health_boost",
+              "duration": 3600
+            }
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

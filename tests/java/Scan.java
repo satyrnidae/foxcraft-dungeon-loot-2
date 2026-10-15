@@ -250,8 +250,9 @@ public class Scan {
         }
         for (Path f : modFiles) {
             JsonElement j = strip(JsonParser.parseString(Files.readString(f)));
-            roundTrip(LootItemFunctions.DIRECT_CODEC, base, f, j, "item_modifier");
-            LootItemFunction c = LootItemFunctions.DIRECT_CODEC.parse(base, j).result().orElse(null);
+            // The registry loads a modifier file with TYPED_CODEC, which takes one object and rejects a bare list
+            roundTrip(LootItemFunctions.TYPED_CODEC, base, f, j, "item_modifier");
+            LootItemFunction c = LootItemFunctions.TYPED_CODEC.parse(base, j).result().orElse(null);
             if (c != null) mods.put(ResourceKey.create(Registries.ITEM_MODIFIER, Identifier.parse(id(root, f, "item_modifier"))), c);
         }
         rsb.add(Registries.ITEM_MODIFIER, ctx -> mods.forEach(ctx::register));

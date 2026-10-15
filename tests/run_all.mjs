@@ -124,7 +124,7 @@ async function javaChecks(allowDownload) {
     return [['java checks', `SKIPPED could not fetch libraries: ${exc.message}`]];
   }
   const classpath = [jar, ...libs].join(path.delimiter);
-  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java'].map((n) => path.join(TESTS, 'java', n));
+  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java'].map((n) => path.join(TESTS, 'java', n));
   if (run(javac, ['-cp', classpath, '-d', classes, ...sources], { cwd: CACHE }) !== 0) return [['java compile', 'FAIL']];
   const runcp = [classes, classpath].join(path.delimiter);
   const functions = path.join(ROOT, 'data', 'foxcraft_dungeon_loot', 'function');
@@ -134,6 +134,7 @@ async function javaChecks(allowDownload) {
     ['vanilla behavior (Harness)', 'Harness', null],
     ['data codecs (Scan)', 'Scan', path.join(ROOT, 'data')],
     ['generated commands (CmdCheck)', 'CmdCheck', functions],
+    ['pack registry load (PackLoad)', 'PackLoad', ROOT],
   ]) {
     if (main === 'CmdCheck' && !fs.existsSync(functions)) {
       results.push([label, 'SKIPPED no build output']);

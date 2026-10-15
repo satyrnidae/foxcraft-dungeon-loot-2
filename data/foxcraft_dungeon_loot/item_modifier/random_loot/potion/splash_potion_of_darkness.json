@@ -1,24 +1,27 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Splash Potion of Darkness",
-      "color": "yellow",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:potion_contents": {
-        "custom_color": 2696993,
-        "custom_effects": [
-          {
-            "id": "minecraft:darkness",
-            "duration": 600
-          }
-        ]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Darkness",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 2696993,
+          "custom_effects": [
+            {
+              "id": "minecraft:darkness",
+              "duration": 600
+            }
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

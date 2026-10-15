@@ -1,68 +1,71 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": [
-      {
-        "text": "Armor Stand",
-        "italic": false
-      },
-      {
-        "text": " (Bashful)",
-        "color": "gray",
-        "italic": false
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      {
-        "text": "Pose: Bashful",
-        "italic": false,
-        "color": "gray"
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:common/armor_stand",
-      "minecraft:entity_data": {
-        "id": "minecraft:armor_stand",
-        "ShowArms": 1,
-        "Pose": {
-          "RightArm": [
-            30.0,
-            0.0,
-            -35.0
-          ],
-          "Head": [
-            20.0,
-            25.0,
-            15.0
-          ],
-          "LeftArm": [
-            30.0,
-            0.0,
-            35.0
-          ],
-          "RightLeg": [
-            10.0,
-            10.0,
-            0.0
-          ],
-          "Body": [
-            0.0,
-            3.8545465,
-            0.0
-          ]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Armor Stand",
+          "italic": false
+        },
+        {
+          "text": " (Bashful)",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pose: Bashful",
+          "italic": false,
+          "color": "gray"
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:common/armor_stand",
+        "minecraft:entity_data": {
+          "id": "minecraft:armor_stand",
+          "ShowArms": 1,
+          "Pose": {
+            "RightArm": [
+              30.0,
+              0.0,
+              -35.0
+            ],
+            "Head": [
+              20.0,
+              25.0,
+              15.0
+            ],
+            "LeftArm": [
+              30.0,
+              0.0,
+              35.0
+            ],
+            "RightLeg": [
+              10.0,
+              10.0,
+              0.0
+            ],
+            "Body": [
+              0.0,
+              3.8545465,
+              0.0
+            ]
+          }
         }
       }
     }
-  }
-]
+  ]
+}

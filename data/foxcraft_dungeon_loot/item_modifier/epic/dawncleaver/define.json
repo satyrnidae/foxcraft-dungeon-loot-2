@@ -1,40 +1,43 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Dawncleaver",
-      "color": "light_purple",
-      "italic": false
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Dawncleaver",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "May Mysteria shine upon thee and drench",
+        "thou in her holy, cleansing light!",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 5,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 5,
+        "minecraft:smite": 5,
+        "minecraft:unbreaking": 5
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:2,DungeonItem:1b}"
     }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "May Mysteria shine upon thee and drench",
-      "thou in her holy, cleansing light!",
-      [
-        "Rarity: ",
-        {
-          "text": "Epic",
-          "color": "light_purple",
-          "italic": true
-        }
-      ]
-    ],
-    "mode": "replace_all"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:fire_aspect": 5,
-      "minecraft:mending": 1,
-      "minecraft:sharpness": 5,
-      "minecraft:smite": 5,
-      "minecraft:unbreaking": 5
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:2,DungeonItem:1b}"
-  }
-]
+  ]
+}

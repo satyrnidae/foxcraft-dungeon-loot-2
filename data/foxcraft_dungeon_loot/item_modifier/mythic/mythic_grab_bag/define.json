@@ -1,35 +1,38 @@
-[
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:74,GrabBag:1b,ProcessOnUsed:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/mythic_grab_bag"
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:74,GrabBag:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/mythic_grab_bag"
+      }
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Radiant Grab-Bag",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "A grab bag containing mythic items.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
     }
-  },
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Radiant Grab-Bag",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "A grab bag containing mythic items.",
-      [
-        "Rarity: ",
-        {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ]
-    ],
-    "mode": "replace_all"
-  }
-]
+  ]
+}

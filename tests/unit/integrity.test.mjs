@@ -62,6 +62,12 @@ describe('references', () => {
     assert.deepEqual(missing, []);
   });
 
+  it('every item modifier file is one function object', () => {
+    // The registry codec rejects a bare list, only inline modifiers in a loot table may be one. Wrap in minecraft:sequence.
+    const lists = jsonIn(dataFile('item_modifier')).filter((file) => Array.isArray(pk.loadJson(file))).map(pk.rel);
+    assert.deepEqual(lists, []);
+  });
+
   it('every set_custom_data tag is valid SNBT', () => {
     const bad = [];
     for (const file of jsonIn(dataFile('item_modifier'))) {
@@ -248,6 +254,12 @@ describe('give functions', () => {
     if (!BUILD) return t.skip('no build output, run npx mcb build for this check');
     const load = pk.readText(pk.generatedFunction('give/on_load'));
     const process = pk.readText(pk.generatedFunction('give/process'));
+    const dev = pk.loadJson(path.join(pk.ROOT, 'config.json')).mc.dev;
+    if (!dev) {
+      // A release build has no triggers and no clock
+      assert.ok(!load.includes('trigger') && !process.includes('scores='));
+      return;
+    }
     const missing = Object.keys(GIVES).filter((n) => !load.includes(`scoreboard objectives add ${n} trigger`) || !process.includes(`scores={${n}=1..}`));
     assert.deepEqual(missing, []);
   });

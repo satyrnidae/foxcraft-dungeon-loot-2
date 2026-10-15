@@ -55,7 +55,7 @@ Data flow for one item: a loot table rolls the base item and runs a modifier cha
 - Thin loot tables. Item definitions live in `item_modifier/<rarity>/<item>/define.json`, with the item's other modifiers beside it, so there is one place to edit an item.
 - Strict identity. `DungeonLootId` uniqueness holds across all modifier files, checked by script. SNBT string form is used everywhere so ints never turn into bytes.
 - Lifecycle symmetry. Every objective added has a removal, and `scoreboardsVersion` plus `update_scoreboards` handle renames.
-- Real verification tools, now under `tests/`. `Scan.java` parses data with the game's own codecs, `CmdCheck.java` parses generated commands with the game's dispatcher, `check_old_keys.mjs` flags removed keys, and a `node:test` suite generates one test per item and per item source file. These caught real bugs during the port.
+- Real verification tools, now under `tests/`. `Scan.java` parses data with the game's own codecs, `CmdCheck.java` parses generated commands with the game's dispatcher, `PackLoad.java` runs the game's datapack registry load, `check_old_keys.mjs` flags removed keys, and a `node:test` suite generates one test per item and per item source file. These caught real bugs during the port.
 - Event gating. Item events are only dispatched to players matching `process_*` predicates, which keeps idle cost low on slow CPUs.
 - Reproducible build. Compiler pinned to mc-build 4.2.0, output paths deterministic.
 

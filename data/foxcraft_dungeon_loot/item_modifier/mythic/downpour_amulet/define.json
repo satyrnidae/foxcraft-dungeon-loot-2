@@ -1,134 +1,137 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Downpour Amulet",
-      "italic": false,
-      "color": "green"
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Downpour Amulet",
+        "italic": false,
+        "color": "green"
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Tor'Enhia implores you to make it rain.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Drizzle: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When used while skies are clear, summons",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "a rainstorm for five minutes.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "Durability is decreased by 4%.",
+            "color": "red",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "Downpour: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "While the skies are not thundering, and",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "if used while crouching, summons a thunderstorm",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for 2½ minutes.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "Durability is decreased by 13%.",
+            "color": "red",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": "Sunburn: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "If used while the skies are not clear,",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "clears all active weather effects.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "Durability is decreased by 25%.",
+            "color": "red",
+            "italic": false
+          }
+        ]
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:37,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/downpour_amulet"
+      }
     }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "Tor'Enhia implores you to make it rain.",
-      [
-        "Rarity: ",
-        {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Drizzle: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "When used while skies are clear, summons",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "a rainstorm for five minutes.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": " - ",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Durability is decreased by 4%.",
-          "color": "red",
-          "italic": false
-        }
-      ],
-      [
-        {
-          "text": "Downpour: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "While the skies are not thundering, and",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "if used while crouching, summons a thunderstorm",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "for 2½ minutes.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": " - ",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Durability is decreased by 13%.",
-          "color": "red",
-          "italic": false
-        }
-      ],
-      [
-        {
-          "text": "Sunburn: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "If used while the skies are not clear,",
-          "color": "gray",
-          "italic": false
-        }
-      ],
-      {
-        "text": "clears all active weather effects.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": " - ",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "Durability is decreased by 25%.",
-          "color": "red",
-          "italic": false
-        }
-      ]
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:37,DungeonItem:1b,ProcessOnUsed:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/downpour_amulet"
-    }
-  }
-]
+  ]
+}

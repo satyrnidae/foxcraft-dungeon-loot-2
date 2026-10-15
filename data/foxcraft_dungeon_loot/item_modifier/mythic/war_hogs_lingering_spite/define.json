@@ -1,42 +1,45 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "War Hog's Lingering Spite",
-      "color": "green",
-      "italic": false
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Lingering Spite",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "In ages long past, fearsome warriors roamed the",
+        "Nether. This blade is their lingering spite.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:fire_aspect": 5,
+        "minecraft:knockback": 2,
+        "minecraft:mending": 1,
+        "minecraft:sharpness": 15,
+        "minecraft:sweeping_edge": 3,
+        "minecraft:looting": 3,
+        "minecraft:unbreaking": 5
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:9,DungeonItem:1b}"
     }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "In ages long past, fearsome warriors roamed the",
-      "Nether. This blade is their lingering spite.",
-      [
-        "Rarity: ",
-        {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ]
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:fire_aspect": 5,
-      "minecraft:knockback": 2,
-      "minecraft:mending": 1,
-      "minecraft:sharpness": 15,
-      "minecraft:sweeping_edge": 3,
-      "minecraft:looting": 3,
-      "minecraft:unbreaking": 5
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:9,DungeonItem:1b}"
-  }
-]
+  ]
+}

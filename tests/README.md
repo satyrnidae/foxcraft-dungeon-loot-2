@@ -31,7 +31,7 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 | `unit/specs/items.json` | Snapshot of the facts each item test pins down |
 | `unit/gen_specs.mjs` | Regenerates the snapshot |
 | `unit/checks.mjs` | Lets one test report several failed checks together |
-| `java/` | `Harness`, `Scan` and `CmdCheck`, which run the game's own codecs and command parser |
+| `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader |
 | `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs`, `fetch_mc_jar.mjs` |
 | `verifying-against-vanilla.md` | How the Java checks work and what they found |
 | `.cache/` | Downloaded libraries and compiled classes, gitignored |

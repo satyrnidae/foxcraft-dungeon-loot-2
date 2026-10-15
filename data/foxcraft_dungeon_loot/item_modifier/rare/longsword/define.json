@@ -1,28 +1,31 @@
-[
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "A blade with exceptional reach.",
-      [
-        "Rarity: ",
-        {
-          "text": "Rare",
-          "color": "aqua",
-          "italic": true
-        }
-      ]
-    ],
-    "mode": "replace_all"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:sweeping_edge": 5
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "A blade with exceptional reach.",
+        [
+          "Rarity: ",
+          {
+            "text": "Rare",
+            "color": "aqua",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
     },
-    "add": false
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:10,DungeonItem:1b}"
-  }
-]
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:sweeping_edge": 5
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:10,DungeonItem:1b}"
+    }
+  ]
+}

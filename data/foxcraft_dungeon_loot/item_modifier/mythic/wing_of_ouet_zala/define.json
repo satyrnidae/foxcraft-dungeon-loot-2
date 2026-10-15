@@ -1,67 +1,70 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Wing of Ouet-Zala",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "May the Blessings of Ouet-Zala, God",
-      "of the Winds, lift you to the heathens",
-      "where you belong.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Wing of Ouet-Zala",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "May the Blessings of Ouet-Zala, God",
+        "of the Winds, lift you to the heathens",
+        "where you belong.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Wing of Ouet-Zala: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Applies Levitation",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Wing of Ouet-Zala: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "Applies Levitation",
+          "text": "while held in off-hand.",
           "color": "gray",
           "italic": false
         }
       ],
-      {
-        "text": "while held in off-hand.",
-        "color": "gray",
-        "italic": false
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
+      "mode": "append"
     },
-    "add": false
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:61,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/wing_of_ouet_zala",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
-        ]
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:61,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/wing_of_ouet_zala",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

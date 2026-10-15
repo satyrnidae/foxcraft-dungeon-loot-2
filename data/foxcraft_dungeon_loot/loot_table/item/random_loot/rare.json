@@ -299,7 +299,7 @@
         },
         {
           "type": "minecraft:tag",
-          "items": "#minecraft:music_discs",
+          "items": "#foxcraft_dungeon_loot:music_discs",
           "expand": true,
           "weight": 1,
           "quality": 0

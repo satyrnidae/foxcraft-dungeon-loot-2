@@ -1,70 +1,73 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Buckwheat",
-      "color": "light_purple",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "...But if it started with an \"F\" instead.",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Buckwheat",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "...But if it started with an \"F\" instead.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Love Potion #9: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Holding this item in your",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Epic",
-          "color": "light_purple",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "Love Potion #9: ",
-          "color": "light_purple",
+          "text": "main hand will make all breedable",
+          "color": "gray",
           "italic": false
         },
         {
-          "text": "Holding this item in your",
+          "text": "livestock within 5 blocks enter love",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "mode every 3 seconds.",
           "color": "gray",
           "italic": false
         }
       ],
-      {
-        "text": "main hand will make all breedable",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "livestock within 5 blocks enter love",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "mode every 3 seconds.",
-        "color": "gray",
-        "italic": false
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:unbreaking": 1
+      "mode": "append"
     },
-    "add": true
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:76,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:epic/buckwheat"
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:unbreaking": 1
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:76,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/buckwheat"
+      }
     }
-  }
-]
+  ]
+}

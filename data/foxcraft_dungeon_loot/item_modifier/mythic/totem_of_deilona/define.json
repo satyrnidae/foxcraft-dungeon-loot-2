@@ -1,111 +1,114 @@
-[
-  {
-    "type": "minecraft:set_attributes",
-    "modifiers": [
-      {
-        "attribute": "minecraft:luck",
-        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/luck",
-        "amount": 2,
-        "operation": "add_value",
-        "slot": "offhand"
-      },
-      {
-        "attribute": "minecraft:max_health",
-        "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/max_health",
-        "amount": 10,
-        "operation": "add_value",
-        "slot": "offhand"
-      }
-    ]
-  },
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Totem of Deilona",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "May Deilona, God of Health and Good",
-      "Fortune, smile upon thee!",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
         {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
+          "attribute": "minecraft:luck",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/luck",
+          "amount": 2,
+          "operation": "add_value",
+          "slot": "offhand"
+        },
+        {
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/totem_of_deilona/max_health",
+          "amount": 10,
+          "operation": "add_value",
+          "slot": "offhand"
         }
-      ],
-      "",
-      [
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Totem of Deilona",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "May Deilona, God of Health and Good",
+        "Fortune, smile upon thee!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Deilona's Blessing: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When held in your",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Deilona's Blessing: ",
-          "color": "green",
+          "text": "off-hand, grants up to five nearby",
+          "color": "gray",
           "italic": false
         },
         {
-          "text": "When held in your",
+          "text": "allies Regeneration I.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Doctor, Heal Thyself: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When held in",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "your main hand, grants five seconds",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "of Regeneration II to yourself.",
           "color": "gray",
           "italic": false
         }
       ],
-      {
-        "text": "off-hand, grants up to five nearby",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "allies Regeneration I.",
-        "color": "gray",
-        "italic": false
-      },
-      [
-        {
-          "text": "Doctor, Heal Thyself: ",
-          "color": "green",
-          "italic": false
-        },
-        {
-          "text": "When held in",
-          "color": "gray",
-          "italic": false
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:55,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/totem_of_deilona",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
         }
-      ],
-      {
-        "text": "your main hand, grants five seconds",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "of Regeneration II to yourself.",
-        "color": "gray",
-        "italic": false
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:mending": 1
-    }
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:55,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:mythic/totem_of_deilona",
-      "minecraft:tooltip_display": {
-        "hidden_components": [
-          "minecraft:enchantments"
-        ]
       }
     }
-  }
-]
+  ]
+}

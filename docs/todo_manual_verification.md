@@ -30,7 +30,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 4a-2 - entity NBT
 
-- [ ] Wandering trader: spawn one (`/summon wandering_trader`). Trade index stand appears (visible in dev mode) holding a snowball. Trades populate, no log errors.
+- [x] Wandering trader: spawn one (`/summon wandering_trader`, only gets trades in a dev build; release needs a natural spawn or `{DespawnDelay:48000}`). Trade index stand appears (visible in dev mode) holding a snowball. Trades populate, no log errors.
 - [ ] Trade state: buy something, leave and re-open. `AddedTrades` grows and trades are not duplicated. In dev mode `/data get entity @e[tag=satyrn.fdl.wanderingTrader.tradeIndex,limit=1] equipment.mainhand.components` shows `minecraft:custom_data` with the three keys.
 - [ ] Recipe storage: `/data get storage foxcraft_dungeon_loot:trades Current` after a trade build shows `count` ints, not `Count` bytes.
 - [ ] X No Evil: throw it. A tracker stand follows the snowball, the snowball passenger is the X No Evil model, and on landing a cloud spawns with one of the 7 effects (blindness, hunger, wither, poison, nausea, instant damage IV, slowness III) applied to players standing in it.
@@ -75,6 +75,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 5 - trades
 
+- [ ] Trader staging: the first right-click opens the vanilla trades, the screen closes by itself after a tick, click again and the custom trades follow the vanilla ones. The trader should not visibly jump or fall, and must end up where it stood. A trader never right-clicked has no Offers yet. Killing a staged trader drops no snowball.
 - [ ] Spawn a wandering trader with `/summon`, wait for the index build ("Building trade index..." in chat on load) and for the trader to finish, then trade window opens.
 - [ ] Vanilla trades are gone and only the pack's offers appear. If vanilla offers still show, the pre-filled `Offers` is not suppressing them.
 - [ ] Each offer type shows correct items: grab bags, heads, dungeon loot, goat horns, exchange rates, endgame. Names, lore and models intact.
@@ -149,4 +150,4 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 
 - Variants with their own `item_model` (phase 7).
-- [ ] Give triggers: `/tag @s add satyrn.fdl.giver`, wait half a second, `/trigger give_chainsaw` and `/trigger give_chainsaw_netherite` give the iron and netherite chainsaw. Untagged players cannot trigger. `/trigger give_estudinaes_patience_netherite` gives a netherite chestplate. A disc and a horn trigger each give their item.
+- [ ] Give triggers, dev build only: wait half a second after load, `/trigger give_chainsaw` and `/trigger give_chainsaw_netherite` give the iron and netherite chainsaw. A release build has no give triggers. `/trigger give_estudinaes_patience_netherite` gives a netherite chestplate. A disc and a horn trigger each give their item.

@@ -245,8 +245,25 @@ Two tools check the repository's JSON under `data/`, because 26.3 loads unconver
   Pack predicates are inlined before parsing because the vanilla lookup already owns the predicate registry, and loot table references are checked
   for existence and parsed as empty tables. Known harmless re-encodings (default `weight`, `quality`, `add`, constant number providers, `__comment` keys,
   advancement defaults) are not reported.
+  Item modifier files are parsed with `LootItemFunctions.TYPED_CODEC`, what the registry uses, so a file that is a bare JSON list fails. `DIRECT_CODEC` accepts lists, and an earlier version of Scan used it and missed 237 modifier files the game rejected.
   Pack instruments are parsed with `Instrument.DIRECT_CODEC`, then a `minecraft:instrument` component naming one is swapped for a vanilla id before the table or modifier is parsed, since the vanilla registry cannot take them.
 
+
+## 9b. Loading the pack like the game
+
+`tests/java/PackLoad.java PACK_DIR` is the closest local stand-in for the game validating a datapack. It builds a resource manager from the vanilla data and the repo as a directory pack,
+loads the tags of the built-in registries with `TagLoader`, then runs `RegistryDataLoader.load` for the worldgen and the reloadable registries, the same call that is in the stack when the game logs
+`Failed to validate datapack`. It captures every ERROR the load logs and exits 1 if there is one. That covers what Scan cannot:
+- a tag that names an id which no longer exists, logged as `Couldn't load tag ... missing following references`;
+- a tag reference such as `#minecraft:music_discs` that points at a tag which was removed;
+- a file the registry codec rejects, for example an item modifier that is a bare list.
+
+Run it from a scratch directory with an absolute path, like the other checks:
+```bash
+javac -cp "$JAR:$CP" -d "$WORK/classes" tests/java/PackLoad.java
+java -cp "$WORK/classes:$JAR:$CP" PackLoad "$(pwd)"
+```
+Limits: it parses and links, nothing runs. Functions are not part of the registries it loads, `CmdCheck` covers them.
 
 ## 10. Parsing the generated commands
 

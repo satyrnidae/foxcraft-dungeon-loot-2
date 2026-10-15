@@ -1,65 +1,68 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Albatross Heavy Industries® LumberJACKED™ 8.5hp",
-      "color": "green",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_lore",
-    "lore": [
-      "The new Albatross Heavy Industries®",
-      "LumberJACKED™ 8.5hp really puts the",
-      "\"cut\" in cutting-edge!",
-      [
-        "Rarity: ",
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Albatross Heavy Industries® LumberJACKED™ 8.5hp",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "The new Albatross Heavy Industries®",
+        "LumberJACKED™ 8.5hp really puts the",
+        "\"cut\" in cutting-edge!",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "High-Speed Chain: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Tears through the",
+            "color": "gray",
+            "italic": false
+          }
+        ],
         {
-          "text": "Mythic",
-          "color": "green",
-          "italic": true
-        }
-      ],
-      "",
-      [
-        {
-          "text": "High-Speed Chain: ",
-          "color": "green",
+          "text": "gnarliest wood with ease. Grants Haste",
+          "color": "gray",
           "italic": false
         },
         {
-          "text": "Tears through the",
+          "text": "II when held in main-hand.",
           "color": "gray",
           "italic": false
         }
       ],
-      {
-        "text": "gnarliest wood with ease. Grants Haste",
-        "color": "gray",
-        "italic": false
-      },
-      {
-        "text": "II when held in main-hand.",
-        "color": "gray",
-        "italic": false
-      }
-    ],
-    "mode": "append"
-  },
-  {
-    "type": "minecraft:set_enchantments",
-    "enchantments": {
-      "minecraft:efficiency": 10,
-      "minecraft:mending": 1,
-      "minecraft:silk_touch": 1,
-      "minecraft:unbreaking": 5,
-      "minecraft:smite": 10
+      "mode": "append"
     },
-    "add": false
-  },
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:87,Rarity:\"Mythic\",DungeonItem:1b}"
-  }
-]
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:efficiency": 10,
+        "minecraft:mending": 1,
+        "minecraft:silk_touch": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:smite": 10
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:87,Rarity:\"Mythic\",DungeonItem:1b}"
+    }
+  ]
+}

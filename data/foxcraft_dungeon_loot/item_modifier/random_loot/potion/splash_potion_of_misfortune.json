@@ -1,24 +1,27 @@
-[
-  {
-    "type": "minecraft:set_name",
-    "name": {
-      "text": "Splash Potion of Misfortune",
-      "color": "yellow",
-      "italic": false
-    }
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:potion_contents": {
-        "custom_color": 12624973,
-        "custom_effects": [
-          {
-            "id": "minecraft:unluck",
-            "duration": 3600
-          }
-        ]
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Misfortune",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 12624973,
+          "custom_effects": [
+            {
+              "id": "minecraft:unluck",
+              "duration": 3600
+            }
+          ]
+        }
       }
     }
-  }
-]
+  ]
+}

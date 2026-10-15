@@ -2,10 +2,10 @@
   "values": [
     "#foxcraft_dungeon_loot:air",
     "#foxcraft_dungeon_loot:fluids",
-    "#minecraft:replaceable_plants",
+    "#foxcraft_dungeon_loot:replaceable_plants",
     "#foxcraft_dungeon_loot:item/rare/ima_leaf/azaleas",
     "#minecraft:small_flowers",
-    "#minecraft:tall_flowers",
+    "#foxcraft_dungeon_loot:tall_flowers",
     "minecraft:oak_sapling",
     "minecraft:birch_sapling",
     "minecraft:spruce_sapling",

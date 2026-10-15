@@ -1,13 +1,16 @@
-[
-  {
-    "type": "minecraft:set_custom_data",
-    "tag": "{DungeonLootId:102,DungeonItem:1b}"
-  },
-  {
-    "type": "minecraft:set_components",
-    "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nematode",
-      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_captainzephyrr_nematode"
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:102,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nematode",
+        "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_captainzephyrr_nematode"
+      }
     }
-  }
-]
+  ]
+}

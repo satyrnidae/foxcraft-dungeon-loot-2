@@ -232,11 +232,16 @@ export function lootTablePath(tableId) {
 
 export const asList = (value) => (value === undefined || value === null ? [] : Array.isArray(value) ? value : [value]);
 
-/** A modifier file is one function, a list of functions, or a list that nests lists. */
+/**
+ * A modifier file is one function object, and the registry rejects a bare list. Several functions are wrapped in
+ * minecraft:sequence. Inline modifiers in loot tables may still be lists. Sequences are flattened, so callers see
+ * the functions in the order they run.
+ */
 export function functionList(modifierJson) {
   const out = [];
   for (const item of asList(modifierJson)) {
     if (Array.isArray(item)) out.push(...functionList(item));
+    else if (item && bareType(item) === 'sequence') out.push(...functionList(item.functions));
     else out.push(item);
   }
   return out;
