@@ -22,3 +22,8 @@ function clock_4t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/epic/rogues_dagger/clock_4t 1t
 }
+
+# Gives the target the rogues dagger.
+function give_rogues_dagger {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/rogues_dagger
+}

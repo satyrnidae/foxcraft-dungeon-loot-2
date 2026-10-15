@@ -192,3 +192,8 @@ dir raycast {
         }
     }
 }
+
+# Gives the target the hammer of sol.
+function give_hammer_of_sol {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol
+}

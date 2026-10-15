@@ -1,0 +1,4 @@
+# Gives the target the d4.
+function give_d4 {
+    loot give @s loot foxcraft_dungeon_loot:item/common/d4
+}

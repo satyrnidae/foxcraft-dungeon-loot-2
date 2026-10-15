@@ -47,3 +47,8 @@ function plant_sapling {
         }
     }
 }
+
+# Gives the target the ima leaf.
+function give_ima_leaf {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/ima_leaf
+}

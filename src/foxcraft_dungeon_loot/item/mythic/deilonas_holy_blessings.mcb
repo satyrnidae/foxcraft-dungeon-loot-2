@@ -94,3 +94,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the deilonas holy blessings.
+function give_deilonas_holy_blessings {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/deilonas_holy_blessings
+}

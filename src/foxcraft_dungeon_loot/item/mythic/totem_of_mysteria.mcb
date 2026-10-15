@@ -37,3 +37,8 @@ function on_load {
 function on_uninstall {
     data remove storage foxcraft_dungeon_loot:items TotemOfMysteria
 }
+
+# Gives the target the totem of mysteria.
+function give_totem_of_mysteria {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/totem_of_mysteria
+}

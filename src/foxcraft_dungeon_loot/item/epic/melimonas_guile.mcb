@@ -1,0 +1,4 @@
+# Gives the target the melimonas guile.
+function give_melimonas_guile {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/melimonas_guile
+}

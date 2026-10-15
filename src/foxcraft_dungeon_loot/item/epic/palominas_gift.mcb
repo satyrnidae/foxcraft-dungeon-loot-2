@@ -1,0 +1,4 @@
+# Gives the target the palominas gift.
+function give_palominas_gift {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/palominas_gift
+}

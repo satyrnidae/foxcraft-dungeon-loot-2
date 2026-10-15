@@ -16,3 +16,8 @@ function clock_4t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/epic/wand_of_block_state_editing/clock_4t 1t
 }
+
+# Gives the target the wand of block state editing.
+function give_wand_of_block_state_editing {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/wand_of_block_state_editing
+}

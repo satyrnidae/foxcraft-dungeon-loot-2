@@ -97,3 +97,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the pride and extreme prejudice.
+function give_pride_and_extreme_prejudice {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/pride_and_extreme_prejudice
+}

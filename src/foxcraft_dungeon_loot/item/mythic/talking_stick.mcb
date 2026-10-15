@@ -31,3 +31,8 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/talking_stick/clock_10t 9t
 }
+
+# Gives the target the talking stick.
+function give_talking_stick {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/talking_stick
+}

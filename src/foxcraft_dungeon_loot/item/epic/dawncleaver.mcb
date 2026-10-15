@@ -1,0 +1,18 @@
+# Gives the target the dawncleaver.
+function give_dawncleaver {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/dawncleaver
+}
+
+# Gives the diamond variant, loot variant score 1.
+function give_dawncleaver_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/dawncleaver
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 2.
+function give_dawncleaver_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/dawncleaver
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

@@ -10,13 +10,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_absinthe"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "absinthe"
   },
   "item/common/animus": {
     "base_items": [
@@ -29,13 +31,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_animus"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "animus"
   },
   "item/common/armor_stand": {
     "base_items": [
@@ -48,7 +52,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -56,7 +62,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand"
   },
   "item/common/armor_stand_baby": {
     "base_items": [
@@ -69,7 +75,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_baby"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -77,7 +85,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_baby"
   },
   "item/common/armor_stand_bashful": {
     "base_items": [
@@ -90,7 +98,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_bashful"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -98,7 +108,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_bashful"
   },
   "item/common/armor_stand_cancan": {
     "base_items": [
@@ -111,7 +121,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_cancan"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -119,7 +131,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_cancan"
   },
   "item/common/armor_stand_dab": {
     "base_items": [
@@ -132,7 +144,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_dab"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -140,7 +154,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_dab"
   },
   "item/common/armor_stand_gallant": {
     "base_items": [
@@ -153,7 +167,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_gallant"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -161,7 +177,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_gallant"
   },
   "item/common/armor_stand_greyskull": {
     "base_items": [
@@ -174,7 +190,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_greyskull"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -182,7 +200,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_greyskull"
   },
   "item/common/armor_stand_skeleton": {
     "base_items": [
@@ -195,7 +213,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_skeleton"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -203,7 +223,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_skeleton"
   },
   "item/common/armor_stand_zombie": {
     "base_items": [
@@ -216,7 +236,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_stand_zombie"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:armor_stand"
     ],
@@ -224,7 +246,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_stand_zombie"
   },
   "item/common/coffee": {
     "base_items": [
@@ -237,13 +259,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_coffee"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "coffee"
   },
   "item/common/common_grab_bag": {
     "base_items": [
@@ -257,6 +281,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_common_grab_bag",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -283,7 +308,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d10"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d10"
     ],
@@ -295,7 +322,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d10"
   },
   "item/common/d12": {
     "base_items": [
@@ -308,7 +335,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d12"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d12"
     ],
@@ -320,7 +349,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d12"
   },
   "item/common/d20": {
     "base_items": [
@@ -333,7 +362,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d20"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d20"
     ],
@@ -345,7 +376,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d20"
   },
   "item/common/d4": {
     "base_items": [
@@ -358,7 +389,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d4"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d4"
     ],
@@ -370,7 +403,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d4"
   },
   "item/common/d6": {
     "base_items": [
@@ -383,7 +416,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d6"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d6"
     ],
@@ -395,7 +430,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d6"
   },
   "item/common/d8": {
     "base_items": [
@@ -408,7 +443,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_d8"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:d8"
     ],
@@ -420,7 +457,7 @@
       "in_main_hand"
     ],
     "rarity": null,
-    "src": null
+    "src": "d8"
   },
   "item/common/laudanum": {
     "base_items": [
@@ -433,13 +470,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_laudanum"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "laudanum"
   },
   "item/common/luma": {
     "base_items": [
@@ -452,13 +491,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_luma"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "luma"
   },
   "item/common/moonshine": {
     "base_items": [
@@ -471,13 +512,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_moonshine"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "moonshine"
   },
   "item/common/nectar": {
     "base_items": [
@@ -490,13 +533,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_nectar"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "nectar"
   },
   "item/common/stout": {
     "base_items": [
@@ -509,13 +554,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_stout"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "stout"
   },
   "item/common/tequila": {
     "base_items": [
@@ -528,13 +575,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_tequila"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "tequila"
   },
   "item/common/vitae": {
     "base_items": [
@@ -547,13 +596,15 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_vitae"
+    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "vitae"
   },
   "item/epic/buckwheat": {
     "base_items": [
@@ -570,6 +621,7 @@
     "hooks": [
       "clock_3s",
       "damage_tool",
+      "give_buckwheat",
       "on_load",
       "on_uninstall"
     ],
@@ -600,7 +652,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_dawncleaver",
+      "give_dawncleaver_diamond",
+      "give_dawncleaver_netherite"
+    ],
     "item_models": [],
     "loot_ids": [
       2
@@ -608,7 +664,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "dawncleaver"
   },
   "item/epic/epic_grab_bag": {
     "base_items": [
@@ -622,6 +678,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_epic_grab_bag",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -656,6 +713,11 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_estudinaes_guidance",
+      "give_estudinaes_guidance_chainmail",
+      "give_estudinaes_guidance_diamond",
+      "give_estudinaes_guidance_iron",
+      "give_estudinaes_guidance_netherite",
       "on_load"
     ],
     "item_models": [],
@@ -675,7 +737,8 @@
       "minecraft:chainmail_chestplate",
       "minecraft:diamond_chestplate",
       "minecraft:iron_chestplate",
-      "minecraft:leather_chestplate"
+      "minecraft:leather_chestplate",
+      "minecraft:netherite_chestplate"
     ],
     "dungeon_item": true,
     "function_types": [
@@ -688,6 +751,11 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_estudinaes_patience",
+      "give_estudinaes_patience_chainmail",
+      "give_estudinaes_patience_diamond",
+      "give_estudinaes_patience_iron",
+      "give_estudinaes_patience_netherite",
       "on_load"
     ],
     "item_models": [],
@@ -719,7 +787,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_estudinaes_script",
+      "give_estudinaes_script_chainmail",
+      "give_estudinaes_script_diamond",
+      "give_estudinaes_script_iron",
+      "give_estudinaes_script_netherite"
+    ],
     "item_models": [],
     "loot_ids": [
       30
@@ -727,7 +801,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "estudinaes_script"
   },
   "item/epic/estudinaes_sorrow": {
     "base_items": [
@@ -743,6 +817,8 @@
     ],
     "hooks": [
       "apply_wither",
+      "give_estudinaes_sorrow",
+      "give_estudinaes_sorrow_netherite",
       "on_hit",
       "on_raycast_success"
     ],
@@ -776,6 +852,11 @@
     "hooks": [
       "clock_10s",
       "clock_10t",
+      "give_estudinaes_survival",
+      "give_estudinaes_survival_chainmail",
+      "give_estudinaes_survival_diamond",
+      "give_estudinaes_survival_iron",
+      "give_estudinaes_survival_netherite",
       "on_load"
     ],
     "item_models": [],
@@ -803,7 +884,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_fortune_500",
+      "give_fortune_500_diamond",
+      "give_fortune_500_netherite"
+    ],
     "item_models": [],
     "loot_ids": [
       22
@@ -811,7 +896,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "fortune_500"
   },
   "item/epic/heros_amulet": {
     "base_items": [
@@ -826,6 +911,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_heros_amulet",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -853,7 +939,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_kobolds_vengeance"
+    ],
     "item_models": [],
     "loot_ids": [
       4
@@ -861,7 +949,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "kobolds_vengeance"
   },
   "item/epic/melimonas_guile": {
     "base_items": [
@@ -874,7 +962,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_melimonas_guile"
+    ],
     "item_models": [],
     "loot_ids": [
       3
@@ -882,7 +972,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "melimonas_guile"
   },
   "item/epic/palominas_gift": {
     "base_items": [
@@ -895,7 +985,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_palominas_gift"
+    ],
     "item_models": [],
     "loot_ids": [
       5
@@ -903,7 +995,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "palominas_gift"
   },
   "item/epic/peerless_yewhewn": {
     "base_items": [
@@ -917,7 +1009,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_peerless_yewhewn"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:peerless_yewhewn"
     ],
@@ -927,7 +1021,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "peerless_yewhewn"
   },
   "item/epic/rogues_dagger": {
     "base_items": [
@@ -944,6 +1038,7 @@
     ],
     "hooks": [
       "clock_4t",
+      "give_rogues_dagger",
       "on_load"
     ],
     "item_models": [
@@ -973,6 +1068,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_silverfish_escape_artist",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1003,7 +1099,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_skullbasher"
+    ],
     "item_models": [],
     "loot_ids": [
       6
@@ -1011,7 +1109,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "skullbasher"
   },
   "item/epic/spell_scroll_hail_of_arrows": {
     "base_items": [
@@ -1026,6 +1124,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_spell_scroll_hail_of_arrows",
       "on_snowball_used",
       "on_tick",
       "spawn_arrows_1",
@@ -1059,6 +1158,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_tithe_to_uthiir",
       "on_hit",
       "on_hit_arthropod",
       "on_killed_arthropod",
@@ -1091,6 +1191,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_torenhias_fist",
       "on_load",
       "on_snowball_used",
       "on_tick",
@@ -1123,6 +1224,7 @@
     ],
     "hooks": [
       "clock_4t",
+      "give_wand_of_block_state_editing",
       "on_load"
     ],
     "item_models": [
@@ -1151,7 +1253,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_yo_yo_mans_revenge"
+    ],
     "item_models": [],
     "loot_ids": [
       8
@@ -1159,7 +1263,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "yo_yo_mans_revenge"
   },
   "item/mythic/auto_pickaxe": {
     "base_items": [
@@ -1177,6 +1281,9 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_auto_pickaxe",
+      "give_auto_pickaxe_diamond",
+      "give_auto_pickaxe_netherite",
       "on_load"
     ],
     "item_models": [
@@ -1208,6 +1315,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_bringer_of_fear",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1242,8 +1350,9 @@
     ],
     "hooks": [
       "clock_10t",
-      "give_diamond_upgrade",
-      "give_netherite_upgrade",
+      "give_chainsaw",
+      "give_chainsaw_diamond",
+      "give_chainsaw_netherite",
       "on_load",
       "on_tick",
       "on_uninstall"
@@ -1277,6 +1386,7 @@
     ],
     "hooks": [
       "clock_10s",
+      "give_constantines_gift",
       "on_load"
     ],
     "item_models": [],
@@ -1303,6 +1413,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_deilonas_holy_blessings",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1335,6 +1446,7 @@
     ],
     "hooks": [
       "damage",
+      "give_downpour_amulet",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1366,6 +1478,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_evokers_tome",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1402,6 +1515,9 @@
     "hooks": [
       "clock_10t",
       "damage",
+      "give_gravilock_boots",
+      "give_gravilock_boots_diamond",
+      "give_gravilock_boots_netherite",
       "on_load"
     ],
     "item_models": [],
@@ -1433,6 +1549,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_hammer_of_sol",
       "hit_target",
       "on_load",
       "on_snowball_used",
@@ -1467,6 +1584,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_how_about_no",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1500,6 +1618,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_idol_of_melimonas",
       "on_load"
     ],
     "item_models": [
@@ -1528,6 +1647,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_mythic_grab_bag",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -1554,7 +1674,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_pierce_the_sky"
+    ],
     "item_models": [],
     "loot_ids": [
       7
@@ -1562,7 +1684,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "pierce_the_sky"
   },
   "item/mythic/poncho_sanchezs_fate": {
     "base_items": [
@@ -1577,6 +1699,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_poncho_sanchezs_fate",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1608,6 +1731,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_pride_and_extreme_prejudice",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1640,6 +1764,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_quet_zalas_beloved",
       "on_fall"
     ],
     "item_models": [],
@@ -1667,6 +1792,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_scripture_of_cleansing",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -1697,7 +1823,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_shield_of_the_juggernaut"
+    ],
     "item_models": [],
     "loot_ids": [
       16
@@ -1705,7 +1833,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "shield_of_the_juggernaut"
   },
   "item/mythic/stompies": {
     "base_items": [
@@ -1726,6 +1854,11 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_stompies",
+      "give_stompies_chainmail",
+      "give_stompies_diamond",
+      "give_stompies_iron",
+      "give_stompies_netherite",
       "on_load"
     ],
     "item_models": [],
@@ -1755,6 +1888,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_talking_stick",
       "on_load"
     ],
     "item_models": [],
@@ -1785,6 +1919,7 @@
     "hooks": [
       "clock_2s",
       "clock_4t",
+      "give_totem_of_deilona",
       "on_load"
     ],
     "item_models": [
@@ -1817,6 +1952,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_totem_of_dendris",
       "on_load"
     ],
     "item_models": [
@@ -1848,6 +1984,7 @@
     ],
     "hooks": [
       "clock_4t",
+      "give_totem_of_ekila",
       "on_load"
     ],
     "item_models": [
@@ -1880,6 +2017,7 @@
     ],
     "hooks": [
       "clock_4t",
+      "give_totem_of_gnumoch",
       "on_load"
     ],
     "item_models": [
@@ -1912,6 +2050,7 @@
     "hooks": [
       "clock_10t",
       "clock_2s",
+      "give_totem_of_mysteria",
       "on_load",
       "on_uninstall"
     ],
@@ -1944,6 +2083,7 @@
     "hooks": [
       "do_harvest",
       "do_till",
+      "give_war_hogs_blighted_harvest",
       "harvest_crop",
       "on_harvest",
       "on_kill_entity",
@@ -1983,6 +2123,7 @@
     "hooks": [
       "disarm_entity",
       "disarm_player",
+      "give_war_hogs_burning_rage",
       "on_hit",
       "on_raycast_success"
     ],
@@ -2010,6 +2151,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_war_hogs_disdainful_pride",
       "on_fall"
     ],
     "item_models": [],
@@ -2035,7 +2177,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_war_hogs_festering_wrath"
+    ],
     "item_models": [],
     "loot_ids": [
       13
@@ -2043,7 +2187,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "war_hogs_festering_wrath"
   },
   "item/mythic/war_hogs_insatiable_hunger": {
     "base_items": [
@@ -2059,6 +2203,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_war_hogs_insatiable_hunger",
       "on_load"
     ],
     "item_models": [],
@@ -2084,7 +2229,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_war_hogs_lingering_spite"
+    ],
     "item_models": [],
     "loot_ids": [
       9
@@ -2092,7 +2239,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "war_hogs_lingering_spite"
   },
   "item/mythic/war_hogs_seething_hatred": {
     "base_items": [
@@ -2109,6 +2256,7 @@
     ],
     "hooks": [
       "clock_10t",
+      "give_war_hogs_seething_hatred",
       "on_load"
     ],
     "item_models": [],
@@ -2138,6 +2286,7 @@
     "hooks": [
       "clock_10t",
       "clock_60s",
+      "give_wing_of_ouet_zala",
       "on_load"
     ],
     "item_models": [
@@ -2170,6 +2319,7 @@
     "hooks": [
       "clock_10t",
       "clock_60s",
+      "give_wing_of_quet_zala",
       "on_load"
     ],
     "item_models": [
@@ -2200,6 +2350,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_x_no_evil",
       "on_snowball_used",
       "on_tick"
     ],
@@ -2229,7 +2380,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_admire_me_from_afar"
+    ],
     "item_models": [],
     "loot_ids": [
       11
@@ -2237,7 +2390,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "admire_me_from_afar"
   },
   "item/rare/armor_of_the_golem": {
     "base_items": [
@@ -2251,7 +2404,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_armor_of_the_golem"
+    ],
     "item_models": [],
     "loot_ids": [
       14
@@ -2259,7 +2414,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "armor_of_the_golem"
   },
   "item/rare/aurelias_lucky_compass": {
     "base_items": [
@@ -2274,7 +2429,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_aurelias_lucky_compass"
+    ],
     "item_models": [],
     "loot_ids": [
       18
@@ -2282,7 +2439,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "aurelias_lucky_compass"
   },
   "item/rare/beta_iron_sword": {
     "base_items": [
@@ -2298,6 +2455,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_beta_iron_sword",
       "on_block",
       "on_hit",
       "on_load",
@@ -2330,6 +2488,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_eye_cream",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -2358,6 +2517,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_feather_of_quet_zala",
       "on_load",
       "on_tick",
       "on_uninstall",
@@ -2388,7 +2548,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_flawless_ashenhewn"
+    ],
     "item_models": [
       "foxcraft_dungeon_loot:peerless_yewhewn"
     ],
@@ -2398,7 +2560,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "flawless_ashenhewn"
   },
   "item/rare/gift_of_sheep_island": {
     "base_items": [
@@ -2413,6 +2575,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_gift_of_sheep_island",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -2441,6 +2604,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_grasp_of_uthiir",
       "on_snowball_used",
       "on_tick"
     ],
@@ -2471,6 +2635,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_ima_leaf",
       "on_warped_fungus_used",
       "plant_sapling"
     ],
@@ -2500,7 +2665,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_longsword",
+      "give_longsword_diamond",
+      "give_longsword_netherite"
+    ],
     "item_models": [],
     "loot_ids": [
       10
@@ -2508,7 +2677,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "longsword"
   },
   "item/rare/lucky_rabbits_foot": {
     "base_items": [
@@ -2523,7 +2692,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_lucky_rabbits_foot"
+    ],
     "item_models": [],
     "loot_ids": [
       29
@@ -2531,7 +2702,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "lucky_rabbits_foot"
   },
   "item/rare/quickdraw_crossbow": {
     "base_items": [
@@ -2544,7 +2715,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_quickdraw_crossbow"
+    ],
     "item_models": [],
     "loot_ids": [
       12
@@ -2552,7 +2725,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "quickdraw_crossbow"
   },
   "item/rare/rare_grab_bag": {
     "base_items": [
@@ -2566,6 +2739,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_rare_grab_bag",
       "on_warped_fungus_used"
     ],
     "item_models": [
@@ -2594,7 +2768,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_shroud_of_notoriety"
+    ],
     "item_models": [],
     "loot_ids": [
       15
@@ -2602,7 +2778,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "shroud_of_notoriety"
   },
   "item/special/copper_horn/clear_temper_journey": {
     "base_items": [
@@ -3911,7 +4087,9 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
+    "hooks": [
+      "give_totem_of_undying"
+    ],
     "item_models": [],
     "loot_ids": [
       21
@@ -3919,7 +4097,7 @@
     "named": true,
     "predicates": [],
     "rarity": null,
-    "src": null
+    "src": "totem_of_undying"
   },
   "item/uncommon/uncommon_grab_bag": {
     "base_items": [
@@ -3933,6 +4111,7 @@
       "set_name"
     ],
     "hooks": [
+      "give_uncommon_grab_bag",
       "on_warped_fungus_used"
     ],
     "item_models": [

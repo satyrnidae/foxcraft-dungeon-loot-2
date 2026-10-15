@@ -1,0 +1,4 @@
+# Gives the target the moonshine.
+function give_moonshine {
+    loot give @s loot foxcraft_dungeon_loot:item/common/moonshine
+}

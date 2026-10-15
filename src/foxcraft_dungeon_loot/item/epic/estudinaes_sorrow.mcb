@@ -65,3 +65,15 @@ dir raycast {
         }
     }
 }
+
+# Gives the target the estudinaes sorrow.
+function give_estudinaes_sorrow {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_sorrow
+}
+
+# Gives the netherite variant, loot variant score 1.
+function give_estudinaes_sorrow_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_sorrow
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

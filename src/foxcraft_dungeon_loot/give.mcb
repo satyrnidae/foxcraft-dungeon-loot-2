@@ -1,0 +1,34 @@
+import ../config.js
+import give.js
+
+# Every give_* function in the item sources gets a trigger objective of the same name.
+# Triggers work for players tagged satyrn.fdl.giver and nobody else, so an operator opts someone in with /tag.
+
+function on_load {
+    REPEAT(0, gives.length - 1) as i {
+        scoreboard objectives add <%gives[i].name%> trigger
+    }
+    schedule function foxcraft_dungeon_loot:give/clock_10t 1t
+}
+
+function on_uninstall {
+    tag @a remove satyrn.fdl.giver
+    REPEAT(0, gives.length - 1) as i {
+        scoreboard objectives remove <%gives[i].name%>
+    }
+}
+
+# Runs the give function for every trigger a giver has fired, then re-enables the triggers for givers.
+function clock_10t {
+    schedule function foxcraft_dungeon_loot:give/clock_10t 10t
+
+    execute if entity @a[tag=satyrn.fdl.giver] run function foxcraft_dungeon_loot:give/process
+}
+
+function process {
+    REPEAT(0, gives.length - 1) as i {
+        execute as @a[tag=satyrn.fdl.giver,scores={<%gives[i].name%>=1..}] run function <%gives[i].id%>
+        scoreboard players reset @a[tag=satyrn.fdl.giver] <%gives[i].name%>
+        scoreboard players enable @a[tag=satyrn.fdl.giver] <%gives[i].name%>
+    }
+}

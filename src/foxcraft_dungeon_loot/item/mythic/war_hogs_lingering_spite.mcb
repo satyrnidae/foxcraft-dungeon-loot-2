@@ -1,0 +1,4 @@
+# Gives the target the war hogs lingering spite.
+function give_war_hogs_lingering_spite {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_lingering_spite
+}

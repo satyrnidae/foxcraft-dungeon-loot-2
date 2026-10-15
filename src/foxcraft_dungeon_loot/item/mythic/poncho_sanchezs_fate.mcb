@@ -103,3 +103,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the poncho sanchezs fate.
+function give_poncho_sanchezs_fate {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/poncho_sanchezs_fate
+}

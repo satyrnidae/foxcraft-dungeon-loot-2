@@ -80,7 +80,7 @@ Run from the repo root. Do all of this before claiming a change works.
 
 1. `python tests/run_all.py`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when the 26.3 client jar and Java 25 exist. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
 2. If a unit test fails because you changed an item on purpose, run `python tests/unit/gen_specs.py`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
-3. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
+3. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each, usable by players tagged `satyrn.fdl.giver`. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
 4. For a new hook, the tests fail until its entry is in the function tag.
 
 There is no CI. The tests are static, so you cannot test gameplay. State plainly which checks ran and which did not, and list what a human must test in game. `docs/todo_manual_verification.md` is the running checklist; add the new item to it.

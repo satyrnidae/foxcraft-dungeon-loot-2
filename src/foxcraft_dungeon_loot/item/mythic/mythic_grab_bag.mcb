@@ -11,3 +11,8 @@ function on_warped_fungus_used {
         loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/grab_bag/mythic
     }
 }
+
+# Gives the target the mythic grab bag.
+function give_mythic_grab_bag {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/mythic_grab_bag
+}

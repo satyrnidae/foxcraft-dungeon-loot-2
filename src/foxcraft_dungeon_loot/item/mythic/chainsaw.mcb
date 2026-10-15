@@ -19,18 +19,6 @@ function clock_10t {
     }
 }
 
-function give_netherite_upgrade {
-    scoreboard players set @s satyrn.fdl.loot.variant 2
-    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
-    scoreboard players reset @s satyrn.fdl.loot.variant
-}
-
-function give_diamond_upgrade {
-    scoreboard players set @s satyrn.fdl.loot.variant 1
-    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
-    scoreboard players reset @s satyrn.fdl.loot.variant
-}
-
 # Occurs once as the data pack is loaded.
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/chainsaw/clock_10t 1t
@@ -62,4 +50,23 @@ function on_tick {
 
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.chainsaw.soundCooldown
+}
+
+# Gives the target the chainsaw.
+function give_chainsaw {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
+}
+
+# Gives the diamond variant, loot variant score 1.
+function give_chainsaw_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 2.
+function give_chainsaw_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/chainsaw
+    scoreboard players reset @s satyrn.fdl.loot.variant
 }

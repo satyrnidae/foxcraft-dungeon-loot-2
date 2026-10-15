@@ -36,3 +36,8 @@ function on_killed_arthropod {
 function on_spider_eye_eaten {
     effect clear @s minecraft:poison
 }
+
+# Gives the target the tithe to uthiir.
+function give_tithe_to_uthiir {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/tithe_to_uthiir
+}

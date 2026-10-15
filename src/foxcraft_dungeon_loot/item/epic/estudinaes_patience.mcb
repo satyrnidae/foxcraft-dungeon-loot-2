@@ -20,3 +20,36 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/epic/estudinaes_patience/clock_10t 3t
 }
+
+# Gives the target the estudinaes patience.
+function give_estudinaes_patience {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_patience
+}
+
+# Gives the chainmail variant, loot variant score 1.
+function give_estudinaes_patience_chainmail {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_patience
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the iron variant, loot variant score 2.
+function give_estudinaes_patience_iron {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_patience
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the diamond variant, loot variant score 3.
+function give_estudinaes_patience_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_patience
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 4.
+function give_estudinaes_patience_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 4
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_patience
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

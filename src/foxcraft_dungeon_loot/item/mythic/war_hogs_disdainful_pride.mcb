@@ -22,3 +22,8 @@ function on_fall {
         }
     }
 }
+
+# Gives the target the war hogs disdainful pride.
+function give_war_hogs_disdainful_pride {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_disdainful_pride
+}

@@ -94,3 +94,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the bringer of fear.
+function give_bringer_of_fear {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/bringer_of_fear
+}

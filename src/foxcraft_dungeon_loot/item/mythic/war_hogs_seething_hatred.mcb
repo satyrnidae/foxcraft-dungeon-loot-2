@@ -17,3 +17,8 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/war_hogs_seething_hatred/clock_10t 3t
 }
+
+# Gives the target the war hogs seething hatred.
+function give_war_hogs_seething_hatred {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_seething_hatred
+}

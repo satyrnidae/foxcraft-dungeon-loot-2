@@ -2,6 +2,7 @@
   "__comments": "Functions that should be run when the datapack is loaded or reloaded.",
   "values": [
     "foxcraft_dungeon_loot:event/on_load",
+    "foxcraft_dungeon_loot:give/on_load",
     "foxcraft_dungeon_loot:math/on_load",
     "foxcraft_dungeon_loot:trading/main/on_load",
     "foxcraft_dungeon_loot:item/mythic/auto_pickaxe/on_load",

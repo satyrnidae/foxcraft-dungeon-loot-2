@@ -64,3 +64,8 @@ function on_tick {
         }
     }
 }
+
+# Gives the target the grasp of uthiir.
+function give_grasp_of_uthiir {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/grasp_of_uthiir
+}

@@ -177,6 +177,55 @@ class Scoreboards(unittest.TestCase):
         self.assertEqual(sorted((legacy & added) - {"satyrn.fdl.loot.variant"}), [])
 
 
+class GiveFunctions(unittest.TestCase):
+    """Every item has a give_<item> function in its source file, and every give function has a trigger."""
+    GIVES = {}
+    for _path in sorted(pk.SRC_ITEMS.rglob("*.mcb")):
+        for _name in re.findall(r"^function (give_\w+)", pk.read_text(_path), flags=re.M):
+            GIVES.setdefault(_name, []).append(pk.src_function_prefix(_path))
+
+    def test_give_function_names_are_unique(self):
+        self.assertEqual({n: p for n, p in self.GIVES.items() if len(p) > 1}, {})
+
+    def test_every_item_has_a_give_function_in_its_own_source_file(self):
+        problems = []
+        for name in ITEMS:
+            base = name.rsplit("/", 1)[-1]
+            if name.startswith("item/special/music_disc/"):
+                owner = "item/special/music_disc/main"
+            elif name.startswith("item/special/copper_horn/"):
+                owner = "item/special/copper_horn/main"
+            else:
+                owner = name
+            if owner not in self.GIVES.get("give_" + base, []):
+                problems.append("%s has no give_%s in %s.mcb" % (name, base, owner))
+        self.assertEqual(problems, [])
+
+    def test_every_loot_variant_has_a_give_function(self):
+        problems = []
+        for name, path in ITEMS.items():
+            table = pk.load_json(path)
+            scores = set()
+            for node in _dicts(table):
+                value = (node.get("scores") or {}).get("satyrn.fdl.loot.variant")
+                if isinstance(value, int):
+                    scores.add(value)
+            base = name.rsplit("/", 1)[-1]
+            found = len([n for n in self.GIVES if n.startswith("give_%s_" % base) and n[len("give_%s_" % base):] in
+                         {"leather", "chainmail", "iron", "diamond", "netherite"}])
+            if found != len(scores):
+                problems.append("%s has %d variant scores and %d variant give functions" % (name, len(scores), found))
+        self.assertEqual(problems, [])
+
+    def test_every_give_function_has_a_trigger(self):
+        if not pk.build_exists():
+            self.skipTest("no build output, run npx mcb build for this check")
+        load = pk.read_text(pk.GEN_FUNCTIONS / "give" / "on_load.mcfunction")
+        process = pk.read_text(pk.GEN_FUNCTIONS / "give" / "process.mcfunction")
+        missing = [n for n in self.GIVES if "scoreboard objectives add %s trigger" % n not in load or "scores={%s=1..}" % n not in process]
+        self.assertEqual(missing, [])
+
+
 class Versions(unittest.TestCase):
     def test_versions_agree(self):
         config = pk.load_json(pk.ROOT / "config.json")["mc"]

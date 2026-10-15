@@ -82,3 +82,8 @@ dir raycast {
         }
     }
 }
+
+# Gives the target the war hogs burning rage.
+function give_war_hogs_burning_rage {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage
+}

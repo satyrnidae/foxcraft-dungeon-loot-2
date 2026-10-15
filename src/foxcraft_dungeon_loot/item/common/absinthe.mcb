@@ -1,0 +1,4 @@
+# Gives the target the absinthe.
+function give_absinthe {
+    loot give @s loot foxcraft_dungeon_loot:item/common/absinthe
+}

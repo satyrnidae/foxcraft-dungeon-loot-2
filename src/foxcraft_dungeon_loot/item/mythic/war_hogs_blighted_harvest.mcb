@@ -207,3 +207,8 @@ dir raycast {
         }
     }
 }
+
+# Gives the target the war hogs blighted harvest.
+function give_war_hogs_blighted_harvest {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest
+}

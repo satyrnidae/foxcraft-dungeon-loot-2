@@ -22,3 +22,36 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/stompies/clock_10t 8t
 }
+
+# Gives the target the stompies.
+function give_stompies {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/stompies
+}
+
+# Gives the chainmail variant, loot variant score 1.
+function give_stompies_chainmail {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/stompies
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the iron variant, loot variant score 2.
+function give_stompies_iron {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/stompies
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the diamond variant, loot variant score 3.
+function give_stompies_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/stompies
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 4.
+function give_stompies_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 4
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/stompies
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

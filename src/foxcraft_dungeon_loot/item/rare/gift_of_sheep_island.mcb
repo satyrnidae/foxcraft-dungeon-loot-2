@@ -10,3 +10,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the gift of sheep island.
+function give_gift_of_sheep_island {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/gift_of_sheep_island
+}

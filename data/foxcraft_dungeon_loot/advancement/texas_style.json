@@ -1381,7 +1381,7 @@
     ]
   ],
   "rewards": {
-    "function": "foxcraft_dungeon_loot:item/mythic/chainsaw/give_diamond_upgrade",
+    "function": "foxcraft_dungeon_loot:item/mythic/chainsaw/give_chainsaw_diamond",
     "experience": 1000
   }
 }

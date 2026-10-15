@@ -83,3 +83,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the feather of quet zala.
+function give_feather_of_quet_zala {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/feather_of_quet_zala
+}

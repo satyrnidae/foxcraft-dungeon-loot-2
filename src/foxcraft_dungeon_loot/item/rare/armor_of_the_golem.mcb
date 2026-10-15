@@ -1,0 +1,4 @@
+# Gives the target the armor of the golem.
+function give_armor_of_the_golem {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/armor_of_the_golem
+}

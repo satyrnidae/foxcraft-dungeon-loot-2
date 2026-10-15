@@ -148,3 +148,8 @@ function reset_cooldown {
     title @s actionbar {"text":"The Evoker's Tome is ready to use once more.","color":"dark_purple"}
     scoreboard players reset @s satyrn.fdl.evokersTome.cooldown
 }
+
+# Gives the target the evokers tome.
+function give_evokers_tome {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/evokers_tome
+}

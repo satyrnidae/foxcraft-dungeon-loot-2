@@ -50,3 +50,8 @@ function on_load {
 function on_uninstall {
     data remove storage foxcraft_dungeon_loot:items Buckwheat.InLove
 }
+
+# Gives the target the buckwheat.
+function give_buckwheat {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/buckwheat
+}

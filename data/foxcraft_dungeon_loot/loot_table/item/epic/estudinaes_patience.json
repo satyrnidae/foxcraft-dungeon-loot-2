@@ -82,13 +82,13 @@
         "type": "minecraft:entity_scores",
         "entity": "this",
         "scores": {
-          "satyrn.fdl.loot.variant": 3
+          "satyrn.fdl.loot.variant": 4
         }
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond_chestplate"
+          "name": "minecraft:netherite_chestplate"
         }
       ]
     }

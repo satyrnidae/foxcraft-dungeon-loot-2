@@ -89,3 +89,8 @@ function on_uninstall {
     scoreboard objectives remove satyrn.fdl.torenhiasFist.cooldown
     scoreboard objectives remove satyrn.fdl.torenhiasFist.particle
 }
+
+# Gives the target the torenhias fist.
+function give_torenhias_fist {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/torenhias_fist
+}

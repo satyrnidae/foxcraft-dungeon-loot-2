@@ -35,3 +35,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the heros amulet.
+function give_heros_amulet {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/heros_amulet
+}

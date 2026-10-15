@@ -33,3 +33,8 @@ function clock_4t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/totem_of_gnumoch/clock_4t 4t
 }
+
+# Gives the target the totem of gnumoch.
+function give_totem_of_gnumoch {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/totem_of_gnumoch
+}

@@ -1,0 +1,4 @@
+# Gives the target the admire me from afar.
+function give_admire_me_from_afar {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/admire_me_from_afar
+}

@@ -11,3 +11,8 @@ function on_warped_fungus_used {
         loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/grab_bag/common
     }
 }
+
+# Gives the target the common grab bag.
+function give_common_grab_bag {
+    loot give @s loot foxcraft_dungeon_loot:item/common/common_grab_bag
+}

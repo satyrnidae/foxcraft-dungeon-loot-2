@@ -58,3 +58,58 @@ function on_uninstall {
 
     scoreboard players reset copperGoatHorn.minHarmonyPitch <%config.internalScoreboard%>
 }
+
+# Gives the target the clear temper journey.
+function give_clear_temper_journey {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/clear_temper_journey
+}
+
+# Gives the target the dry urge anger.
+function give_dry_urge_anger {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/dry_urge_anger
+}
+
+# Gives the target the fearless river gift.
+function give_fearless_river_gift {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/fearless_river_gift
+}
+
+# Gives the target the fresh nest thought.
+function give_fresh_nest_thought {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/fresh_nest_thought
+}
+
+# Gives the target the great sky falling.
+function give_great_sky_falling {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/great_sky_falling
+}
+
+# Gives the target the mumble fire memory.
+function give_mumble_fire_memory {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/mumble_fire_memory
+}
+
+# Gives the target the old hymn resting.
+function give_old_hymn_resting {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/old_hymn_resting
+}
+
+# Gives the target the pure water desire.
+function give_pure_water_desire {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/pure_water_desire
+}
+
+# Gives the target the random goat horn.
+function give_random_goat_horn {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/random_goat_horn
+}
+
+# Gives the target the secret lake tear.
+function give_secret_lake_tear {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/secret_lake_tear
+}
+
+# Gives the target the sweet moon love.
+function give_sweet_moon_love {
+    loot give @s loot foxcraft_dungeon_loot:item/special/copper_horn/sweet_moon_love
+}

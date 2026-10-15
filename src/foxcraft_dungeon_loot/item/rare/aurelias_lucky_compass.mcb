@@ -1,0 +1,4 @@
+# Gives the target the aurelias lucky compass.
+function give_aurelias_lucky_compass {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/aurelias_lucky_compass
+}

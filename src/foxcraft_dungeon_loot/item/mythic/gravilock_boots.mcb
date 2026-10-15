@@ -67,3 +67,22 @@ function damage {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/gravilock_boots/clock_10t 5t
 }
+
+# Gives the target the gravilock boots.
+function give_gravilock_boots {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/gravilock_boots
+}
+
+# Gives the diamond variant, loot variant score 1.
+function give_gravilock_boots_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/gravilock_boots
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 2.
+function give_gravilock_boots_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/gravilock_boots
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

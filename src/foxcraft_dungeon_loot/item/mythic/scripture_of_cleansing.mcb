@@ -180,3 +180,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the scripture of cleansing.
+function give_scripture_of_cleansing {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing
+}

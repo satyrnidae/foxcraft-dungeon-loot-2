@@ -47,3 +47,8 @@ function on_tick {
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.betaIronSword.soundCooldown
 }
+
+# Gives the target the beta iron sword.
+function give_beta_iron_sword {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/beta_iron_sword
+}

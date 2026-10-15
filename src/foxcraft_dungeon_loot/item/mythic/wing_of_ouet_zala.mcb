@@ -23,3 +23,8 @@ function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/wing_of_ouet_zala/clock_10t 4t
     schedule function foxcraft_dungeon_loot:item/mythic/wing_of_ouet_zala/clock_60s 1t
 }
+
+# Gives the target the wing of ouet zala.
+function give_wing_of_ouet_zala {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/wing_of_ouet_zala
+}

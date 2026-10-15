@@ -60,3 +60,8 @@ function clock_4t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/totem_of_ekila/clock_4t 3t
 }
+
+# Gives the target the totem of ekila.
+function give_totem_of_ekila {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/totem_of_ekila
+}

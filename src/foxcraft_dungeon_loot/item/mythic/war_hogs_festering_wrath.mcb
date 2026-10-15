@@ -1,0 +1,4 @@
+# Gives the target the war hogs festering wrath.
+function give_war_hogs_festering_wrath {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_festering_wrath
+}

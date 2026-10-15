@@ -149,3 +149,4 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 
 - Variants with their own `item_model` (phase 7).
+- [ ] Give triggers: `/tag @s add satyrn.fdl.giver`, wait half a second, `/trigger give_chainsaw` and `/trigger give_chainsaw_netherite` give the iron and netherite chainsaw. Untagged players cannot trigger. `/trigger give_estudinaes_patience_netherite` gives a netherite chestplate. A disc and a horn trigger each give their item.

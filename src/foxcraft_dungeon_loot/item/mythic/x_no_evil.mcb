@@ -86,3 +86,8 @@ function on_tick {
         }
     }
 }
+
+# Gives the target the x no evil.
+function give_x_no_evil {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/x_no_evil
+}

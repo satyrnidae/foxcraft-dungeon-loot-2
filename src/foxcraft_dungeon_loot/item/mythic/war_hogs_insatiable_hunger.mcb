@@ -18,3 +18,8 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/war_hogs_insatiable_hunger/clock_10t 2t
 }
+
+# Gives the target the war hogs insatiable hunger.
+function give_war_hogs_insatiable_hunger {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/war_hogs_insatiable_hunger
+}

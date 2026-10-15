@@ -31,3 +31,8 @@ function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/totem_of_deilona/clock_4t 2t
     schedule function foxcraft_dungeon_loot:item/mythic/totem_of_deilona/clock_2s 1t
 }
+
+# Gives the target the totem of deilona.
+function give_totem_of_deilona {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/totem_of_deilona
+}

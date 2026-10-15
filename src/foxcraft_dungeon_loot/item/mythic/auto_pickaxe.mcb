@@ -23,3 +23,22 @@ function clock_10t {
 function on_load {
     schedule function foxcraft_dungeon_loot:item/mythic/auto_pickaxe/clock_10t 1t
 }
+
+# Gives the target the auto pickaxe.
+function give_auto_pickaxe {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/auto_pickaxe
+}
+
+# Gives the diamond variant, loot variant score 1.
+function give_auto_pickaxe_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/auto_pickaxe
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 2.
+function give_auto_pickaxe_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/auto_pickaxe
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

@@ -92,3 +92,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the silverfish escape artist.
+function give_silverfish_escape_artist {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/silverfish_escape_artist
+}

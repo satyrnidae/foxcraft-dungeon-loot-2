@@ -2,6 +2,7 @@
   "__comment": "Functions that should be run when the plugin is uninstalled, to clean up scoreboards.",
   "values": [
     "foxcraft_dungeon_loot:event/on_uninstall",
+    "foxcraft_dungeon_loot:give/on_uninstall",
     "foxcraft_dungeon_loot:math/on_uninstall",
     "foxcraft_dungeon_loot:trading/main/on_uninstall",
     "foxcraft_dungeon_loot:item/rare/beta_iron_sword/on_uninstall",

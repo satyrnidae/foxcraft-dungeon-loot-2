@@ -16,3 +16,8 @@ function on_fall {
         }
     }
 }
+
+# Gives the target the quet zalas beloved.
+function give_quet_zalas_beloved {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/quet_zalas_beloved
+}

@@ -1,0 +1,4 @@
+# Gives the target the d20.
+function give_d20 {
+    loot give @s loot foxcraft_dungeon_loot:item/common/d20
+}

@@ -81,3 +81,8 @@ function on_warped_fungus_used {
         }
     }
 }
+
+# Gives the target the how about no.
+function give_how_about_no {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/how_about_no
+}

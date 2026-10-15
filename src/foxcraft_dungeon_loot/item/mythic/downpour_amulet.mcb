@@ -119,3 +119,8 @@ function damage {
         break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:downpour_amulet"}}
     }
 }
+
+# Gives the target the downpour amulet.
+function give_downpour_amulet {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/downpour_amulet
+}

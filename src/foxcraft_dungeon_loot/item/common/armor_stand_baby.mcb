@@ -1,0 +1,4 @@
+# Gives the target the armor stand baby.
+function give_armor_stand_baby {
+    loot give @s loot foxcraft_dungeon_loot:item/common/armor_stand_baby
+}

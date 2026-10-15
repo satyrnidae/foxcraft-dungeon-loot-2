@@ -1,0 +1,4 @@
+# Gives the target the totem of undying.
+function give_totem_of_undying {
+    loot give @s loot foxcraft_dungeon_loot:item/uncommon/totem_of_undying
+}
