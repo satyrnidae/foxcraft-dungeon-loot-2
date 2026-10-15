@@ -48,8 +48,8 @@ public class CmdCheck {
                     } else if (r.getContext().getNodes().isEmpty()) err = "no node";
                     else if (!hasCommand(r)) err = "incomplete command";
                 } catch (Exception ex) { err = ex.toString(); }
-                // Loot tables, predicates and item modifiers of the pack are not in the vanilla registries; existence is checked elsewhere.
-                if (err != null && err.contains("Can't find element 'foxcraft_dungeon_loot:")) { skipped++; err = null; }
+                // Loot tables, predicates, item modifiers and instruments of the pack are not in the vanilla registries; existence is checked elsewhere.
+                if (err != null && (err.contains("Can't find element 'foxcraft_dungeon_loot:") || err.contains("Failed to get element foxcraft_dungeon_loot:"))) { skipped++; err = null; }
                 if (err != null) { bad++; Bootstrap.STDOUT.println(root.relativize(f).toString().replace(java.io.File.separatorChar, '/') + ":" + n + ": " + err + "\n    " + line); }
             }
         }

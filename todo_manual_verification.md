@@ -99,6 +99,20 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Music disc 11 base item still looks like vanilla disc 11. Its custom disc models are phase 8.
 - [ ] War Hog wrath post effect: `/effect`-free check, `war_hog_wrath` loads as a post effect. It is not referenced by anything yet.
 
+## Phase 8a - copper goat horn
+
+- [ ] `/reload` shows no instrument, sound or modifier errors. `/loot give @s loot foxcraft_dungeon_loot:goat_horns/random_goat_horn` gives a horn; all ten songs appear over a few rolls.
+- [ ] Holding a horn and standing still looking level: right-click plays the melody part for the full 4 seconds. `/data get entity @s SelectedItem.components."minecraft:instrument"` ends in `_melody`.
+- [ ] Sneaking: the instrument changes to `_bass` and the bass part plays. Looking up 30 degrees or more (not sneaking): `_harmony`. Sneaking wins over looking up.
+- [ ] Changing stance while the horn is held swaps the instrument at the next click, with no inventory flicker.
+- [ ] Horn in the offhand behaves the same.
+- [ ] Sound carries far: audible from about 256 blocks, subtitle reads "Copper Goat Horn plays". No vanilla goat horn sound plays on top.
+- [ ] Note particles show now and then while the horn is being used (random, about every half second) and stop when use ends. No cooldown scoreboard is involved; the item's own use cooldown applies.
+- [ ] Tooltip shows the horn name and song lore only, no extra instrument line.
+- [ ] A copper horn from the previous version (old `CustomInstrument` custom data, `minecraft:admire_goat_horn` instrument) is swapped to the new instruments as soon as it is held.
+- [ ] Trading for a horn still awards the Instrumentalist advancement.
+- [ ] Update from the previous version (scoreboardsVersion 4 -> 5): the old `satyrn.fdl.copperGoatHorn.soundCooldown` and `.particle` objectives are gone after `/reload`, `currentPitch` exists, and removal of the datapack leaves none behind.
+
 ## Not yet testable (later phases)
 
 

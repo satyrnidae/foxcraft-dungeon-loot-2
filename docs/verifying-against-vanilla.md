@@ -247,6 +247,7 @@ Two tools check the repository's JSON under `data/`, because 26.3 loads unconver
   Pack predicates are inlined before parsing because the vanilla lookup already owns the predicate registry, and loot table references are checked
   for existence and parsed as empty tables. Known harmless re-encodings (default `weight`, `quality`, `add`, constant number providers, `__comment` keys,
   advancement defaults) are not reported.
+  Pack instruments are parsed with `Instrument.DIRECT_CODEC`, then a `minecraft:instrument` component naming one is swapped for a vanilla id before the table or modifier is parsed, since the vanilla registry cannot take them.
 
 
 ## 10. Parsing the generated commands
@@ -258,6 +259,6 @@ Build first (`npx mcb build`), then compile and run it from a scratch directory 
 javac -cp "$JAR:$CP" -d "$WORK/classes" docs/tools/CmdCheck.java
 java -cp "$WORK/classes:$JAR:$CP" CmdCheck "$(pwd)/data/foxcraft_dungeon_loot/function"
 ```
-Limits: the pack's own loot tables, predicates and item modifiers are not in the vanilla registries, so unresolved ids in the `foxcraft_dungeon_loot`
+Limits: the pack's own loot tables, predicates, item modifiers and instruments are not in the vanilla registries, so unresolved ids in the `foxcraft_dungeon_loot`
 namespace are counted and ignored. NBT inside `summon` and `data modify` is only checked as syntax, so an old key such as `HandItems` still parses;
 grep `src/` for those. Macro lines starting with `$` are skipped.

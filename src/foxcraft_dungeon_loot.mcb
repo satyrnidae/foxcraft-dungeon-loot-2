@@ -70,6 +70,9 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.math.input1
     scoreboard objectives remove satyrn.fdl.math.input2
     scoreboard objectives remove satyrn.fdl.const
+    scoreboard objectives remove satyrn.fdl.copperGoatHorn.soundCooldown
+    scoreboard objectives remove satyrn.fdl.copperGoatHorn.particle
+    scoreboard players reset copperGoatHorn.cooldown <%config.internalScoreboard%>
 
     scoreboard players set #version <%config.internalScoreboard%> <%config.scoreboardsVersion%>
 }

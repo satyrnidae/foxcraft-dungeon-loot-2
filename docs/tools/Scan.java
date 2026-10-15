@@ -7,6 +7,7 @@ import net.minecraft.core.registries.*;
 import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.server.Bootstrap;
+import net.minecraft.world.item.Instrument;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
@@ -88,20 +89,49 @@ public class Scan {
     /** Function types listed in -Dscan.skip=a,b are removed from modifier lists before parsing, for constructs a later phase converts. */
     static final Set<String> SKIP = new HashSet<>(Arrays.asList(System.getProperty("scan.skip", "").split(",")));
 
+    /** Ids of the pack's instruments, parsed with the game's codec. Registry lookups cannot hold them, see inline(). */
+    static final Set<String> INSTRUMENT_IDS = new HashSet<>();
+
+    /** Replaces a minecraft:instrument component naming a pack instrument with a vanilla one, once the pack's file has parsed. */
+    static JsonElement swapInstruments(JsonElement e) {
+        if (e.isJsonObject()) {
+            JsonObject o = new JsonObject();
+            for (var en : e.getAsJsonObject().entrySet()) {
+                JsonElement v = en.getValue();
+                if (en.getKey().equals("minecraft:instrument") && v.isJsonPrimitive() && INSTRUMENT_IDS.contains(v.getAsString())) {
+                    o.addProperty(en.getKey(), "minecraft:ponder_goat_horn");
+                } else {
+                    o.add(en.getKey(), swapInstruments(v));
+                }
+            }
+            return o;
+        }
+        if (e.isJsonArray()) {
+            JsonArray a = new JsonArray();
+            for (JsonElement c : e.getAsJsonArray()) a.add(swapInstruments(c));
+            return a;
+        }
+        return e;
+    }
+
     static JsonElement strip(JsonElement e) {
+        return stripSkipped(swapInstruments(e));
+    }
+
+    static JsonElement stripSkipped(JsonElement e) {
         if (SKIP.isEmpty() || (SKIP.size() == 1 && SKIP.contains(""))) return e;
         if (e.isJsonArray()) {
             JsonArray a = new JsonArray();
             for (JsonElement c : e.getAsJsonArray()) {
                 if (c.isJsonObject() && c.getAsJsonObject().has("type") && c.getAsJsonObject().get("type").isJsonPrimitive()
                     && SKIP.contains(c.getAsJsonObject().get("type").getAsString())) continue;
-                a.add(strip(c));
+                a.add(stripSkipped(c));
             }
             return a;
         }
         if (e.isJsonObject()) {
             JsonObject o = new JsonObject();
-            for (var en : e.getAsJsonObject().entrySet()) o.add(en.getKey(), strip(en.getValue()));
+            for (var en : e.getAsJsonObject().entrySet()) o.add(en.getKey(), stripSkipped(en.getValue()));
             return o;
         }
         return e;
@@ -188,6 +218,13 @@ public class Scan {
         boot();
         Path root = Paths.get(args[0]);
         RegistryOps<JsonElement> base = lookup.createSerializationContext(JsonOps.INSTANCE);
+
+        // Pack instruments are data-driven; check their files here so the ids used by components can be trusted.
+        for (Path f : files(root, "instrument")) {
+            JsonElement j = JsonParser.parseString(Files.readString(f));
+            roundTrip(Instrument.DIRECT_CODEC, base, f, j, "instrument");
+            INSTRUMENT_IDS.add(id(root, f, "instrument"));
+        }
 
         // Pass 1: predicates and item modifiers, so loot tables and advancements can reference them by id.
         RegistrySetBuilder rsb = new RegistrySetBuilder();

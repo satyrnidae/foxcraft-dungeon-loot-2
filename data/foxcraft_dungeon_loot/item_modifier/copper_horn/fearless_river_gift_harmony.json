@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:set_components",
+  "components": {
+    "minecraft:instrument": "foxcraft_dungeon_loot:fearless_river_gift_harmony"
+  }
+}

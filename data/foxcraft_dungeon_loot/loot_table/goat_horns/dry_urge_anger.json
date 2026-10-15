@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:instrument": "minecraft:admire_goat_horn",
+                "minecraft:instrument": "foxcraft_dungeon_loot:dry_urge_anger_melody",
                 "minecraft:tooltip_display": {
                   "hidden_components": [
                     "minecraft:instrument"

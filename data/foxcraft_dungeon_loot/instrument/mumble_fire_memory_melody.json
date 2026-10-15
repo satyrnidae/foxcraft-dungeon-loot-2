@@ -1,0 +1,10 @@
+{
+  "description": {
+    "translate": "instrument.foxcraft_dungeon_loot.mumble_fire_memory"
+  },
+  "range": 256.0,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:item.copper_goat_horn.melody.mumble_fire_memory"
+  },
+  "use_duration": 4.0
+}

@@ -114,7 +114,7 @@
     "subtitle": "subtitles.item.dice.d8",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d8/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d8/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d8/roll2",
@@ -129,7 +129,7 @@
     "subtitle": "subtitles.item.dice.d10",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d10/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d10/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d10/roll2",
@@ -144,7 +144,7 @@
     "subtitle": "subtitles.item.dice.d12",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d12/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d12/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d12/roll2",
@@ -159,7 +159,7 @@
     "subtitle": "subtitles.item.dice.d20",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d20/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d20/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d20/roll2",
@@ -294,6 +294,276 @@
       "mob/enderdragon/wings4",
       "mob/enderdragon/wings5",
       "mob/enderdragon/wings6"
+    ]
+  },
+  "item.copper_goat_horn.bass.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.clear_temper_journey": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.dry_urge_anger": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.fearless_river_gift": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.fresh_nest_thought": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.great_sky_falling": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.mumble_fire_memory": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.old_hymn_resting": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.pure_water_desire": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.secret_lake_tear": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear_melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.bass.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love_bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.harmony.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love_harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_goat_horn.melody.sweet_moon_love": {
+    "subtitle": "subtitles.item.copper_goat_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love_melody",
+        "stream": true
+      }
     ]
   }
 }
