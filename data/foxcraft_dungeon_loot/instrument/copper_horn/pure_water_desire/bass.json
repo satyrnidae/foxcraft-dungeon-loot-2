@@ -4,7 +4,7 @@
   },
   "range": 256.0,
   "sound_event": {
-    "sound_id": "foxcraft_dungeon_loot:item.copper_goat_horn.bass.pure_water_desire"
+    "sound_id": "foxcraft_dungeon_loot:item.copper_horn.pure_water_desire.bass"
   },
   "use_duration": 4.0
 }
