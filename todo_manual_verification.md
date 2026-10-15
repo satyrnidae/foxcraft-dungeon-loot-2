@@ -65,9 +65,29 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Item at 1 durability breaks with the break sound and particle, and is removed from the slot.
 - [ ] Durability bar fraction per use looks right for each base item (boots tiers, elytra, warped fungus on a stick).
 
+## Phase 4c.4 - use detection (unchanged logic, 26.3 behavior check)
+
+- [ ] Right-click with each kind of warped fungus on a stick item (not riding anything): its `on_warped_fungus_used` hook fires once per click.
+- [ ] Same with an offhand item from `#foxcraft_dungeon_loot:prevents_use` (snowball, bow, goat horn, etc.) in the offhand: the stick does not fire.
+- [ ] Throw an event-enabled snowball (X No Evil): fires once per throw. A plain snowball does not.
+- [ ] Eat a spider eye with a spider-eye item active, and block with a shield holding a block item: the matching events fire once each.
+- [ ] Use counts reset: hold right-click on the stick for several seconds, hook should not keep firing after release.
+
+## Phase 5 - trades
+
+- [ ] Spawn a wandering trader with `/summon`, wait for the index build ("Building trade index..." in chat on load) and for the trader to finish, then trade window opens.
+- [ ] Vanilla trades are gone and only the pack's offers appear. If vanilla offers still show, the pre-filled `Offers` is not suppressing them.
+- [ ] Each offer type shows correct items: grab bags, heads, dungeon loot, goat horns, exchange rates, endgame. Names, lore and models intact.
+- [ ] Prices: buy and second buy counts within their ranges, and "0" second-buy rolls show a single-cost trade, not a broken or free one.
+- [ ] Pay with real coins from loot: the offer accepts them. Coins that differ in any component (hand-renamed, wrong stack from another source) are refused.
+- [ ] Coin stacks above 64 (up to 99) work as payment, and 99-stack sell counts show correctly in the UI.
+- [ ] Max uses and the uses counter decrement. Trader restock behavior is as before.
+- [ ] Llamas follow the trader on a leash after spawn (`leash` data key), and carry the trader as owner.
+- [ ] Trader state stand is removed after trades are added, and the trader's AI turns back on.
+- [ ] Trade welcome message and glow on spawn.
+
 ## Not yet testable (later phases)
 
-- Trader `Offers` item format (phase 5).
 - Item definitions and state models (phase 6).
 - Variants with their own `item_model` (phase 7).
 - Discs and copper horn (phase 8).

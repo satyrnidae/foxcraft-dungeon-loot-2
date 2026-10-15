@@ -60,21 +60,21 @@ template set_max_uses {
 # Sets the current recipe's buy item count to a constant value
 template set_buy_price {
     with a0:word {
-        data modify storage foxcraft_dungeon_loot:trades Current.buy.Count set value <%a0%>b
+        data modify storage foxcraft_dungeon_loot:trades Current.buy.count set value <%a0%>
     }
 }
 
 # Sets the current recipe's secondary buy item count to a constant value
 template set_buyb_price {
     with a0:word {
-        data modify storage foxcraft_dungeon_loot:trades Current.buyB.Count set value <%a0%>b
+        data modify storage foxcraft_dungeon_loot:trades Current.buyB.count set value <%a0%>
     }
 }
 
 # Sets the current recipe's item count per sale to a constant value
 template set_sell_count {
     with a0:word {
-        data modify storage foxcraft_dungeon_loot:trades Current.sell.Count set value <%a0%>b
+        data modify storage foxcraft_dungeon_loot:trades Current.sell.count set value <%a0%>
     }
 }
 
@@ -91,7 +91,7 @@ template randomize_buy_price {
     with a0:word a1:word {
         # Set price
         rng <%a0%> <%a1%>
-        execute store result storage foxcraft_dungeon_loot:trades Current.buy.Count byte 1 run scoreboard players get #math.result <%config.internalScoreboard%>
+        execute store result storage foxcraft_dungeon_loot:trades Current.buy.count int 1 run scoreboard players get #math.result <%config.internalScoreboard%>
     }
 }
 
@@ -100,7 +100,7 @@ template randomize_buyb_price {
     with a0:word a1:word {
         # Set price
         rng <%a0%> <%a1%>
-        execute store result storage foxcraft_dungeon_loot:trades Current.buyB.Count byte 1 run scoreboard players get #math.result <%config.internalScoreboard%>
+        execute store result storage foxcraft_dungeon_loot:trades Current.buyB.count int 1 run scoreboard players get #math.result <%config.internalScoreboard%>
     }
 }
 
@@ -109,6 +109,6 @@ template randomize_sell_count {
     with a0:word a1:word {
         # Set price
         rng <%a0%> <%a1%>
-        execute store result storage foxcraft_dungeon_loot:trades Current.sell.Count byte 1 run scoreboard players get #math.result <%config.internalScoreboard%>
+        execute store result storage foxcraft_dungeon_loot:trades Current.sell.count int 1 run scoreboard players get #math.result <%config.internalScoreboard%>
     }
 }
