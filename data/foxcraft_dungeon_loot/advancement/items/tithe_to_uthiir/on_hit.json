@@ -4,7 +4,7 @@
     "player_hurt_arthropod": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
-        "player": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand",
+        "player": "foxcraft_dungeon_loot:items/tithe_to_uthiir/in_main_hand",
         "damage": {
           "blocked": false
         },
@@ -20,7 +20,7 @@
     "player_killed_arthropod": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": "foxcraft_dungeon_loot:items/estudinaes_sorrow/in_main_hand",
+        "player": "foxcraft_dungeon_loot:items/tithe_to_uthiir/in_main_hand",
         "entity": {
           "type": "minecraft:entity_properties",
           "entity": "this",

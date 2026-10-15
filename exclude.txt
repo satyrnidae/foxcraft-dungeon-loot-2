@@ -11,3 +11,5 @@ src/
 texturepack/
 node_modules/
 
+todo_manual_verification.md
+todo_modernization_inventory.md

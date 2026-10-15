@@ -10,8 +10,8 @@ A Minecraft 26.3 datapack (data pack format 121, `min_format`/`max_format` in `p
 
 - `npm i mc-build` installs the compiler (dependency in `package.json`); run `npx mcb build` in the repo root to compile `src/` into `data/`, or `npx mcb watch` to rebuild on change. `mcb.config.js` holds the compiler options. mc-build 4.x does not clean stale output, so delete the generated function folders before a rebuild after renaming or removing sources.
 - `build.ps1` (PowerShell + 7-Zip) zips the datapack into `.build/<baseArchiveName>-<version>[+dev].zip`, then runs `texturepack/build.ps1` to zip the resource pack. `exclude.txt` keeps `src/`, `texturepack/`, scripts, and config out of the datapack zip.
-- There are no automated tests. `python docs/tools/check_old_keys.py` flags pre-26.3 keys in the JSON under `data/`, `docs/tools/Scan.java` parses it with the game's own codecs, and `docs/tools/CmdCheck.java` parses the generated commands with the game's dispatcher (needs the 26.3 client jar and Java 25, see `docs/verifying-against-vanilla.md`). Verify behavior by loading the pack in a Minecraft 26.3 world.
-- Version lives in two places that must be kept in sync: `config.json` (`mc.version`, used by templates and the zip name) and `pack.mcmeta` (`meta.version` and `meta.changelog`). `config.json` `mc.dev: true` enables dev-only code (e.g. re-enabling the `satyrn.fdl.loot.variant` trigger every tick via `IF (config.dev)`).
+- There are no automated tests. `python docs/tools/check_old_keys.py` flags pre-26.3 keys in the JSON under `data/`, `docs/tools/Scan.java` parses it with the game's own codecs, and `docs/tools/CmdCheck.java` parses the generated commands with the game's dispatcher. Both Java tools need the 26.3 client jar and Java 25, see `docs/verifying-against-vanilla.md`. Verify behavior by loading the pack in a Minecraft 26.3 world.
+- Version lives in two places that must be kept in sync: `config.json` `mc.version`, which templates and the zip name use, and `pack.mcmeta` `meta.version` and `meta.changelog`. `config.json` `mc.dev: true` enables dev-only code such as re-enabling the `satyrn.fdl.loot.variant` trigger every tick via `IF (config.dev)`.
 
 ## Source vs. generated output
 
@@ -26,7 +26,7 @@ Core tick/load logic is deliberately decoupled from items. `load`/`tick`/`uninst
 
 - Each item has `src/foxcraft_dungeon_loot/items/<item>.mcb`; each `function x` inside compiles to `items/<item>/x`. Items implement whichever hooks they need (`on_load`, `on_tick`, `on_snowball_used`, ...).
 - **Adding or removing an item hook means also adding/removing its `foxcraft_dungeon_loot:items/<item>/<hook>` entry in the matching tag JSON**, otherwise it never runs.
-- `src/foxcraft_dungeon_loot/events.mcb` turns vanilla stats and predicates (fall distance, used snowball / warped fungus on a stick, ate spider eye, blocked with shield) into those events. Item-specific events are only dispatched to players matching `predicate/events/process_*` (e.g. holding an event-enabled item), which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `events.mcb`, and a tag file.
+- `src/foxcraft_dungeon_loot/events.mcb` turns vanilla stats and predicates such as fall distance, a used snowball or warped fungus on a stick, an eaten spider eye and a shield block into those events. Item-specific events are only dispatched to players matching `predicate/events/process_*`, for example holding an event-enabled item, which is how the pack stays cheap on slow CPUs. New events need an objective, a predicate, a dispatch in `events.mcb`, and a tag file.
 - Items use scoreboards/tags prefixed `satyrn.fdl.*`. Periodic work uses self-rescheduling `schedule function ... Nt` clocks started from `on_load`.
 
 ## Items and loot

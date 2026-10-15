@@ -136,6 +136,15 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Unique discs stay vanilla: pigstep (bastion), relic (trail ruins), creator and precipice (trial chambers), creator music box (trial pot), bounce, tears (ghast), lava chicken (zombie).
 - [ ] The overrides in `data/minecraft/loot_table/` match the 26.3 vanilla tables apart from the disc entries; diff them again after a Minecraft update.
 
+## Review fixes
+
+- [ ] Wing of Quet Zala and Wing of Ouet Zala: carrying one in the inventory (not worn) triggers the occasional 5 second levitation or nausea clock.
+- [ ] Tithe to Uthiir: hitting and killing an arthropod while holding it fires the hit and kill effects. Estudinae's Sorrow no longer triggers them.
+- [ ] Chainsaw: holding it in the main hand grants haste 2 once, and clears when put away. No unknown predicate errors in the log.
+- [ ] Quet Zala's Beloved: with another mob wearing an Unbreaking chestplate nearby, a player without Unbreaking still takes the always-damage path.
+- [ ] War Hog's Disdainful Pride: boots with Unbreaking use the Unbreaking durability odds on a fall.
+- [ ] Datapack zip built with `build.ps1` does not contain `todo_manual_verification.md`.
+
 ## Not yet testable (later phases)
 
 

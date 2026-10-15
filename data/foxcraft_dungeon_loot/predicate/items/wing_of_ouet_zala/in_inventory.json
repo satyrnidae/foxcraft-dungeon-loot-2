@@ -2,6 +2,6 @@
   "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "minecraft:nbt": "{Inventory:[{tag:{DungeonLootId:61}}]}"
+    "minecraft:nbt": "{Inventory:[{components:{\"minecraft:custom_data\":{DungeonLootId:61}}}]}"
   }
 }

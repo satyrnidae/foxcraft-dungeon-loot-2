@@ -12,6 +12,7 @@ stronger check but needs the client jar and Java 25.
 import glob
 import json
 import os
+import re
 import sys
 
 # Condition types that used to be written as "condition": "minecraft:<name>" and are now "type".
@@ -47,6 +48,8 @@ def walk(node, kind, path, found):
                 found.append("%s: removed type '%s'" % (here, value))
             if key == "nbt" and isinstance(value, str):
                 found.append("%s: item NBT string, use components or custom_data" % here)
+            if isinstance(value, str) and re.search(r"tag\s*:\s*\{", value):
+                found.append("%s: item 'tag' in SNBT '%s', use components" % (here, value[:40]))
             if isinstance(value, str) and ("CustomModelData" in value or "HideFlags" in value):
                 found.append("%s: item NBT key in '%s'" % (here, value[:40]))
             walk(value, kind, here, found)
