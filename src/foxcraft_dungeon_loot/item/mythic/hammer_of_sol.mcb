@@ -58,11 +58,11 @@ function on_tick {
     # Add tag to player to know they have the hammer in their main hand (Since they are throwing it, if they only have 1, the next they wouldn't have it in their hand anymore)
     execute as @a[predicate=!foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_main_hand,predicate=!foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_off_hand] run tag @s remove satyrn.fdl.holdingTitanHammer
 
-    execute as @a[predicate=foxcraft_dungeon_loot:item/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_main_hand] run tag @s remove satyrn.fdl.holdingTitanHammer
+    execute as @a[predicate=foxcraft_dungeon_loot:entity/inventory/is_mainhand_snowball,predicate=!foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_main_hand] run tag @s remove satyrn.fdl.holdingTitanHammer
     # Add tag to players holding the hammer in their main hand.
     execute as @a[predicate=foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_main_hand] run tag @s add satyrn.fdl.holdingTitanHammer
     # Add tag to players holding the hammer in their offhand who don't have another snowball in their main hand.
-    execute as @a[predicate=!foxcraft_dungeon_loot:item/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_off_hand] run tag @s add satyrn.fdl.holdingTitanHammer
+    execute as @a[predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_off_hand] run tag @s add satyrn.fdl.holdingTitanHammer
 
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
     execute as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {

@@ -16,7 +16,7 @@ function clock_3s {
         }
 
         execute if score #test <%config.internalScoreboard%> matches 1.. unless entity @s[gamemode=creative] run {
-            execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
+            execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
                 # Get unbreaking level from the tool.
                 execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                 function foxcraft_dungeon_loot:math/should_damage_tool
@@ -25,7 +25,7 @@ function clock_3s {
                 function foxcraft_dungeon_loot:item/epic/buckwheat/damage_tool
             }
 
-            execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
+            execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
                 break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:buckwheat"}}
             }
         }

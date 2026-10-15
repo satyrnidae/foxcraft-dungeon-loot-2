@@ -40,16 +40,16 @@ function disarm_player {
 function on_hit {
 
     execute if entity @s[advancements={foxcraft_dungeon_loot:item/war_hogs_burning_rage/on_hit={player_hurt_entity=true}}] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/raycast/start
-    execute if entity @s[advancements={foxcraft_dungeon_loot:item/war_hogs_burning_rage/on_hit={entity_hurt_player=true}},predicate=!foxcraft_dungeon_loot:item/is_mainhand_empty,gamemode=!creative] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_player
+    execute if entity @s[advancements={foxcraft_dungeon_loot:item/war_hogs_burning_rage/on_hit={entity_hurt_player=true}},predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_empty,gamemode=!creative] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_player
 
     advancement revoke @s only foxcraft_dungeon_loot:item/war_hogs_burning_rage/on_hit
 }
 
 # Occurs when the raycast succeeds.
 function on_raycast_success {
-    execute if entity @s[type=!minecraft:player,predicate=!foxcraft_dungeon_loot:item/is_mainhand_empty,predicate=!foxcraft_dungeon_loot:entity/is_war_hog] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_entity
+    execute if entity @s[type=!minecraft:player,predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_empty,predicate=!foxcraft_dungeon_loot:entity/is_war_hog] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_entity
 
-    execute if entity @s[gamemode=!creative,predicate=!foxcraft_dungeon_loot:item/is_mainhand_empty] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_player
+    execute if entity @s[gamemode=!creative,predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_empty] run function foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/disarm_player
 }
 
 # Subclass for raycasting.

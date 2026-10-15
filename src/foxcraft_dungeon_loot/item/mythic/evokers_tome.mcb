@@ -17,7 +17,7 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
                     execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
@@ -25,7 +25,7 @@ function on_tick {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_jaw_trap
                 }
 
-                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
                     break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:evoker_tome"}}
                 }
             }
@@ -35,7 +35,7 @@ function on_tick {
             playsound foxcraft_dungeon_loot:entity.player.cast_spell player @a
 
             execute unless entity @s[gamemode=creative] run {
-                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_has_unbreaking] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
                     execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
                     function foxcraft_dungeon_loot:math/should_damage_tool
                     execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
@@ -43,7 +43,7 @@ function on_tick {
                     item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/evokers_tome/damage_sharknado
                 }
 
-                execute if entity @s[predicate=foxcraft_dungeon_loot:item/mainhand_broken] run {
+                execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
                     break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:evoker_tome"}}
                 }
             }
