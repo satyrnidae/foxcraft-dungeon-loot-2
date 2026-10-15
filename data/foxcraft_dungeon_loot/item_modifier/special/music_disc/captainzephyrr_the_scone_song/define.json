@@ -6,8 +6,8 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_mdoadq_the_scone_song",
-      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_mdoadq_the_scone_song"
+      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_captainzephyrr_the_scone_song",
+      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_captainzephyrr_the_scone_song"
     }
   }
 ]

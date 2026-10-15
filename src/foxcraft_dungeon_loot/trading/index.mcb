@@ -473,117 +473,117 @@ function build {
         function foxcraft_dungeon_loot:trading/recipes/push
 
 # Discs: custom discs first, then the base game discs. Each one has its own trade index.
-        # Trade Index 98: music_disc_mdoadq_acornman
+        # Trade Index 98: music_disc_captainzephyrr_acornman
         function foxcraft_dungeon_loot:trading/recipes/new
         set_buy_from_loot foxcraft_dungeon_loot:item/random_loot/coin/gold_coins
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 99: music_disc_mdoadq_acornman_am
+        # Trade Index 99: music_disc_captainzephyrr_acornman_am
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman_am
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 100: music_disc_mdoadq_acornmanreskinbd5
+        # Trade Index 100: music_disc_captainzephyrr_acornmanreskinbd5
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornmanreskinbd5
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 101: music_disc_mdoadq_aeon
+        # Trade Index 101: music_disc_captainzephyrr_aeon
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeon
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 102: music_disc_mdoadq_aeonorch190bpm
+        # Trade Index 102: music_disc_captainzephyrr_aeonorch190bpm
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeonorch190bpm
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 103: music_disc_mdoadq_avidit_e
+        # Trade Index 103: music_disc_captainzephyrr_avidit_e
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_avidit_e
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 104: music_disc_mdoadq_drown
+        # Trade Index 104: music_disc_captainzephyrr_drown
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_drown
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 105: music_disc_mdoadq_duma
+        # Trade Index 105: music_disc_captainzephyrr_duma
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_duma
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 106: music_disc_mdoadq_flutes
+        # Trade Index 106: music_disc_captainzephyrr_flutes
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_flutes
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 107: music_disc_mdoadq_gutturalis
+        # Trade Index 107: music_disc_captainzephyrr_gutturalis
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_gutturalis
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 108: music_disc_mdoadq_kotyledon
+        # Trade Index 108: music_disc_captainzephyrr_kotyledon
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_kotyledon
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 109: music_disc_mdoadq_locker
+        # Trade Index 109: music_disc_satyrnidae_locker
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_locker
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 110: music_disc_mdoadq_lost
+        # Trade Index 110: music_disc_satyrnidae_lost
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_lost
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 111: music_disc_mdoadq_minimalist
+        # Trade Index 111: music_disc_satyrnidae_minimalist
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_minimalist
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 112: music_disc_mdoadq_nematode
+        # Trade Index 112: music_disc_captainzephyrr_nematode
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nematode
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 113: music_disc_mdoadq_nighttime_transit
+        # Trade Index 113: music_disc_captainzephyrr_nighttime_transit
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nighttime_transit
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 114: music_disc_mdoadq_old_white_straight_road
+        # Trade Index 114: music_disc_captainzephyrr_old_white_straight_road
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_old_white_straight_road
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 115: music_disc_mdoadq_outskirts
+        # Trade Index 115: music_disc_satyrnidae_outskirts
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_outskirts
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 116: music_disc_mdoadq_pathetic_mario
+        # Trade Index 116: music_disc_captainzephyrr_pathetic_mario
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_pathetic_mario
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 117: music_disc_mdoadq_pet_the_dog
+        # Trade Index 117: music_disc_satyrnidae_pet_the_dog
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pet_the_dog
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 118: music_disc_mdoadq_pies_e
+        # Trade Index 118: music_disc_satyrnidae_pies_e
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pies_e
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 119: music_disc_mdoadq_reboot
+        # Trade Index 119: music_disc_satyrnidae_reboot
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_reboot
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 120: music_disc_mdoadq_rhapsodymini2
+        # Trade Index 120: music_disc_captainzephyrr_rhapsodymini2
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rhapsodymini2
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 121: music_disc_mdoadq_rigmarole
+        # Trade Index 121: music_disc_captainzephyrr_rigmarole
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rigmarole
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 122: music_disc_mdoadq_slither
+        # Trade Index 122: music_disc_satyrnidae_slither
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_slither
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 123: music_disc_mdoadq_sparkplugs
+        # Trade Index 123: music_disc_captainzephyrr_sparkplugs
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_sparkplugs
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 124: music_disc_mdoadq_the_scone_song
+        # Trade Index 124: music_disc_captainzephyrr_the_scone_song
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_the_scone_song
         function foxcraft_dungeon_loot:trading/recipes/push
 
-        # Trade Index 125: music_disc_mdoadq_wanderer
+        # Trade Index 125: music_disc_satyrnidae_wanderer
         set_sell_from_loot foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_wanderer
         function foxcraft_dungeon_loot:trading/recipes/push
 

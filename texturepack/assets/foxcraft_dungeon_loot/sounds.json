@@ -566,226 +566,226 @@
       }
     ]
   },
-  "music_disc.mdoadq_acornman": {
+  "music_disc.captainzephyrr_acornman": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/acornman",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornman",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_acornman_am": {
+  "music_disc.captainzephyrr_acornman_am": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/acornman_am",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornman_am",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_acornmanreskinbd5": {
+  "music_disc.captainzephyrr_acornmanreskinbd5": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/acornmanreskinbd5",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornmanreskinbd5",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_aeon": {
+  "music_disc.captainzephyrr_aeon": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/aeon",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/aeon",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_aeonorch190bpm": {
+  "music_disc.captainzephyrr_aeonorch190bpm": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/aeonorch190bpm",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/aeonorch190bpm",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_avidit_e": {
+  "music_disc.captainzephyrr_avidit_e": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/avidit_e",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/avidit_e",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_drown": {
+  "music_disc.captainzephyrr_drown": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/drown",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/drown",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_duma": {
+  "music_disc.captainzephyrr_duma": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/duma",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/duma",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_flutes": {
+  "music_disc.captainzephyrr_flutes": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/flutes",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/flutes",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_gutturalis": {
+  "music_disc.captainzephyrr_gutturalis": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/gutturalis",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/gutturalis",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_kotyledon": {
+  "music_disc.captainzephyrr_kotyledon": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/kotyledon",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/kotyledon",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_locker": {
+  "music_disc.satyrnidae_locker": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/locker",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/locker",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_lost": {
+  "music_disc.satyrnidae_lost": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/lost",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/lost",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_minimalist": {
+  "music_disc.satyrnidae_minimalist": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/minimalist",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/minimalist",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_nematode": {
+  "music_disc.captainzephyrr_nematode": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/nematode",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/nematode",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_nighttime_transit": {
+  "music_disc.captainzephyrr_nighttime_transit": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/nighttime_transit",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/nighttime_transit",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_old_white_straight_road": {
+  "music_disc.captainzephyrr_old_white_straight_road": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/old_white_straight_road",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/old_white_straight_road",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_outskirts": {
+  "music_disc.satyrnidae_outskirts": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/outskirts",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/outskirts",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_pathetic_mario": {
+  "music_disc.captainzephyrr_pathetic_mario": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/pathetic_mario",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/pathetic_mario",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_pet_the_dog": {
+  "music_disc.satyrnidae_pet_the_dog": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/pet_the_dog",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/pet_the_dog",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_pies_e": {
+  "music_disc.satyrnidae_pies_e": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/pies_e",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/pies_e",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_reboot": {
+  "music_disc.satyrnidae_reboot": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/reboot",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/reboot",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_rhapsodymini2": {
+  "music_disc.captainzephyrr_rhapsodymini2": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/rhapsodymini2",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/rhapsodymini2",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_rigmarole": {
+  "music_disc.captainzephyrr_rigmarole": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/rigmarole",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/rigmarole",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_slither": {
+  "music_disc.satyrnidae_slither": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/slither",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/slither",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_sparkplugs": {
+  "music_disc.captainzephyrr_sparkplugs": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/sparkplugs",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/sparkplugs",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_the_scone_song": {
+  "music_disc.captainzephyrr_the_scone_song": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/the_scone_song",
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/the_scone_song",
         "stream": true
       }
     ]
   },
-  "music_disc.mdoadq_wanderer": {
+  "music_disc.satyrnidae_wanderer": {
     "sounds": [
       {
-        "name": "foxcraft_dungeon_loot:records/mdoadq/wanderer",
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/wanderer",
         "stream": true
       }
     ]

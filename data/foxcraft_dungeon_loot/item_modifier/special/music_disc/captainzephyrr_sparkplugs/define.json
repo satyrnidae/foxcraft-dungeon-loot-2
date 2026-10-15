@@ -6,8 +6,8 @@
   {
     "type": "minecraft:set_components",
     "components": {
-      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_mdoadq_sparkplugs",
-      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_mdoadq_sparkplugs"
+      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_captainzephyrr_sparkplugs",
+      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_captainzephyrr_sparkplugs"
     }
   }
 ]

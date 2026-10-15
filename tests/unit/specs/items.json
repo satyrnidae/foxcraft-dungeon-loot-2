@@ -3038,7 +3038,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornman"
     ],
     "loot_ids": [
       88
@@ -3059,7 +3059,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornman_am"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornman_am"
     ],
     "loot_ids": [
       89
@@ -3080,7 +3080,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_acornmanreskinbd5"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_acornmanreskinbd5"
     ],
     "loot_ids": [
       90
@@ -3101,7 +3101,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_aeon"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_aeon"
     ],
     "loot_ids": [
       91
@@ -3122,7 +3122,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_aeonorch190bpm"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_aeonorch190bpm"
     ],
     "loot_ids": [
       92
@@ -3143,7 +3143,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_avidit_e"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_avidit_e"
     ],
     "loot_ids": [
       93
@@ -3164,7 +3164,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_drown"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_drown"
     ],
     "loot_ids": [
       94
@@ -3185,7 +3185,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_duma"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_duma"
     ],
     "loot_ids": [
       95
@@ -3206,7 +3206,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_flutes"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_flutes"
     ],
     "loot_ids": [
       96
@@ -3227,7 +3227,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_gutturalis"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_gutturalis"
     ],
     "loot_ids": [
       97
@@ -3248,7 +3248,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_kotyledon"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_kotyledon"
     ],
     "loot_ids": [
       98
@@ -3269,7 +3269,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_nematode"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_nematode"
     ],
     "loot_ids": [
       102
@@ -3290,7 +3290,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_nighttime_transit"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_nighttime_transit"
     ],
     "loot_ids": [
       103
@@ -3311,7 +3311,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_old_white_straight_road"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_old_white_straight_road"
     ],
     "loot_ids": [
       104
@@ -3332,7 +3332,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pathetic_mario"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_pathetic_mario"
     ],
     "loot_ids": [
       106
@@ -3353,7 +3353,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_rhapsodymini2"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_rhapsodymini2"
     ],
     "loot_ids": [
       110
@@ -3374,7 +3374,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_rigmarole"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_rigmarole"
     ],
     "loot_ids": [
       111
@@ -3395,7 +3395,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_sparkplugs"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_sparkplugs"
     ],
     "loot_ids": [
       113
@@ -3416,7 +3416,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_the_scone_song"
+      "foxcraft_dungeon_loot:music_disc_captainzephyrr_the_scone_song"
     ],
     "loot_ids": [
       114
@@ -3437,7 +3437,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_locker"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_locker"
     ],
     "loot_ids": [
       99
@@ -3458,7 +3458,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_lost"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_lost"
     ],
     "loot_ids": [
       100
@@ -3479,7 +3479,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_minimalist"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_minimalist"
     ],
     "loot_ids": [
       101
@@ -3500,7 +3500,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_outskirts"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_outskirts"
     ],
     "loot_ids": [
       105
@@ -3521,7 +3521,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pet_the_dog"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_pet_the_dog"
     ],
     "loot_ids": [
       107
@@ -3542,7 +3542,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_pies_e"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_pies_e"
     ],
     "loot_ids": [
       108
@@ -3563,7 +3563,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_reboot"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_reboot"
     ],
     "loot_ids": [
       109
@@ -3584,7 +3584,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_slither"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_slither"
     ],
     "loot_ids": [
       112
@@ -3605,7 +3605,7 @@
     ],
     "hooks": [],
     "item_models": [
-      "foxcraft_dungeon_loot:music_disc_mdoadq_wanderer"
+      "foxcraft_dungeon_loot:music_disc_satyrnidae_wanderer"
     ],
     "loot_ids": [
       115
