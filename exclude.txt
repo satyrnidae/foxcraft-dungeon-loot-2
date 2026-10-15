@@ -12,3 +12,4 @@ src/
 texturepack/
 node_modules/
 tests/
+*.sh

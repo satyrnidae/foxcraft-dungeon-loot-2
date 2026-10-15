@@ -1,9 +1,17 @@
 $BuildDir = "$PSScriptRoot/.build"
 
 # Check if build dir exists, create if not
-if (-not (Test-Path $BuildDir)) {
-    New-Item -ItemType Directory $BuildDir
+if (Test-Path $BuildDir) {
+    Remove-Item -Path $BuildDir -Recurse -Force -ErrorAction SilentlyContinue
 }
+New-Item -ItemType Directory $BuildDir
+
+# Generated function and rebuild
+$McBuildOutputDir = "$PSScriptRoot/data/function"
+if(Test-Path $McBuildOutputDir) {
+    Remove-Item -Path $McBuildOutputDir -Recurse -Force -ErrorAction SilentlyContinue
+}
+npx mcb build
 
 # Read pack.mcmeta
 $ConfigFile = "$PSScriptRoot/config.json"
