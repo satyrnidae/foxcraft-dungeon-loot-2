@@ -1,0 +1,10 @@
+{
+  "comparator_output": 2,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_wolfgun_tropic"
+  },
+  "length_in_seconds": 168.999,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.wolfgun_tropic"
+  }
+}

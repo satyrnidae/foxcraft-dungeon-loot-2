@@ -1,0 +1,10 @@
+{
+  "comparator_output": 8,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_wolfgun_cliff_where"
+  },
+  "length_in_seconds": 209.51,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.wolfgun_cliff_where"
+  }
+}

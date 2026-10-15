@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "foxcraft_dungeon_loot:item/music_disc_mdoadq_acornman_am"
+  }
+}

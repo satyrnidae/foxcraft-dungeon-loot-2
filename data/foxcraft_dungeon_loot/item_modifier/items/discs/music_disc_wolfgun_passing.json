@@ -1,0 +1,13 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:133,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_wolfgun_passing",
+      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_wolfgun_passing"
+    }
+  }
+]

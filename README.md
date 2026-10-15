@@ -22,8 +22,11 @@ This pack contains code derived from utility packs and examples provided by [Clo
 
 Some items are loosely based on the potions from Greymerk's wonderful [Roguelike](https://github.com/Greymerk/minecraft-roguelike) mod.
 
-### Wolfgun
-Older commits of assets may include a set of custom music disc sound files which are mixed-down mono versions of Wolfgun's album [RUNNING](https://wolfgun.bandcamp.com/album/running). These files are excluded in more recent versions. The album can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
+### Music discs
+The pack adds 51 custom music discs, each a vanilla disc with its own jukebox song.
+ - 19 tracks by CaptainZephyrr and 9 by @satyrnidae
+ - 22 tracks by Wolfgun, 11 from [RUNNING](https://wolfgun.bandcamp.com/album/running) and 11 from [RUNNING II](https://wolfgun.bandcamp.com/album/running-ii), used with attribution. The audio is not committed to this repository, so a fresh clone is missing those files until you copy them in by hand. Both albums can be downloaded for free or at any price through Wolfgun's Bandcamp page, and I highly recommend doing so.
+ - "Dog" by C418, which the game does not ship. The audio is not committed either.
 
 ### Freesound
 Some sound effects were downloaded from Freesound.org. Those are listed here:

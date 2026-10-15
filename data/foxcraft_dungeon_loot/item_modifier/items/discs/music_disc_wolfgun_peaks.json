@@ -1,0 +1,13 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:134,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_wolfgun_peaks",
+      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_wolfgun_peaks"
+    }
+  }
+]

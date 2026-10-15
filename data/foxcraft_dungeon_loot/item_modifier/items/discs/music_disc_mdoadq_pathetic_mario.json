@@ -1,0 +1,13 @@
+[
+  {
+    "type": "minecraft:set_custom_data",
+    "tag": "{DungeonLootId:106,DungeonItem:1b}"
+  },
+  {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:item_model": "foxcraft_dungeon_loot:music_disc_mdoadq_pathetic_mario",
+      "minecraft:jukebox_playable": "foxcraft_dungeon_loot:music_disc_mdoadq_pathetic_mario"
+    }
+  }
+]

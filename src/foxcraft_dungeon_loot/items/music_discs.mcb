@@ -1,0 +1,205 @@
+# Give functions for the custom music discs, one per disc. Run as the target with /function.
+
+function give_music_disc_mdoadq_acornman {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornman
+}
+
+function give_music_disc_mdoadq_acornman_am {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornman_am
+}
+
+function give_music_disc_mdoadq_acornmanreskinbd5 {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_acornmanreskinbd5
+}
+
+function give_music_disc_mdoadq_aeon {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_aeon
+}
+
+function give_music_disc_mdoadq_aeonorch190bpm {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_aeonorch190bpm
+}
+
+function give_music_disc_mdoadq_avidit_e {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_avidit_e
+}
+
+function give_music_disc_mdoadq_drown {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_drown
+}
+
+function give_music_disc_mdoadq_duma {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_duma
+}
+
+function give_music_disc_mdoadq_flutes {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_flutes
+}
+
+function give_music_disc_mdoadq_gutturalis {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_gutturalis
+}
+
+function give_music_disc_mdoadq_kotyledon {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_kotyledon
+}
+
+function give_music_disc_mdoadq_locker {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_locker
+}
+
+function give_music_disc_mdoadq_lost {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_lost
+}
+
+function give_music_disc_mdoadq_minimalist {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_minimalist
+}
+
+function give_music_disc_mdoadq_nematode {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_nematode
+}
+
+function give_music_disc_mdoadq_nighttime_transit {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_nighttime_transit
+}
+
+function give_music_disc_mdoadq_old_white_straight_road {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_old_white_straight_road
+}
+
+function give_music_disc_mdoadq_outskirts {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_outskirts
+}
+
+function give_music_disc_mdoadq_pathetic_mario {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pathetic_mario
+}
+
+function give_music_disc_mdoadq_pet_the_dog {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pet_the_dog
+}
+
+function give_music_disc_mdoadq_pies_e {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_pies_e
+}
+
+function give_music_disc_mdoadq_reboot {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_reboot
+}
+
+function give_music_disc_mdoadq_rhapsodymini2 {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_rhapsodymini2
+}
+
+function give_music_disc_mdoadq_rigmarole {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_rigmarole
+}
+
+function give_music_disc_mdoadq_slither {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_slither
+}
+
+function give_music_disc_mdoadq_sparkplugs {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_sparkplugs
+}
+
+function give_music_disc_mdoadq_the_scone_song {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_the_scone_song
+}
+
+function give_music_disc_mdoadq_wanderer {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_mdoadq_wanderer
+}
+
+function give_music_disc_wolfgun_after_another {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_after_another
+}
+
+function give_music_disc_wolfgun_between_layers {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_between_layers
+}
+
+function give_music_disc_wolfgun_black_dawn {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_black_dawn
+}
+
+function give_music_disc_wolfgun_cliff_where {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_cliff_where
+}
+
+function give_music_disc_wolfgun_dark_southern_sky {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_dark_southern_sky
+}
+
+function give_music_disc_wolfgun_deer {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_deer
+}
+
+function give_music_disc_wolfgun_every_morning {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_every_morning
+}
+
+function give_music_disc_wolfgun_far_away {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_far_away
+}
+
+function give_music_disc_wolfgun_into_stars {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_into_stars
+}
+
+function give_music_disc_wolfgun_lightform {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_lightform
+}
+
+function give_music_disc_wolfgun_moon_beams {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_moon_beams
+}
+
+function give_music_disc_wolfgun_moon_rays {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_moon_rays
+}
+
+function give_music_disc_wolfgun_mt_ennui {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_mt_ennui
+}
+
+function give_music_disc_wolfgun_night_i {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_night_i
+}
+
+function give_music_disc_wolfgun_night_ii {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_night_ii
+}
+
+function give_music_disc_wolfgun_of_plains {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_of_plains
+}
+
+function give_music_disc_wolfgun_pale_star {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_pale_star
+}
+
+function give_music_disc_wolfgun_passing {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_passing
+}
+
+function give_music_disc_wolfgun_peaks {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_peaks
+}
+
+function give_music_disc_wolfgun_throughout {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_throughout
+}
+
+function give_music_disc_wolfgun_tropic {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_tropic
+}
+
+function give_music_disc_wolfgun_unseen_land {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_wolfgun_unseen_land
+}
+
+function give_music_disc_c418_dog {
+    loot give @s loot foxcraft_dungeon_loot:items/discs/music_disc_c418_dog
+}

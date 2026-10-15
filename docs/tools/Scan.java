@@ -8,6 +8,7 @@ import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
@@ -92,7 +93,10 @@ public class Scan {
     /** Ids of the pack's instruments, parsed with the game's codec. Registry lookups cannot hold them, see inline(). */
     static final Set<String> INSTRUMENT_IDS = new HashSet<>();
 
-    /** Replaces a minecraft:instrument component naming a pack instrument with a vanilla one, once the pack's file has parsed. */
+    /** Ids of the pack's jukebox songs, parsed the same way. */
+    static final Set<String> SONG_IDS = new HashSet<>();
+
+    /** Replaces an instrument or jukebox_playable component naming a pack entry with a vanilla one, once the pack's file has parsed. */
     static JsonElement swapInstruments(JsonElement e) {
         if (e.isJsonObject()) {
             JsonObject o = new JsonObject();
@@ -100,6 +104,8 @@ public class Scan {
                 JsonElement v = en.getValue();
                 if (en.getKey().equals("minecraft:instrument") && v.isJsonPrimitive() && INSTRUMENT_IDS.contains(v.getAsString())) {
                     o.addProperty(en.getKey(), "minecraft:ponder_goat_horn");
+                } else if (en.getKey().equals("minecraft:jukebox_playable") && v.isJsonPrimitive() && SONG_IDS.contains(v.getAsString())) {
+                    o.addProperty(en.getKey(), "minecraft:cat");
                 } else {
                     o.add(en.getKey(), swapInstruments(v));
                 }
@@ -224,6 +230,11 @@ public class Scan {
             JsonElement j = JsonParser.parseString(Files.readString(f));
             roundTrip(Instrument.DIRECT_CODEC, base, f, j, "instrument");
             INSTRUMENT_IDS.add(id(root, f, "instrument"));
+        }
+        for (Path f : files(root, "jukebox_song")) {
+            JsonElement j = JsonParser.parseString(Files.readString(f));
+            roundTrip(JukeboxSong.DIRECT_CODEC, base, f, j, "jukebox_song");
+            SONG_IDS.add(id(root, f, "jukebox_song"));
         }
 
         // Pass 1: predicates and item modifiers, so loot tables and advancements can reference them by id.

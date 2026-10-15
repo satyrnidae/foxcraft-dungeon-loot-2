@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_mdoadq_duma"
+  },
+  "length_in_seconds": 220.9,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.mdoadq_duma"
+  }
+}

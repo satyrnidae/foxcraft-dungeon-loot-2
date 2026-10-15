@@ -113,8 +113,19 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Trading for a horn still awards the Instrumentalist advancement.
 - [ ] Update from the previous version (scoreboardsVersion 4 -> 5): the old `satyrn.fdl.copperGoatHorn.soundCooldown` and `.particle` objectives are gone after `/reload`, `currentPitch` exists, and removal of the datapack leaves none behind.
 
+## Phase 8b - music discs
+
+- [ ] `/reload` shows no jukebox song, sound or lang errors. The 22 Wolfgun and the C418 audio are present in the resource pack folder (gitignored) or the client logs missing sounds for those.
+- [ ] `/function foxcraft_dungeon_loot:items/music_discs/give_music_disc_mdoadq_acornman` and the same for a Wolfgun disc and `give_music_disc_c418_dog`: a cat-base disc appears with its own texture, and the tooltip shows "Artist - Title".
+- [ ] Each disc plays in a jukebox, shows the right title in the action bar, and ends at the right time. Check at least 5 mdoadq, 5 Wolfgun and Dog.
+- [ ] Comparator output next to a jukebox with each disc matches the value in its `jukebox_song`. Dog is set to 6, adjust if you want another.
+- [ ] No leftover `music_disc_11` override: a vanilla disc 11 and a vanilla cat disc look and play normally.
+- [ ] Every disc texture renders (inventory and ground), none purple-black.
+- [ ] `/loot give @s loot foxcraft_dungeon_loot:items/discs/<id>` works and the item carries `DungeonLootId` 88 to 138.
+- [ ] Credits in the README match the tracks.
+
 ## Not yet testable (later phases)
 
 
 - Variants with their own `item_model` (phase 7).
-- Discs and copper horn (phase 8).
+- Disc distribution: trader, structure loot, creeper drops.

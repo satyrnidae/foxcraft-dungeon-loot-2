@@ -565,5 +565,413 @@
         "stream": true
       }
     ]
+  },
+  "music_disc.mdoadq_acornman": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/acornman",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_acornman_am": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/acornman_am",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_acornmanreskinbd5": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/acornmanreskinbd5",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_aeon": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/aeon",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_aeonorch190bpm": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/aeonorch190bpm",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_avidit_e": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/avidit_e",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_drown": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/drown",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_duma": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/duma",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_flutes": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/flutes",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_gutturalis": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/gutturalis",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_kotyledon": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/kotyledon",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_locker": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/locker",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_lost": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/lost",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_minimalist": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/minimalist",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_nematode": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/nematode",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_nighttime_transit": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/nighttime_transit",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_old_white_straight_road": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/old_white_straight_road",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_outskirts": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/outskirts",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_pathetic_mario": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/pathetic_mario",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_pet_the_dog": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/pet_the_dog",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_pies_e": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/pies_e",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_reboot": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/reboot",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_rhapsodymini2": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/rhapsodymini2",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_rigmarole": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/rigmarole",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_slither": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/slither",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_sparkplugs": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/sparkplugs",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_the_scone_song": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/the_scone_song",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.mdoadq_wanderer": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/mdoadq/wanderer",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_after_another": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/after_another",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_between_layers": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/between_layers",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_black_dawn": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/black_dawn",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_cliff_where": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/cliff_where",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_dark_southern_sky": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/dark_southern_sky",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_deer": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/deer",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_every_morning": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/every_morning",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_far_away": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/far_away",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_into_stars": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/into_stars",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_lightform": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/lightform",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_moon_beams": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/moon_beams",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_moon_rays": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/moon_rays",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_mt_ennui": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/mt_ennui",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_night_i": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/night_i",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_night_ii": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/night_ii",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_of_plains": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/of_plains",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_pale_star": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/pale_star",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_passing": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/passing",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_peaks": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/peaks",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_throughout": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/throughout",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_tropic": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/tropic",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_unseen_land": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/unseen_land",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.c418_dog": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/c418/dog",
+        "stream": true
+      }
+    ]
   }
 }
