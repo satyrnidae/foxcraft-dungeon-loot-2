@@ -2,11 +2,14 @@
 *.ps1
 README.md
 CLAUDE.md
+AGENTS.md
 docs/
 config.json
+mcb.config.js
 exclude.txt
 package*.json
 src/
 texturepack/
 node_modules/
-
+tests/
+*.sh

@@ -1,0 +1,4 @@
+# Gives the target the vitae.
+function give_vitae {
+    loot give @s loot foxcraft_dungeon_loot:item/common/vitae
+}

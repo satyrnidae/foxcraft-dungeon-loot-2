@@ -1,0 +1,4 @@
+# Gives the target the shield of the juggernaut.
+function give_shield_of_the_juggernaut {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/shield_of_the_juggernaut
+}

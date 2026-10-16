@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:using_item",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/iron_sword"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "foxcraft_dungeon_loot:item/rare/iron_sword_blocking"
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Blighted Harvest",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "",
+        [
+          {
+            "text": "Souls Collected: ",
+            "color": "dark_green",
+            "italic": false
+          },
+          {
+            "text": "0",
+            "color": "green"
+          },
+          {
+            "text": " / 10",
+            "color": "dark_green"
+          }
+        ],
+        "",
+        "When the Nether was opened to the Overworld,",
+        "piglins flooded forth to reap the bountiful",
+        "resources. This scythe is their blighted harvest.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Reaper's Curse: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Each entity killed fills this item",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "with a single soul. Upon reaching 10 souls, a blast",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "of Wither III is released in a 10 block radius.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Dark Harvest: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Using this scythe to till farmland or",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "to harvest crops (such as wheat, carrots, beets,",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "and potatoes) will also till or harvest nearby",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "blocks or full-grown crops.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:silk_touch": 1,
+        "minecraft:fortune": 5,
+        "minecraft:sharpness": 20,
+        "minecraft:smite": 5
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{Souls:0,DungeonLootId:86,DungeonItem:1b,Rarity:\"Mythic\"}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/war_hogs_blighted_harvest"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:equipment": {
+      "feet": {
+        "count": {
+          "min": 1
+        },
+        "predicates": {
+          "minecraft:enchantments": [
+            {
+              "enchantments": "minecraft:unbreaking"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

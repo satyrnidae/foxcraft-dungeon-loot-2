@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit_foot"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:rare/lucky_rabbits_foot/define"
+}

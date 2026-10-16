@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:nbt": "{Inventory:[{components:{\"minecraft:custom_data\":{DungeonLootId:62}}}]}"
+  }
+}

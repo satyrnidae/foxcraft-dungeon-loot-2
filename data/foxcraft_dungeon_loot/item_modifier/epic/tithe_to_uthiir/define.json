@@ -1,0 +1,75 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:81,DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Uthiir, God of Arthropods, kindly asks that",
+        "you thin the herd."
+      ],
+      "mode": "insert"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        [
+          {
+            "text": "Uthiir's Embrace: ",
+            "color": "gold",
+            "italic": false
+          },
+          {
+            "text": "Upon killing a spider",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "or a cave spider there is a 10% chance that",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "it will drop the ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "Grasp of Uthiir",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": ", allowing",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "you to throw a web projectile that will",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "entangle your foes in cobwebs.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:bane_of_arthropods": 5,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5
+      }
+    }
+  ]
+}

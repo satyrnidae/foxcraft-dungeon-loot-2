@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_chestplate"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:mythic/war_hogs_insatiable_hunger/define"
+}

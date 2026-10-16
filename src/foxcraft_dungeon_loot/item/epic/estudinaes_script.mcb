@@ -1,0 +1,32 @@
+# Gives the target the estudinaes script.
+function give_estudinaes_script {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_script
+}
+
+# Gives the chainmail variant, loot variant score 1.
+function give_estudinaes_script_chainmail {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_script
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the iron variant, loot variant score 2.
+function give_estudinaes_script_iron {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_script
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the diamond variant, loot variant score 3.
+function give_estudinaes_script_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_script
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 4.
+function give_estudinaes_script_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 4
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_script
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

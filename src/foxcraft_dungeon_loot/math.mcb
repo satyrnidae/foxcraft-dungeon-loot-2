@@ -1,0 +1,95 @@
+import ../config.js
+###
+
+NOTES ON USE
+
+#math.input1 and #math.input2 from the internal scoreboards are used to store math inputs.
+These are not guaranteed to remain unchanged through the course of a math operation; if the numbers must remain for further operations, consider storing them in a separate scoreboard and copying them to #math.input1/2 with a scoreboard players operation command.
+
+#math.result is used to output the result of an equation.
+
+The scoreboard satyrn.fdl.math.temp is used during the processing of functions and should be ignored.
+
+Random numbers come from the rng template in macros.mcbt, which wraps /random.
+
+The score of #math.result in the internal scoreboard is undefined unless checked after invoking a function in the same subtick.
+
+###
+
+function on_load {
+    # Create math input scoreboards
+    scoreboard objectives add satyrn.fdl.math.temp dummy
+
+    scoreboard players set #1200 <%config.internalScoreboard%> 1200
+    scoreboard players set #20 <%config.internalScoreboard%> 20
+}
+
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.math.temp
+}
+
+###
+Sets #math.result in the internal scoreboard to a boolean int based on the values of #math.input1 in the internal scoreboard.
+If the function returns a 0, the tool should not be damaged.
+If the function returns a 1, the tool should be damaged.
+Damage chance is 1/(level+1), the vanilla Unbreaking rule for tools: threshold 32767/(level+1) against a roll of 1..32767.
+###
+function should_damage_tool {
+    execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
+        scoreboard players set #math.result <%config.internalScoreboard%> 1
+    } else run {
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 32767
+        scoreboard players add #math.input1 <%config.internalScoreboard%> 1
+        scoreboard players operation #math.input2 <%config.internalScoreboard%> /= #math.input1 <%config.internalScoreboard%>
+        scoreboard players operation @s satyrn.fdl.math.temp = #math.input2 <%config.internalScoreboard%>
+
+        execute store result score #math.result <%config.internalScoreboard%> run random value 1..32767
+
+        execute if score #math.result <%config.internalScoreboard%> < @s satyrn.fdl.math.temp run {
+            scoreboard players set #math.result <%config.internalScoreboard%> 1
+        } else run {
+            scoreboard players set #math.result <%config.internalScoreboard%> 0
+        }
+    }
+}
+
+
+# This function operates identically to the should_damage_tool function above, but uses the armor rule: 60% base chance plus 40% scaled by Unbreaking.
+# If the function returns a 0, the tool should not be damaged.
+# If the function returns a 1, the tool should be damaged.
+function should_damage_armor {
+    execute unless score #math.input1 <%config.internalScoreboard%> matches 1.. run {
+        scoreboard players set #math.result <%config.internalScoreboard%> 1
+    } else run {
+        # Vanilla Unbreaking rule for armor: damage chance is 60% + 40%/(level+1), as 19660 + 13107/(level+1) out of 32767
+        scoreboard players set #math.input2 <%config.internalScoreboard%> 13107
+        scoreboard players add #math.input1 <%config.internalScoreboard%> 1
+        scoreboard players operation #math.input2 <%config.internalScoreboard%> /= #math.input1 <%config.internalScoreboard%>
+        scoreboard players add #math.input2 <%config.internalScoreboard%> 19660
+        scoreboard players operation @s satyrn.fdl.math.temp = #math.input2 <%config.internalScoreboard%>
+
+        execute store result score #math.result <%config.internalScoreboard%> run random value 1..32767
+
+        execute if score #math.result <%config.internalScoreboard%> < @s satyrn.fdl.math.temp run {
+            scoreboard players set #math.result <%config.internalScoreboard%> 1
+        } else run {
+            scoreboard players set #math.result <%config.internalScoreboard%> 0
+        }
+    }
+}
+
+###
+This function converts the input value into both minutes and seconds.
+Use #math.input1 for input, #math.minutes and #math.seconds for results.
+###
+function ticks_to_min_sec {
+    scoreboard players operation #math.minutes <%config.internalScoreboard%> = #math.input1 <%config.internalScoreboard%>
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> = #math.input1 <%config.internalScoreboard%>
+
+    # Convert input to rough minutes.
+    scoreboard players operation #math.minutes <%config.internalScoreboard%> /= #1200 <%config.internalScoreboard%>
+
+    # Convert remainder to rough seconds.
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> %= #1200 <%config.internalScoreboard%>
+    scoreboard players operation #math.seconds <%config.internalScoreboard%> /= #20 <%config.internalScoreboard%>
+}

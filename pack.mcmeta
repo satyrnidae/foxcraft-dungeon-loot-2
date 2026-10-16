@@ -1,14 +1,32 @@
 {
   "pack": {
-    "pack_format": 10,
+    "min_format": 121,
+    "max_format": 121,
     "description": "Foxcraft Dungeon Loot 2"
   },
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.2.1+alpha.2",
+    "version": "26.3-alpha.1",
     "baseArchiveName": "foxcraft-dungeon-loot",
     "changelog": {
+      "26.3-alpha.1": [
+        "Port to Minecraft 26.3, data pack format 121. Worlds from 1.19 are not migrated.",
+        "Items use data components instead of NBT, models come from item_model.",
+        "Commands, entity data and trader offers updated for the 26.3 formats.",
+        "Random numbers use the /random command.",
+        "Copper goat horns use instruments, so the sound plays natively and the cooldown is gone.",
+        "Add 51 music discs: 50 by CaptainZephyrr, Satyrnidae and Wolfgun, plus C418 - Dog.",
+        "Music discs are sold by Wandering Traders for gold coins, found in ancient cities, simple dungeons, stronghold corridors and woodland mansions, and dropped by creepers.",
+        "Scripture of Cleansing removes curses with item modifiers and no longer needs an armor stand.",
+        "Remove the Copper-Plated tools.",
+        "Fix Wing of Quet Zala and Wing of Ouet Zala never applying their timed effects.",
+        "Fix Tithe to Uthiir triggering as Estudinae's Sorrow.",
+        "Fix War Hog's Disdainful Pride ignoring Unbreaking.",
+        "Fix Quet Zala's Beloved using another mob's chestplate for Unbreaking.",
+        "Fix Chainsaw not giving haste.",
+        "Scoreboards version 5, the copper horn cooldown objectives are removed."
+      ],
       "1.2.1+alpha.2": [
         "Ima Leaf now plants a sapling when the user uses it to teleport.",
         "Ima Leaf now teleports the player relative to their current position instead of a fixed height."

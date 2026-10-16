@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_nugget",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/silver_coins"
+      }
+    },
+    "title": "Gacha Gotcha",
+    "description": "Trade with a Wandering Trader for a Grab-Bag.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "foxcraft_dungeon_loot:head_trade",
+  "criteria": {
+    "trade_for_item": {
+      "trigger": "minecraft:villager_trade",
+      "conditions": {
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
+          }
+        },
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": "{GrabBag:1b}"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trade_for_item"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "foxcraft_dungeon_loot:item/random_loot/advancement/grab_bag_trade"
+    ]
+  }
+}

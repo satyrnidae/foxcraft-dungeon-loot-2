@@ -1,0 +1,58 @@
+# TAGS USED
+# satyrn.fdl.estudinaesGuidance.effectsApplied - Players who have had the item's effect applied to them.
+
+# Occurs once every 10 ticks.
+function clock_10t {
+    schedule function foxcraft_dungeon_loot:item/epic/estudinaes_guidance/clock_10t 10t
+    # Apply the effect to players that are wearing Estudinae's Guidance but do not yet have the effects applied to them.
+    execute as @a[predicate=foxcraft_dungeon_loot:item/epic/estudinaes_guidance/worn,predicate=!foxcraft_dungeon_loot:item/epic/estudinaes_guidance/has_effects] run {
+        tag @s add satyrn.fdl.estudinaesGuidance.effectsApplied
+        effect give @s minecraft:slowness 1000000 1
+        effect give @s minecraft:dolphins_grace 1000000
+    }
+    # Apply the effect to players who are not wearing the item but have had the item's effects applied to them.
+    execute as @a[predicate=!foxcraft_dungeon_loot:item/epic/estudinaes_guidance/worn,tag=satyrn.fdl.estudinaesGuidance.effectsApplied] run {
+        effect clear @s minecraft:slowness
+        effect clear @s minecraft:dolphins_grace
+        tag @s remove satyrn.fdl.estudinaesGuidance.effectsApplied
+    }
+}
+
+# Occurs when the datapack is loaded.
+function on_load {
+    # Schedules the clock function with an offset of 2 ticks.
+    schedule function foxcraft_dungeon_loot:item/epic/estudinaes_guidance/clock_10t 2t
+}
+
+# Gives the target the estudinaes guidance.
+function give_estudinaes_guidance {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_guidance
+}
+
+# Gives the chainmail variant, loot variant score 1.
+function give_estudinaes_guidance_chainmail {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_guidance
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the iron variant, loot variant score 2.
+function give_estudinaes_guidance_iron {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_guidance
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the diamond variant, loot variant score 3.
+function give_estudinaes_guidance_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_guidance
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 4.
+function give_estudinaes_guidance_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 4
+    loot give @s loot foxcraft_dungeon_loot:item/epic/estudinaes_guidance
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

@@ -1,0 +1,11 @@
+{
+  "type": "entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:equipment": {
+      "offhand": {
+        "items": "#foxcraft_dungeon_loot:prevents_use"
+      }
+    }
+  }
+}

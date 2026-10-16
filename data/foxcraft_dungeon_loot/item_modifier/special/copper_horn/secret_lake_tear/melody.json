@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:set_components",
+  "components": {
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear/melody"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:equipment": {
+      "chest": {
+        "items": [
+          "minecraft:elytra"
+        ],
+        "predicates": {
+          "minecraft:damage": {
+            "durability": {
+              "min": 0,
+              "max": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

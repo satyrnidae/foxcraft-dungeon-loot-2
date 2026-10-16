@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Potion of Heroism",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 4521796,
+          "custom_effects": [
+            {
+              "id": "minecraft:hero_of_the_village",
+              "duration": 300
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

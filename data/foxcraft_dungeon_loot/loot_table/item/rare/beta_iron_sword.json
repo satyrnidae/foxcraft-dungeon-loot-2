@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:rare/beta_iron_sword/define"
+}

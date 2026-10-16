@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:mythic/war_hogs_festering_wrath/define"
+}

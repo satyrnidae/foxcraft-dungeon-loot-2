@@ -1,0 +1,20 @@
+{
+  "display": {
+    "title": "satyrnidae",
+    "description": "Datapacks Created by satyrnidae!",
+    "icon": {
+      "id": "minecraft:player_head",
+      "components": {
+        "minecraft:profile": "satyrnidae"
+      }
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "global:root",
+  "criteria": {
+    "trigger": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

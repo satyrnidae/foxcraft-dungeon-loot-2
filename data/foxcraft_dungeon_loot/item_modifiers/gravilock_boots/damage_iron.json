@@ -1,8 +1,0 @@
-{
-  "function": "set_damage",
-  "damage": {
-    "type": "constant",
-    "value": -0.0051283
-  },
-  "add": true
-}

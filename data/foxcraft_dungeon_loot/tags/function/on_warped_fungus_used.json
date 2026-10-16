@@ -1,0 +1,25 @@
+{
+  "__comments": "These functions are called on ticks where a player has used a warped fungus on a stick. Commands are executed per player, at the player's current position.",
+  "values": [
+    "foxcraft_dungeon_loot:item/mythic/bringer_of_fear/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/common/common_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/deilonas_holy_blessings/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/common/dice/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/downpour_amulet/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/epic/epic_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/evokers_tome/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/rare/eye_cream/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/rare/feather_of_quet_zala/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/rare/gift_of_sheep_island/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/epic/heros_amulet/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/how_about_no/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/rare/ima_leaf/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/mythic_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/poncho_sanchezs_fate/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/pride_and_extreme_prejudice/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/rare/rare_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/epic/silverfish_escape_artist/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/uncommon/uncommon_grab_bag/on_warped_fungus_used"
+  ]
+}

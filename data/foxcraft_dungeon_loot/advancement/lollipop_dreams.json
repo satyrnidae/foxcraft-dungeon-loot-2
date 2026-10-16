@@ -1,0 +1,51 @@
+{
+  "parent": "foxcraft_dungeon_loot:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_axe",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/iron_chainsaw"
+      }
+    },
+    "title": "Lollipop Dreams",
+    "description": "Killed an undead with a chainsaw.",
+    "frame": "task",
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "player_killed_entity": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#foxcraft_dungeon_loot:undead"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_killed_entity"
+    ]
+  ]
+}

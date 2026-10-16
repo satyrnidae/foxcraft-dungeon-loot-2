@@ -1,0 +1,4 @@
+# Gives the target the lucky rabbits foot.
+function give_lucky_rabbits_foot {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/lucky_rabbits_foot
+}

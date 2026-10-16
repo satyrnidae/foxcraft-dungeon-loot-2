@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:set_components",
+  "components": {
+    "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory/bass"
+  }
+}

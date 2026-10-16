@@ -1,0 +1,4 @@
+# Gives the target the d12.
+function give_d12 {
+    loot give @s loot foxcraft_dungeon_loot:item/common/d12
+}

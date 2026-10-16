@@ -1,0 +1,57 @@
+import ../../../config.js
+import ../../../macros.mcbt
+
+# Runs every 3 seconds.
+function clock_3s {
+    schedule function foxcraft_dungeon_loot:item/epic/buckwheat/clock_3s 3s
+
+    execute as @a[predicate=foxcraft_dungeon_loot:item/epic/buckwheat/in_main_hand] at @s run {
+        scoreboard players set #test <%config.internalScoreboard%> 0
+        # Up to 10 livestock mobs within 5 blocks with an age of 0 (breeding cooldown is over)
+        execute as @e[type=#foxcraft_dungeon_loot:livestock, distance=..5, predicate=foxcraft_dungeon_loot:item/epic/buckwheat/can_breed, limit=10, sort=nearest] at @s run {
+            # Set in love for 10 seconds.
+            data modify entity @s InLove set from storage foxcraft_dungeon_loot:items Buckwheat.InLove
+            particle minecraft:heart ~ ~1 ~ 0.2 0.2 0.2 0 10
+            scoreboard players add #test <%config.internalScoreboard%> 1
+        }
+
+        execute if score #test <%config.internalScoreboard%> matches 1.. unless entity @s[gamemode=creative] run {
+            execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
+                # Get unbreaking level from the tool.
+                execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
+                function foxcraft_dungeon_loot:math/should_damage_tool
+                execute if score #math.result <%config.internalScoreboard%> matches 1 run function foxcraft_dungeon_loot:item/epic/buckwheat/damage_tool
+            } else run {
+                function foxcraft_dungeon_loot:item/epic/buckwheat/damage_tool
+            }
+
+            execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
+                break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:epic/buckwheat"}}
+            }
+        }
+    }
+}
+
+function damage_tool {
+    execute if score #test <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_1
+    REPEAT(0, 3) as i {
+        execute if score #test <%config.internalScoreboard%> matches <%2*(i+1)%>..<%2*(i+1)+1%> run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_<%2*(i+1)%>
+    }
+    execute if score #test <%config.internalScoreboard%> matches 10.. run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:epic/buckwheat/damage_10
+}
+
+# Runs when the datapack is loaded.
+function on_load {
+    schedule function foxcraft_dungeon_loot:item/epic/buckwheat/clock_3s 1t
+    data merge storage foxcraft_dungeon_loot:items {Buckwheat:{InLove:600}}
+}
+
+# Runs when the datapack is uninstalled via the uninstall command.
+function on_uninstall {
+    data remove storage foxcraft_dungeon_loot:items Buckwheat.InLove
+}
+
+# Gives the target the buckwheat.
+function give_buckwheat {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/buckwheat
+}

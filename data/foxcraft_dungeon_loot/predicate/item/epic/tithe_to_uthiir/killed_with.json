@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "attacker",
+  "predicate": {
+    "minecraft:equipment": {
+      "mainhand": {
+        "predicates": {
+          "minecraft:custom_data": "{DungeonLootId:81}"
+        }
+      }
+    }
+  }
+}

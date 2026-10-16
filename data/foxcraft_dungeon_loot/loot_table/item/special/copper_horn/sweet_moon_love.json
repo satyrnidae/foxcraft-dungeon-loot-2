@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:goat_horn",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:instrument": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love/melody",
+                "minecraft:tooltip_display": {
+                  "hidden_components": [
+                    "minecraft:instrument"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:special/copper_horn/sweet_moon_love/define"
+}

@@ -1,0 +1,48 @@
+{
+  "parent": "foxcraft_dungeon_loot:item/root",
+  "criteria": {
+    "player_hurt_entity": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": "foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/in_main_hand",
+        "damage": {
+          "blocked": false
+        }
+      }
+    },
+    "entity_hurt_player": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": []
+        },
+        "damage": {
+          "blocked": false,
+          "source_entity": {
+            "minecraft:entity_type": "minecraft:piglin_brute",
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:28}"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_hurt_entity",
+      "entity_hurt_player"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:item/mythic/war_hogs_burning_rage/on_hit"
+  }
+}

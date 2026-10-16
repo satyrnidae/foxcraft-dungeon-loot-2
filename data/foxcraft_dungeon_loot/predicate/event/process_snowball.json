@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:any_of",
+  "terms": [
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:equipment": {
+          "mainhand": {
+            "items": [
+              "minecraft:snowball"
+            ],
+            "predicates": {
+              "minecraft:custom_data": "{ProcessOnUsed:1b}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:equipment": {
+          "offhand": {
+            "items": [
+              "minecraft:snowball"
+            ],
+            "predicates": {
+              "minecraft:custom_data": "{ProcessOnUsed:1b}"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

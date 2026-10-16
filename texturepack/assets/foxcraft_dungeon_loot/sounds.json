@@ -47,7 +47,6 @@
     ]
   },
   "item.beta_iron_sword.block": {
-    "subtitle": "subtitles.item.beta_iron_sword.block",
     "sounds": [
       "foxcraft_dungeon_loot:items/beta_iron_sword/block1",
       "foxcraft_dungeon_loot:items/beta_iron_sword/block2"
@@ -114,7 +113,7 @@
     "subtitle": "subtitles.item.dice.d8",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d8/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d8/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d8/roll2",
@@ -129,7 +128,7 @@
     "subtitle": "subtitles.item.dice.d10",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d10/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d10/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d10/roll2",
@@ -144,7 +143,7 @@
     "subtitle": "subtitles.item.dice.d12",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d12/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d12/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d12/roll2",
@@ -159,7 +158,7 @@
     "subtitle": "subtitles.item.dice.d20",
     "sounds": [
       {
-        "name":"foxcraft_dungeon_loot:items/dice/d20/roll1",
+        "name": "foxcraft_dungeon_loot:items/dice/d20/roll1",
         "volume": 10.0
       },
       "foxcraft_dungeon_loot:items/dice/d20/roll2",
@@ -268,7 +267,7 @@
     ]
   },
   "item.torenhias_fist.thunder": {
-    "subtitle": "subtitles.item.mjolnir.thunder",
+    "subtitle": "subtitles.item.torenhias_fist.thunder",
     "sounds": [
       "item/trident/thunder1",
       "item/trident/thunder2"
@@ -286,7 +285,7 @@
     ]
   },
   "item.war_hogs_disdainful_pride.parachute_activation": {
-    "subtitle": "subtitles.war_hogs_disdainful_pride.parachute_activation",
+    "subtitle": "subtitles.item.war_hogs_disdainful_pride.parachute_activation",
     "sounds": [
       "mob/enderdragon/wings1",
       "mob/enderdragon/wings2",
@@ -294,6 +293,684 @@
       "mob/enderdragon/wings4",
       "mob/enderdragon/wings5",
       "mob/enderdragon/wings6"
+    ]
+  },
+  "item.copper_horn.clear_temper_journey.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.clear_temper_journey.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.clear_temper_journey.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/clear_temper_journey/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.dry_urge_anger.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.dry_urge_anger.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.dry_urge_anger.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/dry_urge_anger/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fearless_river_gift.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fearless_river_gift.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fearless_river_gift.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fearless_river_gift/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fresh_nest_thought.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fresh_nest_thought.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.fresh_nest_thought.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/fresh_nest_thought/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.great_sky_falling.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.great_sky_falling.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.great_sky_falling.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/great_sky_falling/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.mumble_fire_memory.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.mumble_fire_memory.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.mumble_fire_memory.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/mumble_fire_memory/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.old_hymn_resting.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.old_hymn_resting.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.old_hymn_resting.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/old_hymn_resting/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.pure_water_desire.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.pure_water_desire.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.pure_water_desire.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/pure_water_desire/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.secret_lake_tear.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.secret_lake_tear.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.secret_lake_tear.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/secret_lake_tear/melody",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.sweet_moon_love.bass": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love/bass",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.sweet_moon_love.harmony": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love/harmony",
+        "stream": true
+      }
+    ]
+  },
+  "item.copper_horn.sweet_moon_love.melody": {
+    "subtitle": "subtitles.item.copper_horn.played",
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:copper_horn/sweet_moon_love/melody",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_acornman": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornman",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_acornman_am": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornman_am",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_acornmanreskinbd5": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/acornmanreskinbd5",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_aeon": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/aeon",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_aeonorch190bpm": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/aeonorch190bpm",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_avidit_e": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/avidit_e",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_drown": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/drown",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_duma": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/duma",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_flutes": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/flutes",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_gutturalis": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/gutturalis",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_kotyledon": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/kotyledon",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_locker": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/locker",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_lost": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/lost",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_minimalist": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/minimalist",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_nematode": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/nematode",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_nighttime_transit": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/nighttime_transit",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_old_white_straight_road": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/old_white_straight_road",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_outskirts": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/outskirts",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_pathetic_mario": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/pathetic_mario",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_pet_the_dog": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/pet_the_dog",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_pies_e": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/pies_e",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_reboot": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/reboot",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_rhapsodymini2": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/rhapsodymini2",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_rigmarole": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/rigmarole",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_slither": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/slither",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_sparkplugs": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/sparkplugs",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.captainzephyrr_the_scone_song": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/captainzephyrr/the_scone_song",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.satyrnidae_wanderer": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/satyrnidae/wanderer",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_after_another": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/after_another",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_between_layers": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/between_layers",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_black_dawn": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/black_dawn",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_cliff_where": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/cliff_where",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_dark_southern_sky": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/dark_southern_sky",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_deer": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/deer",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_every_morning": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/every_morning",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_far_away": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/far_away",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_into_stars": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/into_stars",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_lightform": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/lightform",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_moon_beams": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/moon_beams",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_moon_rays": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/moon_rays",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_mt_ennui": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/mt_ennui",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_night_i": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/night_i",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_night_ii": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/night_ii",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_of_plains": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/of_plains",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_pale_star": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/pale_star",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_passing": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/passing",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_peaks": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/peaks",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_throughout": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/throughout",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_tropic": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/tropic",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.wolfgun_unseen_land": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/wolfgun/unseen_land",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.c418_dog": {
+    "sounds": [
+      {
+        "name": "foxcraft_dungeon_loot:records/c418/dog",
+        "stream": true
+      }
     ]
   }
 }

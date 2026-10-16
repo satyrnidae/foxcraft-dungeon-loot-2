@@ -1,0 +1,28 @@
+import ../../../config.js
+import ../../../macros.mcbt
+
+# Gives the target the tithe to uthiir, the netherite one.
+function give_tithe_to_uthiir {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/tithe_to_uthiir
+}
+
+# Gives the rare diamond variant, loot variant score 1.
+function give_tithe_to_uthiir_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/tithe_to_uthiir
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the uncommon iron variant, loot variant score 2.
+function give_tithe_to_uthiir_iron {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/tithe_to_uthiir
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the common copper variant, loot variant score 3.
+function give_tithe_to_uthiir_copper {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/epic/tithe_to_uthiir
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

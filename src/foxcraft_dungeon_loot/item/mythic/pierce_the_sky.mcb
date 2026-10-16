@@ -1,0 +1,4 @@
+# Gives the target the pierce the sky.
+function give_pierce_the_sky {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/pierce_the_sky
+}

@@ -1,0 +1,87 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
+        {
+          "text": "X No Evil",
+          "color": "red",
+          "bold": false,
+          "italic": false
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "There is only safety here. There is no war",
+        "within these walls.",
+        [
+          "Rarity: ",
+          {
+            "text": "Cursed",
+            "color": "red",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Long in the Fang: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "When thrown, rolls a D10.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Depending on the outcome, a detrimental ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "potion effect is applied to all entities in a",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "10-block radius from where the projectile",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "landed.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:79,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/x_no_evil",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:armor_stand"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:common/armor_stand/define"
+}

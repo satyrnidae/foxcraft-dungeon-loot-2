@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:carved_pumpkin"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:rare/armor_of_the_golem/define"
+}

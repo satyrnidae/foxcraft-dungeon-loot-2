@@ -1,0 +1,26 @@
+{
+  "parent": "foxcraft_dungeon_loot:item/root",
+  "criteria": {
+    "using_copper_horn": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:goat_horn"
+          ],
+          "predicates": {
+            "minecraft:custom_data": "{CopperGoatHorn:1b}"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "using_copper_horn"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:item/special/copper_horn/main/on_using_item"
+  }
+}

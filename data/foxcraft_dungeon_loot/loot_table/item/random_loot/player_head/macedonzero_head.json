@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:random_loot/player_head/macedonzero_head"
+}

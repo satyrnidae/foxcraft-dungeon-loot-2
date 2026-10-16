@@ -1,0 +1,190 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 6,
+          "quality": 0,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1800
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 600
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "quality": 1,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1560
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 700
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "quality": 2,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1320
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 800
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "quality": 3,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 1080
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 900
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "quality": 4,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 840
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 1000
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "quality": 5,
+          "name": "minecraft:potion",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:blindness",
+                      "duration": 600
+                    },
+                    {
+                      "id": "minecraft:instant_damage",
+                      "duration": 10
+                    },
+                    {
+                      "id": "minecraft:resistance",
+                      "amplifier": 1,
+                      "duration": 1200
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:common/moonshine/define"
+}

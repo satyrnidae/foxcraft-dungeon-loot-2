@@ -1,0 +1,7 @@
+{
+  "type": "set_count",
+  "count": {
+    "type": "constant",
+    "value": 0
+  }
+}

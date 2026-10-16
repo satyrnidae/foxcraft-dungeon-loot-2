@@ -1,0 +1,25 @@
+{
+  "__comments": "Uthiir's Grasp, the Tithe to Uthiir intrinsic. Called from the spider, cave spider and silverfish loot tables.",
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/grasp_of_uthiir"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          "foxcraft_dungeon_loot:item/epic/tithe_to_uthiir/killed_with",
+          {
+            "type": "minecraft:random_chance",
+            "chance": 0.1
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Gives the target the peerless yewhewn.
+function give_peerless_yewhewn {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/peerless_yewhewn
+}

@@ -1,0 +1,104 @@
+import ../../../config.js
+import ../../../macros.mcbt
+
+# Runs when the datapack is loaded.
+function on_load {
+    scoreboard objectives add satyrn.fdl.prideAndExtremePrejudice.cooldown dummy
+
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get prideAndExtremePrejudice.cooldown <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set prideAndExtremePrejudice.cooldown <%config.internalScoreboard%> 24000
+}
+
+# Runs once per tick
+function on_tick {
+    # Increment the cooldown timer.
+    execute as @a[scores={satyrn.fdl.prideAndExtremePrejudice.cooldown=1..}] run {
+        scoreboard players remove @s satyrn.fdl.prideAndExtremePrejudice.cooldown 1
+
+        # Reset the cooldown timer.
+        execute at @s[scores={satyrn.fdl.prideAndExtremePrejudice.cooldown=..0}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.prideAndExtremePrejudice.cooldown
+        }
+    }
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.prideAndExtremePrejudice.cooldown
+
+    scoreboard players reset prideAndExtremePrejudice.cooldown <%config.internalScoreboard%>
+}
+
+# Runs on ticks where a player has used a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/mythic/pride_and_extreme_prejudice/in_main_hand] run {
+        execute if score @s satyrn.fdl.prideAndExtremePrejudice.cooldown matches 1.. run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
+            title @s actionbar {"text":"Pride and Extreme Prejudice is ready to be used once more.","color":"dark_purple"}
+        } else run {
+            rng 1 10
+
+            execute if score #math.result <%config.internalScoreboard%> matches 1 run {
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
+                effect give @s minecraft:bad_omen 1200 3
+                tellraw @s {"text":"The sound of horns fills the air.","color":"gray","italic":true}
+            } else execute if score #math.result satyrn.fdl.internal matches 2 run {
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
+                effect give @s minecraft:bad_omen 1200 2
+                tellraw @s {"text":"A fell wind sweeps the land.","color":"gray","italic":true}
+            } else execute if score #math.result satyrn.fdl.internal matches 3..8 run {
+                playsound minecraft:event.raid.horn hostile @a ~ ~ ~ 100
+                effect give @s minecraft:bad_omen 1200
+                tellraw @s {"text":"A chill trickles down your spine.","color":"gray","italic":true}
+            } else run {
+                playsound foxcraft_dungeon_loot:event.roll.hero player @a
+                effect give @s minecraft:hero_of_the_village 1200
+                tellraw @s {"text":"A warm breeze calms your nerves.","color":"gray","italic":true}
+            }
+
+            execute unless entity @s[gamemode=creative] run {
+                scoreboard players operation @s satyrn.fdl.prideAndExtremePrejudice.cooldown = prideAndExtremePrejudice.cooldown <%config.internalScoreboard%>
+                scoreboard players operation #math.input1 <%config.internalScoreboard%> = prideAndExtremePrejudice.cooldown <%config.internalScoreboard%>
+                function foxcraft_dungeon_loot:math/ticks_to_min_sec
+
+                execute if score #math.minutes <%config.internalScoreboard%> matches 0 run {
+                    execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                        title @s actionbar {"text":"Pride and Extreme Prejudice is now on cooldown for 1 second.","color":"dark_purple"}
+                    } else run {
+                        title @s actionbar [{"text":"Pride and Extreme Prejudice is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                    }
+                } else execute if score #math.seconds satyrn.fdl.internal matches 0 run {
+                    execute if score #math.minutes <%config.internalScoreboard%> matches 1 run {
+                        title @s actionbar {"text":"Pride and Extreme Prejudice is now on cooldown for 1 minute.","color":"dark_purple"}
+                    } else run {
+                        title @s actionbar [{"text":"Pride and Extreme Prejudice is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes."]
+                    }
+                } else run {
+                    execute if score #math.minutes <%config.internalScoreboard%> matches 1 run {
+                        execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                            title @s actionbar {"text":"Pride and Extreme Prejudice is now on cooldown for 1 minute, 1 second.","color":"dark_purple"}
+                        } else run {
+                        title @s actionbar [{"text":"Pride and Extreme Prejudice is now on cooldown for 1 minute, ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    } else run {
+                        execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                            title @s actionbar [{"text":"Pride and Extreme Prejudice is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, 1 second."]
+                        } else run {
+                            title @s actionbar [{"text":"Pride and Extreme Prejudice is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, ",{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    }
+                }
+
+                break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/pride_and_extreme_prejudice"}}
+            }
+        }
+    }
+}
+
+# Gives the target the pride and extreme prejudice.
+function give_pride_and_extreme_prejudice {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/pride_and_extreme_prejudice
+}

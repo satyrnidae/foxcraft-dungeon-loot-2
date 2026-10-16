@@ -1,0 +1,4 @@
+# Gives the target the skullbasher.
+function give_skullbasher {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/skullbasher
+}

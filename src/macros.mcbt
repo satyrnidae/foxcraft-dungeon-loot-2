@@ -1,0 +1,36 @@
+import ./config.js
+###
+Contains various macros for use throughout the datapack, including:
+ - Item breaking
+ - Random number generation
+###
+
+###
+Breaks an item in a specific inventory slot, plays the item break noise, and displays the item break particle.
+Does not check if the item is actually broken.
+
+Parameters:
+0 - The non-numeric slot ID of the item.
+1 - The item stack that the particle will display as, an SNBT compound such as {id:"minecraft:iron_boots"}.
+###
+template break_item {
+    with a0:word a1:word {
+        playsound minecraft:entity.item.break player @s ~ ~ ~ 2.0 1.0
+        particle minecraft:item{item:<%a1%>} ^ ^1.25 ^0.5 0 0.5 0.5 0.1 8
+        item modify entity @s <%a0%> foxcraft_dungeon_loot:remove
+    }
+}
+
+###
+Generates a random number between a lower and upper bound, both inclusive, and stores it in #math.result.
+Wraps /random; bounds must be literals and differ, since /random rejects a range of one.
+
+Parameters:
+0 - The lower bound of the random result.
+1 - The upper bound of the random result.
+###
+template rng {
+    with a0:word a1:word {
+        execute store result score #math.result <%config.internalScoreboard%> run random value <%a0%>..<%a1%>
+    }
+}

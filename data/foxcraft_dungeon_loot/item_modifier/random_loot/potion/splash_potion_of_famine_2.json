@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Famine",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 5797459,
+          "custom_effects": [
+            {
+              "id": "minecraft:hunger",
+              "amplifier": 1,
+              "duration": 600
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

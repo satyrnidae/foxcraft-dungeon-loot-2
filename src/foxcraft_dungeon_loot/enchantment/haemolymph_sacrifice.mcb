@@ -1,0 +1,17 @@
+# Hæmolymph Sacrifice. The enchantment data file runs on_killed_arthropod as the attacker from its post_attack effect, when the struck
+# arthropod is already dead. The level predicates pick the effects.
+
+# Run as the attacker after a lethal hit on an arthropod. Hæmolymph Sacrifice I gives 10 seconds of Speed I, 5 of Resistance II and 3 of Regeneration, level II gives 10 seconds of Speed II,
+# 5 of Resistance III and 5 of Regeneration. The higher level is a stronger effect, not a longer one.
+function on_killed_arthropod {
+    execute if predicate foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/level_1 run {
+        effect give @s minecraft:speed 10 0
+        effect give @s minecraft:resistance 5 1
+        effect give @s minecraft:regeneration 3 0
+    }
+    execute if predicate foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/level_2 run {
+        effect give @s minecraft:speed 10 1
+        effect give @s minecraft:resistance 5 2
+        effect give @s minecraft:regeneration 5 0
+    }
+}

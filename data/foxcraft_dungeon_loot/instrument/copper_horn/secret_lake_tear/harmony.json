@@ -1,0 +1,10 @@
+{
+  "description": {
+    "translate": "instrument.foxcraft_dungeon_loot.copper_horn.secret_lake_tear"
+  },
+  "range": 256.0,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:item.copper_horn.secret_lake_tear.harmony"
+  },
+  "use_duration": 4.0
+}

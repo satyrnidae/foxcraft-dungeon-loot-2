@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fishing_rod"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:epic/yo_yo_mans_revenge/define"
+}

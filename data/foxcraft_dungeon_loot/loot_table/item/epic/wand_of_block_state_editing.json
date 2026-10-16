@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:debug_stick"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:epic/wand_of_block_state_editing/define"
+}
