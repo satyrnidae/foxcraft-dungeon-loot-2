@@ -21,7 +21,7 @@ if (-not $env:SKIP_TESTS) {
     if (-not $TestConfig.mc.dev) { $TestArgs += "--release" }
     node "$PSScriptRoot/tests/run_all.mjs" @TestArgs
     if ($LASTEXITCODE -ne 0) {
-        Write-Error "Tests failed, not building the archives."
+        Write-Error "Tests failed, cowardly refusing to build the .zip files."
         exit $LASTEXITCODE
     }
 }

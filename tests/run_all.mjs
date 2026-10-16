@@ -8,7 +8,7 @@
 //     node tests/run_all.mjs --release      also run the release checks, such as mc.dev being false
 //     node tests/run_all.mjs -k chainsaw    only unit tests whose name matches, repeatable
 //
-// Exit status is 1 when any step fails. A step that cannot run, such as the Java checks without a jar, is reported as
+// Exit status is 1 when any step fails. A failing build or unit test step ends the run, the Java checks are not started. A step that cannot run, such as the Java checks without a jar, is reported as
 // SKIPPED and does not fail the run.
 //
 // Java checks need the client jar. They use MC_JAR if set, else the launcher copy at %APPDATA%/.minecraft/versions/<mc_version>/<mc_version>.jar,
@@ -168,7 +168,10 @@ async function main() {
   say('\n== unit tests ==');
   summary.push(['unit tests (tests/unit)', unitTests(patterns) === 0 ? 'PASS' : 'FAIL']);
 
-  if (flag('--no-java')) {
+  // Fail fast: a unit test failure ends the run here, the slower Java checks would only bury its output
+  if (summary.some(([, status]) => status === 'FAIL')) {
+    summary.push(['java checks', 'SKIPPED not run after a failure']);
+  } else if (flag('--no-java')) {
     summary.push(['java checks', 'SKIPPED --no-java']);
   } else {
     say('\n== java checks ==');
