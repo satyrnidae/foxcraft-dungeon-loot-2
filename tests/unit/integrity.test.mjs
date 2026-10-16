@@ -1,12 +1,15 @@
 // Whole-pack checks that no single item owns: identity, references, resources, scoreboards, versions, old keys.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 
 import { scan } from '../tools/check_old_keys.mjs';
 import { dicts, sorted } from './checks.mjs';
 import * as pk from './packdata.mjs';
+
+const loreLib = createRequire(import.meta.url)('../../scripts/lore.js');
 
 const NS = pk.NS;
 const ITEMS = pk.itemTables();
@@ -229,7 +232,8 @@ describe('enchantments', () => {
 });
 
 describe('lore', () => {
-  const MAX_LORE_WIDTH = 44;
+  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore.js
+  const MAX_LORE_WIDTH = loreLib.LORE_PIXELS;
 
   /** The text a lore entry renders as one line: a string, a component, or a list of them joined on one line. */
   const lineText = (entry) => {
@@ -253,7 +257,10 @@ describe('lore', () => {
     return entry?.text ?? '';
   };
 
-  /** Every lore line over the limit, as { file, line, endLine, width, text }, the lines being where the entry sits in the file. */
+  /**
+   * Every lore line that wraps wrong, as { file, line, endLine, kind, note, text }, the lines being where the entry sits in the file.
+   * A wide line is over the limit, a short one stops early: no ending punctuation and the next word still fits.
+   */
   const longLoreLines = () => {
     const long = [];
     for (const root of ['item_modifier', 'loot_table']) {
@@ -262,6 +269,7 @@ describe('lore', () => {
         let cursor = 0;
         for (const node of dicts(pk.loadJson(file))) {
           if (pk.bareType(node) !== 'set_lore' || !Array.isArray(node.lore)) continue;
+          const entries = [];
           for (const entry of node.lore) {
             const text = lineText(entry);
             // Lore entries come in file order, so search on from the last one found
@@ -272,14 +280,21 @@ describe('lore', () => {
             let end = at >= 0 && lastNeedle ? lines.findIndex((l, i) => i >= at && l.includes(lastNeedle)) : at;
             if (end < at) end = at;
             if (at >= 0) cursor = end + 1;
-            if (text.length > MAX_LORE_WIDTH) long.push({ file: pk.rel(file), line: at >= 0 ? at + 1 : 1, endLine: end >= 0 ? end + 1 : 1, width: text.length, text });
+            const width = loreLib.componentWidth(entry);
+            const where = { file: pk.rel(file), line: at >= 0 ? at + 1 : 1, endLine: end >= 0 ? end + 1 : 1, text };
+            entries.push({ ...where, width });
+            if (width > MAX_LORE_WIDTH) long.push({ ...where, kind: 'wide', note: `${width} pixels, ${MAX_LORE_WIDTH} fit, ${loreLib.wrapAdvice(text)}` });
+          }
+          for (const { index, word } of loreLib.shortLines(entries)) {
+            const { width, ...where } = entries[index];
+            long.push({ ...where, kind: 'short', note: `no ending punctuation, "${word}" from the next line fits, ${width + loreLib.loreWidth(' ' + word)} of ${MAX_LORE_WIDTH} pixels` });
           }
         }
       }
     }
     return long;
   };
-  const describeLine = (l) => `${l.file}:${l.line}: ${l.width} "${l.text}"`;
+  const describeLine = (l) => `${l.file}:${l.line}: ${l.note}: "${l.text}"`;
 
   /**
    * The lines changed against HEAD, staged or not, as a Map from file to [start, end] ranges of the new text. A file git does not
@@ -314,7 +329,7 @@ describe('lore', () => {
 
   // Lore on a line that is part of an edit, staged or not, must already fit. The test fails right after listing the lines.
   // Over-width lines the edit did not touch are only warnings, so old lore never blocks a build and never shows as a failure.
-  it('lore lines in the edit are at most 44 characters', async (t) => {
+  it('lore lines in the edit fit the average width of 44 characters and do not stop early', async (t) => {
     const changed = changedLines();
     if (changed === null) return t.skip('git cannot list the changed lines');
     const long = longLoreLines();
@@ -322,9 +337,9 @@ describe('lore', () => {
     // Old over-width lines are todos, one per line named path:line so the terminal can link to it. The subtests pass, a failing todo is
     // drawn as a failure and fills the end of the report with red.
     for (const l of long.filter((l) => !inEdit(changed, l))) {
-      await t.test(describeLine(l), { todo: 'lore line over ' + MAX_LORE_WIDTH + ' characters' }, () => {});
+      await t.test(describeLine(l), { todo: l.kind === 'wide' ? 'lore line over ' + MAX_LORE_WIDTH + ' pixels' : 'lore line wrapped early' }, () => {});
     }
-    if (mine.length) assert.fail(`${mine.length} lore lines are over ${MAX_LORE_WIDTH} characters in the edit:\n${mine.map(describeLine).join('\n')}`);
+    if (mine.length) assert.fail(`${mine.length} lore lines are wrapped wrong in the edit, over ${MAX_LORE_WIDTH} pixels or stopping early:\n${mine.map(describeLine).join('\n')}`);
   });
   /** Modifier ids, inline functions and lists of them, as the flat list of functions they run. */
   const resolveModifier = (m) => {
