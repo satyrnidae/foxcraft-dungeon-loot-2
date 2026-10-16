@@ -376,7 +376,11 @@ export function itemTables() {
   const out = new Map();
   const base = path.join(DATA, 'loot_table', 'item');
   for (const file of walk(base, '.json')) {
-    const relPath = posix(path.relative(base, file)).slice(0, -'.json'.length);
+    let relPath = posix(path.relative(base, file)).slice(0, -'.json'.length);
+    // An item with more loot tables keeps its main one in <item>/drop.json, the item is still named by its folder and
+    //  the other tables beside drop.json, such as an expiry drop, are not items
+    if (relPath.endsWith('/drop')) relPath = relPath.slice(0, -'/drop'.length);
+    else if (exists(path.join(path.dirname(file), 'drop.json'))) continue;
     if (!relPath.startsWith('random_loot/')) out.set('item/' + relPath, file);
   }
   return out;

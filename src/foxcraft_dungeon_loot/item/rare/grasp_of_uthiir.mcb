@@ -48,9 +48,7 @@ function on_tick {
             }
 
             # Clean up tracking entity
-            IF (config.dev) {
-                particle minecraft:end_rod ~ ~ ~ 0.1 0.1 0.1 0.02 20
-            }
+            particle minecraft:end_rod ~ ~ ~ 0.1 0.1 0.1 0.02 20
             tag @a remove satyrn.fdl.graspOfUthiir.thrower
             kill @s
         }

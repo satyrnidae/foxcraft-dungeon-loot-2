@@ -42,6 +42,7 @@ public class Scan {
      */
     static boolean benign(JsonObject o, String key, JsonElement value) {
         if (key.startsWith("__comment")) return true;
+        if (key.equals("type") && value.isJsonPrimitive() && value.getAsString().equals("minecraft:generic") && o.has("pools")) return true;
         if (key.equals("weight") && value.isJsonPrimitive() && value.getAsString().equals("1")) return true;
         if (key.equals("quality") && value.isJsonPrimitive() && value.getAsString().equals("0")) return true;
         if (key.equals("add") && value.isJsonPrimitive() && value.getAsString().equals("false")) return true;

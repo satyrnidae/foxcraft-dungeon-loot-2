@@ -210,7 +210,7 @@ function build {
         function foxcraft_dungeon_loot:trading/recipes/push
 
         # Trade Index 35: Hammer of Sol
-        set_sell_from_loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol
+        set_sell_from_loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol/drop
         function foxcraft_dungeon_loot:trading/recipes/push
 
         # Trade Index 36: How About No?

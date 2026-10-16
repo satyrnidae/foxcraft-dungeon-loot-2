@@ -37,7 +37,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:item/mythic/hammer_of_sol"
+          "value": "foxcraft_dungeon_loot:item/mythic/hammer_of_sol/drop"
         },
         {
           "type": "minecraft:loot_table",
