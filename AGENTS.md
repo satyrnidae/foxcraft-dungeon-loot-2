@@ -39,7 +39,7 @@ src/                         mc-build sources, the source of truth for functions
     item/<rarity>/<item>.mcb one file per item, mirrors loot_table/item
     item/special/            copper_horn/ (main.mcb, template.mcbt) and music_disc/main.mcb
 data/foxcraft_dungeon_loot/
-  loot_table/item/<rarity>/    item loot tables, thin, one file per item
+  loot_table/item/<rarity>/    item loot tables, thin, one file per item, or <item>/drop.json plus extra tables for an item with more
   loot_table/item/special/     music_disc/ and copper_horn/ loot tables, named like their modifier folders
   loot_table/item/random_loot/ pickers, pools and groups for random drops
   loot_table/entity/           loot for entities, such as the Wandering Trader
