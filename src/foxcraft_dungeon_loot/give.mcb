@@ -2,7 +2,7 @@ import ../config.js
 import give.js
 
 # Dev builds only. Every give_* function in the item sources gets a trigger objective of the same name, enabled for
-# every player. A release build adds no objectives and runs no clock, the give_* functions stay for /function.
+# every player. The trigger value is the amount, /trigger give_x set 5 runs the give function five times, capped at 256. A release build adds no objectives and runs no clock, the give_* functions stay for /function.
 
 function on_load {
     IF (config.dev) {
@@ -20,7 +20,7 @@ function on_uninstall {
     }
 }
 
-# Runs the give function for every trigger a player has fired, then re-enables the triggers.
+# Runs the give function once per point of trigger value for every player that fired one, then re-enables the triggers.
 function clock_10t {
     IF (config.dev) {
         schedule function foxcraft_dungeon_loot:give/clock_10t 10t
@@ -32,9 +32,19 @@ function clock_10t {
 function process {
     IF (config.dev) {
         REPEAT(0, gives.length - 1) as i {
-            execute as @a[scores={<%gives[i].name%>=1..}] run function <%gives[i].id%>
+            scoreboard players set @a[scores={<%gives[i].name%>=257..}] <%gives[i].name%> 256
+            execute as @a[scores={<%gives[i].name%>=1..}] run function foxcraft_dungeon_loot:give/loop_<%gives[i].name%>
             scoreboard players reset @a <%gives[i].name%>
             scoreboard players enable @a <%gives[i].name%>
         }
+    }
+}
+
+# One counting loop per give function, each pass spends one point of the trigger score.
+REPEAT(0, gives.length - 1) as i {
+    function loop_<%gives[i].name%> {
+        function <%gives[i].id%>
+        scoreboard players remove @s <%gives[i].name%> 1
+        execute if score @s <%gives[i].name%> matches 1.. run function foxcraft_dungeon_loot:give/loop_<%gives[i].name%>
     }
 }

@@ -150,4 +150,4 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 
 - Variants with their own `item_model` (phase 7).
-- [ ] Give triggers, dev build only: wait half a second after load, `/trigger give_chainsaw` and `/trigger give_chainsaw_netherite` give the iron and netherite chainsaw. A release build has no give triggers. `/trigger give_estudinaes_patience_netherite` gives a netherite chestplate. A disc and a horn trigger each give their item.
+- [ ] Give triggers, dev build only: wait half a second after load, `/trigger give_copper_coin set 5` gives five stacks of copper coins, a plain `/trigger` gives one, `/trigger give_chainsaw` and `/trigger give_chainsaw_netherite` give the iron and netherite chainsaw. A release build has no give triggers. `/trigger give_estudinaes_patience_netherite` gives a netherite chestplate. A disc and a horn trigger each give their item.

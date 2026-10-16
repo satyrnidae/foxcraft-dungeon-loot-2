@@ -1,0 +1,21 @@
+# Give functions for the coins, one per denomination. Run as the target with /function.
+
+function give_copper_coin {
+    loot give @s loot foxcraft_dungeon_loot:item/random_loot/coin/copper_coins
+}
+
+function give_silver_coin {
+    loot give @s loot foxcraft_dungeon_loot:item/random_loot/coin/silver_coins
+}
+
+function give_electrum_coin {
+    loot give @s loot foxcraft_dungeon_loot:item/random_loot/coin/electrum_coins
+}
+
+function give_gold_coin {
+    loot give @s loot foxcraft_dungeon_loot:item/random_loot/coin/gold_coins
+}
+
+function give_platinum_coin {
+    loot give @s loot foxcraft_dungeon_loot:item/random_loot/coin/platinum_coins
+}
