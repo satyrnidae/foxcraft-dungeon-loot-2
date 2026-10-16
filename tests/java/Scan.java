@@ -8,6 +8,7 @@ import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
@@ -34,6 +35,16 @@ public class Scan {
         BuiltInRegistries.DATA_COMPONENT_INITIALIZERS.build(lookup).forEach(pc -> pc.apply());
     }
 
+    static final String[] STAND_IN_NAMES = {"sharpness", "smite", "bane_of_arthropods", "fire_aspect", "looting", "sweeping_edge", "efficiency", "fortune", "power", "punch"};
+    static final Map<String, String> STAND_INS = new LinkedHashMap<>();
+
+    /** Reads a data file with the pack enchantment ids swapped for vanilla stand-ins. */
+    static String read(Path f) throws Exception {
+        String text = Files.readString(f);
+        for (var e : STAND_INS.entrySet()) text = text.replace(e.getKey(), e.getValue());
+        return text;
+    }
+
     static void out(String s) { Bootstrap.STDOUT.println(s); }
 
     /**
@@ -44,6 +55,8 @@ public class Scan {
         if (key.startsWith("__comment")) return true;
         if (key.equals("type") && value.isJsonPrimitive() && value.getAsString().equals("minecraft:generic") && o.has("pools")) return true;
         if (key.equals("weight") && value.isJsonPrimitive() && value.getAsString().equals("1")) return true;
+        // set_lore and set_contents list operations: offset defaults to 0 and is not written back
+        if (key.equals("offset") && value.isJsonPrimitive() && value.getAsString().equals("0")) return true;
         if (key.equals("quality") && value.isJsonPrimitive() && value.getAsString().equals("0")) return true;
         if (key.equals("add") && value.isJsonPrimitive() && value.getAsString().equals("false")) return true;
         if ((key.equals("announce_to_chat") || key.equals("show_toast")) && value.isJsonPrimitive() && value.getAsString().equals("true")) return true;
@@ -156,7 +169,8 @@ public class Scan {
     static JsonElement inline(JsonElement e, Map<String, JsonElement> preds, String parentKey) {
         if (e.isJsonPrimitive() && e.getAsJsonPrimitive().isString() && preds.containsKey(e.getAsString())
             && !"function".equals(parentKey) && !"name".equals(parentKey)) {
-            return preds.get(e.getAsString());
+            // A predicate can name another one, so inline inside it too. Pack predicates do not loop.
+            return inline(preds.get(e.getAsString()), preds, null);
         }
         if (e.isJsonObject()) {
             JsonObject src = e.getAsJsonObject();
@@ -226,14 +240,23 @@ public class Scan {
         Path root = Paths.get(args[0]);
         RegistryOps<JsonElement> base = lookup.createSerializationContext(JsonOps.INSTANCE);
 
+        // Pack enchantments are data-driven and the vanilla registry cannot take them, so check their own files here and let every
+        // other file name a vanilla stand-in in their place, a different one for each so a modifier keeps all its keys.
+        for (Path f : files(root, "enchantment")) {
+            JsonElement j = JsonParser.parseString(Files.readString(f));
+            roundTrip(Enchantment.DIRECT_CODEC, base, f, j, "enchantment");
+            String id = id(root, f, "enchantment");
+            STAND_INS.put(id, "minecraft:" + STAND_IN_NAMES[STAND_INS.size() % STAND_IN_NAMES.length]);
+        }
+
         // Pack instruments are data-driven; check their files here so the ids used by components can be trusted.
         for (Path f : files(root, "instrument")) {
-            JsonElement j = JsonParser.parseString(Files.readString(f));
+            JsonElement j = JsonParser.parseString(read(f));
             roundTrip(Instrument.DIRECT_CODEC, base, f, j, "instrument");
             INSTRUMENT_IDS.add(id(root, f, "instrument"));
         }
         for (Path f : files(root, "jukebox_song")) {
-            JsonElement j = JsonParser.parseString(Files.readString(f));
+            JsonElement j = JsonParser.parseString(read(f));
             roundTrip(JukeboxSong.DIRECT_CODEC, base, f, j, "jukebox_song");
             SONG_IDS.add(id(root, f, "jukebox_song"));
         }
@@ -243,14 +266,17 @@ public class Scan {
         Map<ResourceKey<LootItemCondition>, LootItemCondition> preds = new LinkedHashMap<>();
         Map<ResourceKey<LootItemFunction>, LootItemFunction> mods = new LinkedHashMap<>();
         List<Path> predFiles = files(root, "predicate"), modFiles = files(root, "item_modifier");
+        // A predicate may name another pack predicate, so inline those before parsing
+        Map<String, JsonElement> predJson = new HashMap<>();
+        for (Path f : predFiles) predJson.put(id(root, f, "predicate"), JsonParser.parseString(read(f)));
         for (Path f : predFiles) {
-            JsonElement j = JsonParser.parseString(Files.readString(f));
+            JsonElement j = inline(JsonParser.parseString(read(f)), predJson, null);
             roundTrip(LootItemCondition.DIRECT_CODEC, base, f, j, "predicate");
             LootItemCondition c = LootItemCondition.DIRECT_CODEC.parse(base, j).result().orElse(null);
             if (c != null) preds.put(ResourceKey.create(Registries.PREDICATE, Identifier.parse(id(root, f, "predicate"))), c);
         }
         for (Path f : modFiles) {
-            JsonElement j = strip(JsonParser.parseString(Files.readString(f)));
+            JsonElement j = strip(JsonParser.parseString(read(f)));
             // The registry loads a modifier file with TYPED_CODEC, which takes one object and rejects a bare list
             roundTrip(LootItemFunctions.TYPED_CODEC, base, f, j, "item_modifier");
             LootItemFunction c = LootItemFunctions.TYPED_CODEC.parse(base, j).result().orElse(null);
@@ -260,16 +286,14 @@ public class Scan {
         RegistryOps<JsonElement> ops = rsb.build(lookup).createSerializationContext(JsonOps.INSTANCE);
 
         // Pass 2: everything that may reference them.
-        Map<String, JsonElement> predJson = new HashMap<>();
-        for (Path f : predFiles) predJson.put(id(root, f, "predicate"), JsonParser.parseString(Files.readString(f)));
         for (Path f : files(root, "loot_table")) TABLE_IDS.add(id(root, f, "loot_table"));
         for (Path f : files(root, "loot_table")) {
             currentFile = f.getFileName().toString();
-            safe(LootTable.DIRECT_CODEC, ops, f, inline(strip(JsonParser.parseString(Files.readString(f))), predJson, null), "loot_table");
+            safe(LootTable.DIRECT_CODEC, ops, f, inline(strip(JsonParser.parseString(read(f))), predJson, null), "loot_table");
         }
         for (String r : BAD_REFS) { bad++; out("MISSING loot table reference " + r); }
         for (Path f : files(root, "advancement")) {
-            JsonObject adv = JsonParser.parseString(Files.readString(f)).getAsJsonObject();
+            JsonObject adv = JsonParser.parseString(read(f)).getAsJsonObject();
             // Reward loot tables resolve through the registry, which does not contain the pack's tables; check existence instead.
             if (adv.has("rewards") && adv.getAsJsonObject("rewards").has("loot")) {
                 for (JsonElement r : adv.getAsJsonObject("rewards").getAsJsonArray("loot")) {

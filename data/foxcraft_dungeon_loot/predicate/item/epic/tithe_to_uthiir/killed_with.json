@@ -1,12 +1,9 @@
 {
   "type": "minecraft:entity_properties",
-  "entity": "this",
+  "entity": "attacker",
   "predicate": {
     "minecraft:equipment": {
       "mainhand": {
-        "count": {
-          "min": 1
-        },
         "predicates": {
           "minecraft:custom_data": "{DungeonLootId:81}"
         }

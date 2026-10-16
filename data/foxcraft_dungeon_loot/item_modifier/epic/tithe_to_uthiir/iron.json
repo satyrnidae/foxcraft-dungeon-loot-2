@@ -1,0 +1,72 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:uncommon/tithe_to_uthiir"
+      }
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Tithe to Uthiir",
+        "color": "yellow",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        [
+          "Rarity: ",
+          {
+            "text": "Uncommon",
+            "color": "yellow",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Balm of the Spider God II: ",
+            "color": "aqua",
+            "italic": false
+          },
+          {
+            "text": "Eating a spider",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "eye will remove any active poison effects as",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "long as you weild the enchanted weapon, and",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "applies a 10-second Strength II effect in",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "return.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "foxcraft_dungeon_loot:balm_of_the_spider_god": 2
+      }
+    }
+  ]
+}

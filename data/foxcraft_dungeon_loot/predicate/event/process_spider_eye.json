@@ -8,7 +8,11 @@
         "minecraft:equipment": {
           "mainhand": {
             "predicates": {
-              "minecraft:custom_data": "{ProcessSpiderEye:1b}"
+              "minecraft:enchantments": [
+                {
+                  "enchantments": "foxcraft_dungeon_loot:balm_of_the_spider_god"
+                }
+              ]
             }
           }
         }
@@ -21,7 +25,11 @@
         "minecraft:equipment": {
           "offhand": {
             "predicates": {
-              "minecraft:custom_data": "{ProcessSpiderEye:1b}"
+              "minecraft:enchantments": [
+                {
+                  "enchantments": "foxcraft_dungeon_loot:balm_of_the_spider_god"
+                }
+              ]
             }
           }
         }

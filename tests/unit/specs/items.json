@@ -1147,6 +1147,9 @@
   },
   "item/epic/tithe_to_uthiir": {
     "base_items": [
+      "minecraft:copper_sword",
+      "minecraft:diamond_sword",
+      "minecraft:iron_sword",
       "minecraft:netherite_sword"
     ],
     "dungeon_item": true,
@@ -1159,20 +1162,22 @@
     ],
     "hooks": [
       "give_tithe_to_uthiir",
-      "on_hit",
-      "on_hit_arthropod",
-      "on_killed_arthropod",
-      "on_spider_eye_eaten"
+      "give_tithe_to_uthiir_copper",
+      "give_tithe_to_uthiir_diamond",
+      "give_tithe_to_uthiir_iron"
     ],
     "item_models": [
-      "foxcraft_dungeon_loot:epic/tithe_to_uthiir"
+      "foxcraft_dungeon_loot:common/tithe_to_uthiir",
+      "foxcraft_dungeon_loot:epic/tithe_to_uthiir",
+      "foxcraft_dungeon_loot:rare/tithe_to_uthiir",
+      "foxcraft_dungeon_loot:uncommon/tithe_to_uthiir"
     ],
     "loot_ids": [
       81
     ],
     "named": true,
     "predicates": [
-      "in_main_hand"
+      "killed_with"
     ],
     "rarity": null,
     "src": "tithe_to_uthiir"

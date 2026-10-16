@@ -2,7 +2,12 @@ import ../config.js
 import give.js
 
 # Dev builds only. Every give_* function in the item sources gets a trigger objective of the same name, enabled for
-# every player. The trigger value is the amount, /trigger give_x set 5 runs the give function five times, capped at 256. A release build adds no objectives and runs no clock, the give_* functions stay for /function.
+# every player. What the value means depends on the item:
+#   Plain items: the amount, /trigger give_x set 5 runs the give function five times, capped at 256.
+#   Tiered items: the tier from the lowest, 1, to the highest, so /trigger give_longsword set 3 gives the netherite
+#   one. Items with tiers do not stack, which is why they take no amount. A value above the top tier gives the top one.
+#   Pack enchantments: the level of the enchanted book, /trigger give_balm_of_the_spider_god_book set 3 gives the level III book. A value above the enchantment's max_level gives the max level book.
+# A release build adds no objectives and runs no clock, the give_* functions stay for /function.
 
 function on_load {
     IF (config.dev) {
@@ -15,12 +20,14 @@ function on_load {
 
 function on_uninstall {
     # Also cleans up after a dev build
+    data remove storage foxcraft_dungeon_loot:give Id
+    data remove storage foxcraft_dungeon_loot:give Level
     REPEAT(0, gives.length - 1) as i {
         scoreboard objectives remove <%gives[i].name%>
     }
 }
 
-# Runs the give function once per point of trigger value for every player that fired one, then re-enables the triggers.
+# Runs the give functions for every trigger a player has fired, then re-enables the triggers.
 function clock_10t {
     IF (config.dev) {
         schedule function foxcraft_dungeon_loot:give/clock_10t 10t
@@ -31,20 +38,54 @@ function clock_10t {
 
 function process {
     IF (config.dev) {
-        REPEAT(0, gives.length - 1) as i {
-            scoreboard players set @a[scores={<%gives[i].name%>=257..}] <%gives[i].name%> 256
-            execute as @a[scores={<%gives[i].name%>=1..}] run function foxcraft_dungeon_loot:give/loop_<%gives[i].name%>
-            scoreboard players reset @a <%gives[i].name%>
-            scoreboard players enable @a <%gives[i].name%>
+        REPEAT(0, plain.length - 1) as i {
+            scoreboard players set @a[scores={<%plain[i].name%>=257..}] <%plain[i].name%> 256
+            execute as @a[scores={<%plain[i].name%>=1..}] run function foxcraft_dungeon_loot:give/loop_<%plain[i].name%>
+            scoreboard players reset @a <%plain[i].name%>
+            scoreboard players enable @a <%plain[i].name%>
+        }
+        REPEAT(0, tiered.length - 1) as i {
+            # Value n picks tier n, the highest also takes anything above it
+            REPEAT(0, tiered[i].tiers.length - 1) as j {
+                IF (j < tiered[i].tiers.length - 1) {
+                    execute as @a[scores={<%tiered[i].name%>=<%j+1%>}] run function <%tiered[i].tiers[j].id%>
+                }
+                IF (j == tiered[i].tiers.length - 1) {
+                    execute as @a[scores={<%tiered[i].name%>=<%j+1%>..}] run function <%tiered[i].tiers[j].id%>
+                }
+            }
+            scoreboard players reset @a <%tiered[i].name%>
+            scoreboard players enable @a <%tiered[i].name%>
+        }
+        REPEAT(0, enchants.length - 1) as i {
+            scoreboard players set @a[scores={<%enchants[i].name%>=<%enchants[i].maxLevel+1%>..}] <%enchants[i].name%> <%enchants[i].maxLevel%>
+            execute as @a[scores={<%enchants[i].name%>=1..}] run function foxcraft_dungeon_loot:give/book_<%enchants[i].name%>
+            scoreboard players reset @a <%enchants[i].name%>
+            scoreboard players enable @a <%enchants[i].name%>
         }
     }
 }
 
-# One counting loop per give function, each pass spends one point of the trigger score.
-REPEAT(0, gives.length - 1) as i {
-    function loop_<%gives[i].name%> {
-        function <%gives[i].id%>
-        scoreboard players remove @s <%gives[i].name%> 1
-        execute if score @s <%gives[i].name%> matches 1.. run function foxcraft_dungeon_loot:give/loop_<%gives[i].name%>
+# One counting loop per plain give function, each pass spends one point of the trigger score.
+REPEAT(0, plain.length - 1) as i {
+    function loop_<%plain[i].name%> {
+        function <%plain[i].id%>
+        scoreboard players remove @s <%plain[i].name%> 1
+        execute if score @s <%plain[i].name%> matches 1.. run function foxcraft_dungeon_loot:give/loop_<%plain[i].name%>
     }
+}
+
+
+# One enchanted book per pack enchantment. The value of the trigger is the level.
+REPEAT(0, enchants.length - 1) as i {
+    function book_<%enchants[i].name%> {
+        execute store result storage foxcraft_dungeon_loot:give Level int 1 run scoreboard players get @s <%enchants[i].name%>
+        data modify storage foxcraft_dungeon_loot:give Id set value "<%enchants[i].enchantment%>"
+        function foxcraft_dungeon_loot:give/book with storage foxcraft_dungeon_loot:give
+    }
+}
+
+# Macro, gives the enchanted book from the Id and Level in storage.
+function book {
+    $give @s minecraft:enchanted_book[minecraft:stored_enchantments={"$(Id)":$(Level)}]
 }
