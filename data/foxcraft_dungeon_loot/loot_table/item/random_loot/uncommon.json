@@ -157,6 +157,12 @@
           "quality": 1,
           "type": "minecraft:loot_table",
           "value": "foxcraft_dungeon_loot:item/random_loot/player_head/hyosoryu_head"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 1,
+          "quality": 0,
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/random_uncommon_book"
         }
       ]
     }

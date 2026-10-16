@@ -95,7 +95,7 @@ There is no CI. The tests are static, so you cannot test gameplay. State plainly
 - Commit messages: match `git log`, a gitmoji then an imperative summary, for example `👽️ Modernize copper goat horns`. Reference the issue as `Refs #<n>` in the body.
 - Preserve each file's line endings. Most `.mcb` are LF, most JSON is CRLF. Do not reformat unrelated lines.
 - JSON: two-space indent, no trailing commas.
-- Item lore text: break lines at about 44 characters, one lore entry per line, so tooltips keep a consistent width.
+- Item lore text: break lines at 226 pixels, the width of 44 average characters in the default font, one lore entry per line, so tooltips keep a consistent width. `scripts/lore.js` measures it.
 
 ## Working rules
 

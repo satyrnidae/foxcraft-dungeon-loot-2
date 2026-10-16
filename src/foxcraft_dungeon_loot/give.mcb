@@ -76,6 +76,15 @@ REPEAT(0, plain.length - 1) as i {
 }
 
 
+# One give function per written book, the loot table is made from src/books.
+REPEAT(0, plain.length - 1) as i {
+    IF (plain[i].book) {
+        function give_<%plain[i].book%> {
+            loot give @s loot foxcraft_dungeon_loot:item/random_loot/book/generated/<%plain[i].book%>
+        }
+    }
+}
+
 # One enchanted book per pack enchantment. The value of the trigger is the level.
 REPEAT(0, enchants.length - 1) as i {
     function book_<%enchants[i].name%> {
