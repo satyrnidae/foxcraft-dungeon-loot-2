@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:written_book"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:random_loot/book/the_interview"
+}
