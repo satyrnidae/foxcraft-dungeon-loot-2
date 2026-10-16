@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash equivalent of build.ps1: rebuild the functions with mc-build, zip the datapack into
+# Bash equivalent of build.ps1: rebuild the functions with mc-build, run the tests, zip the datapack into
 # .build/<baseArchiveName>-<version>[+dev].zip with a .sha1 beside it, then build the resource pack.
 # Needs Node (npx) and 7-Zip as 7z, 7zz or 7za.
 set -euo pipefail
@@ -21,6 +21,13 @@ mkdir -p "$BUILD_DIR"
 rm -rf "$ROOT/data/foxcraft_dungeon_loot/function"
 rm -f "$ROOT/data/minecraft/tags/function/load.json" "$ROOT/data/minecraft/tags/function/tick.json"
 npx mcb build
+
+# Tests run on the output just built, a failure stops the build. Set SKIP_TESTS=1 when they already ran, such as in CI.
+# A non-dev build also runs the release checks.
+if [[ -z "${SKIP_TESTS:-}" ]]; then
+    release="$(node -p "require('./config.json').mc.dev ? '' : '--release'")"
+    node tests/run_all.mjs --no-build $release
+fi
 
 if [[ -f config.json ]]; then
     # name, version and dev flag from config.json, one per line
