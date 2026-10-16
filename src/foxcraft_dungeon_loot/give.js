@@ -68,6 +68,16 @@ for (const full of files) {
     }
 }
 
+// Written books, one plain give function per en_us source in src/books, given by the function in give.mcb
+const bookRoot = path.join(__dirname, '..', 'books', 'en_us');
+if (fs.existsSync(bookRoot)) {
+    for (const name of fs.readdirSync(bookRoot).sort()) {
+        const m = /^(.+).md$/.exec(name);
+        // A markdown file without frontmatter is not a book
+        if (m && !m[1].endsWith('_filtered') && fs.readFileSync(path.join(bookRoot, name), 'utf8').trimStart().startsWith('---')) plain.push({ name: 'give_' + m[1], id: 'foxcraft_dungeon_loot:give/give_' + m[1], book: m[1] });
+    }
+}
+
 // Pack enchantments, give_<name>_book for data/foxcraft_dungeon_loot/enchantment/<folders>/<name>.json
 const enchantRoot = path.join(__dirname, '..', '..', 'data', 'foxcraft_dungeon_loot', 'enchantment');
 const enchants = [];
