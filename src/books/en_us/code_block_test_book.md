@@ -5,6 +5,7 @@ rarity: epic
 lore:
   Dev only, not in any loot table.
   Syntax colors of code blocks.
+debug: true
 ---
 
 # Code Blocks

@@ -11,6 +11,7 @@ styles: {
     underline: true
   }
 }
+debug: true
 ---
 
 # Font:

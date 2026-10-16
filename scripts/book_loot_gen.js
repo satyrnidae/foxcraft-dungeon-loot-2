@@ -12,10 +12,25 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const NS = 'foxcraft_dungeon_loot';
 const BOOK_DIR = path.join(ROOT, 'src', 'books');
-const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book');
-const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book');
+// Generated files get a folder of their own, so a hand-written book modifier or table beside them is never cleaned up
+const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book', 'generated');
+const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book', 'generated');
 const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', NS, 'lang');
 const REFERENCE_LANG = 'en_us';
+// Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
+const ALL_TABLE = 'random_book';
+// Frontmatter keys, anything else is warned about. Title and author are required.
+const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'styles', 'debug'];
+const REQUIRED_KEYS = ['title', 'author'];
+
+// Project dev flag, config.json mc.dev. Books with debug: true are only generated when it is set.
+function devMode() {
+    try {
+        return JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).mc.dev === true;
+    } catch (e) {
+        return false;
+    }
+}
 
 const MAX_TITLE = 32;
 const MAX_PAGES = 100;
@@ -23,13 +38,14 @@ const MAX_PAGES = 100;
 const PAGE_LINES = 14;
 const PAGE_WIDTH = 114;
 const PAGE_EDIT_LENGTH = 1024;
-// Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run.
-const { loadFonts, withNamespace, DEFAULT_FONT } = require('./fonts.js');
-const FONTS = loadFonts();
+// Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
+const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
 const { highlight } = require('./highlight.js');
-const { LORE_WIDTH, LORE_PIXELS, loreWidth, wrapAdvice, shortLines } = require('./lore.js');
+const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, wrapAdvice, shortLines } = require('./lore.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
+// Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
+const RESERVED = new Set([ALL_TABLE, ...Object.keys(RARITY_COLORS).map((r) => `random_${r}_book`)]);
 const COLORS = ['black', 'dark_blue', 'dark_green', 'dark_aqua', 'dark_red', 'dark_purple', 'gold', 'gray', 'dark_gray', 'blue', 'green', 'aqua', 'red', 'light_purple', 'yellow', 'white'];
 
 //region SNBT
@@ -796,10 +812,34 @@ function fenceCode(lines) {
     return out;
 }
 
+// Splits on <br> outside of fenced and inline code, so code that shows a <br> stays in one piece
+function splitOnBreaks(body) {
+    const sections = [[]];
+    let fenced = false;
+    for (const line of body.split('\n')) {
+        const fence = /^\s*```/.test(line);
+        if (fence) fenced = !fenced;
+        if (fence || fenced) {
+            sections[sections.length - 1].push(line);
+            continue;
+        }
+        // Inline code spans are masked while looking for breaks
+        const masked = line.replace(/(`+)[^`]*?\1/g, (m) => '\0'.repeat(m.length));
+        const breaks = /<br\s*\/?>/gi;
+        let last = 0;
+        let found;
+        while ((found = breaks.exec(masked))) {
+            sections[sections.length - 1].push(line.slice(last, found.index));
+            sections.push([]);
+            last = found.index + found[0].length;
+        }
+        sections[sections.length - 1].push(line.slice(last));
+    }
+    return sections.map((lines) => lines.join('\n'));
+}
+
 function splitSections(body) {
-    return body
-        .replace(/\r\n/g, '\n')
-        .split(/<br\s*\/?>/i)
+    return splitOnBreaks(body.replace(/\r\n/g, '\n'))
         .map((section) =>
             fenceCode(section.split('\n'))
                 .map((line) => line.replace(/\s+$/, ''))
@@ -927,7 +967,7 @@ function buildBook(id, file) {
     for (const { index, word } of shortLines(loreRows)) warnings.push(`${file}: lore line "${loreRows[index].text}" has no ending punctuation and "${word}" from the next line fits`);
     for (const line of meta.lore) if (loreWidth(line) > LORE_PIXELS) warnings.push(`${file}: lore line is ${loreWidth(line)} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: "${line}", ${wrapAdvice(line)}`);
 
-    const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author || 'Unknown', pages: components, resolved: true };
+    const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author, pages: components, resolved: true };
     const set = { 'minecraft:written_book_content': content };
     const rarity = rarityOf(meta);
     if (rarity) set['minecraft:custom_name'] = itemName(title, rarity);
@@ -959,14 +999,24 @@ function emit(file, text, check) {
 
 const json = (value) => JSON.stringify(value, null, 2) + '\n';
 
-function tableFor(id) {
-    return { pools: [{ rolls: 1, entries: [{ type: 'minecraft:item', name: 'minecraft:written_book' }] }], modifier: `${NS}:random_loot/book/${id}` };
+// One book of the generated ones, equal odds
+// An empty list is a table without pools, which drops nothing. A table entry that points at one still counts as picked, so
+// the tables of all books list the books themselves and not the rarity tables.
+function allTable(ids) {
+    if (!ids.length) return { pools: [] };
+    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${id}` })) }] };
 }
 
-// { locale: { id: { file } } } from src/books/<locale>/<id>.md
-function findSources(dir, warnings = []) {
+function tableFor(id) {
+    return { pools: [{ rolls: 1, entries: [{ type: 'minecraft:item', name: 'minecraft:written_book' }] }], modifier: `${NS}:random_loot/book/generated/${id}` };
+}
+
+// { locale: { id: { file } } } from src/books/<locale>/<id>.md. A book needs a title and an author and anything else in
+// the frontmatter is warned about. A debug book is left out unless dev is set, in every locale.
+function findSources(dir, warnings = [], dev = devMode()) {
     const found = {};
     if (!fs.existsSync(dir)) return found;
+    const hidden = new Set();
     for (const localeDir of fs.readdirSync(dir, { withFileTypes: true })) {
         if (!localeDir.isDirectory()) continue;
         const books = (found[localeDir.name] = {});
@@ -974,12 +1024,29 @@ function findSources(dir, warnings = []) {
             const m = /^(.+?)\.md$/.exec(name);
             if (!m) continue;
             const file = path.join(dir, localeDir.name, name);
+            const text = fs.readFileSync(file, 'utf8');
             // A markdown file without frontmatter, such as a README, is not a book
-            if (!fs.readFileSync(file, 'utf8').trimStart().startsWith('---')) continue;
-            if (m[1].endsWith('_filtered')) warnings.push(`${file}: ignored, filtering is inline now with <filter as="...">text</filter>`);
-            else books[m[1]] = { file };
+            if (!text.trimStart().startsWith('---')) continue;
+            if (RESERVED.has(m[1])) throw new Error(`${file}: ${m[1]} is the loot table of a group of generated books, pick another book id`);
+            if (!/^[a-z0-9_.-]+$/.test(m[1])) throw new Error(`${file}: the file name is the book id and a resource path, lowercase letters, digits and _ . - only`);
+            if (m[1].endsWith('_filtered')) {
+                warnings.push(`${file}: ignored, filtering is inline now with <filter as="...">text</filter>`);
+                continue;
+            }
+            let meta;
+            try {
+                meta = parseFrontmatter(text).meta;
+            } catch (e) {
+                throw new Error(`${file}: ${e.message}`);
+            }
+            for (const key of REQUIRED_KEYS) if (!String(meta[key] || '').trim()) throw new Error(`${file}: frontmatter ${key} is required`);
+            for (const key of Object.keys(meta)) if (!FRONTMATTER_KEYS.includes(key)) warnings.push(`${file}: unsupported frontmatter key "${key}", one of ${FRONTMATTER_KEYS.join(', ')}`);
+            if (String(meta.debug).toLowerCase() === 'true' && !dev) hidden.add(m[1]);
+            else if (meta.debug !== undefined && !/^(true|false)$/i.test(String(meta.debug))) throw new Error(`${file}: frontmatter debug is true or false`);
+            books[m[1]] = { file, rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
         }
     }
+    for (const books of Object.values(found)) for (const id of hidden) delete books[id];
     return found;
 }
 
@@ -988,19 +1055,24 @@ function findSources(dir, warnings = []) {
  * Options: check, only (source files to limit the modifiers to), and the directories for tests.
  */
 function generate(options = {}) {
-    const { check = false, bookDir = BOOK_DIR, modifierDir = MODIFIER_DIR, tableDir = TABLE_DIR, langDir = LANG_DIR } = options;
+    const { check = false, bookDir = BOOK_DIR, modifierDir = MODIFIER_DIR, tableDir = TABLE_DIR, langDir = LANG_DIR, dev } = options;
     const only = options.only && options.only.map((f) => path.resolve(f));
     const changed = [];
     const warnings = [];
-    const sources = findSources(bookDir, warnings);
+    const sources = findSources(bookDir, warnings, dev);
     const references = sources[REFERENCE_LANG] || {};
     const langs = {};
+    const builds = new Map();
+    const buildOnce = (id, file) => {
+        if (!builds.has(file)) builds.set(file, buildBook(id, file));
+        return builds.get(file);
+    };
 
     for (const [locale, books] of Object.entries(sources)) {
         langs[locale] = {};
         for (const [id, book] of Object.entries(books)) {
             if (locale !== REFERENCE_LANG && !references[id]) throw new Error(`${book.file}: no ${REFERENCE_LANG} book called ${id}`);
-            const built = buildBook(id, book.file);
+            const built = buildOnce(id, book.file);
             warnings.push(...built.warnings);
             Object.assign(langs[locale], built.lang);
             if (locale === REFERENCE_LANG) {
@@ -1010,12 +1082,22 @@ function generate(options = {}) {
                 const table = path.join(tableDir, id + '.json');
                 if (emit(table, json(tableFor(id)), check)) changed.push(table);
             } else {
-                const reference = Object.keys(buildBook(id, references[id].file).lang);
+                const reference = Object.keys(buildOnce(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {
                     warnings.push(`${book.file}: formatting differs from the ${REFERENCE_LANG} book, translated text lines up only where the spans do`);
                 }
             }
         }
+    }
+
+    // The table of all books lists them whatever the source filter is
+    // Debug books have their own table and give function, but never drop at random
+    const random = Object.keys(references).filter((id) => !references[id].debug).sort();
+    const aggregates = { [ALL_TABLE]: random };
+    for (const rarity of Object.keys(RARITY_COLORS)) aggregates[`random_${rarity}_book`] = random.filter((id) => references[id].rarity === rarity);
+    for (const [name, ids] of Object.entries(aggregates)) {
+        const file = path.join(tableDir, name + '.json');
+        if (emit(file, json(allTable(ids)), check)) changed.push(file);
     }
 
     // Modifiers and tables are all made here, so one without a source is left over from a book that was removed or renamed
@@ -1024,7 +1106,7 @@ function generate(options = {}) {
         for (const dir of [modifierDir, tableDir]) {
             if (!fs.existsSync(dir)) continue;
             for (const name of fs.readdirSync(dir)) {
-                if (!name.endsWith('.json') || ids.has(name.slice(0, -5))) continue;
+                if (!name.endsWith('.json') || ids.has(name.slice(0, -5)) || (dir === tableDir && name.slice(0, -5) in aggregates)) continue;
                 const stale = path.join(dir, name);
                 if (!check) fs.unlinkSync(stale);
                 changed.push(stale);
@@ -1047,7 +1129,7 @@ function generate(options = {}) {
 
 //endregion
 
-module.exports = { generate, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth };
+module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth };
 
 if (require.main === module) {
     const args = process.argv.slice(2);

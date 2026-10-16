@@ -227,7 +227,7 @@ function packFonts(cached, assetsDir, ascents = {}) {
         };
         walk(dir, '');
     }
-    const readFont = (id) => (found[id] ? JSON.parse(fs.readFileSync(found[id], 'utf8')) : cached[id] ? { providers: [{ type: 'space', advances: unpackedAsSpace(cached[id]) }] } : null);
+    const readFont = (id) => (found[id] ? JSON.parse(fs.readFileSync(found[id], 'utf8')) : cached[id] ? { providers: [{ type: 'space', advances: unpack(cached[id]) }] } : null);
     const readTexture = (id) => {
         const [ns, p] = id.split(':');
         return fs.readFileSync(path.join(assetsDir, ns, 'textures', p));
@@ -239,9 +239,6 @@ function packFonts(cached, assetsDir, ascents = {}) {
     }
     return out;
 }
-
-// A cached vanilla font handed to measureFont as if it were a space provider
-const unpackedAsSpace = (grouped) => unpack(grouped);
 
 //endregion
 

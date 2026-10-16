@@ -44,6 +44,12 @@
           "weight": 200,
           "quality": 0,
           "value": "foxcraft_dungeon_loot:item/random_loot/single_tool"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 0,
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/random_common_book"
         }
       ]
     }

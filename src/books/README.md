@@ -5,7 +5,7 @@ Written book loot is made from the markdown files here. This file has no frontma
 ## Files
 
 - One book is `src/books/<locale>/<id>.md`, for example `src/books/en_us/enderman.md`. The id is the file name, lowercase with underscores.
-- `en_us` is the reference. It writes the item modifier `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/<id>.json` and the loot table `loot_table/item/random_loot/book/<id>.json`, both gitignored and made by every build. A file there without a markdown source is deleted, so removing or renaming a book cleans up after itself. Adding a book to a random loot pool is still done by hand.
+- `en_us` is the reference. It writes the item modifier `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated/<id>.json` and the loot table `loot_table/item/random_loot/book/generated/<id>.json`, both gitignored and made by every build. A file in those `generated` folders without a markdown source is deleted, so removing or renaming a book cleans up after itself. Hand-written book files beside them are never touched. Adding a book to a random loot pool is still done by hand, or point the pool at `item/random_loot/book/generated/random_book`,, or at `item/random_loot/book/generated/random_book`. `random_book` rolls one of all generated books and `random_<rarity>_book` one of a rarity, for common to cursed. A `debug: true` book is left out of all of them. A rarity without a book is an empty table that drops nothing. Loot tables have no tags, and those names are not usable as book ids.
 - Every locale writes its text to `texturepack/assets/foxcraft_dungeon_loot/lang/<locale>.json`, committed. A translation is the same markdown in another locale folder. Pages are cut by the text, so a translation that cuts differently gets a warning and the English page structure.
 - Dev builds get `/trigger give_<id>` for every en_us book. A release build adds none; `/function foxcraft_dungeon_loot:give/give_<id>` stays.
 
@@ -17,6 +17,7 @@ title: Book title, or an SNBT text component
 author: Name
 rarity: common|uncommon|rare|epic|mythic|cursed
 font: foxcraft_dungeon_loot:pixellated_elegance
+debug: true
 lore:
   first lore line, wrapped by hand
   second lore line
@@ -24,7 +25,8 @@ lore:
 ```
 
 - `title` is plain text, at most 32 characters. `<filter as="Darn Book">Damn Book</filter>` sets the title that players with chat filtering see. An SNBT title also sets the item name and cannot be filtered.
-- `author` defaults to Unknown.
+- `title` and `author` are required, a book without either stops the build. A key the generator does not know, such as a typo, warns.
+- `debug: true` keeps the book out of anything but a dev build, `config.json` `mc.dev`. It gets no loot table, give function or lang entries in a release. Test and demo books are marked with it.
 - `rarity` adds a `Rarity: ` lore line and colors the item name by it, not italic. An SNBT title keeps its own colors over that. The item name has no filtered side, so it uses the filtered title when there is one.
 - `font` is optional and sets the font of the whole text. A `<font face>` inside still wins. Title and lore keep the default font.
 - `styles` is optional and is a small stylesheet, a compound of SNBT over as many lines as it takes. Each key is a selector and each value a style, see Styles below.
@@ -36,7 +38,7 @@ lore:
 - `<br>` is a manual page break. A page never starts or ends with an empty line.
 - A line that starts at a newline keeps its indentation, a line that starts at a wrap loses its leading spaces, and every line loses its trailing spaces.
 - Widths come from the font of each glyph, bold is a pixel wider. A page past the editor limit of 1024 characters, a book over 100 pages and a font that is not defined anywhere all warn.
-- Spans do not reach across a `<br>`. Close them first.
+- Spans do not reach across a `<br>`. Close them first. A `<br>` in a code block or an inline code span is text, not a break.
 
 ## Formatting
 
@@ -128,7 +130,7 @@ A word wider than a whole line cannot be moved down to fit, so the game breaks i
 - A word that fits a line is never hyphenated. When `By Valentina` is too wide but `Valentina` is not, it wraps to `By` and `Valentina`.
 - Code and `<span>` text are never hyphenated.
 
-The patterns are the dev dependencies `hypher` and `hyphenation.en-us`, installed with `npm i`.
+The patterns are the dependencies `hypher` and `hyphenation.en-us`, installed with `npm i`.
 
 ## Test books
 

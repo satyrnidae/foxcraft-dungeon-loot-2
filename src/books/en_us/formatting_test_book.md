@@ -18,6 +18,7 @@ styles: {
     italic: true
   }
 }
+debug: true
 ---
 
 # Formatting Test

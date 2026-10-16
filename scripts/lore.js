@@ -73,11 +73,12 @@ function shortLines(lines, limit = LORE_PIXELS) {
     for (let i = 0; i + 1 < lines.length; i++) {
         const text = lines[i].text.trim();
         const next = lines[i + 1].text.trim();
-        if (!text || !next || TERMINAL.test(text)) continue;
+        // The Rarity line is its own stanza, never a continuation
+        if (!text || !next || TERMINAL.test(text) || /^Rarity:/.test(next)) continue;
         const word = next.split(' ')[0];
         if (lines[i].width + loreWidth(' ' + word) <= limit) short.push({ index: i, word });
     }
     return short;
 }
 
-module.exports = { LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapLore, wrapAdvice, shortLines };
+module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapLore, wrapAdvice, shortLines };

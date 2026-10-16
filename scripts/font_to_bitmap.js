@@ -279,7 +279,7 @@ function main() {
     }
 
     const providers = [
-        { type: 'space', advances: { ' ': space, ' ': space } },
+        { type: 'space', advances: { ' ': space, '\u00a0': space } },
         { type: 'bitmap', file: `${args.namespace}:font/${name}.png`, ascent: shownAscent, height: shownHeight, chars },
     ];
     const pngFile = path.join(args.out, args.namespace, 'textures', 'font', name + '.png');

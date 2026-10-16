@@ -210,6 +210,9 @@ describe('book generator markdown', () => {
     assert.deepEqual(gen.splitSections('# Head\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.equal(gen.pagesOf('one<br>two').length, 2);
+    // A <br> in code is text, not a break
+    assert.equal(gen.splitSections('a `<br>` b<br>c').length, 2);
+    assert.equal(gen.splitSections('a\n```\n<br>\n```\nb<br>c').length, 2);
   });
 });
 
@@ -346,6 +349,58 @@ describe('book generator files', () => {
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
 
+  it('requires a title and an author, and warns about an unsupported key', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/ok.md', SOURCE.replace('rarity: epic', 'rarty: epic'));
+      const warnings = [];
+      gen.findSources(opts.bookDir, warnings, false);
+      assert.ok(warnings.some((w) => w.includes('unsupported frontmatter key "rarty"')));
+      write(dir, 'books/en_us/ok.md', SOURCE.replace('author: Me\n', ''));
+      assert.throws(() => gen.findSources(opts.bookDir, [], false), /author is required/);
+      write(dir, 'books/en_us/ok.md', SOURCE.replace('title: Test Book\n', ''));
+      assert.throws(() => gen.findSources(opts.bookDir, [], false), /title is required/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('leaves out a debug book unless dev is set', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/shown.md', SOURCE);
+      write(dir, 'books/en_us/hidden.md', SOURCE.replace('rarity: epic', 'debug: true'));
+      assert.deepEqual(Object.keys(gen.findSources(opts.bookDir, [], false).en_us), ['shown']);
+      assert.deepEqual(Object.keys(gen.findSources(opts.bookDir, [], true).en_us), ['hidden', 'shown']);
+      const entries = () => JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'random_book.json'), 'utf8')).pools[0].entries.map((e) => e.value);
+      gen.generate({ ...opts, dev: false });
+      assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
+      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown']);
+      gen.generate({ ...opts, dev: true });
+      assert.ok(fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
+      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown'], 'a debug book is not in the random table');
+      gen.generate({ ...opts, dev: false });
+      assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')), 'the table of a book that went debug is removed');
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('writes a table per rarity, empty when no book has it', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', SOURCE);
+      gen.generate(opts);
+      const read = (name) => JSON.parse(fs.readFileSync(path.join(opts.tableDir, name + '.json'), 'utf8'));
+      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), ['foxcraft_dungeon_loot:item/random_loot/book/generated/test']);
+      assert.deepEqual(read('random_rare_book'), { pools: [] });
+      write(dir, 'books/en_us/random_rare_book.md', SOURCE);
+      assert.throws(() => gen.generate(opts), /random_rare_book is the loot table/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('removes the modifier and table of a book that has no source any more', () => {
     const { dir, opts } = sandbox();
     try {
@@ -370,7 +425,7 @@ describe('book generator files', () => {
     try {
       write(dir, 'books/en_us/test.md', SOURCE);
       const first = gen.generate(opts);
-      assert.equal(first.changed.length, 3);
+      assert.equal(first.changed.length, 10);
       const mod = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8'));
       const content = mod.functions[0].components['minecraft:written_book_content'];
       assert.equal(content.pages.length, 2);
@@ -388,7 +443,7 @@ describe('book generator files', () => {
   it('filter spans give the filtered side of a page, other locales only write lang', () => {
     const { dir, opts } = sandbox();
     try {
-      const source = '---\ntitle: Test Book\n---\n\nSay <filter as="||heck||">hell</filter> now<br>Page two';
+      const source = '---\ntitle: Test Book\nauthor: Me\n---\n\nSay <filter as="||heck||">hell</filter> now<br>Page two';
       write(dir, 'books/en_us/test.md', source);
       write(dir, 'books/es_es/test.md', source.replace('Say', 'Di'));
       gen.generate(opts);
@@ -549,7 +604,7 @@ describe('book generator files', () => {
     const { dir, opts } = sandbox();
     try {
       const filler = Array.from({ length: 13 }, () => 'x').join('\n');
-      write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\n---\n\n${filler}\n<filter as="a b">one\ntwo</filter>`);
+      write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\n---\n\n${filler}\n<filter as="a b">one\ntwo</filter>`);
       const { warnings } = gen.generate(opts);
       assert.ok(warnings.some((w) => /cut by the page break/.test(w)), warnings.join('\n'));
     } finally {
@@ -560,7 +615,7 @@ describe('book generator files', () => {
   it('a font in the frontmatter sets the font of every page, a span inside keeps its own', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nfont: foxcraft_dungeon_loot:pixellated_elegance\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
       gen.generate(opts);
       const [page] = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
       assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance');
@@ -573,7 +628,7 @@ describe('book generator files', () => {
   it('a frontmatter font that is not a resource location stops the build', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nfont: foxcraft_dungeon_loot:pixellated_elegance,\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance,\n---\n\nText');
       assert.throws(() => gen.generate(opts), /test\.md: frontmatter font/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -619,7 +674,7 @@ describe('book generator files', () => {
     assert.deepEqual(over, []);
   });
 
-  it('the committed books match their sources', () => {
+  it('the generated books match their sources', () => {
     const result = gen.generate({ check: true });
     assert.deepEqual(result.changed, [], 'run node scripts/book_loot_gen.js, or mcb build, to regenerate');
   });
@@ -632,7 +687,7 @@ describe('book give triggers', () => {
     assert.ok(ids.length > 0);
     for (const id of ids) {
       const fn = pk.readText(pk.generatedFunction('give/give_' + id));
-      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/${id}`), id);
+      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${id}`), id);
       assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add give_${id} trigger`), id);
     }
   });

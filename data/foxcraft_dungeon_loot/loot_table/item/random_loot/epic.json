@@ -146,6 +146,12 @@
           "quality": 2,
           "type": "minecraft:loot_table",
           "value": "foxcraft_dungeon_loot:item/epic/tithe_to_uthiir"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 1,
+          "quality": 0,
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/random_epic_book"
         }
       ]
     }
