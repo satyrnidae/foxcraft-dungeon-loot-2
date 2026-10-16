@@ -789,6 +789,42 @@ function build {
         set_sell_item_id "minecraft:music_disc_ward"
         function foxcraft_dungeon_loot:trading/recipes/push
 
+# Section separators 171-177, disabled trades that only label the list: a named sign as the cost, a barrier as the result
+        # Trade Index 171: section separator, Coin Exchange
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Coin Exchange",color:"white",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"a41f-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 172: section separator, Decorative Skulls
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Decorative Skulls",color:"yellow",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"7be2-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 173: section separator, Records
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Records",color:"aqua",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"c09d-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 174: section separator, Copper Horns
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Copper Horns",color:"aqua",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"3d58-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 175: section separator, Grab Bags
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Grab Bags",color:"light_purple",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"e6a0-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 176: section separator, Mysterious Loot
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Mysterious Loot",color:"green",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"91cc-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
+        # Trade Index 177: section separator, Endgame Items
+        function foxcraft_dungeon_loot:trading/recipes/new
+        data modify storage foxcraft_dungeon_loot:trades Current set value {rewardExp:0b,maxUses:0,buy:{id:"minecraft:oak_sign",count:1,components:{"minecraft:item_name":{text:"Endgame Items",color:"green",italic:false},"minecraft:custom_data":{FdlTradeSeparator:1b,Nonce:"5f17-do-not-obtain"}}},sell:{id:"minecraft:barrier",count:1}}
+        function foxcraft_dungeon_loot:trading/recipes/push
+
         tellraw @a {"text":"Trade index built!","color":"gray"}
         schedule function foxcraft_dungeon_loot:trading/index/release_chunk 1t
     }

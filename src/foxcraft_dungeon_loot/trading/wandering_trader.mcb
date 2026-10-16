@@ -27,11 +27,18 @@ function on_load {
 function on_tick {
     execute if entity @s[tag=!satyrn.fdl.wanderingTrader.initialized] run {
         tag @s add satyrn.fdl.wanderingTrader.initialized
-        # Wandering trader "not spawned naturally" check
+        # Only traders with a DespawnDelay get custom trades, so spawners and eggs do not (#124). A /summon leaves it at 0,
+        # so a dev build accepts 0 as well, otherwise a test trader never gets its lists.
         execute store result score #test <%config.internalScoreboard%> run data get entity @s DespawnDelay
 
-        execute if score #test <%config.internalScoreboard%> matches 1.. run {
+        execute if score #test <%config.internalScoreboard%> matches <%config.dev?0:1%>.. run {
             data merge entity @s {NoAI:1b,NoGravity:1b,DeathLootTable:"foxcraft_dungeon_loot:entity/wandering_trader"}
+
+            # Since 26.3 an entity only saves Offers it already has, and the vanilla trades are only generated on the first
+            #  right-click. Writing Offers now would replace them, so the custom recipes wait in an inert body slot item and
+            #  are merged in by on_interact after vanilla has made its own.
+            tag @s add satyrn.fdl.trades.staged
+            data merge entity @s {drop_chances:{body:0f},equipment:{body:{id:"minecraft:snowball",count:1,components:{"minecraft:custom_data":{StagedTrades:[]}}}}}
 
             execute as @e[type=minecraft:trader_llama,limit=2,sort=nearest,tag=!satyrn.fdl.wanderingTrader.llama,distance=..10] run {
                 tag @s add satyrn.fdl.wanderingTrader.llama
@@ -101,11 +108,34 @@ function on_tick {
     #  Just set the randomizer to 1-index values, as it's one argument less than incrementing the scoreboard immediately
     #  afterwards.
 
+# Exchange Loot Trades
+    execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.exchange] run {
+        execute if score @s satyrn.fdl.tradesAdded.exchange >= @s satyrn.fdl.tradesToAdd.exchange run {
+            tag @s add satyrn.fdl.trades.hasTrades.exchange
+        } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.exchange] run {
+                tag @s add satyrn.fdl.trades.separator.exchange
+                scoreboard players set @s satyrn.fdl.selectedTrade 172
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
+            execute unless score @s satyrn.fdl.tradesAdded.exchange matches 0.. run scoreboard players set @s satyrn.fdl.selectedTrade 21
+            # Increments trades to add by one each time
+            scoreboard players add @s satyrn.fdl.selectedTrade 1
+            function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            scoreboard players add @s satyrn.fdl.tradesAdded.exchange 1
+        }
 # Head trades
-    execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.head] run {
+    } else execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.head] run {
         execute if score @s satyrn.fdl.tradesAdded.head >= @s satyrn.fdl.tradesToAdd.head run {
             tag @s add satyrn.fdl.trades.hasTrades.head
         } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.head] run {
+                tag @s add satyrn.fdl.trades.separator.head
+                scoreboard players set @s satyrn.fdl.selectedTrade 173
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
             tag @s remove satyrn.fdl.tradeAdded
 
             rng 6 21
@@ -119,6 +149,33 @@ function on_tick {
                 scoreboard players add @s satyrn.fdl.tradesAdded.head 1
             }
         }
+# Disc Trades
+    } else execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.discs] run {
+        execute if score @s satyrn.fdl.tradesToAdd.discs matches 0 run {
+            tag @s add satyrn.fdl.trades.hasTrades.discs
+        } else execute if score @s satyrn.fdl.tradesAdded.discs >= @s satyrn.fdl.tradesToAdd.discs run {
+            tag @s add satyrn.fdl.trades.hasTrades.discs
+        } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.discs] run {
+                tag @s add satyrn.fdl.trades.separator.discs
+                scoreboard players set @s satyrn.fdl.selectedTrade 174
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
+            tag @s remove satyrn.fdl.tradeAdded
+
+            # Remember: These are 1-indexed, not 0-indexed, due to the search function
+            rng 99 171
+            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
+
+            execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trading/wandering_trader/check_existing_trades
+
+            execute if entity @s[tag=satyrn.fdl.tradeAdded] run {
+                function foxcraft_dungeon_loot:trading/wandering_trader/append_current_trade_to_index
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+                scoreboard players add @s satyrn.fdl.tradesAdded.discs 1
+            }
+        }
 # Goat Horns
     } else execute unless entity @s[tag=satyrn.fdl.trades.hasTrades.goatHorns] run {
         execute if score @s satyrn.fdl.tradesToAdd.goatHorns matches 0 run {
@@ -126,6 +183,12 @@ function on_tick {
         } else execute if score @s satyrn.fdl.tradesAdded.goatHorns >= @s satyrn.fdl.tradesToAdd.goatHorns run {
             tag @s add satyrn.fdl.trades.hasTrades.goatHorns
         } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.goatHorns] run {
+                tag @s add satyrn.fdl.trades.separator.goatHorns
+                scoreboard players set @s satyrn.fdl.selectedTrade 175
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
             tag @s remove satyrn.fdl.tradeAdded
 
             rng 84 93
@@ -144,6 +207,12 @@ function on_tick {
         execute if score @s satyrn.fdl.tradesAdded.grabBag >= @s satyrn.fdl.tradesToAdd.grabBag run {
             tag @s add satyrn.fdl.trades.hasTrades.grabBag
         } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.grabBag] run {
+                tag @s add satyrn.fdl.trades.separator.grabBag
+                scoreboard players set @s satyrn.fdl.selectedTrade 176
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
             execute unless score @s satyrn.fdl.tradesAdded.grabBag matches 0.. run scoreboard players set @s satyrn.fdl.selectedTrade 0
             # Increments trades to add by one each time
             scoreboard players add @s satyrn.fdl.selectedTrade 1
@@ -159,6 +228,12 @@ function on_tick {
         } else execute if score @s satyrn.fdl.tradesAdded.dungeonLoot >= @s satyrn.fdl.tradesToAdd.dungeonLoot run {
             tag @s add satyrn.fdl.trades.hasTrades.dungeonLoot
         } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.dungeonLoot] run {
+                tag @s add satyrn.fdl.trades.separator.dungeonLoot
+                scoreboard players set @s satyrn.fdl.selectedTrade 177
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
             tag @s remove satyrn.fdl.tradeAdded
 
             execute unless score @s satyrn.fdl.tradesAdded.dungeonLoot matches 1.. run {
@@ -183,6 +258,12 @@ function on_tick {
         } else execute if score @s satyrn.fdl.tradesAdded.endgame >= @s satyrn.fdl.tradesToAdd.endgame run {
             tag @s add satyrn.fdl.trades.hasTrades.endgame
         } else run {
+            # Section separator, once, when this section has trades to add
+            execute unless entity @s[tag=satyrn.fdl.trades.separator.endgame] run {
+                tag @s add satyrn.fdl.trades.separator.endgame
+                scoreboard players set @s satyrn.fdl.selectedTrade 178
+                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
+            }
             tag @s remove satyrn.fdl.tradeAdded
 
             # Remember: These are 1-indexed, not 0-indexed, due to the search function
@@ -197,38 +278,6 @@ function on_tick {
                 scoreboard players add @s satyrn.fdl.tradesAdded.endgame 1
         }
     }
-# Exchange Loot Trades
-    } else execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.exchange] run {
-        execute if score @s satyrn.fdl.tradesAdded.exchange >= @s satyrn.fdl.tradesToAdd.exchange run {
-            tag @s add satyrn.fdl.trades.hasTrades.exchange
-        } else run {
-            execute unless score @s satyrn.fdl.tradesAdded.exchange matches 0.. run scoreboard players set @s satyrn.fdl.selectedTrade 21
-            # Increments trades to add by one each time
-            scoreboard players add @s satyrn.fdl.selectedTrade 1
-            function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
-            scoreboard players add @s satyrn.fdl.tradesAdded.exchange 1
-        }
-# Disc Trades
-    } else execute if entity @s[tag=!satyrn.fdl.trades.hasTrades.discs] run {
-        execute if score @s satyrn.fdl.tradesToAdd.discs matches 0 run {
-            tag @s add satyrn.fdl.trades.hasTrades.discs
-        } else execute if score @s satyrn.fdl.tradesAdded.discs >= @s satyrn.fdl.tradesToAdd.discs run {
-            tag @s add satyrn.fdl.trades.hasTrades.discs
-        } else run {
-            tag @s remove satyrn.fdl.tradeAdded
-
-            # Remember: These are 1-indexed, not 0-indexed, due to the search function
-            rng 99 171
-            scoreboard players operation @s satyrn.fdl.selectedTrade = #math.result <%config.internalScoreboard%>
-
-            execute as @e[type=minecraft:armor_stand,tag=satyrn.fdl.wanderingTrader.tradeIndex,sort=nearest,limit=1] run function foxcraft_dungeon_loot:trading/wandering_trader/check_existing_trades
-
-            execute if entity @s[tag=satyrn.fdl.tradeAdded] run {
-                function foxcraft_dungeon_loot:trading/wandering_trader/append_current_trade_to_index
-                function foxcraft_dungeon_loot:trading/wandering_trader/add_trade
-                scoreboard players add @s satyrn.fdl.tradesAdded.discs 1
-            }
-        }
 # Finalize entity
     # Finalize the entity, cleaning up the tracker armor stand, etc. Since we don't enter this
     #   function after this tag is sent, should only be called once.
@@ -312,7 +361,7 @@ function recursive_check {
 
 function add_trade {
     # i value should loop through entire size of the trade index
-    REPEAT(0, 170) as i {
+    REPEAT(0, 177) as i {
         # i values are zero indexed but selectedTrade is 1-indexed. Add 1 to i in the check.
         execute if score @s satyrn.fdl.selectedTrade matches <%i+1%> run {
             get_offer_from_index <%i%>
@@ -402,6 +451,52 @@ function add_trade {
         }
     }
 
-    # Append the constructed recipe.
-    data modify entity @s Offers.Recipes append from storage foxcraft_dungeon_loot:trades Current
+    # Stage the constructed recipe, on_interact moves it into Offers.
+    data modify entity @s equipment.body.components."minecraft:custom_data".StagedTrades append from storage foxcraft_dungeon_loot:trades Current
+}
+
+# Rewarded by advancement trading/on_interact after a player right-clicks a finished trader that still has staged recipes.
+# Vanilla has generated its own offers by then, so the custom ones are added after them. The open trading screen holds the
+# old list and a screen cannot be refreshed, so it is closed by moving the trader out of interaction range for a tick.
+function on_interact {
+    advancement revoke @s only foxcraft_dungeon_loot:trading/on_interact
+
+    # Greeted by return_trader once the trader is back down
+    tag @s add satyrn.fdl.trades.greet
+
+    execute as @e[type=minecraft:wandering_trader,tag=satyrn.fdl.trades.staged,tag=satyrn.fdl.trades.hasTrades,distance=..8,sort=nearest,limit=1] at @s run function foxcraft_dungeon_loot:trading/wandering_trader/merge_staged
+}
+
+function merge_staged {
+    data modify entity @s Offers.Recipes append from entity @s equipment.body.components."minecraft:custom_data".StagedTrades[]
+    data remove entity @s equipment.body
+    tag @s remove satyrn.fdl.trades.staged
+
+    tag @s add satyrn.fdl.trades.returning
+    data merge entity @s {NoGravity:1b}
+    tp @s ~ ~12 ~
+
+    # Leashed llamas go along by the same offset, otherwise the leads stretch past their limit and break.
+    execute as @e[type=minecraft:trader_llama,distance=..16] at @s run {
+        tag @s add satyrn.fdl.trades.returning
+        data merge entity @s {NoGravity:1b}
+        tp @s ~ ~12 ~
+    }
+    schedule function foxcraft_dungeon_loot:trading/wandering_trader/return_trader 1t
+}
+
+function return_trader {
+    execute as @e[tag=satyrn.fdl.trades.returning] at @s run {
+        tp @s ~ ~-12 ~
+        data merge entity @s {NoGravity:0b}
+        tag @s remove satyrn.fdl.trades.returning
+
+        # Same format as the welcome message, the trader is the selector. Llamas have nothing to say.
+        execute if entity @s[type=minecraft:wandering_trader] run {
+            tellraw @p[tag=satyrn.fdl.trades.greet] ["[",{"selector":"@s"},"] Ah, ",{"selector":"@p[tag=satyrn.fdl.trades.greet]"},", welcome! I have some interesting things for you... if you've got the coin, that is!"]
+            execute as @p[tag=satyrn.fdl.trades.greet] at @s run playsound minecraft:entity.wandering_trader.yes neutral @s ~ ~ ~
+        }
+    }
+
+    tag @a remove satyrn.fdl.trades.greet
 }

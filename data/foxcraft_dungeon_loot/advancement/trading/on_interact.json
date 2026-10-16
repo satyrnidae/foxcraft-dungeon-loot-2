@@ -1,0 +1,21 @@
+{
+  "parent": "foxcraft_dungeon_loot:root",
+  "criteria": {
+    "interacted": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader",
+            "minecraft:nbt": "{Tags:[satyrn.fdl.trades.staged]}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:trading/wandering_trader/on_interact"
+  }
+}
