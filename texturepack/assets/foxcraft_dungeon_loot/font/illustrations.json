@@ -1,0 +1,20 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        " ": 114,
+        "\u00a0": 114
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/illustrations.png",
+      "ascent": 124,
+      "height": 126,
+      "chars": [
+        "0"
+      ]
+    }
+  ]
+}
