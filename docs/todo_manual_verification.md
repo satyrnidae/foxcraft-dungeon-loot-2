@@ -8,16 +8,16 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 ## Phase 3 - items as components
 
-- [ ] `/loot give @s loot foxcraft_dungeon_loot:item/<rarity>/<item>` for a sample of each rarity: name, lore, enchantments, attributes, hidden tooltip parts look right.
-- [ ] Items with a tier (chainsaw, auto pickaxe, etc.): the `satyrn.fdl.loot.variant` score picks the right tier and base item.
-- [ ] Potions (`loot/potions`): effects, color and name correct.
+- [x] `/loot give @s loot foxcraft_dungeon_loot:item/<rarity>/<item>` for a sample of each rarity: name, lore, enchantments, attributes, hidden tooltip parts look right.
+- [x] Items with a tier (chainsaw, auto pickaxe, etc.): the `satyrn.fdl.loot.variant` score picks the right tier and base item.
+- [x] Potions (`loot/potions`): effects, color and name correct.
 - [ ] Player heads (`loot/heads`): skin textures load. Marie_Annelise head is gone from the uncommon pool.
-- [ ] Coins: stack to 99. Armor stand loot (9 tables): spawns with arms and pose.
+- [x] Coins: stack to 99. Armor stand loot (9 tables): spawns with arms and pose.
 - [ ] Armor sets (Estudinae's Guidance, Patience, Script, Survival): dyed color 5215783 applied on every tier.
 - [ ] Unbreakable items show no durability bar.
 - [ ] Advancement icons render (advancements screen).
-- [ ] Each custom item's hook still fires, so `custom_data` predicates match (spot check one per hook tag).
-- [ ] Texture pack: every custom item shows its model, no purple-black. State models (bow pulling, horn tooting, shield blocking) show only the idle look until phase 6.
+- [x] Each custom item's hook still fires, so `custom_data` predicates match (spot check one per hook tag).
+- [x] Texture pack: every custom item shows its model, no purple-black. State models (bow pulling, horn tooting, shield blocking) show only the idle look until phase 6.
 
 ## Phase 4a - item components in commands
 
@@ -69,7 +69,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 - [ ] Right-click with each kind of warped fungus on a stick item (not riding anything): its `on_warped_fungus_used` hook fires once per click.
 - [ ] Same with an offhand item from `#foxcraft_dungeon_loot:prevents_use` (snowball, bow, goat horn, etc.) in the offhand: the stick does not fire.
-- [ ] Throw an event-enabled snowball (X No Evil): fires once per throw. A plain snowball does not.
+- [x] Throw an event-enabled snowball (X No Evil): fires once per throw. A plain snowball does not.
 - [ ] Eat a spider eye with a spider-eye item active, and block with a shield holding a block item: the matching events fire once each.
 - [ ] Use counts reset: hold right-click on the stick for several seconds, hook should not keep firing after release.
 
@@ -154,4 +154,5 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 
 
 - Variants with their own `item_model` (phase 7).
-- [ ] Give triggers, dev build only: wait half a second after load, `/trigger give_copper_coin set 5` gives five stacks of copper coins, a plain `/trigger` gives one, `/trigger give_chainsaw set 1` and `set 3` give the iron and netherite chainsaw, a value above the top tier gives the top one, and the tiers have no trigger of their own. `/trigger give_haemolymph_sacrifice_book set 2` gives an enchanted book with Hæmolymph Sacrifice II, `set 9` still gives II because the enchantment tops out there, the same exists for the other two Tithe enchantments, and it can be applied at an anvil. A release build has no give triggers. `/trigger give_estudinaes_patience set 5` gives a netherite chestplate and `set 1` a leather one. `/trigger give_tithe_to_uthiir set 1` gives the copper sword and `set 4` the netherite one. A disc and a horn trigger each give their item.
+- [x] Give triggers, dev build only: wait half a second after load, `/trigger give_copper_coin set 5` gives five stacks of copper coins, a plain `/trigger` gives one, `/trigger give_chainsaw set 1` and `set 3` give the iron and netherite chainsaw, a value above the top tier gives the top one, and the tiers have no trigger of their own. `/trigger give_haemolymph_sacrifice_book set 2` gives an enchanted book with Hæmolymph Sacrifice II, `set 9` still gives II because the enchantment tops out there, the same exists for the other two Tithe enchantments, and it can be applied at an anvil. A release build has no give triggers. `/trigger give_estudinaes_patience set 5` gives a netherite chestplate and `set 1` a leather one. `/trigger give_tithe_to_uthiir set 1` gives the copper sword and `set 4` the netherite one. A disc and a horn trigger each give their item.
+- [x] Tithe to Uthiir custom enchantments work the same way on any random sword as they do on the item
