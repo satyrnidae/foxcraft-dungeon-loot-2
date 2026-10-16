@@ -2606,7 +2606,8 @@
     "hooks": [
       "give_grasp_of_uthiir",
       "on_snowball_used",
-      "on_tick"
+      "on_tick",
+      "place_web"
     ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/grasp_of_uthiir"
