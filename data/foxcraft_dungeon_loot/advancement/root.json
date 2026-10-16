@@ -1,0 +1,31 @@
+{
+  "display": {
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:golden_sword",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/rogues_dagger",
+        "minecraft:enchantment_glint_override": true
+      }
+    },
+    "title": [
+      {
+        "text": "Foxcraft Dungeon Loot"
+      }
+    ],
+    "description": [
+      {
+        "text": "Customized, powerful dungeon loot!"
+      }
+    ],
+    "announce_to_chat": false,
+    "show_toast": true,
+    "hidden": false
+  },
+  "parent": "global:satyrnidae/author",
+  "criteria": {
+    "adv_criteria": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

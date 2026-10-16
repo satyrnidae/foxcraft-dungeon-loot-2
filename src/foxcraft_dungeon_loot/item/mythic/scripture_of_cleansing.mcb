@@ -1,0 +1,187 @@
+import ../../../config.js
+import ../../../macros.mcbt
+
+# Summons a particle every ten ticks
+function clock_10t {
+    schedule function foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing/clock_10t 10t
+    execute as @a at @s run {
+        execute if score @s satyrn.fdl.itemId.mainHand matches 51 run {
+            particle minecraft:enchant ~ ~1 ~ 0.5 0.5 0.5 0.0 1
+        }
+    }
+}
+
+# Starts the clock function with a 2 tick offset and creates the cooldown timer
+function on_load {
+    schedule function foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing/clock_10t 2t
+    scoreboard objectives add satyrn.fdl.scriptureOfCleansing.cooldown dummy
+
+    execute store success score #test <%config.internalScoreboard%> run scoreboard players get scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set scriptureOfCleansing.cooldown <%config.internalScoreboard%> 1200
+}
+
+# Executes once per player per tick
+function on_tick {
+    # Increment tick timer
+    execute as @a[scores={satyrn.fdl.scriptureOfCleansing.cooldown=1..}] run {
+        scoreboard players remove @s satyrn.fdl.scriptureOfCleansing.cooldown 1
+
+        # Reset scoreboard after 30 seconds.
+        execute at @s[scores={satyrn.fdl.scriptureOfCleansing.cooldown=..0}] run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_ready player @s ~ ~ ~ 0.5
+            particle minecraft:witch ~ ~1 ~ 0 0.5 0 1 10 normal @s
+            title @s actionbar {"text":"The Scripture of Cleansing is ready to be used once more.","color":"dark_purple"}
+            scoreboard players reset @s satyrn.fdl.scriptureOfCleansing.cooldown
+        }
+    }
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.scriptureOfCleansing.cooldown
+
+    scoreboard players reset scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+}
+
+# Runs when the player uses a warped fungus on a stick.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing/in_main_hand] run {
+        execute if score @s satyrn.fdl.scriptureOfCleansing.cooldown matches 1.. run {
+            playsound foxcraft_dungeon_loot:entity.player.spell_fails player @s ~ ~ ~ 0.5
+            title @s actionbar {"text":"The Scripture of Cleansing is on cooldown and cannot be used.","color":"dark_purple"}
+        } else run {
+            # First matching curse wins: equipped slots first, then the rest of the inventory. Vanishing before binding in each pass.
+            scoreboard players set #test <%config.internalScoreboard%> 0
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s weapon.offhand *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s weapon.offhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your offhand item.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s weapon.offhand *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s weapon.offhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your offhand item.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.head *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s armor.head foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your helmet.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.head *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s armor.head foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your helmet.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.chest *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s armor.chest foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your chestplate.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.chest *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s armor.chest foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your chestplate.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.legs *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s armor.legs foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your leggings.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.legs *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s armor.legs foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your leggings.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.feet *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s armor.feet foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from your boots.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s armor.feet *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s armor.feet foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from your boots.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            REPEAT(0, 35) as i {
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s container.<%i%> *[minecraft:enchantments~[{enchantments:"minecraft:vanishing_curse"}]] run {
+                item modify entity @s container.<%i%> foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_vanishing
+                tellraw @s {"text":"The Scripture of Cleansing removed the Vanishing curse from an item in your inventory.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            }
+            REPEAT(0, 35) as i {
+            execute if score #test <%config.internalScoreboard%> matches 0 if items entity @s container.<%i%> *[minecraft:enchantments~[{enchantments:"minecraft:binding_curse"}]] run {
+                item modify entity @s container.<%i%> foxcraft_dungeon_loot:mythic/scripture_of_cleansing/remove_binding
+                tellraw @s {"text":"The Scripture of Cleansing removed the Binding curse from an item in your inventory.","color":"gray","italic":true}
+                scoreboard players set #test <%config.internalScoreboard%> 1
+            }
+            }
+            execute if score #test <%config.internalScoreboard%> matches 1 run {
+                playsound foxcraft_dungeon_loot:entity.player.cast_wololo player @a
+                particle minecraft:enchanted_hit ~ ~1 ~ 0.5 0.5 0.5 1.0 10
+                summon minecraft:experience_orb ~ ~ ~ {Value:6}
+            } else run {
+                playsound minecraft:block.fire.extinguish player @a ~ ~ ~ 1.0 2.0
+                particle minecraft:smoke ^ ^1.5 ^0.5 0.05 0.05 0.05 0 5 normal @s
+                tellraw @s {"text":"The Scripture of Cleansing was unable to uncurse any of your items.","color":"gray","italic":true}
+            }
+
+            # Really banking on #test's value in the internal scoreboard being set to 1 or 0 at this point :)
+            execute unless entity @s[gamemode=creative] run {
+                execute if score #test <%config.internalScoreboard%> matches 1 run {
+                    # 4/21/95 is my birthday btw, if you were wondering why I used that number. Why did I put this here? This function has broken me (:
+                    break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/scripture_of_cleansing"}}
+                } else run {
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
+                        execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
+                        function foxcraft_dungeon_loot:math/should_damage_tool
+                        execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/damage_failure
+                    } else run {
+                        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:mythic/scripture_of_cleansing/damage_failure
+                    }
+
+                    execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
+                        # 19950421 was too large a number to prepend or I would have gone with the ISO date format. Curse you single-precision floating point limitations!!!
+                        break_item weapon.mainhand {id:"minecraft:warped_fungus_on_a_stick",components:{"minecraft:item_model":"foxcraft_dungeon_loot:mythic/scripture_of_cleansing"}}
+                    }
+                }
+                scoreboard players operation @s satyrn.fdl.scriptureOfCleansing.cooldown = scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+                scoreboard players operation #math.input1 <%config.internalScoreboard%> = scriptureOfCleansing.cooldown <%config.internalScoreboard%>
+                function foxcraft_dungeon_loot:math/ticks_to_min_sec
+
+                execute if score #math.minutes <%config.internalScoreboard%> matches 0 run {
+                    execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                        title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 second.","color":"dark_purple"}
+                    } else run {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                    }
+                } else execute if score #math.seconds satyrn.fdl.internal matches 0 run {
+                    execute if score #math.minutes <%config.internalScoreboard%> matches 1 run {
+                        title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 minute.","color":"dark_purple"}
+                    } else run {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes."]
+                    }
+                } else run {
+                    execute if score #math.minutes <%config.internalScoreboard%> matches 1 run {
+                        execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                            title @s actionbar {"text":"The Scripture of Cleansing is now on cooldown for 1 minute, 1 second.","color":"dark_purple"}
+                        } else run {
+                        title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for 1 minute, ","color":"dark_purple"},{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    } else run {
+                        execute if score #math.seconds <%config.internalScoreboard%> matches 1 run {
+                            title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, 1 second."]
+                        } else run {
+                            title @s actionbar [{"text":"The Scripture of Cleansing is now on cooldown for ","color":"dark_purple"},{"score":{"name":"#math.minutes","objective":"<%config.internalScoreboard%>"}}," minutes, ",{"score":{"name":"#math.seconds","objective":"<%config.internalScoreboard%>"}}," seconds."]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Gives the target the scripture of cleansing.
+function give_scripture_of_cleansing {
+    loot give @s loot foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing
+}

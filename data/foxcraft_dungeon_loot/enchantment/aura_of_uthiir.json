@@ -1,0 +1,49 @@
+{
+  "description": {
+    "translate": "enchantment.foxcraft_dungeon_loot.aura_of_uthiir",
+    "fallback": "Aura of Uthiir"
+  },
+  "supported_items": "#minecraft:swords",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "enchanted": "attacker",
+        "affected": "victim",
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "foxcraft_dungeon_loot:enchantment/aura_of_uthiir/post_attack"
+        },
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "minecraft:entity_type": "#foxcraft_dungeon_loot:arthropods"
+              }
+            },
+            {
+              "type": "minecraft:random_chance",
+              "chance": 0.10
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

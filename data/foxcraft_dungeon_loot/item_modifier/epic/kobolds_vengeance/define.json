@@ -1,0 +1,56 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/epic/kobolds_vengeance/attack_damage",
+          "amount": 5,
+          "operation": "add_value",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Kobold's Vengeance",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "...And his name was Tom Bodet.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1,
+        "minecraft:impaling": 2,
+        "minecraft:sharpness": 2,
+        "minecraft:smite": 2,
+        "minecraft:bane_of_arthropods": 2,
+        "minecraft:knockback": 5
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:4,DungeonItem:1b}"
+    }
+  ]
+}

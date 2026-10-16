@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:effects": {
+      "minecraft:conduit_power": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      },
+      "minecraft:mining_fatigue": {
+        "amplifier": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    }
+  }
+}

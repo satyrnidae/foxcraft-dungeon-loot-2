@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:rare/shroud_of_notoriety/define"
+}

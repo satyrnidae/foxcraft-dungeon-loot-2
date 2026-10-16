@@ -1,0 +1,110 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride/armor",
+          "amount": 5,
+          "operation": "add_value",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:armor_toughness",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride/armor_toughness",
+          "amount": 3,
+          "operation": "add_value",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:knockback_resistance",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride/knockback_resistance",
+          "amount": 0.2,
+          "operation": "add_value",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride/movement_speed",
+          "amount": -0.1,
+          "operation": "add_multiplied_total",
+          "slot": "feet"
+        },
+        {
+          "attribute": "minecraft:max_health",
+          "id": "foxcraft_dungeon_loot:items/mythic/war_hogs_disdainful_pride/max_health",
+          "amount": 2,
+          "operation": "add_value",
+          "slot": "feet"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "War Hog's Disdainful Pride",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Long ago, great warriors roamed the nether,",
+        "dropping down on unsuspecting prey from the",
+        "shelves above. These boots are their",
+        "disdainful pride.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Pride Comes Before the Fall: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When falling for",
+            "color": "gray"
+          }
+        ],
+        {
+          "text": "more than five meters, Slow Falling is applied",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for three seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:vanishing_curse": 1,
+        "minecraft:feather_falling": 5,
+        "minecraft:fire_protection": 3,
+        "minecraft:mending": 1,
+        "minecraft:protection": 4,
+        "minecraft:soul_speed": 2,
+        "minecraft:unbreaking": 5
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:58,DungeonItem:1b,ProcessFall:1b}"
+    }
+  ]
+}

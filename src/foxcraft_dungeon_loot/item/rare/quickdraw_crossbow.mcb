@@ -1,0 +1,4 @@
+# Gives the target the quickdraw crossbow.
+function give_quickdraw_crossbow {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/quickdraw_crossbow
+}

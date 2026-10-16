@@ -1,0 +1,80 @@
+{
+  "__comments": "Tithe to Uthiir item loot table. Every tier keeps Balm of the Spider God, its strength lasts 30, 20, 15 and 10 seconds from netherite down to copper. Without a variant score it is the epic netherite sword. Score 1 is the rare diamond one without Aura of Uthiir, 2 the uncommon iron one that also loses Haemolymph Sacrifice, 3 the common copper one with no effects.",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword",
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/netherite"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_sword",
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/diamond"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_sword",
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/iron"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:copper_sword",
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/copper"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
+        }
+      }
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/define"
+}

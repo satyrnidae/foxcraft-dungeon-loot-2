@@ -1,0 +1,15 @@
+{
+  "__comment": "Downpour Amulet",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:mythic/downpour_amulet/define"
+}

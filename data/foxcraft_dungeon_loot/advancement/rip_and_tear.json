@@ -1,0 +1,489 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:netherite_axe",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/netherite_chainsaw"
+      }
+    },
+    "title": "Rip and Tear",
+    "description": "Kill each of the denizens of the Nether and the End with a chainsaw.",
+    "frame": "challenge",
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "foxcraft_dungeon_loot:lollipop_dreams",
+  "criteria": {
+    "minecraft:blaze": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:blaze"
+          }
+        }
+      }
+    },
+    "minecraft:ghast": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:ghast"
+          }
+        }
+      }
+    },
+    "minecraft:hoglin": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:hoglin"
+          }
+        }
+      }
+    },
+    "minecraft:magma_cube": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:magma_cube"
+          }
+        }
+      }
+    },
+    "minecraft:piglin": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:piglin"
+          }
+        }
+      }
+    },
+    "minecraft:piglin_brute": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:piglin_brute"
+          }
+        }
+      }
+    },
+    "minecraft:strider": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:strider"
+          }
+        }
+      }
+    },
+    "minecraft:wither_skeleton": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wither_skeleton"
+          }
+        }
+      }
+    },
+    "minecraft:zombified_piglin": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:zombified_piglin"
+          }
+        }
+      }
+    },
+    "minecraft:zoglin": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:zoglin"
+          }
+        }
+      }
+    },
+    "minecraft:wither": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wither"
+          }
+        }
+      }
+    },
+    "minecraft:enderman": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:enderman"
+          }
+        }
+      }
+    },
+    "minecraft:endermite": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:endermite"
+          }
+        }
+      }
+    },
+    "minecraft:shulker": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:shulker"
+          }
+        }
+      }
+    },
+    "minecraft:ender_dragon": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "count": {
+                  "min": 1
+                },
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:87}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:ender_dragon"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "minecraft:blaze"
+    ],
+    [
+      "minecraft:ghast"
+    ],
+    [
+      "minecraft:hoglin"
+    ],
+    [
+      "minecraft:magma_cube"
+    ],
+    [
+      "minecraft:piglin"
+    ],
+    [
+      "minecraft:piglin_brute"
+    ],
+    [
+      "minecraft:strider"
+    ],
+    [
+      "minecraft:wither_skeleton"
+    ],
+    [
+      "minecraft:zombified_piglin"
+    ],
+    [
+      "minecraft:zoglin"
+    ],
+    [
+      "minecraft:wither"
+    ],
+    [
+      "minecraft:enderman"
+    ],
+    [
+      "minecraft:endermite"
+    ],
+    [
+      "minecraft:shulker"
+    ],
+    [
+      "minecraft:ender_dragon"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:item/mythic/chainsaw/give_chainsaw_netherite",
+    "experience": 2500
+  }
+}

@@ -1,0 +1,13 @@
+# Aura of Uthiir. The enchantment data file runs post_attack as the struck arthropod from its post_attack effect.
+
+# Run as the arthropod that Aura of Uthiir struck, one hit in twenty, from the enchantment's post_attack effect.
+function post_attack {
+    playsound minecraft:entity.player.attack.crit player @a
+    particle minecraft:crit ~ ~1 ~ 0.5 0.5 0.5 0.01 20 force
+
+    # Summon a short-lived area effect cloud to show the effect radius
+    summon minecraft:area_effect_cloud ~ ~0.1 ~ {Duration:2,potion_contents:{custom_color:10421252},Radius:10}
+
+    execute as @e[type=#foxcraft_dungeon_loot:hostile,distance=..10] run effect give @s minecraft:wither 5 2
+    execute as @e[type=#foxcraft_dungeon_loot:arthropods,distance=..10] run effect give @s minecraft:weakness 5 2
+}

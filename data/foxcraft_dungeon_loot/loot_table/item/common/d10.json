@@ -1,0 +1,15 @@
+{
+  "__comment": "Ten-sided die",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:common/d10/define"
+}

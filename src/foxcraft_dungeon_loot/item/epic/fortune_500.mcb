@@ -1,0 +1,18 @@
+# Gives the target the fortune 500.
+function give_fortune_500 {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/fortune_500
+}
+
+# Gives the diamond variant, loot variant score 1.
+function give_fortune_500_diamond {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/epic/fortune_500
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the netherite variant, loot variant score 2.
+function give_fortune_500_netherite {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/epic/fortune_500
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

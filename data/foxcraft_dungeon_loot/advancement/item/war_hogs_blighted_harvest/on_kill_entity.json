@@ -1,0 +1,29 @@
+{
+  "parent": "foxcraft_dungeon_loot:item/root",
+  "criteria": {
+    "player_killed_entity": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": "foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/in_main_hand",
+        "entity": {
+          "type": "minecraft:inverted",
+          "term": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "#foxcraft_dungeon_loot:non_living"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_killed_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/on_kill_entity"
+  }
+}

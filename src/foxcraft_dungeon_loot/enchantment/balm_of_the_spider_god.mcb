@@ -1,0 +1,13 @@
+# Balm of the Spider God has no effect hook of its own. The spider eye event runs on_spider_eye_eaten for a player holding it.
+
+# Handles the spider eye eaten event. The eye's poison is cleared and the player gets Strength for 10 seconds, I to III by the
+# level of Balm of the Spider God. Level IV is Strength III for 30 seconds, three times level III. Either hand counts, the exact
+# level is tested.
+function on_spider_eye_eaten {
+    effect clear @s minecraft:poison
+
+    execute if predicate foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/level_1 run effect give @s minecraft:strength 10 0
+    execute if predicate foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/level_2 run effect give @s minecraft:strength 10 1
+    execute if predicate foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/level_3 run effect give @s minecraft:strength 10 2
+    execute if predicate foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/level_4 run effect give @s minecraft:strength 30 2
+}

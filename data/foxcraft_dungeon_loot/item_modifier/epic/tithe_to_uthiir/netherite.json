@@ -1,0 +1,138 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/tithe_to_uthiir"
+      }
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Tithe to Uthiir",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Hæmolymph Sacrifice II: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "Gain 10 seconds of",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Speed II, 5 seconds of Resistance III, and 5",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "seconds of Regeneration whenever you kill an",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "arthropod.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Aura of Uthiir: ",
+            "color": "light_purple",
+            "italic": false
+          },
+          {
+            "text": "10% chance that an ominous",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "aura afflicts all hostile mobs and in a",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "10-meter radius with Wither III, and all",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "arthropods in a 10-meter radius with",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Weakness III, for 5 seconds each time you",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "kill an arthropod.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Balm of the Spider God IV: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Eating a spider",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "eye will remove any active poison effects as",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "long as you weild the enchanted weapon, and",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "applies a 30-second Strength III effect in",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "return.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "foxcraft_dungeon_loot:aura_of_uthiir": 1,
+        "foxcraft_dungeon_loot:haemolymph_sacrifice": 2,
+        "foxcraft_dungeon_loot:balm_of_the_spider_god": 4
+      }
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_axe",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_pickaxe",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_sword",
+          "weight": 4,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_shovel",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/tool/rare_hoe",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/admire_me_from_afar",
+          "weight": 5,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/armor_of_the_golem",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/beta_iron_sword",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/aurelias_lucky_compass",
+          "weight": 5,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/grasp_of_uthiir",
+          "weight": 5,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/gift_of_sheep_island",
+          "weight": 5,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/ima_leaf",
+          "weight": 2,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/eye_cream",
+          "weight": 4,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/feather_of_quet_zala",
+          "weight": 4,
+          "quality": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/longsword",
+          "weight": 6,
+          "quality": 4,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/lucky_rabbits_foot",
+          "weight": 5,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/quickdraw_crossbow",
+          "weight": 6,
+          "quality": 4,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/flawless_ashenhewn",
+          "weight": 6,
+          "quality": 4,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/rare/shroud_of_notoriety",
+          "weight": 4,
+          "quality": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beacon",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:conduit",
+          "weight": 2,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:end_crystal",
+          "weight": 5,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield",
+          "weight": 3,
+          "quality": 0,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:unbreaking"
+              ]
+            },
+            {
+              "type": "minecraft:enchant_randomly",
+              "condition": {
+                "type": "minecraft:random_chance",
+                "chance": 0.2
+              },
+              "options": [
+                "minecraft:mending"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:elytra",
+          "weight": 3,
+          "quality": 0,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_randomly",
+              "options": [
+                "minecraft:unbreaking"
+              ]
+            },
+            {
+              "type": "minecraft:enchant_randomly",
+              "condition": {
+                "type": "minecraft:random_chance",
+                "chance": 0.2
+              },
+              "options": [
+                "minecraft:mending"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bow",
+          "weight": 3,
+          "quality": 0,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crossbow",
+          "weight": 3,
+          "quality": 0,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fishing_rod",
+          "weight": 3,
+          "quality": 0,
+          "modifier": [
+            {
+              "type": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "min": 30,
+                "max": 50
+              },
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_boots",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_chestplate",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_helmet",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/random_loot/armor/rare_leggings",
+          "weight": 3,
+          "quality": 0
+        },
+        {
+          "type": "minecraft:tag",
+          "items": "#foxcraft_dungeon_loot:music_discs",
+          "expand": true,
+          "weight": 1,
+          "quality": 0
+        }
+      ]
+    }
+  ]
+}

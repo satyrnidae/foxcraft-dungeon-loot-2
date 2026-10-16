@@ -1,0 +1,49 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/clear_temper_journey"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/dry_urge_anger"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/fearless_river_gift"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/fresh_nest_thought"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/great_sky_falling"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/mumble_fire_memory"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/old_hymn_resting"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/pure_water_desire"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/secret_lake_tear"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/copper_horn/sweet_moon_love"
+        }
+      ]
+    }
+  ]
+}

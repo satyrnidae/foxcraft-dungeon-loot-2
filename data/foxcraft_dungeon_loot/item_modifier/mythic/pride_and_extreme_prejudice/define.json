@@ -1,0 +1,156 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Pride and Extreme Prejudice",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "There is no glory without risk. Best to be prepared",
+        "for the worst.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Precarious Prejudice: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "Rolls a D10. The result will",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "determine the outcome:",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "1: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Inflicts Bad Omen IV.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "2: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Inflicts Bad Omen III.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "3-8: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Inflicts Bad Omen I.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        [
+          {
+            "text": " - ",
+            "color": "gray",
+            "italic": false
+          },
+          {
+            "text": "9-10: ",
+            "color": "white",
+            "italic": false
+          },
+          {
+            "text": "Grants Hero of the Village.",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "All effects are applied for 20 minutes.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile: ",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": "The item is consumed upon use.",
+            "color": "gray",
+            "italic": false
+          }
+        ]
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:49,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:unbreakable": {},
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/pride_and_extreme_prejudice",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments",
+            "minecraft:unbreakable"
+          ]
+        }
+      }
+    }
+  ]
+}

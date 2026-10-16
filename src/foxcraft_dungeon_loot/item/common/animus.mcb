@@ -1,0 +1,4 @@
+# Gives the target the animus.
+function give_animus {
+    loot give @s loot foxcraft_dungeon_loot:item/common/animus
+}

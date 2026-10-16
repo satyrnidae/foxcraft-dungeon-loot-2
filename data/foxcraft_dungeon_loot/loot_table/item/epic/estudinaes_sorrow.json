@@ -1,0 +1,40 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_sword"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": 1
+          }
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_sword"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
+        }
+      }
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:epic/estudinaes_sorrow/define"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Splash Potion of Calamity",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 745784,
+          "custom_effects": [
+            {
+              "id": "minecraft:bad_omen",
+              "amplifier": 1,
+              "duration": 1800
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,14 +1,25 @@
 {
   "pack": {
-    "pack_format": 9,
-    "description": "Foxcraft Dungeon Loot 1.19"
+    "min_format": [97, 1],
+    "max_format": [97, 1],
+    "description": "Foxcraft Dungeon Loot 2"
   },
   "meta": {
     "author": "satyrnidae",
     "website": "https://satyrn.dev",
-    "version": "1.2.1+alpha.1",
+    "version": "26.3-alpha.1",
     "baseArchiveName": "foxcraft-dungeon-loot-resources",
     "changelog": {
+      "26.3-alpha.1": [
+        "Port to resource pack format 97.1.",
+        "Item definitions replace the custom model data overrides on vanilla item models.",
+        "Add models, textures and sounds for the 51 music discs.",
+        "Wolfgun and C418 audio is not included in the build and must be copied in by hand.",
+        "Copper goat horn sounds moved into the pack's own namespace.",
+        "War Hog's Wrath post effect moved to the new post_effect format.",
+        "Fix the silverfish escape artist texture path.",
+        "Remove the Copper-Plated tool models and textures."
+      ],
       "1.2.1+alpha.1": [
         "Add music disc in private version"
       ],

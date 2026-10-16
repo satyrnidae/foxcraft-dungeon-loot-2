@@ -1,0 +1,4 @@
+# Gives the target the d10.
+function give_d10 {
+    loot give @s loot foxcraft_dungeon_loot:item/common/d10
+}

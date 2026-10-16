@@ -1,0 +1,4 @@
+# Gives the target the yo yo mans revenge.
+function give_yo_yo_mans_revenge {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/yo_yo_mans_revenge
+}

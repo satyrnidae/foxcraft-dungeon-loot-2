@@ -1,0 +1,54 @@
+import ../../../config.js
+import ../../../macros.mcbt
+
+# Stop the shield sound and play the sword sound if the cooldown is met.
+function on_block {
+    stopsound @a * minecraft:item.shield.block
+
+    execute unless score @s satyrn.fdl.betaIronSword.soundCooldown matches 1.. run {
+        scoreboard players set @s satyrn.fdl.betaIronSword.soundCooldown 10
+        playsound foxcraft_dungeon_loot:item.beta_iron_sword.block player @s
+    }
+}
+
+# Damage the sword when it is used to hit an entity. This takes unbreaking into effect.
+function on_hit {
+    execute unless entity @s[gamemode=creative] run {
+        execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
+            # Get unbreaking level from the tool.
+            execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
+            function foxcraft_dungeon_loot:math/should_damage_tool
+            # Only execute the following if the score is equal to 1 or more
+            execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit
+        } else run {
+            item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit
+        }
+
+        execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_broken] run {
+            break_item weapon.mainhand {id:"minecraft:shield",components:{"minecraft:item_model":"foxcraft_dungeon_loot:rare/iron_sword"}}
+        }
+    }
+
+    advancement revoke @s only foxcraft_dungeon_loot:item/beta_iron_sword/on_hit
+}
+
+# Executes when the plugin is loaded.
+function on_load {
+    scoreboard objectives add satyrn.fdl.betaIronSword.soundCooldown dummy
+}
+
+# Executes on each tick.
+function on_tick {
+    execute as @a[scores={satyrn.fdl.betaIronSword.soundCooldown=1..}] run {
+        scoreboard players remove @s satyrn.fdl.betaIronSword.soundCooldown 1
+    }
+}
+
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.betaIronSword.soundCooldown
+}
+
+# Gives the target the beta iron sword.
+function give_beta_iron_sword {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/beta_iron_sword
+}

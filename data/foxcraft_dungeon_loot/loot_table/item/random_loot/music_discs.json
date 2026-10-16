@@ -1,0 +1,264 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornman_am",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_acornmanreskinbd5",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeon",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_aeonorch190bpm",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_avidit_e",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_drown",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_duma",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_flutes",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_gutturalis",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_kotyledon",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_locker",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_lost",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_minimalist",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nematode",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_nighttime_transit",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_old_white_straight_road",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_outskirts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_pathetic_mario",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pet_the_dog",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_pies_e",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_reboot",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rhapsodymini2",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_rigmarole",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_slither",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_sparkplugs",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/captainzephyrr_the_scone_song",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/satyrnidae_wanderer",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_after_another",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_between_layers",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_black_dawn",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_cliff_where",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_dark_southern_sky",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_deer",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_every_morning",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_far_away",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_into_stars",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_lightform",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_beams",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_moon_rays",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_mt_ennui",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_i",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_night_ii",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_of_plains",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_pale_star",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_passing",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_peaks",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_throughout",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_tropic",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/wolfgun_unseen_land",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/special/music_disc/c418_dog",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

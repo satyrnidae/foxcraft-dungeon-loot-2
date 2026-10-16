@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/bow",
+    "textures": {
+        "layer0": "foxcraft_dungeon_loot:item/rare/flawless_ashenhewn_pulling_0"
+    }
+}

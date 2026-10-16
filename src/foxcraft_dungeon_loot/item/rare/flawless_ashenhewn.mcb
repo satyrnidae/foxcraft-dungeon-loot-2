@@ -1,0 +1,4 @@
+# Gives the target the flawless ashenhewn.
+function give_flawless_ashenhewn {
+    loot give @s loot foxcraft_dungeon_loot:item/rare/flawless_ashenhewn
+}

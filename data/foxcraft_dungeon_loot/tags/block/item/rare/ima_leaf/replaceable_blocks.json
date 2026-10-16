@@ -1,0 +1,17 @@
+{
+  "values": [
+    "#foxcraft_dungeon_loot:air",
+    "#foxcraft_dungeon_loot:fluids",
+    "#foxcraft_dungeon_loot:replaceable_plants",
+    "#foxcraft_dungeon_loot:item/rare/ima_leaf/azaleas",
+    "#minecraft:small_flowers",
+    "#foxcraft_dungeon_loot:tall_flowers",
+    "minecraft:oak_sapling",
+    "minecraft:birch_sapling",
+    "minecraft:spruce_sapling",
+    "minecraft:jungle_sapling",
+    "minecraft:acacia_sapling",
+    "minecraft:dark_oak_sapling",
+    "minecraft:mangrove_propagule"
+  ]
+}

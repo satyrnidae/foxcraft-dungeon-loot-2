@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Gold Coins",
+        "color": "aqua",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/gold_coins",
+        "minecraft:max_stack_size": 99
+      }
+    }
+  ]
+}

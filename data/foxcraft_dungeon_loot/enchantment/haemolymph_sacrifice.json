@@ -1,0 +1,52 @@
+{
+  "description": {
+    "translate": "enchantment.foxcraft_dungeon_loot.haemolymph_sacrifice",
+    "fallback": "Hæmolymph Sacrifice"
+  },
+  "supported_items": "#minecraft:swords",
+  "weight": 1,
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 1
+  },
+  "max_cost": {
+    "base": 1,
+    "per_level_above_first": 1
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "enchanted": "attacker",
+        "affected": "attacker",
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/on_killed_arthropod"
+        },
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "minecraft:entity_type": "#foxcraft_dungeon_loot:arthropods"
+              }
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "minecraft:nbt": "{Health:0.0f}"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spyglass"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:rare/admire_me_from_afar/define"
+}

@@ -1,0 +1,4 @@
+# Gives the target the kobolds vengeance.
+function give_kobolds_vengeance {
+    loot give @s loot foxcraft_dungeon_loot:item/epic/kobolds_vengeance
+}

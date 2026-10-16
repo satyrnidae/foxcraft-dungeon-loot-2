@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_satyrnidae_lost"
+  },
+  "length_in_seconds": 86.0,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.satyrnidae_lost"
+  }
+}

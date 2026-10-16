@@ -1,0 +1,94 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_damage",
+      "damage": 0.0023,
+      "add": false
+    },
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/mythic/quet_zalas_beloved/armor",
+          "amount": 6,
+          "operation": "add_value",
+          "slot": "chest"
+        },
+        {
+          "attribute": "minecraft:movement_speed",
+          "id": "foxcraft_dungeon_loot:items/mythic/quet_zalas_beloved/movement_speed",
+          "amount": 0.4,
+          "operation": "add_multiplied_base",
+          "slot": "chest"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Quet-Zala's Beloved",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "\"And to you, my most cherished disciple: Wings.",
+        "May they carry you away from harm, and into my",
+        "loving embrace.\"",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Quet-Zala's Embrace: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": "When falling for more than",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "five meters, Slow Falling is applied for three",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "seconds.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:blast_protection": 4,
+        "minecraft:fire_protection": 4,
+        "minecraft:mending": 1,
+        "minecraft:projectile_protection": 4,
+        "minecraft:protection": 5,
+        "minecraft:thorns": 3,
+        "minecraft:unbreaking": 5
+      },
+      "add": true
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:50,DungeonItem:1b,ProcessFall:1b}"
+    }
+  ]
+}

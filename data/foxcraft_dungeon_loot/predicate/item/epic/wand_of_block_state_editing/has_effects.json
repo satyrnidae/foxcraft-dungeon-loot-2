@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:effects": {
+      "minecraft:haste": {
+        "amplifier": {
+          "min": 100,
+          "max": 255
+        }
+      }
+    }
+  }
+}

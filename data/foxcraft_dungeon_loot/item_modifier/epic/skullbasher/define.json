@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_attributes",
+      "modifiers": [
+        {
+          "attribute": "minecraft:attack_damage",
+          "id": "foxcraft_dungeon_loot:items/epic/skullbasher/attack_damage",
+          "amount": 5,
+          "operation": "add_value",
+          "slot": "mainhand"
+        },
+        {
+          "attribute": "minecraft:armor",
+          "id": "foxcraft_dungeon_loot:items/epic/skullbasher/armor",
+          "amount": 3,
+          "operation": "add_value",
+          "slot": "mainhand"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Skullbasher",
+        "color": "light_purple",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "When fighting skeletons, the best offense",
+        "is often a great defense.",
+        [
+          "Rarity: ",
+          {
+            "text": "Epic",
+            "color": "light_purple",
+            "italic": true
+          }
+        ]
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:knockback": 4,
+        "minecraft:mending": 1,
+        "minecraft:unbreaking": 5,
+        "minecraft:sharpness": 3,
+        "minecraft:smite": 5,
+        "minecraft:looting": 3
+      },
+      "add": false
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:6,DungeonItem:1b}"
+    }
+  ]
+}

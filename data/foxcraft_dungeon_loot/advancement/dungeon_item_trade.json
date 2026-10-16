@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:gold_nugget",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/coin/gold_coins"
+      }
+    },
+    "title": "\"This Belongs in a Museum!\"",
+    "description": "Trade with a Wandering Trader for some dungeon loot.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "foxcraft_dungeon_loot:grab_bag_trade",
+  "criteria": {
+    "trade_for_item": {
+      "trigger": "minecraft:villager_trade",
+      "conditions": {
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wandering_trader"
+          }
+        },
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": "{DungeonItem:1b}"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trade_for_item"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "foxcraft_dungeon_loot:item/random_loot/advancement/dungeon_item_trade"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+# Gives the target the stout.
+function give_stout {
+    loot give @s loot foxcraft_dungeon_loot:item/common/stout
+}

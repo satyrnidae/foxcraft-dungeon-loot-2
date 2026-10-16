@@ -1,0 +1,10 @@
+{
+  "comparator_output": 5,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_wolfgun_lightform"
+  },
+  "length_in_seconds": 199.987,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.wolfgun_lightform"
+  }
+}

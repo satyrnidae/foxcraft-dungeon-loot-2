@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": [
+        {
+          "text": "Armor Stand",
+          "italic": false
+        },
+        {
+          "text": " (Skeleton)",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "text": "Pose: Skeleton",
+          "italic": false,
+          "color": "gray"
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonItem:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:common/armor_stand",
+        "minecraft:entity_data": {
+          "id": "minecraft:armor_stand",
+          "ShowArms": 1,
+          "Pose": {
+            "RightArm": [
+              -90.0,
+              -10.0,
+              0.0
+            ],
+            "Head": [
+              1.4536514,
+              7.777254,
+              0.0
+            ],
+            "LeftArm": [
+              -90.0,
+              30.0,
+              0.0
+            ],
+            "Body": [
+              0.0,
+              0.22099066,
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

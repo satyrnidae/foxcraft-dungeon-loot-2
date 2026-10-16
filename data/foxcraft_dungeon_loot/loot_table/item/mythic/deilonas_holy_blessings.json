@@ -1,0 +1,15 @@
+{
+  "__comment": "Deilona's Holy Blessings",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:mythic/deilonas_holy_blessings/define"
+}

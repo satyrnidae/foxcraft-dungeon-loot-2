@@ -1,0 +1,96 @@
+id,rarity,item,base,flags,hooks,decision,reason
+4,epic,kobolds_vengeance,bone,,,move,Passive. bone has no food or consumable component. Potato only for uniformity.
+29,rare,lucky_rabbits_foot,rabbit_foot,,,move,Passive. rabbit_foot has no food or consumable component. Potato only for uniformity.
+53,mythic,talking_stick,stick,,,move,"Passive. stick has no food or consumable component, nothing to strip. Potato only for uniformity."
+76,epic,buckwheat,warped_fungus_on_a_stick,,,move,"Move. Durability moves to components: max_damage 100 and max_stack_size 1 set on the potato, !food and !consumable removed. damage_tool modifiers and the break_item call keep working."
+,common,absinthe,potion,,,stay,drinkable
+,common,animus,potion,,,stay,drinkable
+,common,armor_stand,armor_stand,,,stay,placeable entity item
+,common,armor_stand_baby,armor_stand,,,stay,placeable entity item
+,common,armor_stand_bashful,armor_stand,,,stay,placeable entity item
+,common,armor_stand_cancan,armor_stand,,,stay,placeable entity item
+,common,armor_stand_dab,armor_stand,,,stay,placeable entity item
+,common,armor_stand_gallant,armor_stand,,,stay,placeable entity item
+,common,armor_stand_greyskull,armor_stand,,,stay,placeable entity item
+,common,armor_stand_skeleton,armor_stand,,,stay,placeable entity item
+,common,armor_stand_zombie,armor_stand,,,stay,placeable entity item
+,common,coffee,potion,,,stay,drinkable
+,common,laudanum,potion,,,stay,drinkable
+,common,luma,potion,,,stay,drinkable
+,common,moonshine,potion,,,stay,drinkable
+,common,nectar,potion,,,stay,drinkable
+,common,stout,potion,,,stay,drinkable
+,common,tequila,potion,,,stay,drinkable
+,common,vitae,potion,,,stay,drinkable
+1,epic,peerless_yewhewn,bow,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+2,epic,dawncleaver,diamond_sword / iron_sword / netherite_sword,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+3,epic,melimonas_guile,trident,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+5,epic,palominas_gift,trident,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+6,epic,skullbasher,shield,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+7,mythic,pierce_the_sky,crossbow,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+8,epic,yo_yo_mans_revenge,fishing_rod,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+9,mythic,war_hogs_lingering_spite,netherite_sword,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+10,rare,longsword,diamond_sword / iron_sword / netherite_sword,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+11,rare,admire_me_from_afar,spyglass,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+12,rare,quickdraw_crossbow,crossbow,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+13,mythic,war_hogs_festering_wrath,netherite_helmet,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+14,rare,armor_of_the_golem,carved_pumpkin,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+15,rare,shroud_of_notoriety,player_head,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+16,mythic,shield_of_the_juggernaut,shield,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+17,epic,rogues_dagger,golden_sword,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+18,rare,aurelias_lucky_compass,compass,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+19,mythic,totem_of_ekila,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+20,mythic,totem_of_gnumoch,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+21,uncommon,totem_of_undying,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+22,epic,fortune_500,diamond_pickaxe / iron_pickaxe / netherite_pickaxe,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+28,mythic,war_hogs_burning_rage,netherite_axe,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+30,epic,estudinaes_script,chainmail_leggings / diamond_leggings / iron_leggings / leather_leggings / netherite_leggings,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+31,epic,estudinaes_sorrow,diamond_sword / netherite_sword,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+32,mythic,auto_pickaxe,diamond_pickaxe / iron_pickaxe / netherite_pickaxe,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+33,mythic,gravilock_boots,diamond_boots / iron_boots / netherite_boots,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+34,mythic,bringer_of_fear,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+35,mythic,constantines_gift,(loot table ref),,,stay,"enchanted_golden_apple, eating it is a feature"
+36,mythic,deilonas_holy_blessings,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+37,mythic,downpour_amulet,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+38,epic,estudinaes_guidance,chainmail_boots / diamond_boots / iron_boots / leather_boots / netherite_boots,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+39,epic,estudinaes_patience,chainmail_chestplate / diamond_chestplate / iron_chestplate / leather_chestplate,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+40,epic,estudinaes_survival,chainmail_helmet / diamond_helmet / iron_helmet / leather_helmet / netherite_helmet,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+41,mythic,evokers_tome,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+42,rare,eye_cream,warped_fungus_on_a_stick,ProcessOnUsed,on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+43,rare,feather_of_quet_zala,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+44,rare,gift_of_sheep_island,warped_fungus_on_a_stick,ProcessOnUsed,on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+45,epic,heros_amulet,warped_fungus_on_a_stick,ProcessOnUsed,on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+46,mythic,how_about_no,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+47,mythic,idol_of_melimonas,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+48,mythic,poncho_sanchezs_fate,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+49,mythic,pride_and_extreme_prejudice,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+50,mythic,quet_zalas_beloved,elytra,ProcessFall,on_fall,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+51,mythic,scripture_of_cleansing,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+52,mythic,stompies,chainmail_boots / diamond_boots / iron_boots / leather_boots / netherite_boots,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+54,mythic,totem_of_dendris,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+55,mythic,totem_of_deilona,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+56,mythic,totem_of_mysteria,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+57,epic,wand_of_block_state_editing,debug_stick,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+58,mythic,war_hogs_disdainful_pride,netherite_boots,ProcessFall,on_fall,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+59,mythic,war_hogs_insatiable_hunger,netherite_chestplate,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+60,mythic,war_hogs_seething_hatred,netherite_leggings,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+61,mythic,wing_of_ouet_zala,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+62,mythic,wing_of_quet_zala,totem_of_undying,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+63,epic,silverfish_escape_artist,warped_fungus_on_a_stick,ProcessOnUsed,on_tick on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+64,common,d4,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+65,common,d6,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+66,common,d8,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+67,common,d10,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+68,common,d12,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+69,common,d20,warped_fungus_on_a_stick,ProcessOnUsed,,stay,"interactive, uses the fungus use event"
+75,mythic,hammer_of_sol,snowball,ProcessOnUsed,on_snowball_used on_tick,stay,"thrown, snowball is the use trigger"
+77,rare,ima_leaf,warped_fungus_on_a_stick,ProcessOnUsed,on_warped_fungus_used,stay,"interactive, uses the fungus use event"
+78,epic,spell_scroll_hail_of_arrows,snowball,ProcessOnUsed,on_snowball_used on_tick,stay,"thrown, snowball is the use trigger"
+79,mythic,x_no_evil,snowball,ProcessOnUsed,on_snowball_used on_tick,stay,"thrown, snowball is the use trigger"
+80,epic,torenhias_fist,snowball,ProcessOnUsed,on_snowball_used on_tick,stay,"thrown, snowball is the use trigger"
+81,epic,tithe_to_uthiir,netherite_sword,ProcessSpiderEye,on_spider_eye_eaten,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+82,rare,beta_iron_sword,shield,ProcessBlock,on_block on_tick,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+83,rare,grasp_of_uthiir,snowball,ProcessOnUsed,on_snowball_used on_tick,stay,"thrown, snowball is the use trigger"
+85,rare,flawless_ashenhewn,bow,,,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+86,mythic,war_hogs_blighted_harvest,netherite_hoe,Souls,on_tick,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"
+87,mythic,chainsaw,diamond_axe / iron_axe / netherite_axe,,on_tick,stay,"base item provides the function (equipment, weapon, totem, tool or wearable)"

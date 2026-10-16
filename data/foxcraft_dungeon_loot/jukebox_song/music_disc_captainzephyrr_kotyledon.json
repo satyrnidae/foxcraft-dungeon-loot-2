@@ -1,0 +1,10 @@
+{
+  "comparator_output": 2,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_captainzephyrr_kotyledon"
+  },
+  "length_in_seconds": 276.5,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.captainzephyrr_kotyledon"
+  }
+}

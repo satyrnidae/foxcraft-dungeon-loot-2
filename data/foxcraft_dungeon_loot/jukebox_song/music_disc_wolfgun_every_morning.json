@@ -1,0 +1,10 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.foxcraft_dungeon_loot.music_disc_wolfgun_every_morning"
+  },
+  "length_in_seconds": 162.688,
+  "sound_event": {
+    "sound_id": "foxcraft_dungeon_loot:music_disc.wolfgun_every_morning"
+  }
+}

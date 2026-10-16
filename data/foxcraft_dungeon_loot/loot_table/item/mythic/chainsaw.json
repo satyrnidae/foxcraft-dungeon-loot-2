@@ -1,0 +1,81 @@
+{
+  "__comment": "Albatross Heavy Industries® LumberJACKED™ 8.5hp - All Variants",
+  "pools": [
+    {
+      "__comment": "Iron variant, default",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 2
+            }
+          }
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_axe"
+        }
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/iron_chainsaw"
+        }
+      }
+    },
+    {
+      "__comment": "Diamond variant, loot variant score = 1",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_axe"
+        }
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/diamond_chainsaw"
+        }
+      }
+    },
+    {
+      "__comment": "Netherite variant, loot variant score = 2",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_axe"
+        }
+      ],
+      "modifier": {
+        "type": "minecraft:set_components",
+        "components": {
+          "minecraft:item_model": "foxcraft_dungeon_loot:mythic/netherite_chainsaw"
+        }
+      }
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:mythic/chainsaw/define"
+}

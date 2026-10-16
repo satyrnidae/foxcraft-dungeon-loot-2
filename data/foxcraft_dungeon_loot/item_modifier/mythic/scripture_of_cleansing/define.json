@@ -1,0 +1,104 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Scripture of Cleansing",
+        "color": "green",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Approach, ye Blasted Souls, and be Cleansed.",
+        [
+          "Rarity: ",
+          {
+            "text": "Mythic",
+            "color": "green",
+            "italic": true
+          }
+        ],
+        "",
+        [
+          {
+            "text": "Cleansing Ritual: ",
+            "color": "green",
+            "italic": false
+          },
+          {
+            "text": " When used, an item that",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "you are either holding or wearing will be",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "cleansed of either Curse of Vanishing or",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Curse of Binding. If no cursed item is found,",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "the Scripture is damaged, but not consumed.",
+          "color": "gray",
+          "italic": false
+        },
+        [
+          {
+            "text": "Fragile:",
+            "color": "red",
+            "italic": false
+          },
+          {
+            "text": " This item is consumed when",
+            "color": "gray",
+            "italic": false
+          }
+        ],
+        {
+          "text": "Cleansing Ritual is used to successfully",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "cleanse a cursed item.",
+          "color": "gray",
+          "italic": false
+        }
+      ],
+      "mode": "replace_all"
+    },
+    {
+      "type": "minecraft:set_enchantments",
+      "enchantments": {
+        "minecraft:mending": 1
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:51,DungeonItem:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/scripture_of_cleansing",
+        "minecraft:tooltip_display": {
+          "hidden_components": [
+            "minecraft:enchantments"
+          ]
+        }
+      }
+    }
+  ]
+}

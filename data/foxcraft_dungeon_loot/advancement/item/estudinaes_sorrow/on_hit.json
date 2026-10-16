@@ -1,0 +1,70 @@
+{
+  "parent": "foxcraft_dungeon_loot:item/root",
+  "criteria": {
+    "player_hurt_entity": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:31}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:inverted",
+          "term": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "#foxcraft_dungeon_loot:non_living"
+            }
+          }
+        }
+      }
+    },
+    "player_killed_entity": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": "{DungeonLootId:31}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:inverted",
+          "term": {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:entity_type": "#foxcraft_dungeon_loot:non_living"
+            }
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_hurt_entity",
+      "player_killed_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "foxcraft_dungeon_loot:item/epic/estudinaes_sorrow/on_hit"
+  }
+}

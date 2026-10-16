@@ -1,0 +1,4 @@
+# Gives the target the luma.
+function give_luma {
+    loot give @s loot foxcraft_dungeon_loot:item/common/luma
+}

@@ -1,0 +1,13 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "foxcraft_dungeon_loot:item/common/common_grab_bag"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "__comment": "Estudinae's Patience - All Variants",
+  "pools": [
+    {
+      "__comment": "Leather variant, default",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 4
+            }
+          }
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:leather_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Chainmail variant, loot variant score = 1",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:chainmail_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Iron Variant, loot variant score = 2",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Diamond Variant, loot variant score = 3",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond_chestplate"
+        }
+      ]
+    },
+    {
+      "__comment": "Netherite Variant, loot variant score = 4",
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 4
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_chestplate"
+        }
+      ]
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:epic/estudinaes_patience/define"
+}
