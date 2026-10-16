@@ -9,7 +9,7 @@ Writes written book loot from markdown. `mcb build` runs it through `src/foxcraf
 ### Layout
 
 - Sources: `src/books/<locale>/<id>.md`, for example `src/books/en_us/palomina_and_the_demon_lord.md`.
-- `en_us` is the reference. It writes `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/<id>.json`, and `loot_table/item/random_loot/book/<id>.json` when that does not exist yet. Adding the book to a random loot pool stays manual.
+- `en_us` is the reference. It writes `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/<id>.json` and `loot_table/item/random_loot/book/<id>.json`, both gitignored. Files in those folders without a source are deleted. Adding the book to a random loot pool stays manual.
 - Every locale writes its text to `texturepack/assets/foxcraft_dungeon_loot/lang/<locale>.json` under `book.foxcraft_dungeon_loot.<id>.*`. Other keys in that file are kept. A translation is the same markdown in another locale folder. Pages are cut by the text, so a translation that cuts differently gets a warning and the English page structure.
 - Page text is `translate` with the English as `fallback`, so the pack works without the resource pack. A span inside a page is a `%1$s` argument with its own key.
 - Dev builds get `/trigger give_<id>` for every en_us book, from `give.js`. A release build adds none, `/function foxcraft_dungeon_loot:give/give_<id>` stays.

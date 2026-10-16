@@ -346,6 +346,25 @@ describe('book generator files', () => {
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
 
+  it('removes the modifier and table of a book that has no source any more', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', SOURCE);
+      write(dir, 'mod/gone.json', '{}');
+      write(dir, 'table/gone.json', '{}');
+      write(dir, 'table/README.txt', 'kept');
+      assert.ok(gen.generate({ ...opts, check: true }).changed.some((f) => f.endsWith('gone.json')));
+      assert.ok(fs.existsSync(path.join(opts.tableDir, 'gone.json')));
+      gen.generate(opts);
+      assert.ok(!fs.existsSync(path.join(opts.modifierDir, 'gone.json')));
+      assert.ok(!fs.existsSync(path.join(opts.tableDir, 'gone.json')));
+      assert.ok(fs.existsSync(path.join(opts.tableDir, 'test.json')));
+      assert.ok(fs.existsSync(path.join(opts.tableDir, 'README.txt')));
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('writes the modifier, table, lang file and the rarity lore line, and then is current', () => {
     const { dir, opts } = sandbox();
     try {

@@ -5,7 +5,7 @@ Written book loot is made from the markdown files here. This file has no frontma
 ## Files
 
 - One book is `src/books/<locale>/<id>.md`, for example `src/books/en_us/enderman.md`. The id is the file name, lowercase with underscores.
-- `en_us` is the reference. It writes the item modifier `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/<id>.json`, gitignored, and the loot table `loot_table/item/random_loot/book/<id>.json` when it does not exist yet, committed. Adding a book to a random loot pool is still done by hand.
+- `en_us` is the reference. It writes the item modifier `data/foxcraft_dungeon_loot/item_modifier/random_loot/book/<id>.json` and the loot table `loot_table/item/random_loot/book/<id>.json`, both gitignored and made by every build. A file there without a markdown source is deleted, so removing or renaming a book cleans up after itself. Adding a book to a random loot pool is still done by hand.
 - Every locale writes its text to `texturepack/assets/foxcraft_dungeon_loot/lang/<locale>.json`, committed. A translation is the same markdown in another locale folder. Pages are cut by the text, so a translation that cuts differently gets a warning and the English page structure.
 - Dev builds get `/trigger give_<id>` for every en_us book. A release build adds none; `/function foxcraft_dungeon_loot:give/give_<id>` stays.
 

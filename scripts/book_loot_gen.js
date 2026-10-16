@@ -984,7 +984,7 @@ function findSources(dir, warnings = []) {
 }
 
 /**
- * Generates every book. Returns { changed, warnings }; changed lists the files written, or in check mode the ones out of date.
+ * Generates every book. Returns { changed, warnings }; changed lists the files written or removed, or in check mode the ones out of date.
  * Options: check, only (source files to limit the modifiers to), and the directories for tests.
  */
 function generate(options = {}) {
@@ -1008,13 +1008,26 @@ function generate(options = {}) {
                 const modifier = path.join(modifierDir, id + '.json');
                 if (emit(modifier, json(built.modifier), check)) changed.push(modifier);
                 const table = path.join(tableDir, id + '.json');
-                // The loot table is plain boilerplate, written once
-                if (!fs.existsSync(table) && emit(table, json(tableFor(id)), check)) changed.push(table);
+                if (emit(table, json(tableFor(id)), check)) changed.push(table);
             } else {
                 const reference = Object.keys(buildBook(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {
                     warnings.push(`${book.file}: formatting differs from the ${REFERENCE_LANG} book, translated text lines up only where the spans do`);
                 }
+            }
+        }
+    }
+
+    // Modifiers and tables are all made here, so one without a source is left over from a book that was removed or renamed
+    if (!only) {
+        const ids = new Set(Object.keys(references));
+        for (const dir of [modifierDir, tableDir]) {
+            if (!fs.existsSync(dir)) continue;
+            for (const name of fs.readdirSync(dir)) {
+                if (!name.endsWith('.json') || ids.has(name.slice(0, -5))) continue;
+                const stale = path.join(dir, name);
+                if (!check) fs.unlinkSync(stale);
+                changed.push(stale);
             }
         }
     }

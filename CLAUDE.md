@@ -48,7 +48,7 @@ Their functions live in `src/foxcraft_dungeon_loot/enchantment/<name>.mcb` and c
 
 ## Books
 
-Written book loot is generated from markdown in `src/books/<locale>/<id>.md` by `scripts/book_loot_gen.js`, which `mcb build` runs through `src/foxcraft_dungeon_loot/books.js`. It writes `item_modifier/random_loot/book/<id>.json` and the `texturepack/assets/foxcraft_dungeon_loot/lang/` files, so edit the markdown and never those outputs. The modifiers are gitignored and made by the build, the loot tables and lang files are committed. Format and layout are in `scripts/README.md`.
+Written book loot is generated from markdown in `src/books/<locale>/<id>.md` by `scripts/book_loot_gen.js`, which `mcb build` runs through `src/foxcraft_dungeon_loot/books.js`. It writes `item_modifier/random_loot/book/<id>.json`, `loot_table/item/random_loot/book/<id>.json` and the `texturepack/assets/foxcraft_dungeon_loot/lang/` files, so edit the markdown and never those outputs. The modifiers and loot tables are gitignored and made by the build, which also deletes any it has no source for; the lang files are committed. Format and layout are in `scripts/README.md`.
 
 ## Trades
 
