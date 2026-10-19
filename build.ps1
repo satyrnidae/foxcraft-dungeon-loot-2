@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 $BuildDir = "$PSScriptRoot/.build"
 
 # Check if build dir exists, create if not
