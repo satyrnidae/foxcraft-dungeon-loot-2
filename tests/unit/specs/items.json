@@ -606,6 +606,29 @@
     "rarity": null,
     "src": "vitae"
   },
+  "item/common/writable_letter": {
+    "base_items": [
+      "minecraft:writable_book"
+    ],
+    "dungeon_item": true,
+    "function_types": [
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [
+      "give_writable_letter"
+    ],
+    "item_models": [
+      "foxcraft_dungeon_loot:random_loot/writable_letter"
+    ],
+    "loot_ids": [],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": "writable_letter"
+  },
   "item/epic/buckwheat": {
     "base_items": [
       "minecraft:warped_fungus_on_a_stick"
