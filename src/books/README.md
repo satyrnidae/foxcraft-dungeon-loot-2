@@ -48,7 +48,7 @@ lore:
 
 ## Formatting
 
-- `**bold**`, `*italic*` or `_italic_`, `__underlined__`, `~~strikethrough~~`, `||obfuscated||`. `\*` escapes a marker.
+- `**bold**`, `*italic*` or `_italic_`, `__underlined__`, `~~strikethrough~~`, `||obfuscated||`. `\*` escapes a marker, `\uXXXX` or `\u{X..}` is that code point, for glyphs a keyboard can't type, such as the private-use ones of `staff_notation`.
 - `# Header`, any number of `#`, is bold and underlined with an empty line under it.
 - `` `inline code` `` and fenced blocks are set in `foxcraft_dungeon_loot:pixel_mono`. The text is literal, nothing in it is markup. A block keeps its indentation and a `#` in it is not a heading. A block with a language after the fence is colored: `mcfunction`, `json`, `javascript` or `js`, `bash` or `sh`, `python` or `py`, `yaml` and `java`. Anything else stays plain.
 - `<font color="gray" face="minecraft:illageralt" shadow="#80ff0000">text</font>`: color is a name or `#rrggbb`, face is the font, shadow is `#aarrggbb`.

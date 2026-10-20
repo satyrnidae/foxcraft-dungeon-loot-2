@@ -11,29 +11,30 @@ lore: [
 styles: {
   body: {
     italic: true
+  },
+  .staff: {
+    font: foxcraft_dungeon_loot:staff_notation
   }
 }
 ---
 
-Lonely little glockenspiel
-Tines all fouled with rust
-Sorry little glockenspiel
-How they broke your trust
----
-Glockenspiel, glockenspiel
-Can I hear you sing?
-Glockenspiel, glockenspiel
-Let all your bells ring
----
-Broken little glockenspiel
-Once polished and pristine
-Wayward little glockenspiel
-Abandoned and unseen
----
-Oh, glockenspiel, glockenspiel
-Can I hear you sing?
-Glockenspiel, glockenspiel
-Let all your bells ring
----
-Lovely little glockenspiel
-Let me hear your sound
+<style class=".staff">\ue000\ue001\ue002\ue008\ue008\ue010\ue010\ue019\ue008\ue005\ue063</style>
+Lone-ly Lit-tle Glock-en-spiel
+
+<style class=".staff">\ue000\ue023\ue002\</staff>
+Tines all fouled with rust,
+Why have they a-ban-doned you,
+Sun-dered all your trust?
+
+Bro-ken Lit-tle Glock-en-spiel
+don't you fill with rage?
+Thin-king of the wic-ked ones who
+cast you off with age?
+
+Love-ly Lit-tle Glock-en-spiel,
+Let me hear you sing!
+
+Lone-ly lit-tle Glock-en-spiel,
+Tines all fouled with rust,
+How could they a-ban-don you,
+sun-der all your trust?

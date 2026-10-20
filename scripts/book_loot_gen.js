@@ -378,6 +378,14 @@ function parseInline(text, start, closer, classes = {}) {
         }
         const c = text[i];
         if (c === '\\' && i + 1 < text.length) {
+            // \uXXXX or \u{X...} is the code point, for glyphs of a font that no keyboard types
+            const code = /^\\u(?:([0-9a-fA-F]{4})|\{([0-9a-fA-F]{1,6})\})/.exec(text.slice(i, i + 10));
+            const point = code && parseInt(code[1] || code[2], 16);
+            if (code && point <= 0x10ffff) {
+                buffer += String.fromCodePoint(point);
+                i += code[0].length;
+                continue;
+            }
             buffer += text[i + 1];
             i += 2;
             continue;
@@ -1124,7 +1132,8 @@ function emit(file, text, check) {
     return true;
 }
 
-const json = (value) => JSON.stringify(value, null, 2) + '\n';
+// Private-use characters, the glyphs of fonts such as staff_notation, are written as \uXXXX so they stay readable in the output
+const json = (value) => JSON.stringify(value, null, 2).replace(/[\ue000-\uf8ff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`) + '\n';
 
 // One book of the generated ones, equal odds
 // An empty list is a table without pools, which drops nothing. A table entry that points at one still counts as picked, so
