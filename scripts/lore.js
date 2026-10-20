@@ -81,4 +81,30 @@ function shortLines(lines, limit = LORE_PIXELS) {
     return short;
 }
 
-module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapLore, wrapAdvice, shortLines };
+/**
+ * Reflows a whole lore block. A line that does not end in terminating punctuation goes on in the next one, so the two
+ * are joined before wrapping; an empty line, a sentence end and the Rarity line keep their breaks. Returns the new lines.
+ */
+function reflowLore(lines, limit = LORE_PIXELS) {
+    const out = [];
+    let paragraph = '';
+    const flush = () => {
+        if (paragraph) out.push(...wrapLore(paragraph, limit));
+        paragraph = '';
+    };
+    lines.forEach((raw, i) => {
+        const text = raw.trim();
+        if (!text) {
+            flush();
+            out.push('');
+            return;
+        }
+        paragraph = paragraph ? `${paragraph} ${text}` : text;
+        const next = (lines[i + 1] || '').trim();
+        if (TERMINAL.test(text) || !next || /^Rarity:/.test(next)) flush();
+    });
+    flush();
+    return out;
+}
+
+module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapLore, wrapAdvice, shortLines, reflowLore };

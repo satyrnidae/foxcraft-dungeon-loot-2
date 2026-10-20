@@ -16,7 +16,9 @@ Written book loot is made from the markdown files here. This file has no frontma
 title: Book title, or an SNBT text component
 author: Name
 rarity: common|uncommon|rare|epic|mythic|cursed
-font: foxcraft_dungeon_loot:pixellated_elegance
+model: foxcraft_dungeon_loot:random_loot/written_letter
+data: {DungeonLootId:87,DungeonItem:1b}
+writable: false
 debug: true
 lore:
   first lore line, wrapped by hand
@@ -28,17 +30,21 @@ lore:
 - `title` and `author` are required, a book without either stops the build. A key the generator does not know, such as a typo, warns.
 - `debug: true` keeps the book out of anything but a dev build, `config.json` `mc.dev`. It gets no loot table, give function or lang entries in a release. Test and demo books are marked with it.
 - `rarity` adds a `Rarity: ` lore line and colors the item name by it, not italic. An SNBT title keeps its own colors over that. The item name has no filtered side, so it uses the filtered title when there is one.
-- `font` is optional and sets the font of the whole text. A `<font face>` inside still wins. Title and lore keep the default font.
+- The font of the whole text is `styles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }`, see Styles. The old `font:` key still works but is deprecated and warns. A `<font face>` inside still wins. Title and lore keep the default font.
+- `model` is optional and is the resource location of a client item definition, `assets/<namespace>/items/<path>.json`, saved as the `item_model` component. A trailing `.json` is dropped and a bare path gets the pack namespace. Without it the book keeps the vanilla written book model.
+- `writable` is optional and `false` by default. `true` makes a book and quill (`minecraft:writable_book`, with `writable_book_content`) instead of a written book. Its pages are plain strings, so bold, colors, fonts, links, `styles` and hyphenation are dropped and only the text stays, `<filter>` still gives a filtered reading. It has no author or title, so `author` is not required and `title` becomes the item name. Pages are still cut like a written book's. Signing keeps the `item_model` component, so every five ticks the datapack swaps `foxcraft_dungeon_loot:random_loot/writable_letter` on a written book held by a player for `random_loot/written_letter` (`event/clock_5t`). Give a writable letter `model: foxcraft_dungeon_loot:random_loot/writable_letter`.
+- `data` is optional and is an SNBT compound for the `minecraft:custom_data` component, for example `{DungeonLootId:87,DungeonItem:1b}`, over as many lines as it takes to close the braces. It is written with `minecraft:set_custom_data` as the SNBT string, so `1b` stays a byte and `87` an int. Anything that is not a valid compound stops the build.
 - `styles` is optional and is a small stylesheet, a compound of SNBT over as many lines as it takes. Each key is a selector and each value a style, see Styles below.
-- `lore` lines are wrapped by hand and stay within 44 average characters, 226 pixels. The script warns, and a test fails, for a line over that or one that stops early.
+- A `lore` line is plain text, or a JSON or SNBT text component when it starts with `{` or `[`, for example `{"text":"Hush","color":"gray","italic":true}` or `["A ",{"text":"list","bold":true}]`, kept on one line. The whole block can also be one JSON or SNBT list after `lore:`, over as many lines as it takes, `lore: ["first", {"text":"second","color":"gray"}]`, where every string is plain text and every object or list a component. A line is saved as written and its width is measured from its text. A component line is never joined or wrapped by the reflow.
+- `lore` lines are wrapped by hand and stay within 44 average characters, 226 pixels. The script warns, and a test fails, for a line over that or one that stops early. When a book has such a line, the warning ends with the whole lore block reflowed: lines that do not end in punctuation are joined with the next, then wrapped to the width, and the Rarity line is left alone. Paste it under `lore:`.
 
 ## Pages
 
 - Text flows over the pages by itself. A newline is a line break, a blank line is an empty line, and a long line wraps. A page holds 14 lines of 114 pixels.
-- `<br>` is a manual page break. A page never starts or ends with an empty line.
+- A line of only `---` (spaces around it are fine) is a manual page break. A page never starts or ends with an empty line.
 - A line that starts at a newline keeps its indentation, a line that starts at a wrap loses its leading spaces, and every line loses its trailing spaces.
 - Widths come from the font of each glyph, bold is a pixel wider. A page past the editor limit of 1024 characters, a book over 100 pages and a font that is not defined anywhere all warn.
-- Spans do not reach across a `<br>`. Close them first. A `<br>` in a code block or an inline code span is text, not a break.
+- Spans do not reach across a page break. Close them first. A `---` in a code block, or with other text on its line, is text, not a break.
 
 ## Formatting
 
@@ -65,7 +71,7 @@ The `styles` of the frontmatter work like a small stylesheet. A key is a selecto
   - `a`, `font` and `span`: the tags. The class and the attributes of the tag come after them.
 - A name that is neither a dotted class nor one of those is an error.
 - A style is a compound of `color` (a name or `#rrggbb`), `font`, `bold`, `italic`, `underline`, `strikethrough`, `obfuscated` and `shadow_color` (an integer or `#aarrggbb`). Every key is optional and anything else is an error. A flag that is `false` turns the format off where the text around it has it on.
-- The `font:` key of the frontmatter is the font of `body`, and `body` wins when both set one.
+- `body: { font: ... }` sets the font of the whole text, and a `<font face>` inside still wins. The old frontmatter `font:` key is deprecated: it still sets the font of `body`, and `body` wins when both set one, but the build warns.
 
 ```
 ---
@@ -112,7 +118,7 @@ Read the <a href="https://example.com">docs</a> or
 
 ## Tall fonts
 
-A font whose `ascent` is over 9 pixels, more than a line, takes empty lines above its line: one for every 9 pixels it reaches over the 7 of the default font, so an ascent of 18 takes two. The generator adds the lines that are missing, empty lines already in the text count, and so does a glyph at the top of a page, which gets pushed down. An illustration is one glyph alone after a `<br>`. At most 13 lines are added, the most a page has above its last line, so a font that reaches further than 126 pixels leaks over the top of the page instead of failing the build. Such a font suits a drop cap at the start of a section:
+A font whose `ascent` is over 9 pixels, more than a line, takes empty lines above its line: one for every 9 pixels it reaches over the 7 of the default font, so an ascent of 18 takes two. The generator adds the lines that are missing, empty lines already in the text count, and so does a glyph at the top of a page, which gets pushed down. An illustration is one glyph alone after a `---` page break. At most 13 lines are added, the most a page has above its last line, so a font that reaches further than 126 pixels leaks over the top of the page instead of failing the build. Such a font suits a drop cap at the start of a section:
 
 ```
 ## 1:

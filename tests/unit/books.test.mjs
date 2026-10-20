@@ -204,15 +204,15 @@ describe('book generator markdown', () => {
     assert.deepEqual(page('<a href="https://example.com">x</a>').component.click_event, { action: 'open_url', url: 'https://example.com' });
   });
 
-  it('<br> is a page break, a newline a line break and a header is bold and underlined', () => {
-    assert.deepEqual(gen.splitSections('one  \ntwo\n\n<br>three<BR/>\n# Head'), ['one\ntwo', 'three', '<h1>Head</h1>']);
+  it('a line of --- is a page break, a newline a line break and a header is bold and underlined', () => {
+    assert.deepEqual(gen.splitSections('one  \ntwo\n\n---\nthree\n  ---  \n# Head'), ['one\ntwo', 'three', '<h1>Head</h1>']);
     // A heading gets one empty line under it, and not a second when there is one already
     assert.deepEqual(gen.splitSections('# Head\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n\ntext'), ['<h1>Head</h1>\n\ntext']);
-    assert.equal(gen.pagesOf('one<br>two').length, 2);
-    // A <br> in code is text, not a break
-    assert.equal(gen.splitSections('a `<br>` b<br>c').length, 2);
-    assert.equal(gen.splitSections('a\n```\n<br>\n```\nb<br>c').length, 2);
+    assert.equal(gen.pagesOf('one\n---\ntwo').length, 2);
+    // A --- in code or after other text is not a break
+    assert.equal(gen.splitSections('a ---\n`---`\nb\n---\nc').length, 2);
+    assert.equal(gen.splitSections('a\n```\n---\n```\nb\n---\nc').length, 2);
   });
 });
 
@@ -311,8 +311,8 @@ describe('book generator pagination', () => {
     assert.deepEqual(gen.pagesOf(body).map(text), ['WWWWWWWW WWWWWWWWW']);
   });
 
-  it('<br> starts a page even when the last one has room', () => {
-    assert.deepEqual(gen.pagesOf('one<br>two').map(text), ['one', 'two']);
+  it('--- starts a page even when the last one has room', () => {
+    assert.deepEqual(gen.pagesOf('one\n---\ntwo').map(text), ['one', 'two']);
   });
 });
 
@@ -326,7 +326,7 @@ describe('book generator files', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'books-'));
     return { dir, opts: { bookDir: path.join(dir, 'books'), modifierDir: path.join(dir, 'mod'), tableDir: path.join(dir, 'table'), langDir: path.join(dir, 'lang') } };
   };
-  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore:\n  first line\n    second line\n---\n\nPage **one**<br>Page two';
+  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore:\n  first line\n    second line\n---\n\nPage **one**\n---\nPage two';
 
   it('frontmatter gives title, author, rarity and trimmed lore', () => {
     const { meta, body } = gen.parseFrontmatter(SOURCE);
@@ -443,7 +443,7 @@ describe('book generator files', () => {
   it('filter spans give the filtered side of a page, other locales only write lang', () => {
     const { dir, opts } = sandbox();
     try {
-      const source = '---\ntitle: Test Book\nauthor: Me\n---\n\nSay <filter as="||heck||">hell</filter> now<br>Page two';
+      const source = '---\ntitle: Test Book\nauthor: Me\n---\n\nSay <filter as="||heck||">hell</filter> now\n---\nPage two';
       write(dir, 'books/en_us/test.md', source);
       write(dir, 'books/es_es/test.md', source.replace('Say', 'Di'));
       gen.generate(opts);
@@ -546,7 +546,7 @@ describe('book generator files', () => {
   });
 
   it('a tall glyph at the top of a page is pushed down by empty lines so the illustration sits in place', () => {
-    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustrations">0</font>';
+    const md = 'text\n---\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustrations">0</font>';
     const pages = gen.pagesOf(md);
     assert.equal(pages.length, 2);
     const { lines } = gen.layout(pages[1]);
@@ -612,14 +612,27 @@ describe('book generator files', () => {
     }
   });
 
-  it('a font in the frontmatter sets the font of every page, a span inside keeps its own', () => {
+  it('a body font in the styles sets the font of every page, a span inside keeps its own', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nstyles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
       gen.generate(opts);
       const [page] = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
       assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance');
       assert.equal(page.with[0].font, 'minecraft:illageralt');
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('the old frontmatter font key still works and warns that it is deprecated', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance\n---\n\nText');
+      const { warnings } = gen.generate(opts);
+      assert.ok(warnings.some((w) => /test\.md: the frontmatter font is deprecated, use styles: \{ body: \{ font: foxcraft_dungeon_loot:pixellated_elegance \} \}/.test(w)));
+      const [page] = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
+      assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -635,11 +648,132 @@ describe('book generator files', () => {
     }
   });
 
+  it('data in the frontmatter is set as custom data in the SNBT string form, on written and writable books', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\ndata: {\n  DungeonLootId: 87,\n  DungeonItem: 1b\n}\n---\n\nText');
+      write(dir, 'books/en_us/note.md', '---\ntitle: Note\nwritable: true\ndata: {DungeonLootId:88}\n---\n\nText');
+      gen.generate(opts);
+      const read = (id) => JSON.parse(fs.readFileSync(path.join(opts.modifierDir, id + '.json'), 'utf8')).functions;
+      assert.deepEqual(read('test')[1], { type: 'minecraft:set_custom_data', tag: '{ DungeonLootId: 87, DungeonItem: 1b }' });
+      assert.deepEqual(read('note')[1], { type: 'minecraft:set_custom_data', tag: '{DungeonLootId:88}' });
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('data that is not an SNBT compound stops the build', () => {
+    for (const data of ['{DungeonLootId:}', '[1,2]', 'nope']) {
+      const { dir, opts } = sandbox();
+      try {
+        write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\ndata: ${data}\n---\n\nText`);
+        assert.throws(() => gen.generate(opts), /test\.md: frontmatter data/);
+      } finally {
+        fs.rmSync(dir, { recursive: true, force: true });
+      }
+    }
+  });
+
+  it('a model in the frontmatter is saved as the item_model component', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nmodel: foxcraft_dungeon_loot:random_loot/written_letter.json\n---\n\nText');
+      gen.generate(opts);
+      const set = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components;
+      assert.equal(set['minecraft:item_model'], 'foxcraft_dungeon_loot:random_loot/written_letter');
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a frontmatter model that is not a resource location stops the build', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nmodel: Foo Bar\n---\n\nText');
+      assert.throws(() => gen.generate(opts), /test\.md: frontmatter model/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('writable: true makes a book and quill with plain pages and no author needed', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Letter\nwritable: true\n---\n\nSome **bold** text');
+      gen.generate(opts);
+      const modifier = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8'));
+      const components = modifier.functions[0].components;
+      assert.deepEqual(components['minecraft:writable_book_content'].pages, ['Some bold text']);
+      assert.equal(components['minecraft:written_book_content'], undefined);
+      const table = JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'test.json'), 'utf8'));
+      assert.equal(table.pools[0].entries[0].name, 'minecraft:writable_book');
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('rejects a rarity that does not exist', () => {
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', SOURCE.replace('epic', 'legendary'));
       assert.throws(() => gen.generate(opts), /rarity/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('reflowLore joins lines without ending punctuation, keeps sentence ends and wraps to the width', () => {
+    const lore = require('../../scripts/lore.js');
+    const out = lore.reflowLore(['Hastily scrawled sheet music with', 'accompanying lyrics.', 'Second paragraph that is long enough to need a wrap somewhere here.']);
+    assert.equal(out[0], 'Hastily scrawled sheet music with');
+    assert.equal(out[1], 'accompanying lyrics.');
+    assert.ok(out.length > 3);
+    for (const line of out) assert.ok(lore.loreWidth(line) <= lore.LORE_PIXELS, line);
+    assert.deepEqual(lore.reflowLore(['short.', '', 'also short.']), ['short.', '', 'also short.']);
+  });
+
+  it('a lore line starting with { or [ is a JSON text component, anything else is plain text', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Plain line.\n  {"text":"Blue","color":"blue","italic":true}\n  ["A ",{"text":"list","bold":true}]\n---\n\nText');
+      const { warnings } = gen.generate(opts);
+      assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
+      const { lore } = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[1];
+      assert.deepEqual(lore, ['Plain line.', { text: 'Blue', color: 'blue', italic: true }, ['A ', { text: 'list', bold: true }]]);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('lore can be one JSON list over several lines', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore: [\n  "[Not a component]",\n  {"text": "Blue", "color": "blue"}\n]\n---\n\nText');
+      const { warnings } = gen.generate(opts);
+      assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
+      const { lore } = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[1];
+      assert.deepEqual(lore, ['[Not a component]', { text: 'Blue', color: 'blue' }]);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a lore line of broken JSON stops the build', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  {"text":\n---\n\nText');
+      assert.throws(() => gen.generate(opts), /lore line/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a bad lore block comes with the whole block reflowed', () => {
+    const { dir, opts } = sandbox();
+    try {
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Hastily scrawled sheet music with accompanying lyrics.\n---\n\nText');
+      const { warnings } = gen.generate(opts);
+      assert.ok(warnings.some((w) => w.includes('reflowed lore') && w.includes('\n  Hastily scrawled sheet music with\n  accompanying lyrics.')));
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -666,9 +800,9 @@ describe('book generator files', () => {
         const text = fs.readFileSync(path.join(root, locale.name, name), 'utf8');
         if (!text.trimStart().startsWith('---')) continue;
         const { meta } = gen.parseFrontmatter(text);
-        const lines = meta.lore.map((text) => ({ text, width: lore.loreWidth(text) }));
+        const lines = gen.loreEntries(meta);
         for (const { index, word } of lore.shortLines(lines)) over.push(`${locale.name}/${name}: "${lines[index].text}" has no ending punctuation and "${word}" from the next line fits`);
-        for (const line of meta.lore) if (lore.loreWidth(line) > lore.LORE_PIXELS) over.push(`${locale.name}/${name}: ${lore.loreWidth(line)} pixels, ${lore.LORE_PIXELS} fit: "${line}", ${lore.wrapAdvice(line)}`);
+        for (const line of lines) if (line.width > lore.LORE_PIXELS) over.push(`${locale.name}/${name}: ${line.width} pixels, ${lore.LORE_PIXELS} fit: "${line.raw}"${line.plain ? ', ' + lore.wrapAdvice(line.raw) : ''}`);
       }
     }
     assert.deepEqual(over, []);

@@ -20,8 +20,12 @@ const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
 // Frontmatter keys, anything else is warned about. Title and author are required.
-const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'styles', 'debug'];
+const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'debug'];
 const REQUIRED_KEYS = ['title', 'author'];
+
+// writable: true makes a book and quill. Its pages are plain strings, so it has no author and keeps no formatting
+const isWritable = (meta) => String(meta.writable).toLowerCase() === 'true';
+const requiredKeys = (meta) => (isWritable(meta) ? ['title'] : REQUIRED_KEYS);
 
 // Project dev flag, config.json mc.dev. Books with debug: true are only generated when it is set.
 function devMode() {
@@ -41,7 +45,7 @@ const PAGE_EDIT_LENGTH = 1024;
 // Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
 const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
 const { highlight } = require('./highlight.js');
-const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, wrapAdvice, shortLines } = require('./lore.js');
+const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapAdvice, shortLines, reflowLore } = require('./lore.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
@@ -154,6 +158,22 @@ function bracesOpen(text) {
     return depth;
 }
 
+// How many [ and { are still open at the end of the text, not counting the ones in quoted strings
+function nestingOpen(text) {
+    let depth = 0;
+    let quote = null;
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (quote) {
+            if (c === '\\') i++;
+            else if (c === quote) quote = null;
+        } else if (c === '"' || c === "'") quote = c;
+        else if (c === '[' || c === '{') depth++;
+        else if (c === ']' || c === '}') depth--;
+    }
+    return depth;
+}
+
 function parseFrontmatter(text) {
     const lines = text.replace(/\r\n/g, '\n').split('\n');
     const meta = { lore: [] };
@@ -168,7 +188,25 @@ function parseFrontmatter(text) {
         if (m && !/^\s/.test(line)) {
             key = m[1].toLowerCase();
             if (key === 'lore') {
-                if (m[2].trim()) meta.lore.push(m[2].trim());
+                let value = m[2].trim();
+                if (value.startsWith('[')) {
+                    // lore: [ "line", {"text": "component"} ] over as many lines as it takes to close the list; each entry is kept as it is
+                    while (nestingOpen(value) > 0 && n + 1 < frontmatter.length) value += '\n' + frontmatter[++n];
+                    if (nestingOpen(value) !== 0) throw new Error('lore in the frontmatter is not closed');
+                    let list;
+                    try {
+                        list = parseSnbt(value.replace(/,\s*$/, ''));
+                    } catch (e) {
+                        throw new Error(`lore is not a valid JSON or SNBT list: ${e.message}`);
+                    }
+                    meta.lore.push(...list.map((entry) => ({ entry })));
+                } else if (value) meta.lore.push(value);
+            } else if (key === 'data') {
+                // An SNBT compound over as many lines as it takes to close its braces, kept as the SNBT string
+                let text = m[2];
+                while (nestingOpen(text) > 0 && n + 1 < frontmatter.length) text += '\n' + frontmatter[++n];
+                if (nestingOpen(text) !== 0) throw new Error('data in the frontmatter is not closed');
+                meta.data = text.replace(/,\s*$/, '').replace(/\s*\n\s*/g, ' ').trim();
             } else if (key === 'styles') {
                 // A compound over as many lines as it takes to close its braces
                 let text = m[2];
@@ -209,6 +247,13 @@ function parseFont(value) {
     const id = String(value).trim();
     if (!/^([a-z0-9_.-]+:)?[a-z0-9/._-]+$/.test(id)) throw new Error(`font "${value}" is not a resource location, lowercase letters, digits and _ . - / only`);
     return id;
+}
+
+// An item model is a resource location of an item definition, assets/<namespace>/items/<path>.json. A trailing .json is dropped
+function parseModel(value) {
+    const id = String(value).trim().replace(/\.json$/, '');
+    if (!/^([a-z0-9_.-]+:)?[a-z0-9/._-]+$/.test(id)) throw new Error(`model "${value}" is not a resource location, lowercase letters, digits and _ . - / only`);
+    return id.includes(':') ? id : `${NS}:${id}`;
 }
 
 function parseColor(value) {
@@ -779,8 +824,8 @@ function paginate(content, ascentOf = (font) => FONTS.ascentOf(font)) {
 
 //region Books
 
-// <br> is a manual page break. Between them a newline in the source is a line break, so a blank line is an empty line,
-// and a line that is too long wraps by itself. Spans do not reach across a <br>.
+// A line of only --- is a manual page break. Between them a newline in the source is a line break, so a blank line is an empty line,
+// and a line that is too long wraps by itself. Spans do not reach across a page break.
 const escapeMarkup = (s) => s.replace(/[\\*_~|<`]/g, '\\$&');
 
 // The lines of a code block as markup: literal spans in the code font, colored by the language of the fence when the
@@ -812,28 +857,16 @@ function fenceCode(lines) {
     return out;
 }
 
-// Splits on <br> outside of fenced and inline code, so code that shows a <br> stays in one piece
+// Splits on a line of only --- outside of fenced code, so code that shows one stays in one piece
+const PAGE_BREAK = /^\s*---\s*$/;
+
 function splitOnBreaks(body) {
     const sections = [[]];
     let fenced = false;
     for (const line of body.split('\n')) {
-        const fence = /^\s*```/.test(line);
-        if (fence) fenced = !fenced;
-        if (fence || fenced) {
-            sections[sections.length - 1].push(line);
-            continue;
-        }
-        // Inline code spans are masked while looking for breaks
-        const masked = line.replace(/(`+)[^`]*?\1/g, (m) => '\0'.repeat(m.length));
-        const breaks = /<br\s*\/?>/gi;
-        let last = 0;
-        let found;
-        while ((found = breaks.exec(masked))) {
-            sections[sections.length - 1].push(line.slice(last, found.index));
-            sections.push([]);
-            last = found.index + found[0].length;
-        }
-        sections[sections.length - 1].push(line.slice(last));
+        if (/^\s*```/.test(line)) fenced = !fenced;
+        if (!fenced && PAGE_BREAK.test(line)) sections.push([]);
+        else sections[sections.length - 1].push(line);
     }
     return sections.map((lines) => lines.join('\n'));
 }
@@ -846,7 +879,7 @@ function splitSections(body) {
                 // A heading is bold and underlined and always has an empty line under it
                 .flatMap((line, n, lines) => (/^#{1,6}\s+/.test(line) ? [line.replace(/^(#{1,6})\s+(.*)$/, (_, hashes, text) => `<h${hashes.length}>${text}</h${hashes.length}>`), ...(lines[n + 1] === '' ? [] : [''])] : [line]))
                 .join('\n')
-                // The line break that ends the <br> line goes, the empty lines after it are paginate's to keep or drop
+                // The line break that ends the --- line goes, the empty lines after it are paginate's to keep or drop
                 .replace(/^\n|\n+$/g, '')
         )
         .filter(Boolean);
@@ -881,7 +914,26 @@ function readSource(file) {
             throw new Error(`${file}: frontmatter ${e.message}`);
         }
     }
-    return { meta, pages: pagesOf(body, meta.font || null, hyphenatorOf(path.basename(path.dirname(file))), meta.styles || {}) };
+    if (meta.data !== undefined) {
+        let data;
+        try {
+            data = parseSnbt(meta.data);
+        } catch (e) {
+            throw new Error(`${file}: frontmatter data is not valid SNBT: ${e.message}`);
+        }
+        if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error(`${file}: frontmatter data is an SNBT compound, like {DungeonLootId:87}`);
+    }
+    if (meta.model) {
+        try {
+            parseModel(meta.model);
+        } catch (e) {
+            throw new Error(`${file}: frontmatter ${e.message}`);
+        }
+    }
+    if (meta.writable !== undefined && !/^(true|false)$/i.test(String(meta.writable))) throw new Error(`${file}: frontmatter writable is true or false`);
+    // A writable book's pages are not hyphenated, a hyphen would stay in the text the player edits
+    const hyphenator = isWritable(meta) ? null : hyphenatorOf(path.basename(path.dirname(file)));
+    return { meta, pages: pagesOf(body, meta.font || null, hyphenator, meta.styles || {}) };
 }
 
 // numbers are the page indexes, when the list is a subset of the pages
@@ -920,8 +972,30 @@ function rarityOf(meta) {
     return name;
 }
 
+// A lore line is plain text, or JSON/SNBT for a text component when it starts with { or [. Plain text is shown as is, in the
+// default lore style. Returns { raw, component, text, width }: text is what a line reads as, empty for a component that is not
+// plain text, so the wrap checks leave it alone
+function loreEntries(meta) {
+    return meta.lore.map((item) => {
+        if (typeof item === 'object') {
+            const raw = JSON.stringify(item.entry);
+            if (typeof item.entry === 'string') return { raw: item.entry, component: item.entry, text: item.entry, width: loreWidth(item.entry), plain: true };
+            return { raw, component: item.entry, text: '', width: componentWidth(item.entry), plain: false };
+        }
+        const raw = item;
+        if (!/^[{[]/.test(raw)) return { raw, component: raw, text: raw, width: loreWidth(raw), plain: true };
+        let component;
+        try {
+            component = parseSnbt(raw);
+        } catch (e) {
+            throw new Error(`lore line ${raw} is not valid JSON or SNBT: ${e.message}`);
+        }
+        return { raw, component, text: '', width: componentWidth(component), plain: false };
+    });
+}
+
 function loreLines(meta) {
-    const lines = [...meta.lore];
+    const lines = loreEntries(meta).map((e) => e.component);
     const name = rarityOf(meta);
     if (name) lines.push(['Rarity: ', { text: name[0].toUpperCase() + name.slice(1), color: RARITY_COLORS[name], italic: true }]);
     return lines;
@@ -934,6 +1008,34 @@ function itemName(title, rarity) {
     const base = { color: RARITY_COLORS[rarity], italic: false };
     if (!title.rich) return { text: title.filtered || title.text, ...base };
     return { text: '', ...base, extra: [].concat(title.rich) };
+}
+
+// The text of a page as the reader sees it, with none of the formatting
+const plainText = (tree) => glyphs(tree).map((g) => g.ch).join('');
+
+// A book and quill keeps plain strings, so the formatting, fonts, title and author are lost. The title is the item name
+function buildWritable(source, title, file, warnings) {
+    const { meta } = source;
+    for (const key of ['author', 'font', 'styles']) if (meta[key]) warnings.push(`${file}: ${key} does nothing in a writable book`);
+    const pages = source.pages.map((tree) => variant(tree, false));
+    const filtered = source.pages.map((tree) => variant(tree, true));
+    const texts = pages.map((tree, n) => {
+        const raw = plainText(tree);
+        if (raw.length > PAGE_EDIT_LENGTH) warnings.push(`${file}: page ${n + 1} has ${raw.length} characters, the editor stops at ${PAGE_EDIT_LENGTH}`);
+        const other = plainText(filtered[n]);
+        return other === raw ? raw : { raw, filtered: other };
+    });
+    if (texts.length > MAX_PAGES) warnings.push(`${file}: ${texts.length} pages, a book takes ${MAX_PAGES}`);
+    const rarity = rarityOf(meta);
+    const set = { 'minecraft:writable_book_content': { pages: texts } };
+    set['minecraft:custom_name'] = rarity ? itemName(title, rarity) : title.rich || { text: title.filtered || title.text, italic: false };
+    if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
+    const functions = [{ type: 'minecraft:set_components', components: set }];
+    // The SNBT string form, a JSON compound would turn small ints into bytes
+    if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
+    const lore = loreLines(meta);
+    if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
+    return { modifier: { type: 'minecraft:sequence', functions }, lang: {}, warnings };
 }
 
 /** Item modifier JSON and lang entries for one book in one locale. */
@@ -949,6 +1051,7 @@ function buildBook(id, file) {
         if (text && text.length > MAX_TITLE) warnings.push(`${file}: ${kind} is ${text.length} characters, the book takes ${MAX_TITLE}`);
     }
     if (pages.length > MAX_PAGES) warnings.push(`${file}: ${pages.length} pages, a book takes ${MAX_PAGES}`);
+    if (isWritable(meta)) return buildWritable(source, title, file, warnings);
     let components = pageComponents(pages, id, 'page', lang, warnings, file);
 
     // The filtered reading cuts pages where the raw one does. A page that reads the same stays a plain component, the game
@@ -963,16 +1066,40 @@ function buildBook(id, file) {
         const own = pageComponents(differs.map((n) => filtered[n]), id, 'filtered', lang, warnings, file, differs);
         components = components.map((raw, n) => (differs.includes(n) ? { raw, filtered: own[differs.indexOf(n)] } : raw));
     }
-    const loreRows = meta.lore.map((text) => ({ text, width: loreWidth(text) }));
+    const warningsBeforeLore = warnings.length;
+    const loreRows = loreEntries(meta);
     for (const { index, word } of shortLines(loreRows)) warnings.push(`${file}: lore line "${loreRows[index].text}" has no ending punctuation and "${word}" from the next line fits`);
-    for (const line of meta.lore) if (loreWidth(line) > LORE_PIXELS) warnings.push(`${file}: lore line is ${loreWidth(line)} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: "${line}", ${wrapAdvice(line)}`);
+    for (const row of loreRows) {
+        if (row.width <= LORE_PIXELS) continue;
+        warnings.push(`${file}: lore line is ${row.width} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: "${row.raw}"${row.plain ? ', ' + wrapAdvice(row.raw) : ''}`);
+    }
+    // When any line is off, offer the whole block reflowed so it can be pasted into the frontmatter
+    const loreProblems = warnings.length - warningsBeforeLore;
+    if (loreProblems) {
+        // A text component keeps its line and ends the paragraph before it
+        const reflowed = [];
+        let run = [];
+        const flush = () => reflowed.push(...reflowLore(run.splice(0)));
+        for (const row of loreRows) {
+            if (row.plain) run.push(row.raw);
+            else {
+                flush();
+                reflowed.push(row.raw);
+            }
+        }
+        flush();
+        if (reflowed.join('\n') !== loreRows.map((r) => r.raw).join('\n')) warnings.push(`${file}: reflowed lore, replace the lines under "lore:" with:\n${reflowed.map((l) => '  ' + l).join('\n')}`);
+    }
 
     const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author, pages: components, resolved: true };
     const set = { 'minecraft:written_book_content': content };
     const rarity = rarityOf(meta);
     if (rarity) set['minecraft:custom_name'] = itemName(title, rarity);
     else if (title.rich) set['minecraft:custom_name'] = title.rich;
+    if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
     const functions = [{ type: 'minecraft:set_components', components: set }];
+    // The SNBT string form, a JSON compound would turn small ints into bytes
+    if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
     const lore = loreLines(meta);
     if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
     return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
@@ -1007,8 +1134,8 @@ function allTable(ids) {
     return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${id}` })) }] };
 }
 
-function tableFor(id) {
-    return { pools: [{ rolls: 1, entries: [{ type: 'minecraft:item', name: 'minecraft:written_book' }] }], modifier: `${NS}:random_loot/book/generated/${id}` };
+function tableFor(id, writable = false) {
+    return { pools: [{ rolls: 1, entries: [{ type: 'minecraft:item', name: writable ? 'minecraft:writable_book' : 'minecraft:written_book' }] }], modifier: `${NS}:random_loot/book/generated/${id}` };
 }
 
 // { locale: { id: { file } } } from src/books/<locale>/<id>.md. A book needs a title and an author and anything else in
@@ -1039,11 +1166,12 @@ function findSources(dir, warnings = [], dev = devMode()) {
             } catch (e) {
                 throw new Error(`${file}: ${e.message}`);
             }
-            for (const key of REQUIRED_KEYS) if (!String(meta[key] || '').trim()) throw new Error(`${file}: frontmatter ${key} is required`);
+            for (const key of requiredKeys(meta)) if (!String(meta[key] || '').trim()) throw new Error(`${file}: frontmatter ${key} is required`);
+            if (meta.font !== undefined) warnings.push(`${file}: the frontmatter font is deprecated, use styles: { body: { font: ${meta.font} } }`);
             for (const key of Object.keys(meta)) if (!FRONTMATTER_KEYS.includes(key)) warnings.push(`${file}: unsupported frontmatter key "${key}", one of ${FRONTMATTER_KEYS.join(', ')}`);
             if (String(meta.debug).toLowerCase() === 'true' && !dev) hidden.add(m[1]);
             else if (meta.debug !== undefined && !/^(true|false)$/i.test(String(meta.debug))) throw new Error(`${file}: frontmatter debug is true or false`);
-            books[m[1]] = { file, rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
+            books[m[1]] = { file, writable: isWritable(meta), rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
         }
     }
     for (const books of Object.values(found)) for (const id of hidden) delete books[id];
@@ -1080,7 +1208,7 @@ function generate(options = {}) {
                 const modifier = path.join(modifierDir, id + '.json');
                 if (emit(modifier, json(built.modifier), check)) changed.push(modifier);
                 const table = path.join(tableDir, id + '.json');
-                if (emit(table, json(tableFor(id)), check)) changed.push(table);
+                if (emit(table, json(tableFor(id, book.writable)), check)) changed.push(table);
             } else {
                 const reference = Object.keys(buildOnce(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {
@@ -1129,7 +1257,7 @@ function generate(options = {}) {
 
 //endregion
 
-module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth };
+module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
 
 if (require.main === module) {
     const args = process.argv.slice(2);

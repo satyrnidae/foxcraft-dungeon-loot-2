@@ -23,7 +23,10 @@ The authoring guide, with the tall font and hyphenation rules and the `<span>` t
 title: Book title, or SNBT text component
 author: Name
 rarity: common|uncommon|rare|epic|mythic|cursed
-font: foxcraft_dungeon_loot:pixellated_elegance
+styles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }
+model: foxcraft_dungeon_loot:random_loot/written_letter
+data: {DungeonLootId:87,DungeonItem:1b}
+writable: false
 debug: true
 lore:
   first lore line, wrapped by hand
@@ -34,17 +37,20 @@ Text flows over the pages by itself. A newline is a line break,
 so this is the second line, and a blank line is an empty one.
 
 A long line wraps on its own, and the page changes after 14 lines.
-<br>
+---
 This starts a new page.
 ```
 
-- `<br>` is a manual page break. Everything else is cut into pages automatically: a page holds 14 lines of 114 pixels, a line wraps after its last space, and a page never starts with an empty line. A line that starts at a newline keeps its indentation, a line that starts at a wrap loses its leading spaces, and every line loses its trailing spaces. A trim can change where text wraps, so the layout is redone after each cut until no line needs one.
-- Spans do not reach across a `<br>`, close them first. `<br>` inside a fence or an inline code span is not a break.
+- A line of only `---` is a manual page break. Everything else is cut into pages automatically: a page holds 14 lines of 114 pixels, a line wraps after its last space, and a page never starts with an empty line. A line that starts at a newline keeps its indentation, a line that starts at a wrap loses its leading spaces, and every line loses its trailing spaces. A trim can change where text wraps, so the layout is redone after each cut until no line needs one.
+- Spans do not reach across a page break, close them first. A `---` inside a fence, or with other text on its line, is not a break.
 - Title is plain text, at most 32 characters. `<filter as="Darn Book">Damn Book</filter>` in it sets the chat-filtered title, the same tag as in the text. The filtered title is limited to 32 characters too, and an SNBT title cannot have one. A title in SNBT also sets `custom_name` and its plain text becomes the book title. A book with a `rarity` gets the item name in the color of the rarity, not italic, like the other items of the pack; the item name has no filtered side, so it uses the filtered title when there is one; an SNBT title keeps its own colors and styles over it. A book without a rarity keeps the name the game derives from the title.
-- Font is optional and sets the font of the whole text, a `<font face>` inside still wins. It is measured for the layout, so the page fit follows it. Title and lore keep the default font.
+- Model is optional, an item definition id saved as `minecraft:item_model`; `.json` is dropped and a bare path gets the pack namespace.
+- Data is optional, an SNBT compound written as `minecraft:set_custom_data` in its string form, so byte and int suffixes survive.
+- Writable is optional, `true` makes a `minecraft:writable_book` with plain string pages: no formatting, hyphenation, author or lang entries, and the title is the item name.
+- The font of the whole text is `styles: { body: { font: ... } }`, a `<font face>` inside still wins; the old `font:` key still works, with a deprecation warning. It is measured for the layout, so the page fit follows it. Title and lore keep the default font.
 - Rarity appends the `Rarity: ` lore line after the lore, colored like the rest of the pack. Lore lines stay within 44 average characters, 226 pixels, and the script warns about a line over that or one that stops early.
 - Formatting: `**bold**`, `*italic*` or `_italic_`, `__underlined__`, `~~strikethrough~~`, `||obfuscated||`, `# Header` as bold and underlined with an empty line under it, `\*` to escape. Stacked formatting is one component, nested formatting uses `with`.
-- `inline code` and fenced code blocks, three backticks on their own line, are set in `foxcraft_dungeon_loot:pixel_mono`. Their text is literal, nothing in it is markup, a block keeps its indentation and a `#` in it is not a heading. A backtick without a closer on the line stays a backtick. A block does not reach across a `<br>`. A block with a language after the fence is colored: `mcfunction`, `json`, `javascript` or `js`, `bash` or `sh`, `python` or `py`, `yaml` and `java`. A block with none, or one that is not in that list, stays plain. Prism does the lexing, a dependency; mcfunction has a tokenizer of its own in `scripts/highlight.js`, which also holds the colors. The code itself is written as plain text components, not translatable ones. A block is one `with` entry of its page, a translate component with a lang key of its own for the template that joins the pieces, so the text around it has a single `%n$s` for all the code. `code_block_test_book` shows every language.
+- `inline code` and fenced code blocks, three backticks on their own line, are set in `foxcraft_dungeon_loot:pixel_mono`. Their text is literal, nothing in it is markup, a block keeps its indentation and a `#` in it is not a heading. A backtick without a closer on the line stays a backtick. A block does not reach across a page break. A block with a language after the fence is colored: `mcfunction`, `json`, `javascript` or `js`, `bash` or `sh`, `python` or `py`, `yaml` and `java`. A block with none, or one that is not in that list, stays plain. Prism does the lexing, a dependency; mcfunction has a tokenizer of its own in `scripts/highlight.js`, which also holds the colors. The code itself is written as plain text components, not translatable ones. A block is one `with` entry of its page, a translate component with a lang key of its own for the template that joins the pieces, so the text around it has a single `%n$s` for all the code. `code_block_test_book` shows every language.
 - `<font color="gray" face="minecraft:illageralt" shadow="#80ff0000">text</font>`: color is a name or `#rrggbb`, face is the font, shadow is `#aarrggbb` for `shadow_color`.
 - `<a on_click='{action:copy_to_clipboard,value:"text"}' on_hover='{action:show_text,value:"tip"}'>text</a>`: both attributes take SNBT click and hover events. A plain `href="https://..."` makes an `open_url`.
 - `<filter as="darn">damn</filter>`: the chat-filtered text. Players with chat filtering on see `as` in its place, everyone else sees the content. `as` takes the same markdown as the text and inherits the formatting around the span. Pages are cut by the raw text and the filtered page follows, so both have the same page count. A page with no difference stays a plain component. Warns when a filtered page runs over 14 lines or a page break falls inside a span. An old `<id>_filtered.md` is ignored with a warning.
