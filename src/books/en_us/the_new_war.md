@@ -1,12 +1,23 @@
 ---
-title: Hand-scrawled Journal
-author: Private James Rondeux, 1
+title: Torn Journal Page
+author: Unknown
 rarity: common
-font: foxcraft_dungeon_loot:textmachine_handwriting
+model: foxcraft_dungeon_loot:random_loot/written_letter
 lore:
   The notes portray someone's thoughts on...
   a war? But... with whom? Or rather, what...?
+styles: {
+  body: {
+    font: foxcraft_dungeon_loot:textmachine_handwriting
+  }
+  .annotation: {
+    font: minecraft:default,
+    italic: true
+  }
+}
 ---
+
+<style class=".annotation">The text is scrawled and barely legible, as though it were written in a hurry</style>
 
 # June 14th, 2XXX
 

@@ -1,12 +1,14 @@
 ---
 title: Palomina and the Dæmon Lord
 author: Unknown
-rarity: common
+rarity: uncommon
 lore:
   A faded, leather-bound bible. It seems
   familiar, somehow...
-font: foxcraft_dungeon_loot:pixellated_elegance
 styles: {
+  body: {
+    font: foxcraft_dungeon_loot:pixellated_elegance
+  },
   .front: {
     font: foxcraft_dungeon_loot:hexenaat
   }
@@ -25,7 +27,7 @@ But in their endless search for knowledge, they discovered the prison of the DÆ
 Wasting no time, MELIMONAS struck out against MYSTERIA and, catching Them unawares, drove Them from the Sky. The DÆMON, victorious, took the Earth as Its trophy, swallowing the entire world and blackening the Sky with an endless Night.
 
 Generations passed, and Humanity dwindled. The forces of MELIMONAS were relentless in their campaign against all that was blessed with MYSTERIA's Light. Cities fell. Libraries burned. Too much, lost to the Fires of MELIMONAS.
-<br>
+---
 
 ## Chaptre II: Knight
 
@@ -44,7 +46,7 @@ And MYSTERIA instructed, "Thou must take Mine Light to the highest point and loo
 "Should its aim be true, and its bearer pure of heart, it shall strike down the DÆMON LORD and drive It from this place."
 
 Thus spake MYSTERIA.
-<br>
+---
 
 ## Chaptre III: Merchant
 
@@ -70,7 +72,7 @@ Upon reaching the highest peak, PALOMINA called out, "MELIMONAS!
 "I have beaten back Your forces! I have reached this, the highest peak in all the land, and I shall do battle unto You!"
 
 Thus spake PALOMINA.
-<br>
+---
 
 ## Chaptre IV: Deception
 
@@ -90,7 +92,7 @@ MELIMONAS erupted into raucous laughter as the mortified PALOMINA scrambled to p
 Thus spake MELIMONAS.
 
 PALOMINA, out of options, and not knowing the Dark Spear's blighted provenance, heft the Dark Spear above her head. But when she tried to loose the Spear, it held onto her with tendrils of oozing Darkness and pulled her high into the Sky.
-<br>
+---
 
 ## Chaptre V: Loss
 
@@ -106,7 +108,7 @@ And MELIMONAS besieged PALOMINA's mind with horrors. Towns abandoned. Children o
 The fall of Humanity itself.
 
 PALOMINA struggled against the tide of omens as they threatened to pull her under, deep into a sea of her own despair.
-<br>
+---
 
 ## Chaptre VI: Light
 
@@ -118,7 +120,7 @@ PALOMINA struggled against the tide of omens as they threatened to pull her unde
 Thus spake MYSTERIA.
 
 Slowly, PALOMINA understood. She needed not a Spear, but the Light, and the DÆMON LORD was much closer than before.
-<br>
+---
 
 ## Chaptre VII: Resolve
 
@@ -136,7 +138,7 @@ PALOMINA took aim at the DÆMON LORD, and once again loosed herself upon It, tea
 But even cleansed the Dark Spear refused to release PALOMINA's hand. And thus did it carry PALOMINA far beyond the Sky, and deep into the Night she pierced.
 
 PALOMINA would never again return to the Earth, but she left behind the wound rent through the DÆMON's Night; a brilliant Moon to mark her sacrifice.
-<br>
+---
 
 ## Chaptre Final: Apotheosis
 
