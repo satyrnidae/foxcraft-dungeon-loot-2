@@ -526,6 +526,33 @@ describe('book generator files', () => {
     assert.equal(page[1].styles.font, font);
   });
 
+  it('inline code with pad after it is that many pixels of padding', () => {
+    const tick = String.fromCharCode(96);
+    const pad = (n) => gen.parseInline(`a${tick}${n}${tick}pad b`, 0, null).content;
+    const glyphs = (n) => [...pad(n)[1].content[0]].map((c) => c.charCodeAt(0));
+    assert.equal(pad('32')[1].styles.font, 'foxcraft_dungeon_loot:padding');
+    assert.deepEqual(glyphs('32'), [0xf820]);
+    assert.deepEqual(glyphs('0x10'), [0xf810]);
+    assert.deepEqual(glyphs('0o10'), [0xf808]);
+    assert.deepEqual(glyphs('0b0111_0001'), [0xf840, 0xf820, 0xf810, 0xf801]);
+    assert.deepEqual(glyphs('-3'), [0xf882, 0xf881]);
+    // The one space after pad is dropped, a second one stays
+    assert.deepEqual(pad('0'), ['a', 'b']);
+    assert.deepEqual(gen.parseInline(`a${tick}1${tick}pad  b`, 0, null).content.slice(2), [' b']);
+    assert.throws(() => pad('114'), /up to 113/);
+    assert.throws(() => pad('1__0'), /not a number/);
+    // Without pad and a space right after it, it is code
+    assert.equal(gen.parseInline(`${tick}32${tick} pad`, 0, null).content[0].styles.font, 'foxcraft_dungeon_loot:pixel_mono');
+    const glued = gen.parseInline(`${tick}32${tick}padLone`, 0, null).content;
+    assert.deepEqual(glued, [{ styles: { font: 'foxcraft_dungeon_loot:pixel_mono' }, content: ['32'] }, 'padLone']);
+    // The end of a line ends it too
+    assert.equal(gen.parseInline(`a${tick}3${tick}pad
+b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
+    // Padding takes its width on the page
+    const page = gen.pagesOf(`${tick}113${tick}pad ${tick}1${tick}pad`);
+    assert.equal(page.length, 1);
+  });
+
   it('a code block is colored by its language and written as literal text components', () => {
     const { highlight } = require('../../scripts/highlight.js');
     const colors = (code, language) => Object.fromEntries(highlight(code, language).flat().filter((p) => p.color).map((p) => [p.text, p.color]));
@@ -622,11 +649,20 @@ describe('book generator files', () => {
   it('the height of a glyph is the one of the provider that draws it, so a font mixes tall glyphs and short ones', () => {
     const fonts = fontsApi.loadFonts();
     const staff = 'foxcraft_dungeon_loot:staff_notation';
-    assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xe000)), 17);
+    // The ascent of the notation bitmap, read from the font so tuning it needs no change here
+    const file = path.join(pk.ROOT, 'texturepack', 'assets', 'foxcraft_dungeon_loot', 'font', 'staff_notation.json');
+    const tall = JSON.parse(fs.readFileSync(file, 'utf8')).providers.find((p) => p.file === 'foxcraft_dungeon_loot:font/notation.png').ascent;
+    assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xe000)), tall);
+    // The staff lines, from staff.png at three times the size, are drawn as high and as tall as the notes
+    const providers = JSON.parse(fs.readFileSync(file, 'utf8')).providers;
+    const notes = providers.find((p) => p.file === 'foxcraft_dungeon_loot:font/notation.png');
+    const lines = providers.find((p) => p.file === 'foxcraft_dungeon_loot:font/staff.png');
+    assert.deepEqual([lines.ascent, lines.height], [notes.ascent, notes.height]);
+    assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xef01)), tall);
     // minecraft:default at 3/4 and the padding, in the same font
     assert.equal(fonts.ascentOf(staff, 'a'), 5);
     assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xf808)), 0);
-    assert.equal(fonts.ascentOf(staff), 17);
+    assert.equal(fonts.ascentOf(staff), tall);
     // A line of words in the staff font sits in its line, a line of staff takes the lines above it
     const classes = { '.staff': { font: staff } };
     const [words] = gen.pagesOf('<style class="staff">just words</style>', null, null, classes);
@@ -959,4 +995,205 @@ describe('book give triggers', () => {
       assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add give_${id} trigger`), id);
     }
   });
+});
+
+describe('music fences', () => {
+  const music = require('../../scripts/music.js');
+  const widthOf = (ch) => lore.FONTS.widthOf(music.FONT, ch, false);
+  // The spans of each staff line, each as its color, the glyphs it draws but bars, its bars and how far it advances
+  const lines = (code) =>
+    music.musicLines(code, widthOf).map((line) =>
+      [...line.matchAll(/<font face="([^"]+)" color="([^"]+)" literal="1">([^<]*)<\/font>/g)].map(([, face, color, text]) => {
+        assert.equal(face, music.FONT);
+        const chars = [...text];
+        const drawn = chars.map((c) => c.charCodeAt(0)).filter((g) => g < 0xf800);
+        const isBar = (g) => g >= 0xee00 && g <= 0xee04;
+        return { color, glyphs: drawn.filter((g) => !isBar(g)), bars: drawn.filter(isBar), width: chars.reduce((sum, c) => sum + widthOf(c), 0) };
+      })
+    );
+
+  it('a fence is one staff line: the staff in grey back to its start, then the notes in black', () => {
+    const [line, ...more] = lines('||: ClefTr TSC Bm 4-4i 6-8i 6-8i 2-4 2-4 | 1-4 2-2 R1 :||');
+    assert.equal(more.length, 0);
+    const [staff, notes] = line;
+    assert.equal(staff.color, '#aaaaaa');
+    assert.equal(notes.color, '#000000');
+    assert.equal(staff.width, 0);
+    assert.ok(notes.width <= 114, `${notes.width}px`);
+    // A ledger line under each C4 and B3 on the staff; a start repeat, a bar and an end repeat in black
+    assert.deepEqual(staff.glyphs.filter((g) => g >= 0xef02), [0xef04, 0xef04, 0xef04, 0xef04]);
+    assert.deepEqual(staff.bars, []);
+    assert.deepEqual(notes.bars, [0xee01, 0xee04, 0xee02]);
+    // Clef, common time, F# and C#, E4 and G4 turned down, C4 and B3 up, the whole rest
+    assert.deepEqual(notes.glyphs, [0xe000, 0xe005, 0xe101, 0xe104, 0xe41b, 0xe519, 0xe519, 0xe40c, 0xe40c, 0xe40d, 0xe30c, 0xe211]);
+  });
+
+  it('stems go up below B4 and down from it, accidentals and ledger lines reach the extensions', () => {
+    const notes = (code) => lines(code)[0][1].glyphs;
+    const staff = (code) => lines(code)[0][0].glyphs.filter((g) => g >= 0xef02);
+    assert.deepEqual(notes('7-4 8-4 7-4i 8-8i 3-2i'), [0xe407, 0xe417, 0xe418, 0xe506, 0xe31c]);
+    assert.deepEqual(notes('#16-4 b0-1 n15-2 #8-4'), [0xe21b, 0xe40f, 0xe21a, 0xe210, 0xe31e, 0xe310, 0xe105, 0xe417]);
+    assert.deepEqual(staff('16-4 14-4 2-4 1-4 0-4 8-4'), [0xef02, 0xef03, 0xef04, 0xef04, 0xef05]);
+    // A ledger line is 12 columns: 3 pixels left of a head of 4 or a whole note of 6
+    const at = (code, g) => {
+      const place = (span) => {
+        let x = 0;
+        for (const ch of span) {
+          if (ch.charCodeAt(0) === g) return x;
+          x += widthOf(ch);
+        }
+      };
+      const [staff, ink] = music.musicLines(code, widthOf)[0].split('</font>').map((s) => s.replace(/^<font [^>]*>/, ''));
+      return place(staff) ?? place(ink);
+    };
+    assert.equal(at('16-4', 0xef02) - at('16-4', 0xe40f), -3);
+    assert.equal(at('16-1', 0xef02) - at('16-1', 0xe200), -3);
+    // A chord shares its heads' place and the stem of its note furthest from the middle line
+    assert.deepEqual(notes('(2-4 4-4 13-4)'), [0xe40c, 0xe40a, 0xe401]);
+    assert.deepEqual(staff('(2-1 16-1)'), [0xef02, 0xef04]);
+    // A note the font has no stem for that way takes the other
+    assert.deepEqual(notes('(2-4 15-4)'), [0xe40c, 0xe410]);
+  });
+
+  it('comments, keys by clef and written glyphs', () => {
+    const notes = (code) => lines(code)[0][1].glyphs;
+    assert.deepEqual(notes('3-4 // 4-4\n# 5-4\n6-4 # 7-4'), [0xe40b, 0xe408]);
+    assert.deepEqual(notes('ClefB Eb'), [0xe003, 0xe112, 0xe10f, 0xe113]);
+    // Every clef, the C clefs from staff.png, and the key signature each puts where it reads
+    const clefs = { Tr: 0xe000, Fr: 0xe001, Ba: 0xe002, B: 0xe003, Sb: 0xe004, S: 0xed00, Ms: 0xed01, A: 0xed02, Te: 0xed03, BaC: 0xed04 };
+    for (const [name, g] of Object.entries(clefs)) assert.equal(notes(`Clef${name}`)[0], g, name);
+    // D major on a tenor staff: F# on the second line from the bottom, C# on the fourth
+    assert.deepEqual(notes('ClefTe D'), [0xed03, 0xe107, 0xe103]);
+    assert.deepEqual(notes('ClefFr Bb'), notes('ClefB Bb').map((g) => (g === 0xe003 ? 0xe001 : g)));
+    assert.throws(() => notes('ClefX'), /not a clef/);
+    assert.deepEqual(notes('TS6/8 \ue600 \ue601 \ue602'), [0xe00a, 0xe006, 0xe600, 0xe601, 0xe602]);
+  });
+
+  it('glyphs written in a row keep touching however the line is stretched', () => {
+    // Where each glyph of the notes span starts
+    const xs = (code) => {
+      const ink = music.musicLines(code, widthOf)[0].split('</font>')[1].replace(/^<font [^>]*>/, '');
+      const out = {};
+      let x = 0;
+      for (const ch of ink) {
+        out[ch.charCodeAt(0)] = x;
+        x += widthOf(ch);
+      }
+      return out;
+    };
+    for (const code of ['\\ue600 \\ue601 \\ue602 8-2 |', 'ClefTr Bm \\ue600\\ue601\\ue602 R-1 8-8 |', '1-8 \\ue600 \\ue601 \\ue602 :||']) {
+      const at = xs(code);
+      // Each starts where the one before draws to, 12 columns at 5/6
+      assert.equal(at[0xe601] - at[0xe600], 10, code);
+      assert.equal(at[0xe602] - at[0xe601], 10, code);
+    }
+  });
+
+  it('|| is a double bar, ||| a stop, and staff: and symbol: color the block', () => {
+    const bars = (code) => lines(code).flatMap(([, notes]) => notes.bars);
+    assert.deepEqual(bars('|| 1-4 || 2-4 |||'), [0xee00, 0xee00, 0xee03]);
+    assert.deepEqual(bars('||| 1-4 |'), [0xee03, 0xee04]);
+    // A line broken at a double bar ends with one and the next starts with one
+    const run = '8-8 9-8 10-8 11-8 12-8 13-8 '.repeat(3).trim();
+    const split = lines(`${run} || ${run} |`).map(([, notes]) => notes.bars);
+    assert.equal(split[0].at(-1), 0xee00);
+    assert.equal(split[1][0], 0xee00);
+    const [[staff, notes]] = lines('staff:Dark_Aqua 1-4 symbol:#5A1F8C');
+    assert.equal(staff.color, 'dark_aqua');
+    assert.equal(notes.color, '#5a1f8c');
+    assert.throws(() => lines('staff:mauve'), /not a color/);
+    assert.throws(() => lines('staff:#777'), /not a color/);
+    assert.throws(() => lines('staff:red 1-4 staff:blue'), /set twice/);
+  });
+
+  it('the accidentals of a chord alternate outwards from the highest, sharing a column a seventh apart', () => {
+    // Where each glyph of the notes span starts
+    const xs = (code) => {
+      const ink = music.musicLines(code, widthOf)[0].split('</font>')[1].replace(/^<font [^>]*>/, '');
+      const out = {};
+      let x = 0;
+      for (const ch of ink) {
+        out[ch.charCodeAt(0)] ??= x;
+        x += widthOf(ch);
+      }
+      return out;
+    };
+    // G4 nearest the heads, C4 next, E4 furthest out
+    const close = xs('(#2-4 #4-4 #6-4)');
+    assert.ok(close[0xe107] > close[0xe21e] && close[0xe21e] > close[0xe109], JSON.stringify(close));
+    assert.ok(close[0xe40c] > close[0xe107]);
+    // C4 and D5, a seventh apart, side by side in one column
+    const apart = xs('(#2-4 #9-4)');
+    assert.equal(apart[0xe21e], apart[0xe104]);
+  });
+
+  it('i turns a stem, d sets it up and p down, where the font has that stem', () => {
+    const notes = (code) => lines(code)[0][1].glyphs;
+    assert.deepEqual(notes('7-4 7-4i 7-4d 7-4p'), [0xe407, 0xe418, 0xe407, 0xe418]);
+    assert.deepEqual(notes('9-8 9-8i 9-8d 9-8p'), [0xe516, 0xe505, 0xe505, 0xe516]);
+    // Nothing to do where there is no such stem, or no stem at all
+    assert.deepEqual(notes('15-4i 16-2d 1-4p 0-8i 7-1p 7-1i'), [0xe410, 0xe30f, 0xe40d, 0xe50e, 0xe209, 0xe209]);
+    // An override turns one note of a chord
+    assert.deepEqual(notes('(4-4 6-4p)'), [0xe40a, 0xe419]);
+  });
+
+  it('what the font cannot draw stops the build', () => {
+    assert.throws(() => lines('17-4'), /above 16/);
+    assert.throws(() => lines('TS5/4'), /no time 5\/4/);
+    assert.throws(() => lines('(1-4 R-4)'), /only notes/);
+    assert.throws(() => lines('Clef'), /is not a note/);
+  });
+
+  it('music too long for a line is squeezed, then broken at a bar with the clef and key again', () => {
+    const bar = '8-8 9-8 10-8 11-8 12-8 13-8';
+    assert.equal(lines(`ClefTr F#m TS6/8 ${bar} | ${bar} |||`).length, 1);
+    const wrapped = lines(`ClefTr F#m TS6/8 ${bar} | ${bar} | ${bar} | ${bar} |||`);
+    assert.ok(wrapped.length > 1);
+    for (const [staff, notes] of wrapped) {
+      assert.ok(notes.width <= 114, `${notes.width}px`);
+      assert.deepEqual(notes.glyphs.slice(0, 4), [0xe000, 0xe101, 0xe104, 0xe100]);
+      assert.equal(notes.bars[0], 0xee04);
+      assert.deepEqual(staff.bars, []);
+    }
+    assert.equal(wrapped.flat().filter((s) => s.glyphs.includes(0xe00a)).length, 1);
+    assert.equal(wrapped[wrapped.length - 1][1].bars.at(-1), 0xee03);
+  });
+
+  it('the staff ends under the bar closing it and never past it', () => {
+    const segments = { 0xef00: 3, 0xef01: 12 };
+    const spansOf = (marks) => marks.filter((m) => m.g === 0xef00 || m.g === 0xef01).map(({ x, g }) => {
+      assert.ok(segments[g], `segment ${g.toString(16)}`);
+      return [x, x + (segments[g] * 30) / 36];
+    });
+    // Each segment starts where the one before it draws to: no seam, no overlap
+    const seamless = (spans, what) => spans.slice(1).forEach(([x], n) => assert.ok(Math.abs(x - spans[n][1]) < 0.01, `${what}: ${spans[n][1]} to ${x}`));
+    // One staff from 0 under every bar and through the one that closes it, past the gap between its lines into its last
+    for (const [token, first, columns] of [['|', 0, 1], ['||', 2, 3], ['|||', 2, 4], ['||:', 3, 4], [':||', 4, 6]]) {
+      const close = { '|': 0xee04, '||': 0xee00, '|||': 0xee03, '||:': 0xee01, ':||': 0xee02 }[token];
+      const laid = music.layoutLine({ open: 0xee04, items: music.parse(':|| ||: :|| || ||| || 1-4'), close }, widthOf, 0, true);
+      const x = laid.ink.at(-1).x;
+      const spans = spansOf(laid.staff).sort((p, q) => p[0] - q[0]);
+      const end = Math.max(...spans.map((s) => s[1]));
+      assert.equal(spans[0][0], 0, token);
+      seamless(spans, token);
+      assert.ok(end >= x + (first * 30) / 36 - 0.01 && end <= x + (columns * 30) / 36 + 0.01, `${token}: ends at ${end} for a bar at ${x}`);
+    }
+    // Every line reaches across the page, bars alone too: 12 pixel segments, and a 3 pixel one where they stop short
+    for (const code of ['ClefTr Bm 8-4 8-4 10-4 10-4 |', '|', '|| |||']) {
+      const [[staff, notes]] = lines(code);
+      assert.equal(notes.width, 114, code);
+      assert.deepEqual(staff.glyphs.filter((g) => g === 0xef01).length, 11, code);
+    }
+    assert.deepEqual(lines('|')[0][0].glyphs, [...Array(11).fill(0xef01), 0xef00]);
+    for (const [lo, hi] of [[112, 112 + 30 / 36], [110, 110 + 120 / 36], [108, 113], [110, 112.5], [20, 20 + 30 / 36]]) {
+      const spans = spansOf(music.staffUnder(lo, hi));
+      const end = Math.max(...spans.map((s) => s[1]));
+      assert.equal(spans[0][0], 0);
+      seamless(spans, `${lo}-${hi}`);
+      assert.ok(end >= lo - 0.01 && end <= hi + 0.01, `${lo}-${hi}: ends at ${end}`);
+    }
+    // Where no 12 and 3 end to end can end under the bar, there is no staff
+    assert.equal(music.staffUnder(109, 109 + 30 / 36), null);
+  });
+
 });

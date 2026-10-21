@@ -51,13 +51,14 @@ lore:
 
 - `**bold**`, `*italic*` or `_italic_`, `__underlined__`, `~~strikethrough~~`, `||obfuscated||`. `\*` escapes a marker, `\uXXXX` or `\u{X..}` is that code point, for glyphs a keyboard can't type, such as the private-use ones of `staff_notation`.
 - `# Header`, any number of `#`, is bold and underlined with an empty line under it.
+- `` `32`pad ``, inline code with `pad` right after it, is that many pixels of blank padding, the glyphs of `foxcraft_dungeon_loot:padding`. The number is decimal, `0x10`, `0o10` or `0b0111_0001`, with `_` between digits, and a `-` steps back. It goes up to 113, a line of 114 being a line break, and anything that is not a number stops the build. `pad` takes a space after it, which is dropped, or the end of the line: `` `25`pad Lone `` is the padding and then `Lone`, while `` `25`padLone `` is the code `25` and the word `padLone`. Without `pad` after it, it is code. `pad` is the one type of inline code so far; a fenced block names its language on the fence line and needs no space.
 - `` `inline code` `` and fenced blocks are set in `foxcraft_dungeon_loot:pixel_mono`. The text is literal, nothing in it is markup. A block keeps its indentation and a `#` in it is not a heading. A block with a language after the fence is colored: `mcfunction`, `json`, `javascript` or `js`, `bash` or `sh`, `python` or `py`, `yaml` and `java`. Anything else stays plain.
 - `<font color="gray" face="minecraft:illageralt" shadow="#80ff0000">text</font>`: color is a name or `#rrggbb`, face is the font, shadow is `#aarrggbb`.
 - `<filter as="darn">damn</filter>`: players with chat filtering on see `as` in its place. `as` takes the same markdown and inherits the formatting around it. Both readings have the same page count.
 - `<style class="url">text</style>`: the class `.url` from the stylesheet. Several names, `class="url warn"`, apply in order and a later one wins. An unknown class stops the build. Inside the tag the usual markup still works, and a `<font>` or `<a>` inside overrides it.
 - `class` also works on `<font>`, `<a>`, `<span>` and `<center>`, as `<a class="url" href="...">`. The default style of the tag comes first, then the class, then the attributes of the tag, so `<font class="url" color="red">` is red and `<font class="url" face="minecraft:alt">` takes the font from the tag. A `<span class>` is also kept from being hyphenated.
 - `<span>text</span>`: no style of its own, the `span` type or a class can add one. The words inside are never hyphenated, for text that is not a word, such as a name in a made-up language or a string of symbols. It leaves no trace in the page.
-- `<center>text</center>`: every line the text is on is centered, the line it wraps onto too. The padding is drawn with blank glyphs of `foxcraft_dungeon_loot:padding`, 1 pixel exact (`\uf801` is 1px up to `\uf840` 64px, and `\uf881` to `\uf8c0` the same widths backwards, as `\uf881` between staff glyphs, which draw 10.2px and step 11, and `\uf882` on both sides of a bar, which sets it over the edge of the glyphs around it), and carries no underline or strikethrough. On lines of their own, `<center>` and `</center>` add no empty line. `class` styles the text like on `<style>`, and `class="h1"` to `h6`, or `header`, gives it the look of a header when the stylesheet has no class of that name, without the empty line a `#` header gets. A book and quill leaves the text where it is.
+- `<center>text</center>`: every line the text is on is centered, the line it wraps onto too. The padding is drawn with blank glyphs of `foxcraft_dungeon_loot:padding`, 1 pixel exact (`\uf801` is 1px up to `\uf840` 64px, and `\uf881` to `\uf8c0` the same widths backwards, as `\uf881` between the staff glyphs of `staff_notation`, which draw 10px and step 11, and `\uf882` on both sides of a bar, which sets it over the edge of the glyphs around it), and carries no underline or strikethrough. On lines of their own, `<center>` and `</center>` add no empty line. `class` styles the text like on `<style>`, and `class="h1"` to `h6`, or `header`, gives it the look of a header when the stylesheet has no class of that name, without the empty line a `#` header gets. A book and quill leaves the text where it is.
 
 ## Styles
 
@@ -129,6 +130,30 @@ A font whose `ascent` is over 9 pixels, more than a line, takes empty lines abov
 <font face="foxcraft_dungeon_loot:hexenaat">I</font>n Time Immemorial, the Sun God
 ```
 
+## Music
+
+A fenced block with the language `music` is drawn as a staff line in `foxcraft_dungeon_loot:staff_notation`: the staff and ledger lines in grey `#aaaaaa`, the bars, clef, key, time, notes and rests over them in black, unless the block sets its own colors. The staff and its ledger lines, `\uef00` to `\uef05`, the bars, `\uee00` to `\uee04`, and the C clefs, `\ued00` to `\ued04`, are glyphs of `staff_notation` from `staff.png`: its cells are three times the size of the notes' and drawn as high, so the lines are a third as thick and the bars and C clefs reach from the top line of the staff to its bottom one exactly. The notes, other clefs and the rest are `notation.png`. Words are separated by spaces or line breaks, and `//` or a `#` on its own starts a comment to the end of the line.
+
+```
+```music
+||: ClefTr TSC Bm 4-4i 6-8i 6-8i 2-4 2-4 | 1-4 2-2 R1 :||
+```
+Words go un-der by hand
+```
+
+- A clef is `Clef` and its name: `Tr` treble, `Fr` French violin, `Ba` baritone, `B` bass and `Sb` sub-bass, the G and F clefs; `S` soprano, `Ms` mezzo-soprano, `A` alto, `Te` tenor and `BaC` baritone on the C clef, which reads like `Ba`. The C clefs are `\ued00` to `\ued04` of `staff.png`, as tall as the staff.
+- `TSC` is common time and `TS3/4` a time signature; the font has 6, 4, 3 and 2 above and 8, 4, 3 and 2 below.
+- A key such as `C`, `F#`, `Bb`, `Am` or `Ebm` draws its sharps or flats where the clef before it puts them, treble without one.
+- A note is its place and the denominator of its length: `1-2` is a half note on B3. Places go from 0, A3, to 16, C6, as on a treble staff, under any clef; lengths are 1, 2, 4 and 8. Stems go up below 8, B4, and down from it. A trailing `i` turns a stem the other way, `d` sets it up and `p` down: `7-4p`. The font has up stems from 14, A5, down and down stems from 3, D4, up, so where it has no stem the asked way the note keeps the one it has, and a whole note has none to turn. Notes from 14 up and from 2 down get their ledger lines.
+- `#`, `b` or `n` before a note is a sharp, flat or natural: `#6-4`.
+- `(2-1 4-1 6-1)` is a chord, its notes over each other, stemmed the way its note furthest from the middle line goes. Its accidentals stand in columns left of it as engraved: the highest nearest the notes, then the lowest, then the next highest and next lowest, each in the nearest column where no other is closer than a seventh.
+- `R-4` or `R4` is a rest, by the same lengths.
+- `|` is a bar, `||` a double bar, `|||` a stop, `||:` and `:||` repeats. A block opens and closes with a bar, a plain one when it has none.
+- `staff:gray` and `symbol:#5a1f8c` set the color of the staff, with its ledger lines, and of everything drawn over it, the bars too, for the whole block. A color is one of the 16 names, such as `dark_aqua`, or `#rrggbb`; the defaults are `#aaaaaa` and `#000000`, and each can be set once a block.
+- `\ue600`, or the glyph itself, is that glyph of the font, and glyphs written one after another join up, as `\ue600 \ue601 \ue602`, the glockenspiel triplet.
+
+A block is one staff line across the page, 114 pixels: the room after its notes is shared out to reach it, or taken in down to a pixel when the music is wider. Only music that still does not fit is broken over more lines, at a bar, each line opening with the clef and key again and reaching across the page too. The staff reaches 20 pixels above its line, so it gets two empty lines over it. The staff itself ends within its own line, so a line of words right after the block clears it, and only notes under the staff, C4 and lower, reach into that line. Lining the words up under the notes is done by hand, with padding. `music_notation_test_book` shows all of it.
+
 ## Hyphenation
 
 A word wider than a whole line cannot be moved down to fit, so the game breaks it between two letters. In a locale with hyphenation patterns, `en_us` for now, it breaks at a syllable with a hyphen instead, and the hyphen goes into the text as `-` and a line break.
@@ -142,4 +167,4 @@ The patterns are the dependencies `hypher` and `hyphenation.en-us`, installed wi
 
 ## Test books
 
-`formatting_test_book`, `code_block_test_book` and the `*_test_book` font books show every feature in game. They are not in any loot pool, give them with `/trigger give_<id>` on a dev build.
+`formatting_test_book`, `code_block_test_book`, `music_notation_test_book` and the `*_test_book` font books show every feature in game. They are not in any loot pool, give them with `/trigger give_<id>` on a dev build.

@@ -46,6 +46,7 @@ const PAGE_EDIT_LENGTH = 1024;
 const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
 const { highlight } = require('./highlight.js');
 const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore } = require('./lore.js');
+const { musicLines, FONT: MUSIC_FONT } = require('./music.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
@@ -403,6 +404,14 @@ function parseInline(text, start, closer, classes = {}) {
             const close = text.indexOf('`', i + 1);
             if (close > i + 1 && !text.slice(i + 1, close).includes('\n')) {
                 flush();
+                // A type of INLINE_TYPES right after the code, then a space, which is dropped, or the end of the line, makes
+                // the code that type; `n`padding is code and the word padding
+                const typed = /^([a-z][\w-]*)(?: |(?=\n|$))/.exec(text.slice(close + 1));
+                if (typed && Object.hasOwn(INLINE_TYPES, typed[1])) {
+                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close)));
+                    i = close + 1 + typed[0].length;
+                    continue;
+                }
                 content.push({ styles: { font: CODE_FONT, ...classes.code }, content: [text.slice(i + 1, close)] });
                 i = close + 1;
                 continue;
@@ -776,7 +785,7 @@ function reserveTall(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch))
     throw new Error('reserveTall does not settle');
 }
 
-// Blank glyphs of the padding font, each as wide as the low bits of its code point say:  is 1 pixel,  64.
+// Blank glyphs of the padding font, each as wide as the low bits of its code point say: \uf801 is 1 pixel, \uf840 64.
 // The padding turns off the formats that would draw on it, an underline or strikethrough of the text around it.
 const PAD_FONT = `${NS}:padding`;
 const PAD_STYLES = { font: PAD_FONT, bold: false, underlined: false, strikethrough: false, obfuscated: false };
@@ -785,6 +794,27 @@ const padding = (width) =>
         .filter((w) => (width >= w ? ((width -= w), true) : false))
         .map((w) => String.fromCharCode(0xf800 + w))
         .join('');
+// Padding either way, the backwards glyphs being 0x80 past the forwards ones
+const signedPadding = (width) => (width < 0 ? [...padding(-width)].map((c) => String.fromCharCode(c.charCodeAt(0) + 0x80)).join('') : padding(width));
+
+// The pixels of a `n`pad. A whole line of padding, 114 pixels, is the same as a line break, so it stops at 113.
+const MAX_PAD = PAGE_WIDTH - 1;
+function padWidth(source) {
+    const m = /^(-?)(0x[0-9a-f](?:_?[0-9a-f])*|0o[0-7](?:_?[0-7])*|0b[01](?:_?[01])*|\d(?:_?\d)*)$/i.exec(source.trim());
+    if (!m) throw new Error(`\`${source}\`pad is not a number`);
+    const width = Number(m[2].replace(/_/g, '')) * (m[1] ? -1 : 1);
+    if (Math.abs(width) > MAX_PAD) throw new Error(`\`${source}\`pad is ${width}px, padding goes up to ${MAX_PAD}`);
+    return width;
+}
+
+// The types of inline code, by the word after its closing backtick, each giving the nodes that stand for the code.
+// `n`pad is n pixels of padding, decimal, 0x, 0o or 0b with _ between digits, negative to step back.
+const INLINE_TYPES = {
+    pad: (code) => {
+        const width = padWidth(code);
+        return width ? [{ styles: PAD_STYLES, content: [signedPadding(width)] }] : [];
+    },
+};
 
 /**
  * Centers every line that holds a glyph of a <center>: a line that starts at a wrap starts at a newline instead, so the
@@ -1012,6 +1042,9 @@ function codeLines(language, lines) {
     return rows.map((row) => row.map(({ text, color }) => `<font face="${CODE_FONT}"${color ? ` color="${color}"` : ''} literal="1">${escapeMarkup(text)}</font>`).join(''));
 }
 
+// The lines of a block as markup, a music block as staff lines and any other as code
+const blockLines = (language, lines) => (language === 'music' ? musicLines(lines.join('\n'), (ch) => FONTS.widthOf(MUSIC_FONT, ch, false)) : codeLines(language, lines));
+
 // Fenced code blocks in the lines of a section become the markup of their code lines, the fence lines are dropped
 function fenceCode(lines) {
     const out = [];
@@ -1021,7 +1054,7 @@ function fenceCode(lines) {
         if (fence && !block) {
             block = { language: fence[1], lines: [] };
         } else if (fence) {
-            out.push(...codeLines(block.language, block.lines));
+            out.push(...blockLines(block.language, block.lines));
             block = null;
         } else if (block) {
             block.lines.push(line);
@@ -1029,7 +1062,7 @@ function fenceCode(lines) {
             out.push(line);
         }
     }
-    if (block) out.push(...codeLines(block.language, block.lines));
+    if (block) out.push(...blockLines(block.language, block.lines));
     return out;
 }
 
