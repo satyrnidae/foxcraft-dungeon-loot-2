@@ -341,10 +341,13 @@ describe('book generator files', () => {
       return gen.buildBook('t', file).modifier.functions[0].components['minecraft:custom_name'];
     };
     const book = (title, rarity) => `---\ntitle: ${title}\n${rarity ? `rarity: ${rarity}\n` : ''}---\n\nx`;
-    assert.deepEqual(name(book('Plain', 'epic')), { text: 'Plain', color: 'light_purple', italic: false });
+    // A plain name is a lang key, a translation gives it its own words
+    assert.deepEqual(name(book('Plain', 'epic')), { translate: 'book.foxcraft_dungeon_loot.t.title', fallback: 'Plain', color: 'light_purple', italic: false });
+    fs.writeFileSync(file, book('Plain', 'epic'));
+    assert.equal(gen.buildBook('t', file).lang['book.foxcraft_dungeon_loot.t.title'], 'Plain');
     assert.equal(name(book('Plain')), undefined);
     // The item name has no filtered side, so it takes the filtered title
-    assert.equal(name(book('<filter as="Darn">Damn</filter>', 'rare')).text, 'Darn');
+    assert.equal(name(book('<filter as="Darn">Damn</filter>', 'rare')).fallback, 'Darn');
     const rich = name(book('{text: "Fancy", color: red}', 'rare'));
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
@@ -430,7 +433,10 @@ describe('book generator files', () => {
       const content = mod.functions[0].components['minecraft:written_book_content'];
       assert.equal(content.pages.length, 2);
       assert.equal(content.title.raw, 'Test Book');
-      assert.deepEqual(mod.functions[1].lore.at(-1), ['Rarity: ', { text: 'Epic', color: 'light_purple', italic: true }]);
+      // The Rarity line takes its words from the hand-written lang of the namespace
+      assert.deepEqual(mod.functions[1].lore.at(-1), { translate: 'lore.foxcraft_dungeon_loot.rarity', fallback: 'Rarity: %s', with: [{ translate: 'rarity.foxcraft_dungeon_loot.epic', fallback: 'Epic', color: 'light_purple', italic: true }] });
+      assert.equal(lore.componentText(mod.functions[1].lore.at(-1)), 'Rarity: Epic');
+      assert.equal(lore.componentText(mod.functions[1].lore.at(-1), 'fr_ca'), 'Rareté : Épique');
       assert.equal(JSON.parse(fs.readFileSync(path.join(opts.langDir, 'en_us.json'), 'utf8'))['book.foxcraft_dungeon_loot.test.page.1'], 'Page %1$s');
       assert.deepEqual(gen.generate({ ...opts, check: true }).changed, []);
       fs.writeFileSync(path.join(opts.modifierDir, 'test.json'), '{}');
@@ -458,6 +464,33 @@ describe('book generator files', () => {
       assert.ok(!Object.keys(lang).some((k) => k.endsWith('.filtered.2')));
       assert.ok(fs.existsSync(path.join(opts.langDir, 'es_es.json')));
       assert.deepEqual(fs.readdirSync(opts.modifierDir), ['test.json']);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a longer translation has its pages cut with the reference, the keys and %n$s line up', () => {
+    const { dir, opts } = sandbox();
+    try {
+      const head = '---\ntitle: Test Book\nauthor: Me\n---\n\n';
+      const en = 'word '.repeat(150) + 'a **bold** b ' + 'word '.repeat(150) + 'c *it* d ' + 'word '.repeat(100);
+      // About twice as long, so it alone would need more pages
+      const fr = 'mot mot '.repeat(150) + 'a **gras** b ' + 'mot mot '.repeat(150) + 'c *it* d ' + 'mot mot '.repeat(100);
+      write(dir, 'books/en_us/test.md', head + en);
+      write(dir, 'books/fr_ca/test.md', head + fr);
+      assert.ok(gen.pagesOf(fr).length > gen.pagesOf(en).length);
+      const { warnings } = gen.generate(opts);
+      assert.deepEqual(warnings.filter((w) => w.includes('test.md')), []);
+      const lang = (locale) => JSON.parse(fs.readFileSync(path.join(opts.langDir, locale + '.json'), 'utf8'));
+      const [enLang, frLang] = [lang('en_us'), lang('fr_ca')];
+      assert.deepEqual(Object.keys(frLang), Object.keys(enLang));
+      const args = (s) => (s.match(/%\d+\$s/g) || []).join();
+      for (const key of Object.keys(enLang)) assert.equal(args(frLang[key]), args(enLang[key]), key);
+      const pages = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
+      assert.equal(pages.length, gen.pagesOf(fr).length);
+      // Spans that do not line up keep the pages of each locale, with a warning
+      write(dir, 'books/fr_ca/test.md', head + fr.replace('*it*', 'it'));
+      assert.ok(gen.generate(opts).warnings.some((w) => /spans of section 1 are not the ones/.test(w)));
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -584,6 +617,60 @@ describe('book generator files', () => {
     assert.equal(JSON.stringify(gen.hyphenate(['supercalifragilisticexpialidocious'], null)), JSON.stringify(['supercalifragilisticexpialidocious']));
     const code = [{ styles: {}, literal: true, content: ['supercalifragilisticexpialidocious'] }];
     assert.equal(JSON.stringify(gen.hyphenate(code, hyphenator)), JSON.stringify(code));
+  });
+
+  it('the height of a glyph is the one of the provider that draws it, so a font mixes tall glyphs and short ones', () => {
+    const fonts = fontsApi.loadFonts();
+    const staff = 'foxcraft_dungeon_loot:staff_notation';
+    assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xe000)), 17);
+    // minecraft:default at 3/4 and the padding, in the same font
+    assert.equal(fonts.ascentOf(staff, 'a'), 5);
+    assert.equal(fonts.ascentOf(staff, String.fromCodePoint(0xf808)), 0);
+    assert.equal(fonts.ascentOf(staff), 17);
+    // A line of words in the staff font sits in its line, a line of staff takes the lines above it
+    const classes = { '.staff': { font: staff } };
+    const [words] = gen.pagesOf('<style class="staff">just words</style>', null, null, classes);
+    assert.equal(gen.layout(words).lines.length, 1);
+    const [music] = gen.pagesOf('<style class="staff">\\ue000</style>', null, null, classes);
+    assert.equal(gen.layout(music).lines.length, 3);
+  });
+
+  it('a page break never leaves the empty lines of a tall line behind on the page before it', () => {
+    // Twelve lines, then the two empty lines a 25px tall glyph needs, which would end the page at 14
+    const content = ['a\n'.repeat(11) + 'a\n\n\n', { styles: { font: 'x:tall' }, content: ['T'] }];
+    const rows = (tree) => {
+      const { lines, chars } = gen.layout(tree);
+      return lines.map((l) => chars.slice(l.tstart, l.tend).map((c) => c.ch).join(''));
+    };
+    const pages = gen.paginate(content, (font) => (font === 'x:tall' ? 25 : 0));
+    assert.equal(pages.length, 2);
+    assert.deepEqual(rows(pages[1]), ['', '', 'T']);
+  });
+
+  it('<center> pads every line it is on to the middle, the overflow of a wrap too', () => {
+    // [padding, text] widths of each line
+    const rows = (tree) => {
+      const { lines, chars } = gen.layout(tree);
+      const width = (list) => list.reduce((sum, g) => sum + lore.FONTS.widthOf(g.font, g.ch, g.bold), 0);
+      return lines.map((l) => {
+        const line = chars.slice(l.tstart, l.tend);
+        return [width(line.filter((g) => g.font === 'foxcraft_dungeon_loot:padding')), width(line.filter((g) => g.font !== 'foxcraft_dungeon_loot:padding'))];
+      });
+    };
+    const [page] = gen.pagesOf('left\n<center>\nThe quick brown fox jumps over the lazy dog and runs\n</center>\nleft');
+    const lines = rows(page);
+    assert.equal(lines.length, 5);
+    assert.deepEqual(lines[0], [0, lines[0][1]]);
+    assert.deepEqual(lines[4], [0, lines[4][1]]);
+    for (const [pad, text] of lines.slice(1, 4)) assert.equal(pad, Math.floor((114 - text) / 2));
+    // The padding is its own span, an underline of a header class does not reach over it
+    const [header] = gen.pagesOf('<center class="h1">Title</center>');
+    assert.equal(header[0].styles.underlined, false);
+    assert.equal(header[1].styles.underlined, true);
+    // A book and quill keeps the text where it is
+    const [plain] = gen.pagesOf('<center>Title</center>', null, null, {}, false);
+    assert.deepEqual(plain, ['Title']);
+    assert.throws(() => gen.pagesOf('<center class="nope">x</center>'), /unknown class/);
   });
 
   it('a filter span needs as, an old _filtered file is ignored with a warning', () => {
@@ -739,10 +826,28 @@ describe('book generator files', () => {
       const { warnings } = gen.generate(opts);
       assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
       const { lore } = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[1];
-      assert.deepEqual(lore, ['Plain line.', { text: 'Blue', color: 'blue', italic: true }, ['A ', { text: 'list', bold: true }]]);
+      // A plain line is a lang key so a translation can word it, a component stays as written
+      assert.deepEqual(lore, [{ translate: 'book.foxcraft_dungeon_loot.test.lore.1', fallback: 'Plain line.' }, { text: 'Blue', color: 'blue', italic: true }, ['A ', { text: 'list', bold: true }]]);
+      assert.equal(JSON.parse(fs.readFileSync(path.join(opts.langDir, 'en_us.json'), 'utf8'))['book.foxcraft_dungeon_loot.test.lore.1'], 'Plain line.');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
+  });
+
+  it('every rarity has its words in each hand-written lang of the namespace', () => {
+    const dir = path.join(pk.ROOT, 'texturepack', 'assets', 'foxcraft_dungeon_loot', 'lang');
+    for (const name of fs.readdirSync(dir).filter((n) => n.endsWith('.json'))) {
+      const lang = JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
+      const missing = ['lore.foxcraft_dungeon_loot.rarity', ...Object.keys(gen.RARITY_COLORS).map((r) => `rarity.foxcraft_dungeon_loot.${r}`)].filter((k) => !(k in lang));
+      assert.deepEqual(missing, [], name);
+      assert.match(lang['lore.foxcraft_dungeon_loot.rarity'], /%(1\$)?s/, name);
+    }
+  });
+
+  it('a translate lore line is measured and read through the lang files, its fallback when the key is missing', () => {
+    const line = { translate: 'book.foxcraft_dungeon_loot.no_such_book.lore.1', fallback: '100%% of %s', with: [{ text: 'it', bold: true }] };
+    assert.equal(lore.componentText(line), '100% of it');
+    assert.equal(lore.componentWidth(line), lore.loreWidth('100% of ') + lore.loreWidth('it', true));
   });
 
   it('lore can be one JSON list over several lines', () => {
@@ -752,7 +857,7 @@ describe('book generator files', () => {
       const { warnings } = gen.generate(opts);
       assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
       const { lore } = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[1];
-      assert.deepEqual(lore, ['[Not a component]', { text: 'Blue', color: 'blue' }]);
+      assert.deepEqual(lore, [{ translate: 'book.foxcraft_dungeon_loot.test.lore.1', fallback: '[Not a component]' }, { text: 'Blue', color: 'blue' }]);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -768,31 +873,59 @@ describe('book generator files', () => {
     }
   });
 
-  it('a bad lore block comes with the whole block reflowed', () => {
+  it('plain lore is wrapped to the width by the generator, keeping the breaks after sentence ends', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Hastily scrawled sheet music with accompanying lyrics.\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Hastily scrawled sheet music with accompanying lyrics. The sheet\n  bears no author.\n---\n\nText');
       const { warnings } = gen.generate(opts);
-      assert.ok(warnings.some((w) => w.includes('reflowed lore') && w.includes('\n  Hastily scrawled sheet music with\n  accompanying lyrics.')));
+      assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
+      const lang = JSON.parse(fs.readFileSync(path.join(opts.langDir, 'en_us.json'), 'utf8'));
+      const lines = Object.keys(lang).filter((k) => k.includes('.lore.')).map((k) => lang[k]);
+      // A sentence end inside a frontmatter line flows on, one at the end of a line keeps its break
+      assert.deepEqual(lines, ['Hastily scrawled sheet music with', 'accompanying lyrics. The sheet bears no', 'author.']);
+      for (const line of lines) assert.ok(lore.loreWidth(line) <= lore.LORE_PIXELS, line);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
   });
 
-  it('the generator warns about a lore line over the pixel width, not the character count', () => {
+  it('only a lore word or a component line too wide for a line is warned about', () => {
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  ' + 'x'.repeat(lore.LORE_WIDTH)));
+      assert.ok(gen.generate(opts).warnings.some((w) => /lore word "x+" is \d+ pixels/.test(w)));
+      // Narrow letters get more characters in the same width, and a long line of words just wraps
+      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  ' + 'i'.repeat(lore.LORE_WIDTH + 20) + '\n  ' + 'word '.repeat(40)));
+      assert.ok(!gen.generate(opts).warnings.some((w) => /lore/.test(w)));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  {"text":"' + 'x'.repeat(lore.LORE_WIDTH) + '"}'));
       assert.ok(gen.generate(opts).warnings.some((w) => /lore line is \d+ pixels/.test(w)));
-      // Narrow letters get more characters in the same width
-      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  ' + 'i'.repeat(lore.LORE_WIDTH + 20)));
-      assert.ok(!gen.generate(opts).warnings.some((w) => /lore line is/.test(w)));
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
   });
 
-  it('every lore line of the book sources fits the average width of 44 characters and does not stop early', () => {
+  it('a translation whose lore wraps into fewer lines is wrapped narrower to fill as many', () => {
+    const { dir, opts } = sandbox();
+    try {
+      const book = (lore) => `---\ntitle: Test Book\nauthor: Me\nlore:\n  ${lore}\n---\n\nText`;
+      write(dir, 'books/en_us/test.md', book('A short note about the war.'));
+      write(dir, 'books/fr_ca/test.md', book('Une note pas si courte que ça sur la guerre et sur ceux qui la font.'));
+      gen.generate(opts);
+      const lang = (locale) => JSON.parse(fs.readFileSync(path.join(opts.langDir, locale + '.json'), 'utf8'));
+      const lines = (l) => Object.keys(l).filter((k) => k.includes('.lore.')).map((k) => l[k]);
+      const [en, fr] = [lines(lang('en_us')), lines(lang('fr_ca'))];
+      assert.equal(fr.length, 2);
+      assert.equal(en.length, 2);
+      assert.ok(en.every(Boolean), 'no empty line: ' + en.join('|'));
+      assert.equal(en.join(' '), 'A short note about the war.');
+      const lore0 = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions.find((f) => f.type === 'minecraft:set_lore').lore;
+      assert.equal(lore0.length, 2);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('every lore line of the book sources wraps to the average width of 44 characters', () => {
     const root = path.join(pk.ROOT, 'src', 'books');
     const over = [];
     for (const locale of fs.readdirSync(root, { withFileTypes: true }).filter((d) => d.isDirectory())) {
@@ -800,9 +933,10 @@ describe('book generator files', () => {
         const text = fs.readFileSync(path.join(root, locale.name, name), 'utf8');
         if (!text.trimStart().startsWith('---')) continue;
         const { meta } = gen.parseFrontmatter(text);
-        const lines = gen.loreEntries(meta);
-        for (const { index, word } of lore.shortLines(lines)) over.push(`${locale.name}/${name}: "${lines[index].text}" has no ending punctuation and "${word}" from the next line fits`);
-        for (const line of lines) if (line.width > lore.LORE_PIXELS) over.push(`${locale.name}/${name}: ${line.width} pixels, ${lore.LORE_PIXELS} fit: "${line.raw}"${line.plain ? ', ' + lore.wrapAdvice(line.raw) : ''}`);
+        for (const line of gen.wrappedLore(meta)) {
+          const width = line.component !== undefined ? lore.componentWidth(line.component) : lore.loreWidth(line.text);
+          if (width > lore.LORE_PIXELS) over.push(`${locale.name}/${name}: ${width} pixels, ${lore.LORE_PIXELS} fit: ${JSON.stringify(line)}`);
+        }
       }
     }
     assert.deepEqual(over, []);

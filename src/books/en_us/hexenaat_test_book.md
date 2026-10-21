@@ -2,8 +2,7 @@
 title: "Custom Font: Hexenaat"
 author: Claude
 rarity: epic
-lore:
-  Tests out the Hexenaat font.
+lore: Tests out the Hexenaat font.
 styles: {
   body: {
     font: foxcraft_dungeon_loot:hexenaat

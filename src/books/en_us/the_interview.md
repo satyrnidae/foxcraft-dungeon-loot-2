@@ -3,9 +3,7 @@ title: The Interview
 author: Isa Massacre
 rarity: common
 lore:
-  Albatross Heavy Industries can neither
-  confirm nor deny the accuracy of this
-  depiction of their hiring practices.
+  Albatross Heavy Industries can neither confirm nor deny the accuracy of this depiction of their hiring practices.
 ---
 
 # The Interview

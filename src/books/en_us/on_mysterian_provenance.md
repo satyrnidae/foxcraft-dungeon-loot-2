@@ -3,6 +3,11 @@ title: On Mysterian Provenance
 author: Milonia Melisova
 rarity: uncommon
 model: foxcraft_dungeon_loot:random_loot/written_letter
+lore: [
+    "To: Doctor Felstaff Braun",
+    "Department of Archaeology",
+    "Tynesdale Academy"
+]
 styles: {
     body: {
         font: foxcraft_dungeon_loot:textmachine_handwriting

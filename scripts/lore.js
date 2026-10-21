@@ -3,6 +3,8 @@
  * How wide a lore line may be. The tooltip has no fixed character count, so the limit is in pixels: 44 characters of
  * average English text in the default font. Shared by the book generator and the tests of item lore.
  */
+const fs = require('fs');
+const path = require('path');
 const { loadFonts, DEFAULT_FONT } = require('./fonts.js');
 
 const FONTS = loadFonts();
@@ -19,9 +21,45 @@ const loreWidth = (text, bold = false) => [...text].reduce((sum, ch) => sum + gl
 const weights = Object.entries(ENGLISH);
 const LORE_PIXELS = Math.round((LORE_WIDTH * weights.reduce((sum, [ch, f]) => sum + f * glyphWidth(ch), 0)) / weights.reduce((sum, [, f]) => sum + f, 0));
 
+// The lang files of the resource pack, { locale: { key: template } } over all namespaces, read when first needed so a
+// build that has just written them is seen
+let langs = null;
+function langsOf() {
+    if (langs) return langs;
+    langs = {};
+    const assets = path.join(__dirname, '..', 'texturepack', 'assets');
+    for (const ns of fs.existsSync(assets) ? fs.readdirSync(assets) : []) {
+        const dir = path.join(assets, ns, 'lang');
+        if (!fs.existsSync(dir)) continue;
+        for (const name of fs.readdirSync(dir).filter((n) => n.endsWith('.json'))) {
+            Object.assign((langs[name.slice(0, -5)] ??= {}), JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')));
+        }
+    }
+    return langs;
+}
+
+// The template of a translate component in a locale: its lang entry, else its fallback, else the key, as the game does
+const templateOf = (component, locale) => langsOf()[locale]?.[component.translate] ?? component.fallback ?? component.translate;
+
+// A template cut into its literal text and its %s, %n$s or %% placeholders, the arguments as indexes into with
+function formatParts(template) {
+    const parts = [];
+    let next = 0;
+    let last = 0;
+    for (const m of template.matchAll(/%(?:(\d+)\$)?([sd%])/g)) {
+        parts.push(template.slice(last, m.index));
+        if (m[2] === '%') parts.push('%');
+        else parts.push({ arg: m[1] ? Number(m[1]) - 1 : next++ });
+        last = m.index + m[0].length;
+    }
+    parts.push(template.slice(last));
+    return parts;
+}
+
 /**
  * Width in pixels of a text component on one line: a string, an object with text and extra, or a list whose first entry is
- * the parent of the rest. Only bold changes the width, and a child inherits it.
+ * the parent of the rest. Only bold changes the width, and a child inherits it. A translate component is as wide as its
+ * widest locale in the lang files of the resource pack.
  */
 function componentWidth(component, bold = false) {
     if (typeof component === 'string') return loreWidth(component, bold);
@@ -32,9 +70,25 @@ function componentWidth(component, bold = false) {
     }
     if (component && typeof component === 'object') {
         const b = component.bold !== undefined ? component.bold : bold;
-        return loreWidth(component.text ?? '', b) + (component.extra ?? []).reduce((sum, c) => sum + componentWidth(c, b), 0);
+        const extra = (component.extra ?? []).reduce((sum, c) => sum + componentWidth(c, b), 0);
+        if (component.translate === undefined) return loreWidth(component.text ?? '', b) + extra;
+        const args = component.with ?? [];
+        const width = (template) => formatParts(template).reduce((sum, p) => sum + (typeof p === 'string' ? loreWidth(p, b) : args[p.arg] === undefined ? 0 : componentWidth(args[p.arg], b)), 0);
+        const locales = Object.keys(langsOf());
+        return Math.max(width(templateOf(component, 'en_us')), ...locales.map((locale) => width(templateOf(component, locale)))) + extra;
     }
     return 0;
+}
+
+/** The text of a component on one line as a locale reads it, en_us by default. */
+function componentText(component, locale = 'en_us') {
+    if (typeof component === 'string') return component;
+    if (Array.isArray(component)) return component.map((c) => componentText(c, locale)).join('');
+    if (!component || typeof component !== 'object') return '';
+    const extra = (component.extra ?? []).map((c) => componentText(c, locale)).join('');
+    if (component.translate === undefined) return (component.text ?? '') + extra;
+    const args = component.with ?? [];
+    return formatParts(templateOf(component, locale)).map((p) => (typeof p === 'string' ? p : args[p.arg] === undefined ? '' : componentText(args[p.arg], locale))).join('') + extra;
 }
 
 /** Greedy wrap of plain text into lines that fit, breaking after a space; a word longer than a line stays whole. */
@@ -107,4 +161,4 @@ function reflowLore(lines, limit = LORE_PIXELS) {
     return out;
 }
 
-module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapLore, wrapAdvice, shortLines, reflowLore };
+module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, componentText, wrapLore, wrapAdvice, shortLines, reflowLore };

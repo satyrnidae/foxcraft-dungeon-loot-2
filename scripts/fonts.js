@@ -3,6 +3,8 @@
 //
 // Vanilla fonts are read from the client jar once and cached in scripts/font_widths.json, so builds need no jar:
 //   node scripts/fonts.js [path/to/client.jar]
+// The jar is the one build.ps1 downloads to tests/.cache/mc, else the launcher's. The same run caches the pixel width of
+// every glyph of the vanilla font images in scripts/font_textures.json, so a pack font can use those images at its own size.
 // Fonts of the resource pack, texturepack/assets/<namespace>/font/<name>.json, are read on every run from their own
 // bitmap and space providers. TrueType and unihex providers cannot be measured here, their glyphs get a guessed width.
 const fs = require('fs');
@@ -11,11 +13,21 @@ const zlib = require('zlib');
 
 const ROOT = path.join(__dirname, '..');
 const CACHE = path.join(__dirname, 'font_widths.json');
+const TEXTURE_CACHE = path.join(__dirname, 'font_textures.json');
 const PACK_ASSETS = path.join(ROOT, 'texturepack', 'assets');
 const DEFAULT_FONT = 'minecraft:default';
 const DEFAULT_SPACE = 4;
 const UNKNOWN_WIDTH = 9;
-const DEFAULT_JAR = path.join(process.env.APPDATA || '', '.minecraft', 'versions', '26.3', '26.3.jar');
+const MC_VERSION = (() => {
+    try {
+        return JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).mc.mc_version;
+    } catch (e) {
+        return '26.3';
+    }
+})();
+const CACHED_JAR = path.join(ROOT, 'tests', '.cache', 'mc', MC_VERSION, `${MC_VERSION}.jar`);
+const LAUNCHER_JAR = path.join(process.env.APPDATA || '', '.minecraft', 'versions', MC_VERSION, `${MC_VERSION}.jar`);
+const DEFAULT_JAR = fs.existsSync(CACHED_JAR) || !fs.existsSync(LAUNCHER_JAR) ? CACHED_JAR : LAUNCHER_JAR;
 
 //region PNG and zip
 
@@ -121,6 +133,36 @@ function openZip(file) {
 const withNamespace = (id) => (id.includes(':') ? id : 'minecraft:' + id);
 
 /**
+ * How many pixels of its cell each glyph of a bitmap provider takes, up to its rightmost inked column, as
+ * { cellH, pixels: { char: px } }. The texture is a PNG buffer, or such a result already, from the cache of the vanilla images.
+ */
+function glyphPixels(provider, texture) {
+    if (!Buffer.isBuffer(texture)) return texture;
+    const png = decodePng(texture);
+    const rows = provider.chars.map((r) => [...r]);
+    const cols = Math.max(...rows.map((r) => r.length));
+    const cellW = png.width / cols;
+    const cellH = png.height / rows.length;
+    const pixels = {};
+    rows.forEach((row, r) => {
+        row.forEach((ch, c) => {
+            if (ch === '\u0000') return;
+            let right = -1;
+            for (let x = 0; x < cellW; x++) {
+                for (let y = 0; y < cellH; y++) {
+                    if (png.inked(c * cellW + x, r * cellH + y)) {
+                        right = x;
+                        break;
+                    }
+                }
+            }
+            if (right >= 0) pixels[ch] ??= right + 1;
+        });
+    });
+    return { cellH, pixels };
+}
+
+/**
  * The advance widths of one font as { char: width }, the first provider that has a glyph wins. readFont gives the JSON of a
  * font id, readTexture the PNG buffer of a texture id such as minecraft:font/ascii.png.
  */
@@ -137,27 +179,9 @@ function measureFont(fontId, readFont, readTexture, seen = new Set()) {
         } else if (provider.type === 'space') {
             for (const [ch, w] of Object.entries(provider.advances || {})) widths[ch] ??= w;
         } else if (provider.type === 'bitmap') {
-            const png = decodePng(readTexture(withNamespace(provider.file)));
-            const rows = provider.chars.map((r) => [...r]);
-            const cols = Math.max(...rows.map((r) => r.length));
-            const cellW = png.width / cols;
-            const cellH = png.height / rows.length;
+            const { cellH, pixels } = glyphPixels(provider, readTexture(withNamespace(provider.file)));
             const scale = (provider.height ?? 8) / cellH;
-            rows.forEach((row, r) => {
-                row.forEach((ch, c) => {
-                    if (ch === '\u0000') return;
-                    let right = -1;
-                    for (let x = 0; x < cellW; x++) {
-                        for (let y = 0; y < cellH; y++) {
-                            if (png.inked(c * cellW + x, r * cellH + y)) {
-                                right = x;
-                                break;
-                            }
-                        }
-                    }
-                    if (right >= 0) widths[ch] ??= Math.trunc(0.5 + (right + 1) * scale) + 1;
-                });
-            });
+            for (const [ch, px] of Object.entries(pixels)) widths[ch] ??= Math.trunc(0.5 + px * scale) + 1;
         }
     }
     return widths;
@@ -188,28 +212,43 @@ function buildCache(jarFile) {
         return zip[`assets/${ns}/textures/${p}`]();
     };
     const fonts = {};
+    const textures = {};
     for (const name of Object.keys(zip).sort()) {
         const m = /^assets\/minecraft\/font\/(.+)\.json$/.exec(name);
-        if (m) fonts['minecraft:' + m[1]] = pack(measureFont('minecraft:' + m[1], readFont, readTexture));
+        if (!m) continue;
+        fonts['minecraft:' + m[1]] = pack(measureFont('minecraft:' + m[1], readFont, readTexture));
+        for (const provider of readFont('minecraft:' + m[1]).providers || []) {
+            if (provider.type !== 'bitmap') continue;
+            const id = withNamespace(provider.file);
+            const { cellH, pixels } = glyphPixels(provider, readTexture(id));
+            textures[id] ??= { cellH, pixels: pack(pixels) };
+        }
     }
     fs.writeFileSync(CACHE, JSON.stringify(fonts, null, 1) + '\n');
+    fs.writeFileSync(TEXTURE_CACHE, JSON.stringify(textures, null, 1) + '\n');
     return Object.keys(fonts);
 }
 
 /**
- * How far the glyphs of a font reach above the baseline, in game pixels: the largest ascent of its bitmap providers,
- * references followed. 0 for a font without one.
+ * How far each glyph of a font reaches above the baseline, in game pixels, as { char: ascent }: the ascent of the
+ * bitmap provider that draws it, references followed, and the first provider that has a glyph wins as in the game. A
+ * glyph of a space provider reaches nowhere. A font can so mix tall glyphs with ones that sit inside a line.
  */
-function fontAscent(fontId, readFont, seen = new Set()) {
-    if (seen.has(fontId)) return 0;
+function glyphAscents(fontId, readFont, seen = new Set()) {
+    const ascents = {};
+    if (seen.has(fontId)) return ascents;
     seen.add(fontId);
     const font = readFont(fontId);
-    let ascent = 0;
     for (const provider of (font && font.providers) || []) {
-        if (provider.type === 'reference') ascent = Math.max(ascent, fontAscent(withNamespace(provider.id), readFont, seen));
-        else if (provider.type === 'bitmap') ascent = Math.max(ascent, provider.ascent || 0);
+        if (provider.type === 'reference') {
+            for (const [ch, a] of Object.entries(glyphAscents(withNamespace(provider.id), readFont, seen))) ascents[ch] ??= a;
+        } else if (provider.type === 'space') {
+            for (const ch of Object.keys(provider.advances || {})) ascents[ch] ??= 0;
+        } else if (provider.type === 'bitmap') {
+            for (const row of provider.chars || []) for (const ch of row) if (ch !== '\u0000') ascents[ch] ??= provider.ascent || 0;
+        }
     }
-    return ascent;
+    return ascents;
 }
 
 // The fonts of the resource pack, { id: widths }. A reference to a vanilla font takes it from the cache.
@@ -228,21 +267,26 @@ function packFonts(cached, assetsDir, ascents = {}) {
         walk(dir, '');
     }
     const readFont = (id) => (found[id] ? JSON.parse(fs.readFileSync(found[id], 'utf8')) : cached[id] ? { providers: [{ type: 'space', advances: unpack(cached[id]) }] } : null);
+    // A texture of the pack, else a vanilla font image from its cache, as minecraft:font/ascii.png at another height
+    const textures = fs.existsSync(TEXTURE_CACHE) ? JSON.parse(fs.readFileSync(TEXTURE_CACHE, 'utf8')) : {};
     const readTexture = (id) => {
         const [ns, p] = id.split(':');
-        return fs.readFileSync(path.join(assetsDir, ns, 'textures', p));
+        const file = path.join(assetsDir, ns, 'textures', p);
+        if (fs.existsSync(file)) return fs.readFileSync(file);
+        if (textures[id]) return { cellH: textures[id].cellH, pixels: unpack(textures[id].pixels) };
+        throw new Error(`texture ${id} is not in texturepack/assets or the cache of the vanilla font images, run node scripts/fonts.js`);
     };
     const out = {};
     for (const id of Object.keys(found)) {
         out[id] = measureFont(id, readFont, readTexture);
-        ascents[id] = fontAscent(id, readFont);
+        ascents[id] = glyphAscents(id, readFont);
     }
     return out;
 }
 
 //endregion
 
-/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold) is the advance of one glyph in pixels, ascentOf(font) how far a font reaches above the baseline. */
+/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold) is the advance of one glyph in pixels, ascentOf(font, char) how far a glyph reaches above the baseline, or the tallest glyph of the font without a char. */
 function loadFonts(options = {}) {
     const cache = fs.existsSync(options.cache || CACHE) ? JSON.parse(fs.readFileSync(options.cache || CACHE, 'utf8')) : {};
     const fonts = {};
@@ -257,8 +301,12 @@ function loadFonts(options = {}) {
         const width = ch === ' ' ? (table || fonts[DEFAULT_FONT] || {})[' '] ?? DEFAULT_SPACE : (table || {})[ch] ?? UNKNOWN_WIDTH;
         return width + (bold && ch !== ' ' ? 1 : 0);
     };
-    // The ascent of a font of the pack, 0 for the fonts of the game: they sit inside a line
-    const ascentOf = (font) => ascents[withNamespace(font || DEFAULT_FONT)] || 0;
+    // The ascent of a glyph of a font of the pack, 0 for the fonts of the game: they sit inside a line
+    const ascentOf = (font, ch) => {
+        const table = ascents[withNamespace(font || DEFAULT_FONT)];
+        if (!table) return 0;
+        return ch === undefined ? Math.max(0, ...Object.values(table)) : table[ch] ?? 0;
+    };
     return { widthOf, ascentOf, fonts, missing };
 }
 

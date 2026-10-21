@@ -2,8 +2,7 @@
 title: Fireblood
 author: Isa Massacre
 rarity: common
-lore:
-  A mysterious affliction? A curse?
+lore: A mysterious affliction? Or a curse?
 ---
 
 The screams in the next room grew louder.

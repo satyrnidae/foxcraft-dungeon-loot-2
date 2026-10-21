@@ -3,8 +3,7 @@ title: Palomina and the Dæmon Lord
 author: Unknown
 rarity: uncommon
 lore:
-  A faded, leather-bound bible. It seems
-  familiar, somehow...
+  A faded, leather-bound bible. It seems familiar, somehow...
 styles: {
   body: {
     font: foxcraft_dungeon_loot:pixellated_elegance

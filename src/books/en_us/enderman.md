@@ -3,8 +3,7 @@ title: ENDERMAN
 author: Unknown
 rarity: common
 lore:
-  Woe unto you should you ever encounter
-  such a creature, dear traveler...
+  Woe unto you should you ever encounter such a creature, dear traveler...
 ---
 
 It's been one month since the incident

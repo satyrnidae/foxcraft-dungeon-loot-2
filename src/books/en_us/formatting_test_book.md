@@ -2,9 +2,7 @@
 title: Formatting Test Book
 author: Claude
 rarity: epic
-lore:
-  Dev only, not in any loot table.
-  Every format the book generator knows.
+lore: Dev only, not in any loot table. Every format the book generator knows.
 styles: {
   .url: {
     color: "blue",

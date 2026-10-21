@@ -235,26 +235,24 @@ describe('lore', () => {
   // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore.js
   const MAX_LORE_WIDTH = loreLib.LORE_PIXELS;
 
-  /** The text a lore entry renders as one line: a string, a component, or a list of them joined on one line. */
-  const lineText = (entry) => {
-    if (typeof entry === 'string') return entry;
-    if (Array.isArray(entry)) return entry.map(lineText).join('');
-    if (entry && typeof entry === 'object') return (entry.text ?? '') + (entry.extra ?? []).map(lineText).join('');
-    return '';
-  };
+  /**
+   * The text a lore entry renders as one line: a string, a component, or a list of them joined on one line. A translate
+   * component reads as its en_us lang entry.
+   */
+  const lineText = (entry) => loreLib.componentText(entry);
 
-  /** The first piece of text of an entry, to find its line in the file. */
+  /** The first piece of text of an entry, to find its line in the file. A translate component is found by its fallback. */
   const firstText = (entry) => {
     if (typeof entry === 'string') return entry;
     if (Array.isArray(entry)) return entry.map(firstText).find(Boolean) ?? '';
-    return entry?.text ?? '';
+    return entry?.text ?? entry?.fallback ?? '';
   };
 
   /** The last piece of text of an entry. */
   const lastText = (entry) => {
     if (typeof entry === 'string') return entry;
     if (Array.isArray(entry)) return [...entry].reverse().map(lastText).find(Boolean) ?? '';
-    return entry?.text ?? '';
+    return entry?.text ?? entry?.fallback ?? '';
   };
 
   /**

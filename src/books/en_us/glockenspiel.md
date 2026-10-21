@@ -3,38 +3,66 @@ title: Little Glockenspiel
 author: Unknown
 rarity: common
 model: foxcraft_dungeon_loot:random_loot/written_letter
-lore: [
-  "Hastily scrawled sheet music with",
-  "accompanying lyrics. The sheet bears no",
-  "author, only a title: \"Little Glockenspiel\""
-]
+lore: "Hastily scrawled sheet music with accompanying lyrics. The sheet bears no author, only a title: \"Little Glockenspiel\""
 styles: {
   body: {
     italic: true
   },
   .staff: {
-    font: foxcraft_dungeon_loot:staff_notation
+    font: foxcraft_dungeon_loot:staff_notation,
+    italic: false
+    color: #6c6c6c
   }
 }
 ---
 
-<style class=".staff">\ue000\ue001\ue002\ue008\ue008\ue010\ue010\ue019\ue008\ue005\ue063</style>
-Lone-ly Lit-tle Glock-en-spiel
+<center class="h1">Glockenspiel</center>
 
-<style class=".staff">\ue000\ue023\ue002\</staff>
+<style class=".staff">\ue000\uf881\ue001\uf881\ue002\uf881\ue008\uf881\ue008\uf881\ue00a\uf881\ue00a\uf882\ue022\uf882\ue008\uf881\ue008\uf881\ue005\uf881\ue00e\uf882\ue022</style>
+
+Lone-ly Lit-tle Glock-en-spiel
+<style class=".staff">\ue000\uf881\ue014\uf881\ue008\uf881\ue009\uf881\ue00a\uf881\ue00b\uf882\ue022\uf882\ue00c\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 Tines all fouled with rust,
+---
+<style class=".staff">\ue000\uf881\ue014\uf881\ue00b\uf881\ue00b\uf881\ue00b\uf881\ue00e\uf882\ue022\uf882\ue01f\uf881\ue020\uf881\ue021\uf881\ue008\uf881\ue00e\uf882\ue022</style>
+
 Why have they a-ban-doned you,
+<style class=".staff">\ue000\uf881\ue014\uf881\ue00a\uf881\ue00b\uf881\ue00a\uf881\ue009\uf882\ue022\uf882\ue008\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 Sun-dered all your trust?
+---
+<style class=".staff">\ue000\uf881\ue002\uf881\ue008\uf881\ue008\uf881\ue00a\uf881\ue00a\uf882\ue022\uf882\ue008\uf881\ue008\uf881\ue005\uf881\ue00e\uf882\ue022</style>
 
 Bro-ken Lit-tle Glock-en-spiel
+<style class=".staff">\ue000\uf881\ue014\uf881\ue008\uf881\ue009\uf881\ue00a\uf881\ue00b\uf882\ue022\uf882\ue00c\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 don't you fill with rage?
+---
+<style class=".staff">\ue000\uf881\ue002\uf881\ue00b\uf881\ue00b\uf881\ue00b\uf881\ue00e\uf882\ue022\uf882\ue01f\uf881\ue020\uf881\ue021\uf881\ue008\uf881\ue008\uf882\ue022</style>
+
 Thin-king of the wic-ked ones who
+<style class=".staff">\ue000\uf881\ue002\uf881\ue00a\uf881\ue00b\uf881\ue00a\uf881\ue009\uf882\ue022\uf882\ue008\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 cast you off with age?
+---
+<style class=".staff">\ue000\uf881\ue002\uf881\ue009\uf881\ue009\uf881\ue009\uf881\ue00a\uf882\ue022\uf882\ue009\uf881\ue009\uf881\ue005\uf881\ue00e\uf882\ue022</style>
 
 Love-ly Lit-tle Glock-en-spiel,
+<style class=".staff">\ue000\uf881\ue014\uf881\ue009\uf881\ue009\uf881\ue009\uf881\ue00a\uf882\ue022\uf882\ue009\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 Let me hear you sing!
+---
+<style class=".staff">\ue000\uf881\ue002\uf881\ue008\uf881\ue008\uf881\ue00a\uf881\ue00a\uf882\ue022\uf882\ue008\uf881\ue008\uf881\ue005\uf881\ue00e\uf882\ue022</style>
 
 Lone-ly lit-tle Glock-en-spiel,
+<style class=".staff">\ue000\uf881\ue014\uf881\ue008\uf881\ue009\uf881\ue00a\uf881\ue00b\uf882\ue022\uf882\ue00c\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue022</style>
+
 Tines all fouled with rust,
+---
+<style class=".staff">\ue000\uf881\ue014\uf881\ue00b\uf881\ue00b\uf881\ue00b\uf881\ue00e\uf882\ue022\uf882\ue01f\uf881\ue020\uf881\ue021\uf881\ue008\uf881\ue00e\uf882\ue022</style>
+
 How could they a-ban-don you,
+<style class=".staff">\ue000\uf881\ue014\uf881\ue00a\uf881\ue00b\uf881\ue00a\uf881\ue009\uf882\ue022\uf882\ue008\uf881\ue00e\uf881\ue011\uf881\ue00f\uf882\ue026</style>
+
 sun-der all your trust?

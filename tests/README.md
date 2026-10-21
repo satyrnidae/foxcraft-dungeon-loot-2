@@ -14,7 +14,7 @@ node tests/run_all.mjs --release       also run the release checks, such as mc.d
 node tests/run_all.mjs -k chainsaw     only unit tests whose name matches chainsaw
 ```
 
-Needs Node 22 or newer with `npm ci` done. The Java checks also need Java 25 and the client jar for `mc.mc_version` in `config.json`. The jar is `MC_JAR` if set, else the launcher copy, else a download from Mojang into `tests/.cache/mc` checked against its sha1, so a fresh checkout needs no launcher. `--no-download` turns that off. On CI a skipped step counts as a failure. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
+Needs Node 22 or newer with `npm ci` done. The Java checks also need Java 25, `JAVA25` (the java executable or the JDK folder) or else a Java 25 `JDK_HOME` or `JAVA_HOME`, in that order, either of which can go in a gitignored `.env` in the repo root as `KEY=value` lines, and the client jar for `mc.mc_version` in `config.json`. The jar is `MC_JAR` if set, else the launcher copy, else a download from Mojang into `tests/.cache/mc` checked against its sha1, so a fresh checkout needs no launcher. `--no-download` turns that off. On CI a skipped step counts as a failure. Each step is reported as PASS, FAIL or SKIPPED, and only FAIL makes the exit status 1.
 
 Unit tests alone: `node --test tests/unit/*.test.mjs`.
 

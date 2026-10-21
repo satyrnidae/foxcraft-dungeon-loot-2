@@ -15,7 +15,7 @@ const BOOK_DIR = path.join(ROOT, 'src', 'books');
 // Generated files get a folder of their own, so a hand-written book modifier or table beside them is never cleaned up
 const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book', 'generated');
 const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book', 'generated');
-const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', NS, 'lang');
+const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', 'generated', 'lang');
 const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
@@ -45,7 +45,7 @@ const PAGE_EDIT_LENGTH = 1024;
 // Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
 const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
 const { highlight } = require('./highlight.js');
-const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, wrapAdvice, shortLines, reflowLore } = require('./lore.js');
+const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore } = require('./lore.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
@@ -307,11 +307,19 @@ function parseClasses(raw) {
     return classes;
 }
 
-// The styles of a class attribute, several names apply in order. class="url" is the style .url
+// A header is bold and underlined unless the stylesheet says otherwise, header and then its level are added to that
+const headerStyles = (name, classes) => ({ bold: true, underlined: true, ...classes.header, ...(name === 'header' ? {} : classes[name]) });
+
+// The styles of a class attribute, several names apply in order. class="url" is the style .url; without one, class="h1"
+// is the look of a header of that level and class="header" of any header
 function classStyles(attrs, classes) {
     const styles = {};
     for (const name of (attrs.class || '').split(/\s+/).filter(Boolean)) {
         const key = '.' + name.replace(/^\./, '');
+        if (!classes[key] && /^(h[1-6]|header)$/.test(name)) {
+            Object.assign(styles, headerStyles(name, classes));
+            continue;
+        }
         if (!classes[key]) throw new Error(`unknown class "${name}", the frontmatter has ${Object.keys(classes).filter((k) => k.startsWith('.')).join(', ') || 'none'}`);
         Object.assign(styles, classes[key]);
     }
@@ -400,7 +408,7 @@ function parseInline(text, start, closer, classes = {}) {
                 continue;
             }
         }
-        const tag = /^<(font|a|filter|span|style|h[1-6])(\s[^>]*)?>/i.exec(text.slice(i));
+        const tag = /^<(font|a|filter|span|style|center|h[1-6])(\s[^>]*)?>/i.exec(text.slice(i));
         if (tag) {
             const name = tag[1].toLowerCase();
             const attrs = parseAttributes(tag[2] || '');
@@ -408,8 +416,14 @@ function parseInline(text, start, closer, classes = {}) {
             if (!sub.closed) throw new Error(`<${name}> is not closed`);
             flush();
             if (/^h[1-6]$/.test(name)) {
-                // A header, bold and underlined unless the stylesheet says otherwise
-                content.push({ styles: { bold: true, underlined: true, ...classes.header, ...classes[name] }, content: sub.content });
+                content.push({ styles: headerStyles(name, classes), content: sub.content });
+            } else if (name === 'center') {
+                // The styles of its classes, centerLines centers every line it is on. Like a block, the newline right
+                // after <center> and the one right before </center> are not lines of their own
+                const inner = sub.content.slice();
+                if (typeof inner[0] === 'string') inner[0] = inner[0].replace(/^\n/, '');
+                if (typeof inner[inner.length - 1] === 'string') inner[inner.length - 1] = inner[inner.length - 1].replace(/\n$/, '');
+                content.push({ styles: classStyles(attrs, classes), content: inner.filter((p) => p !== ''), center: true });
             } else if (name === 'style') {
                 // The styles of the named classes from the frontmatter
                 if (!attrs.class) throw new Error('<style> needs a class="..." attribute');
@@ -543,11 +557,11 @@ function toComponent(content, key, lang, styles = {}) {
 }
 
 // The characters of the tree as the reader sees them, each with whether it is bold and its font, an inner font wins
-function glyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false) {
+function glyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = false) {
     return content.flatMap((p) =>
         typeof p === 'string'
-            ? [...p].map((ch) => ({ ch, bold, font, literal, nohyphen }))
-            : glyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true)
+            ? [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center }))
+            : glyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center || p.center === true)
     );
 }
 
@@ -707,8 +721,10 @@ const LINE_HEIGHT = 9;
 const BASELINE = 7;
 const linesAbove = (ascent) => (ascent > LINE_HEIGHT ? Math.min(Math.ceil((ascent - BASELINE) / LINE_HEIGHT), PAGE_LINES - 1) : 0);
 
-// Puts the string in the tree before the glyph with the given index, outside the span that starts there
+// Puts the string, or a list of strings and nodes, in the tree before the glyph with the given index, outside the span
+// that starts there
 function insertAt(content, target, text) {
+    const parts = [].concat(text);
     let pos = 0;
     const walk = (nodes) => {
         for (let i = 0; i < nodes.length; i++) {
@@ -716,13 +732,16 @@ function insertAt(content, target, text) {
             if (typeof part === 'string') {
                 const chars = [...part];
                 if (target >= pos && target < pos + chars.length) {
-                    nodes[i] = chars.slice(0, target - pos).join('') + text + chars.slice(target - pos).join('');
+                    const before = chars.slice(0, target - pos).join('');
+                    const after = chars.slice(target - pos).join('');
+                    if (typeof text === 'string') nodes[i] = before + text + after;
+                    else nodes.splice(i, 1, ...[before, ...parts, after].filter((p) => p !== ''));
                     return true;
                 }
                 pos += chars.length;
             } else {
                 if (target === pos) {
-                    nodes.splice(i, 0, text);
+                    nodes.splice(i, 0, ...parts);
                     return true;
                 }
                 if (walk(part.content)) return true;
@@ -738,14 +757,14 @@ function insertAt(content, target, text) {
  * above it. Empty lines that are there count. ascentOf
  * gives how high a font reaches. Returns a copy of the tree.
  */
-function reserveTall(content, ascentOf = (font) => FONTS.ascentOf(font)) {
+function reserveTall(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
     const tree = JSON.parse(JSON.stringify(content));
     for (let guard = 0; guard < 1000; guard++) {
         const { lines, chars } = layout(tree);
         let change = null;
         lines.forEach((line, k) => {
             if (change || line.tstart === line.tend) return;
-            const need = linesAbove(Math.max(...chars.slice(line.tstart, line.tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font)), 0));
+            const need = linesAbove(Math.max(...chars.slice(line.tstart, line.tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font, g.ch)), 0));
             if (!need) return;
             let empty = 0;
             while (k - empty - 1 >= 0 && lines[k - empty - 1].tstart === lines[k - empty - 1].tend) empty++;
@@ -755,6 +774,47 @@ function reserveTall(content, ascentOf = (font) => FONTS.ascentOf(font)) {
         insertAt(tree, change.place, '\n'.repeat(change.count));
     }
     throw new Error('reserveTall does not settle');
+}
+
+// Blank glyphs of the padding font, each as wide as the low bits of its code point say:  is 1 pixel,  64.
+// The padding turns off the formats that would draw on it, an underline or strikethrough of the text around it.
+const PAD_FONT = `${NS}:padding`;
+const PAD_STYLES = { font: PAD_FONT, bold: false, underlined: false, strikethrough: false, obfuscated: false };
+const padding = (width) =>
+    [64, 32, 16, 8, 4, 2, 1]
+        .filter((w) => (width >= w ? ((width -= w), true) : false))
+        .map((w) => String.fromCharCode(0xf800 + w))
+        .join('');
+
+/**
+ * Centers every line that holds a glyph of a <center>: a line that starts at a wrap starts at a newline instead, so the
+ * overflow is centered on its own, and padding as wide as half of what is left of the line goes before it. Lines are
+ * done from the last up, padding a line that fits does not move the wraps above it. Returns a copy of the tree with the
+ * <center> marks gone.
+ */
+function centerLines(content) {
+    const tree = JSON.parse(JSON.stringify(content));
+    const { lines, chars } = layout(tree);
+    for (const line of [...lines].reverse()) {
+        const text = chars.slice(line.tstart, line.tend);
+        if (!text.some((g) => g.center)) continue;
+        const pad = padding(Math.floor((PAGE_WIDTH - text.reduce((sum, g) => sum + widthOf(g), 0)) / 2));
+        const parts = [...(line.soft ? ['\n'] : []), ...(pad ? [{ styles: PAD_STYLES, content: [pad] }] : [])];
+        if (parts.length) insertAt(tree, chars[line.tstart].place, parts);
+    }
+    return unwrapCenter(tree);
+}
+
+// The tree without the marks of <center> nodes. One without a class is gone, its text stays where it is.
+function unwrapCenter(content) {
+    return content.flatMap((part) => {
+        if (typeof part === 'string') return [part];
+        const inner = unwrapCenter(part.content);
+        if (!part.center) return [{ ...part, content: inner }];
+        if (!Object.keys(part.styles).length) return inner;
+        const { center, ...kept } = part;
+        return [{ ...kept, content: inner }];
+    });
 }
 
 // The part of the tree between two glyph indexes, spans cut to fit, empty ones and the dropped glyph indexes left out.
@@ -800,31 +860,139 @@ function variant(content, filtered, onCut = () => {}) {
  * Fills pages with lines, PAGE_LINES each. A page does not start with an empty line and does not end with one, so a
  * paragraph gap that falls on a page edge vanishes.
  */
-function paginate(content, ascentOf = (font) => FONTS.ascentOf(font)) {
+function paginate(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
+    const pager = pagerOf(content, ascentOf);
+    const ranges = [];
+    for (let at = pager.first(0); at < pager.lines.length; ) {
+        let end = Math.min(at + PAGE_LINES, pager.lines.length);
+        // The empty lines above a tall line go to the next page with it
+        while (end > at + 1 && pager.splitsReserve(end)) end--;
+        ranges.push([at, end]);
+        at = pager.first(end);
+    }
+    return ranges.map(([from, to]) => pager.slice(from, to)).filter(Boolean);
+}
+
+/**
+ * The lines of a tree as pages are cut from them. first(n) is the line a page that starts at line n really starts at:
+ * empty lines at the top of a page are dropped, except the ones a tall glyph below them needs to sit in place.
+ * slice(from, to) is the page of those lines without the empty lines at its end, or null when none are left.
+ */
+function pagerOf(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
     const { lines, chars, dropped } = layout(content);
-    const pages = [];
-    let page = [];
-    const flush = () => {
-        while (page.length && page[page.length - 1].start === page[page.length - 1].end) page.pop();
-        if (page.length) {
-            pages.push(sliceTree(content, chars[page[0].start].place, chars[page[page.length - 1].end - 1].place + 1, dropped));
-        }
-        page = [];
-    };
-    // Empty lines at the top of a page are dropped, except the ones a tall glyph below them needs to sit in place
+    const empty = (n) => lines[n].tstart === lines[n].tend;
     const keeps = (n) => {
         let next = n;
-        while (next < lines.length && lines[next].tstart === lines[next].tend) next++;
+        while (next < lines.length && empty(next)) next++;
         if (next === lines.length) return false;
-        const need = linesAbove(Math.max(...chars.slice(lines[next].tstart, lines[next].tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font)), 0));
+        const need = linesAbove(Math.max(...chars.slice(lines[next].tstart, lines[next].tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font, g.ch)), 0));
         return next - n <= need;
     };
-    for (const [n, line] of lines.entries()) {
-        if (!page.length && line.start === line.end && !keeps(n)) continue;
-        page.push(line);
-        if (page.length === PAGE_LINES) flush();
+    const first = (n) => {
+        while (n < lines.length && lines[n].start === lines[n].end && !keeps(n)) n++;
+        return n;
+    };
+    const slice = (from, to) => {
+        while (to > from && lines[to - 1].start === lines[to - 1].end) to--;
+        return to > from ? sliceTree(content, chars[lines[from].start].place, chars[lines[to - 1].end - 1].place + 1, dropped) : null;
+    };
+    // Whether a page that ends before line `to` keeps the empty lines a tall glyph after it needs, at the bottom of the
+    // page instead of above that glyph at the top of the next
+    const splitsReserve = (to) => {
+        if (to === 0 || to >= lines.length || !empty(to - 1)) return false;
+        let next = to;
+        while (next < lines.length && empty(next)) next++;
+        if (next === lines.length) return false;
+        const need = linesAbove(Math.max(...chars.slice(lines[next].tstart, lines[next].tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font, g.ch)), 0));
+        return next - to < need;
+    };
+    return { lines, chars, empty, first, slice, splitsReserve };
+}
+
+// Where the spans of a tree start and end, in glyph places and in the order they come. The padding of <center> is left
+// out, its count depends on where the lines wrap.
+function spanEdges(content) {
+    const edges = [];
+    let pos = 0;
+    const walk = (nodes) => {
+        for (const part of nodes) {
+            if (typeof part === 'string') {
+                pos += [...part].length;
+                continue;
+            }
+            const pad = part.styles && part.styles.font === PAD_FONT;
+            if (!pad) edges.push(pos);
+            walk(part.content);
+            if (!pad) edges.push(pos);
+        }
+    };
+    walk(content);
+    return { edges, length: pos };
+}
+
+/**
+ * Pages of the same section in several locales, cut so that each page holds the same spans, or the same parts of them,
+ * in every locale: page n of a translation then has the lang keys and %n$s of page n of the reference. A cut is placed by
+ * the spans before it, and inside the text between two span edges by how far into that text it is, so a longer
+ * translation pulls the cuts of the shorter one back. Returns a list of pages per locale, or null when no common cut
+ * fits a page, as when the spans differ.
+ */
+function paginateTogether(contents, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
+    const all = contents.map((content) => {
+        const pager = pagerOf(content, ascentOf);
+        const { edges, length } = spanEdges(content);
+        // The span edges up to a glyph place, and that place as span edges and the fraction of the text to the next one
+        const before = (place) => edges.filter((e) => e <= place).length;
+        const progress = (place) => {
+            const k = before(place);
+            const from = k ? edges[k - 1] : 0;
+            const to = k < edges.length ? edges[k] : length;
+            return k + (to > from ? (place - from) / (to - from) : 0);
+        };
+        return { pager, edges, before, progress };
+    });
+    if (new Set(all.map((a) => a.edges.length)).size > 1) return null;
+    // A cut before line `to` of a page that starts at line `from`: the last glyph left on the page and the first glyph
+    // after it decide which spans are cut, null when the page would be empty
+    const cutOf = (a, from, to) => {
+        const { lines, chars, empty } = a.pager;
+        let last = to - 1;
+        while (last >= from && empty(last)) last--;
+        if (last < from) return null;
+        let next = to;
+        while (next < lines.length && empty(next)) next++;
+        if (next === lines.length) return { to, end: true, key: 'end', progress: Infinity };
+        const x = chars[lines[last].tend - 1].place;
+        const y = chars[lines[next].tstart].place;
+        return { to, end: false, key: `${a.before(x)}:${a.before(y)}`, progress: a.progress(y) };
+    };
+    const pages = all.map(() => []);
+    const at = all.map((a) => a.pager.first(0));
+    for (let guard = 0; at.some((n, i) => n < all[i].pager.lines.length); guard++) {
+        if (guard > 10000 || at.some((n, i) => n >= all[i].pager.lines.length)) return null;
+        const cuts = all.map((a, i) => {
+            const list = [];
+            for (let to = at[i] + 1; to <= Math.min(at[i] + PAGE_LINES, a.pager.lines.length); to++) {
+                const cut = cutOf(a, at[i], to);
+                // The chat-filtered reading of the page has to fit too, an alt can be longer than its text
+                if (cut && !a.pager.splitsReserve(to) && layout(variant(a.pager.slice(at[i], to), true)).lines.length <= PAGE_LINES) list.push(cut);
+            }
+            return list;
+        });
+        if (cuts.some((list) => !list.length)) return null;
+        // The locale that gets the least far on a full page sets how far all go; each still has its first cut
+        const reach = Math.min(...cuts.map((list) => Math.max(...list.map((c) => c.progress))));
+        const allowed = cuts.map((list) => list.filter((c, n) => n === 0 || c.progress <= reach));
+        const common = allowed[0].map((c) => c.key).filter((key) => allowed.every((list) => list.some((c) => c.key === key)));
+        if (!common.length) return null;
+        // The farthest common cut, each locale filling its page as far as that cut lets it
+        const key = common[common.length - 1];
+        all.forEach((a, i) => {
+            const cut = allowed[i].filter((c) => c.key === key).pop();
+            pages[i].push(a.pager.slice(at[i], cut.to));
+            at[i] = a.pager.first(cut.to);
+        });
     }
-    flush();
     return pages;
 }
 
@@ -894,12 +1062,18 @@ function splitSections(body) {
 }
 
 // Every page of the body, a list of trees. Sections fill pages on their own, 14 lines each. A font wraps the whole text,
-// a <font face> inside still wins.
-function pagesOf(body, font = null, hyphenator = null, classes = {}) {
-    return splitSections(body).flatMap((section) => {
+// a <font face> inside still wins. Without center, <center> leaves its lines where they are, as a book and quill does.
+function pagesOf(body, font = null, hyphenator = null, classes = {}, center = true) {
+    return sectionsOf(body, font, hyphenator, classes, center).flatMap((tree) => paginate(tree));
+}
+
+// The tree of every section of the body, laid out and ready to be cut into pages
+function sectionsOf(body, font = null, hyphenator = null, classes = {}, center = true) {
+    return splitSections(body).map((section) => {
         const content = parseInline(section, 0, null, classes).content;
         const base = { ...(font ? { font } : {}), ...classes.body };
-        return paginate(reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ styles: base, content }] : content, hyphenator))));
+        const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ styles: base, content }] : content, hyphenator)));
+        return center ? centerLines(tree) : unwrapCenter(tree);
     });
 }
 
@@ -941,7 +1115,34 @@ function readSource(file) {
     if (meta.writable !== undefined && !/^(true|false)$/i.test(String(meta.writable))) throw new Error(`${file}: frontmatter writable is true or false`);
     // A writable book's pages are not hyphenated, a hyphen would stay in the text the player edits
     const hyphenator = isWritable(meta) ? null : hyphenatorOf(path.basename(path.dirname(file)));
-    return { meta, pages: pagesOf(body, meta.font || null, hyphenator, meta.styles || {}) };
+    // A book and quill shows its text in the default font, the glyphs of the padding would not be blank there
+    const sections = sectionsOf(body, meta.font || null, hyphenator, meta.styles || {}, !isWritable(meta));
+    return { meta, sections, pages: sections.flatMap((tree) => paginate(tree)) };
+}
+
+/**
+ * The sources of one book in the reference locale and its translations, with the pages of all cut together by
+ * paginateTogether. Section by section; when the sections or their spans do not line up, every locale keeps its own
+ * pages and a warning says so.
+ */
+function alignSources(files, warnings) {
+    const sources = files.map((file) => readSource(file));
+    if (sources.length < 2 || isWritable(sources[0].meta)) return sources;
+    const [reference, ...translations] = files;
+    if (new Set(sources.map((s) => s.sections.length)).size > 1) {
+        warnings.push(`${translations.join(', ')}: the --- page breaks are not the ones of ${reference}, pages are cut on their own`);
+        return sources;
+    }
+    const pages = sources.map(() => []);
+    for (let n = 0; n < sources[0].sections.length; n++) {
+        const together = paginateTogether(sources.map((s) => s.sections[n]));
+        if (!together) {
+            warnings.push(`${translations.join(', ')}: the spans of section ${n + 1} are not the ones of ${reference}, pages are cut on their own`);
+            return sources;
+        }
+        together.forEach((list, i) => pages[i].push(...list));
+    }
+    return sources.map((source, i) => ({ ...source, pages: pages[i] }));
 }
 
 // numbers are the page indexes, when the list is a subset of the pages
@@ -1002,19 +1203,74 @@ function loreEntries(meta) {
     });
 }
 
-function loreLines(meta) {
-    const lines = loreEntries(meta).map((e) => e.component);
+/**
+ * The lines of the lore as the item shows them, { text } for plain text and { component } for a component line. Plain
+ * text is wrapped to the width: a frontmatter line is joined with the next unless it ends a sentence or the next is empty,
+ * and broken where the next word does not fit, so the frontmatter needs no wrapping of its own. A component line keeps its place and ends the text before it.
+ * With a count, the text is wrapped narrower until it takes that many lines, so a translation that wraps into fewer lines
+ * than another locale still fills every line the item has; empty lines make up the rest when it cannot.
+ */
+function wrappedLore(meta, count = 0) {
+    const rows = loreEntries(meta);
+    const wrap = (limit) => {
+        const out = [];
+        let run = [];
+        const flush = () => out.push(...reflowLore(run.splice(0), limit).map((text) => ({ text })));
+        for (const row of rows) {
+            if (row.plain) run.push(row.text);
+            else {
+                flush();
+                out.push({ component: row.component });
+            }
+        }
+        flush();
+        return out;
+    };
+    let lines = wrap(LORE_PIXELS);
+    if (lines.length < count) {
+        // Fewer lines for a wider limit; the widest limit that still takes count lines
+        let lo = 1;
+        let hi = LORE_PIXELS;
+        while (lo < hi) {
+            const mid = Math.ceil((lo + hi) / 2);
+            if (wrap(mid).length >= count) lo = mid;
+            else hi = mid - 1;
+        }
+        if (wrap(lo).length === count) lines = wrap(lo);
+        while (lines.length < count) lines.push({ text: '' });
+    }
+    return lines;
+}
+
+// A plain lore line is a lang key, book.<namespace>.<id>.lore.<n>, so a translation gives it its own words. A component
+// line stays as it is. count is the number of lines of the locale whose lore wraps into the most.
+function loreLines(meta, id, lang, count = 0) {
+    const lines = wrappedLore(meta, count).map((line, n) => {
+        if (line.component !== undefined) return line.component;
+        const key = `book.${NS}.${id}.lore.${n + 1}`;
+        lang[key] = escapePercent(line.text);
+        return { translate: key, fallback: escapePercent(line.text) };
+    });
     const name = rarityOf(meta);
-    if (name) lines.push(['Rarity: ', { text: name[0].toUpperCase() + name.slice(1), color: RARITY_COLORS[name], italic: true }]);
+    // The Rarity line is the pack's, its words are in the hand-written lang of the namespace, not in a book
+    if (name) {
+        const rarity = { translate: `rarity.${NS}.${name}`, fallback: name[0].toUpperCase() + name.slice(1), color: RARITY_COLORS[name], italic: true };
+        lines.push({ translate: `lore.${NS}.rarity`, fallback: 'Rarity: %s', with: [rarity] });
+    }
     return lines;
 }
 
 // The item name in the color of the rarity, not italic, as the other items of the pack have it. The name has no filtered
 // side, so it takes the filtered title when there is one. An SNBT title keeps its own colors and styles, the rarity only
 // fills in what it leaves out.
-function itemName(title, rarity) {
+// A plain name is a lang key, so a translation names the item in its own words.
+function itemName(title, rarity, key, lang) {
     const base = { color: RARITY_COLORS[rarity], italic: false };
-    if (!title.rich) return { text: title.filtered || title.text, ...base };
+    if (!title.rich) {
+        const text = title.filtered || title.text;
+        lang[key] = escapePercent(text);
+        return { translate: key, fallback: escapePercent(text), ...base };
+    }
     return { text: '', ...base, extra: [].concat(title.rich) };
 }
 
@@ -1022,7 +1278,7 @@ function itemName(title, rarity) {
 const plainText = (tree) => glyphs(tree).map((g) => g.ch).join('');
 
 // A book and quill keeps plain strings, so the formatting, fonts, title and author are lost. The title is the item name
-function buildWritable(source, title, file, warnings) {
+function buildWritable(id, source, title, file, warnings) {
     const { meta } = source;
     for (const key of ['author', 'font', 'styles']) if (meta[key]) warnings.push(`${file}: ${key} does nothing in a writable book`);
     const pages = source.pages.map((tree) => variant(tree, false));
@@ -1036,20 +1292,20 @@ function buildWritable(source, title, file, warnings) {
     if (texts.length > MAX_PAGES) warnings.push(`${file}: ${texts.length} pages, a book takes ${MAX_PAGES}`);
     const rarity = rarityOf(meta);
     const set = { 'minecraft:writable_book_content': { pages: texts } };
-    set['minecraft:custom_name'] = rarity ? itemName(title, rarity) : title.rich || { text: title.filtered || title.text, italic: false };
+    const lang = {};
+    set['minecraft:custom_name'] = title.rich && !rarity ? title.rich : itemName(title, rarity, `book.${NS}.${id}.title`, lang);
     if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
     const functions = [{ type: 'minecraft:set_components', components: set }];
     // The SNBT string form, a JSON compound would turn small ints into bytes
     if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
-    const lore = loreLines(meta);
+    const lore = loreLines(meta, id, lang, source.loreCount);
     if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
-    return { modifier: { type: 'minecraft:sequence', functions }, lang: {}, warnings };
+    return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
 }
 
 /** Item modifier JSON and lang entries for one book in one locale. */
-function buildBook(id, file) {
+function buildBook(id, file, source = readSource(file)) {
     const warnings = [];
-    const source = readSource(file);
     const { meta } = source;
     const pages = source.pages.map((tree) => variant(tree, false));
     const lang = {};
@@ -1059,7 +1315,7 @@ function buildBook(id, file) {
         if (text && text.length > MAX_TITLE) warnings.push(`${file}: ${kind} is ${text.length} characters, the book takes ${MAX_TITLE}`);
     }
     if (pages.length > MAX_PAGES) warnings.push(`${file}: ${pages.length} pages, a book takes ${MAX_PAGES}`);
-    if (isWritable(meta)) return buildWritable(source, title, file, warnings);
+    if (isWritable(meta)) return buildWritable(id, source, title, file, warnings);
     let components = pageComponents(pages, id, 'page', lang, warnings, file);
 
     // The filtered reading cuts pages where the raw one does. A page that reads the same stays a plain component, the game
@@ -1074,41 +1330,25 @@ function buildBook(id, file) {
         const own = pageComponents(differs.map((n) => filtered[n]), id, 'filtered', lang, warnings, file, differs);
         components = components.map((raw, n) => (differs.includes(n) ? { raw, filtered: own[differs.indexOf(n)] } : raw));
     }
-    const warningsBeforeLore = warnings.length;
-    const loreRows = loreEntries(meta);
-    for (const { index, word } of shortLines(loreRows)) warnings.push(`${file}: lore line "${loreRows[index].text}" has no ending punctuation and "${word}" from the next line fits`);
-    for (const row of loreRows) {
-        if (row.width <= LORE_PIXELS) continue;
-        warnings.push(`${file}: lore line is ${row.width} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: "${row.raw}"${row.plain ? ', ' + wrapAdvice(row.raw) : ''}`);
-    }
-    // When any line is off, offer the whole block reflowed so it can be pasted into the frontmatter
-    const loreProblems = warnings.length - warningsBeforeLore;
-    if (loreProblems) {
-        // A text component keeps its line and ends the paragraph before it
-        const reflowed = [];
-        let run = [];
-        const flush = () => reflowed.push(...reflowLore(run.splice(0)));
-        for (const row of loreRows) {
-            if (row.plain) run.push(row.raw);
-            else {
-                flush();
-                reflowed.push(row.raw);
-            }
+    // Plain lore is wrapped by wrappedLore, only a word or a component line too wide for a line is left
+    for (const row of loreEntries(meta)) {
+        if (!row.plain) {
+            if (row.width > LORE_PIXELS) warnings.push(`${file}: lore line is ${row.width} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: ${row.raw}`);
+            continue;
         }
-        flush();
-        if (reflowed.join('\n') !== loreRows.map((r) => r.raw).join('\n')) warnings.push(`${file}: reflowed lore, replace the lines under "lore:" with:\n${reflowed.map((l) => '  ' + l).join('\n')}`);
+        for (const word of row.text.split(' ')) if (loreWidth(word) > LORE_PIXELS) warnings.push(`${file}: lore word "${word}" is ${loreWidth(word)} pixels, wider than the ${LORE_PIXELS} of a line`);
     }
 
     const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author, pages: components, resolved: true };
     const set = { 'minecraft:written_book_content': content };
     const rarity = rarityOf(meta);
-    if (rarity) set['minecraft:custom_name'] = itemName(title, rarity);
+    if (rarity) set['minecraft:custom_name'] = itemName(title, rarity, `book.${NS}.${id}.title`, lang);
     else if (title.rich) set['minecraft:custom_name'] = title.rich;
     if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
     const functions = [{ type: 'minecraft:set_components', components: set }];
     // The SNBT string form, a JSON compound would turn small ints into bytes
     if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
-    const lore = loreLines(meta);
+    const lore = loreLines(meta, id, lang, source.loreCount);
     if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
     return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
 }
@@ -1199,9 +1439,19 @@ function generate(options = {}) {
     const sources = findSources(bookDir, warnings, dev);
     const references = sources[REFERENCE_LANG] || {};
     const langs = {};
+    // A book with translations has its pages cut in all its locales together, so they share the lang keys
+    const aligned = new Map();
+    for (const id of Object.keys(references)) {
+        const files = [references[id].file, ...Object.entries(sources).filter(([locale, books]) => locale !== REFERENCE_LANG && books[id]).map(([, books]) => books[id].file)];
+        if (files.length < 2) continue;
+        // Every locale has the lore lines of the one whose lore wraps into the most
+        const both = alignSources(files, warnings);
+        const loreCount = Math.max(...both.map((source) => wrappedLore(source.meta).length));
+        both.forEach((source, i) => aligned.set(files[i], { ...source, loreCount }));
+    }
     const builds = new Map();
     const buildOnce = (id, file) => {
-        if (!builds.has(file)) builds.set(file, buildBook(id, file));
+        if (!builds.has(file)) builds.set(file, buildBook(id, file, aligned.get(file)));
         return builds.get(file);
     };
 
@@ -1251,14 +1501,10 @@ function generate(options = {}) {
         }
     }
 
-    // Every key under book.<namespace>. belongs to this script, the rest of a lang file is kept
+    // The lang files of the generated namespace belong to this script, hand-written keys go in the other namespaces
     for (const [locale, entries] of Object.entries(langs)) {
         const file = path.join(langDir, locale + '.json');
-        const kept = {};
-        if (fs.existsSync(file)) {
-            for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(file, 'utf8')))) if (!k.startsWith(`book.${NS}.`)) kept[k] = v;
-        }
-        if (emit(file, json({ ...kept, ...entries }), check)) changed.push(file);
+        if (emit(file, json(entries), check)) changed.push(file);
     }
     for (const id of FONTS.missing) warnings.push(`font ${id} is not defined by the game or texturepack/assets, its glyphs are measured as 9 pixels`);
     return { changed, warnings };
@@ -1266,7 +1512,7 @@ function generate(options = {}) {
 
 //endregion
 
-module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
+module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, sectionsOf, paginate, paginateTogether, wrappedLore, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
 
 if (require.main === module) {
     const args = process.argv.slice(2);
