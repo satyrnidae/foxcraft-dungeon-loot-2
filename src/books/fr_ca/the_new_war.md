@@ -10,12 +10,13 @@ styles: {
   }
   .annotation: {
     font: minecraft:default,
-    italic: true
+    italic: true,
+    color: dark_gray
   }
 }
 ---
 
-<style class=".annotation">Le texte est griffonné et à peine lisible, comme s'il avait été écrit à la hâte</style>
+<style class=".annotation">Le texte est griffonné et à peine lisible, comme s'il avait été écrit à la hâte.</style>
 
 # 14 juin 2XXX
 

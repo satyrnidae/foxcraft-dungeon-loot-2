@@ -146,23 +146,25 @@ async function javaChecks(allowDownload) {
     return [['java checks', `SKIPPED could not fetch libraries: ${exc.message}`]];
   }
   const classpath = [jar, ...libs].join(path.delimiter);
-  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java'].map((n) => path.join(TESTS, 'java', n));
+  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'BookRender.java'].map((n) => path.join(TESTS, 'java', n));
   if (run(javac, ['-cp', classpath, '-d', classes, ...sources], { cwd: CACHE }) !== 0) return [['java compile', 'FAIL']];
   const runcp = [classes, classpath].join(path.delimiter);
   const functions = path.join(ROOT, 'data', 'foxcraft_dungeon_loot', 'function');
   const results = [];
   // Run from the cache folder, the game writes a logs/ folder into the working directory.
-  for (const [label, main, arg] of [
-    ['vanilla behavior (Harness)', 'Harness', null],
+  for (const [label, main, ...args] of [
+    ['vanilla behavior (Harness)', 'Harness'],
     ['data codecs (Scan)', 'Scan', path.join(ROOT, 'data')],
     ['generated commands (CmdCheck)', 'CmdCheck', functions],
     ['pack registry load (PackLoad)', 'PackLoad', ROOT],
+    // Every generated book page as a PNG in tests/.cache/books, wrapped by the game's own line splitter
+    ['book pages (BookRender)', 'BookRender', ROOT, path.join(CACHE, 'books')],
   ]) {
     if (main === 'CmdCheck' && !fs.existsSync(functions)) {
       results.push([label, 'SKIPPED no build output']);
       continue;
     }
-    results.push([label, run(java, ['-cp', runcp, main, ...(arg ? [arg] : [])], { cwd: CACHE }) === 0 ? 'PASS' : 'FAIL']);
+    results.push([label, run(java, ['-cp', runcp, main, ...args], { cwd: CACHE }) === 0 ? 'PASS' : 'FAIL']);
   }
   return results;
 }

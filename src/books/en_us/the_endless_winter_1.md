@@ -14,9 +14,13 @@ lore:
 
   "There's a dreadful silence. It's louder than any silence ought to be. I call out, but my voice feels muffled, as though the air itself abhors the sound. For a time, all I hear is the quickening pace of my own heart.
 
-  "But it's interrupted by a new sound: like a hammer striking an anvil. It's far away, but I creep towards it, each footfall threatening to dash me against the ice. Soon, I hear voices. They're guttural, and aren't speaking any language I can understand. The din begins to lift as I get closer, and soon, I see torchlight shining through a crack, the small beam reflecting off the frozen cave walls in a sparkling glory.
+  "But it's interrupted by a new sound: like a hammer striking an anvil. It's far away, but I creep towards it, each footfall threatening to dash me against the ice.
 
-  "You'd think I would think better of it, but something almost compels me to peer through the crack. I hunch down and stare through the small portal. My eyes scream from the sudden brightness, but I don't blink... can't blink. Because looking through the hole, I see Drauven. Dozens of them. Wrapped in thick furs, huddling around makeshift braziers, striking the rock with stolen pickaxes, almost feverish in their search for... something. Me?
+  "Soon, I hear voices. They're guttural, and aren't speaking any language I can understand. The din begins to lift as I get closer, and soon, I see torchlight shining through a crack, the small beam reflecting off the frozen cave walls in a sparkling glory.
+
+  "You'd think I would think better of it, but something almost compels me to peer through the crack. I hunch down and stare through the small portal. My eyes scream from the sudden brightness, but I don't blink... can't blink. Because looking through the hole, I see Drauven.
+  
+  "Dozens of them. Wrapped in thick furs, huddling around makeshift braziers, striking the rock with stolen pickaxes, almost feverish in their search for... something. Me?
 
   "I scramble to get up, but slip on the frozen floor. I scream as skin tears against the sharp rocks and blood splashes against the ice. The pickaxes stop, and the light from the crack suddenly dims...
 

@@ -16,7 +16,7 @@ lore:
 
   "I just don't see how this cave is any different from the last three we looked at." Timur grunted and shifted the weight of his pack on his shoulders. "Though I suppose if it's not crawling with Deepists, it'll be an improvement."
 
-  Liara was too busy unpacking her gear to respond. Besides, Timur knew what he was getting into when he agreed to join her on this mission. "Leave that," she instructed as Timur readjusted his pack once more. "It'll only slow us down, and besides, if it's anything like my dream there won't be much room for maneuvering a large pack about anyways."
+  Liara was too busy unpacking her gear to respond. Besides, Timur knew what he was getting into when he agreed to join her on this mission. "Leave that," she instructed as Timur readjusted his pack once more. "It'll only slow us down, and if it's anything like my dream, there won't be much room for maneuvering a large pack about anyways."
 
   Timur set the pack down, half begrudgingly, half relieved to be free of its burden. He unsheathed a pickaxe from its side and holstered it against his belt as Liara produced a willow-hewn bow from her own pack. "You sure about that? I doubt there's gonna be much room to shoot in a cave."
 

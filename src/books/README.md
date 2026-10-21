@@ -132,25 +132,25 @@ A font whose `ascent` is over 9 pixels, more than a line, takes empty lines abov
 
 ## Music
 
-A fenced block with the language `music` is drawn as a staff line in `foxcraft_dungeon_loot:staff_notation`: the staff and ledger lines in grey `#aaaaaa`, the bars, clef, key, time, notes and rests over them in black, unless the block sets its own colors. The staff and its ledger lines, `\uef00` to `\uef05`, the bars, `\uee00` to `\uee04`, and the C clefs, `\ued00` to `\ued04`, are glyphs of `staff_notation` from `staff.png`: its cells are three times the size of the notes' and drawn as high, so the lines are a third as thick and the bars and C clefs reach from the top line of the staff to its bottom one exactly. The notes, other clefs and the rest are `notation.png`. Words are separated by spaces or line breaks, and `//` or a `#` on its own starts a comment to the end of the line.
+A fenced block with the language `music` is drawn as a staff line in `foxcraft_dungeon_loot:staff_notation`: the staff and ledger lines in grey `#aaaaaa`, the bars, clef, key, time, notes and rests over them in black, unless the block sets its own colors. The staff and its ledger lines, `\uef00` to `\uef05`, the bars, `\uee00` to `\uee05`, and the C clefs, `\ued00` to `\ued04`, are glyphs of `staff_notation` from `staff.png`: its cells are three times the size of the notes' and drawn as high, so the lines are a third as thick and the bars and C clefs reach from the top line of the staff to its bottom one exactly. The notes, other clefs and the rest are `notation.png`. Words are separated by spaces or line breaks, and `//` or a `#` on its own starts a comment to the end of the line.
 
 ```
 ```music
-||: ClefTr TSC Bm 4-4i 6-8i 6-8i 2-4 2-4 | 1-4 2-2 R1 :||
+||: ClefG2 TSC Bm 5-4i 6-8i 6-8i 2-4 2-4 | 1-4 2-2 R1 :||
 ```
 Words go un-der by hand
 ```
 
-- A clef is `Clef` and its name: `Tr` treble, `Fr` French violin, `Ba` baritone, `B` bass and `Sb` sub-bass, the G and F clefs; `S` soprano, `Ms` mezzo-soprano, `A` alto, `Te` tenor and `BaC` baritone on the C clef, which reads like `Ba`. The C clefs are `\ued00` to `\ued04` of `staff.png`, as tall as the staff.
-- `TSC` is common time and `TS3/4` a time signature; the font has 6, 4, 3 and 2 above and 8, 4, 3 and 2 below.
+- A clef is `Clef`, its letter and the line it sits on, counted from the bottom: `ClefG2` treble, `ClefG1` French violin, `ClefF3` baritone, `ClefF4` bass, `ClefF5` sub-bass, `ClefC1` soprano, `ClefC2` mezzo-soprano, `ClefC3` alto, `ClefC4` tenor and `ClefC5` baritone, which reads like `ClefF3`. The C clefs are `\ued00` to `\ued04` of `staff.png`, as tall as the staff.
+- `TSC` is common time and `TS3/4` a time signature; the font has 8, 6, 4, 3 and 2 both above and below.
 - A key such as `C`, `F#`, `Bb`, `Am` or `Ebm` draws its sharps or flats where the clef before it puts them, treble without one.
-- A note is its place and the denominator of its length: `1-2` is a half note on B3. Places go from 0, A3, to 16, C6, as on a treble staff, under any clef; lengths are 1, 2, 4 and 8. Stems go up below 8, B4, and down from it. A trailing `i` turns a stem the other way, `d` sets it up and `p` down: `7-4p`. The font has up stems from 14, A5, down and down stems from 3, D4, up, so where it has no stem the asked way the note keeps the one it has, and a whole note has none to turn. Notes from 14 up and from 2 down get their ledger lines.
+- A note is its place and the denominator of its length: `1-2` is a half note on B3. Places go from 0, A3, to 16, C6, as on a treble staff, under any clef; lengths are 1, 2, 4 and 8. Stems go up below 8, B4, and down from it. A trailing `i` turns a stem the other way, `d` sets it up and `p` down: `7-4p`. The font has up stems from 12, F5, down and down stems from 5, F4, up, so where it has no stem the asked way the note keeps the one it has, and a whole note has none to turn. Notes from 14 up and from 2 down get their ledger lines.
 - `#`, `b` or `n` before a note is a sharp, flat or natural: `#6-4`.
 - `(2-1 4-1 6-1)` is a chord, its notes over each other, stemmed the way its note furthest from the middle line goes. Its accidentals stand in columns left of it as engraved: the highest nearest the notes, then the lowest, then the next highest and next lowest, each in the nearest column where no other is closer than a seventh.
 - `R-4` or `R4` is a rest, by the same lengths.
-- `|` is a bar, `||` a double bar, `|||` a stop, `||:` and `:||` repeats. A block opens and closes with a bar, a plain one when it has none.
+- `|` is a bar, `||` a double bar, `|||` a stop, its thick line first when it opens the block, `||:` and `:||` repeats. A block opens and closes with a bar, a plain one when it has none.
 - `staff:gray` and `symbol:#5a1f8c` set the color of the staff, with its ledger lines, and of everything drawn over it, the bars too, for the whole block. A color is one of the 16 names, such as `dark_aqua`, or `#rrggbb`; the defaults are `#aaaaaa` and `#000000`, and each can be set once a block.
-- `\ue600`, or the glyph itself, is that glyph of the font, and glyphs written one after another join up, as `\ue600 \ue601 \ue602`, the glockenspiel triplet.
+- `\ue600`, or the glyph itself, is that glyph of the font, and glyphs written one after another join up, as `\ue600 \ue601 \ue602 \ue603`, the glockenspiel triplet.
 
 A block is one staff line across the page, 114 pixels: the room after its notes is shared out to reach it, or taken in down to a pixel when the music is wider. Only music that still does not fit is broken over more lines, at a bar, each line opening with the clef and key again and reaching across the page too. The staff reaches 20 pixels above its line, so it gets two empty lines over it. The staff itself ends within its own line, so a line of words right after the block clears it, and only notes under the staff, C4 and lower, reach into that line. Lining the words up under the notes is done by hand, with padding. `music_notation_test_book` shows all of it.
 

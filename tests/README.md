@@ -31,10 +31,10 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 | `unit/specs/items.json` | Snapshot of the facts each item test pins down |
 | `unit/gen_specs.mjs` | Regenerates the snapshot |
 | `unit/checks.mjs` | Lets one test report several failed checks together |
-| `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader |
+| `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader, and `BookRender`, which draws every generated book page |
 | `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs`, `fetch_mc_jar.mjs` |
 | `verifying-against-vanilla.md` | How the Java checks work and what they found |
-| `.cache/` | Downloaded libraries and compiled classes, gitignored |
+| `.cache/` | Downloaded libraries, compiled classes and the rendered book pages in `books/<locale>/<id>/page_NN.png`, gitignored |
 
 ## What the item tests check
 
@@ -63,6 +63,10 @@ The snapshot pins current state, not correctness. Reviewing a diff of `specs/ite
 - New item: add the loot table, modifier and source. The tests find them. Run `node tests/unit/gen_specs.mjs` and review the new spec entry.
 - Changed item on purpose: regenerate the spec and read the diff.
 - New check that applies to every item: add it to `items.test.mjs`. A check for one item belongs in a spec field.
+
+## Book pages
+
+`BookRender` writes every page of every generated book, in en_us and in each locale it has a source for in `src/books/<locale>/`, to `tests/.cache/books/<locale>/<id>/page_NN.png`, three pixels to a GUI pixel, on the vanilla book background. The pages are read with the game's component codec, translated from the resource pack lang files and broken into lines by the game's own `StringSplitter`, as the book screen does, so the line breaks are the game's. The drawing is its own, with no GPU: bitmap and space providers of the pack and the client jar, colors, bold, italic, underline and strikethrough. Unifont is not in the client jar, so a glyph no bitmap font has is the missing glyph box, and TrueType or unihex providers are skipped with a warning. A locale has the game's en_us entries under its own, as in game, and the client jar has only the vanilla en_us, so vanilla text such as the page counter stays English. A page the game breaks into more than 14 lines fails the step, since the book cuts its end off. A book with filtered pages is drawn a second time into `books/<locale>/<id>/filtered/`, every page as a reader with chat filtering sees it: the filtered side where a page has one, the raw side elsewhere, and the line check covers both. Run it alone with `java -cp <classes and classpath> BookRender <repo> <out> [scale]`.
 
 ## Known limits
 

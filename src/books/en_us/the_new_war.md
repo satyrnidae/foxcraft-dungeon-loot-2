@@ -10,12 +10,13 @@ styles: {
   }
   .annotation: {
     font: minecraft:default,
-    italic: true
+    italic: true,
+    color: dark_gray
   }
 }
 ---
 
-<style class=".annotation">The text is scrawled and barely legible, as though it were written in a hurry</style>
+<style class=".annotation">The text is scrawled and barely legible, as though it were written in a hurry.</style>
 
 # June 14th, 2XXX
 

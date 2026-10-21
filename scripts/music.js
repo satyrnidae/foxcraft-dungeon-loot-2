@@ -11,22 +11,24 @@ const SCALE = 30 / 36;
 const PAGE_WIDTH = 114;
 
 // The clefs: the G and F clefs of the first row of notation.png, and the C clefs of the third row of staff.png, as tall as
-// the staff like its bars. Baritone is the F clef on the middle line, BaC the C clef on the top one, which reads the same.
+// the staff like its bars. Each is named by its letter and the line it sits on, counted from the bottom: G2 is the
+// treble clef, F4 the bass, C3 the alto. F3 and C5 are both baritone and read the same.
 const CLEFS = {
-    Tr: 0xe000, Fr: 0xe001, Ba: 0xe002, B: 0xe003, Sb: 0xe004,
-    S: 0xed00, Ms: 0xed01, A: 0xed02, Te: 0xed03, BaC: 0xed04,
+    G2: 0xe000, G1: 0xe001, F3: 0xe002, F4: 0xe003, F5: 0xe004,
+    C1: 0xed00, C2: 0xed01, C3: 0xed02, C4: 0xed03, C5: 0xed04,
 };
 const COMMON_TIME = 0xe005;
 // The digits of a time signature, the upper ones above the middle line and the lower ones under it, set at the same place
-const UPPER = { 6: 0xe00a, 4: 0xe00b, 3: 0xe00c, 2: 0xe00d };
-const LOWER = { 8: 0xe006, 4: 0xe007, 3: 0xe008, 2: 0xe009 };
+const UPPER = { 8: 0xe00b, 6: 0xe00c, 4: 0xe00d, 3: 0xe00e, 2: 0xe00f };
+const LOWER = { 8: 0xe006, 6: 0xe007, 4: 0xe008, 3: 0xe009, 2: 0xe00a };
 // The staff and its ledger lines are the glyphs of staff.png in staff_notation: cells of three times the size, drawn as
 // high, so their lines are a third as thick. Widths here are in the columns of the notes.
-// Ledger lines by the note furthest out: C6 has two above, A5 and B5 one, C4 and B3 one below, A3 two. They are 12 columns
-// wide, centered over the head: 3 pixels left of a head of 4 or a whole note of 6
+// Ledger lines by the note furthest out: C6 has two above, A5 and B5 one, C4 and B3 one below, A3 two. They are 8 columns
+// wide, centered over a head of 6, one pixel left of it
 const LEDGERS = { 16: 0xef02, 15: 0xef03, 14: 0xef03, 2: 0xef04, 1: 0xef04, 0: 0xef05 };
-const LEDGER_COLUMNS = 12;
-const headColumns = (len) => (len === 1 ? 6 : 4);
+const LEDGER_COLUMNS = 8;
+// Every note head is 6 columns wide, in columns 0 to 5 of its glyph
+const HEAD_COLUMNS = 6;
 // The staff segments by their width in the image: 12 for the staff and 3 to finish it under the bar that closes it
 const SEGMENTS = { 3: 0xef00, 12: 0xef01 };
 const LONG = 12;
@@ -37,32 +39,36 @@ const START_REPEAT = 0xee01;
 const END_REPEAT = 0xee02;
 const STOP = 0xee03;
 const BAR = 0xee04;
+// ||| opening the music is the stop turned round, its thick line first
+const START_STOP = 0xee05;
+const opening = (token) => (token === '|||' ? START_STOP : BARS[token]);
 const BARS = { '|': BAR, '||': DOUBLE_BAR, '|||': STOP, '||:': START_REPEAT, ':||': END_REPEAT };
 // The bars are drawn over one staff that runs the whole line, from under the bar that opens it through the bar that
 // closes it: past the gap between its lines into its last line, and no further than that line's right edge. By columns,
 // where its last line starts and where it ends; the dots of a start repeat stand past them
-const BAR_LINES = { [BAR]: [0, 1], [DOUBLE_BAR]: [2, 3], [STOP]: [2, 4], [START_REPEAT]: [3, 4], [END_REPEAT]: [4, 6] };
+const BAR_LINES = { [BAR]: [0, 1], [DOUBLE_BAR]: [2, 3], [STOP]: [2, 4], [START_REPEAT]: [3, 4], [END_REPEAT]: [4, 6], [START_STOP]: [3, 4] };
 const staffThrough = (x, g) => staffUnder(x + BAR_LINES[g][0] * SCALE, x + BAR_LINES[g][1] * SCALE);
 // Rests and notes by the denominator of their length. Notes are numbered 0 for A3 up to 16 for C6, as on a treble staff.
-// Stems go up below B4 and down from it; the font has up stems from A5 down to A3 and down stems from C6 down to D4.
+// Stems go up below B4 and down from it; the font has up stems from F5 down to A3 and down stems from C6 down to F4.
 const RESTS = { 1: 0xe211, 2: 0xe212, 4: 0xe213, 8: 0xe214 };
 const WHOLE = 0xe200;
-const STEMS = { 2: [0xe300, 0xe30f], 4: [0xe400, 0xe40f], 8: [0xe500, 0xe50f] };
+const STEMS = { 2: [0xe300, 0xe30d], 4: [0xe400, 0xe40d], 8: [0xe500, 0xe50d] };
 const MIDDLE = 8;
-// Sharps, flats and naturals: C6 to A5 on the upper extension, G5 to D4 on the staff, C4 to A3 on the lower one
+// Sharps, flats and naturals: C6 to A5 on the upper extension, G5 to D4 on the staff, C4 to A3 on the lower one. The
+// naturals of both extensions follow the down stems of the half notes
 // Two accidentals of a chord share a column a seventh or more apart
 const ACCIDENTAL_SHARE = 6;
-const ACCIDENTALS = { '#': [0xe21b, 0xe100, 0xe21e], b: [0xe215, 0xe10b, 0xe218], n: [0xe31d, 0xe116, 0xe41d] };
+const ACCIDENTALS = { '#': [0xe21b, 0xe100, 0xe21e], b: [0xe215, 0xe10b, 0xe218], n: [0xe31b, 0xe116, 0xe31e] };
 // The places of the sharps and flats of a key signature in order, by clef. Each clef moves the treble ones by where it puts
 // its note, kept within a seventh that sits on the staff: treble and sub-bass alike, French violin like bass, baritone two
 // places under bass, and the C clefs from soprano on the bottom line up to tenor on the fourth, as engraved
 const KEY_SHARPS = {
-    Tr: [12, 9, 13, 10, 7, 11, 8], Fr: [10, 7, 11, 8, 5, 9, 6], Ba: [8, 5, 9, 6, 10, 7, 4], B: [10, 7, 11, 8, 5, 9, 6], Sb: [12, 9, 13, 10, 7, 11, 8],
-    S: [7, 11, 8, 12, 9, 13, 10], Ms: [9, 6, 10, 7, 4, 8, 5], A: [11, 8, 12, 9, 6, 10, 7], Te: [6, 10, 7, 11, 8, 12, 9], BaC: [8, 5, 9, 6, 10, 7, 4],
+    G2: [12, 9, 13, 10, 7, 11, 8], G1: [10, 7, 11, 8, 5, 9, 6], F3: [8, 5, 9, 6, 10, 7, 4], F4: [10, 7, 11, 8, 5, 9, 6], F5: [12, 9, 13, 10, 7, 11, 8],
+    C1: [7, 11, 8, 12, 9, 13, 10], C2: [9, 6, 10, 7, 4, 8, 5], C3: [11, 8, 12, 9, 6, 10, 7], C4: [6, 10, 7, 11, 8, 12, 9], C5: [8, 5, 9, 6, 10, 7, 4],
 };
 const KEY_FLATS = {
-    Tr: [8, 11, 7, 10, 6, 9, 5], Fr: [6, 9, 5, 8, 4, 7, 3], Ba: [4, 7, 3, 6, 9, 5, 8], B: [6, 9, 5, 8, 4, 7, 3], Sb: [8, 11, 7, 10, 6, 9, 5],
-    S: [10, 13, 9, 12, 8, 11, 7], Ms: [5, 8, 4, 7, 3, 6, 9], A: [7, 10, 6, 9, 5, 8, 4], Te: [9, 12, 8, 11, 7, 10, 6], BaC: [4, 7, 3, 6, 9, 5, 8],
+    G2: [8, 11, 7, 10, 6, 9, 5], G1: [6, 9, 5, 8, 4, 7, 3], F3: [4, 7, 3, 6, 9, 5, 8], F4: [6, 9, 5, 8, 4, 7, 3], F5: [8, 11, 7, 10, 6, 9, 5],
+    C1: [10, 13, 9, 12, 8, 11, 7], C2: [5, 8, 4, 7, 3, 6, 9], C3: [7, 10, 6, 9, 5, 8, 4], C4: [9, 12, 8, 11, 7, 10, 6], C5: [4, 7, 3, 6, 9, 5, 8],
 };
 // Sharps in a key, flats as negative
 const KEYS = {
@@ -85,7 +91,7 @@ function accidental(kind, p) {
 function noteGlyph({ p, len }, down) {
     if (len === 1) return WHOLE + 16 - p;
     const [up, dn] = STEMS[len];
-    return (down && p >= 3) || p > 14 ? dn + 16 - p : up + 14 - p;
+    return (down && p >= 5) || p > 12 ? dn + 16 - p : up + 12 - p;
 }
 
 // Which way a note stems: the way of its chord, the other way with i, up with d, down with p
@@ -194,7 +200,7 @@ function layoutLine({ open, items, close }, widthOf, extra = 0, pin = false) {
     const weight = (it) => 8 / it.len;
     const total = items.filter((it) => it.type === 'event').reduce((sum, it) => sum + weight(it), 0);
     let done = 0;
-    let clef = 'Tr';
+    let clef = 'G2';
     ink.push({ x: 0, g: open });
     let x = occ(open) + AFTER_BAR;
     for (const it of items) {
@@ -256,7 +262,7 @@ function layoutLine({ open, items, close }, widthOf, extra = 0, pin = false) {
             heads.forEach((g) => ink.push({ x: head, g }));
             const top = Math.max(...it.notes.map((n) => n.p));
             const bottom = Math.min(...it.notes.map((n) => n.p));
-            const ledger = head - Math.round(((LEDGER_COLUMNS - Math.max(...it.notes.map((n) => headColumns(n.len)))) / 2) * SCALE);
+            const ledger = head - Math.round(((LEDGER_COLUMNS - HEAD_COLUMNS) / 2) * SCALE);
             if (top >= 14) staff.push({ x: ledger, g: LEDGERS[top] });
             if (bottom <= 2) staff.push({ x: ledger, g: LEDGERS[bottom] });
             x = head + Math.max(...heads.map(occ)) + room;
@@ -335,7 +341,7 @@ function musicLines(code, widthOf) {
     };
     const body = items.slice(items[0] && items[0].type === 'bar' ? 1 : 0);
     const tail = body.length && body[body.length - 1].type === 'bar' ? body.pop().bar : null;
-    const whole = { open: items[0] && items[0].type === 'bar' ? BARS[items[0].bar] : BAR, items: body, close: tail ? BARS[tail] : BAR };
+    const whole = { open: items[0] && items[0].type === 'bar' ? opening(items[0].bar) : BAR, items: body, close: tail ? BARS[tail] : BAR };
     const extra = fill(whole, widthOf);
     if (extra !== null) return [render(whole, extra)];
 
@@ -344,7 +350,7 @@ function musicLines(code, widthOf) {
     let i = 0;
     let open = BAR;
     if (items[0] && items[0].type === 'bar') {
-        open = BARS[items[0].bar];
+        open = opening(items[0].bar);
         i = 1;
     }
     let clef = null;
@@ -403,4 +409,4 @@ function musicLines(code, widthOf) {
     return lines.map((l) => render(l, fill(l, widthOf) ?? 0));
 }
 
-module.exports = { musicLines, parse, layoutLine, staffUnder, headColumns, FONT };
+module.exports = { musicLines, parse, layoutLine, staffUnder, HEAD_COLUMNS, FONT };
