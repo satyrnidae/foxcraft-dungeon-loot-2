@@ -16,20 +16,33 @@ styles: {
     italic: true
   },
   .center: {
-    center: true
+    align: center
   },
   .redcenter: {
-    center: true,
+    align: center,
     color: "red"
   },
   .nocenter: {
-    center: false
+    align: left
+  },
+  .right: {
+    align: right
+  },
+  .redright: {
+    align: right,
+    color: "red"
+  },
+  .intentionalblank: {
+    italic: true,
+    color: gray,
+    align: center
   }
 }
 debug: true
 ---
 
 # Formatting Test
+<vcenter>
 Page one. This book is given by
 /trigger give_formatting_test_book
 and by nothing else.
@@ -37,6 +50,7 @@ Pages fill by themselves, 14 lines
 each, and a newline is a line break.
 ---
 # Styles
+<vcenter>
 **bold**, *italic*, _italic too_,
 __underlined__, ~~struck out~~ and
 ||obfuscated text||.
@@ -49,6 +63,7 @@ Escaped: \*not italic\* and \_not\_.
 Snake_case_names stay as written.
 ---
 # Nesting
+<vcenter>
 **Bold with *italic inside* and
 __underlined inside__ it, then
 plain bold again.**
@@ -57,6 +72,7 @@ plain bold again.**
 ~~strike~~** and back.*
 ---
 # Colors
+<vcenter>
 <font color="dark_red">dark_red</font> <font color="red">red</font> <font color="gold">gold</font> <font color="yellow">yellow</font>
 <font color="dark_green">dark_green</font> <font color="green">green</font> <font color="aqua">aqua</font>
 <font color="dark_aqua">dark_aqua</font> <font color="dark_blue">dark_blue</font> <font color="blue">blue</font>
@@ -64,11 +80,13 @@ plain bold again.**
 <font color="white">white</font> <font color="gray">gray</font> <font color="dark_gray">dark_gray</font> <font color="black">black</font>
 ---
 # More colors
+<vcenter>
 Hex: <font color="#ff8800">#ff8800</font> and <font color="#3366cc">#3366cc</font>.
 
 A <font color="red">red **bold** word</font> inside a line.
 ---
 # Fonts
+<vcenter>
 default: The quick brown fox.
 <font face="minecraft:alt">alt: The quick brown fox.</font>
 <font face="minecraft:illageralt">illageralt: The quick brown fox.</font>
@@ -76,6 +94,7 @@ default: The quick brown fox.
 <font face="minecraft:alt" color="aqua">**alt, aqua and bold**</font>
 ---
 # Shadow
+<vcenter>
 <font shadow="#ffff0000">Red shadow</font>
 
 <font shadow="#80000000" color="white">Faint shadow</font>
@@ -83,6 +102,7 @@ default: The quick brown fox.
 <font color="gold" shadow="#ff552200">Gold with a dark orange shadow</font>
 ---
 # Inline code
+<vcenter>
 Use `/trigger give_book` to give one, or `font: a:b` in the frontmatter.
 
 It stays literal: `**not bold**`, `_not italic_` and `<font>`.
@@ -92,6 +112,7 @@ Inside **bold `code`** and *italic `code`*.
 A lone ` backtick stays one.
 ---
 # Code blocks
+<vcenter>
 ```
 function hello() {
   # a comment, not a heading
@@ -103,6 +124,7 @@ function hello() {
 Text after the block, in the book font.
 ---
 # Events
+<vcenter>
 <a on_hover='{action:show_text,value:"Hover text"}'>Hover over this.</a>
 
 <a on_click='{action:change_page,page:1}'>Click to go to page 1.</a>
@@ -121,13 +143,22 @@ Text after the block, in the book font.
 <font class=".url" face="minecraft:alt">Class, alt font</font>
 ---
 # Centered styles
+<vcenter>
 <style class=".center">Starts</style> the line.
 <style class="center">Built-in</style> center.
 Mid-line <style class=".center">is ignored</style>.
 Mid-line <style class=".redcenter">but wrapping onto the next lines centers those lines</style> after.
 <style class=".center"><style class=".nocenter">Turned off</style> inside.</style>
 ---
+# Aligned styles
+<vcenter>
+<style class=".right">Right aligned</style>
+<style class=".redright">A longer red run that wraps onto the next lines, which stay right aligned</style>
+<style class=".right"><style class=".nocenter">Left again</style> inside.</style>
+Left by default.
+---
 # Hyphenation
+<vcenter>
 A word wider than a line breaks at a syllable:
 antidisestablishmentarianism
 
@@ -135,8 +166,12 @@ In a span it does not:
 <span>antidisestablishmentarianism</span>
 ---
 # Everything
+<vcenter>
 <a on_hover='{action:show_text,value:"All at once"}'><font color="light_purple" face="minecraft:alt">**Bold, *italic*, __underlined__, ~~struck~~ and ||hidden||** in alt.</font></a>
 
 100% sure, with a percent sign.
 
 Last line, then the page ends.
+---
+<vcenter>
+<style class=".intentionalblank">This page intentionally left blank.</style>

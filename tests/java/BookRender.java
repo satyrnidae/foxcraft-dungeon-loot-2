@@ -2,6 +2,7 @@ import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.StringSplitter;
+import net.minecraft.client.resources.language.FormattedBidiReorder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.locale.Language;
@@ -40,6 +41,7 @@ public class BookRender {
     static Path root;
     static int scale;
     static final Map<String, FontSet> fonts = new HashMap<>();
+    static String at = "";
     static final Set<String> warned = new TreeSet<>();
 
     static void out(String s) { Bootstrap.STDOUT.println(s); }
@@ -243,6 +245,7 @@ public class BookRender {
     static Glyph glyph(int cp, Style style) {
         FontSet set = font(fontOf(style));
         Glyph g = set.glyph(cp);
+        if (g == null) warned.add("U+" + Integer.toHexString(cp) + " is not in font " + fontOf(style) + ", it draws as a missing glyph, in " + at);
         return g == null ? MISSING : g;
     }
 
@@ -271,6 +274,9 @@ public class BookRender {
      * The lang entries a locale has in game: en_us under it, as the game loads it, then the locale. The client jar holds only the
      * vanilla en_us, the other vanilla locales come from the asset index, so vanilla text such as the page counter stays English.
      */
+    /** The vanilla locales written right to left, whose lines the game shapes and reorders by the bidirectional algorithm. */
+    static final Set<String> RTL_LOCALES = Set.of("ar_sa", "he_il");
+
     static Language language(String locale) throws Exception {
         Map<String, String> entries = new HashMap<>();
         try (InputStream in = BookRender.class.getResourceAsStream("/assets/minecraft/lang/en_us.json")) {
@@ -284,9 +290,9 @@ public class BookRender {
         return new Language() {
             public String getOrDefault(String key, String fallback) { return entries.getOrDefault(key, fallback); }
             public boolean has(String key) { return entries.containsKey(key); }
-            public boolean isDefaultRightToLeft() { return false; }
+            public boolean isDefaultRightToLeft() { return RTL_LOCALES.contains(locale); }
             public FormattedCharSequence getVisualOrder(FormattedText text) {
-                return sink -> text.visit((style, s) -> StringDecomposer.iterateFormatted(s, style, sink) ? Optional.empty() : FormattedText.STOP_ITERATION, Style.EMPTY).isEmpty();
+                return FormattedBidiReorder.reorder(text, isDefaultRightToLeft());
             }
         };
     }
@@ -327,25 +333,23 @@ public class BookRender {
 
     static float drawPass(Graphics2D g, FormattedText line, float x, float y, boolean shadow) {
         float[] pen = {x};
-        line.visit((style, s) -> {
-            StringDecomposer.iterateFormatted(s, style, (index, st, cp) -> {
-                Glyph glyph = glyph(cp, st);
-                float adv = glyph.advance() + (st.isBold() ? 1 : 0);
-                int argb = 0xff000000 | (st.getColor() != null ? st.getColor().getValue() : TEXT_COLOR);
-                if (shadow) argb = st.getShadowColor() != null ? st.getShadowColor() : 0;
-                if (argb >>> 24 != 0) {
-                    float gx = pen[0] + (shadow ? 1 : 0), gy = y + (shadow ? 1 : 0);
-                    draw(g, glyph, gx, gy, argb, st.isItalic());
-                    if (st.isBold()) draw(g, glyph, gx + 1, gy, argb, st.isItalic());
-                    g.setColor(new Color(argb, true));
-                    if (st.isStrikethrough()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + 3.5f) * scale, (adv + 1) * scale, scale));
-                    if (st.isUnderlined()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + LINE_HEIGHT - 1) * scale, (adv + 1) * scale, scale));
-                }
-                pen[0] += adv;
-                return true;
-            });
-            return Optional.empty();
-        }, Style.EMPTY);
+        // The game draws a line in its visual order, so right to left runs are reversed and Arabic letters take their joined forms
+        Language.getInstance().getVisualOrder(line).accept((index, st, cp) -> {
+            Glyph glyph = glyph(cp, st);
+            float adv = glyph.advance() + (st.isBold() ? 1 : 0);
+            int argb = 0xff000000 | (st.getColor() != null ? st.getColor().getValue() : TEXT_COLOR);
+            if (shadow) argb = st.getShadowColor() != null ? st.getShadowColor() : 0;
+            if (argb >>> 24 != 0) {
+                float gx = pen[0] + (shadow ? 1 : 0), gy = y + (shadow ? 1 : 0);
+                draw(g, glyph, gx, gy, argb, st.isItalic());
+                if (st.isBold()) draw(g, glyph, gx + 1, gy, argb, st.isItalic());
+                g.setColor(new Color(argb, true));
+                if (st.isStrikethrough()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + 3.5f) * scale, (adv + 1) * scale, scale));
+                if (st.isUnderlined()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + LINE_HEIGHT - 1) * scale, (adv + 1) * scale, scale));
+            }
+            pen[0] += adv;
+            return true;
+        });
         return pen[0];
     }
 
@@ -402,7 +406,7 @@ public class BookRender {
             for (Path f : old.sorted(Comparator.reverseOrder()).toList()) Files.delete(f);
         }
         int books = 0, pagesDrawn = 0;
-        List<String> failures = new ArrayList<>();
+        Set<String> failures = new TreeSet<>();
         List<Path> files;
         try (Stream<Path> s = Files.list(modifiers)) { files = s.filter(f -> f.toString().endsWith(".json")).sorted().toList(); }
         List<String> locales = locales();
@@ -435,7 +439,11 @@ public class BookRender {
                         g.drawImage(background, 0, 0, BOOK_SIZE * scale, BOOK_SIZE * scale, null);
                         Component indicator = Component.translatable("book.pageIndicator", n + 1, pages.size());
                         drawLine(g, indicator, INDICATOR_RIGHT - splitter.stringWidth(indicator), INDICATOR_Y);
-                        for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
+                        for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) {
+                            at = where + " line " + (i + 1);
+                            float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
+                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/README.md)");
+                        }
                         g.dispose();
                         ImageIO.write(image, "png", dir.resolve(String.format("page_%02d.png", n + 1)).toFile());
                         pagesDrawn++;

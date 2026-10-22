@@ -218,7 +218,7 @@ describe('book generator markdown', () => {
     assert.deepEqual(look('##### x'), { centered: false, bold: true, underlined: false, italic: false });
     assert.deepEqual(look('###### x'), { centered: false, bold: false, underlined: false, italic: true });
     // The stylesheet can take the centering off
-    assert.equal(gen.pagesOf('# x', null, null, gen.parseClasses({ h1: { center: false } }))[0][0].styles.font, undefined);
+    assert.equal(gen.pagesOf('# x', null, null, gen.parseClasses({ h1: { align: 'left' } }))[0][0].styles.font, undefined);
   });
 
   it('a line of --- is a page break, a newline a line break and a header is bold and underlined', () => {
@@ -715,12 +715,58 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.throws(() => gen.pagesOf('<center class=".nope">x</center>'), /unknown class/);
   });
 
-  it('a style with center centers the lines it starts, not one it starts mid-way', () => {
+  it('align right pads the line to the right edge, and a right to left locale mirrors it and aligns to the right by itself', () => {
+    const padWidth = (tree) => {
+      const { chars } = gen.layout(tree);
+      return chars.filter((g) => g.font === 'foxcraft_dungeon_loot:padding').reduce((sum, g) => sum + lore.FONTS.widthOf(g.font, g.ch, g.bold), 0);
+    };
+    const classes = gen.parseClasses({ '.r': { align: 'right' }, '.l': { align: 'left' } });
+    const text = (page) => page.filter((p) => typeof p === 'string').join('');
+    const textWidth = (page) => [...text(page)].reduce((sum, ch) => sum + lore.FONTS.widthOf('minecraft:default', ch, false), 0);
+    // Left to right: right takes all the room, left nothing, and the padding comes first
+    const [right] = gen.pagesOf('<style class=".r">Hi there</style>', null, null, classes);
+    assert.equal(padWidth(right), 114 - textWidth(right));
+    assert.equal(right[0].styles.font, 'foxcraft_dungeon_loot:padding');
+    assert.equal(padWidth(gen.pagesOf('<style class=".l">Hi there</style>', null, null, classes)[0]), 0);
+    assert.equal(padWidth(gen.pagesOf('Hi there')[0]), 0);
+    // Right to left: a line that reads that way is drawn with its end at the left, so the padding follows the text
+    const arabic = 'مرحبا بكم';
+    const [auto] = gen.pagesOf(arabic, null, null, {}, true, true);
+    assert.ok(padWidth(auto) > 0);
+    assert.equal(auto[auto.length - 1].styles.font, 'foxcraft_dungeon_loot:padding');
+    // left is mirrored to the right there and right to the left, center stays
+    assert.ok(padWidth(gen.pagesOf(`<style class=".l">${arabic}</style>`, null, null, classes, true, true)[0]) > 0);
+    assert.equal(padWidth(gen.pagesOf(`<style class=".r">${arabic}</style>`, null, null, classes, true, true)[0]), 0);
+    // A line of a right to left locale that reads left to right keeps its padding in front
+    const [latin] = gen.pagesOf('Hi there', null, null, {}, true, true);
+    assert.equal(latin[0].styles.font, 'foxcraft_dungeon_loot:padding');
+    // A book and quill keeps the text where it is
+    assert.deepEqual(gen.pagesOf('Hi', null, null, {}, false, true)[0], ['Hi']);
+  });
+
+  it('<vcenter> puts the text of a page in the middle of its lines', () => {
+    // Two lines of text on 14 leave 12, six above
+    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\ntwo\nlines')[0]).lines.length, 8);
+    // Not for a page that is full, or for a book and quill
+    const full = Array.from({ length: 14 }, (_, n) => 'l' + n).join('\n');
+    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\n' + full)[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
+    // Under a header it centers the text up to the next header, or the end of the page
+    const lineCount = (body) => gen.layout(gen.sectionsOf(body)[0]).lines.length;
+    assert.equal(lineCount('# A\n<vcenter>\none\n\ntwo'), 1 + 1 + 3 + Math.floor((14 - 5) / 2));
+    assert.equal(lineCount('# A\n<vcenter>\none\n# B\ntwo'), 14);
+    // At the start of a page no header ends it
+    assert.equal(lineCount('<vcenter>\n# A\none'), 3 + Math.floor((14 - 3) / 2));
+    // Only at the start of a page
+    assert.equal(gen.layout(gen.sectionsOf('two\nlines')[0]).lines.length, 2);
+  });
+
+  it('a style with align center centers the lines it starts, not one it starts mid-way', () => {
     const padOf = (tree) => {
       const { lines, chars } = gen.layout(tree);
       return lines.map((l) => chars.slice(l.tstart, l.tend).filter((g) => g.font === 'foxcraft_dungeon_loot:padding').length > 0);
     };
-    const classes = gen.parseClasses({ '.c': { center: true }, '.cr': { center: true, color: 'red' }, '.off': { center: false } });
+    const classes = gen.parseClasses({ '.c': { align: 'center' }, '.cr': { align: 'center', color: 'red' }, '.off': { align: 'left' } });
     // The whole line is centered when the style starts it, and the style leaves no span when centering is all it does
     const [start] = gen.pagesOf('<style class=".c">Start</style> of a line', null, null, classes);
     assert.deepEqual(padOf(start), [true]);
@@ -730,10 +776,10 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const [wrap] = gen.pagesOf('Mid <style class=".cr">a long centered run of text that goes on and wraps over</style>', null, null, classes);
     assert.deepEqual(padOf(wrap), [false, true, true]);
     assert.ok(!JSON.stringify(wrap).includes('"center"'));
-    // An inner center: false turns it off, a body with center centers every line
+    // An inner align: left turns it off, a body with align center centers every line
     assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start</style> of a line</style>', null, null, classes)[0]), [false]);
-    assert.deepEqual(padOf(gen.pagesOf('one\ntwo', null, null, gen.parseClasses({ body: { center: true } }))[0]), [true, true]);
-    assert.throws(() => gen.parseClasses({ '.c': { center: 1 } }), /center is true or false/);
+    assert.deepEqual(padOf(gen.pagesOf('one\ntwo', null, null, gen.parseClasses({ body: { align: 'center' } }))[0]), [true, true]);
+    assert.throws(() => gen.parseClasses({ '.c': { align: 'middle' } }), /align is left, center, right/);
     // class="center" is built in, the center type styles it and <center>
     const typed = gen.parseClasses({ center: { color: 'red' } });
     const [builtIn] = gen.pagesOf('<style class="center">Start</style> of a line', null, null, typed);

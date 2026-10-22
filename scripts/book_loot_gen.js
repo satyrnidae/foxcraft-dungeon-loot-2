@@ -273,12 +273,13 @@ function parseShadow(value) {
 
 // The names of the styles that are not classes: the format types, which override what they look like by default
 const MARKER_TYPES = { '**': 'bold', __: 'underline', '~~': 'strikethrough', '||': 'obfuscated', '*': 'italic', _: 'italic' };
+const ALIGNS = ['left', 'center', 'right'];
 const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center'];
 
 const CLASS_FLAGS = { bold: 'bold', italic: 'italic', underline: 'underlined', underlined: 'underlined', strikethrough: 'strikethrough', obfuscated: 'obfuscated' };
 
 /**
- * The styles of the frontmatter, { name: { color, font, bold, italic, underline, strikethrough, obfuscated, shadow_color, center } },
+ * The styles of the frontmatter, { name: { color, font, bold, italic, underline, strikethrough, obfuscated, shadow_color, align } },
  * as { name: component styles }. A flag that is false is kept: it turns off what the text around it has. shadow_color is
  * an integer or an #aarrggbb code.
  */
@@ -299,12 +300,12 @@ function parseClasses(raw) {
                 styles.font = parseFont(value);
             } else if (key === 'shadow_color') {
                 styles.shadow_color = typeof value === 'number' ? value | 0 : parseShadow(String(value));
-            } else if (key === 'center') {
-                // Not a component style: centerLines centers a line that starts with this text, unwrapCenter drops it
-                if (typeof value !== 'boolean') throw new Error(`style "${name}": center is true or false`);
-                styles.center = value;
+            } else if (key === 'align') {
+                // Not a component style: alignLines aligns a line that starts with this text, unwrapAlign drops it
+                if (!ALIGNS.includes(value)) throw new Error(`style "${name}": align is ${ALIGNS.join(', ')}`);
+                styles.align = value;
             } else {
-                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, center, ${Object.keys(CLASS_FLAGS).join(', ')}`);
+                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, align, ${Object.keys(CLASS_FLAGS).join(', ')}`);
             }
         }
         classes[name] = styles;
@@ -313,11 +314,11 @@ function parseClasses(raw) {
 }
 
 // How each level of header looks unless the stylesheet says otherwise, header and then its level are added to that. A
-// false flag is kept, so a header in italic text is upright. Only h1 is centered, the others leave center to the text
+// false flag is kept, so a header in italic text is upright. Only h1 is centered, the others leave align to the text
 // around them. class="header" without a level is bold and underlined.
 const HEADER_LEVELS = {
     header: { bold: true, underlined: true },
-    h1: { center: true, bold: true, underlined: true, italic: false },
+    h1: { align: 'center', bold: true, underlined: true, italic: false },
     h2: { bold: true, underlined: true, italic: false },
     h3: { bold: false, underlined: true, italic: true },
     h4: { bold: false, underlined: true, italic: false },
@@ -328,7 +329,7 @@ const headerStyles = (name, classes) => ({ ...HEADER_LEVELS[name], ...classes.he
 
 // The styles of a class attribute, several names apply in order. class=".url" is the style .url, the dot is needed.
 // The built-in classes go without one: class="h1" is the look of a header of that level, class="header" of any header
-// and class="center" the center style, which centers the lines the text starts.
+// and class="center" the style align: center, which centers the lines the text starts.
 function classStyles(attrs, classes) {
     const styles = {};
     for (const name of (attrs.class || '').split(/\s+/).filter(Boolean)) {
@@ -337,7 +338,7 @@ function classStyles(attrs, classes) {
             continue;
         }
         if (name === 'center') {
-            Object.assign(styles, { center: true, ...classes.center });
+            Object.assign(styles, { align: 'center', ...classes.center });
             continue;
         }
         if (!name.startsWith('.')) throw new Error(`class "${name}" needs its dot, class=".${name}"; only the built-in h1 to h6, header and center go without one`);
@@ -445,9 +446,9 @@ function parseInline(text, start, closer, classes = {}) {
             if (!sub.closed) throw new Error(`<${name}> is not closed`);
             flush();
             if (/^h[1-6]$/.test(name)) {
-                content.push({ styles: headerStyles(name, classes), content: sub.content });
+                content.push({ styles: headerStyles(name, classes), content: sub.content, header: true });
             } else if (name === 'center') {
-                // The center type and the styles of its classes, centerLines centers every line it is on. Like a block, the newline right
+                // The center type and the styles of its classes, alignLines aligns every line it is on. Like a block, the newline right
                 // after <center> and the one right before </center> are not lines of their own
                 const inner = sub.content.slice();
                 if (typeof inner[0] === 'string') inner[0] = inner[0].replace(/^\n/, '');
@@ -586,16 +587,95 @@ function toComponent(content, key, lang, styles = {}) {
 }
 
 // The characters of the tree as the reader sees them, each with whether it is bold and its font, an inner font wins.
-// center is set inside a <center>, lead by a style with center, which an inner style with center: false turns off.
-function glyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = false, lead = false) {
-    return content.flatMap((p) =>
-        typeof p === 'string'
-            ? [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead }))
-            : glyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center || p.center === true, p.styles.center === undefined ? lead : p.styles.center)
-    );
+// center is set inside a <center>, to its alignment, lead by a style with align, to that, which an inner style with an align overrides.
+function glyphs(...args) {
+    return shapeGlyphs(rawGlyphs(...args));
+}
+function rawGlyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = null, lead = null) {
+    return content.flatMap((p) => {
+        if (typeof p === 'string') return [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead }));
+        const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead);
+        if (p.alt && inner.length) reserveRoom(inner, p, bold, font);
+        return inner;
+    });
+}
+
+// A <filter> span can read wider filtered than raw. Its last glyph gets reserve, the pixels the filtered text is wider, which a
+// text cut into lines for both readings counts (see layoutGlyphs) but never draws, and delta, how much wider it is, less if it
+// is narrower, which the padding of the filtered reading makes up for (see alignLines). each is measured as drawn, shaped on its own.
+function reserveRoom(inner, part, bold, font) {
+    const width = (list) => shapeGlyphs(list.map((g) => ({ ...g }))).reduce((sum, g) => sum + (g.sw ?? widthOf(g)), 0);
+    const filtered = rawGlyphs(part.alt, part.styles.bold === undefined ? bold : part.styles.bold === true, part.styles.font ? withNamespace(part.styles.font) : font);
+    const extra = width(filtered) - width(inner);
+    if (extra > 0) inner[inner.length - 1].reserve = extra;
+    if (extra !== 0) inner[inner.length - 1].delta = extra;
 }
 
 const widthOf = ({ ch, bold, font }) => FONTS.widthOf(font, ch, bold);
+
+// How the game's text renderer draws Arabic: each letter takes the form its neighbors give it, so a line is as wide as its
+// shaped glyphs, which the splitter does not know, it measures the plain letters. scripts/arabic_shaping.json is made from
+// the game's own shaper by tests/java/ArabicShapingTable.java. A glyph of a shaped text gets sw, its width as drawn.
+const SHAPING = require('./arabic_shaping.json');
+const shapeOf = (ch) => SHAPING.letters[ch.codePointAt(0).toString(16)];
+// A mark over a letter, which the letters around it join through
+const isMark = (ch) => /^\p{Mn}$/u.test(ch);
+// The lam-alef ligatures, which join the letter before them and no other
+const isLigature = (ch) => /^[ﻵ-ﻼ]$/.test(ch);
+const joinsAfter = (ch) => !!shapeOf(ch) && shapeOf(ch)[2] !== shapeOf(ch)[0];
+const joinsBefore = (ch) => isLigature(ch) || (!!shapeOf(ch) && shapeOf(ch)[1] !== shapeOf(ch)[0]);
+
+/**
+ * Writes the lam-alef ligature of a text out, as the shaper would make it. The shaper turns the two letters into one, so
+ * the line is a character shorter than the styles the game keeps for it, and every style after the ligature in the line (marks in between included)
+ * lands one glyph early: the padding after it would be drawn in the font of the text. A ligature that is already in the
+ * text is left alone by the shaper, and no styles shift. Tags are skipped when looking for the letter before.
+ */
+function ligate(text) {
+    if (!/\u0644\p{Mn}*[\u0622\u0623\u0625\u0627]/u.test(text)) return text;
+    let out = '';
+    let joined = false;
+    for (let i = 0; i < text.length; ) {
+        const tag = text[i] === '<' ? /^<\/?[a-z][^>]*>/i.exec(text.slice(i)) : null;
+        if (tag) {
+            out += tag[0];
+            i += tag[0].length;
+            continue;
+        }
+        // The marks between the two letters stay, after the ligature
+        const lam = text[i] === '\u0644' ? /^\u0644(\p{Mn}*)([\u0622\u0623\u0625\u0627])/u.exec(text.slice(i)) : null;
+        const ligature = lam ? SHAPING.ligatures[lam[2].charCodeAt(0).toString(16)] : null;
+        if (ligature) {
+            out += String.fromCharCode(parseInt(ligature[joined ? 1 : 0], 16)) + lam[1];
+            i += lam[0].length;
+            joined = false;
+            continue;
+        }
+        if (!isMark(text[i])) joined = joinsAfter(text[i]);
+        out += text[i++];
+    }
+    return out;
+}
+function shapeGlyphs(chars) {
+    const drawn = (g, form) => FONTS.widthOf(g.font, String.fromCodePoint(parseInt(form, 16)), g.bold);
+    // The letter next to chars[i] on a side, past the marks
+    const beside = (i, step) => {
+        for (let n = i + step; n >= 0 && n < chars.length; n += step) if (!isMark(chars[n].ch)) return chars[n];
+        return null;
+    };
+    chars.forEach((g, i) => {
+        const shape = shapeOf(g.ch);
+        if (!shape) return;
+        const prev = beside(i, -1);
+        const next = beside(i, 1);
+        // A mark takes its medial form between two letters that join through it, its own reach does not count
+        const mark = isMark(g.ch);
+        const fromPrev = prev && joinsAfter(prev.ch) && (mark || joinsBefore(g.ch));
+        const toNext = next && (mark || joinsAfter(g.ch)) && joinsBefore(next.ch);
+        g.sw = drawn(g, shape[fromPrev ? (toNext ? 3 : 1) : toNext ? 2 : 0]);
+    });
+    return chars;
+}
 
 /**
  * Lays text out like the book screen: a newline is a forced line break, a line that overflows breaks after its last space,
@@ -603,10 +683,12 @@ const widthOf = ({ ch, bold, font }) => FONTS.widthOf(font, ch, bold);
  * { start, end, tstart, tend, soft }: glyph indexes without the space or newline that ended it, the same trimmed of the
  * spaces at its ends, and whether the line starts at a wrap. Does not remove anything, see layout.
  */
-function layoutGlyphs(chars) {
+function layoutGlyphs(chars, reserve = false) {
     const lines = [];
     let start = 0;
+    // The width as the splitter counts it, and as the glyphs are drawn: a line has to fit both ways
     let width = 0;
+    let drawn = 0;
     let lastSpace = -1;
     let soft = false;
     const push = (end, next, nextSoft) => {
@@ -614,25 +696,31 @@ function layoutGlyphs(chars) {
         start = next;
         soft = nextSoft;
     };
+    // What a glyph takes of a line, and with reserve what the filtered reading of its span needs after it
+    const room = (g) => (reserve ? g.reserve ?? 0 : 0);
+    const drawnWidth = (g) => (g.sw ?? widthOf(g)) + room(g);
     for (let i = 0; i < chars.length; i++) {
         const g = chars[i];
         if (g.ch === '\n') {
             push(i, i + 1, false);
             width = 0;
+            drawn = 0;
             lastSpace = -1;
             continue;
         }
-        const w = widthOf(g);
+        const w = widthOf(g) + room(g);
         // A word carried onto a new line can still be wider than it, as after the indent of a paragraph, and breaks again
-        while (width + w > PAGE_WIDTH && g.ch !== ' ') {
+        while ((width + w > PAGE_WIDTH || drawn + drawnWidth(g) > PAGE_WIDTH) && g.ch !== ' ') {
             if (lastSpace >= start) push(lastSpace, lastSpace + 1, true);
             else push(i, i, true);
             // Carry the word that overflowed onto the new line
-            width = chars.slice(start, i).reduce((sum, c) => sum + widthOf(c), 0);
+            width = chars.slice(start, i).reduce((sum, c) => sum + widthOf(c) + room(c), 0);
+            drawn = chars.slice(start, i).reduce((sum, c) => sum + drawnWidth(c), 0);
             lastSpace = -1;
         }
         if (g.ch === ' ') lastSpace = i;
         width += w;
+        drawn += drawnWidth(g);
     }
     push(chars.length, chars.length, false);
 
@@ -652,12 +740,12 @@ function layoutGlyphs(chars) {
  * Returns { lines, chars, dropped, length }: lines index into chars, the glyphs that are left, each with its place in
  * the tree, and dropped is the set of places that were cut. length counts the glyphs of the tree before the cut.
  */
-function layout(content) {
+function layout(content, reserve = false) {
     const chars = glyphs(content).map((g, place) => ({ ...g, place }));
     const length = chars.length;
     const dropped = new Set();
     for (;;) {
-        const lines = layoutGlyphs(chars);
+        const lines = layoutGlyphs(chars, reserve);
         const line = lines.find((l) => l.tstart > l.start || l.tend < l.end);
         if (!line) return { lines, chars, dropped, length };
         // Cut the tail first so the head indexes stay put
@@ -838,36 +926,76 @@ const INLINE_TYPES = {
     },
 };
 
+// The locales written right to left. Their text is aligned to the right unless a style says otherwise, and an alignment a
+// book writes for text that starts at the left is mirrored: left is right there and right is left, center stays.
+const RTL_LOCALES = ['ar_sa', 'he_il'];
+const MIRROR = { left: 'right', right: 'left', center: 'center' };
+const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Script=Thaana}\p{Script=Nko}]/u;
+
 /**
- * Centers every line that holds a glyph of a <center>, or starts with a glyph of a style with center: a line that starts
- * at a wrap starts at a newline instead, so the overflow is centered on its own, and padding as wide as half of what is
- * left of the line goes before it. A style with center that starts mid-line leaves that line alone, the lines it wraps
- * onto start with it and are centered. Lines are done from the last up, padding a line that fits does not move the
- * wraps above it. Returns a copy of the tree with the <center> marks and center styles gone.
+ * Aligns every line that holds a glyph of a <center>, or starts with a glyph of a style with align, to the left, center or
+ * right: a line that starts at a wrap starts at a newline instead, so the overflow is aligned on its own, and padding goes
+ * on the left of the line, all that is left of it for the right, half of that for the center. A style with align that
+ * starts mid-line leaves that line alone, the lines it wraps onto start with it and are aligned. In a right to left locale
+ * the alignments are mirrored and every other line is aligned to the right too, but those that hold padding, code or
+ * music, which are laid out by hand. Lines are done from the last up, padding a line that fits does not move the wraps
+ * above it. Returns a copy of the tree with the <center> marks and align styles gone.
+ *
+ * The game draws every line from the left edge, whichever way it reads. A line that reads right to left, as the first
+ * letter with a direction decides, is drawn with its end at the left, so its padding goes after the text, where it is at
+ * the left too.
  */
-function centerLines(content) {
+function alignLines(content, rtl = false) {
     const tree = JSON.parse(JSON.stringify(content));
-    const { lines, chars } = layout(tree);
+    const { lines, chars } = layout(tree, rtl);
     for (const line of [...lines].reverse()) {
         const text = chars.slice(line.tstart, line.tend);
-        if (!text.length || !(text[0].lead || text.some((g) => g.center))) continue;
-        const pad = padding(Math.floor((PAGE_WIDTH - text.reduce((sum, g) => sum + widthOf(g), 0)) / 2));
-        const parts = [...(line.soft ? ['\n'] : []), ...(pad ? [{ styles: PAD_STYLES, content: [pad] }] : [])];
+        if (!text.length) continue;
+        const written = text[0].lead ?? text.find((g) => g.center)?.center ?? null;
+        const laidOut = text.some((g) => g.font === PAD_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
+        const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
+        if (align === 'left') continue;
+        const room = PAGE_WIDTH - text.reduce((sum, g) => sum + (g.sw ?? widthOf(g)), 0);
+        // The line of the filtered reading is wider by the delta of the spans on it, so it gets that much less padding
+        const delta = rtl ? text.reduce((sum, g) => sum + (g.delta ?? 0), 0) : 0;
+        const strong = text.find((g) => /^\p{L}$/u.test(g.ch) && g.font !== PAD_FONT);
+        const reads = strong ? RTL_LETTER.test(strong.ch) : rtl;
+        // A right to left mark first, a padding after a left to right run would join it, and be drawn after it, not at the left edge
+        const padOf = (space) => ({ styles: PAD_STYLES, content: [(reads ? '\u200f' : '') + padding(Math.max(0, Math.min(MAX_PAD, align === 'center' ? Math.floor(space / 2) : space)))] });
+        const raw = padOf(room);
+        const filtered = padOf(room - delta);
+        const pad = raw.content[0].length > (reads ? 1 : 0) || filtered.content[0].length > (reads ? 1 : 0);
+        // Where the two differ the padding is a filter span of its own: the filtered reading shows the other one
+        const node = JSON.stringify(raw) === JSON.stringify(filtered) ? raw : { styles: {}, content: [raw], alt: [filtered] };
+        if (pad && reads && !insertAt(tree, chars[line.tend - 1].place + 1, [node])) tree.push(node);
+        const parts = [...(line.soft ? ['\n'] : []), ...(pad && !reads ? [node] : [])];
         if (parts.length) insertAt(tree, chars[line.tstart].place, parts);
     }
-    return unwrapCenter(tree);
+    return unwrapAlign(tree);
 }
 
-// The tree without the marks of <center> nodes and the center of styles, the alt of a filter too. A <center> without a
+/**
+ * Breaks the lines of a text with Arabic in it for good, so the game does not wrap them by the width of the plain letters
+ * when they are drawn wider: a newline goes where each line starts at a wrap, as alignLines does. Returns the tree.
+ */
+function hardWrap(content) {
+    const { lines, chars } = layout(content, true);
+    if (!chars.some((g) => g.sw !== undefined)) return content;
+    const tree = JSON.parse(JSON.stringify(content));
+    for (const line of [...lines].reverse()) if (line.soft && line.tstart < line.tend) insertAt(tree, chars[line.tstart].place, '\n');
+    return tree;
+}
+
+// The tree without the marks of <center> nodes and the align of styles, the alt of a filter too. A <center> without a
 // class is gone, its text stays where it is.
-function unwrapCenter(content) {
+function unwrapAlign(content) {
     return content.flatMap((part) => {
         if (typeof part === 'string') return [part];
-        const inner = unwrapCenter(part.content);
-        const { center: _, ...styles } = part.styles;
-        const node = { ...part, styles, content: inner, ...(part.alt ? { alt: unwrapCenter(part.alt) } : {}) };
-        // A style that only centered leaves nothing to style
-        if ('center' in part.styles && !Object.keys(styles).length && !part.alt && !part.literal) return inner;
+        const inner = unwrapAlign(part.content);
+        const { align: _, ...styles } = part.styles;
+        const node = { ...part, styles, content: inner, ...(part.alt ? { alt: unwrapAlign(part.alt) } : {}) };
+        // A style that only aligned leaves nothing to style
+        if ('align' in part.styles && !Object.keys(styles).length && !part.alt && !part.literal) return inner;
         if (!part.center) return [node];
         if (!Object.keys(styles).length) return inner;
         const { center, ...kept } = node;
@@ -1212,9 +1340,9 @@ function splitSections(body) {
 }
 
 // Every page of the body, a list of trees. Sections fill pages on their own, 14 lines each. A font wraps the whole text,
-// a <font face> inside still wins. Without center, <center> leaves its lines where they are, as a book and quill does.
-function pagesOf(body, font = null, hyphenator = null, classes = {}, center = true) {
-    return sectionsOf(body, font, hyphenator, classes, center).flatMap((tree) => paginate(tree));
+// a <font face> inside still wins. Without align, <center> leaves its lines where they are, as a book and quill does.
+function pagesOf(body, font = null, hyphenator = null, classes = {}, align = true, rtl = false) {
+    return sectionsOf(body, font, hyphenator, classes, align, rtl).flatMap((tree) => paginate(tree));
 }
 
 // Every node of the parsed text gets a number, in the order the spans come. A translation has the same spans in the same
@@ -1239,15 +1367,99 @@ function assignAltIds(content, prefix) {
     });
 }
 
+// <vcenter> on a line of its own puts the text under it in the middle of the page, between that line and the next header, or
+// the end of the page: the empty lines the page has left over are shared by the <vcenter>s on it, half above the text and
+// half below it, so it stands in the middle of the space it has, a header above it where it is. At the start of a page it
+// is the text of the whole page, which no header ends, only the end of the page does; one under a header ends at the next
+// header or the end of the page. A page with more than a page of text is left
+// as it is. An empty line of a page start is dropped, so each of these holds a blank glyph of the padding font.
+const VCENTER_LINE = /^<vcenter>[ \t]*(?:\n|$)/m;
+
+// What a text tree holds in the order of its glyphs: where each <vcenter> is, and where each header starts
+function textMarks(content) {
+    const marks = [];
+    let pos = 0;
+    const walk = (nodes) => {
+        for (const part of nodes) {
+            if (typeof part === 'string') {
+                pos += [...part].length;
+                continue;
+            }
+            if (part.vcenter) marks.push({ kind: 'vcenter', at: pos });
+            const mark = part.header ? { kind: 'header', at: pos, end: pos } : null;
+            if (mark) marks.push(mark);
+            walk(part.content);
+            if (mark) mark.end = pos;
+        }
+    };
+    walk(content);
+    return marks;
+}
+
+const withoutVcenter = (content) =>
+    content.filter((part) => !part.vcenter).map((part) => (typeof part === 'string' ? part : { ...part, content: withoutVcenter(part.content) }));
+
+function centerVertically(tree, marks) {
+    const clean = withoutVcenter(tree);
+    const centers = marks.filter((m) => m.kind === 'vcenter');
+    if (!centers.length || paginate(clean).length !== 1) return clean;
+    const { lines, chars } = layout(clean);
+    const empty = (n) => lines[n].tstart === lines[n].tend;
+    // The line a place of the tree starts or falls in
+    const lineAt = (at) => {
+        const c = chars.findIndex((g) => g.place >= at);
+        return c < 0 ? lines.length : lines.findIndex((l) => c >= l.start && c <= l.end);
+    };
+    const firstLine = lines.findIndex((_, n) => !empty(n));
+    const lastLine = lines.length - 1 - [...lines].reverse().findIndex((_, n) => !empty(lines.length - 1 - n));
+    const spare = PAGE_LINES - (lastLine - firstLine + 1);
+    if (spare <= 0) return clean;
+    const headers = marks.filter((m) => m.kind === 'header');
+    const glyphList = glyphs(clean);
+    // The lines of the text under each: from its first line with something on it, up to the next header that has text above it
+    const regions = centers.map((m) => {
+        let from = Math.max(lineAt(m.at), firstLine);
+        while (from <= lastLine && empty(from)) from++;
+        // Under a header the text goes up to the next header, a <vcenter> of the page itself up to the end of the page
+        const under = headers.some((h) => h.end <= m.at && glyphList.slice(h.end, m.at).every((g) => /\s/.test(g.ch)));
+        const next = under ? headers.map((h) => lineAt(h.at)).find((h) => h > from) : undefined;
+        let to = (next ?? lastLine + 1) - 1;
+        while (to > from && empty(to)) to--;
+        return { from, to, last: next === undefined };
+    });
+    const blank = () => [{ styles: PAD_STYLES, content: [padding(1)] }, '\n'];
+    const fill = (count) => Array.from({ length: count }).flatMap(blank);
+    const edits = [];
+    regions.forEach((r, n) => {
+        const share = Math.floor(spare / regions.length) + (n < spare % regions.length ? 1 : 0);
+        const above = Math.floor(share / 2);
+        if (r.from > lastLine) return;
+        edits.push({ at: chars[lines[r.from].start].place, text: fill(above) });
+        // Under the text, before the line that follows it, unless that is where the page ends
+        if (!r.last) edits.push({ at: chars[lines[r.to + 1].start].place, text: fill(share - above) });
+    });
+    // From the end of the tree, so the places in front stay
+    const result = JSON.parse(JSON.stringify(clean));
+    for (const e of edits.sort((a, b) => b.at - a.at)) if (e.text.length) insertAt(result, e.at, e.text);
+    return result;
+}
+
 // The tree of every section of the body, laid out and ready to be cut into pages
-function sectionsOf(body, font = null, hyphenator = null, classes = {}, center = true) {
+function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = true, rtl = false) {
     let nextId = 0;
-    return splitSections(body).map((section) => {
-        const content = parseInline(section, 0, null, classes).content;
-        nextId = assignIds(content, nextId);
+    return splitSections(ligate(body)).map((text) => {
+        // The parts between the <vcenter> lines, each its own text, with a mark where one was
+        const content = text.split(new RegExp(VCENTER_LINE.source, 'm')).flatMap((part, n) => {
+            const parsed = parseInline(part, 0, null, classes).content;
+            nextId = assignIds(parsed, nextId);
+            return n ? [{ styles: {}, content: [], vcenter: true }, ...parsed] : parsed;
+        });
         const base = { ...(font ? { font } : {}), ...classes.body };
         const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content, hyphenator)));
-        return center ? centerLines(tree) : unwrapCenter(tree);
+        const wrapped = hardWrap(tree);
+        const laidOut = align ? alignLines(wrapped, rtl) : unwrapAlign(wrapped);
+        // A book and quill has no padding glyphs to hold the empty lines
+        return centerVertically(laidOut, align ? textMarks(laidOut) : []);
     });
 }
 
@@ -1298,7 +1510,7 @@ function readSource(file) {
     // A writable book's pages are not hyphenated, a hyphen would stay in the text the player edits
     const hyphenator = isWritable(meta) ? null : hyphenatorOf(path.basename(path.dirname(file)));
     // A book and quill shows its text in the default font, the glyphs of the padding would not be blank there
-    const sections = sectionsOf(body, meta.font || null, hyphenator, meta.styles || {}, !isWritable(meta));
+    const sections = sectionsOf(body, meta.font || null, hyphenator, meta.styles || {}, !isWritable(meta), RTL_LOCALES.includes(path.basename(path.dirname(file))));
     return { meta, sections, pages: sections.flatMap((tree) => paginate(tree)) };
 }
 
