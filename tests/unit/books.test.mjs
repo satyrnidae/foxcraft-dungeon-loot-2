@@ -119,24 +119,24 @@ describe('book generator markdown', () => {
       return gen.toComponent(tree, 'k', {});
     };
     // The class styles go on the span, several names apply in order
-    const link = component('a <style class="url">link</style>');
+    const link = component('a <style class=".url">link</style>');
     assert.deepEqual(link.with[0], { translate: 'k.1', fallback: 'link', color: 'blue', bold: false, underlined: true, shadow_color: 12345678 });
-    assert.deepEqual(component('<style class="url warn">x</style>'), { translate: 'k', fallback: 'x', color: '#ff8800', bold: false, underlined: true, shadow_color: 12345678, italic: true });
+    assert.deepEqual(component('<style class=".url .warn">x</style>'), { translate: 'k', fallback: 'x', color: '#ff8800', bold: false, underlined: true, shadow_color: 12345678, italic: true });
     // The class works on font, a and span too, and the attributes of the tag win over it
-    const withFont = component('<font class="url" color="red" face="minecraft:alt">x</font>');
+    const withFont = component('<font class=".url" color="red" face="minecraft:alt">x</font>');
     assert.equal(withFont.color, 'red');
     assert.equal(withFont.font, 'minecraft:alt');
     assert.equal(withFont.underlined, true);
-    const anchor = component('<a class="url" href="https://example.com">x</a>');
+    const anchor = component('<a class=".url" href="https://example.com">x</a>');
     assert.deepEqual([anchor.color, anchor.click_event.url], ['blue', 'https://example.com']);
-    assert.equal(component('<span class="url">x</span>').color, 'blue');
+    assert.equal(component('<span class=".url">x</span>').color, 'blue');
     // A false turns off what the text around it has, and the width follows
-    const inBold = gen.pagesOf('**a <style class="url">b</style>**', null, null, meta.styles)[0];
+    const inBold = gen.pagesOf('**a <style class=".url">b</style>**', null, null, meta.styles)[0];
     const { chars } = gen.layout(inBold);
     assert.equal(chars.find((c) => c.ch === 'a').bold, true);
     assert.equal(chars.find((c) => c.ch === 'b').bold, false);
     // Unknown classes and keys stop the build
-    assert.throws(() => component('<style class="nope">x</style>'), /unknown class "nope"/);
+    assert.throws(() => component('<style class=".nope">x</style>'), /unknown class ".nope"/);
     assert.throws(() => component('<style>x</style>'), /needs a class/);
     assert.throws(() => gen.parseClasses({ a: { colour: 'red' } }), /unknown colour/);
     assert.throws(() => gen.parseClasses({ a: { bold: 'yes' } }), /true or false/);
@@ -170,9 +170,9 @@ describe('book generator markdown', () => {
     assert.deepEqual(first('**x**'), { translate: 'k.1', fallback: 'x', bold: true, color: 'gold' });
     assert.deepEqual(first('*x*'), { translate: 'k.1', fallback: 'x', italic: false, color: 'aqua' });
     assert.deepEqual(first('__x__'), { translate: 'k.1', fallback: 'x', underlined: true, color: 'red' });
-    // Headers are bold and underlined, header changes all of them and h2 only the second level
-    assert.deepEqual(first('# x\ny'), { translate: 'k.1', fallback: 'x', bold: true, underlined: true, color: 'dark_red' });
-    assert.deepEqual(first('## x\ny'), { translate: 'k.1', fallback: 'x', bold: true, underlined: false, color: 'dark_red' });
+    // Each level has its own look, header changes all of them and h2 only the second level
+    assert.deepEqual(first('## x\ny'), { translate: 'k.1', fallback: 'x', bold: true, underlined: false, italic: false, color: 'dark_red' });
+    assert.deepEqual(first('### x\ny'), { translate: 'k.1', fallback: 'x', bold: false, underlined: true, italic: true, color: 'dark_red' });
     // Code, and the tags
     assert.equal(first('`x`').color, 'gray');
     assert.equal(first('<a href="https://example.com">x</a>').color, 'dark_blue');
@@ -202,6 +202,23 @@ describe('book generator markdown', () => {
     assert.deepEqual(component.click_event, { action: 'copy_to_clipboard', value: 'text' });
     assert.deepEqual(component.hover_event, { action: 'show_text', value: 'tip' });
     assert.deepEqual(page('<a href="https://example.com">x</a>').component.click_event, { action: 'open_url', url: 'https://example.com' });
+  });
+
+  it('each level of header has its own look, only h1 is centered', () => {
+    const look = (md) => {
+      const page = gen.pagesOf(md + '\ny')[0];
+      const node = page.find((p) => typeof p === 'object' && p.styles.font !== 'foxcraft_dungeon_loot:padding');
+      const { bold, underlined, italic } = node.styles;
+      return { centered: page[0].styles?.font === 'foxcraft_dungeon_loot:padding', bold, underlined, italic };
+    };
+    assert.deepEqual(look('# x'), { centered: true, bold: true, underlined: true, italic: false });
+    assert.deepEqual(look('## x'), { centered: false, bold: true, underlined: true, italic: false });
+    assert.deepEqual(look('### x'), { centered: false, bold: false, underlined: true, italic: true });
+    assert.deepEqual(look('#### x'), { centered: false, bold: false, underlined: true, italic: false });
+    assert.deepEqual(look('##### x'), { centered: false, bold: true, underlined: false, italic: false });
+    assert.deepEqual(look('###### x'), { centered: false, bold: false, underlined: false, italic: true });
+    // The stylesheet can take the centering off
+    assert.equal(gen.pagesOf('# x', null, null, gen.parseClasses({ h1: { center: false } }))[0][0].styles.font, undefined);
   });
 
   it('a line of --- is a page break, a newline a line break and a header is bold and underlined', () => {
@@ -469,28 +486,42 @@ describe('book generator files', () => {
     }
   });
 
-  it('a longer translation has its pages cut with the reference, the keys and %n$s line up', () => {
+  it('a translation has its pages cut on its own, and a page lists the spans of every locale', () => {
     const { dir, opts } = sandbox();
     try {
       const head = '---\ntitle: Test Book\nauthor: Me\n---\n\n';
       const en = 'word '.repeat(150) + 'a **bold** b ' + 'word '.repeat(150) + 'c *it* d ' + 'word '.repeat(100);
-      // About twice as long, so it alone would need more pages
+      // About twice as long, so it needs more pages
       const fr = 'mot mot '.repeat(150) + 'a **gras** b ' + 'mot mot '.repeat(150) + 'c *it* d ' + 'mot mot '.repeat(100);
       write(dir, 'books/en_us/test.md', head + en);
       write(dir, 'books/fr_ca/test.md', head + fr);
-      assert.ok(gen.pagesOf(fr).length > gen.pagesOf(en).length);
+      const [enPages, frPages] = [gen.pagesOf(en).length, gen.pagesOf(fr).length];
+      assert.ok(frPages > enPages);
       const { warnings } = gen.generate(opts);
       assert.deepEqual(warnings.filter((w) => w.includes('test.md')), []);
       const lang = (locale) => JSON.parse(fs.readFileSync(path.join(opts.langDir, locale + '.json'), 'utf8'));
       const [enLang, frLang] = [lang('en_us'), lang('fr_ca')];
-      assert.deepEqual(Object.keys(frLang), Object.keys(enLang));
-      const args = (s) => (s.match(/%\d+\$s/g) || []).join();
-      for (const key of Object.keys(enLang)) assert.equal(args(frLang[key]), args(enLang[key]), key);
       const pages = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
-      assert.equal(pages.length, gen.pagesOf(fr).length);
-      // Spans that do not line up keep the pages of each locale, with a warning
+      // The book has the pages of the longest locale, the shorter one ends in empty pages
+      assert.equal(pages.length, frPages);
+      for (let n = enPages + 1; n <= frPages; n++) assert.equal(enLang[`book.foxcraft_dungeon_loot.test.page.${n}`], '');
+      // Each locale reads its own spans from the arguments of the page: every %n$s is an argument of the page, and the
+      // formatted ones are there for the locale that has them on that page
+      for (const [name, texts] of [['en_us', enLang], ['fr_ca', frLang]]) {
+        let styled = 0;
+        pages.forEach((page, n) => {
+          const template = texts[`book.foxcraft_dungeon_loot.test.page.${n + 1}`];
+          for (const [, arg] of template.matchAll(/%(\d+)\$s/g)) {
+            assert.ok(page.with[arg - 1], `${name} page ${n + 1} uses %${arg}$s`);
+            if (page.with[arg - 1].bold || page.with[arg - 1].italic) styled++;
+          }
+        });
+        assert.equal(styled, 2, name);
+      }
+      // Spans that do not line up leave a translation out, with a warning, and the reference reads as before
       write(dir, 'books/fr_ca/test.md', head + fr.replace('*it*', 'it'));
-      assert.ok(gen.generate(opts).warnings.some((w) => /spans of section 1 are not the ones/.test(w)));
+      assert.ok(gen.generate(opts).warnings.some((w) => /the spans are not the ones of/.test(w)));
+      assert.ok(!Object.keys(lang('fr_ca')).some((k) => k.includes('.page.')));
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -681,7 +712,36 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     // A book and quill keeps the text where it is
     const [plain] = gen.pagesOf('<center>Title</center>', null, null, {}, false);
     assert.deepEqual(plain, ['Title']);
-    assert.throws(() => gen.pagesOf('<center class="nope">x</center>'), /unknown class/);
+    assert.throws(() => gen.pagesOf('<center class=".nope">x</center>'), /unknown class/);
+  });
+
+  it('a style with center centers the lines it starts, not one it starts mid-way', () => {
+    const padOf = (tree) => {
+      const { lines, chars } = gen.layout(tree);
+      return lines.map((l) => chars.slice(l.tstart, l.tend).filter((g) => g.font === 'foxcraft_dungeon_loot:padding').length > 0);
+    };
+    const classes = gen.parseClasses({ '.c': { center: true }, '.cr': { center: true, color: 'red' }, '.off': { center: false } });
+    // The whole line is centered when the style starts it, and the style leaves no span when centering is all it does
+    const [start] = gen.pagesOf('<style class=".c">Start</style> of a line', null, null, classes);
+    assert.deepEqual(padOf(start), [true]);
+    assert.ok(!JSON.stringify(start).includes('"center"'));
+    assert.deepEqual(gen.pagesOf('Mid <style class=".c">centered</style> line', null, null, classes)[0], ['Mid ', 'centered', ' line']);
+    // Mid-line it is ignored, the lines it wraps onto start with it and are centered
+    const [wrap] = gen.pagesOf('Mid <style class=".cr">a long centered run of text that goes on and wraps over</style>', null, null, classes);
+    assert.deepEqual(padOf(wrap), [false, true, true]);
+    assert.ok(!JSON.stringify(wrap).includes('"center"'));
+    // An inner center: false turns it off, a body with center centers every line
+    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start</style> of a line</style>', null, null, classes)[0]), [false]);
+    assert.deepEqual(padOf(gen.pagesOf('one\ntwo', null, null, gen.parseClasses({ body: { center: true } }))[0]), [true, true]);
+    assert.throws(() => gen.parseClasses({ '.c': { center: 1 } }), /center is true or false/);
+    // class="center" is built in, the center type styles it and <center>
+    const typed = gen.parseClasses({ center: { color: 'red' } });
+    const [builtIn] = gen.pagesOf('<style class="center">Start</style> of a line', null, null, typed);
+    assert.deepEqual(padOf(builtIn), [true]);
+    assert.equal(builtIn[1].styles.color, 'red');
+    assert.equal(gen.pagesOf('<center>Title</center>', null, null, typed)[0][1].styles.color, 'red');
+    // A class of the frontmatter needs its dot
+    assert.throws(() => gen.pagesOf('<style class="c">x</style>', null, null, classes), /needs its dot, class="\.c"/);
   });
 
   it('a filter span needs as, an old _filtered file is ignored with a warning', () => {

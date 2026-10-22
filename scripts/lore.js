@@ -91,12 +91,15 @@ function componentText(component, locale = 'en_us') {
     return formatParts(templateOf(component, locale)).map((p) => (typeof p === 'string' ? p : args[p.arg] === undefined ? '' : componentText(args[p.arg], locale))).join('') + extra;
 }
 
-/** Greedy wrap of plain text into lines that fit, breaking after a space; a word longer than a line stays whole. */
+// Han, kana and full-width characters, written without spaces, so a line may break between any two of them
+const UNSPACED = '[\\u3000-\\u30ff\\u3400-\\u9fff\\uff00-\\uffef]';
+
+/** Greedy wrap of plain text into lines that fit, breaking after a space or between unspaced characters; a word longer than a line stays whole. */
 function wrapLore(text, limit = LORE_PIXELS) {
     const lines = [];
     let line = '';
-    for (const word of text.split(' ')) {
-        const next = line ? `${line} ${word}` : word;
+    for (const [, space, word] of text.matchAll(new RegExp(`( *)(${UNSPACED}|(?:(?!${UNSPACED})[^ ])+)`, 'g'))) {
+        const next = line ? `${line}${space}${word}` : word;
         if (line && loreWidth(next) > limit) {
             lines.push(line);
             line = word;
@@ -161,4 +164,4 @@ function reflowLore(lines, limit = LORE_PIXELS) {
     return out;
 }
 
-module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, componentText, wrapLore, wrapAdvice, shortLines, reflowLore };
+module.exports = { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, componentText, wrapLore, wrapAdvice, shortLines, reflowLore, UNSPACED };

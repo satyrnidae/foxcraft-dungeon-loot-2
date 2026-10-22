@@ -219,6 +219,10 @@
     {
       "type": "reference",
       "id": "foxcraft_dungeon_loot:padding"
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
     }
   ]
 }

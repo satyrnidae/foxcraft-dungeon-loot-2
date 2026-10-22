@@ -45,7 +45,7 @@ const PAGE_EDIT_LENGTH = 1024;
 // Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
 const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
 const { highlight } = require('./highlight.js');
-const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore } = require('./lore.js');
+const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore, UNSPACED } = require('./lore.js');
 const { musicLines, FONT: MUSIC_FONT } = require('./music.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
@@ -273,12 +273,12 @@ function parseShadow(value) {
 
 // The names of the styles that are not classes: the format types, which override what they look like by default
 const MARKER_TYPES = { '**': 'bold', __: 'underline', '~~': 'strikethrough', '||': 'obfuscated', '*': 'italic', _: 'italic' };
-const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span'];
+const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center'];
 
 const CLASS_FLAGS = { bold: 'bold', italic: 'italic', underline: 'underlined', underlined: 'underlined', strikethrough: 'strikethrough', obfuscated: 'obfuscated' };
 
 /**
- * The styles of the frontmatter, { name: { color, font, bold, italic, underline, strikethrough, obfuscated, shadow_color } },
+ * The styles of the frontmatter, { name: { color, font, bold, italic, underline, strikethrough, obfuscated, shadow_color, center } },
  * as { name: component styles }. A flag that is false is kept: it turns off what the text around it has. shadow_color is
  * an integer or an #aarrggbb code.
  */
@@ -299,8 +299,12 @@ function parseClasses(raw) {
                 styles.font = parseFont(value);
             } else if (key === 'shadow_color') {
                 styles.shadow_color = typeof value === 'number' ? value | 0 : parseShadow(String(value));
+            } else if (key === 'center') {
+                // Not a component style: centerLines centers a line that starts with this text, unwrapCenter drops it
+                if (typeof value !== 'boolean') throw new Error(`style "${name}": center is true or false`);
+                styles.center = value;
             } else {
-                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, ${Object.keys(CLASS_FLAGS).join(', ')}`);
+                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, center, ${Object.keys(CLASS_FLAGS).join(', ')}`);
             }
         }
         classes[name] = styles;
@@ -308,21 +312,37 @@ function parseClasses(raw) {
     return classes;
 }
 
-// A header is bold and underlined unless the stylesheet says otherwise, header and then its level are added to that
-const headerStyles = (name, classes) => ({ bold: true, underlined: true, ...classes.header, ...(name === 'header' ? {} : classes[name]) });
+// How each level of header looks unless the stylesheet says otherwise, header and then its level are added to that. A
+// false flag is kept, so a header in italic text is upright. Only h1 is centered, the others leave center to the text
+// around them. class="header" without a level is bold and underlined.
+const HEADER_LEVELS = {
+    header: { bold: true, underlined: true },
+    h1: { center: true, bold: true, underlined: true, italic: false },
+    h2: { bold: true, underlined: true, italic: false },
+    h3: { bold: false, underlined: true, italic: true },
+    h4: { bold: false, underlined: true, italic: false },
+    h5: { bold: true, underlined: false, italic: false },
+    h6: { bold: false, underlined: false, italic: true },
+};
+const headerStyles = (name, classes) => ({ ...HEADER_LEVELS[name], ...classes.header, ...(name === 'header' ? {} : classes[name]) });
 
-// The styles of a class attribute, several names apply in order. class="url" is the style .url; without one, class="h1"
-// is the look of a header of that level and class="header" of any header
+// The styles of a class attribute, several names apply in order. class=".url" is the style .url, the dot is needed.
+// The built-in classes go without one: class="h1" is the look of a header of that level, class="header" of any header
+// and class="center" the center style, which centers the lines the text starts.
 function classStyles(attrs, classes) {
     const styles = {};
     for (const name of (attrs.class || '').split(/\s+/).filter(Boolean)) {
-        const key = '.' + name.replace(/^\./, '');
-        if (!classes[key] && /^(h[1-6]|header)$/.test(name)) {
+        if (/^(h[1-6]|header)$/.test(name)) {
             Object.assign(styles, headerStyles(name, classes));
             continue;
         }
-        if (!classes[key]) throw new Error(`unknown class "${name}", the frontmatter has ${Object.keys(classes).filter((k) => k.startsWith('.')).join(', ') || 'none'}`);
-        Object.assign(styles, classes[key]);
+        if (name === 'center') {
+            Object.assign(styles, { center: true, ...classes.center });
+            continue;
+        }
+        if (!name.startsWith('.')) throw new Error(`class "${name}" needs its dot, class=".${name}"; only the built-in h1 to h6, header and center go without one`);
+        if (!classes[name]) throw new Error(`unknown class "${name}", the frontmatter has ${Object.keys(classes).filter((k) => k.startsWith('.')).join(', ') || 'none'}`);
+        Object.assign(styles, classes[name]);
     }
     return styles;
 }
@@ -427,12 +447,12 @@ function parseInline(text, start, closer, classes = {}) {
             if (/^h[1-6]$/.test(name)) {
                 content.push({ styles: headerStyles(name, classes), content: sub.content });
             } else if (name === 'center') {
-                // The styles of its classes, centerLines centers every line it is on. Like a block, the newline right
+                // The center type and the styles of its classes, centerLines centers every line it is on. Like a block, the newline right
                 // after <center> and the one right before </center> are not lines of their own
                 const inner = sub.content.slice();
                 if (typeof inner[0] === 'string') inner[0] = inner[0].replace(/^\n/, '');
                 if (typeof inner[inner.length - 1] === 'string') inner[inner.length - 1] = inner[inner.length - 1].replace(/\n$/, '');
-                content.push({ styles: classStyles(attrs, classes), content: inner.filter((p) => p !== ''), center: true });
+                content.push({ styles: { ...classes.center, ...classStyles(attrs, classes) }, content: inner.filter((p) => p !== ''), center: true });
             } else if (name === 'style') {
                 // The styles of the named classes from the frontmatter
                 if (!attrs.class) throw new Error('<style> needs a class="..." attribute');
@@ -565,12 +585,13 @@ function toComponent(content, key, lang, styles = {}) {
     return Object.assign(component, styles);
 }
 
-// The characters of the tree as the reader sees them, each with whether it is bold and its font, an inner font wins
-function glyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = false) {
+// The characters of the tree as the reader sees them, each with whether it is bold and its font, an inner font wins.
+// center is set inside a <center>, lead by a style with center, which an inner style with center: false turns off.
+function glyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = false, lead = false) {
     return content.flatMap((p) =>
         typeof p === 'string'
-            ? [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center }))
-            : glyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center || p.center === true)
+            ? [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead }))
+            : glyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center || p.center === true, p.styles.center === undefined ? lead : p.styles.center)
     );
 }
 
@@ -602,7 +623,8 @@ function layoutGlyphs(chars) {
             continue;
         }
         const w = widthOf(g);
-        if (width + w > PAGE_WIDTH && g.ch !== ' ') {
+        // A word carried onto a new line can still be wider than it, as after the indent of a paragraph, and breaks again
+        while (width + w > PAGE_WIDTH && g.ch !== ' ') {
             if (lastSpace >= start) push(lastSpace, lastSpace + 1, true);
             else push(i, i, true);
             // Carry the word that overflowed onto the new line
@@ -817,17 +839,18 @@ const INLINE_TYPES = {
 };
 
 /**
- * Centers every line that holds a glyph of a <center>: a line that starts at a wrap starts at a newline instead, so the
- * overflow is centered on its own, and padding as wide as half of what is left of the line goes before it. Lines are
- * done from the last up, padding a line that fits does not move the wraps above it. Returns a copy of the tree with the
- * <center> marks gone.
+ * Centers every line that holds a glyph of a <center>, or starts with a glyph of a style with center: a line that starts
+ * at a wrap starts at a newline instead, so the overflow is centered on its own, and padding as wide as half of what is
+ * left of the line goes before it. A style with center that starts mid-line leaves that line alone, the lines it wraps
+ * onto start with it and are centered. Lines are done from the last up, padding a line that fits does not move the
+ * wraps above it. Returns a copy of the tree with the <center> marks and center styles gone.
  */
 function centerLines(content) {
     const tree = JSON.parse(JSON.stringify(content));
     const { lines, chars } = layout(tree);
     for (const line of [...lines].reverse()) {
         const text = chars.slice(line.tstart, line.tend);
-        if (!text.some((g) => g.center)) continue;
+        if (!text.length || !(text[0].lead || text.some((g) => g.center))) continue;
         const pad = padding(Math.floor((PAGE_WIDTH - text.reduce((sum, g) => sum + widthOf(g), 0)) / 2));
         const parts = [...(line.soft ? ['\n'] : []), ...(pad ? [{ styles: PAD_STYLES, content: [pad] }] : [])];
         if (parts.length) insertAt(tree, chars[line.tstart].place, parts);
@@ -835,15 +858,20 @@ function centerLines(content) {
     return unwrapCenter(tree);
 }
 
-// The tree without the marks of <center> nodes. One without a class is gone, its text stays where it is.
+// The tree without the marks of <center> nodes and the center of styles, the alt of a filter too. A <center> without a
+// class is gone, its text stays where it is.
 function unwrapCenter(content) {
     return content.flatMap((part) => {
         if (typeof part === 'string') return [part];
         const inner = unwrapCenter(part.content);
-        if (!part.center) return [{ ...part, content: inner }];
-        if (!Object.keys(part.styles).length) return inner;
-        const { center, ...kept } = part;
-        return [{ ...kept, content: inner }];
+        const { center: _, ...styles } = part.styles;
+        const node = { ...part, styles, content: inner, ...(part.alt ? { alt: unwrapCenter(part.alt) } : {}) };
+        // A style that only centered leaves nothing to style
+        if ('center' in part.styles && !Object.keys(styles).length && !part.alt && !part.literal) return inner;
+        if (!part.center) return [node];
+        if (!Object.keys(styles).length) return inner;
+        const { center, ...kept } = node;
+        return [kept];
     });
 }
 
@@ -863,6 +891,7 @@ function sliceTree(content, from, to, drop = new Set()) {
                 const inner = walk(part.content);
                 if (!inner.length) continue;
                 const node = { styles: part.styles, content: inner };
+                if (part.id !== undefined) node.id = part.id;
                 if (part.literal) node.literal = true;
                 if (part.alt) Object.assign(node, { alt: part.alt }, first >= from && pos <= to ? {} : { cut: true });
                 out.push(node);
@@ -1026,6 +1055,94 @@ function paginateTogether(contents, ascentOf = (font, ch) => FONTS.ascentOf(font
     return pages;
 }
 
+const hasCut = (content) => content.some((part) => typeof part !== 'string' && (part.cut === true || hasCut(part.content)));
+
+/**
+ * Like paginate, and a page also has to fit when read with chat filtering, where a filter can show a longer text than it hides,
+ * and does not end inside a filter span.
+ */
+function paginateFit(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
+    const pager = pagerOf(content, ascentOf);
+    const pages = [];
+    for (let at = pager.first(0); at < pager.lines.length; ) {
+        const fits = (to) => {
+            if (pager.splitsReserve(to)) return false;
+            const page = pager.slice(at, to);
+            // A page edge inside a filter span would leave the span unfiltered
+            return !page || (!hasCut(page) && layout(variant(page, true)).lines.length <= PAGE_LINES);
+        };
+        let end = Math.min(at + PAGE_LINES, pager.lines.length);
+        while (end > at + 1 && !fits(end)) end--;
+        const page = pager.slice(at, end);
+        if (page) pages.push(page);
+        at = pager.first(end);
+    }
+    return pages;
+}
+
+// Adjacent strings joined, empty ones dropped
+function joinText(content) {
+    const parts = [];
+    for (const part of content) {
+        if (typeof part === 'string') {
+            if (typeof parts[parts.length - 1] === 'string') parts[parts.length - 1] += part;
+            else if (part) parts.push(part);
+        } else {
+            parts.push(part);
+        }
+    }
+    return parts;
+}
+
+// Span numbers in the order of the text; the padding of a locale, which has none, goes after
+const byId = (a, b) => (typeof a === 'number' && typeof b === 'number' ? a - b : typeof a === 'number' ? -1 : typeof b === 'number' ? 1 : String(a) < String(b) ? -1 : 1);
+
+/**
+ * The text component of one page, as every locale reads it. contents is the content of the page in each locale, or null where
+ * a locale has no such page. The arguments are every span any locale has on the page, by span number, so a locale that cuts
+ * its pages elsewhere still finds its spans on the page and writes its text as the template of its own lang entry, %n$s
+ * for the spans it has. langs[i] gets the entries of locale i. The component takes the fallback and the style of the
+ * locale at ref.
+ */
+function unionComponent(contents, key, langs, ref) {
+    const parts = contents.map((content) => content && joinText(content));
+    const idOf = (i, part, n) => (part.id !== undefined ? part.id : `~${i}.${n}`);
+    const nodes = new Map();
+    parts.forEach((list, i) => {
+        if (!list) return;
+        list.forEach((part, n) => {
+            if (typeof part === 'string') return;
+            const id = idOf(i, part, n);
+            if (!nodes.has(id)) nodes.set(id, []);
+            nodes.get(id)[i] = part;
+        });
+    });
+    const ids = [...nodes.keys()].sort(byId);
+    const templates = parts.map((list, i) => list && list.map((part, n) => (typeof part === 'string' ? escapePercent(part) : `%${ids.indexOf(idOf(i, part, n)) + 1}$s`)).join(''));
+    templates.forEach((template, i) => template !== null && (langs[i][key] = template));
+    const base = templates[ref] !== null ? ref : templates.findIndex((template) => template !== null);
+    const component = { translate: key, fallback: templates[base] };
+    if (ids.length) {
+        component.with = ids.map((id, n) => {
+            const found = nodes.get(id);
+            const node = found[ref] || found.find(Boolean);
+            if (node.literal) return literalComponent(node);
+            const child = unionComponent(found.map((f) => f && f.content), `${key}.${n + 1}`, langs, ref);
+            return Object.assign(child, node.styles);
+        });
+    }
+    return component;
+}
+
+/** A page as unionComponent, with the style of the whole text, the WHOLE node every page is inside, on the page itself. */
+function unionPage(contents, key, langs, ref) {
+    const wrapped = contents.find((content) => content && content.length === 1 && content[0].id === WHOLE);
+    const inner = contents.map((content) => content && (content.length === 1 && content[0].id === WHOLE ? content[0].content : content));
+    const component = unionComponent(inner, key, langs, ref);
+    contents.forEach((content, i) => content === null && (langs[i][key] = ''));
+    return wrapped ? Object.assign(component, (contents[ref] ? contents[ref][0] : wrapped[0]).styles) : component;
+}
+
 //endregion
 
 //region Books
@@ -1100,12 +1217,36 @@ function pagesOf(body, font = null, hyphenator = null, classes = {}, center = tr
     return sectionsOf(body, font, hyphenator, classes, center).flatMap((tree) => paginate(tree));
 }
 
+// Every node of the parsed text gets a number, in the order the spans come. A translation has the same spans in the same
+// order, so a number is the same span in every locale, wherever its pages end. What a filter shows instead is free to differ
+// between locales: its spans are named by the filter, their place in the text and their style. The padding and hyphens added
+// later have no number. WHOLE is the style of the whole text.
+const WHOLE = 'whole';
+function assignIds(content, next) {
+    for (const part of content) {
+        if (typeof part === 'string') continue;
+        part.id = next++;
+        next = assignIds(part.content, next);
+        if (part.alt) assignAltIds(part.alt, `${part.id}a`);
+    }
+    return next;
+}
+function assignAltIds(content, prefix) {
+    content.forEach((part, n) => {
+        if (typeof part === 'string') return;
+        part.id = `${prefix}${n}${JSON.stringify(part.styles)}`;
+        assignAltIds(part.content, `${part.id}.`);
+    });
+}
+
 // The tree of every section of the body, laid out and ready to be cut into pages
 function sectionsOf(body, font = null, hyphenator = null, classes = {}, center = true) {
+    let nextId = 0;
     return splitSections(body).map((section) => {
         const content = parseInline(section, 0, null, classes).content;
+        nextId = assignIds(content, nextId);
         const base = { ...(font ? { font } : {}), ...classes.body };
-        const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ styles: base, content }] : content, hyphenator)));
+        const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content, hyphenator)));
         return center ? centerLines(tree) : unwrapCenter(tree);
     });
 }
@@ -1120,8 +1261,16 @@ function hyphenatorOf(locale) {
     return HYPHENATORS[locale];
 }
 
+// Keys a translation takes from the reference book when it does not set them
+const INHERITED_KEYS = ['rarity', 'model', 'styles'];
+
 function readSource(file) {
     const { meta, body } = parseFrontmatter(fs.readFileSync(file, 'utf8'));
+    const reference = path.join(path.dirname(path.dirname(file)), REFERENCE_LANG, path.basename(file));
+    if (path.basename(path.dirname(file)) !== REFERENCE_LANG && fs.existsSync(reference)) {
+        const base = parseFrontmatter(fs.readFileSync(reference, 'utf8')).meta;
+        for (const key of INHERITED_KEYS) if (meta[key] === undefined && base[key] !== undefined) meta[key] = base[key];
+    }
     if (meta.font) {
         try {
             parseFont(meta.font);
@@ -1153,29 +1302,56 @@ function readSource(file) {
     return { meta, sections, pages: sections.flatMap((tree) => paginate(tree)) };
 }
 
+// The spans of the sections of a source, numbers and styles in order, what a translation has to share with the reference
+const spansOf = (source) => {
+    const out = [];
+    const walk = (nodes) =>
+        nodes.forEach((part) => {
+            if (typeof part === 'string') return;
+            if (part.id !== undefined && part.id !== WHOLE) out.push(`${part.id}:${JSON.stringify(part.styles)}:${part.alt ? 1 : 0}:${part.literal ? 1 : 0}`);
+            walk(part.content);
+        });
+    source.sections.forEach(walk);
+    return out.join('\n');
+};
+
 /**
- * The sources of one book in the reference locale and its translations, with the pages of all cut together by
- * paginateTogether. Section by section; when the sections or their spans do not line up, every locale keeps its own
- * pages and a warning says so.
+ * The sources of one book in the reference locale and its translations, each with its pages cut on its own, to fill every
+ * page, and the page components all of them are read with: a page lists the spans of every locale that has them on it, see
+ * unionComponent, and a locale with fewer pages has empty ones at the end. A translation whose spans are not the ones of the
+ * reference cannot be matched to it and is left out, with a warning.
  */
 function alignSources(files, warnings) {
     const sources = files.map((file) => readSource(file));
     if (sources.length < 2 || isWritable(sources[0].meta)) return sources;
-    const [reference, ...translations] = files;
-    if (new Set(sources.map((s) => s.sections.length)).size > 1) {
-        warnings.push(`${translations.join(', ')}: the --- page breaks are not the ones of ${reference}, pages are cut on their own`);
-        return sources;
+    const used = [0];
+    for (let i = 1; i < sources.length; i++) {
+        if (spansOf(sources[i]) === spansOf(sources[0])) used.push(i);
+        else warnings.push(`${files[i]}: the spans are not the ones of ${files[0]}, in the same order, so its pages are not translated`);
     }
-    const pages = sources.map(() => []);
-    for (let n = 0; n < sources[0].sections.length; n++) {
-        const together = paginateTogether(sources.map((s) => s.sections[n]));
-        if (!together) {
-            warnings.push(`${translations.join(', ')}: the spans of section ${n + 1} are not the ones of ${reference}, pages are cut on their own`);
-            return sources;
-        }
-        together.forEach((list, i) => pages[i].push(...list));
+    const own = sources.map((source) => source.sections.flatMap((tree) => paginateFit(tree)));
+    const count = Math.max(...used.map((i) => own[i].length));
+    const langs = used.map(() => ({}));
+    const raw = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], false) : null));
+    const filtered = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], true, () => warnings.push(`${files[i]}: page ${n + 1} has a <filter> span cut by the page break, it stays unfiltered`)) : null));
+    const components = [];
+    const id = (file) => path.basename(file, '.md');
+    for (let n = 0; n < count; n++) {
+        const reads = raw(n);
+        reads.forEach((tree, k) => {
+            const { length } = tree ? layout(tree) : { length: 0 };
+            if (length > PAGE_EDIT_LENGTH) warnings.push(`${files[used[k]]}: page ${n + 1} has ${length} characters, the editor stops at ${PAGE_EDIT_LENGTH}`);
+        });
+        const page = unionPage(reads, `book.${NS}.${id(files[0])}.page.${n + 1}`, langs, 0);
+        // A page that reads the same filtered stays a plain component, the game filters it to the same text
+        const filters = filtered(n);
+        const differs = reads.some((tree, k) => tree && JSON.stringify(tree) !== JSON.stringify(filters[k]));
+        components.push(differs ? { raw: page, filtered: unionPage(filters, `book.${NS}.${id(files[0])}.filtered.${n + 1}`, langs, 0) } : page);
     }
-    return sources.map((source, i) => ({ ...source, pages: pages[i] }));
+    return sources.map((source, i) => {
+        const k = used.indexOf(i);
+        return { ...source, pages: own[i], union: k < 0 ? { count: 0, components: [], lang: {} } : { count, components, lang: langs[k] } };
+    });
 }
 
 // numbers are the page indexes, when the list is a subset of the pages
@@ -1340,7 +1516,7 @@ function buildWritable(id, source, title, file, warnings) {
 function buildBook(id, file, source = readSource(file)) {
     const warnings = [];
     const { meta } = source;
-    const pages = source.pages.map((tree) => variant(tree, false));
+    const pages = source.union ? new Array(source.union.count) : source.pages.map((tree) => variant(tree, false));
     const lang = {};
     const title = titleOf(meta);
     if (!title.text) throw new Error(`${file}: title is missing`);
@@ -1349,19 +1525,26 @@ function buildBook(id, file, source = readSource(file)) {
     }
     if (pages.length > MAX_PAGES) warnings.push(`${file}: ${pages.length} pages, a book takes ${MAX_PAGES}`);
     if (isWritable(meta)) return buildWritable(id, source, title, file, warnings);
-    let components = pageComponents(pages, id, 'page', lang, warnings, file);
+    let components;
+    if (source.union) {
+        // The pages of a book with translations are made together by alignSources
+        components = source.union.components;
+        Object.assign(lang, source.union.lang);
+    } else {
+        components = pageComponents(pages, id, 'page', lang, warnings, file);
 
-    // The filtered reading cuts pages where the raw one does. A page that reads the same stays a plain component, the game
-    // filters it to the same text
-    const filtered = source.pages.map((tree, n) => variant(tree, true, () => warnings.push(`${file}: page ${n + 1} has a <filter> span cut by the page break, it stays unfiltered`)));
-    const differs = pages.map((_, n) => n).filter((n) => JSON.stringify(filtered[n]) !== JSON.stringify(pages[n]));
-    for (const n of differs) {
-        const lines = layout(filtered[n]).lines.length;
-        if (lines > PAGE_LINES) warnings.push(`${file}: page ${n + 1} has ${lines} lines when filtered, a page takes ${PAGE_LINES}`);
-    }
-    if (differs.length) {
-        const own = pageComponents(differs.map((n) => filtered[n]), id, 'filtered', lang, warnings, file, differs);
-        components = components.map((raw, n) => (differs.includes(n) ? { raw, filtered: own[differs.indexOf(n)] } : raw));
+        // The filtered reading cuts pages where the raw one does. A page that reads the same stays a plain component, the game
+        // filters it to the same text
+        const filtered = source.pages.map((tree, n) => variant(tree, true, () => warnings.push(`${file}: page ${n + 1} has a <filter> span cut by the page break, it stays unfiltered`)));
+        const differs = pages.map((_, n) => n).filter((n) => JSON.stringify(filtered[n]) !== JSON.stringify(pages[n]));
+        for (const n of differs) {
+            const lines = layout(filtered[n]).lines.length;
+            if (lines > PAGE_LINES) warnings.push(`${file}: page ${n + 1} has ${lines} lines when filtered, a page takes ${PAGE_LINES}`);
+        }
+        if (differs.length) {
+            const own = pageComponents(differs.map((n) => filtered[n]), id, 'filtered', lang, warnings, file, differs);
+            components = components.map((raw, n) => (differs.includes(n) ? { raw, filtered: own[differs.indexOf(n)] } : raw));
+        }
     }
     // Plain lore is wrapped by wrappedLore, only a word or a component line too wide for a line is left
     for (const row of loreEntries(meta)) {
@@ -1369,7 +1552,7 @@ function buildBook(id, file, source = readSource(file)) {
             if (row.width > LORE_PIXELS) warnings.push(`${file}: lore line is ${row.width} pixels, ${LORE_PIXELS} fit, the width of ${LORE_WIDTH} average characters: ${row.raw}`);
             continue;
         }
-        for (const word of row.text.split(' ')) if (loreWidth(word) > LORE_PIXELS) warnings.push(`${file}: lore word "${word}" is ${loreWidth(word)} pixels, wider than the ${LORE_PIXELS} of a line`);
+        for (const word of row.text.split(new RegExp(` |(?<=${UNSPACED})|(?=${UNSPACED})`))) if (loreWidth(word) > LORE_PIXELS) warnings.push(`${file}: lore word "${word}" is ${loreWidth(word)} pixels, wider than the ${LORE_PIXELS} of a line`);
     }
 
     const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author, pages: components, resolved: true };
@@ -1501,7 +1684,7 @@ function generate(options = {}) {
                 if (emit(modifier, json(built.modifier), check)) changed.push(modifier);
                 const table = path.join(tableDir, id + '.json');
                 if (emit(table, json(tableFor(id, book.writable)), check)) changed.push(table);
-            } else {
+            } else if (!aligned.has(book.file)) {
                 const reference = Object.keys(buildOnce(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {
                     warnings.push(`${book.file}: formatting differs from the ${REFERENCE_LANG} book, translated text lines up only where the spans do`);

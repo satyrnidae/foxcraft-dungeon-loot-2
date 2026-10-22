@@ -23,7 +23,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { fetchClientJar } from './tools/fetch_mc_jar.mjs';
+import { fetchClientJar, fetchUnifont } from './tools/fetch_mc_jar.mjs';
 import { fetchLibs } from './tools/fetch_mc_libs.mjs';
 
 const TESTS = path.dirname(fileURLToPath(import.meta.url));
@@ -117,7 +117,15 @@ function findJar() {
 async function resolveJar(allowDownload) {
   const jar = findJar();
   const hasJson = (j) => fs.existsSync(j.replace(/\.jar$/, '.json'));
-  if (fs.existsSync(jar) && hasJson(jar)) return { jar };
+  if (fs.existsSync(jar) && hasJson(jar)) {
+    // The launcher's jar is no help with Unifont, which the game takes from its asset index: BookRender and the font widths need it
+    try {
+      await fetchUnifont(JSON.parse(fs.readFileSync(jar.replace(/\.jar$/, '.json'), 'utf8')), path.join(CACHE, 'mc', MC_VERSION));
+    } catch (exc) {
+      console.error(`could not fetch Unifont, CJK and Arabic draw as missing glyphs: ${exc.message}`);
+    }
+    return { jar };
+  }
   if (process.env.MC_JAR) return { skip: `no client jar at ${jar}, check MC_JAR` };
   if (!allowDownload) return { skip: `no client jar at ${jar}, drop --no-download or set MC_JAR` };
   try {

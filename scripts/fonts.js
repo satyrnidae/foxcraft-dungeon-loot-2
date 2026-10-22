@@ -166,15 +166,17 @@ function glyphPixels(provider, texture) {
  * The advance widths of one font as { char: width }, the first provider that has a glyph wins. readFont gives the JSON of a
  * font id, readTexture the PNG buffer of a texture id such as minecraft:font/ascii.png.
  */
-function measureFont(fontId, readFont, readTexture, seen = new Set()) {
+function measureFont(fontId, readFont, readTexture, seen = new Set(), readHex = null) {
     const widths = {};
     if (seen.has(fontId)) return widths;
     seen.add(fontId);
     const font = readFont(fontId);
     if (!font) throw new Error(`font ${fontId} not found`);
     for (const provider of font.providers || []) {
+        // A provider with a filter option on is for a setting that is off by default
+        if (Object.values(provider.filter || {}).some(Boolean)) continue;
         if (provider.type === 'reference') {
-            const inner = measureFont(withNamespace(provider.id), readFont, readTexture, seen);
+            const inner = measureFont(withNamespace(provider.id), readFont, readTexture, seen, readHex);
             for (const [ch, w] of Object.entries(inner)) widths[ch] ??= w;
         } else if (provider.type === 'space') {
             for (const [ch, w] of Object.entries(provider.advances || {})) widths[ch] ??= w;
@@ -182,10 +184,75 @@ function measureFont(fontId, readFont, readTexture, seen = new Set()) {
             const { cellH, pixels } = glyphPixels(provider, readTexture(withNamespace(provider.file)));
             const scale = (provider.height ?? 8) / cellH;
             for (const [ch, px] of Object.entries(pixels)) widths[ch] ??= Math.trunc(0.5 + px * scale) + 1;
+        } else if (provider.type === 'unihex' && readHex) {
+            for (const [ch, w] of Object.entries(unihexWidths(provider, readHex))) widths[ch] ??= w;
         }
     }
     return widths;
 }
+
+/**
+ * The advances of a unihex provider, { char: width }. readHex gives the text of the hex file of an id. A glyph is as wide as its
+ * inked columns, or the left and right of the size override of its range, and advances half of that plus one, as
+ * UnihexProvider.Glyph does. A glyph with no ink is the whole width of its line.
+ */
+function unihexWidths(provider, readHex) {
+    const overrides = (provider.size_overrides || []).map((o) => ({ from: o.from.codePointAt(0), to: o.to.codePointAt(0), left: o.left, right: o.right }));
+    const widths = {};
+    for (const line of readHex(withNamespace(provider.hex_file)).split(/\r?\n/)) {
+        const colon = line.indexOf(':');
+        if (colon < 1) continue;
+        const cp = parseInt(line.slice(0, colon), 16);
+        const data = line.slice(colon + 1).trim();
+        const digits = data.length / 16; // hex digits in each of the 16 rows
+        const bits = digits * 4;
+        let mask = 0n;
+        for (let y = 0; y < 16; y++) mask |= BigInt('0x' + data.slice(y * digits, (y + 1) * digits));
+        let left = bits;
+        let right = -1;
+        for (let x = 0; x < bits; x++) {
+            if ((mask >> BigInt(bits - 1 - x)) & 1n) {
+                left = Math.min(left, x);
+                right = x;
+            }
+        }
+        if (right < 0) [left, right] = [0, bits];
+        const override = overrides.find((o) => cp >= o.from && cp <= o.to);
+        if (override) [left, right] = [override.left, override.right];
+        widths[String.fromCodePoint(cp)] ??= Math.floor((right - left + 1) / 2) + 1;
+    }
+    return widths;
+}
+
+// The glyphs of Unifont are written as ranges, "4e00-9fff,a000", under their width: the file would be huge with every character
+const UNIFONT = 'minecraft:include/unifont';
+const packRanges = (widths) => {
+    const grouped = {};
+    for (const [ch, w] of Object.entries(widths)) (grouped[w] ??= []).push(ch.codePointAt(0));
+    const out = {};
+    for (const [w, cps] of Object.entries(grouped)) {
+        cps.sort((a, b) => a - b);
+        const ranges = [];
+        for (let i = 0; i < cps.length; ) {
+            let j = i;
+            while (j + 1 < cps.length && cps[j + 1] === cps[j] + 1) j++;
+            ranges.push(i === j ? cps[i].toString(16) : `${cps[i].toString(16)}-${cps[j].toString(16)}`);
+            i = j + 1;
+        }
+        out[w] = ranges.join(',');
+    }
+    return out;
+};
+const unpackRanges = (grouped) => {
+    const widths = {};
+    for (const [w, text] of Object.entries(grouped)) {
+        for (const range of text.split(',')) {
+            const [from, to = from] = range.split('-').map((h) => parseInt(h, 16));
+            for (let cp = from; cp <= to; cp++) widths[String.fromCodePoint(cp)] = Number(w);
+        }
+    }
+    return widths;
+};
 
 // Widths grouped by value, "6": "ABC...", to keep the cache small and readable
 const pack = (widths) => {
@@ -200,10 +267,17 @@ const unpack = (grouped) => {
 };
 
 /** Measures every font in the client jar, includes too, and writes the cache. */
-function buildCache(jarFile) {
+function buildCache(jarFile, unifontDir = path.join(path.dirname(jarFile), 'unifont')) {
     const zip = openZip(jarFile);
+    // The jar's own include/unifont.json is empty, the game takes Unifont from its asset index, see tests/tools/fetch_mc_jar.mjs
+    const unifontFile = (id) => path.join(unifontDir, id.split('/').pop());
+    const readHex = (id) => {
+        const inner = openZip(unifontFile(id));
+        return Object.keys(inner).filter((n) => n.endsWith('.hex')).map((n) => inner[n]().toString('utf8')).join('\n');
+    };
     const readFont = (id) => {
         const [ns, p] = id.split(':');
+        if (ns === 'minecraft' && /^include\/unifont/.test(p) && fs.existsSync(unifontFile(p + '.json'))) return JSON.parse(fs.readFileSync(unifontFile(p + '.json'), 'utf8'));
         const entry = zip[`assets/${ns}/font/${p}.json`];
         return entry ? JSON.parse(entry().toString('utf8')) : null;
     };
@@ -213,10 +287,16 @@ function buildCache(jarFile) {
     };
     const fonts = {};
     const textures = {};
+    const withUnifont = [];
+    const hasUnifont = fs.existsSync(unifontFile('unifont.json'));
+    if (hasUnifont) fonts[UNIFONT] = packRanges(measureFont(UNIFONT, readFont, readTexture, new Set(), readHex));
+    const reaches = (id, visited = new Set()) => !visited.has(id) && (visited.add(id), id === UNIFONT || (readFont(id)?.providers || []).some((p) => p.type === 'reference' && reaches(withNamespace(p.id), visited)));
     for (const name of Object.keys(zip).sort()) {
         const m = /^assets\/minecraft\/font\/(.+)\.json$/.exec(name);
-        if (!m) continue;
-        fonts['minecraft:' + m[1]] = pack(measureFont('minecraft:' + m[1], readFont, readTexture));
+        if (!m || m[1] === 'include/unifont') continue;
+        // The widths of Unifont are kept once, a font that reaches it by a reference only lists its id
+        fonts['minecraft:' + m[1]] = pack(measureFont('minecraft:' + m[1], readFont, readTexture, new Set([UNIFONT]), readHex));
+        if (hasUnifont && reaches('minecraft:' + m[1])) withUnifont.push('minecraft:' + m[1]);
         for (const provider of readFont('minecraft:' + m[1]).providers || []) {
             if (provider.type !== 'bitmap') continue;
             const id = withNamespace(provider.file);
@@ -224,6 +304,7 @@ function buildCache(jarFile) {
             textures[id] ??= { cellH, pixels: pack(pixels) };
         }
     }
+    if (withUnifont.length) fonts.__with_unifont = withUnifont;
     fs.writeFileSync(CACHE, JSON.stringify(fonts, null, 1) + '\n');
     fs.writeFileSync(TEXTURE_CACHE, JSON.stringify(textures, null, 1) + '\n');
     return Object.keys(fonts);
@@ -253,6 +334,7 @@ function glyphAscents(fontId, readFont, seen = new Set()) {
 
 // The fonts of the resource pack, { id: widths }. A reference to a vanilla font takes it from the cache.
 function packFonts(cached, assetsDir, ascents = {}) {
+    // cached is { id: { char: width } }
     const found = {};
     if (!fs.existsSync(assetsDir)) return found;
     for (const ns of fs.readdirSync(assetsDir)) {
@@ -266,7 +348,7 @@ function packFonts(cached, assetsDir, ascents = {}) {
         };
         walk(dir, '');
     }
-    const readFont = (id) => (found[id] ? JSON.parse(fs.readFileSync(found[id], 'utf8')) : cached[id] ? { providers: [{ type: 'space', advances: unpack(cached[id]) }] } : null);
+    const readFont = (id) => (found[id] ? JSON.parse(fs.readFileSync(found[id], 'utf8')) : cached[id] ? { providers: [{ type: 'space', advances: cached[id] }] } : null);
     // A texture of the pack, else a vanilla font image from its cache, as minecraft:font/ascii.png at another height
     const textures = fs.existsSync(TEXTURE_CACHE) ? JSON.parse(fs.readFileSync(TEXTURE_CACHE, 'utf8')) : {};
     const readTexture = (id) => {
@@ -290,16 +372,22 @@ function packFonts(cached, assetsDir, ascents = {}) {
 function loadFonts(options = {}) {
     const cache = fs.existsSync(options.cache || CACHE) ? JSON.parse(fs.readFileSync(options.cache || CACHE, 'utf8')) : {};
     const fonts = {};
-    for (const [id, grouped] of Object.entries(cache)) fonts[id] = unpack(grouped);
+    for (const [id, grouped] of Object.entries(cache)) if (!id.startsWith('__') && id !== UNIFONT) fonts[id] = unpack(grouped);
+    // The fonts that reach Unifont have its widths under their own, which win
+    if (cache[UNIFONT]) {
+        const unifont = unpackRanges(cache[UNIFONT]);
+        for (const id of cache.__with_unifont || []) fonts[id] = { ...unifont, ...fonts[id] };
+    }
     const ascents = {};
-    Object.assign(fonts, packFonts(cache, options.assets || PACK_ASSETS, ascents));
+    Object.assign(fonts, packFonts({ ...fonts }, options.assets || PACK_ASSETS, ascents));
     const missing = new Set();
     const widthOf = (font, ch, bold) => {
         const id = withNamespace(font || DEFAULT_FONT);
         const table = fonts[id];
         if (!table) missing.add(id);
         const width = ch === ' ' ? (table || fonts[DEFAULT_FONT] || {})[' '] ?? DEFAULT_SPACE : (table || {})[ch] ?? UNKNOWN_WIDTH;
-        return width + (bold && ch !== ' ' ? 1 : 0);
+        // Bold adds a pixel to every glyph, a space too: in 26.3 GlyphInfo.getAdvance(bold) adds getBoldOffset() and the space provider keeps it
+        return width + (bold ? 1 : 0);
     };
     // The ascent of a glyph of a font of the pack, 0 for the fonts of the game: they sit inside a line
     const ascentOf = (font, ch) => {

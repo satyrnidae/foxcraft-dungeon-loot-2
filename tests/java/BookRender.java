@@ -69,10 +69,27 @@ public class BookRender {
         MISSING = new Glyph(6, box, 1, 7);
     }
 
-    /** A resource of the resource pack, else of the client jar on the classpath, as in game with the pack on top. */
+    /**
+     * The Unifont files the game takes from its asset index, not from the client jar, whose own include/unifont.json is
+     * empty: tests/tools/fetch_mc_jar.mjs puts them in tests/.cache/mc/<version>/unifont.
+     */
+    static Path unifontDir() throws Exception {
+        Path mc = root.resolve("tests/.cache/mc");
+        if (!Files.isDirectory(mc)) return null;
+        try (Stream<Path> versions = Files.list(mc)) {
+            return versions.map(v -> v.resolve("unifont")).filter(Files::isDirectory).sorted().reduce((a, b) -> b).orElse(null);
+        }
+    }
+
+    /** A resource of the resource pack, else Unifont, else of the client jar on the classpath, as in game with the pack on top. */
     static InputStream resource(String ns, String path) throws Exception {
         Path f = root.resolve("texturepack/assets").resolve(ns).resolve(path);
         if (Files.exists(f)) return Files.newInputStream(f);
+        if (ns.equals("minecraft") && path.matches("font/(include/)?unifont[a-z_]*\\.(json|zip)")) {
+            Path dir = unifontDir();
+            Path file = dir == null ? null : dir.resolve(path.substring(path.lastIndexOf('/') + 1));
+            if (file != null && Files.exists(file)) return Files.newInputStream(file);
+        }
         return BookRender.class.getResourceAsStream("/assets/" + ns + "/" + path);
     }
 
@@ -118,6 +135,11 @@ public class BookRender {
                     set.providers.add(glyphs);
                 }
                 case "bitmap" -> set.providers.add(bitmap(p));
+                case "unihex" -> {
+                    Map<Integer, Glyph> glyphs = unihex(p);
+                    if (glyphs == null) warned.add("font " + fontId + " needs " + p.get("hex_file").getAsString() + ", run node tests/tools/fetch_mc_jar.mjs; its glyphs draw as missing");
+                    else set.providers.add(glyphs);
+                }
                 default -> warned.add("font " + fontId + " has a " + type + " provider, which is not drawn");
             }
         }
@@ -148,6 +170,67 @@ public class BookRender {
                 int ink = 0;
                 for (int x = cellW - 1; x >= 0 && ink == 0; x--) for (int y = 0; y < cellH; y++) if ((cell.getRGB(x, y) >>> 24) != 0) { ink = x + 1; break; }
                 glyphs.put(cp, new Glyph((int) (0.5 + ink * glyphScale) + 1, cell, glyphScale, ascent));
+            }
+        }
+        return glyphs;
+    }
+
+    /** The glyphs of a Unifont hex file, drawn when first asked for: 114000 images would be a lot to keep. */
+    static class LazyGlyphs extends HashMap<Integer, Glyph> {
+        final Map<Integer, String> hex = new HashMap<>();
+        final List<int[]> overrides = new ArrayList<>();
+
+        @Override public boolean containsKey(Object cp) { return hex.containsKey(cp); }
+
+        @Override public Glyph get(Object key) {
+            Glyph done = super.get(key);
+            if (done != null || !hex.containsKey(key)) return done;
+            int cp = (Integer) key;
+            String data = hex.get(cp);
+            int bits = data.length() / 16 * 4; // 16 rows of this many columns
+            long[] rows = new long[16];
+            int first = bits, last = -1;
+            for (int y = 0; y < 16; y++) {
+                rows[y] = Long.parseLong(data.substring(y * bits / 4, (y + 1) * bits / 4), 16);
+                for (int x = 0; x < bits; x++) {
+                    if ((rows[y] >> (bits - 1 - x) & 1) != 0) { first = Math.min(first, x); last = Math.max(last, x); }
+                }
+            }
+            // UnihexProvider.LineData.calculateWidth: the inked columns, or none at all and the width of the line
+            int left = last < 0 ? 0 : first, right = last < 0 ? bits : last;
+            for (int[] o : overrides) if (cp >= o[0] && cp <= o[1]) { left = o[2]; right = o[3]; }
+            int width = right - left + 1;
+            BufferedImage image = new BufferedImage(Math.max(width, 1), 16, BufferedImage.TYPE_INT_ARGB);
+            for (int y = 0; y < 16; y++) {
+                for (int x = left; x <= right && x < bits; x++) if ((rows[y] >> (bits - 1 - x) & 1) != 0) image.setRGB(x - left, y, 0xffffffff);
+            }
+            // The glyph advances width / 2 + 1 and is drawn half size, as Glyph.info and bake do
+            Glyph g = new Glyph(width / 2 + 1, image, 0.5f, 7);
+            put(cp, g);
+            return g;
+        }
+    }
+
+    /** A unihex provider, or null when its zip is not in the cache. */
+    static Map<Integer, Glyph> unihex(JsonObject p) throws Exception {
+        String[] file = id(p.get("hex_file").getAsString());
+        LazyGlyphs glyphs = new LazyGlyphs();
+        if (p.has("size_overrides")) {
+            for (JsonElement el : p.getAsJsonArray("size_overrides")) {
+                JsonObject o = el.getAsJsonObject();
+                glyphs.overrides.add(new int[] {o.get("from").getAsString().codePointAt(0), o.get("to").getAsString().codePointAt(0), o.get("left").getAsInt(), o.get("right").getAsInt()});
+            }
+        }
+        try (InputStream in = resource(file[0], file[1])) {
+            if (in == null) return null;
+            try (var zip = new java.util.zip.ZipInputStream(in)) {
+                for (var entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
+                    if (!entry.getName().endsWith(".hex")) continue;
+                    for (String line : new String(zip.readAllBytes(), "UTF-8").split("\\r?\\n")) {
+                        int colon = line.indexOf(':');
+                        if (colon > 0) glyphs.hex.put(Integer.parseInt(line.substring(0, colon), 16), line.substring(colon + 1).trim());
+                    }
+                }
             }
         }
         return glyphs;
@@ -208,16 +291,16 @@ public class BookRender {
         };
     }
 
-    /** Draws one glyph at a GUI position, tinted, sheared when italic, as the game's text renderer places it. */
-    static void draw(Graphics2D g, Glyph glyph, float x, float y, int rgb, boolean italic) {
+    /** Draws one glyph at a GUI position, tinted with an ARGB color, sheared when italic, as the game's text renderer places it. */
+    static void draw(Graphics2D g, Glyph glyph, float x, float y, int argb, boolean italic) {
         if (glyph.image() == null) return;
         BufferedImage cell = glyph.image();
         BufferedImage tinted = new BufferedImage(cell.getWidth(), cell.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int px = 0; px < cell.getWidth(); px++) {
             for (int py = 0; py < cell.getHeight(); py++) {
                 int c = cell.getRGB(px, py);
-                int r = ((c >> 16) & 0xff) * ((rgb >> 16) & 0xff) / 255, gr = ((c >> 8) & 0xff) * ((rgb >> 8) & 0xff) / 255, b = (c & 0xff) * (rgb & 0xff) / 255;
-                tinted.setRGB(px, py, (c & 0xff000000) | (r << 16) | (gr << 8) | b);
+                int a = (c >>> 24) * (argb >>> 24) / 255, r = ((c >> 16) & 0xff) * ((argb >> 16) & 0xff) / 255, gr = ((c >> 8) & 0xff) * ((argb >> 8) & 0xff) / 255, b = (c & 0xff) * (argb & 0xff) / 255;
+                tinted.setRGB(px, py, (a << 24) | (r << 16) | (gr << 8) | b);
             }
         }
         float up = 7 - glyph.ascent();
@@ -232,19 +315,32 @@ public class BookRender {
         g.drawImage(tinted, at, null);
     }
 
-    /** Draws a line of formatted text from x, returning where it ends. */
+    /**
+     * Draws a line of formatted text from x, returning where it ends. The book screen draws no drop shadow, but a style's
+     * shadow_color is drawn anyway, as the game does: the glyphs and lines again in that ARGB color one pixel right and down,
+     * all under the text.
+     */
     static float drawLine(Graphics2D g, FormattedText line, float x, float y) {
+        drawPass(g, line, x, y, true);
+        return drawPass(g, line, x, y, false);
+    }
+
+    static float drawPass(Graphics2D g, FormattedText line, float x, float y, boolean shadow) {
         float[] pen = {x};
         line.visit((style, s) -> {
             StringDecomposer.iterateFormatted(s, style, (index, st, cp) -> {
                 Glyph glyph = glyph(cp, st);
-                int rgb = st.getColor() != null ? st.getColor().getValue() : TEXT_COLOR;
-                draw(g, glyph, pen[0], y, rgb, st.isItalic());
-                if (st.isBold()) draw(g, glyph, pen[0] + 1, y, rgb, st.isItalic());
                 float adv = glyph.advance() + (st.isBold() ? 1 : 0);
-                g.setColor(new Color(rgb));
-                if (st.isStrikethrough()) g.fill(new java.awt.geom.Rectangle2D.Float((pen[0] - 1) * scale, (y + 3.5f) * scale, (adv + 1) * scale, scale));
-                if (st.isUnderlined()) g.fill(new java.awt.geom.Rectangle2D.Float((pen[0] - 1) * scale, (y + LINE_HEIGHT - 1) * scale, (adv + 1) * scale, scale));
+                int argb = 0xff000000 | (st.getColor() != null ? st.getColor().getValue() : TEXT_COLOR);
+                if (shadow) argb = st.getShadowColor() != null ? st.getShadowColor() : 0;
+                if (argb >>> 24 != 0) {
+                    float gx = pen[0] + (shadow ? 1 : 0), gy = y + (shadow ? 1 : 0);
+                    draw(g, glyph, gx, gy, argb, st.isItalic());
+                    if (st.isBold()) draw(g, glyph, gx + 1, gy, argb, st.isItalic());
+                    g.setColor(new Color(argb, true));
+                    if (st.isStrikethrough()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + 3.5f) * scale, (adv + 1) * scale, scale));
+                    if (st.isUnderlined()) g.fill(new java.awt.geom.Rectangle2D.Float((gx - 1) * scale, (gy + LINE_HEIGHT - 1) * scale, (adv + 1) * scale, scale));
+                }
                 pen[0] += adv;
                 return true;
             });

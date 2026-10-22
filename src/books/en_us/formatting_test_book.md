@@ -14,6 +14,16 @@ styles: {
   .warn: {
     color: "#ff8800",
     italic: true
+  },
+  .center: {
+    center: true
+  },
+  .redcenter: {
+    center: true,
+    color: "red"
+  },
+  .nocenter: {
+    center: false
   }
 }
 debug: true
@@ -102,13 +112,20 @@ Text after the block, in the book font.
 <a href="https://minecraft.wiki/w/Written_Book">Open the wiki page.</a>
 ---
 # Classes
-<style class="url">A url style</style>
-<style class="warn">A warn style</style>
-<style class="url warn">Both, warn wins</style>
-**Bold <style class="url">not bold</style> bold**
-<a class="url" href="https://example.com">A styled link</a>
-<font class="url" color="red">Class, red color</font>
-<font class="url" face="minecraft:alt">Class, alt font</font>
+<style class=".url">A url style</style>
+<style class=".warn">A warn style</style>
+<style class=".url .warn">Both, warn wins</style>
+**Bold <style class=".url">not bold</style> bold**
+<a class=".url" href="https://example.com">A styled link</a>
+<font class=".url" color="red">Class, red color</font>
+<font class=".url" face="minecraft:alt">Class, alt font</font>
+---
+# Centered styles
+<style class=".center">Starts</style> the line.
+<style class="center">Built-in</style> center.
+Mid-line <style class=".center">is ignored</style>.
+Mid-line <style class=".redcenter">but wrapping onto the next lines centers those lines</style> after.
+<style class=".center"><style class=".nocenter">Turned off</style> inside.</style>
 ---
 # Hyphenation
 A word wider than a line breaks at a syllable:
