@@ -35,3 +35,8 @@ tests/.cache/
 
 # Environment variables
 .env
+
+# Minecraft dev MCP
+libraries/
+logs/
+versions/

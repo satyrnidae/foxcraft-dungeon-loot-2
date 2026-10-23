@@ -101,6 +101,36 @@ public class Scan {
 
     static int bad = 0;
 
+    /** Replaces an id in the functions of a sequence with the modifier file it names, down to a depth that stops a cycle. */
+    static JsonElement inlineModifiers(JsonElement e, Map<String, JsonElement> mods, int depth) {
+        if (depth > 8) return e;
+        if (e.isJsonArray()) {
+            JsonArray out = new JsonArray();
+            for (JsonElement x : e.getAsJsonArray()) out.add(inlineModifiers(x, mods, depth));
+            return out;
+        }
+        if (!e.isJsonObject()) return e;
+        JsonObject o = new JsonObject();
+        for (var en : e.getAsJsonObject().entrySet()) {
+            JsonElement v = en.getValue();
+            if (en.getKey().equals("functions") && v.isJsonArray()) {
+                JsonArray list = new JsonArray();
+                for (JsonElement x : v.getAsJsonArray()) {
+                    String ref = x.isJsonPrimitive() ? x.getAsString() : null;
+                    if (ref != null && mods.containsKey(ref)) {
+                        list.add(inlineModifiers(mods.get(ref), mods, depth + 1));
+                    } else {
+                        list.add(inlineModifiers(x, mods, depth));
+                    }
+                }
+                o.add(en.getKey(), list);
+            } else {
+                o.add(en.getKey(), inlineModifiers(v, mods, depth));
+            }
+        }
+        return o;
+    }
+
     /** Function types listed in -Dscan.skip=a,b are removed from modifier lists before parsing, for constructs a later phase converts. */
     static final Set<String> SKIP = new HashSet<>(Arrays.asList(System.getProperty("scan.skip", "").split(",")));
 
@@ -275,8 +305,11 @@ public class Scan {
             LootItemCondition c = LootItemCondition.DIRECT_CODEC.parse(base, j).result().orElse(null);
             if (c != null) preds.put(ResourceKey.create(Registries.PREDICATE, Identifier.parse(id(root, f, "predicate"))), c);
         }
+        // A sequence may name other modifier files by id in its functions, which need the registry to resolve, so inline those
+        Map<String, JsonElement> modJson = new HashMap<>();
+        for (Path f : modFiles) modJson.put(id(root, f, "item_modifier"), strip(JsonParser.parseString(read(f))));
         for (Path f : modFiles) {
-            JsonElement j = strip(JsonParser.parseString(read(f)));
+            JsonElement j = inlineModifiers(modJson.get(id(root, f, "item_modifier")), modJson, 0);
             // The registry loads a modifier file with TYPED_CODEC, which takes one object and rejects a bare list
             roundTrip(LootItemFunctions.TYPED_CODEC, base, f, j, "item_modifier");
             LootItemFunction c = LootItemFunctions.TYPED_CODEC.parse(base, j).result().orElse(null);

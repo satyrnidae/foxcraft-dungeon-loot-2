@@ -29,7 +29,7 @@ But in their endless search for knowledge, they discovered the prison of the <st
 Wasting no time, <style class=".name">Melimonas</style> struck out against <style class=".name">Mysteria</style> and, catching Them unawares, drove Them from the Sky. The <style class=".name">Dæmon</style>, victorious, took the Earth as Its trophy, swallowing the entire world and blackening the Sky with an endless Night.
 
 Generations passed, and Humanity dwindled. The forces of <style class=".name">Melimonas</style> were relentless in their campaign against all that was blessed with <style class=".name">Mysteria</style>'s Light. Cities fell. Libraries burned. Too much, lost to the Fires of <style class=".name">Melimonas</style>.
----
+<br>
 
 <center class="h1">__**II**__</center>
 
@@ -48,7 +48,7 @@ And <style class=".name">Mysteria</style> instructed, "Thou shalt take My Light 
 "Should its aim be true, and its bearer pure of heart, it shall strike down the <style class=".name">Dæmon Lord</style> and drive It from this place."
 
 Thus spake <style class=".name">Mysteria</style>.
----
+<br>
 
 <center>__**III**__</center>
 
@@ -72,7 +72,7 @@ Palomina, being none the wiser, accepted the gift, and bade the Merchant farewel
 Upon reaching the highest peak, Palomina called out, "<style class=".name">Melimonas</style>!
 
 "I have beaten back your forces! I have reached this, the highest peak in all the land, and I will do battle unto you!"
----
+<br>
 
 <center>__**IV**__</center>
 
@@ -92,7 +92,7 @@ For <style class=".name">Melimonas</style> was clever. It knew <style class=".na
 Thus spake <style class=".name">Melimonas</style>.
 
 Palomina, out of options, and not knowing the Dark Spear's blighted provenance, heft it high above her head. But when she tried to loose the Spear, it held onto her with tendrils of oozing Darkness and pulled her high into the Sky.
----
+<br>
 
 <center>__**V**__</center>
 
@@ -108,7 +108,7 @@ And <style class=".name">Melimonas</style> besieged Palomina's mind with horrors
 The fall of Humanity itself.
 
 Palomina struggled against the tide of omens as they threatened to pull her under, deep into a sea of her own despair.
----
+<br>
 
 <center>__**VI**__</center>
 
@@ -120,7 +120,7 @@ Palomina struggled against the tide of omens as they threatened to pull her unde
 Thus spake <style class=".name">Mysteria</style>.
 
 Slowly, Palomina understood. She needed not a Spear, but the Light, and the <style class=".name">Dæmon Lord</style> was much closer than before.
----
+<br>
 
 <center>__**VII**__</center>
 
@@ -136,7 +136,7 @@ Palomina took aim at the <style class=".name">Dæmon Lord</style>, and once agai
 But even cleansed the Dark Spear refused to release Palomina's hand. And thus did it carry Palomina far beyond the Sky, and deep into the Night she pierced.
 
 Palomina would never again return to the Earth, but she left behind the wound rent through the <style class=".name">Dæmon</style>'s Night; a brilliant Moon to mark her sacrifice.
----
+<br>
 
 <center>__**VIII**__</center>
 

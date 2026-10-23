@@ -37,6 +37,21 @@ describe('identity', () => {
   });
 });
 
+describe('villager trades', () => {
+  // A villager trade is loaded without the item modifier registry, so it holds its functions inline. They must stay the ones
+  // the loot table gives: the tier file of the book, then the shared define
+  const NS = 'foxcraft_dungeon_loot:';
+  const expand = (f) => {
+    if (typeof f === 'string') return expand(pk.loadJson(dataFile('item_modifier', f.slice(NS.length) + '.json')));
+    return f.type === 'minecraft:sequence' ? f.functions.flatMap(expand) : [f];
+  };
+
+  it('the mystery book trade has the functions of the common book', () => {
+    const trade = pk.loadJson(dataFile('villager_trade', 'librarian', '5', 'common_mystery_book.json'));
+    assert.deepEqual(trade.given_item_modifier, [`${NS}special/mystery_book/common`, `${NS}special/mystery_book/define`].flatMap(expand));
+  });
+});
+
 describe('references', () => {
   it('every loot table reference resolves', () => {
     const missing = [];
@@ -438,7 +453,7 @@ describe('give functions', () => {
   for (const file of pk.srcItemFiles()) {
     for (const m of pk.readText(file).matchAll(/^function (give_\w+)/gm)) (GIVES[m[1]] ??= []).push(pk.srcFunctionPrefix(file));
   }
-  const TIERS = new Set(['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite']);
+  const TIERS = new Set(['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite', 'uncommon', 'rare', 'epic', 'mythic']);
 
   it('names are unique', () => {
     assert.deepEqual(Object.fromEntries(Object.entries(GIVES).filter(([, owners]) => owners.length > 1)), {});

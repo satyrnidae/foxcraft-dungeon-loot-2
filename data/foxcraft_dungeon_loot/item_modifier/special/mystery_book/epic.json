@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    "foxcraft_dungeon_loot:rarity/epic",
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Mysterious Book",
+        "color": "light_purple",
+        "italic": false
+      }
+    }
+  ]
+}

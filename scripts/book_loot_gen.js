@@ -274,7 +274,7 @@ function parseShadow(value) {
 // The names of the styles that are not classes: the format types, which override what they look like by default
 const MARKER_TYPES = { '**': 'bold', __: 'underline', '~~': 'strikethrough', '||': 'obfuscated', '*': 'italic', _: 'italic' };
 const ALIGNS = ['left', 'center', 'right'];
-const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center'];
+const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center', 'horiz', 'tally'];
 
 const CLASS_FLAGS = { bold: 'bold', italic: 'italic', underline: 'underlined', underlined: 'underlined', strikethrough: 'strikethrough', obfuscated: 'obfuscated' };
 
@@ -300,12 +300,16 @@ function parseClasses(raw) {
                 styles.font = parseFont(value);
             } else if (key === 'shadow_color') {
                 styles.shadow_color = typeof value === 'number' ? value | 0 : parseShadow(String(value));
+            } else if (key === 'char') {
+                // Not a component style: the glyph horizontalLine draws a line of, unwrapAlign drops it
+                if (typeof value !== 'string' || [...value].length !== 1 || value === '\n') throw new Error(`style "${name}": char is one character, such as "~" or " "`);
+                styles.char = value;
             } else if (key === 'align') {
                 // Not a component style: alignLines aligns a line that starts with this text, unwrapAlign drops it
                 if (!ALIGNS.includes(value)) throw new Error(`style "${name}": align is ${ALIGNS.join(', ')}`);
                 styles.align = value;
             } else {
-                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, align, ${Object.keys(CLASS_FLAGS).join(', ')}`);
+                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, align, char, ${Object.keys(CLASS_FLAGS).join(', ')}`);
             }
         }
         classes[name] = styles;
@@ -425,12 +429,12 @@ function parseInline(text, start, closer, classes = {}) {
             const close = text.indexOf('`', i + 1);
             if (close > i + 1 && !text.slice(i + 1, close).includes('\n')) {
                 flush();
-                // A type of INLINE_TYPES right after the code, then a space, which is dropped, or the end of the line, makes
-                // the code that type; `n`padding is code and the word padding
-                const typed = /^([a-z][\w-]*)(?: |(?=\n|$))/.exec(text.slice(close + 1));
+                // A type of INLINE_TYPES right after the code, with no letter or digit after it, makes the code that type; `n`padding
+                // is code and the word padding. What follows the type stays text, a space only for the types of INLINE_EATS_SPACE
+                const typed = /^([a-z]+)(?![a-zA-Z0-9])/.exec(text.slice(close + 1));
                 if (typed && Object.hasOwn(INLINE_TYPES, typed[1])) {
-                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close)));
-                    i = close + 1 + typed[0].length;
+                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close), classes));
+                    i = close + 1 + typed[0].length + (INLINE_EATS_SPACE.has(typed[1]) && text[close + 1 + typed[0].length] === ' ' ? 1 : 0);
                     continue;
                 }
                 content.push({ styles: { font: CODE_FONT, ...classes.code }, content: [text.slice(i + 1, close)] });
@@ -907,24 +911,92 @@ const padding = (width) =>
 // Padding either way, the backwards glyphs being 0x80 past the forwards ones
 const signedPadding = (width) => (width < 0 ? [...padding(-width)].map((c) => String.fromCharCode(c.charCodeAt(0) + 0x80)).join('') : padding(width));
 
+// A number of decimal, 0x, 0o or 0b digits with _ between them, as its value; undefined when it is not one
+function parseNumber(source) {
+    const m = /^(-?)(0x[0-9a-f](?:_?[0-9a-f])*|0o[0-7](?:_?[0-7])*|0b[01](?:_?[01])*|\d(?:_?\d)*)$/i.exec(source.trim());
+    return m ? Number(m[2].replace(/_/g, '')) * (m[1] ? -1 : 1) : undefined;
+}
+
 // The pixels of a `n`pad. A whole line of padding, 114 pixels, is the same as a line break, so it stops at 113.
 const MAX_PAD = PAGE_WIDTH - 1;
 function padWidth(source) {
-    const m = /^(-?)(0x[0-9a-f](?:_?[0-9a-f])*|0o[0-7](?:_?[0-7])*|0b[01](?:_?[01])*|\d(?:_?\d)*)$/i.exec(source.trim());
-    if (!m) throw new Error(`\`${source}\`pad is not a number`);
-    const width = Number(m[2].replace(/_/g, '')) * (m[1] ? -1 : 1);
+    const width = parseNumber(source);
+    if (width === undefined) throw new Error(`\`${source}\`pad is not a number`);
     if (Math.abs(width) > MAX_PAD) throw new Error(`\`${source}\`pad is ${width}px, padding goes up to ${MAX_PAD}`);
     return width;
 }
 
+// Tally marks, each 4 vertical ticks and then a crosswise one over them, a group of 5, in the font of tallies.png: the tick is
+// the first glyph, the cross the second.
+const TALLY_FONT = `${NS}:tallies`;
+const TALLY_STYLES = { font: TALLY_FONT, bold: false, underlined: false, strikethrough: false, obfuscated: false };
+const TICK = '\ue000';
+const CROSS = '\ue001';
+// The color of the marks unless the tally type of the stylesheet says otherwise
+const TALLY_COLOR = 'dark_gray';
+const TALLY_GAP = 2;
+const MAX_TALLY = 1000;
+
+// The count of a `n`tally: a number as for pad, or the tally itself, IIIII with spaces anywhere between
+function tallyCount(source) {
+    const code = source.trim();
+    const count = /^[I ]+$/.test(code) ? code.replace(/ /g, '').length : parseNumber(code);
+    if (count === undefined || count < 0) throw new Error(`\`${source}\`tally is not a number or tallies of I`);
+    if (count > MAX_TALLY) throw new Error(`\`${source}\`tally is ${count}, tallies go up to ${MAX_TALLY}`);
+    return count;
+}
+
+// The nodes of a count in groups of 5, the cross stepped back to sit in the middle of the four ticks before it, so it
+// reaches out on both sides of them: the group starts that far in, and ends where the ticks or the cross do, then a gap.
+// A run of groups too wide for the page goes on over lines of its own, broken here, since a wrap between the ticks and
+// the cross would split a group. Their width is measured from the start of a line.
+function tallyNodes(count, classes = {}) {
+    const tick = FONTS.widthOf(TALLY_FONT, TICK, false);
+    const cross = FONTS.widthOf(TALLY_FONT, CROSS, false);
+    const start = Math.floor((4 * tick - cross) / 2);
+    const lead = Math.max(0, -start);
+    const end = Math.max(4 * tick, start + cross);
+    const nodes = [];
+    const styles = { ...TALLY_STYLES, color: TALLY_COLOR, ...classes.tally };
+    const glyphs = (text) => nodes.push({ styles, content: [text] });
+    const pad = (px) => px && nodes.push({ styles: PAD_STYLES, content: [signedPadding(px)] });
+    let x = 0;
+    // A unit of the given width goes after the gap, on the line it fits, else on the next
+    const place = (width, draw) => {
+        if (x && x + TALLY_GAP + width > MAX_PAD) {
+            nodes.push('\n');
+            x = 0;
+        } else if (x) {
+            pad(TALLY_GAP);
+            x += TALLY_GAP;
+        }
+        draw();
+        x += width;
+    };
+    for (let g = 0; g < Math.floor(count / 5); g++) {
+        place(lead + end, () => {
+            pad(lead);
+            glyphs(TICK.repeat(4));
+            pad(start - 4 * tick);
+            glyphs(CROSS);
+            pad(end - (start + cross));
+        });
+    }
+    if (count % 5) place((count % 5) * tick, () => glyphs(TICK.repeat(count % 5)));
+    return nodes;
+}
+
 // The types of inline code, by the word after its closing backtick, each giving the nodes that stand for the code.
-// `n`pad is n pixels of padding, decimal, 0x, 0o or 0b with _ between digits, negative to step back.
+// `n`pad is n pixels of padding, negative to step back. `n`tally is n tallies, see tallyNodes.
 const INLINE_TYPES = {
     pad: (code) => {
         const width = padWidth(code);
         return width ? [{ styles: PAD_STYLES, content: [signedPadding(width)] }] : [];
     },
+    tally: (code, classes) => tallyNodes(tallyCount(code), classes),
 };
+// The types that take one space after them with them, as `n`pad does; the others leave it in the text
+const INLINE_EATS_SPACE = new Set(['pad']);
 
 // The locales written right to left. Their text is aligned to the right unless a style says otherwise, and an alignment a
 // book writes for text that starts at the left is mirrored: left is right there and right is left, center stays.
@@ -952,7 +1024,7 @@ function alignLines(content, rtl = false) {
         const text = chars.slice(line.tstart, line.tend);
         if (!text.length) continue;
         const written = text[0].lead ?? text.find((g) => g.center)?.center ?? null;
-        const laidOut = text.some((g) => g.font === PAD_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
+        const laidOut = text.some((g) => g.font === PAD_FONT || g.font === TALLY_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
         const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
         if (align === 'left') continue;
         const room = PAGE_WIDTH - text.reduce((sum, g) => sum + (g.sw ?? widthOf(g)), 0);
@@ -992,7 +1064,7 @@ function unwrapAlign(content) {
     return content.flatMap((part) => {
         if (typeof part === 'string') return [part];
         const inner = unwrapAlign(part.content);
-        const { align: _, ...styles } = part.styles;
+        const { align: _, char: __, ...styles } = part.styles;
         const node = { ...part, styles, content: inner, ...(part.alt ? { alt: unwrapAlign(part.alt) } : {}) };
         // A style that only aligned leaves nothing to style
         if ('align' in part.styles && !Object.keys(styles).length && !part.alt && !part.literal) return inner;
@@ -1107,7 +1179,7 @@ function spanEdges(content) {
                 pos += [...part].length;
                 continue;
             }
-            const pad = part.styles && part.styles.font === PAD_FONT;
+            const pad = part.rule || (part.styles && part.styles.font === PAD_FONT);
             if (!pad) edges.push(pos);
             walk(part.content);
             if (!pad) edges.push(pos);
@@ -1311,16 +1383,40 @@ function fenceCode(lines) {
     return out;
 }
 
-// Splits on a line of only --- outside of fenced code, so code that shows one stays in one piece
-const PAGE_BREAK = /^\s*---\s*$/;
+// Splits on a <br> anywhere in the text, except in code: a fenced block, or an inline `code` span on a line, so code that
+// shows one stays in one piece. A line of --- is a horizontal line, see horizontalLine.
+const PAGE_BREAK = /^<br\s*\/?>/i;
 
 function splitOnBreaks(body) {
     const sections = [[]];
+    const add = (text) => sections[sections.length - 1].push(text);
     let fenced = false;
     for (const line of body.split('\n')) {
-        if (/^\s*```/.test(line)) fenced = !fenced;
-        if (!fenced && PAGE_BREAK.test(line)) sections.push([]);
-        else sections[sections.length - 1].push(line);
+        const fence = /^\s*```/.test(line);
+        if (fence) fenced = !fenced;
+        if (fence || fenced) {
+            add(line);
+            continue;
+        }
+        // The pieces of the line between its breaks; a break ends the section the line is in, and the rest starts the next
+        let from = 0;
+        for (let i = 0; i < line.length; ) {
+            if (line[i] === '\\') {
+                i += 2;
+            } else if (line[i] === '`' && line.indexOf('`', i + 1) > i + 1) {
+                i = line.indexOf('`', i + 1) + 1;
+            } else if (line[i] === '<' && PAGE_BREAK.test(line.slice(i))) {
+                add(line.slice(from, i));
+                sections.push([]);
+                i += PAGE_BREAK.exec(line.slice(i))[0].length;
+                // The spaces after a break are not an indent of the next page
+                while (line[i] === ' ') i++;
+                from = i;
+            } else {
+                i++;
+            }
+        }
+        add(line.slice(from));
     }
     return sections.map((lines) => lines.join('\n'));
 }
@@ -1367,13 +1463,39 @@ function assignAltIds(content, prefix) {
     });
 }
 
-// <vcenter> on a line of its own puts the text under it in the middle of the page, between that line and the next header, or
-// the end of the page: the empty lines the page has left over are shared by the <vcenter>s on it, half above the text and
-// half below it, so it stands in the middle of the space it has, a header above it where it is. At the start of a page it
-// is the text of the whole page, which no header ends, only the end of the page does; one under a header ends at the next
-// header or the end of the page. A page with more than a page of text is left
-// as it is. An empty line of a page start is dropped, so each of these holds a blank glyph of the padding font.
-const VCENTER_LINE = /^<vcenter>[ \t]*(?:\n|$)/m;
+// A line of only --- is a horizontal line across the page: one glyph of foxcraft_dungeon_loot:rule, 113 pixels of line and
+// the pixel after it, so there is no gap in it, as there is between hyphens. The color of the horiz style tints it; it is
+// never bold, a bold glyph would be a pixel wider than the page and wrap. A horiz style with a font or a char of its own
+// gets that character instead, a hyphen unless char says otherwise, as many as fit 114 pixels, a bold one being a pixel
+// wider, and touching, see join. When they do not fit evenly the last one starts early, after padding that steps back, over the one before it, so the
+// line is exactly as wide as the page: a line any wider would wrap, and any shorter would not reach the edge. A space
+// with underline or strikethrough is a line too. over is the styles of a <style> around the --- line, laid over horiz.
+// The pieces are literal, they are not text to translate.
+const RULE_FONT = `${NS}:rule`;
+function horizontalLine(classes, over = {}) {
+    // The char of horiz, else the one of the body, and a style around the line wins over both
+    const { char, ...style } = { ...(classes.body?.char === undefined ? {} : { char: classes.body.char }), ...classes.horiz, ...over };
+    if (!style.font && char === undefined) return [{ styles: { ...style, font: RULE_FONT, bold: false }, content: ['\ue000'], literal: true, rule: true }];
+    const font = style.font ? withNamespace(style.font) : DEFAULT_FONT;
+    const mark = char ?? '-';
+    const bold = (style.bold ?? classes.body?.bold) === true;
+    // A space that ends the line is dropped, so the last mark of a blank is a no-break space, which has a width of its own
+    const end = /\s/.test(mark) ? '\u00a0' : mark;
+    // A glyph is followed by a pixel without ink, so each mark but the last is followed by padding that steps back over it,
+    // and the marks touch; a blank has no ink to join. The last keeps its pixel, it is where the line ends
+    const join = /\S/.test(mark) ? 1 : 0;
+    const advance = FONTS.widthOf(font, mark, bold) - join;
+    const endAdvance = FONTS.widthOf(font, end, bold);
+    const count = Math.max(0, Math.ceil((PAGE_WIDTH - endAdvance) / advance));
+    const excess = count * advance + endAdvance - PAGE_WIDTH;
+    const piece = (text) => ({ styles: { font: DEFAULT_FONT, ...style }, content: [text], literal: true, rule: true });
+    const back = (width) => ({ styles: PAD_STYLES, content: [signedPadding(-width)], literal: true, rule: true });
+    const front = Array.from({ length: count }).flatMap(() => (join ? [piece(mark), back(join)] : [piece(mark)]));
+    return [...front, ...(excess ? [back(excess)] : []), piece(end)];
+}
+
+// The lines that split a section into parts: a <vcenter>, or a horizontal line, which a <style> around the --- may restyle
+const LINE_MARKS = /^(<vcenter>|---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/m;
 
 // What a text tree holds in the order of its glyphs: where each <vcenter> is, and where each header starts
 function textMarks(content) {
@@ -1448,11 +1570,17 @@ function centerVertically(tree, marks) {
 function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = true, rtl = false) {
     let nextId = 0;
     return splitSections(ligate(body)).map((text) => {
-        // The parts between the <vcenter> lines, each its own text, with a mark where one was
-        const content = text.split(new RegExp(VCENTER_LINE.source, 'm')).flatMap((part, n) => {
+        // The parts between the <vcenter> and --- lines, each its own text, with a mark or a horizontal line where one was
+        const pieces = text.split(LINE_MARKS);
+        const content = pieces.flatMap((part, n) => {
+            if (n % 2 && part !== '<vcenter>') {
+                const tag = /^<style((?:\s[^>]*)?)>/.exec(part);
+                return [...horizontalLine(classes, tag ? classStyles(parseAttributes(tag[1]), classes) : {}), '\n'];
+            }
+            if (n % 2) return [{ styles: {}, content: [], vcenter: true }];
             const parsed = parseInline(part, 0, null, classes).content;
             nextId = assignIds(parsed, nextId);
-            return n ? [{ styles: {}, content: [], vcenter: true }, ...parsed] : parsed;
+            return parsed;
         });
         const base = { ...(font ? { font } : {}), ...classes.body };
         const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content, hyphenator)));
@@ -1672,12 +1800,8 @@ function loreLines(meta, id, lang, count = 0) {
         lang[key] = escapePercent(line.text);
         return { translate: key, fallback: escapePercent(line.text) };
     });
-    const name = rarityOf(meta);
-    // The Rarity line is the pack's, its words are in the hand-written lang of the namespace, not in a book
-    if (name) {
-        const rarity = { translate: `rarity.${NS}.${name}`, fallback: name[0].toUpperCase() + name.slice(1), color: RARITY_COLORS[name], italic: true };
-        lines.push({ translate: `lore.${NS}.rarity`, fallback: 'Rarity: %s', with: [rarity] });
-    }
+    // The rarity byte and the Rarity line come from the shared item modifier rarity/<name>. It runs before this one, as a
+    // modifier of the table entry, and appends the line, so the lore of the book is inserted above it
     return lines;
 }
 
@@ -1720,7 +1844,7 @@ function buildWritable(id, source, title, file, warnings) {
     // The SNBT string form, a JSON compound would turn small ints into bytes
     if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
     const lore = loreLines(meta, id, lang, source.loreCount);
-    if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
+    if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'insert' });
     return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
 }
 
@@ -1777,7 +1901,7 @@ function buildBook(id, file, source = readSource(file)) {
     // The SNBT string form, a JSON compound would turn small ints into bytes
     if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
     const lore = loreLines(meta, id, lang, source.loreCount);
-    if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'append' });
+    if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'insert' });
     return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
 }
 
@@ -1811,8 +1935,11 @@ function allTable(ids) {
     return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${id}` })) }] };
 }
 
-function tableFor(id, writable = false) {
-    return { pools: [{ rolls: 1, entries: [{ type: 'minecraft:item', name: writable ? 'minecraft:writable_book' : 'minecraft:written_book' }] }], modifier: `${NS}:random_loot/book/generated/${id}` };
+// The rarity is the shared item modifier rarity/<name>, in the entry so that it runs before the modifier of the book
+function tableFor(id, writable = false, rarity = null) {
+    const entry = { type: 'minecraft:item', name: writable ? 'minecraft:writable_book' : 'minecraft:written_book' };
+    if (rarity) entry.modifier = [`${NS}:rarity/${rarity}`];
+    return { pools: [{ rolls: 1, entries: [entry] }], modifier: `${NS}:random_loot/book/generated/${id}` };
 }
 
 // { locale: { id: { file } } } from src/books/<locale>/<id>.md. A book needs a title and an author and anything else in
@@ -1895,7 +2022,7 @@ function generate(options = {}) {
                 const modifier = path.join(modifierDir, id + '.json');
                 if (emit(modifier, json(built.modifier), check)) changed.push(modifier);
                 const table = path.join(tableDir, id + '.json');
-                if (emit(table, json(tableFor(id, book.writable)), check)) changed.push(table);
+                if (emit(table, json(tableFor(id, book.writable, book.rarity)), check)) changed.push(table);
             } else if (!aligned.has(book.file)) {
                 const reference = Object.keys(buildOnce(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {

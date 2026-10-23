@@ -9,7 +9,7 @@ const path = require('path');
 
 const root = path.join(__dirname, 'item');
 const tableRoot = path.join(__dirname, '..', '..', 'data', 'foxcraft_dungeon_loot', 'loot_table', 'item');
-const ORDER = ['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite'];
+const ORDER = ['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite', 'uncommon', 'rare', 'epic', 'mythic'];
 const files = [];
 
 function walk(dir) {

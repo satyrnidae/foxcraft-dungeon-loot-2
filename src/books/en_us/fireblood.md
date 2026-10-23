@@ -18,7 +18,7 @@ Confused, Luna spoke. "Frederic... he... he's going to be fine, right?" She refu
 "<filter as="Crap!">SHIT,</filter>" she <filter as="exclaimed">cussed</filter>, "Somebody get her out of here! She doesn't need to see-"
 
 **Then Frederic exploded.**
----
+<br>
 Fireblood. They were certain of it.
 
 Luna's attending nurse Tamelise had somberly explained her predicament after leading her to the quarantine wards. Frederic had apparently been exposed, and was in the late stage if the illness when she found him writhing in pain in the Arcaneum. The act of bringing him to the hospital, while noble, had allowed the living flame to make its way from Frederic to her. "We're so sorry," Tamelise said, "but there's nothing we can do... Fireblood has no known cure. All we can do is make you comfortable in your final hours."

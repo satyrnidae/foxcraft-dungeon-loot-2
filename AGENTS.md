@@ -114,7 +114,7 @@ There is no CI. The tests are static, so you cannot test gameplay. State plainly
 - Scratch scores `#test` and `#math.*` are shared. Do not call a helper that uses them from inside another chain that also uses them.
 - The uninstall function disables `file/<baseArchiveName>-<version>.zip`. A dev build or a duplicate name breaks that match.
 - Audio for Wolfgun and C418 discs is not in the repo. Missing-sound warnings on a fresh clone are expected.
-- The master `DungeonLootId` list is a Google Sheet linked in `README.md`. You cannot update it; mention new ids in your report.
+- The master `DungeonLootId` list is `dungeon_loot_items.csv`; regenerate it with `node scripts/dump_items_csv.mjs` after adding items.
 - Effects granted by clocks (`effect give ... 1000000`) are cleared with `effect clear`, which also removes the same effect from other sources. Prefer attributes or enchantment effects when adding new passive bonuses.
 
 ## Reporting

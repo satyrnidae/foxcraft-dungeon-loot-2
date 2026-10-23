@@ -255,24 +255,25 @@ Checked against https://minecraft.wiki/w/Data_component_format: tool, weapon, us
 
 ## 8. custom_data key rename
 
-Rename every `custom_data` key from PascalCase to a namespaced snake_case key, `foxcraft_dungeon_loot:snake_case`. Counts below are from a grep of `data/`, `src/` and `docs/tools`, treat them as approximate.
+Rename every `custom_data` key from PascalCase to a plain snake_case key with no pack prefix, see 8.2. Counts below are from a grep of `data/`, `src/` and `docs/tools`, treat them as approximate.
 
 | Old key | New key | Uses |
 |---|---|---|
-| `DungeonLootId` | `foxcraft_dungeon_loot:dungeon_loot_id` | about 258 in `data/` |
-| `DungeonItem` | `foxcraft_dungeon_loot:dungeon_item` | about 145 |
-| `ProcessOnUsed` | `foxcraft_dungeon_loot:process_on_used` | about 34 |
-| `DungeonHead` | `foxcraft_dungeon_loot:dungeon_head` | 19 |
-| `Rarity` | `foxcraft_dungeon_loot:rarity` | about 104 |
-| `GrabBag` | `foxcraft_dungeon_loot:grab_bag` | 6 |
-| `CopperGoatHorn` | `foxcraft_dungeon_loot:copper_goat_horn` | 10 modifiers plus the two `on_tick` item checks in `copper_goat_horn.mcb` |
-| `ProcessFall` | `foxcraft_dungeon_loot:process_fall` | 4 |
-| `ProcessSpiderEye` | `foxcraft_dungeon_loot:process_spider_eye` | 3 |
-| `ProcessBlock` | `foxcraft_dungeon_loot:process_block` | 3 |
-| `PiglinBarter` | `foxcraft_dungeon_loot:piglin_barter` | 2 |
-| `DungeonLoot` | `foxcraft_dungeon_loot:dungeon_loot` | 1 |
-| `CustomInstrument` | `foxcraft_dungeon_loot:instrument_base` | Not dead. Written by the 10 `item_modifier/special/copper_horn/<song>/define.json` files and read by the `horn_swap` template in `copper_horn.mcbt`, which generates 20 checks, 10 songs for each hand. It stores the song name, and the stance swap uses it to pick the `_bass`, `_harmony` or `_melody` instrument. It could be dropped by reading the song from the current `minecraft:instrument` id, but that needs three checks per song per hand instead of one. Rename it with the rest. The new name fits: the value is the song, the base that the `_bass`, `_harmony` and `_melody` instrument ids are built from. |
-| `AddedTrades`, `ScanTrades`, `CurrentTrade` | `foxcraft_dungeon_loot:added_trades`, `scan_trades`, `current_trade` | trader state on the armor stand, internal |
+| `DungeonLootId` | `dungeon_loot_id` | about 258 in `data/` |
+| `DungeonItem` | `dungeon_item` | about 145 |
+| `ProcessOnUsed` | `process_on_used` | about 34 |
+| `DungeonHead` | `dungeon_head` | 19 |
+| `Rarity` | `rarity` | about 104. Decided: the value becomes a byte, see 8.1. |
+| `GrabBag` | `grab_bag` | 6 |
+| `CopperGoatHorn` | `copper_goat_horn` | 10 modifiers plus the two `on_tick` item checks in `copper_goat_horn.mcb` |
+| `ProcessFall` | `process_fall` | 4 |
+| `ProcessSpiderEye` | `process_spider_eye` | 3 |
+| `ProcessBlock` | `process_block` | 3 |
+| `PiglinBarter` | `piglin_barter` | 2 |
+| `DungeonLoot` | `dungeon_loot` | 1 |
+| `MysteryBook`, `rarity` | `mystery_book`, `rarity` | The Mysterious Book, section 9. Its `rarity` is already the byte of 8.1. |
+| `CustomInstrument` | `instrument_base` | Not dead. Written by the 10 `item_modifier/special/copper_horn/<song>/define.json` files and read by the `horn_swap` template in `copper_horn.mcbt`, which generates 20 checks, 10 songs for each hand. It stores the song name, and the stance swap uses it to pick the `_bass`, `_harmony` or `_melody` instrument. It could be dropped by reading the song from the current `minecraft:instrument` id, but that needs three checks per song per hand instead of one. Rename it with the rest. The new name fits: the value is the song, the base that the `_bass`, `_harmony` and `_melody` instrument ids are built from. |
+| `AddedTrades`, `ScanTrades`, `CurrentTrade` | `added_trades`, `scan_trades`, `current_trade` | trader state on the armor stand, internal |
 
 Places that read or write the keys:
 
@@ -286,14 +287,46 @@ Places that read or write the keys:
 
 Format notes:
 
-- A key with a colon must be quoted in SNBT, so the tag string becomes `"{\"foxcraft_dungeon_loot:dungeon_loot_id\":87,\"foxcraft_dungeon_loot:dungeon_item\":1b}"` inside JSON. Escaping gets ugly, so the rename needs a script and a round-trip parse of every file, not hand edits.
-- The alternative of one nested compound, `{foxcraft_dungeon_loot:{dungeon_loot_id:87}}`, needs no quotes on the key and still matches with `~` partial comparison. Flat keys were asked for; nesting is worth a look if the quoting causes trouble in `.mcb` sources.
+- Keys without a colon need no quoting in SNBT, so the tag string stays a plain `"{dungeon_loot_id:87,dungeon_item:1b}"`. The script and the round-trip parse of every file are still wanted, but quoting is no longer a concern.
 - Keep the SNBT string form. A JSON compound turns small ints into bytes and never matches.
-- mc-build commands containing quoted keys need the quotes escaped the same way. Check each generated command with `CmdCheck.java`.
 
 Cost and risk:
 
 - Breaking for existing items. Anything already in a world keeps the old keys and stops matching every predicate, advancement and hook. The pack is alpha, so the options are: accept the break, or add a one-time migration that rewrites old keys on items in online player inventories and containers at load, which cannot reach items in unloaded chests.
 - Do it in one commit with the mechanical script, before more items and discs are added, so there is one cutover point.
 - Extend `check_old_keys.mjs` to flag any PascalCase key left in a `custom_data` string, and `Scan.java` to assert every `DungeonLootId` is still unique after the rename.
-- Update the Google Sheet notes and the wording in `README.md` ("custom NBT entry") afterward.
+- Update the wording in `README.md` ("custom NBT entry") afterward.
+
+### 8.1 Decision: rarity is a byte
+
+The rarity value is a byte, not a string, to keep item storage small: 0 common, 1 uncommon, 2 rare, 3 epic, 4 mythic, 5 cursed. This replaces the string `Rarity`, and the Mysterious Book already uses it.
+
+The rarity names in the lang files use the same numbers, so a rarity byte and its translation are found by the same number and are easy to keep in sync. The keys `rarity.foxcraft_dungeon_loot.<name>` in `texturepack/assets/foxcraft_dungeon_loot/lang/` would become `rarity.foxcraft_dungeon_loot.<n>`, for example `rarity.foxcraft_dungeon_loot.2` for Rare. Do both in the same commit as the key rename, and extend the tests so the byte values and the lang keys are checked against one list. The shared modifier `item_modifier/rarity/<name>.json` already sets the byte and the Rarity lore line. Item modifiers can be combined without a `reference` function, which 26.3 removed: the `functions` of a `sequence` take modifier ids, and a loot table entry's `modifier` is one id. The generated books and the Mysterious Book use it, and the other items can move to it as they are modernized. The line runs first, so an item's own lore has to be inserted above it, and a name has to be set whole, because `set_name` replaces the component and cannot set only a color. A villager trade cannot name modifier files, its registry loads before them. Not decided yet: whether a modifier then uses `translate` with the number key or keeps the literal name, since the lore `translate` measuring in `scripts/lore.js` goes by the lang text.
+
+### 8.2 Decision: no pack prefix on custom data keys
+
+The new key names are plain snake_case and not prefixed with the pack id, for example `rarity` and `dungeon_loot_id`, not `foxcraft_dungeon_loot:rarity`. This also drops the quoting and escaping cost and the nested compound alternative, so the notes on those were removed from this section. The cost is a possible clash with another pack or mod that writes the same key into `custom_data`. The names are specific enough to accept that, and nothing in the pack depends on a namespace to tell the keys apart.
+
+### 8.3 Decision: the name keeps its own color, no rarity component
+
+No modifier can change only the color of a name that is already set. `set_name`, `set_components` and `copy_name` replace the whole component, `set_lore` works on whole lines, and a text component resolved by `set_name` cannot read the stack it is going onto. Running a function or reading storage in place is not possible from a modifier either. So the shared `rarity/<name>` modifier sets the byte and the lore line only, and each item sets its name with its color, as now.
+
+The `minecraft:rarity` component would color a name without replacing it, since `ItemStack.getStyledHoverName()` uses the rarity color as the parent style of the name. It is not used:
+
+- It only has white, yellow, aqua and light purple. Mythic (green) and cursed (red) would still need an explicit color.
+- `getRarity()` raises the rarity of an enchanted item (common and uncommon to rare, rare to epic). The component would have to be set to the rarity one step below the one to show, back-calculated from whether the item is enchanted, and an enchanted common or uncommon item could not be made at all, since it always shows as rare. Items such as the Tithe to Uthiir get their own enchantment sections when they are modernized, so this would break them.
+
+## 9. Function macros and the Mysterious Book
+
+`item/special/mystery_book.mcb` is the first item to use function macros to look data up at runtime. A line starting with `$` is a template, and each `$(key)` in it is replaced from an NBT compound passed with `function <id> with storage <id>` (or `with entity @s`, `with block ...`). The function must be called with `with`, and the call fails if a key is missing. `give/book` in `give.mcb` already does this. The book reads the item's `rarity` byte into storage, `pick` indexes a list of rarity names with it, and `open` builds the loot table id `random_$(table)_book` from the result.
+
+Why it is a macro: a loot table id cannot be computed in a plain command, so one script covering every rarity needs either a macro or one `execute if` branch per rarity.
+
+Candidates to check, unverified: tiered items with one script per tier or a chain of `execute if score` branches on the variant, and the disc and horn scripts that repeat a block per song through an mc-build template.
+
+Open points:
+
+- A macro call is parsed again on every call, so keep it off the per-tick path. The book only runs it on use, which is fine.
+- Cleaning up the storage keys after the call, as the book does, keeps `data get storage` output tidy.
+- `source.test.mjs` skips loot table paths with `$(...)` in them, and `CmdCheck.java` cannot expand them, so a typo in a macro built id is only found in game. A test could expand the list of possible values and check each table exists, which for the book is `random_<rarity>_book` for the six rarities.
+- The book could drop the `warped_fungus_on_a_stick` use hook for a `consumable` base like the items in 3.3. Not checked: how the opened book table would then be picked from the consumed item.

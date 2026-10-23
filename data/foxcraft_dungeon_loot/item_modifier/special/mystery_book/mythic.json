@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    "foxcraft_dungeon_loot:rarity/mythic",
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Mysterious Book",
+        "color": "green",
+        "italic": false
+      }
+    }
+  ]
+}

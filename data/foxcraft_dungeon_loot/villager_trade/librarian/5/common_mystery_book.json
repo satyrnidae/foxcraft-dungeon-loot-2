@@ -1,0 +1,63 @@
+{
+  "gives": {
+    "id": "minecraft:warped_fungus_on_a_stick"
+  },
+  "given_item_modifier": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{rarity:0b}"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "translate": "lore.foxcraft_dungeon_loot.rarity",
+          "fallback": "Rarity: %s",
+          "with": [
+            {
+              "translate": "rarity.foxcraft_dungeon_loot.common",
+              "fallback": "Common",
+              "color": "white",
+              "italic": true
+            }
+          ]
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Mysterious Book",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:139,MysteryBook:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/mystery_book"
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Don't judge this book by its cover!",
+        "Who knows what wondrous worlds await just",
+        "inside..."
+      ],
+      "mode": "insert"
+    }
+  ],
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 12
+  },
+  "max_uses": 12,
+  "reputation_discount": 0.05,
+  "xp": 30
+}

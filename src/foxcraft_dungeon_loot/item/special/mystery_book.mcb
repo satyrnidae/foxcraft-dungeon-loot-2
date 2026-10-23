@@ -1,0 +1,67 @@
+# One script for every Mysterious Book. The tier is the rarity byte in the item custom_data, 0 common to 5 cursed, and
+# picks the book table to open from the list in on_warped_fungus_used.
+
+# Runs when a warped fungus is used.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/special/mystery_book/in_main_hand] run {
+        playsound minecraft:item.book.page_turn player @a ~ ~ ~ 1 0.9
+        playsound minecraft:block.enchantment_table.use player @a ~ ~ ~ 0.4 1.4
+        particle minecraft:enchant ^ ^1.0 ^0.25 0.25 0.25 0.25 0.5 20
+
+        data modify storage foxcraft_dungeon_loot:mystery_book rarities set value ["common","uncommon","rare","epic","mythic","cursed"]
+        execute store result storage foxcraft_dungeon_loot:mystery_book rarity int 1 run data get entity @s SelectedItem.components."minecraft:custom_data".rarity
+        function foxcraft_dungeon_loot:item/special/mystery_book/pick with storage foxcraft_dungeon_loot:mystery_book
+        function foxcraft_dungeon_loot:item/special/mystery_book/open with storage foxcraft_dungeon_loot:mystery_book
+
+        data remove storage foxcraft_dungeon_loot:mystery_book rarities
+        data remove storage foxcraft_dungeon_loot:mystery_book rarity
+        data remove storage foxcraft_dungeon_loot:mystery_book table
+
+        execute unless entity @s[gamemode=creative] run {
+            item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
+        }
+    }
+}
+
+# Macro, looks up the table name for the rarity in storage.
+function pick {
+    $data modify storage foxcraft_dungeon_loot:mystery_book table set from storage foxcraft_dungeon_loot:mystery_book rarities[$(rarity)]
+}
+
+# Macro, spawns a random book of the looked up table.
+function open {
+    $loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/book/random_$(table)_book
+}
+
+# Gives the target the common mystery book.
+function give_mystery_book {
+    loot give @s loot foxcraft_dungeon_loot:item/special/mystery_book
+}
+
+# Gives the uncommon variant, loot variant score 1.
+function give_mystery_book_uncommon {
+    scoreboard players set @s satyrn.fdl.loot.variant 1
+    loot give @s loot foxcraft_dungeon_loot:item/special/mystery_book
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the rare variant, loot variant score 2.
+function give_mystery_book_rare {
+    scoreboard players set @s satyrn.fdl.loot.variant 2
+    loot give @s loot foxcraft_dungeon_loot:item/special/mystery_book
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the epic variant, loot variant score 3.
+function give_mystery_book_epic {
+    scoreboard players set @s satyrn.fdl.loot.variant 3
+    loot give @s loot foxcraft_dungeon_loot:item/special/mystery_book
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}
+
+# Gives the mythic variant, loot variant score 4.
+function give_mystery_book_mythic {
+    scoreboard players set @s satyrn.fdl.loot.variant 4
+    loot give @s loot foxcraft_dungeon_loot:item/special/mystery_book
+    scoreboard players reset @s satyrn.fdl.loot.variant
+}

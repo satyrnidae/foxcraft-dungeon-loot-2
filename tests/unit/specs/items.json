@@ -4106,6 +4106,39 @@
     "rarity": null,
     "src": null
   },
+  "item/special/mystery_book": {
+    "base_items": [
+      "minecraft:warped_fungus_on_a_stick"
+    ],
+    "dungeon_item": false,
+    "function_types": [
+      "",
+      "set_components",
+      "set_custom_data",
+      "set_lore",
+      "set_name"
+    ],
+    "hooks": [
+      "give_mystery_book",
+      "give_mystery_book_epic",
+      "give_mystery_book_mythic",
+      "give_mystery_book_rare",
+      "give_mystery_book_uncommon",
+      "on_warped_fungus_used",
+      "open",
+      "pick"
+    ],
+    "item_models": [
+      "foxcraft_dungeon_loot:special/mystery_book"
+    ],
+    "loot_ids": [
+      139
+    ],
+    "named": true,
+    "predicates": [],
+    "rarity": null,
+    "src": "mystery_book"
+  },
   "item/uncommon/totem_of_undying": {
     "base_items": [
       "minecraft:totem_of_undying"

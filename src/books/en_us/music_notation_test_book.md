@@ -19,7 +19,7 @@ Alto, chord, rests
 ```music
 ClefC3 TS3/4 Eb (2-1 4-1 6-1) || R-2 R-4 | R-8 R-8 R-8 |||
 ```
----
+<br>
 <center>__**Clefs**__</center>
 
 Treble
@@ -71,7 +71,7 @@ Baritone, C clef
 ```music
 ClefC5 C# 8-4 || Cb 8-4 |||
 ```
----
+<br>
 
 
 ```music
@@ -83,7 +83,7 @@ ClefG2 TS2/4 8-4 8-4 | TS3/4 8-4 8-4 8-4 | TS6/8 8-8 8-8 8-8 |
 ClefF4 TS4/4 8-4 | TS3/2 8-2 | TS8/6 8-4 | TS2/3 8-4 |
 ```
 4/4, 3/2, 8/6, 2/3
----
+<br>
 ```music
 | 8-4 || 8-4 ||| 8-4 ||: 8-4 :|| 8-4 |
 ```
@@ -98,7 +98,7 @@ Stops
 ||: 8-4 8-4 :||
 ```
 Repeats
----
+<br>
 ```music
 || 8-4 8-4 ||
 ```
@@ -113,7 +113,7 @@ Start repeat last
 || |||
 ```
 Bars alone
----
+<br>
 Sharps
 ```music
 // Every accidental, from the lower extension to the upper one
@@ -129,7 +129,7 @@ Naturals
 ```music
 n0-4 n1-4 n2-4 n3-4 n8-4 n13-4 n14-4 n15-4 n16-4
 ```
----
+<br>
 Ledger lines
 ```music
 16-4 15-4 14-4 2-4 1-4 0-4 16-1 0-1 |
@@ -144,7 +144,7 @@ Missing stems
 ```music
 15-4i 1-4p 7-1p (4-4p 6-4d) (2-4 15-4) |
 ```
----
+<br>
 ```music
 // Chord accidentals in columns: the highest nearest the heads, then the lowest, then inwards
 ClefG2 (#2-1 #4-1 #6-1) | (b8-2 b10-2 b12-2 b14-2) |||
@@ -156,7 +156,7 @@ Chord accidentals
 (#2-4 #9-4) (b3-4 n10-4) (#4-4 b5-4 n6-4) (n7-4 9-4 #11-4) |
 ```
 Shared columns
----
+<br>
 ```music
 ClefC4 TS2/4 C 8-2 7-2i || ClefF4 TS6/8 Ab 9-8 10-8 11-8 12-8 |||
 ```
@@ -166,7 +166,7 @@ Clef, key changes
 staff:dark_aqua symbol:#5a1f8c ClefG2 G \ue600 \ue601 \ue602 \ue603 R-4 3-4 :||
 ```
 Colors, glyphs
----
+<br>
 ```music
 // Too long for one line even squeezed, so it breaks at a bar
 ||: ClefG2 TS6/8 F#m 8-8 9-8 10-8 11-8 12-8 13-8 | 14-8 15-8 16-8 15-8 14-8 13-8

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{rarity:5b}"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "translate": "lore.foxcraft_dungeon_loot.rarity",
+          "fallback": "Rarity: %s",
+          "with": [
+            {
+              "translate": "rarity.foxcraft_dungeon_loot.cursed",
+              "fallback": "Cursed",
+              "color": "red",
+              "italic": true
+            }
+          ]
+        }
+      ],
+      "mode": "append"
+    }
+  ]
+}

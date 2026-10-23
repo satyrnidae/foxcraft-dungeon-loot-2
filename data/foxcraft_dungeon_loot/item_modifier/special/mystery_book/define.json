@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:139,MysteryBook:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:special/mystery_book"
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "Don't judge this book by its cover!",
+        "Who knows what wondrous worlds await just",
+        "inside..."
+      ],
+      "mode": "insert"
+    }
+  ]
+}
