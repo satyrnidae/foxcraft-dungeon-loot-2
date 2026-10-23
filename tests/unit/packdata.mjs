@@ -241,7 +241,7 @@ export function functionList(modifierJson) {
   const out = [];
   for (const item of asList(modifierJson)) {
     if (Array.isArray(item)) out.push(...functionList(item));
-    else if (item && bareType(item) === 'sequence') out.push(...functionList(item.functions));
+    else if (item && typeof item === 'object' && bareType(item) === 'sequence') out.push(...functionList(item.functions));
     else out.push(item);
   }
   return out;
@@ -267,6 +267,7 @@ export class Item {
     this.hasName = false;
     this.hasLore = false;
     this.functionTypes = [];
+    this.modifierStack = [];
   }
 
   get lootIds() {
@@ -311,6 +312,12 @@ function walkEntries(node, item, seen) {
 }
 
 function applyFunction(item, fn, origin) {
+  // A sequence may name another modifier file by id, follow it
+  if (typeof fn === 'string') {
+    if (item.modifierStack.includes(fn)) item.errors.push('item modifier ' + fn + ' includes itself');
+    else applyModifier(item, fn);
+    return;
+  }
   const kind = bareType(fn);
   item.functionTypes.push(kind);
   if (kind === 'set_name') {
@@ -348,7 +355,9 @@ function applyModifier(item, modifierId) {
     item.errors.push('missing item modifier ' + modifierId);
     return;
   }
+  item.modifierStack.push(modifierId);
   for (const fn of functionList(loadJson(file))) applyFunction(item, fn, modifierId);
+  item.modifierStack.pop();
 }
 
 /** name is the path under loot_table/, such as item/mythic/chainsaw. */

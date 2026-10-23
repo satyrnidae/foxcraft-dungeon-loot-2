@@ -4112,7 +4112,6 @@
     ],
     "dungeon_item": false,
     "function_types": [
-      "",
       "set_components",
       "set_custom_data",
       "set_lore",
