@@ -1604,10 +1604,19 @@ function hyphenatorOf(locale) {
 // Keys a translation takes from the reference book when it does not set them
 const INHERITED_KEYS = ['rarity', 'model', 'styles'];
 
+// The locale folder of a source and the group folder under it, if any: <locale>/<id>.md or <locale>/<group>/<id>.md
+function placeOf(file) {
+    const dir = path.dirname(file);
+    const grouped = !/^[a-z]{2,3}_[a-z]{2}$/i.test(path.basename(dir));
+    const localeDir = grouped ? path.dirname(dir) : dir;
+    return { locale: path.basename(localeDir), group: grouped ? path.basename(dir) : null, root: path.dirname(localeDir) };
+}
+
 function readSource(file) {
     const { meta, body } = parseFrontmatter(fs.readFileSync(file, 'utf8'));
-    const reference = path.join(path.dirname(path.dirname(file)), REFERENCE_LANG, path.basename(file));
-    if (path.basename(path.dirname(file)) !== REFERENCE_LANG && fs.existsSync(reference)) {
+    const { locale, group, root } = placeOf(file);
+    const reference = path.join(root, REFERENCE_LANG, ...(group ? [group] : []), path.basename(file));
+    if (locale !== REFERENCE_LANG && fs.existsSync(reference)) {
         const base = parseFrontmatter(fs.readFileSync(reference, 'utf8')).meta;
         for (const key of INHERITED_KEYS) if (meta[key] === undefined && base[key] !== undefined) meta[key] = base[key];
     }
@@ -1636,9 +1645,9 @@ function readSource(file) {
     }
     if (meta.writable !== undefined && !/^(true|false)$/i.test(String(meta.writable))) throw new Error(`${file}: frontmatter writable is true or false`);
     // A writable book's pages are not hyphenated, a hyphen would stay in the text the player edits
-    const hyphenator = isWritable(meta) ? null : hyphenatorOf(path.basename(path.dirname(file)));
+    const hyphenator = isWritable(meta) ? null : hyphenatorOf(locale);
     // A book and quill shows its text in the default font, the glyphs of the padding would not be blank there
-    const sections = sectionsOf(body, meta.font || null, hyphenator, meta.styles || {}, !isWritable(meta), RTL_LOCALES.includes(path.basename(path.dirname(file))));
+    const sections = sectionsOf(body, meta.font || null, hyphenator, meta.styles || {}, !isWritable(meta), RTL_LOCALES.includes(locale));
     return { meta, sections, pages: sections.flatMap((tree) => paginate(tree)) };
 }
 
@@ -1930,19 +1939,29 @@ const json = (value) => JSON.stringify(value, null, 2).replace(/[\ue000-\uf8ff]/
 // One book of the generated ones, equal odds
 // An empty list is a table without pools, which drops nothing. A table entry that points at one still counts as picked, so
 // the tables of all books list the books themselves and not the rarity tables.
-function allTable(ids) {
+function allTable(ids, paths = {}) {
     if (!ids.length) return { pools: [] };
-    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${id}` })) }] };
+    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${paths[id] || id}` })) }] };
 }
 
 // The rarity is the shared item modifier rarity/<name>, in the entry so that it runs before the modifier of the book
-function tableFor(id, writable = false, rarity = null) {
+function tableFor(id, writable = false, rarity = null, rel = id) {
     const entry = { type: 'minecraft:item', name: writable ? 'minecraft:writable_book' : 'minecraft:written_book' };
     if (rarity) entry.modifier = [`${NS}:rarity/${rarity}`];
-    return { pools: [{ rolls: 1, entries: [entry] }], modifier: `${NS}:random_loot/book/generated/${id}` };
+    return { pools: [{ rolls: 1, entries: [entry] }], modifier: `${NS}:random_loot/book/generated/${rel}` };
 }
 
-// { locale: { id: { file } } } from src/books/<locale>/<id>.md. A book needs a title and an author and anything else in
+// Markdown files directly in a locale folder or in a group folder, such as an author's, one level down, as paths relative to it
+function bookFiles(localeDir) {
+    const files = [];
+    for (const entry of fs.readdirSync(localeDir, { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1))) {
+        if (entry.isDirectory()) for (const name of fs.readdirSync(path.join(localeDir, entry.name)).sort()) files.push(path.join(entry.name, name));
+        else files.push(entry.name);
+    }
+    return files;
+}
+
+// { locale: { id: { file } } } from src/books/<locale>/[<group>/]<id>.md. A book needs a title and an author and anything else in
 // the frontmatter is warned about. A debug book is left out unless dev is set, in every locale.
 function findSources(dir, warnings = [], dev = devMode()) {
     const found = {};
@@ -1951,10 +1970,11 @@ function findSources(dir, warnings = [], dev = devMode()) {
     for (const localeDir of fs.readdirSync(dir, { withFileTypes: true })) {
         if (!localeDir.isDirectory()) continue;
         const books = (found[localeDir.name] = {});
-        for (const name of fs.readdirSync(path.join(dir, localeDir.name)).sort()) {
+        for (const rel of bookFiles(path.join(dir, localeDir.name))) {
+            const name = path.basename(rel);
             const m = /^(.+?)\.md$/.exec(name);
             if (!m) continue;
-            const file = path.join(dir, localeDir.name, name);
+            const file = path.join(dir, localeDir.name, rel);
             const text = fs.readFileSync(file, 'utf8');
             // A markdown file without frontmatter, such as a README, is not a book
             if (!text.trimStart().startsWith('---')) continue;
@@ -1975,7 +1995,8 @@ function findSources(dir, warnings = [], dev = devMode()) {
             for (const key of Object.keys(meta)) if (!FRONTMATTER_KEYS.includes(key)) warnings.push(`${file}: unsupported frontmatter key "${key}", one of ${FRONTMATTER_KEYS.join(', ')}`);
             if (String(meta.debug).toLowerCase() === 'true' && !dev) hidden.add(m[1]);
             else if (meta.debug !== undefined && !/^(true|false)$/i.test(String(meta.debug))) throw new Error(`${file}: frontmatter debug is true or false`);
-            books[m[1]] = { file, writable: isWritable(meta), rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
+            if (books[m[1]]) throw new Error(`${file}: the book id ${m[1]} is also used by ${books[m[1]].file}, ids are unique across group folders`);
+            books[m[1]] = { file, rel: (path.dirname(rel) === '.' ? '' : path.dirname(rel).split(path.sep).join('/') + '/') + m[1], writable: isWritable(meta), rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
         }
     }
     for (const books of Object.values(found)) for (const id of hidden) delete books[id];
@@ -2019,10 +2040,10 @@ function generate(options = {}) {
             Object.assign(langs[locale], built.lang);
             if (locale === REFERENCE_LANG) {
                 if (only && !only.includes(path.resolve(book.file))) continue;
-                const modifier = path.join(modifierDir, id + '.json');
+                const modifier = path.join(modifierDir, book.rel + '.json');
                 if (emit(modifier, json(built.modifier), check)) changed.push(modifier);
-                const table = path.join(tableDir, id + '.json');
-                if (emit(table, json(tableFor(id, book.writable, book.rarity)), check)) changed.push(table);
+                const table = path.join(tableDir, book.rel + '.json');
+                if (emit(table, json(tableFor(id, book.writable, book.rarity, book.rel)), check)) changed.push(table);
             } else if (!aligned.has(book.file)) {
                 const reference = Object.keys(buildOnce(id, references[id].file).lang);
                 if (reference.join() !== Object.keys(built.lang).join()) {
@@ -2035,24 +2056,29 @@ function generate(options = {}) {
     // The table of all books lists them whatever the source filter is
     // Debug books have their own table and give function, but never drop at random
     const random = Object.keys(references).filter((id) => !references[id].debug).sort();
+    const paths = Object.fromEntries(Object.entries(references).map(([id, book]) => [id, book.rel]));
     const aggregates = { [ALL_TABLE]: random };
     for (const rarity of Object.keys(RARITY_COLORS)) aggregates[`random_${rarity}_book`] = random.filter((id) => references[id].rarity === rarity);
     for (const [name, ids] of Object.entries(aggregates)) {
         const file = path.join(tableDir, name + '.json');
-        if (emit(file, json(allTable(ids)), check)) changed.push(file);
+        if (emit(file, json(allTable(ids, paths)), check)) changed.push(file);
     }
 
     // Modifiers and tables are all made here, so one without a source is left over from a book that was removed or renamed
     if (!only) {
-        const ids = new Set(Object.keys(references));
+        const rels = new Set(Object.values(references).map((book) => book.rel));
         for (const dir of [modifierDir, tableDir]) {
             if (!fs.existsSync(dir)) continue;
-            for (const name of fs.readdirSync(dir)) {
-                if (!name.endsWith('.json') || ids.has(name.slice(0, -5)) || (dir === tableDir && name.slice(0, -5) in aggregates)) continue;
+            for (const name of fs.readdirSync(dir, { recursive: true })) {
+                const rel = name.split(path.sep).join('/');
+                if (!rel.endsWith('.json') || rels.has(rel.slice(0, -5)) || (dir === tableDir && rel.slice(0, -5) in aggregates)) continue;
                 const stale = path.join(dir, name);
+                if (!fs.statSync(stale).isFile()) continue;
                 if (!check) fs.unlinkSync(stale);
                 changed.push(stale);
             }
+            // A group folder left empty by a moved or removed book
+            if (!check) for (const entry of fs.readdirSync(dir, { withFileTypes: true })) if (entry.isDirectory() && !fs.readdirSync(path.join(dir, entry.name)).length) fs.rmdirSync(path.join(dir, entry.name));
         }
     }
 

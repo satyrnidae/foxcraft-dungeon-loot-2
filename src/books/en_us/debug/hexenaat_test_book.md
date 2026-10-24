@@ -1,6 +1,6 @@
 ---
 title: "Custom Font: Hexenaat"
-author: Claude
+author: Debug
 rarity: epic
 lore: Tests out the Hexenaat font.
 styles: {

@@ -1,12 +1,12 @@
 ---
-title: "Custom Font: Handwriting"
-author: Claude
+title: "Custom Font: Pixel Mono"
+author: Debug
 rarity: epic
 lore:
-  Tests out the handwriting font.
+  Tests out the mono font.
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:textmachine_handwriting
+    font: foxcraft_dungeon_loot:pixel_mono
   },
   a: {
     color: dark_blue,
@@ -18,30 +18,30 @@ debug: true
 
 # Font:
 
-Textmachine Handwriting
+Pixeloid Mono
 
-By Ben Jones, @Polyducks
+Designed by GGBotNet
 
-Common Sense License
+<a on_click="{action:'open_url',url:'https://openfontlicense.org/'}">SIL Open Font License 1.1</a>
 
-<a on_click="{action:'open_url',url:'https://polyducks.co.uk'}"><span>polyducks.co.uk</span></a>
-
-<a on_click='{action:copy_to_clipboard,value:"Ben@polyducks.co.uk"}' on_hover='{action:show_text,value:"Click to copy the email"}'><span>Ben@polyducks.co.uk</span></a>
+<a on_click="{action:'open_url',url:'https://www.ggbot.net'}"><span>ggbot.net</span></a>
 <br>
 # Glyphs:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span>abcdefghijklmnopqrstuvwxyzªµºßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ</span>
 
 Digits:
-0123456789
+0123456789²³¹
 <br>
 # Symbols:
 
 <span>!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
+
+<span>¡¢£¤¥¦§¨©«¬­®¯°±²³´¶·¸¹»¼½¾¿×÷‘’‚‛“”…</span>
 <br>
 # Cwm fjord:
 

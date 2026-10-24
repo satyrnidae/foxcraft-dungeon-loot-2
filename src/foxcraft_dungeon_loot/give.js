@@ -71,8 +71,8 @@ for (const full of files) {
 // Written books, one plain give function per en_us source in src/books, given by the function in give.mcb.
 // The generator's own finder decides what a book is, so the two cannot drift apart.
 const { findSources } = require('../../scripts/book_loot_gen.js');
-for (const id of Object.keys(findSources(path.join(__dirname, '..', 'books')).en_us || {})) {
-    plain.push({ name: 'give_' + id, id: 'foxcraft_dungeon_loot:give/give_' + id, book: id });
+for (const [id, source] of Object.entries(findSources(path.join(__dirname, '..', 'books')).en_us || {})) {
+    plain.push({ name: 'give_' + id, id: 'foxcraft_dungeon_loot:give/give_' + id, book: id, bookPath: source.rel });
 }
 
 // Pack enchantments, give_<name>_book for data/foxcraft_dungeon_loot/enchantment/<folders>/<name>.json

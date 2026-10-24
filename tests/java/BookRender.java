@@ -39,6 +39,15 @@ public class BookRender {
     static final int TEXT_COLOR = 0x000000;
 
     static Path root;
+
+    /** A book source is src/books/<locale>/<id>.md, or one folder down in a group such as an author. */
+    static boolean hasSource(Path localeDir, String book) throws java.io.IOException {
+        if (Files.exists(localeDir.resolve(book + ".md"))) return true;
+        if (!Files.isDirectory(localeDir)) return false;
+        try (Stream<Path> groups = Files.list(localeDir)) {
+            return groups.anyMatch(g -> Files.exists(g.resolve(book + ".md")));
+        }
+    }
     static int scale;
     static final Map<String, FontSet> fonts = new HashMap<>();
     static String at = "";
@@ -408,7 +417,7 @@ public class BookRender {
         int books = 0, pagesDrawn = 0;
         Set<String> failures = new TreeSet<>();
         List<Path> files;
-        try (Stream<Path> s = Files.list(modifiers)) { files = s.filter(f -> f.toString().endsWith(".json")).sorted().toList(); }
+        try (Stream<Path> s = Files.walk(modifiers)) { files = s.filter(f -> f.toString().endsWith(".json")).sorted().toList(); }
         List<String> locales = locales();
         for (String locale : locales) {
             Language.inject(language(locale));
@@ -417,7 +426,7 @@ public class BookRender {
                 List<JsonElement[]> pages = pagesOf(JsonParser.parseString(Files.readString(file)));
                 if (pages == null) continue;
                 // A book is in a locale only where it has a source there, the rest would just repeat the English
-                if (!locale.equals("en_us") && !Files.exists(root.resolve("src/books").resolve(locale).resolve(book + ".md"))) continue;
+                if (!locale.equals("en_us") && !hasSource(root.resolve("src/books").resolve(locale), book)) continue;
                 if (locale.equals("en_us")) books++;
                 // With chat filtering on the book shows the filtered side of each page that has one, the raw side of the rest
                 boolean filtered = pages.stream().anyMatch(p -> p[1] != null);

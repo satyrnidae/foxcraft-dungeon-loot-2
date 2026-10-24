@@ -1200,11 +1200,12 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
 describe('book give triggers', () => {
   it('every en_us book has a give function and a trigger', () => {
     const dir = path.join(pk.ROOT, 'src', 'books', 'en_us');
-    const ids = fs.readdirSync(dir).filter((f) => f.endsWith('.md') && !f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.slice(0, -3));
+    const rels = fs.readdirSync(dir, { recursive: true }).filter((f) => f.endsWith('.md') && !f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.split(path.sep).join('/').slice(0, -3));
+    const ids = rels.map((rel) => rel.split('/').pop());
     assert.ok(ids.length > 0);
-    for (const id of ids) {
+    for (const [i, id] of ids.entries()) {
       const fn = pk.readText(pk.generatedFunction('give/give_' + id));
-      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${id}`), id);
+      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${rels[i]}`), id);
       assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add give_${id} trigger`), id);
     }
   });

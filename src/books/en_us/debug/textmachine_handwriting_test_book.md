@@ -1,12 +1,12 @@
 ---
-title: "Custom Font: Pixelated Elegance"
-author: Claude
+title: "Custom Font: Handwriting"
+author: Debug
 rarity: epic
 lore:
-  Tests out the new font
+  Tests out the handwriting font.
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixellated_elegance
+    font: foxcraft_dungeon_loot:textmachine_handwriting
   },
   a: {
     color: dark_blue,
@@ -18,21 +18,23 @@ debug: true
 
 # Font:
 
-Pixelated Elegance
+Textmachine Handwriting
 
-Designed by GGBotNet
+By Ben Jones, @Polyducks
 
-<a on_click="{action:'open_url',url:'https://creativecommons.org/publicdomain/zero/1.0/'}">CC0 1.0 Universal</a>
+Common Sense License
 
-<a on_click="{action:'open_url',url:'https://www.ggbot.net'}"><span>ggbot.net</span></a>
+<a on_click="{action:'open_url',url:'https://polyducks.co.uk'}"><span>polyducks.co.uk</span></a>
+
+<a on_click='{action:copy_to_clipboard,value:"Ben@polyducks.co.uk"}' on_hover='{action:show_text,value:"Click to copy the email"}'><span>Ben@polyducks.co.uk</span></a>
 <br>
 # Glyphs:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
+<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
+<span>abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
 0123456789
@@ -40,8 +42,6 @@ Digits:
 # Symbols:
 
 <span>!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
-
-<span>¡¢£¤¥¦§¨©«¬­®¯°±¶·»¼½¾¿×÷‘’‚‛“”…</span>
 <br>
 # Cwm fjord:
 

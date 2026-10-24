@@ -1,12 +1,12 @@
 ---
-title: "Custom Font: Pixel Mono"
-author: Claude
+title: "Custom Font: Pixelated Elegance"
+author: Debug
 rarity: epic
 lore:
-  Tests out the mono font.
+  Tests out the new font
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixel_mono
+    font: foxcraft_dungeon_loot:pixellated_elegance
   },
   a: {
     color: dark_blue,
@@ -18,30 +18,30 @@ debug: true
 
 # Font:
 
-Pixeloid Mono
+Pixelated Elegance
 
 Designed by GGBotNet
 
-<a on_click="{action:'open_url',url:'https://openfontlicense.org/'}">SIL Open Font License 1.1</a>
+<a on_click="{action:'open_url',url:'https://creativecommons.org/publicdomain/zero/1.0/'}">CC0 1.0 Universal</a>
 
 <a on_click="{action:'open_url',url:'https://www.ggbot.net'}"><span>ggbot.net</span></a>
 <br>
 # Glyphs:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ</span>
+<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyzªµºßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ</span>
+<span>abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
 
 Digits:
-0123456789²³¹
+0123456789
 <br>
 # Symbols:
 
 <span>!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
 
-<span>¡¢£¤¥¦§¨©«¬­®¯°±²³´¶·¸¹»¼½¾¿×÷‘’‚‛“”…</span>
+<span>¡¢£¤¥¦§¨©«¬­®¯°±¶·»¼½¾¿×÷‘’‚‛“”…</span>
 <br>
 # Cwm fjord:
 

@@ -1,6 +1,6 @@
 ---
 title: "Test Book: Illustrations"
-author: Isa Massacre
+author: Debug
 rarity: epic
 debug: true
 ---

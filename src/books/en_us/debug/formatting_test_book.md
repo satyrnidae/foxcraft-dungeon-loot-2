@@ -1,6 +1,6 @@
 ---
 title: Formatting Test Book
-author: Claude
+author: Debug
 rarity: epic
 lore: Dev only, not in any loot table. Every format the book generator knows.
 styles: {

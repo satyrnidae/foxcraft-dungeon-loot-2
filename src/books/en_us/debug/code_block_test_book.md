@@ -1,6 +1,6 @@
 ---
 title: Code Block Test Book
-author: Claude
+author: Debug
 rarity: epic
 lore:
   Dev only, not in any loot table.
