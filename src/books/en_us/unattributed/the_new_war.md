@@ -3,6 +3,7 @@ title: Torn Journal Page
 author: Unknown
 rarity: common
 model: foxcraft_dungeon_loot:random_loot/written_letter
+generation: tattered
 lore: The notes portray someone's thoughts on... a war? But... with whom? Or rather, what...?
 styles: {
   body: {

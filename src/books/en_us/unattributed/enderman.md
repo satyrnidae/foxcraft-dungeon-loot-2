@@ -2,6 +2,7 @@
 title: ENDERMAN
 author: Unknown
 rarity: common
+generation: copy of a copy
 lore:
   Woe unto you should you ever encounter such a creature, dear traveler...
 ---

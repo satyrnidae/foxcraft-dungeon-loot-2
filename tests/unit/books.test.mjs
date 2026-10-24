@@ -374,6 +374,28 @@ describe('book generator files', () => {
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
 
+  it('writes the frontmatter generation into the book content, leaving out the original', () => {
+    const { dir, opts } = sandbox();
+    try {
+      const content = (generation) => {
+        write(dir, 'books/en_us/test.md', generation === undefined ? SOURCE : SOURCE.replace('rarity: epic', 'rarity: epic\ngeneration: ' + generation));
+        gen.generate(opts);
+        const modifier = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8'));
+        const fns = modifier.functions || [modifier];
+        return fns.find((f) => f.components && f.components['minecraft:written_book_content']).components['minecraft:written_book_content'];
+      };
+      assert.equal(content().generation, undefined);
+      assert.equal(content('original').generation, undefined);
+      assert.equal(content('copy').generation, 1);
+      assert.equal(content('copy of a copy').generation, 2);
+      assert.equal(content('3').generation, 3);
+      write(dir, 'books/en_us/test.md', SOURCE.replace('rarity: epic', 'rarity: epic\ngeneration: fourth'));
+      assert.throws(() => gen.generate(opts), /generation is 0 to 3/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('requires a title and an author, and warns about an unsupported key', () => {
     const { dir, opts } = sandbox();
     try {

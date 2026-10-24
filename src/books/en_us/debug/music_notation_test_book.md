@@ -2,6 +2,7 @@
 title: Music Notation Test Book
 author: Debug
 rarity: epic
+generation: tattered
 lore:
   Dev only, not in any loot table.
   The music fence, drawn in the staff_notation font: every clef, bar line, accidental and stem.

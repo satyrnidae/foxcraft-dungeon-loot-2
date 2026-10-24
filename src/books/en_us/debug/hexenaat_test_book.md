@@ -2,6 +2,7 @@
 title: "Custom Font: Hexenaat"
 author: Debug
 rarity: epic
+generation: tattered
 lore: Tests out the Hexenaat font.
 styles: {
   body: {

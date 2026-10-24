@@ -2,6 +2,7 @@
 title: Little Glockenspiel
 author: Unknown
 rarity: common
+generation: tattered
 model: foxcraft_dungeon_loot:random_loot/written_letter
 lore: "Hastily scrawled sheet music with accompanying lyrics. The sheet bears no author, only a title: \"Little Glockenspiel\""
 styles: {

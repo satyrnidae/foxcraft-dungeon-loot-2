@@ -20,7 +20,7 @@ const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
 // Frontmatter keys, anything else is warned about. Title and author are required.
-const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'debug'];
+const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'debug', 'generation'];
 const REQUIRED_KEYS = ['title', 'author'];
 
 // writable: true makes a book and quill. Its pages are plain strings, so it has no author and keeps no formatting
@@ -1602,7 +1602,16 @@ function hyphenatorOf(locale) {
 }
 
 // Keys a translation takes from the reference book when it does not set them
-const INHERITED_KEYS = ['rarity', 'model', 'styles'];
+const INHERITED_KEYS = ['rarity', 'model', 'styles', 'generation'];
+
+// The generation of a written book: 0 original, 1 copy, 2 copy of a copy, 3 tattered, as the number or the name. The game omits 0
+const GENERATIONS = ['original', 'copy', 'copyofacopy', 'tattered'];
+function parseGeneration(value) {
+    const text = String(value).trim().toLowerCase();
+    const n = /^[0-3]$/.test(text) ? Number(text) : GENERATIONS.indexOf(text.replace(/[\s_-]+/g, ''));
+    if (n < 0) throw new Error(`generation is 0 to 3, or original, copy, copy of a copy, tattered, not "${value}"`);
+    return n;
+}
 
 // The locale folder of a source and the group folder under it, if any: <locale>/<id>.md or <locale>/<group>/<id>.md
 function placeOf(file) {
@@ -1635,6 +1644,13 @@ function readSource(file) {
             throw new Error(`${file}: frontmatter data is not valid SNBT: ${e.message}`);
         }
         if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error(`${file}: frontmatter data is an SNBT compound, like {DungeonLootId:87}`);
+    }
+    if (meta.generation !== undefined) {
+        try {
+            parseGeneration(meta.generation);
+        } catch (e) {
+            throw new Error(`${file}: frontmatter ${e.message}`);
+        }
     }
     if (meta.model) {
         try {
@@ -1834,7 +1850,7 @@ const plainText = (tree) => glyphs(tree).map((g) => g.ch).join('');
 // A book and quill keeps plain strings, so the formatting, fonts, title and author are lost. The title is the item name
 function buildWritable(id, source, title, file, warnings) {
     const { meta } = source;
-    for (const key of ['author', 'font', 'styles']) if (meta[key]) warnings.push(`${file}: ${key} does nothing in a writable book`);
+    for (const key of ['author', 'font', 'styles', 'generation']) if (meta[key]) warnings.push(`${file}: ${key} does nothing in a writable book`);
     const pages = source.pages.map((tree) => variant(tree, false));
     const filtered = source.pages.map((tree) => variant(tree, true));
     const texts = pages.map((tree, n) => {
@@ -1901,6 +1917,7 @@ function buildBook(id, file, source = readSource(file)) {
     }
 
     const content = { title: title.filtered ? { raw: title.text, filtered: title.filtered } : { raw: title.text }, author: meta.author, pages: components, resolved: true };
+    if (meta.generation !== undefined && parseGeneration(meta.generation) > 0) content.generation = parseGeneration(meta.generation);
     const set = { 'minecraft:written_book_content': content };
     const rarity = rarityOf(meta);
     if (rarity) set['minecraft:custom_name'] = itemName(title, rarity, `book.${NS}.${id}.title`, lang);

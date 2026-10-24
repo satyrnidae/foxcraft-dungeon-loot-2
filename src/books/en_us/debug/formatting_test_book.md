@@ -2,6 +2,7 @@
 title: Formatting Test Book
 author: Debug
 rarity: epic
+generation: tattered
 lore: Dev only, not in any loot table. Every format the book generator knows.
 styles: {
   body: {

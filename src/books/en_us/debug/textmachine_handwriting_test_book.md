@@ -2,6 +2,7 @@
 title: "Custom Font: Handwriting"
 author: Debug
 rarity: epic
+generation: tattered
 lore:
   Tests out the handwriting font.
 styles: {

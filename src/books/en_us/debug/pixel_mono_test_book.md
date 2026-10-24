@@ -2,6 +2,7 @@
 title: "Custom Font: Pixel Mono"
 author: Debug
 rarity: epic
+generation: tattered
 lore:
   Tests out the mono font.
 styles: {

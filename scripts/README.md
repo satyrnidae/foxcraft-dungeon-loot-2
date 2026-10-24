@@ -29,6 +29,7 @@ model: foxcraft_dungeon_loot:random_loot/written_letter
 data: {DungeonLootId:87,DungeonItem:1b}
 writable: false
 debug: true
+generation: 0|original, 1|copy, 2|copy of a copy, 3|tattered
 lore:
   first lore line, wrapped by hand
   second lore line
@@ -46,6 +47,7 @@ This starts a new page.
 - A line of only `---` is a horizontal line, see `horizontalLine` in the generator and `src/books/README.md`.
 - Spans do not reach across a page break, close them first. A `<br>` inside a fence or an inline code span is not a break.
 - Title is plain text, at most 32 characters. `<filter as="Darn Book">Damn Book</filter>` in it sets the chat-filtered title, the same tag as in the text. The filtered title is limited to 32 characters too, and an SNBT title cannot have one. A title in SNBT also sets `custom_name` and its plain text becomes the book title. A book with a `rarity` gets the item name in the color of the rarity, not italic, like the other items of the pack; the item name has no filtered side, so it uses the filtered title when there is one; an SNBT title keeps its own colors and styles over it. A book without a rarity keeps the name the game derives from the title.
+- Generation is optional: `0` or `original`, `1` or `copy`, `2` or `copy of a copy`, `3` or `tattered`, saved as the `generation` of `minecraft:written_book_content`. It defaults to original, which is left out of the component. A tattered book cannot be copied. A translation inherits it from the `en_us` book.
 - Model is optional, an item definition id saved as `minecraft:item_model`; `.json` is dropped and a bare path gets the pack namespace.
 - Data is optional, an SNBT compound written as `minecraft:set_custom_data` in its string form, so byte and int suffixes survive.
 - Writable is optional, `true` makes a `minecraft:writable_book` with plain string pages: no formatting, hyphenation, author or lang entries, and the title is the item name.

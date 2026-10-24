@@ -2,6 +2,7 @@
 title: Code Block Test Book
 author: Debug
 rarity: epic
+generation: tattered
 lore:
   Dev only, not in any loot table.
   Syntax colors of code blocks.

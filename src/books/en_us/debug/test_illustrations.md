@@ -3,6 +3,8 @@ title: "Test Book: Illustrations"
 author: Debug
 rarity: epic
 debug: true
+generation: tattered
+lore: A test book for the illustration metafonts.
 ---
 
 # Test Illustrations
