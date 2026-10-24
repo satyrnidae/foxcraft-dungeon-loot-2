@@ -40,3 +40,7 @@ tests/.cache/
 libraries/
 logs/
 versions/
+
+# Temporary files
+temp/
+
