@@ -20,6 +20,7 @@
     "foxcraft_dungeon_loot:item/rare/rare_grab_bag/on_warped_fungus_used",
     "foxcraft_dungeon_loot:item/mythic/scripture_of_cleansing/on_warped_fungus_used",
     "foxcraft_dungeon_loot:item/epic/silverfish_escape_artist/on_warped_fungus_used",
-    "foxcraft_dungeon_loot:item/uncommon/uncommon_grab_bag/on_warped_fungus_used"
+    "foxcraft_dungeon_loot:item/uncommon/uncommon_grab_bag/on_warped_fungus_used",
+    "foxcraft_dungeon_loot:item/special/mystery_book/on_warped_fungus_used"
   ]
 }

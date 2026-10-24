@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{rarity:1b}"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "translate": "lore.foxcraft_dungeon_loot.rarity",
+          "fallback": "Rarity: %s",
+          "with": [
+            {
+              "translate": "rarity.foxcraft_dungeon_loot.uncommon",
+              "fallback": "Uncommon",
+              "color": "yellow",
+              "italic": true
+            }
+          ]
+        }
+      ],
+      "mode": "append"
+    }
+  ]
+}

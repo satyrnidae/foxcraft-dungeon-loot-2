@@ -1,12 +1,15 @@
 // Whole-pack checks that no single item owns: identity, references, resources, scoreboards, versions, old keys.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 
 import { scan } from '../tools/check_old_keys.mjs';
 import { dicts, sorted } from './checks.mjs';
 import * as pk from './packdata.mjs';
+
+const loreLib = createRequire(import.meta.url)('../../scripts/lore.js');
 
 const NS = pk.NS;
 const ITEMS = pk.itemTables();
@@ -31,6 +34,21 @@ describe('identity', () => {
     for (const [name, file] of ITEMS) for (const id of pk.buildItem(name, file).lootIds) used.add(id);
     assert.ok([...used].every((id) => id > 0));
     assert.deepEqual([...used].filter((id) => retired.has(id)), [], 'a retired DungeonLootId was reused');
+  });
+});
+
+describe('villager trades', () => {
+  // A villager trade is loaded without the item modifier registry, so it holds its functions inline. They must stay the ones
+  // the loot table gives: the tier file of the book, then the shared define
+  const NS = 'foxcraft_dungeon_loot:';
+  const expand = (f) => {
+    if (typeof f === 'string') return expand(pk.loadJson(dataFile('item_modifier', f.slice(NS.length) + '.json')));
+    return f.type === 'minecraft:sequence' ? f.functions.flatMap(expand) : [f];
+  };
+
+  it('the mystery book trade has the functions of the common book', () => {
+    const trade = pk.loadJson(dataFile('villager_trade', 'librarian', '5', 'common_mystery_book.json'));
+    assert.deepEqual(trade.given_item_modifier, [`${NS}special/mystery_book/common`, `${NS}special/mystery_book/define`].flatMap(expand));
   });
 });
 
@@ -229,31 +247,33 @@ describe('enchantments', () => {
 });
 
 describe('lore', () => {
-  const MAX_LORE_WIDTH = 44;
+  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore.js
+  const MAX_LORE_WIDTH = loreLib.LORE_PIXELS;
 
-  /** The text a lore entry renders as one line: a string, a component, or a list of them joined on one line. */
-  const lineText = (entry) => {
-    if (typeof entry === 'string') return entry;
-    if (Array.isArray(entry)) return entry.map(lineText).join('');
-    if (entry && typeof entry === 'object') return (entry.text ?? '') + (entry.extra ?? []).map(lineText).join('');
-    return '';
-  };
+  /**
+   * The text a lore entry renders as one line: a string, a component, or a list of them joined on one line. A translate
+   * component reads as its en_us lang entry.
+   */
+  const lineText = (entry) => loreLib.componentText(entry);
 
-  /** The first piece of text of an entry, to find its line in the file. */
+  /** The first piece of text of an entry, to find its line in the file. A translate component is found by its fallback. */
   const firstText = (entry) => {
     if (typeof entry === 'string') return entry;
     if (Array.isArray(entry)) return entry.map(firstText).find(Boolean) ?? '';
-    return entry?.text ?? '';
+    return entry?.text ?? entry?.fallback ?? '';
   };
 
   /** The last piece of text of an entry. */
   const lastText = (entry) => {
     if (typeof entry === 'string') return entry;
     if (Array.isArray(entry)) return [...entry].reverse().map(lastText).find(Boolean) ?? '';
-    return entry?.text ?? '';
+    return entry?.text ?? entry?.fallback ?? '';
   };
 
-  /** Every lore line over the limit, as { file, line, endLine, width, text }, the lines being where the entry sits in the file. */
+  /**
+   * Every lore line that wraps wrong, as { file, line, endLine, kind, note, text }, the lines being where the entry sits in the file.
+   * A wide line is over the limit, a short one stops early: no ending punctuation and the next word still fits.
+   */
   const longLoreLines = () => {
     const long = [];
     for (const root of ['item_modifier', 'loot_table']) {
@@ -262,6 +282,7 @@ describe('lore', () => {
         let cursor = 0;
         for (const node of dicts(pk.loadJson(file))) {
           if (pk.bareType(node) !== 'set_lore' || !Array.isArray(node.lore)) continue;
+          const entries = [];
           for (const entry of node.lore) {
             const text = lineText(entry);
             // Lore entries come in file order, so search on from the last one found
@@ -272,14 +293,21 @@ describe('lore', () => {
             let end = at >= 0 && lastNeedle ? lines.findIndex((l, i) => i >= at && l.includes(lastNeedle)) : at;
             if (end < at) end = at;
             if (at >= 0) cursor = end + 1;
-            if (text.length > MAX_LORE_WIDTH) long.push({ file: pk.rel(file), line: at >= 0 ? at + 1 : 1, endLine: end >= 0 ? end + 1 : 1, width: text.length, text });
+            const width = loreLib.componentWidth(entry);
+            const where = { file: pk.rel(file), line: at >= 0 ? at + 1 : 1, endLine: end >= 0 ? end + 1 : 1, text };
+            entries.push({ ...where, width });
+            if (width > MAX_LORE_WIDTH) long.push({ ...where, kind: 'wide', note: `${width} pixels, ${MAX_LORE_WIDTH} fit, ${loreLib.wrapAdvice(text)}` });
+          }
+          for (const { index, word } of loreLib.shortLines(entries)) {
+            const { width, ...where } = entries[index];
+            long.push({ ...where, kind: 'short', note: `no ending punctuation, "${word}" from the next line fits, ${width + loreLib.loreWidth(' ' + word)} of ${MAX_LORE_WIDTH} pixels` });
           }
         }
       }
     }
     return long;
   };
-  const describeLine = (l) => `${l.file}:${l.line}: ${l.width} "${l.text}"`;
+  const describeLine = (l) => `${l.file}:${l.line}: ${l.note}: "${l.text}"`;
 
   /**
    * The lines changed against HEAD, staged or not, as a Map from file to [start, end] ranges of the new text. A file git does not
@@ -314,7 +342,7 @@ describe('lore', () => {
 
   // Lore on a line that is part of an edit, staged or not, must already fit. The test fails right after listing the lines.
   // Over-width lines the edit did not touch are only warnings, so old lore never blocks a build and never shows as a failure.
-  it('lore lines in the edit are at most 44 characters', async (t) => {
+  it('lore lines in the edit fit the average width of 44 characters and do not stop early', async (t) => {
     const changed = changedLines();
     if (changed === null) return t.skip('git cannot list the changed lines');
     const long = longLoreLines();
@@ -322,9 +350,9 @@ describe('lore', () => {
     // Old over-width lines are todos, one per line named path:line so the terminal can link to it. The subtests pass, a failing todo is
     // drawn as a failure and fills the end of the report with red.
     for (const l of long.filter((l) => !inEdit(changed, l))) {
-      await t.test(describeLine(l), { todo: 'lore line over ' + MAX_LORE_WIDTH + ' characters' }, () => {});
+      await t.test(describeLine(l), { todo: l.kind === 'wide' ? 'lore line over ' + MAX_LORE_WIDTH + ' pixels' : 'lore line wrapped early' }, () => {});
     }
-    if (mine.length) assert.fail(`${mine.length} lore lines are over ${MAX_LORE_WIDTH} characters in the edit:\n${mine.map(describeLine).join('\n')}`);
+    if (mine.length) assert.fail(`${mine.length} lore lines are wrapped wrong in the edit, over ${MAX_LORE_WIDTH} pixels or stopping early:\n${mine.map(describeLine).join('\n')}`);
   });
   /** Modifier ids, inline functions and lists of them, as the flat list of functions they run. */
   const resolveModifier = (m) => {
@@ -425,7 +453,7 @@ describe('give functions', () => {
   for (const file of pk.srcItemFiles()) {
     for (const m of pk.readText(file).matchAll(/^function (give_\w+)/gm)) (GIVES[m[1]] ??= []).push(pk.srcFunctionPrefix(file));
   }
-  const TIERS = new Set(['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite']);
+  const TIERS = new Set(['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite', 'uncommon', 'rare', 'epic', 'mythic']);
 
   it('names are unique', () => {
     assert.deepEqual(Object.fromEntries(Object.entries(GIVES).filter(([, owners]) => owners.length > 1)), {});

@@ -9,7 +9,7 @@ const path = require('path');
 
 const root = path.join(__dirname, 'item');
 const tableRoot = path.join(__dirname, '..', '..', 'data', 'foxcraft_dungeon_loot', 'loot_table', 'item');
-const ORDER = ['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite'];
+const ORDER = ['leather', 'chainmail', 'copper', 'iron', 'diamond', 'netherite', 'uncommon', 'rare', 'epic', 'mythic'];
 const files = [];
 
 function walk(dir) {
@@ -66,6 +66,13 @@ for (const full of files) {
         tiers.sort((a, b) => ORDER.indexOf(a.tier) - ORDER.indexOf(b.tier));
         tiered.push({ name: name, id: fn(name).id, tiers: tiers.map((t) => ({ tier: t.tier, id: t.fn.id })) });
     }
+}
+
+// Written books, one plain give function per en_us source in src/books, given by the function in give.mcb.
+// The generator's own finder decides what a book is, so the two cannot drift apart.
+const { findSources } = require('../../scripts/book_loot_gen.js');
+for (const id of Object.keys(findSources(path.join(__dirname, '..', 'books')).en_us || {})) {
+    plain.push({ name: 'give_' + id, id: 'foxcraft_dungeon_loot:give/give_' + id, book: id });
 }
 
 // Pack enchantments, give_<name>_book for data/foxcraft_dungeon_loot/enchantment/<folders>/<name>.json

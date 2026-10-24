@@ -1,0 +1,96 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "modifier": "foxcraft_dungeon_loot:special/mystery_book/common"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:inverted",
+        "term": {
+          "type": "minecraft:entity_scores",
+          "entity": "this",
+          "scores": {
+            "satyrn.fdl.loot.variant": {
+              "min": 1,
+              "max": 4
+            }
+          }
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "modifier": "foxcraft_dungeon_loot:special/mystery_book/uncommon"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 1
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "modifier": "foxcraft_dungeon_loot:special/mystery_book/rare"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 2
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "modifier": "foxcraft_dungeon_loot:special/mystery_book/epic"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 3
+        }
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:warped_fungus_on_a_stick",
+          "modifier": "foxcraft_dungeon_loot:special/mystery_book/mythic"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:entity_scores",
+        "entity": "this",
+        "scores": {
+          "satyrn.fdl.loot.variant": 4
+        }
+      }
+    }
+  ],
+  "modifier": "foxcraft_dungeon_loot:special/mystery_book/define"
+}

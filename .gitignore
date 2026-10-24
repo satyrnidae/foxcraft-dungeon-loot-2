@@ -5,6 +5,11 @@ data/foxcraft_dungeon_loot/function
 data/minecraft/tags/function/load.json
 data/minecraft/tags/function/tick.json
 
+# Book modifiers, loot tables and lang files, generated from src/books by scripts/book_loot_gen.js
+data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated
+data/foxcraft_dungeon_loot/loot_table/item/random_loot/book/generated
+texturepack/assets/generated
+
 # Custom music discs
 texturepack/assets/custom_music_discs
 texturepack/assets/minecraft/models/item/music_disc_11.json
@@ -30,3 +35,8 @@ tests/.cache/
 
 # Environment variables
 .env
+
+# Minecraft dev MCP
+libraries/
+logs/
+versions/

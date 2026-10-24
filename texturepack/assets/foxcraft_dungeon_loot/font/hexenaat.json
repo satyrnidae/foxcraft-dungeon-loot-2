@@ -1,0 +1,29 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        " ": 8,
+        "\u00a0": 8
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/hexenaat.png",
+      "ascent": 18,
+      "height": 24,
+      "chars": [
+        "!\"#$%&'()*+,-./0",
+        "123456789:;<=>?@",
+        "ABCDEFGHIJKLMNOP",
+        "QRSTUVWXYZ[]_abc",
+        "defghijklmnopqrs",
+        "tuvwxyz{|}~\u0000\u0000\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}

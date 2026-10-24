@@ -303,6 +303,12 @@
           "expand": true,
           "weight": 1,
           "quality": 0
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 1,
+          "quality": 0,
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/random_rare_book"
         }
       ]
     }

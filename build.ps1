@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 $BuildDir = "$PSScriptRoot/.build"
 
 # Check if build dir exists, create if not
@@ -11,6 +13,14 @@ $McBuildOutputDir = "$PSScriptRoot/data/function"
 if(Test-Path $McBuildOutputDir) {
     Remove-Item -Path $McBuildOutputDir -Recurse -Force -ErrorAction SilentlyContinue
 }
+# The client jar goes in the test cache, for the Java checks and for measuring the vanilla fonts. It is only fetched when
+# missing or when its sha1 is wrong, and tests/ is never zipped.
+node "$PSScriptRoot/tests/tools/fetch_mc_jar.mjs"
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Could not download the client jar to tests/.cache/mc."
+    exit $LASTEXITCODE
+}
+
 npx mcb build
 
 # Tests run on the output just built, a failure stops the build. Set SKIP_TESTS=1 when they already ran.

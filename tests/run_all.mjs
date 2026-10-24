@@ -13,7 +13,9 @@
 //
 // Java checks need the client jar. They use MC_JAR if set, else the launcher copy at %APPDATA%/.minecraft/versions/<mc_version>/<mc_version>.jar,
 // else a copy downloaded from Mojang into tests/.cache/mc, which is what happens on CI.
-// Set JAVA25 to a Java 25 executable, otherwise the newest JDK found under ~/.jdks or on PATH is used.
+// Java is JAVA25, a Java 25 executable or JDK folder, else JDK_HOME or else JAVA_HOME when it is a Java 25, else the newest
+// JDK under ~/.jdks, else java on PATH. These and MC_JAR can also go in a .env file in the repo root, one KEY=value a
+// line; the environment wins over it.
 // Library jars are downloaded once into tests/.cache, which is gitignored.
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -21,7 +23,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { fetchClientJar } from './tools/fetch_mc_jar.mjs';
+import { fetchClientJar, fetchUnifont } from './tools/fetch_mc_jar.mjs';
 import { fetchLibs } from './tools/fetch_mc_libs.mjs';
 
 const TESTS = path.dirname(fileURLToPath(import.meta.url));
@@ -30,6 +32,20 @@ const CACHE = path.join(TESTS, '.cache');
 // The Minecraft version under test comes from config.json, the same file src/config.js exposes to the sources.
 const MC_VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).mc.mc_version;
 const IS_WINDOWS = process.platform === 'win32';
+
+// KEY=value lines of the gitignored .env in the repo root, for paths that differ per machine such as JAVA25. A # starts a
+// comment line, quotes around a value are dropped, and a variable already set in the environment is kept.
+function loadDotEnv(file = path.join(ROOT, '.env')) {
+  if (!fs.existsSync(file)) return;
+  for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
+    if (line.trimStart().startsWith('#')) continue;
+    const m = /^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/.exec(line);
+    if (!m) continue;
+    const value = m[2].replace(/^(["'])(.*)\1$/, '$2');
+    if (process.env[m[1]] === undefined) process.env[m[1]] = value;
+  }
+}
+loadDotEnv();
 
 const say = (text = '') => console.log(text);
 const run = (cmd, args, options = {}) => spawnSync(cmd, args, { stdio: 'inherit', ...options }).status ?? 1;
@@ -70,9 +86,15 @@ function javaMajor(java) {
 }
 
 function findJava() {
-  const env = process.env.JAVA25;
-  if (env && fs.existsSync(env)) return env;
   const exe = IS_WINDOWS ? 'java.exe' : 'java';
+  // JAVA25 is the java executable, or the JDK folder that has it in bin
+  const env = process.env.JAVA25;
+  if (env && fs.existsSync(env)) return fs.statSync(env).isDirectory() ? path.join(env, 'bin', exe) : env;
+  // Then the JDK of JDK_HOME, else of JAVA_HOME, when it is a Java 25
+  for (const name of ['JDK_HOME', 'JAVA_HOME']) {
+    const home = process.env[name] && path.join(process.env[name], 'bin', exe);
+    if (home && fs.existsSync(home) && javaMajor(home) === 25) return home;
+  }
   const jdks = path.join(os.homedir(), '.jdks');
   if (fs.existsSync(jdks)) {
     const candidates = fs.readdirSync(jdks).filter((d) => d.includes('25')).sort().reverse();
@@ -95,7 +117,15 @@ function findJar() {
 async function resolveJar(allowDownload) {
   const jar = findJar();
   const hasJson = (j) => fs.existsSync(j.replace(/\.jar$/, '.json'));
-  if (fs.existsSync(jar) && hasJson(jar)) return { jar };
+  if (fs.existsSync(jar) && hasJson(jar)) {
+    // The launcher's jar is no help with Unifont, which the game takes from its asset index: BookRender and the font widths need it
+    try {
+      await fetchUnifont(JSON.parse(fs.readFileSync(jar.replace(/\.jar$/, '.json'), 'utf8')), path.join(CACHE, 'mc', MC_VERSION));
+    } catch (exc) {
+      console.error(`could not fetch Unifont, CJK and Arabic draw as missing glyphs: ${exc.message}`);
+    }
+    return { jar };
+  }
   if (process.env.MC_JAR) return { skip: `no client jar at ${jar}, check MC_JAR` };
   if (!allowDownload) return { skip: `no client jar at ${jar}, drop --no-download or set MC_JAR` };
   try {
@@ -124,23 +154,27 @@ async function javaChecks(allowDownload) {
     return [['java checks', `SKIPPED could not fetch libraries: ${exc.message}`]];
   }
   const classpath = [jar, ...libs].join(path.delimiter);
-  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java'].map((n) => path.join(TESTS, 'java', n));
+  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'BookRender.java', 'ArabicShapingTable.java'].map((n) => path.join(TESTS, 'java', n));
   if (run(javac, ['-cp', classpath, '-d', classes, ...sources], { cwd: CACHE }) !== 0) return [['java compile', 'FAIL']];
   const runcp = [classes, classpath].join(path.delimiter);
   const functions = path.join(ROOT, 'data', 'foxcraft_dungeon_loot', 'function');
   const results = [];
   // Run from the cache folder, the game writes a logs/ folder into the working directory.
-  for (const [label, main, arg] of [
-    ['vanilla behavior (Harness)', 'Harness', null],
+  for (const [label, main, ...args] of [
+    // The table the book generator measures Arabic with, written again, and a failure, when the game's shaper gives another
+    ['arabic shaping table (ArabicShapingTable)', 'ArabicShapingTable', path.join(ROOT, 'scripts', 'arabic_shaping.json')],
+    ['vanilla behavior (Harness)', 'Harness'],
     ['data codecs (Scan)', 'Scan', path.join(ROOT, 'data')],
     ['generated commands (CmdCheck)', 'CmdCheck', functions],
     ['pack registry load (PackLoad)', 'PackLoad', ROOT],
+    // Every generated book page as a PNG in tests/.cache/books, wrapped by the game's own line splitter
+    ['book pages (BookRender)', 'BookRender', ROOT, path.join(CACHE, 'books')],
   ]) {
     if (main === 'CmdCheck' && !fs.existsSync(functions)) {
       results.push([label, 'SKIPPED no build output']);
       continue;
     }
-    results.push([label, run(java, ['-cp', runcp, main, ...(arg ? [arg] : [])], { cwd: CACHE }) === 0 ? 'PASS' : 'FAIL']);
+    results.push([label, run(java, ['-cp', runcp, main, ...args], { cwd: CACHE }) === 0 ? 'PASS' : 'FAIL']);
   }
   return results;
 }

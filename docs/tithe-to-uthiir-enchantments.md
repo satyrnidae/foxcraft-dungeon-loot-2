@@ -96,7 +96,7 @@ Uthiir's Grasp is an intrinsic of the Tithe and not an enchantment. It needs the
 - Every function under `src/.../enchantment/` is referenced, and every enchantment has a source file.
 - Every enchantment has its book trigger, clamped to `max_level`, naming the right id.
 - No lore line is repeated after modifiers run in order, which caught a base `define` inserting a blurb a tier file already wrote.
-- Lore lines stay at 44 characters on changed lines. Old over-width lines are todo entries.
+- Lore lines stay within 226 pixels, 44 average characters, on changed lines. Old over-width lines are todo entries.
 - Summons carry no ignored pre-26.3 keys, as todo entries.
 - `PackLoad.java` loads the enchantments, predicates and the advancement with the game's own registry loader.
 

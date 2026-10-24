@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_sword",
-          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/netherite"
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/epic"
         }
       ],
       "condition": {
@@ -30,7 +30,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond_sword",
-          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/diamond"
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/rare"
         }
       ],
       "condition": {
@@ -47,7 +47,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_sword",
-          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/iron"
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/uncommon"
         }
       ],
       "condition": {
@@ -64,7 +64,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:copper_sword",
-          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/copper"
+          "modifier": "foxcraft_dungeon_loot:epic/tithe_to_uthiir/common"
         }
       ],
       "condition": {

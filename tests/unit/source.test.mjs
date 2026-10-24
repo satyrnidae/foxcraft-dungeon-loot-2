@@ -21,7 +21,7 @@ function refs(code, pattern) {
   const out = [];
   for (const m of code.matchAll(new RegExp(pattern, 'g'))) {
     const end = m.index + m[0].length;
-    if (end < code.length && '<%'.includes(code[end])) continue;
+    if (end < code.length && '<%$'.includes(code[end])) continue;
     out.push(m[1]);
   }
   return out;

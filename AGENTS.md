@@ -95,7 +95,7 @@ There is no CI. The tests are static, so you cannot test gameplay. State plainly
 - Commit messages: match `git log`, a gitmoji then an imperative summary, for example `👽️ Modernize copper goat horns`. Reference the issue as `Refs #<n>` in the body.
 - Preserve each file's line endings. Most `.mcb` are LF, most JSON is CRLF. Do not reformat unrelated lines.
 - JSON: two-space indent, no trailing commas.
-- Item lore text: break lines at about 44 characters, one lore entry per line, so tooltips keep a consistent width.
+- Item lore text: break lines at 226 pixels, the width of 44 average characters in the default font, one lore entry per line, so tooltips keep a consistent width. `scripts/lore.js` measures it.
 
 ## Working rules
 
@@ -114,7 +114,7 @@ There is no CI. The tests are static, so you cannot test gameplay. State plainly
 - Scratch scores `#test` and `#math.*` are shared. Do not call a helper that uses them from inside another chain that also uses them.
 - The uninstall function disables `file/<baseArchiveName>-<version>.zip`. A dev build or a duplicate name breaks that match.
 - Audio for Wolfgun and C418 discs is not in the repo. Missing-sound warnings on a fresh clone are expected.
-- The master `DungeonLootId` list is a Google Sheet linked in `README.md`. You cannot update it; mention new ids in your report.
+- The master `DungeonLootId` list is `dungeon_loot_items.csv`; regenerate it with `node scripts/dump_items_csv.mjs` after adding items.
 - Effects granted by clocks (`effect give ... 1000000`) are cleared with `effect clear`, which also removes the same effect from other sources. Prefer attributes or enchantment effects when adding new passive bonuses.
 
 ## Reporting

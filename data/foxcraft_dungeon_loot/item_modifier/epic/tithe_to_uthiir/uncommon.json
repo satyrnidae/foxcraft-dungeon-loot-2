@@ -1,36 +1,29 @@
 {
   "type": "minecraft:sequence",
   "functions": [
+    "foxcraft_dungeon_loot:rarity/uncommon",
     {
       "type": "minecraft:set_components",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:common/tithe_to_uthiir"
+        "minecraft:item_model": "foxcraft_dungeon_loot:uncommon/tithe_to_uthiir"
       }
     },
     {
       "type": "minecraft:set_name",
       "name": {
         "text": "Tithe to Uthiir",
-        "color": "white",
+        "color": "yellow",
         "italic": false
       }
     },
     {
       "type": "minecraft:set_lore",
       "lore": [
-        [
-          "Rarity: ",
-          {
-            "text": "Common",
-            "color": "white",
-            "italic": true
-          }
-        ],
         "",
         [
           {
-            "text": "Balm of the Spider God I: ",
-            "color": "yellow",
+            "text": "Balm of the Spider God II: ",
+            "color": "aqua",
             "italic": false
           },
           {
@@ -50,7 +43,7 @@
           "italic": false
         },
         {
-          "text": "applies a 10-second Strength I effect in",
+          "text": "applies a 10-second Strength II effect in",
           "color": "gray",
           "italic": false
         },
@@ -60,12 +53,12 @@
           "italic": false
         }
       ],
-      "mode": "replace_all"
+      "mode": "append"
     },
     {
       "type": "minecraft:set_enchantments",
       "enchantments": {
-        "foxcraft_dungeon_loot:balm_of_the_spider_god": 1
+        "foxcraft_dungeon_loot:balm_of_the_spider_god": 2
       }
     }
   ]

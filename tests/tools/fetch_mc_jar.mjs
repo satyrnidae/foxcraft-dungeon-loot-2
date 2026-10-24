@@ -23,6 +23,32 @@ async function getJson(url) {
   return response.json();
 }
 
+// The client jar keeps only an empty unifont.json: the font that draws CJK, Hangul, Arabic and the rest is in the asset index
+const UNIFONT_ASSETS = ['font/include/unifont.json', 'font/include/unifont_pua.json', 'font/unifont.zip', 'font/unifont_jp.zip', 'font/unifont_pua.zip'];
+
+/** Downloads the Unifont files of the asset index into <dir>/unifont, as the game finds them under assets/minecraft; the sha1 of each is checked. */
+export async function fetchUnifont(meta, dir) {
+  const out = path.join(dir, 'unifont');
+  fs.mkdirSync(out, { recursive: true });
+  let index = null;
+  for (const name of UNIFONT_ASSETS) {
+    const file = path.join(out, path.basename(name));
+    index ??= (await getJson(meta.assetIndex.url)).objects;
+    const { hash } = index[`minecraft/${name}`] ?? {};
+    if (!hash) throw new Error(`minecraft/${name} is not in the asset index`);
+    if (fs.existsSync(file) && sha1(file) === hash) continue;
+    console.error(`downloading ${path.basename(name)}`);
+    const response = await fetch(`https://resources.download.minecraft.net/${hash.slice(0, 2)}/${hash}`);
+    if (!response.ok) throw new Error(`${name} -> HTTP ${response.status}`);
+    fs.writeFileSync(file, Buffer.from(await response.arrayBuffer()));
+    if (sha1(file) !== hash) {
+      fs.rmSync(file, { force: true });
+      throw new Error(`${name} failed its sha1 check`);
+    }
+  }
+  return out;
+}
+
 /** Returns { jar, json } paths for the version, downloading what is missing or fails its sha1. */
 export async function fetchClientJar(version, outDir = DEFAULT_OUT) {
   const dir = path.join(outDir, version);
@@ -48,6 +74,7 @@ export async function fetchClientJar(version, outDir = DEFAULT_OUT) {
       throw new Error(`${version}.jar failed its sha1 check`);
     }
   }
+  await fetchUnifont(meta, dir);
   return { jar, json };
 }
 

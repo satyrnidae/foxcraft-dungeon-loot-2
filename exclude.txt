@@ -9,7 +9,9 @@ mcb.config.js
 exclude.txt
 package*.json
 src/
+scripts/
 texturepack/
 node_modules/
 tests/
 *.sh
+*.csv

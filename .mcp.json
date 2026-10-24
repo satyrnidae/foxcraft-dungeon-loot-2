@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "minecraft-dev": {
+      "command": "node",
+      "args": ["scripts/mcp_minecraft_dev.mjs"]
+    }
+  }
+}

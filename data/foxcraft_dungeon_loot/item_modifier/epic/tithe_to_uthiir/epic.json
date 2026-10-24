@@ -1,6 +1,7 @@
 {
   "type": "minecraft:sequence",
   "functions": [
+    "foxcraft_dungeon_loot:rarity/epic",
     {
       "type": "minecraft:set_components",
       "components": {
@@ -18,14 +19,6 @@
     {
       "type": "minecraft:set_lore",
       "lore": [
-        [
-          "Rarity: ",
-          {
-            "text": "Epic",
-            "color": "light_purple",
-            "italic": true
-          }
-        ],
         "",
         [
           {
@@ -124,7 +117,7 @@
           "italic": false
         }
       ],
-      "mode": "replace_all"
+      "mode": "append"
     },
     {
       "type": "minecraft:set_enchantments",

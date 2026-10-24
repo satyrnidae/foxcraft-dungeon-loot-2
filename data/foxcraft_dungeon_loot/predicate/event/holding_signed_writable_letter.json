@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:any_of",
+  "terms": [
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:equipment": {
+          "mainhand": {
+            "items": [
+              "minecraft:written_book"
+            ],
+            "components": {
+              "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/writable_letter"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:equipment": {
+          "offhand": {
+            "items": [
+              "minecraft:written_book"
+            ],
+            "components": {
+              "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/writable_letter"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
