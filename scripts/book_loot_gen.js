@@ -20,7 +20,7 @@ const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
 // Frontmatter keys, anything else is warned about. Title and author are required.
-const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'debug', 'generation'];
+const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'style', 'debug', 'generation'];
 const REQUIRED_KEYS = ['title', 'author'];
 
 // writable: true makes a book and quill. Its pages are plain strings, so it has no author and keeps no formatting
@@ -208,7 +208,7 @@ function parseFrontmatter(text) {
                 while (nestingOpen(text) > 0 && n + 1 < frontmatter.length) text += '\n' + frontmatter[++n];
                 if (nestingOpen(text) !== 0) throw new Error('data in the frontmatter is not closed');
                 meta.data = text.replace(/,\s*$/, '').replace(/\s*\n\s*/g, ' ').trim();
-            } else if (key === 'styles') {
+            } else if (key === 'styles' || key === 'style') {
                 // A compound over as many lines as it takes to close its braces
                 let text = m[2];
                 while (bracesOpen(text) > 0 && n + 1 < frontmatter.length) text += '\n' + frontmatter[++n];
@@ -357,6 +357,19 @@ const ENTITIES = { quot: '"', apos: "'", lt: '<', gt: '>', amp: '&' };
 // An attribute value reads &quot; &apos; &lt; &gt; and &amp; as the characters, so a value can hold its own quote
 const decodeEntities = (value) => value.replace(/&(quot|apos|lt|gt|amp);/g, (_, name) => ENTITIES[name]);
 
+// In running text &nbsp; is a no-break space, &quot; &apos; &lt; &gt; and &amp; their characters, and &#160; or &#xA0; the code
+// point. An unknown name stays as typed. Code spans are literal and never get here.
+const TEXT_ENTITY = /^&(#x[0-9a-fA-F]{1,6}|#\d{1,7}|[A-Za-z]+);/;
+const NAMED_ENTITIES = { ...ENTITIES, nbsp: ' ' };
+
+function decodeTextEntity(name) {
+    if (name[0] === '#') {
+        const point = name[1] === 'x' || name[1] === 'X' ? parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10);
+        return point > 0 && point <= 0x10ffff ? String.fromCodePoint(point) : undefined;
+    }
+    return Object.hasOwn(NAMED_ENTITIES, name) ? NAMED_ENTITIES[name] : undefined;
+}
+
 function parseAttributes(source) {
     const attrs = {};
     for (const m of source.matchAll(/([A-Za-z_:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)) attrs[m[1].toLowerCase()] = decodeEntities(m[2] !== undefined ? m[2] : m[3]);
@@ -493,6 +506,15 @@ function parseInline(text, start, closer, classes = {}) {
             buffer += m;
             i += m.length;
             continue;
+        }
+        if (c === '&') {
+            const entity = TEXT_ENTITY.exec(text.slice(i, i + 12));
+            const decoded = entity ? decodeTextEntity(entity[1]) : undefined;
+            if (decoded !== undefined) {
+                buffer += decoded;
+                i += entity[0].length;
+                continue;
+            }
         }
         buffer += c;
         i++;
@@ -1121,6 +1143,11 @@ function variant(content, filtered, onCut = () => {}) {
  */
 function paginate(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
     const pager = pagerOf(content, ascentOf);
+    return pageRanges(pager).map(([from, to]) => pager.slice(from, to)).filter(Boolean);
+}
+
+// The [from, to) lines of every page of a pager
+function pageRanges(pager) {
     const ranges = [];
     for (let at = pager.first(0); at < pager.lines.length; ) {
         let end = Math.min(at + PAGE_LINES, pager.lines.length);
@@ -1129,7 +1156,7 @@ function paginate(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
         ranges.push([at, end]);
         at = pager.first(end);
     }
-    return ranges.map(([from, to]) => pager.slice(from, to)).filter(Boolean);
+    return ranges;
 }
 
 /**
@@ -1334,13 +1361,28 @@ function unionComponent(contents, key, langs, ref) {
     return component;
 }
 
+// The formats the padding turns off, which only matter where something around it has them on
+const OFF_FLAGS = ['bold', 'italic', 'underlined', 'strikethrough', 'obfuscated'];
+
+// Drops the 'false' of a format that nothing around the component turns on, it would be the default anyway. The arguments of a
+// component are inside it, so they inherit what it has on
+function pruneOffFlags(component, inherited = {}) {
+    const on = { ...inherited };
+    for (const flag of OFF_FLAGS) {
+        if (component[flag] === false && !inherited[flag]) delete component[flag];
+        else if (component[flag] !== undefined) on[flag] = component[flag] === true;
+    }
+    if (component.with) component.with.forEach((child) => pruneOffFlags(child, on));
+    return component;
+}
+
 /** A page as unionComponent, with the style of the whole text, the WHOLE node every page is inside, on the page itself. */
 function unionPage(contents, key, langs, ref) {
     const wrapped = contents.find((content) => content && content.length === 1 && content[0].id === WHOLE);
     const inner = contents.map((content) => content && (content.length === 1 && content[0].id === WHOLE ? content[0].content : content));
     const component = unionComponent(inner, key, langs, ref);
     contents.forEach((content, i) => content === null && (langs[i][key] = ''));
-    return wrapped ? Object.assign(component, (contents[ref] ? contents[ref][0] : wrapped[0]).styles) : component;
+    return pruneOffFlags(wrapped ? Object.assign(component, (contents[ref] ? contents[ref][0] : wrapped[0]).styles) : component);
 }
 
 //endregion
@@ -1421,13 +1463,16 @@ function splitOnBreaks(body) {
     return sections.map((lines) => lines.join('\n'));
 }
 
+// A --- line, or one inside a <style>, at the start of the text: what a heading may sit directly on
+const HORIZONTAL_LINE_NEXT = /^(---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/;
+
 function splitSections(body) {
     return splitOnBreaks(body.replace(/\r\n/g, '\n'))
         .map((section) =>
             fenceCode(section.split('\n'))
                 .map((line) => line.replace(/\s+$/, ''))
-                // A heading is bold and underlined and always has an empty line under it
-                .flatMap((line, n, lines) => (/^#{1,6}\s+/.test(line) ? [line.replace(/^(#{1,6})\s+(.*)$/, (_, hashes, text) => `<h${hashes.length}>${text}</h${hashes.length}>`), ...(lines[n + 1] === '' ? [] : [''])] : [line]))
+                // A heading is bold and underlined and always has an empty line under it, unless a horizontal line comes right after it
+                .flatMap((line, n, lines) => (/^#{1,6}\s+/.test(line) ? [line.replace(/^(#{1,6})\s+(.*)$/, (_, hashes, text) => `<h${hashes.length}>${text}</h${hashes.length}>`), ...(lines[n + 1] === '' || HORIZONTAL_LINE_NEXT.test(lines.slice(n + 1, n + 4).join('\n')) ? [] : [''])] : [line]))
                 .join('\n')
                 // The line break that ends the --- line goes, the empty lines after it are paginate's to keep or drop
                 .replace(/^\n|\n+$/g, '')
@@ -1494,10 +1539,10 @@ function horizontalLine(classes, over = {}) {
     return [...front, ...(excess ? [back(excess)] : []), piece(end)];
 }
 
-// The lines that split a section into parts: a <vcenter>, or a horizontal line, which a <style> around the --- may restyle
-const LINE_MARKS = /^(<vcenter>|---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/m;
+// The lines that split a section into parts: a <vcenter> or <vbottom>, or a horizontal line, which a <style> around the --- may restyle
+const LINE_MARKS = /^(<vcenter>|<vbottom>|---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/m;
 
-// What a text tree holds in the order of its glyphs: where each <vcenter> is, and where each header starts
+// What a text tree holds in the order of its glyphs: where each <vcenter> and <vbottom> is, and where each header starts
 function textMarks(content) {
     const marks = [];
     let pos = 0;
@@ -1507,7 +1552,7 @@ function textMarks(content) {
                 pos += [...part].length;
                 continue;
             }
-            if (part.vcenter) marks.push({ kind: 'vcenter', at: pos });
+            if (part.vmark) marks.push({ kind: part.vmark, at: pos });
             const mark = part.header ? { kind: 'header', at: pos, end: pos } : null;
             if (mark) marks.push(mark);
             walk(part.content);
@@ -1519,47 +1564,66 @@ function textMarks(content) {
 }
 
 const withoutVcenter = (content) =>
-    content.filter((part) => !part.vcenter).map((part) => (typeof part === 'string' ? part : { ...part, content: withoutVcenter(part.content) }));
+    content.filter((part) => !part.vmark).map((part) => (typeof part === 'string' ? part : { ...part, content: withoutVcenter(part.content) }));
 
 function centerVertically(tree, marks) {
     const clean = withoutVcenter(tree);
-    const centers = marks.filter((m) => m.kind === 'vcenter');
-    if (!centers.length || paginate(clean).length !== 1) return clean;
-    const { lines, chars } = layout(clean);
-    const empty = (n) => lines[n].tstart === lines[n].tend;
+    if (!marks.some((m) => m.kind !== 'header')) return clean;
+    const pager = pagerOf(clean);
+    const { lines, chars, empty } = pager;
     // The line a place of the tree starts or falls in
     const lineAt = (at) => {
         const c = chars.findIndex((g) => g.place >= at);
         return c < 0 ? lines.length : lines.findIndex((l) => c >= l.start && c <= l.end);
     };
-    const firstLine = lines.findIndex((_, n) => !empty(n));
-    const lastLine = lines.length - 1 - [...lines].reverse().findIndex((_, n) => !empty(lines.length - 1 - n));
-    const spare = PAGE_LINES - (lastLine - firstLine + 1);
-    if (spare <= 0) return clean;
+    const centers = marks.filter((m) => m.kind !== 'header');
     const headers = marks.filter((m) => m.kind === 'header');
     const glyphList = glyphs(clean);
+    const lastLine = lines.length - 1 - [...lines].reverse().findIndex((_, n) => !empty(lines.length - 1 - n));
     // The lines of the text under each: from its first line with something on it, up to the next header that has text above it
     const regions = centers.map((m) => {
-        let from = Math.max(lineAt(m.at), firstLine);
+        let from = lineAt(m.at);
         while (from <= lastLine && empty(from)) from++;
-        // Under a header the text goes up to the next header, a <vcenter> of the page itself up to the end of the page
+        // Under a header the text goes up to the next header, a <vcenter> or <vbottom> of the page itself up to the end of the text
         const under = headers.some((h) => h.end <= m.at && glyphList.slice(h.end, m.at).every((g) => /\s/.test(g.ch)));
-        const next = under ? headers.map((h) => lineAt(h.at)).find((h) => h > from) : undefined;
+        // and any region ends where the next <vcenter> or <vbottom> starts
+        const stops = [...(under ? headers : []), ...centers.filter((c) => c.at > m.at)].map((h) => lineAt(h.at)).filter((h) => h > from);
+        const next = stops.length ? Math.min(...stops) : undefined;
         let to = (next ?? lastLine + 1) - 1;
         while (to > from && empty(to)) to--;
-        return { from, to, last: next === undefined };
+        return { from, to, bottom: m.kind === 'vbottom' };
     });
     const blank = () => [{ styles: PAD_STYLES, content: [padding(1)] }, '\n'];
     const fill = (count) => Array.from({ length: count }).flatMap(blank);
     const edits = [];
-    regions.forEach((r, n) => {
-        const share = Math.floor(spare / regions.length) + (n < spare % regions.length ? 1 : 0);
-        const above = Math.floor(share / 2);
-        if (r.from > lastLine) return;
-        edits.push({ at: chars[lines[r.from].start].place, text: fill(above) });
-        // Under the text, before the line that follows it, unless that is where the page ends
-        if (!r.last) edits.push({ at: chars[lines[r.to + 1].start].place, text: fill(share - above) });
-    });
+    // Each page is aligned on its own, and a region that spans a page boundary is ignored
+    for (const [pageFrom, pageTo] of pageRanges(pager)) {
+        const first = lines.findIndex((_, n) => n >= pageFrom && !empty(n));
+        let last = Math.min(pageTo, lines.length) - 1;
+        while (last > first && empty(last)) last--;
+        if (first < 0 || first >= pageTo) continue;
+        const spare = PAGE_LINES - (last - first + 1);
+        const onPage = regions.filter((r) => r.from >= pageFrom && r.from <= last && r.to <= last);
+        if (spare <= 0 || !onPage.length) continue;
+        // The first <vbottom> goes first: it sits on the last line, so the whitespace above it is what is left for the <vcenter>s
+        // before it, which share that and center in it. Without one before it, the <vbottom> takes the whitespace itself, and
+        // nothing is left for what comes after it
+        const bottom = onPage.findIndex((r) => r.bottom);
+        const taking = onPage.filter((r, n) => (bottom < 0 ? true : !r.bottom && n < bottom));
+        if (bottom >= 0 && !taking.length) taking.push(onPage[bottom]);
+        onPage.forEach((r) => {
+            const n = taking.indexOf(r);
+            if (n < 0) return;
+            const share = Math.floor(spare / taking.length) + (n < spare % taking.length ? 1 : 0);
+            // <vbottom> puts all of the spare lines above the text, <vcenter> half
+            const above = r.bottom ? share : Math.floor(share / 2);
+            edits.push({ at: chars[lines[r.from].start].place, text: fill(above) });
+            // Under the text, before the line that follows it, unless that is where the page ends
+            if (r.to < last) edits.push({ at: chars[lines[r.to + 1].start].place, text: fill(share - above) });
+        });
+    }
+    // Nothing to do on any page
+    if (!edits.length) return clean;
     // From the end of the tree, so the places in front stay
     const result = JSON.parse(JSON.stringify(clean));
     for (const e of edits.sort((a, b) => b.at - a.at)) if (e.text.length) insertAt(result, e.at, e.text);
@@ -1573,11 +1637,11 @@ function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = 
         // The parts between the <vcenter> and --- lines, each its own text, with a mark or a horizontal line where one was
         const pieces = text.split(LINE_MARKS);
         const content = pieces.flatMap((part, n) => {
-            if (n % 2 && part !== '<vcenter>') {
+            if (n % 2 && !/^<v(center|bottom)>/.test(part)) {
                 const tag = /^<style((?:\s[^>]*)?)>/.exec(part);
                 return [...horizontalLine(classes, tag ? classStyles(parseAttributes(tag[1]), classes) : {}), '\n'];
             }
-            if (n % 2) return [{ styles: {}, content: [], vcenter: true }];
+            if (n % 2) return [{ styles: {}, content: [], vmark: part.slice(1, 8) === 'vcenter' ? 'vcenter' : 'vbottom' }];
             const parsed = parseInline(part, 0, null, classes).content;
             nextId = assignIds(parsed, nextId);
             return parsed;
@@ -1725,7 +1789,7 @@ function pageComponents(pages, id, kind, lang, warnings, file, numbers = pages.m
         const n = numbers[i];
         const { length } = layout(tree);
         if (length > PAGE_EDIT_LENGTH) warnings.push(`${file}: page ${n + 1} has ${length} characters, the editor stops at ${PAGE_EDIT_LENGTH}`);
-        return toComponent(tree, `book.${NS}.${id}.${kind}.${n + 1}`, lang);
+        return pruneOffFlags(toComponent(tree, `book.${NS}.${id}.${kind}.${n + 1}`, lang));
     });
 }
 
@@ -1951,7 +2015,7 @@ function emit(file, text, check) {
 }
 
 // Private-use characters, the glyphs of fonts such as staff_notation, are written as \uXXXX so they stay readable in the output
-const json = (value) => JSON.stringify(value, null, 2).replace(/[\ue000-\uf8ff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`) + '\n';
+const json = (value) => JSON.stringify(value, null, 2).replace(/[\u00a0\ue000-\uf8ff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`) + '\n';
 
 // One book of the generated ones, equal odds
 // An empty list is a table without pools, which drops nothing. A table entry that points at one still counts as picked, so

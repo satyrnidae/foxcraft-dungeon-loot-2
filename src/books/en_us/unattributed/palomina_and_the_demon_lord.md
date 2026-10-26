@@ -18,7 +18,7 @@ styles: {
 }
 ---
 
-<center>__**I**__</center>
+# - I -
 
 
 <style class=".front">In</style> Time Immemorial, the God of the Sun <style class=".name">Mysteria</style> fought the <style class=".name">Dæmon Lord</style> <style class=".name">Melimonas</style> and sealed It away, deep below the Earth.
@@ -32,7 +32,7 @@ Wasting no time, <style class=".name">Melimonas</style> struck out against <styl
 Generations passed, and Humanity dwindled. The forces of <style class=".name">Melimonas</style> were relentless in their campaign against all that was blessed with <style class=".name">Mysteria</style>'s Light. Cities fell. Libraries burned. Too much, lost to the Fires of <style class=".name">Melimonas</style>.
 <br>
 
-<center class="h1">__**II**__</center>
+# - II -
 
 
 <style class=".front">B</style>ut all was not lost.
@@ -51,7 +51,7 @@ And <style class=".name">Mysteria</style> instructed, "Thou shalt take My Light 
 Thus spake <style class=".name">Mysteria</style>.
 <br>
 
-<center>__**III**__</center>
+# - III -
 
 
 <style class=".front">A</style>nd so Palomina set out towards the tallest peak, steadfast in her duty.
@@ -75,7 +75,7 @@ Upon reaching the highest peak, Palomina called out, "<style class=".name">Melim
 "I have beaten back your forces! I have reached this, the highest peak in all the land, and I will do battle unto you!"
 <br>
 
-<center>__**IV**__</center>
+# - IV -
 
 
 <style class=".front">M</style><style class=".name">elimonas</style> simply laughed.
@@ -95,7 +95,7 @@ Thus spake <style class=".name">Melimonas</style>.
 Palomina, out of options, and not knowing the Dark Spear's blighted provenance, heft it high above her head. But when she tried to loose the Spear, it held onto her with tendrils of oozing Darkness and pulled her high into the Sky.
 <br>
 
-<center>__**V**__</center>
+# - V -
 
 
 <style class=".front">"F</style>oolish little insect!" exclaimed the <style class=".name">Dæmon Lord</style>, "Thou didst think to best Me?
@@ -111,7 +111,7 @@ The fall of Humanity itself.
 Palomina struggled against the tide of omens as they threatened to pull her under, deep into a sea of her own despair.
 <br>
 
-<center>__**VI**__</center>
+# - VI -
 
 
 <style class=".front">"H</style>arken!" The voice of <style class=".name">Mysteria</style> whispered from the Shards of Light, "Fear not, Child, for Humanity is not yet lost.
@@ -123,7 +123,7 @@ Thus spake <style class=".name">Mysteria</style>.
 Slowly, Palomina understood. She needed not a Spear, but the Light, and the <style class=".name">Dæmon Lord</style> was much closer than before.
 <br>
 
-<center>__**VII**__</center>
+# - VII -
 
 
 <style class=".front">"D</style><style class=".name">æmon</style>!" Palomina exclaimed, her resolve returning. "If you seek our destruction, then I must not waver!"
@@ -139,7 +139,7 @@ But even cleansed the Dark Spear refused to release Palomina's hand. And thus di
 Palomina would never again return to the Earth, but she left behind the wound rent through the <style class=".name">Dæmon</style>'s Night; a brilliant Moon to mark her sacrifice.
 <br>
 
-<center>__**VIII**__</center>
+# - VIII -
 
 
 <style class=".front">N</style>ever again was <style class=".name">Melimonas</style>' Night so Dark that <style class=".name">Mysteria</style> could not banish it from the Sky.

@@ -226,6 +226,10 @@ describe('book generator markdown', () => {
     // A heading gets one empty line under it, and not a second when there is one already
     assert.deepEqual(gen.splitSections('# Head\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n\ntext'), ['<h1>Head</h1>\n\ntext']);
+    // Not before a horizontal line, which sits right under the heading
+    assert.deepEqual(gen.splitSections('# Head\n---\ntext'), ['<h1>Head</h1>\n---\ntext']);
+    assert.deepEqual(gen.splitSections('# Head\n<style class=".x">\n---\n</style>\ntext'), ['<h1>Head</h1>\n<style class=".x">\n---\n</style>\ntext']);
+    assert.deepEqual(gen.splitSections('# Head\n----\ntext'), ['<h1>Head</h1>\n\n----\ntext']);
     assert.equal(gen.pagesOf('one\n<br>\ntwo').length, 2);
     // A --- in code or after other text is not a break
     assert.equal(gen.splitSections('a ---\n`---`\nb\n<br>\nc').length, 2);
@@ -819,6 +823,23 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(latin[0].styles.font, 'foxcraft_dungeon_loot:padding');
     // A book and quill keeps the text where it is
     assert.deepEqual(gen.pagesOf('Hi', null, null, {}, false, true)[0], ['Hi']);
+  });
+
+  it('<vbottom> puts the text of a page at the bottom of its lines', () => {
+    // Two lines of text on 14 leave 12, all above
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines')[0]).lines.length, 14);
+    const full = Array.from({ length: 14 }, (_, n) => 'l' + n).join('\n');
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\n' + full)[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
+  });
+
+  it('a <vcenter> ends at the <vbottom> after it, which sits on the last line', () => {
+    const { lines, chars } = gen.layout(gen.sectionsOf('title\n<vcenter>\nmiddle\n<vbottom>\nend')[0]);
+    const text = lines.map((l) => chars.slice(l.tstart, l.tend).map((c) => c.ch).join(''));
+    assert.equal(text.length, 14);
+    assert.equal(text[13], 'end');
+    // Centered in the 12 empty lines between the title and the end
+    assert.equal(text.indexOf('middle'), 6);
   });
 
   it('<vcenter> puts the text of a page in the middle of its lines', () => {
