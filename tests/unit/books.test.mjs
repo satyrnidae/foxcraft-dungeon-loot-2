@@ -1247,9 +1247,11 @@ describe('book give triggers', () => {
     const ids = rels.map((rel) => rel.split('/').pop());
     assert.ok(ids.length > 0);
     for (const [i, id] of ids.entries()) {
-      const fn = pk.readText(pk.generatedFunction('give/give_' + id));
+      const folder = rels[i].includes('/') ? rels[i].split('/').slice(-2, -1)[0] : 'unattributed';
+      const name = folder === 'debug' ? `give_debug_book_${id}` : folder === 'unattributed' ? `give_book_${id}` : `give_book_${id}_by_${folder}`;
+      const fn = pk.readText(pk.generatedFunction('give/' + name));
       assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${rels[i]}`), id);
-      assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add give_${id} trigger`), id);
+      assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add ${name} trigger`), id);
     }
   });
 });
