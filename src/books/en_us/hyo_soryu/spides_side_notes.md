@@ -33,5 +33,10 @@ styles: {
 <br>
 # - Foreword -
 
-The purpose of these manuals is to educate my fellow adventurers on the aspects of fiends and aberrations, so that they may better eradicate them. This manual details the oversized arachnids of the overworld: the Spider.
+The purpose of these manuals is to educate my fellow adventurers on the aspects of fiends and aberrations, so that they may better eradicate them. This manual details the oversized arachnids of the Overworld: the Spider.
 <br>
+# - Appearances -
+<br>
+# - Afterword -
+
+   One day I hope to find whoever is responsible for creating these abhorrent creatures. But until then, I must be content with slaying any and all of them that I see… and now that you are properly forewarned, so too may you.

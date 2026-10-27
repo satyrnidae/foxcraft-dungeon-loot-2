@@ -27,4 +27,4 @@ styles: {
 <style class=".right">by Arturia So'Tiria</style>
 <br>
 
-In the less violent regions of the Nether, one can happen across small wanderers outfitted in coarse, black wool. These sheepmen manage to ensure their survival in their hostile homeland by trading with the resident pigmen from the many dark brick villages dotting the netherrack shelves. Sheepmen covet emeralds, and so leap at the opportunity to trade with travelers from without the Nether. As with most denizens of the Nether, they have an affinity with fire, retaining complete immunity despite the flammable appearance of their wool.
+In the less violent regions of the Nether, one can happen across small wanderers outfitted in coarse, black wool. These Sheepmen manage to ensure their survival in their hostile homeland by trading with the resident Pigmen from the many dark brick villages dotting the Netherrack shelves. Sheepmen covet emeralds, and so leap at the opportunity to trade with travelers from without the Nether. As with most denizens of the Nether, they have an affinity with fire, retaining complete immunity despite the flammable appearance of their wool.

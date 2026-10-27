@@ -20,4 +20,4 @@ lore:
 
   Timur set the pack down, half begrudgingly, half relieved to be free of its burden. He unsheathed a pickaxe from its side and holstered it against his belt as Liara produced a willow-hewn bow from her own pack. "You sure about that? I doubt there's gonna be much room to shoot in a cave."
 
-  "She's old reliable," quipped Liara, "but a dagger might also be... prudent." Timur grunted again before heading into the cave, and Liara followed close behind.
+  "She's old reliable," quipped Liara, "but a dagger might also be… prudent." Timur grunted again before heading into the cave, and Liara followed close behind.

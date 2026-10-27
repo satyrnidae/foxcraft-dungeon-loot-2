@@ -25,9 +25,9 @@ styles: {
 <br>
 __<style class=".title"><style class=".symbologie">></style> Prologue <style class=".symbologie"><</style></style>__
 
-   Now, I know what you are thinking right now.  "Milonia," you cry, "There are no trolls in this world!"  And you would be right, in fact, to believe this.  But, this is not an ordinary bestiary.  Where the usual fare would stick to the Zombies and Creepers of the world, I dive deeper.  Unearth hidden possibilities.  Uncover... a truth.  Perhaps not THE Truth, but a truth.
+   Now, I know what you are thinking right now.  "Milonia," you cry, "There are no trolls in this world!"  And you would be right, in fact, to believe this.  But, this is not an ordinary bestiary.  Where the usual fare would stick to the Zombies and Creepers of the world, I dive deeper.  Unearth hidden possibilities.  Uncover… a truth.  Perhaps not THE Truth, but a truth.
 
-   Join me on my latest quest to uncover the Mythic, the Magical, and the Majestic!  Read on, and become open to a new kind of possibility.  A new reality!  And let us unearth the mystery surrounding...
+   Join me on my latest quest to uncover the Mythic, the Magical, and the Majestic!  Read on, and become open to a new kind of possibility.  A new reality!  And let us unearth the mystery surrounding…
 
 <vcenter>
 <style class=".title">Trolls</style>
@@ -44,7 +44,7 @@ __<style class=".title"><style class=".symbologie">></style> Prologue <style cla
    For you see, Trolls do not reproduce as the birds and bees do.  Trolls are not born; they arise, clawing out from the very crust of the Earth itself.  Rock, driven to locomotion by some unseen, unknowable force.
 
    As a result, they do bear a passing resemblance to rocks.  However, they most resemble amphibians; frogs, toads, even fish to some extent.  Geologists believe that perhaps when Trolls first clawed their way from the dark, shadowed depths, they modeled their form after the life they observed, which at the time would have been fish, and maybe a couple part-time land animals.
-   
+
    For you see, Trolls are rocks.  And rocks have been around forever.
 <br>
 <vcenter>

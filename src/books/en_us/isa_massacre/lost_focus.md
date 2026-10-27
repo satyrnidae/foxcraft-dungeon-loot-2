@@ -11,7 +11,7 @@ lore: A pondering on loss, as it were.
 
   Kylie, who had been lost in thought, snapped to attention and winced. This was the third time this month she had been daydreaming during an important meeting, and definitely not the first time her manager had to snap her focus back. "Y-yes, Harry, thank you," she replied sheepishly, "What... What were you saying again?"
 
-  Harry sighed as he put his hand to his face. Not a good sign. Clearly she and him were going to have a chat about it after the meeting. It definitely wasn't the first time they would have that chat either. "As I was saying..."
+  Harry sighed as he put his hand to his face. Not a good sign. Clearly she and him were going to have a chat about it after the meeting. It definitely wasn't the first time they would have that chat either. "As I was saying…"
 
   Kylie tried to fix her attention to whatever Harry was droning on about but it kept slipping away like sand through her fingers. Her mind was often elsewhere, but her grandfather's passing had made focusing on anything for more than a few hours much more difficult than she had even thought possible. She'd found herself thinking back to her childhood with him several times this past week alone.
 
@@ -19,7 +19,7 @@ lore: A pondering on loss, as it were.
 
   Harry sighed again as he stood up. The rest of the team had shuffled off to lunch, but Kylie stayed behind.
 
-  "Uh, Harry. I'm..." she started, but the words caught in her throat.
+  "Uh, Harry. I'm…" she started, but the words caught in her throat.
 
   Harry held up a hand to stop her anyways. "It's okay, Kylie. I get it." He arranged the various timetables and project design documents into a neat pile before slipping them into his slim loose-leaf binder and snapping the rings shut. "Losing a grandparent can be difficult; I know that."
 

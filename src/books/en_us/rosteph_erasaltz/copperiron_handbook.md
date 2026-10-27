@@ -107,7 +107,7 @@ In bases of 9 (as 1 block is 9 ingots)
 1 <style class=".lapis">Lapis</style> =
 <style class=".right">1/9 point</style>
 
-1 <style class=".lapis">Lapis</style> = 
+1 <style class=".lapis">Lapis</style> =
 <style class=".right">1 <style class=".redstone">Redstone</style></style>
 
 1 <style class=".lapis">Lapis</style> =

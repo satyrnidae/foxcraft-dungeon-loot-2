@@ -23,7 +23,7 @@ styles: {
 <br>
 __<style class=".title"><style class=".symbologie">></style> Prologue <style class=".symbologie"><</style></style>__
 
-   The intrepid adventurer has likely acquainted themselves with the humble Ghast.  Wafting lazily throughout the cavernous bowels of the Nether, these balloonish behemoths strike terror into the hearts of many with their echoing calls and pained wheezes reverberating throughout the caverns.  But aside from their explosive personality, much about the Ghasts remains an enigma.  Where do they come from? How do they multiply?  Find out these wonderful truths and more in...
+   The intrepid adventurer has likely acquainted themselves with the humble Ghast.  Wafting lazily throughout the cavernous bowels of the Nether, these balloonish behemoths strike terror into the hearts of many with their echoing calls and pained wheezes reverberating throughout the caverns.  But aside from their explosive personality, much about the Ghasts remains an enigma.  Where do they come from? How do they multiply?  Find out these wonderful truths and more in…
 
 <vcenter>
 <style class=".title">Ghasts</style>
