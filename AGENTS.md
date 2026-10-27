@@ -59,7 +59,7 @@ data/foxcraft_dungeon_loot/
   enchantment/                   custom enchantments, any item can carry them, functions in src/.../enchantment/<name>.mcb
   predicate/enchantment/<name>/  predicates that detect an enchantment, any and level_<n>
 data/minecraft/loot_table/   vanilla overrides that inject loot
-texturepack/                 resource pack, own pack.mcmeta and build.ps1
+texturepack/                 resource pack, own pack.mcmeta, zipped by npm run assets
 docs/                        notes, audits, todo lists
 tests/                       run_all.mjs, unit tests, Java checks, Node tools
 ```
@@ -80,7 +80,7 @@ To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a 
 
 Run from the repo root. Do all of this before claiming a change works.
 
-1. `node tests/run_all.mjs`. It deletes the generated functions, runs `npx mcb build`, runs the unit tests, and runs the Java checks when Java 25 exists. The client jar is the launcher copy or a download from Mojang, so a missing launcher no longer skips them unless the download fails. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
+1. `node tests/run_all.mjs`. It deletes the generated functions, runs `mcb build`, runs the unit tests, and runs the Java checks when Java 25 exists. The client jar is the launcher copy or a download from Mojang, so a missing launcher no longer skips them unless the download fails. The summary at the end says PASS, FAIL or SKIPPED for each step. If the jar is missing the Java checks are SKIPPED, say so in your report and do not claim they passed.
 2. If a unit test fails because you changed an item on purpose, run `node tests/unit/gen_specs.mjs`, read the diff of `tests/unit/specs/items.json`, and keep only changes you meant to make.
 3. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each give function that is not a tier variant, in dev builds only, for any player. The value is the amount, or the tier from lowest to highest for an item with tiers. Each pack enchantment gets a `give_<name>_book` trigger whose value is the book level. A new item needs no new test file. Its loot table is found automatically, and its spec entry comes from `gen_specs.py`. A new item source file in `src/foxcraft_dungeon_loot/item/` is also found automatically.
 4. For a new hook, the tests fail until its entry is in the function tag.

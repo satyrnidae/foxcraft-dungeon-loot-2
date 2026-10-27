@@ -27,6 +27,7 @@ lore:
 ```
 
 - `title` is plain text, at most 32 characters. `<filter as="Darn Book">Damn Book</filter>` sets the title that players with chat filtering see. An SNBT title also sets the item name and cannot be filtered.
+- `displayTitle` is optional, the item name alone, plain text or an SNBT component like `title`, with no 32 character limit and no `<filter>`. `title` is still the book's own title, at most 32 characters, so a long name goes here and a short one in `title`. With it the item always gets a `custom_name`, in the color of the `rarity` if there is one. A translation gives its own, else its item name is its `title`.
 - `title` and `author` are required, a book without either stops the build. A key the generator does not know, such as a typo, warns.
 - `debug: true` keeps the book out of anything but a dev build, `config.json` `mc.dev`. It gets no loot table, give function or lang entries in a release. Test and demo books are marked with it.
 - `rarity` adds a `Rarity: ` lore line and colors the item name by it, not italic. An SNBT title keeps its own colors over that. The item name has no filtered side, so it uses the filtered title when there is one.

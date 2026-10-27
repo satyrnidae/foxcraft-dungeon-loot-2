@@ -2,6 +2,10 @@
 
 Book loot generator, built from markdown in `src/books`. Dev utilities, not part of the datapack zip.
 
+## generate_previews.mjs
+
+`npm run previews` runs the generator, `tests/unit/books.test.mjs` and then only `BookRender`, which draws every page to `tests/.cache/books`. `--no-tests` skips the tests, `--no-download` never fetches the client jar, `--scale N` sets the pixels per GUI pixel.
+
 ## book_loot_gen.js
 
 Writes written book loot from markdown. `mcb build` runs it through `src/foxcraft_dungeon_loot/books.js`; run it by hand with `node scripts/books/book_loot_gen.js`, add `--check` to write nothing and fail when output is stale, or pass source files to limit the modifiers.
@@ -22,6 +26,7 @@ The authoring guide, with the tall font and hyphenation rules and the `<span>` t
 ```
 ---
 title: Book title, or SNBT text component
+displayTitle: Item name, when it is longer than the 32 characters of a title
 author: Name
 rarity: common|uncommon|rare|epic|mythic|cursed
 styles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }

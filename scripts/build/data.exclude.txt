@@ -6,7 +6,6 @@ AGENTS.md
 docs/
 config.json
 mcb.config.js
-exclude.txt
 package*.json
 src/
 scripts/
@@ -15,3 +14,7 @@ node_modules/
 tests/
 *.sh
 *.csv
+libraries/
+logs/
+versions/
+temp/

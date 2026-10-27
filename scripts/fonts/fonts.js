@@ -3,7 +3,7 @@
 //
 // Vanilla fonts are read from the client jar once and cached in scripts/fonts/font_widths.json, so builds need no jar:
 //   node scripts/fonts/fonts.js [path/to/client.jar]
-// The jar is the one build.ps1 downloads to tests/.cache/mc, else the launcher's. The same run caches the pixel width of
+// The jar is the one npm run data downloads to tests/.cache/mc, else the launcher's. The same run caches the pixel width of
 // every glyph of the vanilla font images in scripts/fonts/font_textures.json, so a pack font can use those images at its own size.
 // Fonts of the resource pack, texturepack/assets/<namespace>/font/<name>.json, are read on every run from their own
 // bitmap and space providers. TrueType and unihex providers cannot be measured here, their glyphs get a guessed width.

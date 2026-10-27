@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Run every check in tests/ and print a summary.
+// Run every check in tests/ and print a summary, as npm test.
 //
 //     node tests/run_all.mjs                run the build, the unit tests and, when a client jar is found, the Java checks
-//     node tests/run_all.mjs --no-build     skip npx mcb build and reuse the current data/.../function output
+//     node tests/run_all.mjs --no-build     skip mcb build and reuse the current data/.../function output
 //     node tests/run_all.mjs --no-java      skip the checks that need the client jar and Java 25
 //     node tests/run_all.mjs --no-download  never fetch the client jar from Mojang
 //     node tests/run_all.mjs --release      also run the release checks, such as mc.dev being false
@@ -23,6 +23,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { buildFunctions } from '../scripts/build/common.mjs';
 import { fetchClientJar, fetchUnifont } from './tools/fetch_mc_jar.mjs';
 import { fetchLibs } from './tools/fetch_mc_libs.mjs';
 
@@ -64,13 +65,7 @@ function which(name) {
 
 /** Clean the generated functions, then compile src/ with mc-build. Returns [status, why]. */
 function build() {
-  fs.rmSync(path.join(ROOT, 'data', 'foxcraft_dungeon_loot', 'function'), { recursive: true, force: true });
-  for (const name of ['load.json', 'tick.json']) {
-    fs.rmSync(path.join(ROOT, 'data', 'minecraft', 'tags', 'function', name), { force: true });
-  }
-  const npx = which('npx');
-  if (!npx) return [null, 'npx not found'];
-  return [run(npx, ['mcb', 'build'], { cwd: ROOT, shell: IS_WINDOWS }), ''];
+  return [buildFunctions(), ''];
 }
 
 function unitTests(patterns) {
@@ -135,15 +130,18 @@ async function resolveJar(allowDownload) {
   }
 }
 
-/** Returns [name, status] pairs where status is PASS, FAIL or SKIPPED. */
-async function javaChecks(allowDownload) {
+/**
+ * Find Java 25 and the client jar, fetch the libraries and compile the given tests/java sources into tests/.cache/classes.
+ * Returns { java, runcp } to run a class with, or { skip } with the reason it cannot, or { fail } when compiling fails.
+ */
+export async function prepareJava(allowDownload, sourceNames = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'BookRender.java', 'ArabicShapingTable.java']) {
   const java = findJava();
-  if (!java) return [['java checks', 'SKIPPED no Java 25 found, set JAVA25']];
+  if (!java) return { skip: 'no Java 25 found, set JAVA25' };
   const found = await resolveJar(allowDownload);
-  if (found.skip) return [['java checks', `SKIPPED ${found.skip}`]];
+  if (found.skip) return { skip: found.skip };
   const jar = found.jar;
   const versionJson = jar.replace(/\.jar$/, '.json');
-  if (!fs.existsSync(versionJson)) return [['java checks', 'SKIPPED no version json next to the jar']];
+  if (!fs.existsSync(versionJson)) return { skip: 'no version json next to the jar' };
   const javac = path.join(path.dirname(java), IS_WINDOWS ? 'javac.exe' : 'javac');
   const classes = path.join(CACHE, 'classes');
   fs.mkdirSync(classes, { recursive: true });
@@ -151,12 +149,20 @@ async function javaChecks(allowDownload) {
   try {
     libs = await fetchLibs(versionJson, path.join(CACHE, 'libs'));
   } catch (exc) {
-    return [['java checks', `SKIPPED could not fetch libraries: ${exc.message}`]];
+    return { skip: `could not fetch libraries: ${exc.message}` };
   }
   const classpath = [jar, ...libs].join(path.delimiter);
-  const sources = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'BookRender.java', 'ArabicShapingTable.java'].map((n) => path.join(TESTS, 'java', n));
-  if (run(javac, ['-cp', classpath, '-d', classes, ...sources], { cwd: CACHE }) !== 0) return [['java compile', 'FAIL']];
-  const runcp = [classes, classpath].join(path.delimiter);
+  const sources = sourceNames.map((n) => path.join(TESTS, 'java', n));
+  if (run(javac, ['-cp', classpath, '-d', classes, ...sources], { cwd: CACHE }) !== 0) return { fail: 'java compile' };
+  return { java, runcp: [classes, classpath].join(path.delimiter), cache: CACHE };
+}
+
+/** Returns [name, status] pairs where status is PASS, FAIL or SKIPPED. */
+async function javaChecks(allowDownload) {
+  const prepared = await prepareJava(allowDownload);
+  if (prepared.skip) return [['java checks', `SKIPPED ${prepared.skip}`]];
+  if (prepared.fail) return [[prepared.fail, 'FAIL']];
+  const { java, runcp } = prepared;
   const functions = path.join(ROOT, 'data', 'foxcraft_dungeon_loot', 'function');
   const results = [];
   // Run from the cache folder, the game writes a logs/ folder into the working directory.
@@ -192,11 +198,11 @@ async function main() {
   const summary = [];
 
   if (flag('--no-build')) {
-    summary.push(['build (npx mcb build)', 'SKIPPED --no-build']);
+    summary.push(['build (mcb build)', 'SKIPPED --no-build']);
   } else {
     say('== build ==');
     const [code, why] = build();
-    summary.push(['build (npx mcb build)', code === null ? `SKIPPED ${why}` : code === 0 ? 'PASS' : 'FAIL']);
+    summary.push(['build (mcb build)', code === null ? `SKIPPED ${why}` : code === 0 ? 'PASS' : 'FAIL']);
   }
 
   say('\n== unit tests ==');
@@ -222,4 +228,4 @@ async function main() {
   return failed.length ? 1 : 0;
 }
 
-process.exit(await main());
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) process.exit(await main());

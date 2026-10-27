@@ -37,10 +37,10 @@ jobs:
       # A tag also runs the release checks, such as mc.dev being false
       - run: node tests/run_all.mjs ${{ startsWith(github.ref, 'refs/tags/') && '--release' || '' }}
 
-      # Packages both zips with the same script used locally. bash is used so the file mode in git does not matter
+      # Packages both zips with the same scripts used locally
       - run: command -v 7z || command -v 7zz || sudo apt-get install -y p7zip-full
 
-      - run: bash build.sh
+      - run: npm run build
         env:
           SKIP_TESTS: "1"
 

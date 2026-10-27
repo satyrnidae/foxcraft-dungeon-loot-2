@@ -1,7 +1,5 @@
 .*
-build.ps1
 config.json
-exclude.txt
 src/
 *.ase
 *.sh

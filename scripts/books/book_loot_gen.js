@@ -20,7 +20,7 @@ const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
 // Frontmatter keys, anything else is warned about. Title and author are required.
-const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'style', 'debug', 'generation'];
+const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'style', 'debug', 'generation', 'displaytitle'];
 const REQUIRED_KEYS = ['title', 'author'];
 
 // writable: true makes a book and quill. Its pages are plain strings, so it has no author and keeps no formatting
@@ -1798,6 +1798,17 @@ const TITLE_FILTER = /<filter\s+as=(?:"([^"]*)"|'([^']*)')\s*>(.*?)<\/filter>/gi
 // A title in SNBT also sets the item name, the book title itself is plain text. A plain title takes
 // <filter as="...">text</filter> for the chat-filtered title; custom_name has no filtered side, so an SNBT one does not.
 function titleOf(meta) {
+    const result = titleParts(meta);
+    // displayTitle is only the item name, so it has no 32 character limit and no filtered side
+    if (meta.displaytitle) {
+        const display = titleParts({ title: String(meta.displaytitle) });
+        if (display.filtered || /<\/?filter/i.test(display.text)) throw new Error('<filter> does not work in displayTitle, the item name has no filtered side');
+        result.display = { text: display.text, rich: display.rich };
+    }
+    return result;
+}
+
+function titleParts(meta) {
     const raw = meta.title || '';
     if (/^\s*[{[]/.test(raw)) {
         const rich = parseSnbt(raw);
@@ -1900,12 +1911,21 @@ function loreLines(meta, id, lang, count = 0) {
 // A plain name is a lang key, so a translation names the item in its own words.
 function itemName(title, rarity, key, lang) {
     const base = { color: RARITY_COLORS[rarity], italic: false };
-    if (!title.rich) {
-        const text = title.filtered || title.text;
+    const rich = title.display ? title.display.rich : title.rich;
+    if (!rich) {
+        const text = title.display ? title.display.text : title.filtered || title.text;
         lang[key] = escapePercent(text);
         return { translate: key, fallback: escapePercent(text), ...base };
     }
-    return { text: '', ...base, extra: [].concat(title.rich) };
+    return { text: '', ...base, extra: [].concat(rich) };
+}
+
+// The custom_name of a book, or null to leave the name to the game, which derives it from the book's title. A rich title or
+// displayTitle without a rarity is the name as written; a plain displayTitle always sets one, since the title is not the name.
+function nameOf(title, rarity, key, lang) {
+    const rich = title.display ? title.display.rich : title.rich;
+    if (rich && !rarity) return rich;
+    return rarity || title.display ? itemName(title, rarity, key, lang) : null;
 }
 
 // The text of a page as the reader sees it, with none of the formatting
@@ -1927,7 +1947,7 @@ function buildWritable(id, source, title, file, warnings) {
     const rarity = rarityOf(meta);
     const set = { 'minecraft:writable_book_content': { pages: texts } };
     const lang = {};
-    set['minecraft:custom_name'] = title.rich && !rarity ? title.rich : itemName(title, rarity, `book.${NS}.${id}.title`, lang);
+    set['minecraft:custom_name'] = nameOf(title, rarity, `book.${NS}.${id}.title`, lang) ?? itemName(title, rarity, `book.${NS}.${id}.title`, lang);
     if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
     const functions = [{ type: 'minecraft:set_components', components: set }];
     // The SNBT string form, a JSON compound would turn small ints into bytes
@@ -1984,8 +2004,8 @@ function buildBook(id, file, source = readSource(file)) {
     if (meta.generation !== undefined && parseGeneration(meta.generation) > 0) content.generation = parseGeneration(meta.generation);
     const set = { 'minecraft:written_book_content': content };
     const rarity = rarityOf(meta);
-    if (rarity) set['minecraft:custom_name'] = itemName(title, rarity, `book.${NS}.${id}.title`, lang);
-    else if (title.rich) set['minecraft:custom_name'] = title.rich;
+    const name = nameOf(title, rarity, `book.${NS}.${id}.title`, lang);
+    if (name) set['minecraft:custom_name'] = name;
     if (meta.model) set['minecraft:item_model'] = parseModel(meta.model);
     const functions = [{ type: 'minecraft:set_components', components: set }];
     // The SNBT string form, a JSON compound would turn small ints into bytes

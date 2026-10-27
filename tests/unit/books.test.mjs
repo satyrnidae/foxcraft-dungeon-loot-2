@@ -378,6 +378,25 @@ describe('book generator files', () => {
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
 
+  it('displayTitle is the item name alone, with no 32 character limit, while title stays the book title', () => {
+    const file = path.join(os.tmpdir(), 'display_test.md');
+    const long = 'Spiders: A Collection of Side Notes by a Researcher';
+    const build = (extra) => {
+      fs.writeFileSync(file, `---\ntitle: Spiders: Side Notes\nauthor: Me\n${extra}---\n\nx`);
+      return gen.buildBook('t', file);
+    };
+    const withRarity = build(`rarity: rare\ndisplayTitle: ${long}\n`);
+    const comps = withRarity.modifier.functions[0].components;
+    assert.equal(comps['minecraft:written_book_content'].title.raw, 'Spiders: Side Notes');
+    assert.deepEqual(comps['minecraft:custom_name'], { translate: 'book.foxcraft_dungeon_loot.t.title', fallback: long, color: 'aqua', italic: false });
+    assert.equal(withRarity.lang['book.foxcraft_dungeon_loot.t.title'], long);
+    assert.deepEqual(withRarity.warnings, []);
+    // Without a rarity a plain displayTitle still sets the name, and an SNBT one is the name as written
+    assert.equal(build(`displayTitle: ${long}\n`).modifier.functions[0].components['minecraft:custom_name'].fallback, long);
+    assert.deepEqual(build('displayTitle: {text: "Fancy", color: red}\n').modifier.functions[0].components['minecraft:custom_name'], { text: 'Fancy', color: 'red' });
+    assert.throws(() => build('displayTitle: <filter as="a">b</filter>\n'), /filter/);
+  });
+
   it('writes the frontmatter generation into the book content, leaving out the original', () => {
     const { dir, opts } = sandbox();
     try {
