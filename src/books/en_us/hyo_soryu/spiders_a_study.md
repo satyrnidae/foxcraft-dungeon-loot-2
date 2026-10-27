@@ -26,6 +26,8 @@ styles: {
 <vbottom>
 <center><style class=".symbol">~ \u{1f577} \u{1f577} \u{1f577} ~</style></center>
 
+
+
 <center>by Hyōtaru Sōryū</center>
 <br>
 

@@ -27,6 +27,8 @@ styles: {
 <vbottom>
 <center><style class=".symbol">~ \u{1f480} \u{1f480} \u{1f480} ~</style></center>
 
+
+
 <center>by Hyōtaru Sōryū</center>
 <br>
 # - Foreword -
