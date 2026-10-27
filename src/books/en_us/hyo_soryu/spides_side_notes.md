@@ -1,5 +1,6 @@
 ---
-title: Spiders - A Study
+title: "Spiders: Side Notes"
+displayTitle: "Spiders: A Collection of Side Notes"
 author: Hyōtaru Sōryū
 generation: tattered
 lore: Education for the common adventurer on encountering Spiders.
@@ -30,7 +31,7 @@ styles: {
 
 <center>by Hyōtaru Sōryū</center>
 <br>
+# - Foreword -
 
-The purpose of these manuals is to educate my fellow adventurers on the
-
-The rest of the text is so stained by spiderwebs it's entirely illegible.
+The purpose of these manuals is to educate my fellow adventurers on the aspects of fiends and aberrations, so that they may better eradicate them. This manual details the oversized arachnids of the overworld: the Spider.
+<br>

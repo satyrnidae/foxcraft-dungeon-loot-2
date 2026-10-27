@@ -1,5 +1,5 @@
 ---
-title: Skeletons - A Study
+title: "Studies of Skeletons"
 author: Hyōtaru Sōryū
 generation: tattered
 lore: Education for the common adventurer on encountering Skeletons.

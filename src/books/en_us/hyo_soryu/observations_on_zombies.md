@@ -1,5 +1,5 @@
 ---
-title: Zombies - A Study
+title: "Observations on Zombies"
 author: Hyōtaru Sōryū
 generation: tattered
 lore: Education for the common adventurer on encountering Zombies.
@@ -62,3 +62,7 @@ styles: {
    Zombies commonly drop their rotted flesh, up to two edible shavings. Eating it is not advised, as it is vile and weakens one's constitution.
 
    The rarer drops tend to be whatever armor they may be seen wearing, carrots, potatoes, ingots of iron, and swords or shovels of iron. Where the zombie acquired these items is still a mystery, as I have seen one such zombie drop a carrot without a farm in sight!
+<br>
+# - Afterword -
+
+   One day I hope to find whoever is responsible for creating these abhorrent creatures. But until then, I must be content with slaying any and all of them that I see… and now that you are properly forewarned, so too may you.
