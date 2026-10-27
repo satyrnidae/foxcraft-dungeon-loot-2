@@ -1,6 +1,6 @@
 # Books
 
-Written book loot is made from the markdown files here. This file has no frontmatter, so the generator skips it, like any markdown file without one. Edit the markdown and never the generated files; `mcb build` runs `scripts/book_loot_gen.js` on every build, or run `node scripts/book_loot_gen.js` by hand, add `--check` to write nothing and fail when output is stale. Generator internals are in `scripts/README.md`.
+Written book loot is made from the markdown files here. This file has no frontmatter, so the generator skips it, like any markdown file without one. Edit the markdown and never the generated files; `mcb build` runs `scripts/books/book_loot_gen.js` on every build, or run `node scripts/books/book_loot_gen.js` by hand, add `--check` to write nothing and fail when output is stale. Generator internals are in `scripts/books/README.md`.
 
 ## Files
 

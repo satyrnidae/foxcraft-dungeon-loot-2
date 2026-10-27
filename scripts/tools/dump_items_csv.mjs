@@ -3,11 +3,11 @@
 // the entry's, the pool's, then the table's. Rows are ordered by DungeonLootId, items without one come last by name, and an
 // item with neither id, custom name nor client item is left out.
 //
-//     node scripts/dump_items_csv.mjs [output.csv]      default dungeon_loot_items.csv in the repo root
+//     node scripts/tools/dump_items_csv.mjs [output.csv]      default dungeon_loot_items.csv in the repo root
 import fs from 'node:fs';
 import path from 'node:path';
 
-import * as pk from '../tests/unit/packdata.mjs';
+import * as pk from '../../tests/unit/packdata.mjs';
 
 const LOOT_TABLES = path.join(pk.DATA, 'loot_table', 'item');
 const SUFFIX = { byte: 'b', short: 's', int: '', long: 'L', float: 'f', double: 'd' };

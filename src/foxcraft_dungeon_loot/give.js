@@ -70,7 +70,7 @@ for (const full of files) {
 
 // Written books, one plain give function per en_us source in src/books, given by the function in give.mcb.
 // The generator's own finder decides what a book is, so the two cannot drift apart.
-const { findSources } = require('../../scripts/book_loot_gen.js');
+const { findSources } = require('../../scripts/books/book_loot_gen.js');
 for (const [id, source] of Object.entries(findSources(path.join(__dirname, '..', 'books')).en_us || {})) {
     // The folder of the source is the author, give_book_<id>_by_<author>, give_book_<id> for unattributed or outside an author folder, give_debug_book_<id> for debug
     const folder = source.rel.includes('/') ? path.posix.basename(path.posix.dirname(source.rel)) : 'unattributed';

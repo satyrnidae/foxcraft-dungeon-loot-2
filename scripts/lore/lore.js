@@ -5,7 +5,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { loadFonts, DEFAULT_FONT } = require('./fonts.js');
+const { loadFonts, DEFAULT_FONT } = require('../fonts/fonts.js');
 
 const FONTS = loadFonts();
 const LORE_WIDTH = 44;
@@ -27,7 +27,7 @@ let langs = null;
 function langsOf() {
     if (langs) return langs;
     langs = {};
-    const assets = path.join(__dirname, '..', 'texturepack', 'assets');
+    const assets = path.join(__dirname, '..', '..', 'texturepack', 'assets');
     for (const ns of fs.existsSync(assets) ? fs.readdirSync(assets) : []) {
         const dir = path.join(assets, ns, 'lang');
         if (!fs.existsSync(dir)) continue;

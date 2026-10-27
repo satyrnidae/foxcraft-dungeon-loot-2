@@ -3,21 +3,21 @@
 /**
  * Renders a pixel TrueType font to a Minecraft bitmap font: a glyph sheet PNG plus the font/ JSON that points at it.
  *
- *   node scripts/font_to_bitmap.js "Pixelated Elegance.ttf" pixellated_elegance --size 9
+ *   node scripts/fonts/font_to_bitmap.js "Pixelated Elegance.ttf" pixellated_elegance --size 9
  *
  * Writes texturepack/assets/<namespace>/textures/font/<name>.png and texturepack/assets/<namespace>/font/<name>.json.
  * Needs opentype.js, a dev dependency. Glyphs are filled without anti-aliasing and without hinting, so the size should be
  * a whole multiple of the pixel grid of the font: --preview shows the sheet as text.
- * Glyph widths are the ink of each glyph plus one pixel, as vanilla does it, so scripts/fonts.js measures it the same way.
+ * Glyph widths are the ink of each glyph plus one pixel, as vanilla does it, so scripts/fonts/fonts.js measures it the same way.
  */
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const opentype = require('opentype.js');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const COLUMNS = 16;
-const HELP = `usage: node scripts/font_to_bitmap.js <font.ttf> <name> [options]
+const HELP = `usage: node scripts/fonts/font_to_bitmap.js <font.ttf> <name> [options]
   --size N        pixel size of the font em, default the pixel grid of the font, found from the width of a period
   --grid N        font pixels across the em, when the width of a period does not show it; 8 for a font drawn on 4 units of 32
   --namespace S   default foxcraft_dungeon_loot

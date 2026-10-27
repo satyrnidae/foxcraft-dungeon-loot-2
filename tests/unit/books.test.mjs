@@ -1,4 +1,4 @@
-// The book generator in scripts/book_loot_gen.js: markdown to translatable text components, frontmatter, and the committed output.
+// The book generator in scripts/books/book_loot_gen.js: markdown to translatable text components, frontmatter, and the committed output.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
@@ -9,9 +9,9 @@ import { describe, it } from 'node:test';
 import * as pk from './packdata.mjs';
 
 const require = createRequire(import.meta.url);
-const gen = require('../../scripts/book_loot_gen.js');
-const fontsApi = require('../../scripts/fonts.js');
-const lore = require('../../scripts/lore.js');
+const gen = require('../../scripts/books/book_loot_gen.js');
+const fontsApi = require('../../scripts/fonts/fonts.js');
+const lore = require('../../scripts/lore/lore.js');
 const zlib = require('node:zlib');
 
 // An RGBA PNG of the pixels, for fonts built on the fly
@@ -666,7 +666,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('a code block is colored by its language and written as literal text components', () => {
-    const { highlight } = require('../../scripts/highlight.js');
+    const { highlight } = require('../../scripts/books/highlight.js');
     const colors = (code, language) => Object.fromEntries(highlight(code, language).flat().filter((p) => p.color).map((p) => [p.text, p.color]));
     assert.deepEqual(colors('{"a": [1, true]}', 'json'), { '"a"': 'dark_aqua', 1: 'dark_red', true: 'dark_red' });
     assert.equal(colors('x = 1 # c', 'py')['# c'], 'dark_gray');
@@ -1102,7 +1102,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('reflowLore joins lines without ending punctuation, keeps sentence ends and wraps to the width', () => {
-    const lore = require('../../scripts/lore.js');
+    const lore = require('../../scripts/lore/lore.js');
     const out = lore.reflowLore(['Hastily scrawled sheet music with', 'accompanying lyrics.', 'Second paragraph that is long enough to need a wrap somewhere here.']);
     assert.equal(out[0], 'Hastily scrawled sheet music with');
     assert.equal(out[1], 'accompanying lyrics.');
@@ -1236,7 +1236,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
 
   it('the generated books match their sources', () => {
     const result = gen.generate({ check: true });
-    assert.deepEqual(result.changed, [], 'run node scripts/book_loot_gen.js, or mcb build, to regenerate');
+    assert.deepEqual(result.changed, [], 'run node scripts/books/book_loot_gen.js, or mcb build, to regenerate');
   });
 });
 
@@ -1257,7 +1257,7 @@ describe('book give triggers', () => {
 });
 
 describe('music fences', () => {
-  const music = require('../../scripts/music.js');
+  const music = require('../../scripts/music/music.js');
   const widthOf = (ch) => lore.FONTS.widthOf(music.FONT, ch, false);
   // The spans of each staff line, each as its color, the glyphs it draws but bars, its bars and how far it advances
   const lines = (code) =>

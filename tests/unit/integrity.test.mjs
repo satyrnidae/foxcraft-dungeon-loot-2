@@ -9,7 +9,7 @@ import { scan } from '../tools/check_old_keys.mjs';
 import { dicts, sorted } from './checks.mjs';
 import * as pk from './packdata.mjs';
 
-const loreLib = createRequire(import.meta.url)('../../scripts/lore.js');
+const loreLib = createRequire(import.meta.url)('../../scripts/lore/lore.js');
 
 const NS = pk.NS;
 const ITEMS = pk.itemTables();
@@ -247,7 +247,7 @@ describe('enchantments', () => {
 });
 
 describe('lore', () => {
-  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore.js
+  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore/lore.js
   const MAX_LORE_WIDTH = loreLib.LORE_PIXELS;
 
   /**

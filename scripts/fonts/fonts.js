@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 // Glyph advance widths per font, for laying out book pages.
 //
-// Vanilla fonts are read from the client jar once and cached in scripts/font_widths.json, so builds need no jar:
-//   node scripts/fonts.js [path/to/client.jar]
+// Vanilla fonts are read from the client jar once and cached in scripts/fonts/font_widths.json, so builds need no jar:
+//   node scripts/fonts/fonts.js [path/to/client.jar]
 // The jar is the one build.ps1 downloads to tests/.cache/mc, else the launcher's. The same run caches the pixel width of
-// every glyph of the vanilla font images in scripts/font_textures.json, so a pack font can use those images at its own size.
+// every glyph of the vanilla font images in scripts/fonts/font_textures.json, so a pack font can use those images at its own size.
 // Fonts of the resource pack, texturepack/assets/<namespace>/font/<name>.json, are read on every run from their own
 // bitmap and space providers. TrueType and unihex providers cannot be measured here, their glyphs get a guessed width.
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-const ROOT = path.join(__dirname, '..');
+const ROOT = path.join(__dirname, '..', '..');
 const CACHE = path.join(__dirname, 'font_widths.json');
 const TEXTURE_CACHE = path.join(__dirname, 'font_textures.json');
 const PACK_ASSETS = path.join(ROOT, 'texturepack', 'assets');
@@ -356,7 +356,7 @@ function packFonts(cached, assetsDir, ascents = {}) {
         const file = path.join(assetsDir, ns, 'textures', p);
         if (fs.existsSync(file)) return fs.readFileSync(file);
         if (textures[id]) return { cellH: textures[id].cellH, pixels: unpack(textures[id].pixels) };
-        throw new Error(`texture ${id} is not in texturepack/assets or the cache of the vanilla font images, run node scripts/fonts.js`);
+        throw new Error(`texture ${id} is not in texturepack/assets or the cache of the vanilla font images, run node scripts/fonts/fonts.js`);
     };
     const out = {};
     for (const id of Object.keys(found)) {

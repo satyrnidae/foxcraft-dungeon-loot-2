@@ -448,7 +448,7 @@ public class BookRender {
                         for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) {
                             at = where + " line " + (i + 1);
                             float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
-                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/README.md)");
+                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/books/README.md)");
                         }
                         g.dispose();
                         ImageIO.write(image, "png", dir.resolve(String.format("page_%02d.png", n + 1)).toFile());

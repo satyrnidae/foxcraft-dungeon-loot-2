@@ -1,4 +1,4 @@
-// A ```music fence of a book as staff lines in foxcraft_dungeon_loot:staff_notation. See scripts/README.md for the
+// A ```music fence of a book as staff lines in foxcraft_dungeon_loot:staff_notation. See scripts/books/README.md for the
 // notation. Each staff line is two spans: the staff and its ledger lines in grey, padding back to its start, then the bars,
 // clefs, keys, times, notes and rests in black, every glyph set at its place with padding.
 const FONT = 'foxcraft_dungeon_loot:staff_notation';

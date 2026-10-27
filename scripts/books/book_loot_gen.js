@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-// Markdown to written book item modifier. See scripts/README.md for the format.
+// Markdown to written book item modifier. See scripts/books/README.md for the format.
 //
-//   node scripts/book_loot_gen.js            generate everything under src/books
-//   node scripts/book_loot_gen.js --check    write nothing, exit 1 when generated files are out of date
-//   node scripts/book_loot_gen.js a.md ...   only the books of the given source files
+//   node scripts/books/book_loot_gen.js            generate everything under src/books
+//   node scripts/books/book_loot_gen.js --check    write nothing, exit 1 when generated files are out of date
+//   node scripts/books/book_loot_gen.js a.md ...   only the books of the given source files
 //
 // mc-build runs it on every build through src/foxcraft_dungeon_loot/books.js.
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.join(__dirname, '..');
+const ROOT = path.join(__dirname, '..', '..');
 const NS = 'foxcraft_dungeon_loot';
 const BOOK_DIR = path.join(ROOT, 'src', 'books');
 // Generated files get a folder of their own, so a hand-written book modifier or table beside them is never cleaned up
@@ -42,11 +42,11 @@ const MAX_PAGES = 100;
 const PAGE_LINES = 14;
 const PAGE_WIDTH = 114;
 const PAGE_EDIT_LENGTH = 1024;
-// Advance widths per font: the vanilla fonts cached by scripts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
-const { withNamespace, DEFAULT_FONT } = require('./fonts.js');
+// Advance widths per font: the vanilla fonts cached by scripts/fonts/fonts.js and the fonts of the resource pack, read on every run by lore.js.
+const { withNamespace, DEFAULT_FONT } = require('../fonts/fonts.js');
 const { highlight } = require('./highlight.js');
-const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore, UNSPACED } = require('./lore.js');
-const { musicLines, FONT: MUSIC_FONT } = require('./music.js');
+const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore, UNSPACED } = require('../lore/lore.js');
+const { musicLines, FONT: MUSIC_FONT } = require('../music/music.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
@@ -640,7 +640,7 @@ function reserveRoom(inner, part, bold, font) {
 const widthOf = ({ ch, bold, font }) => FONTS.widthOf(font, ch, bold);
 
 // How the game's text renderer draws Arabic: each letter takes the form its neighbors give it, so a line is as wide as its
-// shaped glyphs, which the splitter does not know, it measures the plain letters. scripts/arabic_shaping.json is made from
+// shaped glyphs, which the splitter does not know, it measures the plain letters. scripts/books/arabic_shaping.json is made from
 // the game's own shaper by tests/java/ArabicShapingTable.java. A glyph of a shaped text gets sw, its width as drawn.
 const SHAPING = require('./arabic_shaping.json');
 const shapeOf = (ch) => SHAPING.letters[ch.codePointAt(0).toString(16)];

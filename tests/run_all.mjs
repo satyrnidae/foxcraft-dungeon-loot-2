@@ -162,7 +162,7 @@ async function javaChecks(allowDownload) {
   // Run from the cache folder, the game writes a logs/ folder into the working directory.
   for (const [label, main, ...args] of [
     // The table the book generator measures Arabic with, written again, and a failure, when the game's shaper gives another
-    ['arabic shaping table (ArabicShapingTable)', 'ArabicShapingTable', path.join(ROOT, 'scripts', 'arabic_shaping.json')],
+    ['arabic shaping table (ArabicShapingTable)', 'ArabicShapingTable', path.join(ROOT, 'scripts', 'books', 'arabic_shaping.json')],
     ['vanilla behavior (Harness)', 'Harness'],
     ['data codecs (Scan)', 'Scan', path.join(ROOT, 'data')],
     ['generated commands (CmdCheck)', 'CmdCheck', functions],
