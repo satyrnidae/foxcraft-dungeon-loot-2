@@ -1,0 +1,243 @@
+# Enchantment yaml define Proof of Concept
+# Anything commented out below is an unused option of the enchantment format, kept as reference for the generator.
+# Type-keyed shorthand: "minecraft:x": {...} expands to {"type": "minecraft:x", ...}. A bare value
+# expands to the type's one obvious field, noted per use. Namespace can be dropped for minecraft:.
+
+# Translatable names
+name:
+  - en_us: "Hæmolymph Sacrifice"
+  - fr_fr: "Sacrifice de l'Hémolymphe"
+
+# Lore text lives here, not in the item variants. Proposed, unused until the generators coordinate.
+# An item variant that lists this enchantment under enchantments: gets the entry for its level appended to the
+# lore automatically, so the text is written once per level instead of once per variant. Items keep effects:
+# in their own def for intrinsics and pseudo-enchantments, which have no enchantment to hang text on.
+#
+# Coordination with the item generator:
+# - Enchantment generator runs first and writes a lore fragment per enchantment id and level to a build cache
+#   file, for example .build/enchant_lore.json, with name, from name: and the level, and description already resolved per locale.
+# - Item generator reads the cache, looks up each id: level in a variant's enchantments:, and inserts the
+#   fragments ahead of the item's own effects: entries, intrinsics stay at the bottom. Ordering among
+#   enchantments follows the order listed in the variant.
+# - Item generator owns line wrapping and the width check, the enchantment generator only supplies text.
+# - A listed enchantment with no lore: block, or no entry for that level, adds no lore line. Generator warns.
+# - Changing a level's text here regenerates every item that lists it, so the build must rerun items after enchants.
+lore:
+  # No name or level entry. The generator builds the name line from name: above plus the roman numeral of the
+  # level the item has.
+  # Name color per level, same names as an item effect type. Missing levels use the item rarity.
+  type:
+    1: rare
+    2: epic
+  # Description per level. Shared text with different numbers can use ${...} substitutions as items do.
+  description:
+    1:
+      - translate:
+          - en_us: "Gain 10 seconds of ${speed}, 5 seconds of ${resistance} ${level_2}, and 3 seconds of ${regeneration} whenever you kill an arthropod."
+          - fr_fr: "Obtenez 10 secondes de ${speed}, 5 secondes de ${resistance} ${level_2} et 3 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+        with:
+          - speed:
+              - type: translatable
+                translate: effect.minecraft.speed
+                fallback: Speed
+          - resistance:
+              - type: translatable
+                translate: effect.minecraft.resistance
+                fallback: Resistance
+          - level_2:
+              - type: translatable
+                translate: potion.potency.1
+                fallback: II
+          - regeneration:
+              - type: translatable
+                translate: effect.minecraft.regeneration
+                fallback: Regeneration
+    2:
+      - translate:
+          - en_us: "Gain 10 seconds of ${speed} ${level_2}, 5 seconds of ${resistance} ${level_3}, and 5 seconds of ${regeneration} whenever you kill an arthropod."
+          - fr_fr: "Obtenez 10 secondes de ${speed} ${level_2}, 5 secondes de ${resistance} ${level_3} et 5 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+        with:
+          - speed:
+              - type: translatable
+                translate: effect.minecraft.speed
+                fallback: Speed
+          - level_2:
+              - type: translatable
+                translate: potion.potency.1
+                fallback: II
+          - resistance:
+              - type: translatable
+                translate: effect.minecraft.resistance
+                fallback: Resistance
+          - level_3:
+              - type: translatable
+                translate: potion.potency.2
+                fallback: III
+          - regeneration:
+              - type: translatable
+                translate: effect.minecraft.regeneration
+                fallback: Regeneration
+
+# Item ids, a #tag, or a list of ids
+supportedItems: "#minecraft:swords"
+# Items the enchanting table can offer it on, subset of supportedItems. Defaults to supportedItems.
+# primaryItems: "#minecraft:swords"
+
+# Enchantments that cannot share an item with this one. Id, #tag or list.
+# exclusiveSet: "#minecraft:exclusive_set/damage"
+# exclusiveSet:
+#   - "minecraft:sharpness"
+#   - "minecraft:smite"
+
+weight: 1
+maxLevel: 2
+
+# Costs are base + perLevelAboveFirst * (level - 1)
+cost:
+  min:
+    base: 1
+    perLevelAboveFirst: 1
+  max:
+    base: 1
+    perLevelAboveFirst: 1
+anvilCost: 8
+
+# any, hand, mainhand, offhand, armor, feet, legs, chest, head, body, saddle
+slots:
+ - "mainhand"
+
+effects:
+  "minecraft:post_attack":
+    - enchanted: attacker
+      affected: attacker
+      # Only post_attack and equipment_drops have these; affected is post_attack only.
+      # enchanted: attacker | victim | damaging_entity
+      # affected: attacker | victim | damaging_entity
+      effect:
+        # For this effect, "function" is implied
+        "minecraft:run_function": "foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/on_killed_arthropod"
+        # Other entity effects:
+        # "minecraft:apply_mob_effect":
+        #   to_apply: "minecraft:speed"       # id, #tag or list
+        #   min_duration: 5                   # seconds, level based value
+        #   max_duration: 10
+        #   min_amplifier: 0
+        #   max_amplifier: 1
+        # "minecraft:damage_entity":
+        #   damage_type: "minecraft:magic"
+        #   min_damage: 1
+        #   max_damage: 4
+        # "minecraft:ignite": 4                # seconds
+        # "minecraft:explode":
+        #   radius: 3
+        #   create_fire: false
+        #   block_interaction: none            # none, block, mob, tnt, trigger
+        #   attribute_to_user: true
+        #   damage_type: "minecraft:explosion"
+        #   knockback_multiplier: 1
+        #   offset: [0, 0, 0]
+        #   immune_blocks: "#minecraft:air"
+        #   small_particle: {type: "minecraft:explosion"}
+        #   large_particle: {type: "minecraft:explosion_emitter"}
+        #   block_particles: []
+        #   sound: "minecraft:entity.generic.explode"
+        # "minecraft:apply_impulse":
+        #   direction: [0, 1, 0]
+        #   coordinate_scale: [1, 1, 1]
+        #   magnitude: 0.5
+        # "minecraft:apply_exhaustion": 4      # amount, level based value
+        # "minecraft:play_sound":
+        #   sound: "minecraft:entity.player.levelup"    # id or list of ids
+        #   volume: 1
+        #   pitch: 1
+        # "minecraft:spawn_particles":
+        #   particle: {type: "minecraft:heart"}
+        #   horizontal_position: {type: in_bounding_box}   # or entity_position, with optional offset and scale
+        #   vertical_position: {type: entity_position, offset: 1}
+        #   horizontal_velocity: {movement_scale: 0}       # movement_scale and base, both optional
+        #   vertical_velocity: {base: 0.1}
+        #   speed: 1
+        # "minecraft:summon_entity":
+        #   entity: "minecraft:lightning_bolt"
+        #   join_team: false
+        # "minecraft:change_item_damage":
+        #   amount: 1
+        # "minecraft:all_of":                  # bare list implies "effects"
+        #   - "minecraft:ignite": 4
+        #   - "minecraft:run_function": "ns:path"
+      requirements:
+        "minecraft:all_of":
+          # For this requirement, "terms" is implied.
+          - "minecraft:entity_properties":
+              entity: this
+              predicate:
+                "minecraft:entity_type": "#foxcraft_dungeon_loot:arthropods"
+          - "minecraft:entity_properties":
+              entity: this
+              predicate:
+                "minecraft:nbt": "{Health:0.0f}"
+          # Other common requirements:
+          # - "minecraft:random_chance": {chance: 0.1}
+          # - "minecraft:damage_source_properties":
+          #     predicate: {is_direct: true}
+          # - "minecraft:inverted": {term: ...}
+          # - "minecraft:any_of": [...]
+          # - "minecraft:weather_check": {raining: true}
+          # - "minecraft:location_check": {predicate: {dimension: "minecraft:the_nether"}}
+          # - "minecraft:enchantment_active_check": {active: true}   # only useful on tick/location_changed
+          # - "minecraft:value_check": {value: {type: "minecraft:score", ...}, range: {min: 1}}
+
+  # Other effect components. Verified against the 26.3 jar.
+  # Level based values: constant {value}, linear {base, per_level_above_first}, fraction {numerator, denominator},
+  # levels_squared {added}, lookup {values: [...], fallback}, clamped {value, min, max}, exponent {base, power}.
+  # A bare number is a constant. Value effects: add {value}, multiply {factor}, set {value},
+  # remove_binomial {chance}, scale_exponentially {base, exponent}, all_of {effects}.
+  #
+  # Value components, each a list of {effect: <value effect>, requirements?}
+  # "minecraft:damage":
+  #   - effect:
+  #       "minecraft:add":
+  #         value: {"minecraft:linear": {base: 1, per_level_above_first: 0.5}}
+  #     requirements: {...}
+  # Same shape: damage_protection, armor_effectiveness, knockback, smash_damage_per_fallen_block, item_damage,
+  # ammo_use, projectile_count, projectile_spread, projectile_piercing, block_experience, mob_experience,
+  # repair_with_xp, fishing_time_reduction, fishing_luck_bonus, trident_return_acceleration.
+  # damage_protection is in 1/25 of a damage point, and the sum caps at 20.
+  # equipment_drops is the same but each entry also has enchanted: attacker | victim | damaging_entity.
+  # "minecraft:damage_immunity":
+  #   - effect: {}
+  #     requirements: {...}
+  #
+  # Single value effect, no list and no requirements:
+  # "minecraft:crossbow_charge_time": {"minecraft:add": {value: {"minecraft:linear": {base: -0.25, per_level_above_first: -0.25}}}}
+  # "minecraft:trident_spin_attack_strength": {"minecraft:add": {value: 1.5}}
+  #
+  # Entity effect components, lists of {effect: <entity effect>, requirements?} with no enchanted or affected:
+  # hit_block, tick, projectile_spawned, post_piercing_attack
+  #
+  # "minecraft:location_changed": same list shape, with the entity effects plus the location effects
+  #   replace_block {offset, predicate, block_state, trigger_game_event},
+  #   replace_disk {radius, height, offset, predicate, block_state, trigger_game_event},
+  #   set_block_properties {properties, offset, trigger_game_event}
+  #   and the "minecraft:attribute" effect, which is added while the enchantment is active.
+  #   - effect:
+  #       "minecraft:attribute":
+  #         id: "foxcraft_dungeon_loot:haemolymph"
+  #         attribute: "minecraft:movement_speed"
+  #         amount: {"minecraft:linear": {base: 0.1, per_level_above_first: 0.05}}
+  #         operation: add_multiplied_base    # add_value, add_multiplied_base, add_multiplied_total
+  #
+  # Marker components, an empty object:
+  # "minecraft:prevent_equipment_drop": {}
+  # "minecraft:prevent_armor_change": {}
+  #
+  # Sound components, bare lists:
+  # "minecraft:trident_sound": ["minecraft:item.trident.riptide_1"]
+  # "minecraft:crossbow_charging_sounds": [{start: "minecraft:item.crossbow.quick_charge_1", end: "minecraft:item.crossbow.loading_end"}]
+  #
+  # Attribute modifiers while equipped in a supported slot, plain list with no requirements:
+  # "minecraft:attributes":
+  #   - id: "foxcraft_dungeon_loot:haemolymph"
+  #     attribute: "minecraft:attack_damage"
+  #     amount: {"minecraft:linear": {base: 1, per_level_above_first: 1}}
+  #     operation: add_value

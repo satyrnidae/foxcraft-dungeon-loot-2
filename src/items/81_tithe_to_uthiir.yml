@@ -1,0 +1,385 @@
+# Tithe to Uthiir: YAML Item Definition Format Proposal Sketch
+
+# First line can be a comment describing the item and its variants.
+# Tithe to Uthiir is a netherite sword blessed by the God of Arthropods Uthiir the Many-Legged.
+# Its intrinsic ability allows spiders and cave spiders killed by this weapon to drop a Grasp of Uthiir throwable spiderweb.
+
+# The base item details are defined in the main body, while variant overrides go in the variants: section
+
+# name is a translatable text component so it can be one of:
+# - a bare string, interpreted as a bare translation string, or
+# - a list of objects in the form lang_code: "value", where lang_code can be omitted and a bare string entered for en_us
+name:
+  - Tithe to Uthiir
+  - fr_fr: La Dimê d'Uthiir
+
+# Item is defined in variants
+# item: minecraft:netherite_sword
+
+# The various custom data like DungeonLootId added in define.json via set_custom_data
+customData:
+  dungeonLootId: 81
+  dungeonItem: true # converts to 1b
+
+# minecraft:item_model component
+# Provided by the variants for this example.
+# model: foxcraft_dungeon_loot:epic/tithe_to_uthiir
+
+# Pack rarity, not the minecraft:rarity component. It picks the rarity/<name> modifier, which sets the rarity byte
+# in custom data and appends the Rarity lore line, and the loot tier. Name color is set separately.
+# One of common, uncommon, rare, epic, mythic, or cursed. The one "exotic" item will be swapped to "mythic".
+# Can be excluded for items like Tithe to Uthiir which have defined variants.
+# Defaults to common.
+# rarity: "epic"
+
+# Lore helper. Base item blurb, the flavor lines at the top of the lore. Variants can override this
+blurb:
+  - en_us: Uthiir, God of Arthropods, kindly asks that you thin the herd.
+  - fr_fr: Uthiir, le dieu des arthropodes, demande de bien voulouir éclaircir les rangs.
+# Lore helper. Each entry becomes a colored name plus wrapped description in the lore, no game behavior.
+# Enchantments do not belong in effects: once the enchantment generator supplies lore text (see the lore: block in
+# src/enchantment/*.yml), a variant's enchantments: list is enough and the matching effects: entries below, the
+# Haemolymph, Aura and Balm ones, move into the enchantment defs. Only intrinsics and pseudo-enchantments stay here,
+# for example Uthiir's Embrace, since they have no enchantment definition. Generated lore order is the variant's
+# enchantments in listed order, then effects:, so intrinsics stay at the bottom. The item generator needs the
+# enchantment generator's lore cache before it runs. Until then both are written out by hand as in the variants below.
+# Base item effects are appended after the variant effects.  This keeps intrinsics at the bottom of the list.
+effects:
+  - name:
+      - en_us: Uthiir's Embrace
+      - fr_fr: L'Étreinte d'Uthiir
+    # Used to determine the color of the effect name in the lore. Matches rarity, plus adds an "intrinsic" type which colors the title gold
+    type: intrinsic
+    description:
+      # Translated string entries can include formatting cues alongside the text value. The generator should do its best to align substitutions
+      # In this case, the translated text component with: tag will have one %1$s entry pointing to the Grasp of Uthiir substitution, which itself has multiple translations.
+      # The book generator does this already.
+      # Note that translations should break lines with \n to simplify the substitution alignment.
+      # Substitution can either be inline or, as shown below, via ${identifiers} and a with: block.
+      - en_us:
+          - "Upon killing a spider or a cave spider there is a 10% chance that it will drop the "
+          - text: Grasp of Uthiir
+            color: aqua
+          - ", which allows you to throw a projectile that will entangle your target in cobwebs."
+      - fr_fr:
+          - "Lorsqu'il est utilisé pour tuer une araignée ou une araignée des cavernes, il y a 10% de chance qu'elle laisse tomber la «"
+          - text: Poigne d'Uthiir
+            color: aqua
+          - "», qui permet de lancer un projectile capable d'emprisonner botre cible dans des toiles d'araignée."
+
+# set_enchantments
+enchantments:
+  - "minecraft:bane_of_arthropods": 5
+  - "minecraft:mending": 1
+  - "minecraft:unbreaking": 1
+
+# Unused options. Anything commented out below is a possible entry, kept as reference for the generator.
+# Names checked against the 26.3 jar. Anything set here goes into set_components of the generated modifier,
+# and variants may override any of it. Namespace can be dropped for minecraft: ids.
+
+# Loot table pool. Defaults: one roll, always.
+# weight: 1             # weight within the rarity grab bag and random pool, 0 keeps it out of both
+# quality: 0
+# count: 1              # stack count, or {min: 1, max: 3}
+# grabBag: true         # include in <rarity>_grab_bag
+# condition: ...        # loot condition added to the pool
+# obtainable: false     # no loot table or trigger, give function only
+
+# Extra raw lore lines above the blurb, for anything blurb and effects do not cover. Lore width limits still apply.
+# lore:
+#   - en_us: "Found in a spider's nest."
+
+# Tooltip. hidden_components is a list of component ids to hide, hide_tooltip hides everything.
+# tooltipDisplay:
+#   hideTooltip: false
+#   hiddenComponents:
+#     - "minecraft:attribute_modifiers"
+#     - "minecraft:enchantments"
+# Native minecraft:rarity component, tints the item name. Separate from the pack rarity above and unset by default.
+# nativeRarity: epic       # common, uncommon, rare, epic
+# tooltipStyle: foxcraft_dungeon_loot:epic
+
+# Durability. Unbreakable ignores damage.
+# unbreakable: true
+# maxDamage: 2031
+# damage: 0
+# repairCost: 0
+# enchantable: 15       # enchantability, "value"
+# repairable: "#minecraft:netherite_tool_materials"    # item, list, or #tag
+# maxStackSize: 1
+
+# Glint: true forces it, false hides it. Unset uses the enchantment glint.
+# enchantmentGlintOverride: true
+
+# Attribute modifiers. Replaces the item's default ones, so repeat the sword's attack damage and speed to keep them.
+# attributeModifiers:
+#   - type: "minecraft:attack_damage"
+#     id: "foxcraft_dungeon_loot:tithe_to_uthiir"
+#     amount: 8
+#     operation: add_value        # add_value, add_multiplied_base, add_multiplied_total
+#     slot: mainhand              # any, hand, mainhand, offhand, armor, feet, legs, chest, head, body, saddle
+#     display: default            # default, hidden, or {type: override, value: <text component>}
+
+# Weapon behavior
+# weapon:
+#   itemDamagePerAttack: 1
+#   disableBlockingForSeconds: 0
+# attackRange:
+#   minReach: 0
+#   maxReach: 3
+#   hitboxMargin: 0.3
+#   mobFactor: 1
+# useCooldown:
+#   seconds: 1
+#   cooldownGroup: "foxcraft_dungeon_loot:tithe_to_uthiir"
+# damageResistant: "#minecraft:is_fire"    # damage type tag the item entity ignores
+# deathProtection: ...                     # death_effects list
+
+# Adventure mode. Block ids or #tags.
+# canBreak: "#minecraft:cobweb"
+# canPlaceOn: "minecraft:stone"
+
+# Damage and use. Rarely needed on a sword.
+# tool: {rules: [...], defaultMiningSpeed: 1, damagePerBlock: 1}
+# equippable: {slot: mainhand}
+# blocksAttacks: {...}
+# consumable / food / useRemainder / glider omitted, not relevant to a sword
+
+# Raw components not covered above, written as they appear in set_components. Last word on any conflict.
+# components:
+#   "minecraft:custom_model_data": {strings: ["alt"]}
+
+# If any variants are present, the base item is no longer obtainable.
+# Variant IDs are set automatically by their order. These are used in the /trigger give_ scoreboards and on loot tables.
+variants:
+  # Variant function name is used for the name of the item modifier file.
+  - function: epic
+    # If any variants override rarity it cannot be set in the base item defines.
+    rarity: epic
+    model: foxcraft_dungeon_loot:epic/tithe_to_uthiir
+    item: minecraft:netherite_sword
+    # Variants can override any base component above, for example:
+    # unbreakable: true
+    # maxDamage: 2031
+    # attributeModifiers: [...]
+    # enchantable: 15
+    # weight: 1             # variant weight in the grab bag, defaults to the base weight
+    # obtainable: false     # variant gets no trigger or loot table pool, give function only
+    # name / lore: override per variant, same shape as the base
+    # blurb could be overridden here if the variant should have a different one. This will be used in place of the base item blurb.
+    # If any variant overrides the blurb, the blurb must be set in all variant files. It can be inherited from the base item.
+    # blurb: This is a blurb override! Ha ha!
+    # Variant effects are cumulative, unlike blurbs.
+    effects:
+      # Eventually I'd like to move effect blurbs to be closely tied with enchantments, but I have no plans for that at this stage.
+      # Haemolymph Sacrifice is pulled from the enchantment lore cache at build time, based on the enchants applied by
+      # this variant's enchantments: list, so the entry below is kept for reference only.
+      # - name:
+      #     # translatable text component with substitutions can be manually specified, such as in this case with the enchantment level.
+      #     # type: translatable is implied
+      #     - translate:
+      #         - en_us: "Haemolymph Sacrifice ${level}"
+      #         - fr_fr: "Sacrifice de l'Hémolymphe ${level}"
+      #       with:
+      #         - level:
+      #           # Translatable text components can also be specified manually to reference an existing translation
+      #           # Basically any text component should be able to be manually specified in yaml
+      #           - type: translatable
+      #               # If a translate entry doesn't have a lang members it is treated as a bare translation
+      #             translate: enchantment.level.2
+      #             fallback: II
+      #   type: epic # for light_purple
+      #   description:
+      #     - translate:
+      #         - en_us: "Gain 10 seconds of ${speed} ${level_2}, 5 seconds of ${resistance} ${level_3}, and 5 seconds of ${regeneration} whenever you kill an arthropod."
+      #         - fr_fr: "Obtenez 10 secondes de ${speed} ${level_2}, 5 secondes de ${resistance} ${level_3} et 5 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+      #       with:
+      #         - speed:
+      #             - type: translatable
+      #               translate: effect.minecraft.speed
+      #               fallback: Speed
+      #         - level_2:
+      #             - type: translatable
+      #               translate: potion.potency.1
+      #               fallback: II
+      #         - resistance:
+      #             - type: translatable
+      #               translate: effect.minecraft.resistance
+      #               fallback: Resistance
+      #         - level_3:
+      #             - type: translatable
+      #               translate: potion.potency.2
+      #               fallback: III
+      #         - regeneration:
+      #             - type: translatable
+      #               translate: effect.minecraft.regeneration
+      #               fallback: Regeneration
+      - name:
+          - en_us: "Aura of Uthiir"
+          - fr_fr: "Aura d'Uthiir"
+        type: epic
+        description:
+          - translate:
+              - en_us: "Upon killing an Arthropod, there is a 10% chance that an ominous aura afflicts all hostile mobs within a 10-meter radius with ${wither} ${level_3}, and all other arthropods in a 10-meter radius with ${weakness} ${level_3}, for 5 seconds."
+              - fr_fr: "Lorsqu'un arthropode est tué, il existe 10 % de chances qu'une aura inquiétante affecte, pendant 5 secondes, toutes les créatures hostiles situées dans un rayon de 10 mètres avec l'effet ${wither} ${level_3}, ainsi que tous les autres arthropodes présents dans ce même rayon avec l'effet ${weakness} ${level_3}."
+            with:
+              - wither:
+                  - type: translatable
+                    translate: effect.minecraft.wither
+                    fallback: Wither
+              - level_3:
+                  - type: translatable
+                    translate: potion.potency.2
+                    fallback: III
+              - weakness:
+                  - type: translatable
+                    translate: effect.minecraft.weakness
+                    fallback: Weakness
+      - name:
+          - translate:
+              - en_us: "Balm of the Spider God ${level_4}"
+              - fr_fr: "Baume du Dieu-Araignée ${level_4}"
+            with:
+              - level_4:
+                  - translate: enchantment.level.4
+                    fallback: IV
+        type: mythic
+        description:
+          - translate:
+              - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 30-second ${strength} ${level_3} effect as well."
+              - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_3} d'une durée de 30 secondes."
+            with:
+              - strength:
+                  - translate: effect.minecraft.strength
+                    fallback: Strength
+              - level_3:
+                  - translate: potion.potency.2
+                    fallback: III
+    # Eventually I want to be able to derive effects from these, but that will require some more thought to design
+    enchantments:
+      - "foxcraft_dungeon_loot:aura_of_uthiir": 1
+      - "foxcraft_dungeon_loot:haemolymph_sacrifice": 2
+      - "foxcraft_dungeon_loot:balm_of_the_spider_god": 4
+  # Rare is the diamond one: no Aura of Uthiir, weaker Hæmolymph Sacrifice and Balm
+  - function: rare
+    rarity: rare
+    model: foxcraft_dungeon_loot:rare/tithe_to_uthiir
+    item: minecraft:diamond_sword
+    effects:
+      # Haemolymph Sacrifice is pulled from the enchantment lore cache at build time, based on the enchants applied by
+      # this variant's enchantments: list, so the entry below is kept for reference only.
+      # - name:
+      #     - translate:
+      #         - en_us: "Haemolymph Sacrifice ${level}"
+      #         - fr_fr: "Sacrifice de l'Hémolymphe ${level}"
+      #       with:
+      #         - level:
+      #             - type: translatable
+      #               translate: enchantment.level.1
+      #               fallback: I
+      #   type: rare # for aqua
+      #   description:
+      #     - translate:
+      #         - en_us: "Gain 10 seconds of ${speed}, 5 seconds of ${resistance} ${level_2}, and 3 seconds of ${regeneration} whenever you kill an arthropod."
+      #         - fr_fr: "Obtenez 10 secondes de ${speed}, 5 secondes de ${resistance} ${level_2} et 3 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+      #       with:
+      #         - speed:
+      #             - type: translatable
+      #               translate: effect.minecraft.speed
+      #               fallback: Speed
+      #         - resistance:
+      #             - type: translatable
+      #               translate: effect.minecraft.resistance
+      #               fallback: Resistance
+      #         - level_2:
+      #             - type: translatable
+      #               translate: potion.potency.1
+      #               fallback: II
+      #         - regeneration:
+      #             - type: translatable
+      #               translate: effect.minecraft.regeneration
+      #               fallback: Regeneration
+      - name:
+          - translate:
+              - en_us: "Balm of the Spider God ${level_b}"
+              - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+            with:
+              - level_b:
+                  - type: translatable
+                    translate: enchantment.level.3
+                    fallback: III
+        type: epic
+        description:
+          - translate:
+              - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} ${level_s} effect as well."
+              - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_s} d'une durée de 10 secondes."
+            with:
+              - strength:
+                  - type: translatable
+                    translate: effect.minecraft.strength
+                    fallback: Strength
+              - level_s:
+                  - type: translatable
+                    translate: potion.potency.2
+                    fallback: III
+    enchantments:
+      - "foxcraft_dungeon_loot:haemolymph_sacrifice": 1
+      - "foxcraft_dungeon_loot:balm_of_the_spider_god": 3
+  # Uncommon is the iron one: Balm only
+  - function: uncommon
+    rarity: uncommon
+    model: foxcraft_dungeon_loot:uncommon/tithe_to_uthiir
+    item: minecraft:iron_sword
+    effects:
+      - name:
+          - translate:
+              - en_us: "Balm of the Spider God ${level_b}"
+              - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+            with:
+              - level_b:
+                  - type: translatable
+                    translate: enchantment.level.2
+                    fallback: II
+        type: rare
+        description:
+          - translate:
+              - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} ${level_s} effect as well."
+              - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_s} d'une durée de 10 secondes."
+            with:
+              - strength:
+                  - type: translatable
+                    translate: effect.minecraft.strength
+                    fallback: Strength
+              - level_s:
+                  - type: translatable
+                    translate: potion.potency.1
+                    fallback: II
+    enchantments:
+      - "foxcraft_dungeon_loot:balm_of_the_spider_god": 2
+  # Common is the copper one: Balm I
+  - function: common
+    rarity: common
+    model: foxcraft_dungeon_loot:common/tithe_to_uthiir
+    item: minecraft:copper_sword
+    effects:
+      - name:
+          - translate:
+              - en_us: "Balm of the Spider God ${level_b}"
+              - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+            with:
+              - level_b:
+                  - type: translatable
+                    translate: enchantment.level.1
+                    fallback: I
+        type: uncommon
+        description:
+          - translate:
+              - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} effect as well."
+              - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} d'une durée de 10 secondes."
+            with:
+              - strength:
+                  - type: translatable
+                    translate: effect.minecraft.strength
+                    fallback: Strength
+    enchantments:
+      - "foxcraft_dungeon_loot:balm_of_the_spider_god": 1
