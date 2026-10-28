@@ -406,7 +406,8 @@ function musicLines(code, widthOf) {
     if (last && last.type === 'bar') line.close = BARS[line.items.pop().bar];
     lines.push(line);
 
-    return lines.map((l) => render(l, fill(l, widthOf) ?? 0));
+    // A staff reaches two lines above its own, the empty lines it needs between one staff line and the next
+    return lines.flatMap((l, n) => [...(n ? ['', ''] : []), render(l, fill(l, widthOf) ?? 0)]);
 }
 
 module.exports = { musicLines, parse, layoutLine, staffUnder, HEAD_COLUMNS, FONT };

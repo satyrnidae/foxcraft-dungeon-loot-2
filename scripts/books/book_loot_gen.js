@@ -393,6 +393,117 @@ function anchorStyles(attrs) {
     return styles;
 }
 
+// The click events a link target names besides a bare http or https link: page:3, copy:text, run:command and suggest:command
+const LINK_ACTIONS = { page: 'change_page', copy: 'copy_to_clipboard', run: 'run_command', suggest: 'suggest_command' };
+const LINK_KEYS = { change_page: 'page', copy_to_clipboard: 'value', run_command: 'command', suggest_command: 'command' };
+
+// The click event of the target of a [text](target), as SNBT for eventFrom; undefined when it is none of the forms
+function linkEvent(target) {
+    if (target.startsWith('{')) return target;
+    if (/^https?:\/\//i.test(target)) return `{action:open_url,url:${JSON.stringify(target)}}`;
+    const m = /^(page|copy|run|suggest):([\s\S]*)$/.exec(target);
+    if (!m) return undefined;
+    const action = LINK_ACTIONS[m[1]];
+    const value = action === 'change_page' ? m[2].trim() : JSON.stringify(m[2]);
+    if (action === 'change_page' && !/^\d+$/.test(value)) throw new Error(`page: in a link takes a page number, not ${m[2]}`);
+    return `{action:${action},${LINK_KEYS[action]}:${value}}`;
+}
+
+/**
+ * Reads the (target "hover") of a [text](target "hover") that starts at text[start], the paren. A target is an http or https link,
+ * page:N, copy:text, run:command, suggest:command or an SNBT click event in braces; the optional title in double or single quotes
+ * is shown on hover. A target can hold balanced parentheses and a \) for a closing one. Returns { click, hover, end } or null when
+ * it does not close on the line, in which case the bracket stays text.
+ */
+function parseLinkTarget(text, start) {
+    let i = start + 1;
+    while (text[i] === ' ') i++;
+    let target = '';
+    if (text[i] === '{') {
+        let depth = 0;
+        let quote = null;
+        for (; i < text.length && text[i] !== '\n'; i++) {
+            const c = text[i];
+            target += c;
+            if (quote) {
+                if (c === '\\') target += text[++i] ?? '';
+                else if (c === quote) quote = null;
+            } else if (c === '"' || c === "'") quote = c;
+            else if (c === '{') depth++;
+            else if (c === '}' && --depth === 0) {
+                i++;
+                break;
+            }
+        }
+        if (depth !== 0) return null;
+    } else {
+        let depth = 0;
+        // run:, suggest: and copy: hold spaces, up to the closing paren or a quoted title
+        const spaced = /^(copy|run|suggest):/.test(text.slice(i, i + 8));
+        for (; i < text.length && text[i] !== '\n'; i++) {
+            const c = text[i];
+            if (/\s/.test(c) && (!spaced || /^[ \t]*["')]/.test(text.slice(i)))) break;
+            if (c === '\\' && i + 1 < text.length) {
+                target += text[++i];
+                continue;
+            }
+            if (c === '(') depth++;
+            else if (c === ')' && depth-- === 0) break;
+            target += c;
+        }
+        // The depth went one under on the closing paren
+    }
+    while (text[i] === ' ') i++;
+    let hover;
+    const q = text[i];
+    if (q === '"' || q === "'") {
+        let j = i + 1;
+        hover = '';
+        for (; j < text.length && text[j] !== q && text[j] !== '\n'; j++) {
+            if (text[j] === '\\' && j + 1 < text.length) j++;
+            hover += text[j];
+        }
+        if (text[j] !== q) return null;
+        i = j + 1;
+        while (text[i] === ' ') i++;
+    }
+    if (text[i] !== ')' || !target) return null;
+    return { target, hover, end: i + 1 };
+}
+
+// The characters each bitmap font of the pack draws, { 'ns:name': Set }, read once
+let bitmapFonts;
+function packBitmapFonts() {
+    if (bitmapFonts) return bitmapFonts;
+    bitmapFonts = new Map();
+    const assets = path.join(ROOT, 'texturepack', 'assets');
+    const walk = (dir, ns, prefix) => {
+        for (const e of fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }) : []) {
+            if (e.isDirectory()) walk(path.join(dir, e.name), ns, `${prefix}${e.name}/`);
+            else if (e.name.endsWith('.json')) {
+                const json = JSON.parse(fs.readFileSync(path.join(dir, e.name), 'utf8'));
+                const chars = new Set();
+                for (const p of json.providers || []) if (p.type === 'bitmap') for (const c of (p.chars || []).join('')) if (c !== ' ') chars.add(c);
+                if (chars.size) bitmapFonts.set(`${ns}:${prefix}${e.name.slice(0, -5)}`, chars);
+            }
+        }
+    };
+    if (fs.existsSync(assets)) for (const ns of fs.readdirSync(assets)) walk(path.join(assets, ns, 'font'), ns, '');
+    return bitmapFonts;
+}
+
+/**
+ * The font of an ![char](font), a font id like foxcraft_dungeon_loot:illustrations, without a namespace the pack's own. A bitmap
+ * font of the pack must have the character, so a typo stops the build; other fonts are taken as they are.
+ */
+function imageFont(target, char) {
+    const id = parseFont(target);
+    const font = id.includes(':') ? id : `${NS}:${id}`;
+    const chars = packBitmapFonts().get(font);
+    if (chars && !chars.has(char)) throw new Error(`image "${target}": the font has no character ${JSON.stringify(char)}, it has ${[...chars].join('')}`);
+    return font;
+}
+
 function fontStyles(attrs) {
     const styles = {};
     if (attrs.color !== undefined) styles.color = parseColor(attrs.color);
@@ -488,6 +599,39 @@ function parseInline(text, start, closer, classes = {}) {
             }
             i = sub.end;
             continue;
+        }
+        if (c === '!' && text[i + 1] === '[') {
+            // ![char](font "hover") draws that character of the font, in the color of the text around it
+            const alt = parseInline(text, i + 2, ']', classes);
+            if (alt.closed && text[alt.end] === '(' && alt.content.length && alt.content.every((p) => typeof p === 'string')) {
+                const image = parseLinkTarget(text, alt.end);
+                if (image) {
+                    const char = alt.content.join('');
+                    flush();
+                    const styles = { font: imageFont(image.target, char) };
+                    if (image.hover !== undefined) styles.hover_event = eventFrom(`{action:show_text,value:${JSON.stringify(image.hover)}}`);
+                    content.push({ styles, content: [char] });
+                    i = image.end;
+                    continue;
+                }
+            }
+        }
+        if (c === '[') {
+            // [text](target "hover") is the short form of <a>; a bracket that is not followed by a closed (target) stays text
+            const label = parseInline(text, i + 1, ']', classes);
+            if (label.closed && text[label.end] === '(') {
+                const link = parseLinkTarget(text, label.end);
+                if (link) {
+                    const click = linkEvent(link.target);
+                    if (click === undefined) throw new Error(`link target "${link.target}" is an http or https link, page:N, copy:text, run:command, suggest:command or an event in braces`);
+                    flush();
+                    const styles = { ...classes.a, click_event: eventFrom(click) };
+                    if (link.hover !== undefined) styles.hover_event = eventFrom(`{action:show_text,value:${JSON.stringify(link.hover)}}`);
+                    content.push({ styles, content: label.content });
+                    i = link.end;
+                    continue;
+                }
+            }
         }
         const marker = MARKERS.find(([m]) => text.startsWith(m, i));
         if (marker) {
@@ -859,12 +1003,6 @@ function unwrapNoHyphen(content) {
     });
 }
 
-// A line holds 9 pixels, a glyph of the default font sits 7 above its baseline. A font that reaches higher than a line
-// takes the lines above its own, one for every 9 pixels it reaches over the 7, at most the 13 a page has above its last
-// line. A font that reaches further leaks over the top of the page.
-const LINE_HEIGHT = 9;
-const BASELINE = 7;
-const linesAbove = (ascent) => (ascent > LINE_HEIGHT ? Math.min(Math.ceil((ascent - BASELINE) / LINE_HEIGHT), PAGE_LINES - 1) : 0);
 
 // Puts the string, or a list of strings and nodes, in the tree before the glyph with the given index, outside the span
 // that starts there
@@ -897,10 +1035,17 @@ function insertAt(content, target, text) {
     return walk(content);
 }
 
+// A line holds 9 pixels, a glyph of the default font sits 7 above its baseline. A font that reaches higher than a line
+// draws over the lines above its own, one for every 9 pixels it reaches over the 7, at most the 13 a page has above its last
+// line. The text has to leave those lines empty above a line it starts itself; the generator keeps them with the line at a page edge, and adds them above the rows an automatic wrap makes and the first line of a text, which is the top of its page.
+const LINE_HEIGHT = 9;
+const BASELINE = 7;
+const linesAbove = (ascent) => (ascent > LINE_HEIGHT ? Math.min(Math.ceil((ascent - BASELINE) / LINE_HEIGHT), PAGE_LINES - 1) : 0);
+
 /**
- * Empty lines above a line that holds a glyph of a font reaching higher than a line, so it does not draw over the text
- * above it. Empty lines that are there count. ascentOf
- * gives how high a font reaches. Returns a copy of the tree.
+ * Empty lines above a line that starts a text or an automatic wrap and holds a glyph of a font reaching higher than a line, so it
+ * does not draw over the row above it or the top of the page. A line after a newline gets none, the text leaves the empty lines
+ * it needs. Empty lines that are there count. ascentOf gives how high a font reaches. Returns a copy of the tree.
  */
 function reserveTall(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
     const tree = JSON.parse(JSON.stringify(content));
@@ -908,7 +1053,7 @@ function reserveTall(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch))
         const { lines, chars } = layout(tree);
         let change = null;
         lines.forEach((line, k) => {
-            if (change || line.tstart === line.tend) return;
+            if (change || !(line.soft || k === 0) || line.tstart === line.tend) return;
             const need = linesAbove(Math.max(...chars.slice(line.tstart, line.tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font, g.ch)), 0));
             if (!need) return;
             let empty = 0;
@@ -939,12 +1084,13 @@ function parseNumber(source) {
     return m ? Number(m[2].replace(/_/g, '')) * (m[1] ? -1 : 1) : undefined;
 }
 
-// The pixels of a `n`pad. A whole line of padding, 114 pixels, is the same as a line break, so it stops at 113.
+// The pixels of a `n`pad. A whole line of padding forwards, 114 pixels, is the same as a line break, so it stops at 113; a
+// whole line back is not a break, so a step back goes to 114.
 const MAX_PAD = PAGE_WIDTH - 1;
 function padWidth(source) {
     const width = parseNumber(source);
     if (width === undefined) throw new Error(`\`${source}\`pad is not a number`);
-    if (Math.abs(width) > MAX_PAD) throw new Error(`\`${source}\`pad is ${width}px, padding goes up to ${MAX_PAD}`);
+    if (width > MAX_PAD || width < -PAGE_WIDTH) throw new Error(`\`${source}\`pad is ${width}px, padding goes from -${PAGE_WIDTH} to ${MAX_PAD}`);
     return width;
 }
 
@@ -1026,6 +1172,18 @@ const RTL_LOCALES = ['ar_sa', 'he_il'];
 const MIRROR = { left: 'right', right: 'left', center: 'center' };
 const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Script=Thaana}\p{Script=Nko}]/u;
 
+// How far a line reaches from its start: the furthest the pen gets, so glyphs stacked with a backwards padding count by where
+// they end and not by the sum of their advances, which that padding shortens
+function reach(text) {
+    let x = 0;
+    let far = 0;
+    for (const g of text) {
+        x += g.sw ?? widthOf(g);
+        far = Math.max(far, x);
+    }
+    return far;
+}
+
 /**
  * Aligns every line that holds a glyph of a <center>, or starts with a glyph of a style with align, to the left, center or
  * right: a line that starts at a wrap starts at a newline instead, so the overflow is aligned on its own, and padding goes
@@ -1049,7 +1207,7 @@ function alignLines(content, rtl = false) {
         const laidOut = text.some((g) => g.font === PAD_FONT || g.font === TALLY_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
         const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
         if (align === 'left') continue;
-        const room = PAGE_WIDTH - text.reduce((sum, g) => sum + (g.sw ?? widthOf(g)), 0);
+        const room = PAGE_WIDTH - reach(text);
         // The line of the filtered reading is wider by the delta of the spans on it, so it gets that much less padding
         const delta = rtl ? text.reduce((sum, g) => sum + (g.delta ?? 0), 0) : 0;
         const strong = text.find((g) => /^\p{L}$/u.test(g.ch) && g.font !== PAD_FONT);

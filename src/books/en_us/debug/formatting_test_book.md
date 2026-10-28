@@ -105,10 +105,10 @@ A <font color="red">red **bold** word</font> inside a line.
 # Fonts
 <vcenter>
 default: The quick brown fox.
-<font face="minecraft:alt">alt: The quick brown fox.</font>
-<font face="minecraft:illageralt">illageralt: The quick brown fox.</font>
+<font face="minecraft:alt">alt The quick brown fox</font>
+<font face="minecraft:illageralt">illageralt The quick brown fox</font>
 <font face="minecraft:uniform">uniform: The quick brown fox.</font>
-<font face="minecraft:alt" color="aqua">**alt, aqua and bold**</font>
+<font face="minecraft:alt" color="aqua">**alt aqua and bold**</font>
 <br>
 # Shadow
 <vcenter>
@@ -157,7 +157,7 @@ Text after the block, in the book font.
 **Bold <style class=".url">not bold</style> bold**
 <a class=".url" href="https://example.com">A styled link</a>
 <font class=".url" color="red">Class, red color</font>
-<font class=".url" face="minecraft:alt">Class, alt font</font>
+<font class=".url" face="minecraft:alt">Class alt font</font>
 <br>
 # Centered styles
 <vcenter>
@@ -184,7 +184,7 @@ In a span it does not:
 <br>
 # Everything
 <vcenter>
-<a on_hover='{action:show_text,value:"All at once"}'><font color="light_purple" face="minecraft:alt">**Bold, *italic*, __underlined__, ~~struck~~ and ||hidden||** in alt.</font></a>
+<a on_hover='{action:show_text,value:"All at once"}'><font color="light_purple" face="minecraft:alt">**Bold *italic* __underlined__ ~~struck~~ and ||hidden||** in alt</font></a>
 
 100% sure, with a percent sign.
 
