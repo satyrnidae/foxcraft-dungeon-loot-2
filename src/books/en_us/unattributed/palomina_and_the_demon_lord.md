@@ -14,9 +14,33 @@ styles: {
   },
   .name: {
     font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+  },
+  .title: {
+    font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+    align: center,
+    bold: false
+  },
+  .symbol: {
+    font: foxcraft_dungeon_loot:decora_symbologie
+  },
+  .iconography: {
+    font: foxcraft_dungeon_loot:mysterian_iconography
   }
 }
 ---
+
+<vcenter>
+<center class=".symbol">~</center>
+
+<style class=".title">Palomina</style>
+<style class=".title">and the</style>
+<style class=".title">Dæmon Lord</style>
+
+<center class=".symbol">~</center>
+
+
+<center class=".iconography"><font color="gold">\ue000</font>`-14`pad<font color="black">\ue001</font>`-9`pad<font color="white">\ue002</font></center>
+<br>
 
 # - I -
 
