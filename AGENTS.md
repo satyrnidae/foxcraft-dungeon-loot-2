@@ -72,7 +72,7 @@ tests/                       run_all.mjs, unit tests, Java checks, Node tools
 4. `src/foxcraft_dungeon_loot/item/<rarity>/<item>.mcb` holds hooks. A `function x` in it becomes `foxcraft_dungeon_loot:item/<rarity>/<item>/x`.
 5. The hook name is listed in `tags/function/<event>.json`.
 6. A model definition `texturepack/assets/foxcraft_dungeon_loot/items/<group>/<model>.json` points at `models/item/<group>/<model>.json`, where group is the rarity, special/music_disc, special/copper_horn or random_loot/coin, like the loot table folders. The id is `foxcraft_dungeon_loot:<group>/<model>`. The model points at a texture in `textures/item/<group>/<model>.png`.
-7. Variants, like chainsaw tiers, pick a pool by the `satyrn.fdl.loot.variant` score and set their own `item_model`.
+7. Variants, like Tithe to Uthiir tiers, pick a pool by the `satyrn.fdl.loot.variant` score and set their own `item_model`.
 
 To add a disc, copy an existing one: a `jukebox_song`, a `sounds.json` event, a lang key, an item definition, a model, a texture, a loot table, a modifier, a give function in `item/special/music_disc/main.mcb`, and trade index entries in `trading/index.mcb`. The trade index numbers matter, they are used by position.
 
