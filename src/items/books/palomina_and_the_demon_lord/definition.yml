@@ -1,0 +1,36 @@
+# Palomina and the Daemon Lord: Definition YML
+
+# Custom Name. Overrides title if the intended title is too long for 32 chars.
+# Otherwise this is set to Title in the correct rarity color like existing.
+# name:
+#   - en_us: Palomina and the Dæmon Lord
+
+# Excluded in favor of writable: true/false which swaps the item type between the two editable books
+# item: minecraft:written_book
+
+# Extension from base item def. This will be placed in written_book_content
+title:
+  - en_us: Palomina and the Dæmon Lord
+
+author: Unknown
+writable: true
+
+# Contents dir can be overridden. In this example it is not.
+# There should generally not be a need to do this unless you want multiple books with the same text.
+# Contents dir contains an optional global styles.yml and per-language-named md files.
+# contents: ./contents/
+
+# Dungeon item setup if you want the book to have some kind of effect. Left blank here.
+# Note that this is the intended layout for all items: all custom props under foxcraft_dungeon_loot object in snbt.
+# This will require some changes to scripts and whatnot.
+# customData:
+#   foxcraft_dungeon_loot:
+#     dungeonLootId: 1
+#     dungeonItem: false
+
+# You can use blurb or lore, prefer blurb
+blurb:
+  - en_us: A faded, leather-bound bible. It seems familiar somehow…
+
+# This is an example of something the existing book generator would not do.
+enchantmentGlintOverride: true

@@ -1,0 +1,16 @@
+# YML version of the styles frontmatter, shared between all langs.
+# Technically per-lang md files can still export these in frontmatter but generally that should not be necessary.
+body:
+  font: foxcraft_dungeon_loot:pixellated_elegance
+.front:
+  font: foxcraft_dungeon_loot:hexenaat
+.name:
+  font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+.title:
+  font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+  align: center
+  bold: false
+.symbol:
+  font: foxcraft_dungeon_loot:decora_symbologie
+.iconography:
+  font: foxcraft_dungeon_loot:mysterian_iconography
