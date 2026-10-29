@@ -84,7 +84,7 @@ Run from the repo root. Do all of this before claiming a change works.
 2. Every item source file defines `give_<item>`, plus `give_<item>_<tier>` for variants. `give.js` finds them and `give.mcb` makes a trigger for each give function that is not a tier variant, in dev builds only, for any player. The value is the amount, or the tier from lowest to highest for an item with tiers. Each pack enchantment gets a `give_<name>_book` trigger whose value is the book level. A new item needs no new test file. Its loot table and source file are found automatically.
 3. For a new hook, the tests fail until its entry is in the function tag.
 
-There is no CI. The tests are static, so you cannot test gameplay. State plainly which checks ran and which did not, and list what a human must test in game. `docs/todo_manual_verification.md` is the running checklist; add the new item to it.
+There are no published artifacts and no CI in the usual sense, but the static tests are run automatically on GitHub. The tests are static, so you cannot test gameplay. State plainly which checks ran and which did not, and list what a human must test in game. `docs/todo_manual_verification.md` is the running checklist; add the new item to it.
 
 ## Style
 
