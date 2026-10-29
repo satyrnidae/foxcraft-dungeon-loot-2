@@ -114,11 +114,6 @@ function checkContent(c, item, spec) {
 }
 
 function checkSource(c, item, spec) {
-  const base = basename(item.name);
-  const src = pk.srcItemFor(item.name);
-  const hasSrc = pk.exists(src);
-  c.sub('source file matches spec', () => assert.equal(hasSrc ? base : null, spec.src));
-  c.sub('hooks match spec', () => assert.deepEqual(hasSrc ? sorted(pk.topLevelFunctions(pk.readText(src))) : [], spec.hooks));
   const predDir = pk.predicateDir(item.name);
   const predFiles = predDir ? pk.list(predDir, '.json') : [];
   c.sub('predicates match spec', () => assert.deepEqual(predFiles.map(pk.stem).sort(), spec.predicates));

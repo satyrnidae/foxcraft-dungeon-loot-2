@@ -466,7 +466,9 @@ describe('give functions', () => {
       let owner = name;
       if (name.startsWith('item/special/music_disc/')) owner = 'item/special/music_disc/main';
       else if (name.startsWith('item/special/copper_horn/')) owner = 'item/special/copper_horn/main';
-      if (!(GIVES['give_' + base] || []).includes(owner)) problems.push(`${name} has no give_${base} in ${owner}.mcb`);
+      const owners = GIVES['give_' + base] || [];
+      // An item with helper files, like constants.js, keeps its functions in <name>/main.mcb
+      if (!owners.includes(owner) && !owners.includes(name + '/main')) problems.push(`${name} has no give_${base} in ${owner}.mcb`);
     }
     assert.deepEqual(problems, []);
   });

@@ -41,7 +41,7 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 For every loot table under `loot_table/item/` except `item/random_loot/`, which includes the discs and horns under `item/special/`:
 
 - The loot table, its modifiers and any loot tables it references exist, and every `set_custom_data` tag is valid SNBT.
-- The item matches its entry in `specs/items.json`: `DungeonLootId`, `DungeonItem` flag, rarity, base items, modifier function types, `item_model` values, source hooks and predicates.
+- The item matches its entry in `specs/items.json`: `DungeonLootId`, `DungeonItem` flag, rarity, base items, modifier function types, `item_model` values and predicates.
 - `DungeonLootId` is an int. A byte never matches the predicates.
 - Rarity matches the folder, and an item is not left unnamed.
 - Every `item_model` has an item definition, a model and a texture.

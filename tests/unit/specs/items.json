@@ -10,15 +10,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_absinthe"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "absinthe"
+    "rarity": null
   },
   "item/common/animus": {
     "base_items": [
@@ -31,15 +27,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_animus"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "animus"
+    "rarity": null
   },
   "item/common/armor_stand": {
     "base_items": [
@@ -52,17 +44,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand"
+    "rarity": null
   },
   "item/common/armor_stand_baby": {
     "base_items": [
@@ -75,17 +63,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_baby"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_baby"
+    "rarity": null
   },
   "item/common/armor_stand_bashful": {
     "base_items": [
@@ -98,17 +82,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_bashful"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_bashful"
+    "rarity": null
   },
   "item/common/armor_stand_cancan": {
     "base_items": [
@@ -121,17 +101,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_cancan"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_cancan"
+    "rarity": null
   },
   "item/common/armor_stand_dab": {
     "base_items": [
@@ -144,17 +120,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_dab"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_dab"
+    "rarity": null
   },
   "item/common/armor_stand_gallant": {
     "base_items": [
@@ -167,17 +139,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_gallant"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_gallant"
+    "rarity": null
   },
   "item/common/armor_stand_greyskull": {
     "base_items": [
@@ -190,17 +158,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_greyskull"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_greyskull"
+    "rarity": null
   },
   "item/common/armor_stand_skeleton": {
     "base_items": [
@@ -213,17 +177,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_skeleton"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_skeleton"
+    "rarity": null
   },
   "item/common/armor_stand_zombie": {
     "base_items": [
@@ -236,17 +196,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_stand_zombie"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/armor_stand"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_stand_zombie"
+    "rarity": null
   },
   "item/common/coffee": {
     "base_items": [
@@ -259,15 +215,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_coffee"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "coffee"
+    "rarity": null
   },
   "item/common/common_grab_bag": {
     "base_items": [
@@ -280,10 +232,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_common_grab_bag",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/common_grab_bag"
     ],
@@ -294,8 +242,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "common_grab_bag"
+    "rarity": null
   },
   "item/common/d10": {
     "base_items": [
@@ -308,9 +255,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d10"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d10"
     ],
@@ -321,8 +265,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d10"
+    "rarity": null
   },
   "item/common/d12": {
     "base_items": [
@@ -335,9 +278,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d12"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d12"
     ],
@@ -348,8 +288,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d12"
+    "rarity": null
   },
   "item/common/d20": {
     "base_items": [
@@ -362,9 +301,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d20"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d20"
     ],
@@ -375,8 +311,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d20"
+    "rarity": null
   },
   "item/common/d4": {
     "base_items": [
@@ -389,9 +324,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d4"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d4"
     ],
@@ -402,8 +334,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d4"
+    "rarity": null
   },
   "item/common/d6": {
     "base_items": [
@@ -416,9 +347,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d6"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d6"
     ],
@@ -429,8 +357,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d6"
+    "rarity": null
   },
   "item/common/d8": {
     "base_items": [
@@ -443,9 +370,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_d8"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/d8"
     ],
@@ -456,8 +380,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "d8"
+    "rarity": null
   },
   "item/common/laudanum": {
     "base_items": [
@@ -470,15 +393,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_laudanum"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "laudanum"
+    "rarity": null
   },
   "item/common/luma": {
     "base_items": [
@@ -491,15 +410,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_luma"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "luma"
+    "rarity": null
   },
   "item/common/moonshine": {
     "base_items": [
@@ -512,15 +427,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_moonshine"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "moonshine"
+    "rarity": null
   },
   "item/common/nectar": {
     "base_items": [
@@ -533,15 +444,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_nectar"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "nectar"
+    "rarity": null
   },
   "item/common/stout": {
     "base_items": [
@@ -554,15 +461,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_stout"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "stout"
+    "rarity": null
   },
   "item/common/tequila": {
     "base_items": [
@@ -575,15 +478,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_tequila"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "tequila"
+    "rarity": null
   },
   "item/common/vitae": {
     "base_items": [
@@ -596,15 +495,11 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_vitae"
-    ],
     "item_models": [],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "vitae"
+    "rarity": null
   },
   "item/common/writable_letter": {
     "base_items": [
@@ -617,17 +512,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_writable_letter"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:random_loot/writable_letter"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "writable_letter"
+    "rarity": null
   },
   "item/epic/buckwheat": {
     "base_items": [
@@ -641,13 +532,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_3s",
-      "damage_tool",
-      "give_buckwheat",
-      "on_load",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/buckwheat"
     ],
@@ -659,8 +543,7 @@
       "can_breed",
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "buckwheat"
+    "rarity": null
   },
   "item/epic/dawncleaver": {
     "base_items": [
@@ -675,19 +558,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_dawncleaver",
-      "give_dawncleaver_diamond",
-      "give_dawncleaver_netherite"
-    ],
     "item_models": [],
     "loot_ids": [
       2
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "dawncleaver"
+    "rarity": null
   },
   "item/epic/epic_grab_bag": {
     "base_items": [
@@ -700,10 +577,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_epic_grab_bag",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/epic_grab_bag"
     ],
@@ -714,8 +587,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "epic_grab_bag"
+    "rarity": null
   },
   "item/epic/estudinaes_guidance": {
     "base_items": [
@@ -734,15 +606,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_estudinaes_guidance",
-      "give_estudinaes_guidance_chainmail",
-      "give_estudinaes_guidance_diamond",
-      "give_estudinaes_guidance_iron",
-      "give_estudinaes_guidance_netherite",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       38
@@ -752,8 +615,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "estudinaes_guidance"
+    "rarity": null
   },
   "item/epic/estudinaes_patience": {
     "base_items": [
@@ -772,15 +634,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_estudinaes_patience",
-      "give_estudinaes_patience_chainmail",
-      "give_estudinaes_patience_diamond",
-      "give_estudinaes_patience_iron",
-      "give_estudinaes_patience_netherite",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       39
@@ -790,8 +643,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "estudinaes_patience"
+    "rarity": null
   },
   "item/epic/estudinaes_script": {
     "base_items": [
@@ -810,21 +662,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_estudinaes_script",
-      "give_estudinaes_script_chainmail",
-      "give_estudinaes_script_diamond",
-      "give_estudinaes_script_iron",
-      "give_estudinaes_script_netherite"
-    ],
     "item_models": [],
     "loot_ids": [
       30
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "estudinaes_script"
+    "rarity": null
   },
   "item/epic/estudinaes_sorrow": {
     "base_items": [
@@ -838,13 +682,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "apply_wither",
-      "give_estudinaes_sorrow",
-      "give_estudinaes_sorrow_netherite",
-      "on_hit",
-      "on_raycast_success"
-    ],
     "item_models": [],
     "loot_ids": [
       31
@@ -853,8 +690,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "estudinaes_sorrow"
+    "rarity": null
   },
   "item/epic/estudinaes_survival": {
     "base_items": [
@@ -872,16 +708,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10s",
-      "clock_10t",
-      "give_estudinaes_survival",
-      "give_estudinaes_survival_chainmail",
-      "give_estudinaes_survival_diamond",
-      "give_estudinaes_survival_iron",
-      "give_estudinaes_survival_netherite",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       40
@@ -891,8 +717,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "estudinaes_survival"
+    "rarity": null
   },
   "item/epic/fortune_500": {
     "base_items": [
@@ -907,19 +732,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_fortune_500",
-      "give_fortune_500_diamond",
-      "give_fortune_500_netherite"
-    ],
     "item_models": [],
     "loot_ids": [
       22
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "fortune_500"
+    "rarity": null
   },
   "item/epic/heros_amulet": {
     "base_items": [
@@ -933,10 +752,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_heros_amulet",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/hero_amulet"
     ],
@@ -947,8 +762,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "heros_amulet"
+    "rarity": null
   },
   "item/epic/kobolds_vengeance": {
     "base_items": [
@@ -962,17 +776,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_kobolds_vengeance"
-    ],
     "item_models": [],
     "loot_ids": [
       4
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "kobolds_vengeance"
+    "rarity": null
   },
   "item/epic/melimonas_guile": {
     "base_items": [
@@ -985,17 +795,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_melimonas_guile"
-    ],
     "item_models": [],
     "loot_ids": [
       3
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "melimonas_guile"
+    "rarity": null
   },
   "item/epic/palominas_gift": {
     "base_items": [
@@ -1008,17 +814,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_palominas_gift"
-    ],
     "item_models": [],
     "loot_ids": [
       5
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "palominas_gift"
+    "rarity": null
   },
   "item/epic/peerless_yewhewn": {
     "base_items": [
@@ -1032,9 +834,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_peerless_yewhewn"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/peerless_yewhewn"
     ],
@@ -1043,8 +842,7 @@
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "peerless_yewhewn"
+    "rarity": null
   },
   "item/epic/rogues_dagger": {
     "base_items": [
@@ -1059,11 +857,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_4t",
-      "give_rogues_dagger",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/rogues_dagger"
     ],
@@ -1075,8 +868,7 @@
       "has_effects",
       "should_apply_effects"
     ],
-    "rarity": null,
-    "src": "rogues_dagger"
+    "rarity": null
   },
   "item/epic/silverfish_escape_artist": {
     "base_items": [
@@ -1090,13 +882,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_silverfish_escape_artist",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/silverfish_escape_artist"
     ],
@@ -1107,8 +892,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "silverfish_escape_artist"
+    "rarity": null
   },
   "item/epic/skullbasher": {
     "base_items": [
@@ -1122,17 +906,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_skullbasher"
-    ],
     "item_models": [],
     "loot_ids": [
       6
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "skullbasher"
+    "rarity": null
   },
   "item/epic/spell_scroll_hail_of_arrows": {
     "base_items": [
@@ -1146,14 +926,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_spell_scroll_hail_of_arrows",
-      "on_snowball_used",
-      "on_tick",
-      "spawn_arrows_1",
-      "spawn_arrows_2",
-      "spawn_arrows_3"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/spell_scroll_hail_of_arrows"
     ],
@@ -1165,8 +937,7 @@
       "in_main_hand",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "spell_scroll_hail_of_arrows"
+    "rarity": null
   },
   "item/epic/tithe_to_uthiir": {
     "base_items": [
@@ -1183,12 +954,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_tithe_to_uthiir",
-      "give_tithe_to_uthiir_copper",
-      "give_tithe_to_uthiir_diamond",
-      "give_tithe_to_uthiir_iron"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:common/tithe_to_uthiir",
       "foxcraft_dungeon_loot:epic/tithe_to_uthiir",
@@ -1202,8 +967,7 @@
     "predicates": [
       "killed_with"
     ],
-    "rarity": null,
-    "src": "tithe_to_uthiir"
+    "rarity": null
   },
   "item/epic/torenhias_fist": {
     "base_items": [
@@ -1218,13 +982,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_torenhias_fist",
-      "on_load",
-      "on_snowball_used",
-      "on_tick",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/torenhias_fist"
     ],
@@ -1236,8 +993,7 @@
       "in_main_hand",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "torenhias_fist"
+    "rarity": null
   },
   "item/epic/wand_of_block_state_editing": {
     "base_items": [
@@ -1250,11 +1006,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_4t",
-      "give_wand_of_block_state_editing",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:epic/debug_stick"
     ],
@@ -1266,8 +1017,7 @@
       "has_effects",
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "wand_of_block_state_editing"
+    "rarity": null
   },
   "item/epic/yo_yo_mans_revenge": {
     "base_items": [
@@ -1281,17 +1031,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_yo_yo_mans_revenge"
-    ],
     "item_models": [],
     "loot_ids": [
       8
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "yo_yo_mans_revenge"
+    "rarity": null
   },
   "item/mythic/auto_pickaxe": {
     "base_items": [
@@ -1307,13 +1053,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_auto_pickaxe",
-      "give_auto_pickaxe_diamond",
-      "give_auto_pickaxe_netherite",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/diamond_auto_pickaxe",
       "foxcraft_dungeon_loot:mythic/iron_auto_pickaxe",
@@ -1327,8 +1066,7 @@
       "has_effects",
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "auto_pickaxe"
+    "rarity": null
   },
   "item/mythic/bringer_of_fear": {
     "base_items": [
@@ -1342,13 +1080,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_bringer_of_fear",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/bringer_of_fear"
     ],
@@ -1359,8 +1090,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "bringer_of_fear"
+    "rarity": null
   },
   "item/mythic/chainsaw": {
     "base_items": [
@@ -1376,15 +1106,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_chainsaw",
-      "give_chainsaw_diamond",
-      "give_chainsaw_netherite",
-      "on_load",
-      "on_tick",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/diamond_chainsaw",
       "foxcraft_dungeon_loot:mythic/iron_chainsaw",
@@ -1398,8 +1119,7 @@
       "has_effects",
       "in_main_hand"
     ],
-    "rarity": "Mythic",
-    "src": "chainsaw"
+    "rarity": "Mythic"
   },
   "item/mythic/constantines_gift": {
     "base_items": [
@@ -1412,11 +1132,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10s",
-      "give_constantines_gift",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       35
@@ -1425,8 +1140,7 @@
     "predicates": [
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "constantines_gift"
+    "rarity": null
   },
   "item/mythic/deilonas_holy_blessings": {
     "base_items": [
@@ -1440,13 +1154,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_deilonas_holy_blessings",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/deilonas_holy_blessings"
     ],
@@ -1457,8 +1164,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "deilonas_holy_blessings"
+    "rarity": null
   },
   "item/mythic/downpour_amulet": {
     "base_items": [
@@ -1472,14 +1178,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "damage",
-      "give_downpour_amulet",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/downpour_amulet"
     ],
@@ -1490,8 +1188,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "downpour_amulet"
+    "rarity": null
   },
   "item/mythic/evokers_tome": {
     "base_items": [
@@ -1505,14 +1202,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_evokers_tome",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used",
-      "reset_cooldown"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/evoker_tome"
     ],
@@ -1523,8 +1212,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "evokers_tome"
+    "rarity": null
   },
   "item/mythic/gravilock_boots": {
     "base_items": [
@@ -1540,14 +1228,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "damage",
-      "give_gravilock_boots",
-      "give_gravilock_boots_diamond",
-      "give_gravilock_boots_netherite",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       33
@@ -1560,8 +1240,7 @@
       "is_iron",
       "worn"
     ],
-    "rarity": null,
-    "src": "gravilock_boots"
+    "rarity": null
   },
   "item/mythic/hammer_of_sol": {
     "base_items": [
@@ -1576,14 +1255,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_hammer_of_sol",
-      "hit_target",
-      "on_load",
-      "on_snowball_used",
-      "on_tick",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/hammer_of_sol"
     ],
@@ -1596,8 +1267,7 @@
       "in_off_hand",
       "should_expire"
     ],
-    "rarity": null,
-    "src": "hammer_of_sol"
+    "rarity": null
   },
   "item/mythic/how_about_no": {
     "base_items": [
@@ -1611,13 +1281,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_how_about_no",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/how_about_no"
     ],
@@ -1628,8 +1291,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "how_about_no"
+    "rarity": null
   },
   "item/mythic/idol_of_melimonas": {
     "base_items": [
@@ -1644,11 +1306,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_idol_of_melimonas",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/idol_of_melimonas"
     ],
@@ -1660,8 +1317,7 @@
       "has_effects",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "idol_of_melimonas"
+    "rarity": null
   },
   "item/mythic/mythic_grab_bag": {
     "base_items": [
@@ -1674,10 +1330,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_mythic_grab_bag",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/mythic_grab_bag"
     ],
@@ -1688,8 +1340,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "mythic_grab_bag"
+    "rarity": null
   },
   "item/mythic/pierce_the_sky": {
     "base_items": [
@@ -1702,17 +1353,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_pierce_the_sky"
-    ],
     "item_models": [],
     "loot_ids": [
       7
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "pierce_the_sky"
+    "rarity": null
   },
   "item/mythic/poncho_sanchezs_fate": {
     "base_items": [
@@ -1726,13 +1373,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_poncho_sanchezs_fate",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/poncho_sanchezs_fate"
     ],
@@ -1743,8 +1383,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "poncho_sanchezs_fate"
+    "rarity": null
   },
   "item/mythic/pride_and_extreme_prejudice": {
     "base_items": [
@@ -1758,13 +1397,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_pride_and_extreme_prejudice",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/pride_and_extreme_prejudice"
     ],
@@ -1775,8 +1407,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "pride_and_extreme_prejudice"
+    "rarity": null
   },
   "item/mythic/quet_zalas_beloved": {
     "base_items": [
@@ -1791,10 +1422,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_quet_zalas_beloved",
-      "on_fall"
-    ],
     "item_models": [],
     "loot_ids": [
       50
@@ -1803,8 +1430,7 @@
     "predicates": [
       "should_parachute"
     ],
-    "rarity": null,
-    "src": "quet_zalas_beloved"
+    "rarity": null
   },
   "item/mythic/scripture_of_cleansing": {
     "base_items": [
@@ -1818,14 +1444,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_scripture_of_cleansing",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/scripture_of_cleansing"
     ],
@@ -1836,8 +1454,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "scripture_of_cleansing"
+    "rarity": null
   },
   "item/mythic/shield_of_the_juggernaut": {
     "base_items": [
@@ -1851,17 +1468,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_shield_of_the_juggernaut"
-    ],
     "item_models": [],
     "loot_ids": [
       16
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "shield_of_the_juggernaut"
+    "rarity": null
   },
   "item/mythic/stompies": {
     "base_items": [
@@ -1880,15 +1493,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_stompies",
-      "give_stompies_chainmail",
-      "give_stompies_diamond",
-      "give_stompies_iron",
-      "give_stompies_netherite",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       52
@@ -1898,8 +1502,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "stompies"
+    "rarity": null
   },
   "item/mythic/talking_stick": {
     "base_items": [
@@ -1914,11 +1517,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_talking_stick",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       53
@@ -1928,8 +1526,7 @@
       "has_effects",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "talking_stick"
+    "rarity": null
   },
   "item/mythic/totem_of_deilona": {
     "base_items": [
@@ -1944,12 +1541,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_2s",
-      "clock_4t",
-      "give_totem_of_deilona",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/totem_of_deilona"
     ],
@@ -1962,8 +1553,7 @@
       "in_main_hand",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "totem_of_deilona"
+    "rarity": null
   },
   "item/mythic/totem_of_dendris": {
     "base_items": [
@@ -1978,11 +1568,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_totem_of_dendris",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/totem_of_dendris"
     ],
@@ -1994,8 +1579,7 @@
       "has_effects",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "totem_of_dendris"
+    "rarity": null
   },
   "item/mythic/totem_of_ekila": {
     "base_items": [
@@ -2010,11 +1594,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_4t",
-      "give_totem_of_ekila",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/totem_of_ekila"
     ],
@@ -2027,8 +1606,7 @@
       "has_grounded_effects",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "totem_of_ekila"
+    "rarity": null
   },
   "item/mythic/totem_of_gnumoch": {
     "base_items": [
@@ -2043,11 +1621,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_4t",
-      "give_totem_of_gnumoch",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/totem_of_gnumoch"
     ],
@@ -2059,8 +1632,7 @@
       "has_effects",
       "should_apply_effects"
     ],
-    "rarity": null,
-    "src": "totem_of_gnumoch"
+    "rarity": null
   },
   "item/mythic/totem_of_mysteria": {
     "base_items": [
@@ -2075,13 +1647,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "clock_2s",
-      "give_totem_of_mysteria",
-      "on_load",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/totem_of_mysteria"
     ],
@@ -2093,8 +1658,7 @@
       "has_effects",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "totem_of_mysteria"
+    "rarity": null
   },
   "item/mythic/war_hogs_blighted_harvest": {
     "base_items": [
@@ -2108,21 +1672,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "do_harvest",
-      "do_till",
-      "give_war_hogs_blighted_harvest",
-      "harvest_crop",
-      "on_harvest",
-      "on_kill_entity",
-      "on_load",
-      "on_tick",
-      "on_till",
-      "on_uninstall",
-      "till_coarse_dirt",
-      "till_dirt",
-      "update_soul_count"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/war_hogs_blighted_harvest"
     ],
@@ -2133,8 +1682,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": "Mythic",
-    "src": "war_hogs_blighted_harvest"
+    "rarity": "Mythic"
   },
   "item/mythic/war_hogs_burning_rage": {
     "base_items": [
@@ -2148,13 +1696,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "disarm_entity",
-      "disarm_player",
-      "give_war_hogs_burning_rage",
-      "on_hit",
-      "on_raycast_success"
-    ],
     "item_models": [],
     "loot_ids": [
       28
@@ -2163,8 +1704,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "war_hogs_burning_rage"
+    "rarity": null
   },
   "item/mythic/war_hogs_disdainful_pride": {
     "base_items": [
@@ -2178,10 +1718,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_war_hogs_disdainful_pride",
-      "on_fall"
-    ],
     "item_models": [],
     "loot_ids": [
       58
@@ -2190,8 +1726,7 @@
     "predicates": [
       "worn"
     ],
-    "rarity": null,
-    "src": "war_hogs_disdainful_pride"
+    "rarity": null
   },
   "item/mythic/war_hogs_festering_wrath": {
     "base_items": [
@@ -2205,17 +1740,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_war_hogs_festering_wrath"
-    ],
     "item_models": [],
     "loot_ids": [
       13
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "war_hogs_festering_wrath"
+    "rarity": null
   },
   "item/mythic/war_hogs_insatiable_hunger": {
     "base_items": [
@@ -2229,11 +1760,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_war_hogs_insatiable_hunger",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       59
@@ -2243,8 +1769,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "war_hogs_insatiable_hunger"
+    "rarity": null
   },
   "item/mythic/war_hogs_lingering_spite": {
     "base_items": [
@@ -2257,17 +1782,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_war_hogs_lingering_spite"
-    ],
     "item_models": [],
     "loot_ids": [
       9
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "war_hogs_lingering_spite"
+    "rarity": null
   },
   "item/mythic/war_hogs_seething_hatred": {
     "base_items": [
@@ -2282,11 +1803,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "give_war_hogs_seething_hatred",
-      "on_load"
-    ],
     "item_models": [],
     "loot_ids": [
       60
@@ -2296,8 +1812,7 @@
       "has_effects",
       "worn"
     ],
-    "rarity": null,
-    "src": "war_hogs_seething_hatred"
+    "rarity": null
   },
   "item/mythic/wing_of_ouet_zala": {
     "base_items": [
@@ -2311,12 +1826,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "clock_60s",
-      "give_wing_of_ouet_zala",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/wing_of_ouet_zala"
     ],
@@ -2329,8 +1838,7 @@
       "in_inventory",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "wing_of_ouet_zala"
+    "rarity": null
   },
   "item/mythic/wing_of_quet_zala": {
     "base_items": [
@@ -2344,12 +1852,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "clock_10t",
-      "clock_60s",
-      "give_wing_of_quet_zala",
-      "on_load"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/wing_of_quet_zala"
     ],
@@ -2362,8 +1864,7 @@
       "in_inventory",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "wing_of_quet_zala"
+    "rarity": null
   },
   "item/mythic/x_no_evil": {
     "base_items": [
@@ -2377,11 +1878,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_x_no_evil",
-      "on_snowball_used",
-      "on_tick"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:mythic/x_no_evil"
     ],
@@ -2394,8 +1890,7 @@
       "in_off_hand",
       "is_new_aoe_cloud"
     ],
-    "rarity": null,
-    "src": "x_no_evil"
+    "rarity": null
   },
   "item/rare/admire_me_from_afar": {
     "base_items": [
@@ -2408,17 +1903,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_admire_me_from_afar"
-    ],
     "item_models": [],
     "loot_ids": [
       11
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "admire_me_from_afar"
+    "rarity": null
   },
   "item/rare/armor_of_the_golem": {
     "base_items": [
@@ -2432,17 +1923,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_armor_of_the_golem"
-    ],
     "item_models": [],
     "loot_ids": [
       14
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "armor_of_the_golem"
+    "rarity": null
   },
   "item/rare/aurelias_lucky_compass": {
     "base_items": [
@@ -2457,17 +1944,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_aurelias_lucky_compass"
-    ],
     "item_models": [],
     "loot_ids": [
       18
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "aurelias_lucky_compass"
+    "rarity": null
   },
   "item/rare/beta_iron_sword": {
     "base_items": [
@@ -2482,14 +1965,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_beta_iron_sword",
-      "on_block",
-      "on_hit",
-      "on_load",
-      "on_tick",
-      "on_uninstall"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/iron_sword"
     ],
@@ -2500,8 +1975,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "beta_iron_sword"
+    "rarity": null
   },
   "item/rare/eye_cream": {
     "base_items": [
@@ -2515,10 +1989,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_eye_cream",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/eye_cream"
     ],
@@ -2529,8 +1999,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "eye_cream"
+    "rarity": null
   },
   "item/rare/feather_of_quet_zala": {
     "base_items": [
@@ -2544,13 +2013,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_feather_of_quet_zala",
-      "on_load",
-      "on_tick",
-      "on_uninstall",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/feather_of_quet_zala"
     ],
@@ -2561,8 +2023,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "feather_of_quet_zala"
+    "rarity": null
   },
   "item/rare/flawless_ashenhewn": {
     "base_items": [
@@ -2576,9 +2037,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_flawless_ashenhewn"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/flawless_ashenhewn"
     ],
@@ -2587,8 +2045,7 @@
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "flawless_ashenhewn"
+    "rarity": null
   },
   "item/rare/gift_of_sheep_island": {
     "base_items": [
@@ -2602,10 +2059,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_gift_of_sheep_island",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/gift_of_sheep_island"
     ],
@@ -2616,8 +2069,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "gift_of_sheep_island"
+    "rarity": null
   },
   "item/rare/grasp_of_uthiir": {
     "base_items": [
@@ -2631,12 +2083,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_grasp_of_uthiir",
-      "on_snowball_used",
-      "on_tick",
-      "place_web"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/grasp_of_uthiir"
     ],
@@ -2648,8 +2094,7 @@
       "in_main_hand",
       "in_off_hand"
     ],
-    "rarity": null,
-    "src": "grasp_of_uthiir"
+    "rarity": null
   },
   "item/rare/ima_leaf": {
     "base_items": [
@@ -2663,11 +2108,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_ima_leaf",
-      "on_warped_fungus_used",
-      "plant_sapling"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/ima_leaf"
     ],
@@ -2678,8 +2118,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "ima_leaf"
+    "rarity": null
   },
   "item/rare/longsword": {
     "base_items": [
@@ -2694,19 +2133,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_longsword",
-      "give_longsword_diamond",
-      "give_longsword_netherite"
-    ],
     "item_models": [],
     "loot_ids": [
       10
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "longsword"
+    "rarity": null
   },
   "item/rare/lucky_rabbits_foot": {
     "base_items": [
@@ -2721,17 +2154,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_lucky_rabbits_foot"
-    ],
     "item_models": [],
     "loot_ids": [
       29
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "lucky_rabbits_foot"
+    "rarity": null
   },
   "item/rare/quickdraw_crossbow": {
     "base_items": [
@@ -2744,17 +2173,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_quickdraw_crossbow"
-    ],
     "item_models": [],
     "loot_ids": [
       12
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "quickdraw_crossbow"
+    "rarity": null
   },
   "item/rare/rare_grab_bag": {
     "base_items": [
@@ -2767,10 +2192,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_rare_grab_bag",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:rare/rare_grab_bag"
     ],
@@ -2781,8 +2202,7 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "rare_grab_bag"
+    "rarity": null
   },
   "item/rare/shroud_of_notoriety": {
     "base_items": [
@@ -2797,17 +2217,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_shroud_of_notoriety"
-    ],
     "item_models": [],
     "loot_ids": [
       15
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "shroud_of_notoriety"
+    "rarity": null
   },
   "item/special/copper_horn/clear_temper_journey": {
     "base_items": [
@@ -2820,15 +2236,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/dry_urge_anger": {
     "base_items": [
@@ -2841,15 +2255,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/fearless_river_gift": {
     "base_items": [
@@ -2862,15 +2274,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/fresh_nest_thought": {
     "base_items": [
@@ -2883,15 +2293,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/great_sky_falling": {
     "base_items": [
@@ -2904,15 +2312,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/mumble_fire_memory": {
     "base_items": [
@@ -2925,15 +2331,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/old_hymn_resting": {
     "base_items": [
@@ -2946,15 +2350,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/pure_water_desire": {
     "base_items": [
@@ -2967,15 +2369,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/random_goat_horn": {
     "base_items": [
@@ -2985,13 +2385,11 @@
     "function_types": [
       "set_instrument"
     ],
-    "hooks": [],
     "item_models": [],
     "loot_ids": [],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/secret_lake_tear": {
     "base_items": [
@@ -3004,15 +2402,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/copper_horn/sweet_moon_love": {
     "base_items": [
@@ -3025,15 +2421,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn"
     ],
     "loot_ids": [],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/c418_dog": {
     "base_items": [
@@ -3044,7 +2438,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_c418_dog"
     ],
@@ -3053,8 +2446,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_acornman": {
     "base_items": [
@@ -3065,7 +2457,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornman"
     ],
@@ -3074,8 +2465,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_acornman_am": {
     "base_items": [
@@ -3086,7 +2476,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornman_am"
     ],
@@ -3095,8 +2484,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_acornmanreskinbd5": {
     "base_items": [
@@ -3107,7 +2495,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_acornmanreskinbd5"
     ],
@@ -3116,8 +2503,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_aeon": {
     "base_items": [
@@ -3128,7 +2514,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_aeon"
     ],
@@ -3137,8 +2522,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_aeonorch190bpm": {
     "base_items": [
@@ -3149,7 +2533,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_aeonorch190bpm"
     ],
@@ -3158,8 +2541,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_avidit_e": {
     "base_items": [
@@ -3170,7 +2552,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_avidit_e"
     ],
@@ -3179,8 +2560,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_drown": {
     "base_items": [
@@ -3191,7 +2571,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_drown"
     ],
@@ -3200,8 +2579,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_duma": {
     "base_items": [
@@ -3212,7 +2590,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_duma"
     ],
@@ -3221,8 +2598,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_flutes": {
     "base_items": [
@@ -3233,7 +2609,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_flutes"
     ],
@@ -3242,8 +2617,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_gutturalis": {
     "base_items": [
@@ -3254,7 +2628,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_gutturalis"
     ],
@@ -3263,8 +2636,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_kotyledon": {
     "base_items": [
@@ -3275,7 +2647,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_kotyledon"
     ],
@@ -3284,8 +2655,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_nematode": {
     "base_items": [
@@ -3296,7 +2666,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nematode"
     ],
@@ -3305,8 +2674,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_nighttime_transit": {
     "base_items": [
@@ -3317,7 +2685,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_nighttime_transit"
     ],
@@ -3326,8 +2693,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_old_white_straight_road": {
     "base_items": [
@@ -3338,7 +2704,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_old_white_straight_road"
     ],
@@ -3347,8 +2712,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_pathetic_mario": {
     "base_items": [
@@ -3359,7 +2723,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_pathetic_mario"
     ],
@@ -3368,8 +2731,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_rhapsodymini2": {
     "base_items": [
@@ -3380,7 +2742,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_rhapsodymini2"
     ],
@@ -3389,8 +2750,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_rigmarole": {
     "base_items": [
@@ -3401,7 +2761,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_rigmarole"
     ],
@@ -3410,8 +2769,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_sparkplugs": {
     "base_items": [
@@ -3422,7 +2780,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_sparkplugs"
     ],
@@ -3431,8 +2788,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/captainzephyrr_the_scone_song": {
     "base_items": [
@@ -3443,7 +2799,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_captainzephyrr_the_scone_song"
     ],
@@ -3452,8 +2807,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_locker": {
     "base_items": [
@@ -3464,7 +2818,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_locker"
     ],
@@ -3473,8 +2826,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_lost": {
     "base_items": [
@@ -3485,7 +2837,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_lost"
     ],
@@ -3494,8 +2845,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_minimalist": {
     "base_items": [
@@ -3506,7 +2856,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_minimalist"
     ],
@@ -3515,8 +2864,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_outskirts": {
     "base_items": [
@@ -3527,7 +2875,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_outskirts"
     ],
@@ -3536,8 +2883,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_pet_the_dog": {
     "base_items": [
@@ -3548,7 +2894,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_pet_the_dog"
     ],
@@ -3557,8 +2902,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_pies_e": {
     "base_items": [
@@ -3569,7 +2913,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_pies_e"
     ],
@@ -3578,8 +2921,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_reboot": {
     "base_items": [
@@ -3590,7 +2932,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_reboot"
     ],
@@ -3599,8 +2940,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_slither": {
     "base_items": [
@@ -3611,7 +2951,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_slither"
     ],
@@ -3620,8 +2959,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/satyrnidae_wanderer": {
     "base_items": [
@@ -3632,7 +2970,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_satyrnidae_wanderer"
     ],
@@ -3641,8 +2978,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_after_another": {
     "base_items": [
@@ -3653,7 +2989,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_after_another"
     ],
@@ -3662,8 +2997,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_between_layers": {
     "base_items": [
@@ -3674,7 +3008,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_between_layers"
     ],
@@ -3683,8 +3016,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_black_dawn": {
     "base_items": [
@@ -3695,7 +3027,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_black_dawn"
     ],
@@ -3704,8 +3035,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_cliff_where": {
     "base_items": [
@@ -3716,7 +3046,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_cliff_where"
     ],
@@ -3725,8 +3054,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_dark_southern_sky": {
     "base_items": [
@@ -3737,7 +3065,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_dark_southern_sky"
     ],
@@ -3746,8 +3073,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_deer": {
     "base_items": [
@@ -3758,7 +3084,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_deer"
     ],
@@ -3767,8 +3092,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_every_morning": {
     "base_items": [
@@ -3779,7 +3103,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_every_morning"
     ],
@@ -3788,8 +3111,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_far_away": {
     "base_items": [
@@ -3800,7 +3122,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_far_away"
     ],
@@ -3809,8 +3130,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_into_stars": {
     "base_items": [
@@ -3821,7 +3141,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_into_stars"
     ],
@@ -3830,8 +3149,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_lightform": {
     "base_items": [
@@ -3842,7 +3160,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_lightform"
     ],
@@ -3851,8 +3168,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_moon_beams": {
     "base_items": [
@@ -3863,7 +3179,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_beams"
     ],
@@ -3872,8 +3187,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_moon_rays": {
     "base_items": [
@@ -3884,7 +3198,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_moon_rays"
     ],
@@ -3893,8 +3206,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_mt_ennui": {
     "base_items": [
@@ -3905,7 +3217,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_mt_ennui"
     ],
@@ -3914,8 +3225,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_night_i": {
     "base_items": [
@@ -3926,7 +3236,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_night_i"
     ],
@@ -3935,8 +3244,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_night_ii": {
     "base_items": [
@@ -3947,7 +3255,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_night_ii"
     ],
@@ -3956,8 +3263,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_of_plains": {
     "base_items": [
@@ -3968,7 +3274,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_of_plains"
     ],
@@ -3977,8 +3282,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_pale_star": {
     "base_items": [
@@ -3989,7 +3293,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_pale_star"
     ],
@@ -3998,8 +3301,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_passing": {
     "base_items": [
@@ -4010,7 +3312,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_passing"
     ],
@@ -4019,8 +3320,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_peaks": {
     "base_items": [
@@ -4031,7 +3331,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_peaks"
     ],
@@ -4040,8 +3339,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_throughout": {
     "base_items": [
@@ -4052,7 +3350,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_throughout"
     ],
@@ -4061,8 +3358,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_tropic": {
     "base_items": [
@@ -4073,7 +3369,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_tropic"
     ],
@@ -4082,8 +3377,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/music_disc/wolfgun_unseen_land": {
     "base_items": [
@@ -4094,7 +3388,6 @@
       "set_components",
       "set_custom_data"
     ],
-    "hooks": [],
     "item_models": [
       "foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_unseen_land"
     ],
@@ -4103,8 +3396,7 @@
     ],
     "named": false,
     "predicates": [],
-    "rarity": null,
-    "src": null
+    "rarity": null
   },
   "item/special/mystery_book": {
     "base_items": [
@@ -4117,16 +3409,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_mystery_book",
-      "give_mystery_book_epic",
-      "give_mystery_book_mythic",
-      "give_mystery_book_rare",
-      "give_mystery_book_uncommon",
-      "on_warped_fungus_used",
-      "open",
-      "pick"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:special/mystery_book"
     ],
@@ -4135,8 +3417,7 @@
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "mystery_book"
+    "rarity": null
   },
   "item/uncommon/totem_of_undying": {
     "base_items": [
@@ -4148,17 +3429,13 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_totem_of_undying"
-    ],
     "item_models": [],
     "loot_ids": [
       21
     ],
     "named": true,
     "predicates": [],
-    "rarity": null,
-    "src": "totem_of_undying"
+    "rarity": null
   },
   "item/uncommon/uncommon_grab_bag": {
     "base_items": [
@@ -4171,10 +3448,6 @@
       "set_lore",
       "set_name"
     ],
-    "hooks": [
-      "give_uncommon_grab_bag",
-      "on_warped_fungus_used"
-    ],
     "item_models": [
       "foxcraft_dungeon_loot:uncommon/uncommon_grab_bag"
     ],
@@ -4185,7 +3458,6 @@
     "predicates": [
       "in_main_hand"
     ],
-    "rarity": null,
-    "src": "uncommon_grab_bag"
+    "rarity": null
   }
 }

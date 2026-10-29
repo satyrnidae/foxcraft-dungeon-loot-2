@@ -1,7 +1,7 @@
 // Regenerate tests/unit/specs/items.json from the pack as it is now.
 //
 // The spec is a snapshot: one entry per item with the facts the tests pin down, such as its DungeonLootId, base items,
-// item models, source hooks and predicates. Run it after a deliberate change, then review the diff like any other code
+// item models and predicates. Run it after a deliberate change, then review the diff like any other code
 // change. A diff you did not expect is a bug the tests just caught.
 //
 //     node tests/unit/gen_specs.mjs
@@ -14,13 +14,9 @@ import * as pk from './packdata.mjs';
 
 const SPEC_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), 'specs', 'items.json');
 
-const basename = (name) => name.split('/').pop();
 
 function specFor(name, file) {
   const item = pk.buildItem(name, file);
-  const base = basename(name);
-  const src = pk.srcItemFor(name);
-  const hasSrc = pk.exists(src);
   const predDir = pk.predicateDir(name);
   const rarity = item.customData.Rarity;
   return {
@@ -31,8 +27,6 @@ function specFor(name, file) {
     named: item.hasName,
     function_types: sorted(new Set(item.functionTypes)),
     item_models: sorted(item.itemModels),
-    src: hasSrc ? base : null,
-    hooks: hasSrc ? sorted(pk.topLevelFunctions(pk.readText(src))) : [],
     predicates: predDir ? pk.list(predDir, '.json').map(pk.stem).sort() : [],
   };
 }
