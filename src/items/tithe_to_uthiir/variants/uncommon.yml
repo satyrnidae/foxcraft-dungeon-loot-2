@@ -1,0 +1,31 @@
+# Uncommon is the iron one: Balm only
+rarity: uncommon
+model: foxcraft_dungeon_loot:uncommon/tithe_to_uthiir
+item: minecraft:iron_sword
+variantIndex: 2
+effects:
+  - name:
+      - translate:
+          - en_us: "Balm of the Spider God ${level_b}"
+          - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+        with:
+          - level_b:
+              - type: translatable
+                translate: enchantment.level.2
+                fallback: II
+    type: rare
+    description:
+      - translate:
+          - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} ${level_s} effect as well."
+          - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_s} d'une durée de 10 secondes."
+        with:
+          - strength:
+              - type: translatable
+                translate: effect.minecraft.strength
+                fallback: Strength
+          - level_s:
+              - type: translatable
+                translate: potion.potency.1
+                fallback: II
+enchantments:
+  - "foxcraft_dungeon_loot:balm_of_the_spider_god": 2

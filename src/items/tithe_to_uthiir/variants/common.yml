@@ -1,0 +1,27 @@
+# Common is the copper one: Balm I
+rarity: common
+model: foxcraft_dungeon_loot:common/tithe_to_uthiir
+item: minecraft:copper_sword
+variantIndex: 1
+effects:
+  - name:
+      - translate:
+          - en_us: "Balm of the Spider God ${level_b}"
+          - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+        with:
+          - level_b:
+              - type: translatable
+                translate: enchantment.level.1
+                fallback: I
+    type: uncommon
+    description:
+      - translate:
+          - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} effect as well."
+          - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} d'une durée de 10 secondes."
+        with:
+          - strength:
+              - type: translatable
+                translate: effect.minecraft.strength
+                fallback: Strength
+enchantments:
+  - "foxcraft_dungeon_loot:balm_of_the_spider_god": 1

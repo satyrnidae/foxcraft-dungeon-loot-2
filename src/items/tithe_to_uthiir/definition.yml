@@ -1,0 +1,165 @@
+# Tithe to Uthiir: YAML Item Definition Format Proposal Sketch
+
+# First line can be a comment describing the item and its variants.
+# Tithe to Uthiir is a netherite sword blessed by the God of Arthropods Uthiir the Many-Legged.
+# Its intrinsic ability allows spiders and cave spiders killed by this weapon to drop a Grasp of Uthiir throwable spiderweb.
+
+# The base item details are defined in the main body, while variant overrides go in the variants: section
+
+# name is a translatable text component so it can be one of:
+# - a bare string, interpreted as a bare translation string, or
+# - a list of objects in the form lang_code: "value", where lang_code can be omitted and a bare string entered for en_us
+name:
+  - Tithe to Uthiir
+  - fr_fr: La Dimê d'Uthiir
+
+# Item is defined in variants
+# item: minecraft:netherite_sword
+
+# The various custom data like DungeonLootId added in define.json via set_custom_data
+customData:
+  dungeonLootId: 81
+  dungeonItem: true # converts to 1b
+
+# minecraft:item_model component
+# Provided by the variants for this example.
+# model: foxcraft_dungeon_loot:epic/tithe_to_uthiir
+
+# Pack rarity, not the minecraft:rarity component. It picks the rarity/<name> modifier, which sets the rarity byte
+# in custom data and appends the Rarity lore line, and the loot tier. Name color is set separately.
+# One of common, uncommon, rare, epic, mythic, or cursed. The one "exotic" item will be swapped to "mythic".
+# Can be excluded for items like Tithe to Uthiir which have defined variants.
+# Defaults to common.
+# rarity: "epic"
+
+# Lore helper. Base item blurb, the flavor lines at the top of the lore. Variants can override this
+blurb:
+  - en_us: Uthiir, God of Arthropods, kindly asks that you thin the herd.
+  - fr_fr: Uthiir, le dieu des arthropodes, demande de bien voulouir éclaircir les rangs.
+# Lore helper. Each entry becomes a colored name plus wrapped description in the lore, no game behavior.
+# Enchantments do not belong in effects: once the enchantment generator supplies lore text (see the lore: block in
+# src/enchantment/*.yml), a variant's enchantments: list is enough and the matching effects: entries below, the
+# Haemolymph, Aura and Balm ones, move into the enchantment defs. Only intrinsics and pseudo-enchantments stay here,
+# for example Uthiir's Embrace, since they have no enchantment definition. Generated lore order is the variant's
+# enchantments in listed order, then effects:, so intrinsics stay at the bottom. The item generator needs the
+# enchantment generator's lore cache before it runs. Until then both are written out by hand as in the variants below.
+# Base item effects are appended after the variant effects.  This keeps intrinsics at the bottom of the list.
+effects:
+  - name:
+      - en_us: Uthiir's Embrace
+      - fr_fr: L'Étreinte d'Uthiir
+    # Used to determine the color of the effect name in the lore. Matches rarity, plus adds an "intrinsic" type which colors the title gold
+    type: intrinsic
+    description:
+      # Translated string entries can include formatting cues alongside the text value. The generator should do its best to align substitutions
+      # In this case, the translated text component with: tag will have one %1$s entry pointing to the Grasp of Uthiir substitution, which itself has multiple translations.
+      # The book generator does this already.
+      # Note that translations should break lines with \n to simplify the substitution alignment.
+      # Substitution can either be inline or, as shown below, via ${identifiers} and a with: block.
+      - translate:
+          - en_us:
+              - "Upon killing a spider or a cave spider there is a 10% chance that it will drop the ${grasp_of_uthiir}, which allows you to throw a projectile that will entangle your target in cobwebs."
+          - fr_fr:
+              - "Lorsqu'il est utilisé pour tuer une araignée ou une araignée des cavernes, il y a 10% de chance qu'elle laisse tomber la «${grasp_of_uthiir}», qui permet de lancer un projectile capable d'emprisonner botre cible dans des toiles d'araignée."
+        with:
+          - grasp_of_uthiir:
+              # This references another item by name, using the generated lang key
+              - translate: item.foxcraft_dungeon_loot.grasp_of_uthiir
+                color: aqua
+                fallback: Grasp of Uthiir
+
+# set_enchantments
+enchantments:
+  - "minecraft:bane_of_arthropods": 5
+  - "minecraft:mending": 1
+  - "minecraft:unbreaking": 1
+
+# Unused options. Anything commented out below is a possible entry, kept as reference for the generator.
+# Names checked against the 26.3 jar. Anything set here goes into set_components of the generated modifier,
+# and variants may override any of it. Namespace can be dropped for minecraft: ids.
+
+# Loot table pool. Defaults: one roll, always.
+# weight: 1             # weight within the rarity grab bag and random pool, 0 keeps it out of both
+# quality: 0
+# count: 1              # stack count, or {min: 1, max: 3}
+# grabBag: true         # include in <rarity>_grab_bag
+# condition: ...        # loot condition added to the pool
+# obtainable: false     # no loot table or trigger, give function only
+
+# Extra raw lore lines above the blurb, for anything blurb and effects do not cover. Lore width limits still apply.
+# lore:
+#   - en_us: "Found in a spider's nest."
+
+# Tooltip. hidden_components is a list of component ids to hide, hide_tooltip hides everything.
+# tooltipDisplay:
+#   hideTooltip: false
+#   hiddenComponents:
+#     - "minecraft:attribute_modifiers"
+#     - "minecraft:enchantments"
+# Native minecraft:rarity component, tints the item name. Separate from the pack rarity above and unset by default.
+# nativeRarity: epic       # common, uncommon, rare, epic
+# tooltipStyle: foxcraft_dungeon_loot:epic
+
+# Durability. Unbreakable ignores damage.
+# unbreakable: true
+# maxDamage: 2031
+# damage: 0
+# repairCost: 0
+# enchantable: 15       # enchantability, "value"
+# repairable: "#minecraft:netherite_tool_materials"    # item, list, or #tag
+# maxStackSize: 1
+
+# Glint: true forces it, false hides it. Unset uses the enchantment glint.
+# enchantmentGlintOverride: true
+
+# Attribute modifiers. Replaces the item's default ones, so repeat the sword's attack damage and speed to keep them.
+# attributeModifiers:
+#   - type: "minecraft:attack_damage"
+#     id: "foxcraft_dungeon_loot:tithe_to_uthiir"
+#     amount: 8
+#     operation: add_value        # add_value, add_multiplied_base, add_multiplied_total
+#     slot: mainhand              # any, hand, mainhand, offhand, armor, feet, legs, chest, head, body, saddle
+#     display: default            # default, hidden, or {type: override, value: <text component>}
+
+# Weapon behavior
+# weapon:
+#   itemDamagePerAttack: 1
+#   disableBlockingForSeconds: 0
+# attackRange:
+#   minReach: 0
+#   maxReach: 3
+#   hitboxMargin: 0.3
+#   mobFactor: 1
+# useCooldown:
+#   seconds: 1
+#   cooldownGroup: "foxcraft_dungeon_loot:tithe_to_uthiir"
+# damageResistant: "#minecraft:is_fire"    # damage type tag the item entity ignores
+# deathProtection: ...                     # death_effects list
+
+# Adventure mode. Block ids or #tags.
+# canBreak: "#minecraft:cobweb"
+# canPlaceOn: "minecraft:stone"
+
+# Damage and use. Rarely needed on a sword.
+# tool: {rules: [...], defaultMiningSpeed: 1, damagePerBlock: 1}
+# equippable: {slot: mainhand}
+# blocksAttacks: {...}
+# consumable / food / useRemainder / glider omitted, not relevant to a sword
+
+# Raw components not covered above, written as they appear in set_components. Last word on any conflict.
+# components:
+#   "minecraft:custom_model_data": {strings: ["alt"]}
+
+# If any variants are present, the base item is no longer obtainable.
+# Variant IDs are set automatically by their order. These are used in the /trigger give_ scoreboards and on loot tables.
+# Variants can also be stored next to a folderized definition.yml, as in this case.
+#  (see history for the flat-file method)
+#  In this case the variant ID is determined alphabetically and the function name is derived from the variant file name.
+# Variant ordering can be overridden with a "variantIndex" entry on the variant
+# variants:
+#   - function: epic
+#     rarity: epic
+#     # variantIndex: 1
+#     model: foxcraft_dungeon_loot:epic/tithe_to_uthiir
+#     item: minecraft:netherite_sword
+#     [...]

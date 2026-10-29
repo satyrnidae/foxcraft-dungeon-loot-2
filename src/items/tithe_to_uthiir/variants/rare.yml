@@ -1,0 +1,64 @@
+rarity: rare
+model: foxcraft_dungeon_loot:rare/tithe_to_uthiir
+item: minecraft:diamond_sword
+variantIndex: 3
+effects:
+  # Haemolymph Sacrifice is pulled from the enchantment lore cache at build time, based on the enchants applied by
+  # this variant's enchantments: list, so the entry below is kept for reference only.
+  # - name:
+  #     - translate:
+  #         - en_us: "Haemolymph Sacrifice ${level}"
+  #         - fr_fr: "Sacrifice de l'Hémolymphe ${level}"
+  #       with:
+  #         - level:
+  #             - type: translatable
+  #               translate: enchantment.level.1
+  #               fallback: I
+  #   type: rare # for aqua
+  #   description:
+  #     - translate:
+  #         - en_us: "Gain 10 seconds of ${speed}, 5 seconds of ${resistance} ${level_2}, and 3 seconds of ${regeneration} whenever you kill an arthropod."
+  #         - fr_fr: "Obtenez 10 secondes de ${speed}, 5 secondes de ${resistance} ${level_2} et 3 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+  #       with:
+  #         - speed:
+  #             - type: translatable
+  #               translate: effect.minecraft.speed
+  #               fallback: Speed
+  #         - resistance:
+  #             - type: translatable
+  #               translate: effect.minecraft.resistance
+  #               fallback: Resistance
+  #         - level_2:
+  #             - type: translatable
+  #               translate: potion.potency.1
+  #               fallback: II
+  #         - regeneration:
+  #             - type: translatable
+  #               translate: effect.minecraft.regeneration
+  #               fallback: Regeneration
+  - name:
+      - translate:
+          - en_us: "Balm of the Spider God ${level_b}"
+          - fr_fr: "Baume du Dieu-Araignée ${level_b}"
+        with:
+          - level_b:
+              - type: translatable
+                translate: enchantment.level.3
+                fallback: III
+    type: epic
+    description:
+      - translate:
+          - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 10-second ${strength} ${level_s} effect as well."
+          - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_s} d'une durée de 10 secondes."
+        with:
+          - strength:
+              - type: translatable
+                translate: effect.minecraft.strength
+                fallback: Strength
+          - level_s:
+              - type: translatable
+                translate: potion.potency.2
+                fallback: III
+enchantments:
+  - "foxcraft_dungeon_loot:haemolymph_sacrifice": 1
+  - "foxcraft_dungeon_loot:balm_of_the_spider_god": 3

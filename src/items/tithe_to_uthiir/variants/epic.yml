@@ -1,0 +1,108 @@
+# Epic variant of the Tithe to Uthiir
+
+rarity: epic
+model: foxcraft_dungeon_loot:epic/tithe_to_uthiir
+item: minecraft:netherite_sword
+variantIndex: 4
+# Variants can override any base component above, for example:
+# unbreakable: true
+# maxDamage: 2031
+# attributeModifiers: [...]
+# enchantable: 15
+# weight: 1             # variant weight in the grab bag, defaults to the base weight
+# obtainable: false     # variant gets no trigger or loot table pool, give function only
+# name / lore: override per variant, same shape as the base
+# blurb could be overridden here if the variant should have a different one. This will be used in place of the base item blurb.
+# If any variant overrides the blurb, the blurb must be set in all variant files. It can be inherited from the base item.
+# blurb: This is a blurb override! Ha ha!
+# Variant effects are cumulative, unlike blurbs.
+effects:
+  # Eventually I'd like to move effect blurbs to be closely tied with enchantments, but I have no plans for that at this stage.
+  # Haemolymph Sacrifice is pulled from the enchantment lore cache at build time, based on the enchants applied by
+  # this variant's enchantments: list, so the entry below is kept for reference only.
+  # - name:
+  #     # translatable text component with substitutions can be manually specified, such as in this case with the enchantment level.
+  #     # type: translatable is implied
+  #     - translate:
+  #         - en_us: "Haemolymph Sacrifice ${level}"
+  #         - fr_fr: "Sacrifice de l'Hémolymphe ${level}"
+  #       with:
+  #         - level:
+  #           # Translatable text components can also be specified manually to reference an existing translation
+  #           # Basically any text component should be able to be manually specified in yaml
+  #           - type: translatable
+  #               # If a translate entry doesn't have a lang members it is treated as a bare translation
+  #             translate: enchantment.level.2
+  #             fallback: II
+  #   type: epic # for light_purple
+  #   description:
+  #     - translate:
+  #         - en_us: "Gain 10 seconds of ${speed} ${level_2}, 5 seconds of ${resistance} ${level_3}, and 5 seconds of ${regeneration} whenever you kill an arthropod."
+  #         - fr_fr: "Obtenez 10 secondes de ${speed} ${level_2}, 5 secondes de ${resistance} ${level_3} et 5 secondes de ${regeneration} chaque fois que vous tuez un arthropode."
+  #       with:
+  #         - speed:
+  #             - type: translatable
+  #               translate: effect.minecraft.speed
+  #               fallback: Speed
+  #         - level_2:
+  #             - type: translatable
+  #               translate: potion.potency.1
+  #               fallback: II
+  #         - resistance:
+  #             - type: translatable
+  #               translate: effect.minecraft.resistance
+  #               fallback: Resistance
+  #         - level_3:
+  #             - type: translatable
+  #               translate: potion.potency.2
+  #               fallback: III
+  #         - regeneration:
+  #             - type: translatable
+  #               translate: effect.minecraft.regeneration
+  #               fallback: Regeneration
+  - name:
+      - en_us: "Aura of Uthiir"
+      - fr_fr: "Aura d'Uthiir"
+    type: epic
+    description:
+      - translate:
+          - en_us: "Upon killing an Arthropod, there is a 10% chance that an ominous aura afflicts all hostile mobs within a 10-meter radius with ${wither} ${level_3}, and all other arthropods in a 10-meter radius with ${weakness} ${level_3}, for 5 seconds."
+          - fr_fr: "Lorsqu'un arthropode est tué, il existe 10 % de chances qu'une aura inquiétante affecte, pendant 5 secondes, toutes les créatures hostiles situées dans un rayon de 10 mètres avec l'effet ${wither} ${level_3}, ainsi que tous les autres arthropodes présents dans ce même rayon avec l'effet ${weakness} ${level_3}."
+        with:
+          - wither:
+              - type: translatable
+                translate: effect.minecraft.wither
+                fallback: Wither
+          - level_3:
+              - type: translatable
+                translate: potion.potency.2
+                fallback: III
+          - weakness:
+              - type: translatable
+                translate: effect.minecraft.weakness
+                fallback: Weakness
+  - name:
+      - translate:
+          - en_us: "Balm of the Spider God ${level_4}"
+          - fr_fr: "Baume du Dieu-Araignée ${level_4}"
+        with:
+          - level_4:
+              - translate: enchantment.level.4
+                fallback: IV
+    type: mythic
+    description:
+      - translate:
+          - en_us: "While held, eating a spider eye will remove any active poison effects, and applies a 30-second ${strength} ${level_3} effect as well."
+          - fr_fr: "Lorsqu'il est tenu en main, consommer un œil d'araignée supprime tout effet de poison actif et confère également un effet ${strength} ${level_3} d'une durée de 30 secondes."
+        with:
+          - strength:
+              - translate: effect.minecraft.strength
+                fallback: Strength
+          - level_3:
+              - translate: potion.potency.2
+                fallback: III
+# Eventually I want to be able to derive effects from these, but that will require some more thought to design
+enchantments:
+  - "foxcraft_dungeon_loot:aura_of_uthiir": 1
+  - "foxcraft_dungeon_loot:haemolymph_sacrifice": 2
+  - "foxcraft_dungeon_loot:balm_of_the_spider_god": 4
