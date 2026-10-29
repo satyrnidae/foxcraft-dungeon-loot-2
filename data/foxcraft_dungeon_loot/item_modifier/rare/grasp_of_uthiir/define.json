@@ -33,13 +33,18 @@
             "italic": false
           },
           {
-            "text": "Throw the item to place",
+            "text": "Throw the item at a",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "a cobweb where it lands.",
+          "text": "creature to web its whole hitbox and slow it",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for 5 seconds.",
           "color": "gray",
           "italic": false
         },
