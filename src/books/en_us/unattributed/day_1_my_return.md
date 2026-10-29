@@ -14,6 +14,11 @@ styles: {
         italic: true,
         align: center
     }
+    .garbled: {
+        font: foxcraft_dungeon_loot:garbled,
+        color: dark_gray,
+        italic: true
+    }
 }
 ---
 
@@ -28,9 +33,13 @@ styles: {
 
  **7:16 PM**: I've finally made it back home. I've decided to attempt to build an island. The prototype is done, I shall work on it later, going to fetch rest of items from home.
 <br>
-# Items Needed
-- Shears
-- Shovel
-- Sand
-<vbottom>
+# Items Need<style class=".garbled">ed</style>
+- Shear<style class=".garbled">s</style>
+- Sho<style class=".garbled">vel</style>
+- S<style class=".garbled">and</style>
+- <style class=".garbled">Sponges</style>
+<style class=".garbled">- Pickaxe</style>
+<style class=".garbled">- Dirt</style>
+<style class=".garbled">- Torches</style>
+<vcenter>
 <style class=".meta">The rest of the writing is too washed out to read.</style>
