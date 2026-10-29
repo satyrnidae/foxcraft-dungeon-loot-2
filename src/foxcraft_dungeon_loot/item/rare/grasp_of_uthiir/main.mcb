@@ -66,7 +66,7 @@ function on_tick {
 # Runs as the struck entity. Slows it and webs every empty block its hitbox touches. align xyz plus dx=dy=dz=0 tests the
 # hitbox against a single block cell, the scan covers 3x3 columns up to 3 blocks tall from the feet.
 function hit_entity {
-    effect give @s minecraft:slowness 5 1
+    effect give @s minecraft:slowness <%cobwebDecay%> 1
     scoreboard players set #test <%config.internalScoreboard%> 0
     REPEAT(-1, 1) as x {
         REPEAT(0, 2) as y {
@@ -84,12 +84,12 @@ function hit_entity {
 function web_cell {
     setblock ~ ~ ~ minecraft:cobweb keep
     # Prototype for namespaced custom data on entities, nested under the pack id so other implementations can follow it
-    summon minecraft:marker ~0.5 ~0.5 ~0.5 {Tags:[satyrn.fdl.cobwebdecay],data:{foxcraft_dungeon_loot:{cobweb_decay:<%cobwebDecayTicks%>}}}
+    summon minecraft:marker ~0.5 ~0.5 ~0.5 {Tags:[satyrn.fdl.cobwebdecay],data:{foxcraft_dungeon_loot:{cobweb_decay:<%cobwebDecay * 20%>}}}
     return 1
 }
 
 # Runs as and at a decay marker. Markers do not tick any timer, so count data.foxcraft_dungeon_loot.cobweb_decay down here.
-# Gone when the cobweb was broken, and clears the cobweb when the time runs out.
+# Gone when the cobweb was broken, along with one string from the drop, and clears the cobweb when the time runs out.
 function decay_tick {
     execute if block ~ ~ ~ minecraft:cobweb run {
         execute if data entity @s data.foxcraft_dungeon_loot{cobweb_decay:1} run {
@@ -102,7 +102,20 @@ function decay_tick {
             execute store result entity @s data.foxcraft_dungeon_loot.cobweb_decay int 1 run compute default integer {type:"minecraft:sub",left:{type:"minecraft:storage",storage:"foxcraft_dungeon_loot:items",path:"grasp_of_uthiir.cobweb_decay"},right:1}
         }
     } else run {
+        # Broken early, expiry never reaches here. The break drops one string within a quarter block of the cell center, so
+        # take one from the nearest stack, which may have merged with other string.
+        execute as @e[type=minecraft:item,distance=..1,nbt={Item:{id:"minecraft:string"}},sort=nearest,limit=1] run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/remove_string
         kill @s
+    }
+}
+
+# Runs as a string item stack. Removes one string, and the stack itself only when that was the last.
+function remove_string {
+    execute if data entity @s Item{count:1} run {
+        kill @s
+    } else run {
+        data modify storage foxcraft_dungeon_loot:items grasp_of_uthiir.string_count set from entity @s Item.count
+        execute store result entity @s Item.count int 1 run compute default integer {type:"minecraft:sub",left:{type:"minecraft:storage",storage:"foxcraft_dungeon_loot:items",path:"grasp_of_uthiir.string_count"},right:1}
     }
 }
 

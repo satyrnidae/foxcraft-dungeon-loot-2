@@ -1,4 +1,4 @@
 
 module.exports = {
-    cobwebDecayTicks: 20 * 20
+    cobwebDecay: 20
 };
