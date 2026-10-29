@@ -402,7 +402,10 @@ public class BookRender {
             background = ImageIO.read(in).getSubimage(0, 0, BOOK_SIZE, BOOK_SIZE);
         }
 
-        Path modifiers = root.resolve("data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated");
+        // config.json mc.generatedDirectory, the folder the generator writes the books to
+        java.util.regex.Matcher dirName = java.util.regex.Pattern.compile("\"generatedDirectory\"\\s*:\\s*\"([^\"]+)\"").matcher(Files.readString(root.resolve("config.json")));
+        String generated = dirName.find() ? dirName.group(1) : "__generated__";
+        Path modifiers = root.resolve("data/foxcraft_dungeon_loot/item_modifier/random_loot/book").resolve(generated);
         if (!Files.isDirectory(modifiers)) {
             out("no generated books in " + modifiers);
             System.exit(1);

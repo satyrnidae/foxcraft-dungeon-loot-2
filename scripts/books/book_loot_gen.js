@@ -10,12 +10,21 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..', '..');
+// config.json mc.generatedDirectory, the folder name mc-build puts generated files in. Generated books use it too, so they
+// are told apart from hand-written ones beside them.
+const GENERATED_DIR = (() => {
+    try {
+        return JSON.parse(fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8')).mc.generatedDirectory || '__generated__';
+    } catch (e) {
+        return '__generated__';
+    }
+})();
 const NS = 'foxcraft_dungeon_loot';
 const BOOK_DIR = path.join(ROOT, 'src', 'books');
 // Generated files get a folder of their own, so a hand-written book modifier or table beside them is never cleaned up
-const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book', 'generated');
-const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book', 'generated');
-const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', 'generated', 'lang');
+const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book', GENERATED_DIR);
+const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book', GENERATED_DIR);
+const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', GENERATED_DIR, 'lang');
 const REFERENCE_LANG = 'en_us';
 // Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
 const ALL_TABLE = 'random_book';
@@ -2200,14 +2209,14 @@ const json = (value) => JSON.stringify(value, null, 2).replace(/[\u00a0\ue000-\u
 // the tables of all books list the books themselves and not the rarity tables.
 function allTable(ids, paths = {}) {
     if (!ids.length) return { pools: [] };
-    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/generated/${paths[id] || id}` })) }] };
+    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/${GENERATED_DIR}/${paths[id] || id}` })) }] };
 }
 
 // The rarity is the shared item modifier rarity/<name>, in the entry so that it runs before the modifier of the book
 function tableFor(id, writable = false, rarity = null, rel = id) {
     const entry = { type: 'minecraft:item', name: writable ? 'minecraft:writable_book' : 'minecraft:written_book' };
     if (rarity) entry.modifier = [`${NS}:rarity/${rarity}`];
-    return { pools: [{ rolls: 1, entries: [entry] }], modifier: `${NS}:random_loot/book/generated/${rel}` };
+    return { pools: [{ rolls: 1, entries: [entry] }], modifier: `${NS}:random_loot/book/${GENERATED_DIR}/${rel}` };
 }
 
 // Markdown files directly in a locale folder or in a group folder, such as an author's, one level down, as paths relative to it
@@ -2352,7 +2361,7 @@ function generate(options = {}) {
 
 //endregion
 
-module.exports = { generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, sectionsOf, paginate, paginateTogether, wrappedLore, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
+module.exports = { GENERATED_DIR, generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, sectionsOf, paginate, paginateTogether, wrappedLore, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
 
 if (require.main === module) {
     const args = process.argv.slice(2);

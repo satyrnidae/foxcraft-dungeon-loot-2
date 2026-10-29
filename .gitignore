@@ -6,9 +6,7 @@ data/minecraft/tags/function/load.json
 data/minecraft/tags/function/tick.json
 
 # Book modifiers, loot tables and lang files, generated from src/books by scripts/books/book_loot_gen.js
-data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated
-data/foxcraft_dungeon_loot/loot_table/item/random_loot/book/generated
-texturepack/assets/generated
+**/__generated__
 
 # Custom music discs
 texturepack/assets/custom_music_discs

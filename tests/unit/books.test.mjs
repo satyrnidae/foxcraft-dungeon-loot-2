@@ -477,10 +477,10 @@ describe('book generator files', () => {
       const entries = () => JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'random_book.json'), 'utf8')).pools[0].entries.map((e) => e.value);
       gen.generate({ ...opts, dev: false });
       assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
-      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown']);
+      assert.deepEqual(entries(), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/shown`]);
       gen.generate({ ...opts, dev: true });
       assert.ok(fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
-      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown'], 'a debug book is not in the random table');
+      assert.deepEqual(entries(), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/shown`], 'a debug book is not in the random table');
       gen.generate({ ...opts, dev: false });
       assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')), 'the table of a book that went debug is removed');
     } finally {
@@ -494,7 +494,7 @@ describe('book generator files', () => {
       write(dir, 'books/en_us/test.md', SOURCE);
       gen.generate(opts);
       const read = (name) => JSON.parse(fs.readFileSync(path.join(opts.tableDir, name + '.json'), 'utf8'));
-      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), ['foxcraft_dungeon_loot:item/random_loot/book/generated/test']);
+      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/test`]);
       assert.deepEqual(read('random_rare_book'), { pools: [] });
       write(dir, 'books/en_us/random_rare_book.md', SOURCE);
       assert.throws(() => gen.generate(opts), /random_rare_book is the loot table/);
@@ -1303,7 +1303,7 @@ describe('book give triggers', () => {
       const folder = rels[i].includes('/') ? rels[i].split('/').slice(-2, -1)[0] : 'unattributed';
       const name = folder === 'debug' ? `give_debug_book_${id}` : folder === 'unattributed' ? `give_book_${id}` : `give_book_${id}_by_${folder}`;
       const fn = pk.readText(pk.generatedFunction('give/' + name));
-      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${rels[i]}`), id);
+      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/${gen.GENERATED_DIR}/${rels[i]}`), id);
       assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add ${name} trigger`), id);
     }
   });

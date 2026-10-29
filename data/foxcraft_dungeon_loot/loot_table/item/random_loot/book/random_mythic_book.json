@@ -5,7 +5,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "foxcraft_dungeon_loot:item/random_loot/book/generated/random_mythic_book"
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/__generated__/random_mythic_book"
         }
       ]
     }
