@@ -28,8 +28,6 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 | `unit/items.test.mjs` | One generated test per item, 162 of them |
 | `unit/source.test.mjs` | One generated test per file in `src/foxcraft_dungeon_loot/item/` |
 | `unit/integrity.test.mjs` | Whole-pack checks: ids, references, resources, scoreboards, versions, old keys |
-| `unit/specs/items.json` | Snapshot of the facts each item test pins down |
-| `unit/gen_specs.mjs` | Regenerates the snapshot |
 | `unit/checks.mjs` | Lets one test report several failed checks together |
 | `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader, `BookRender`, which draws every generated book page, and `ArabicShapingTable`, which checks `scripts/arabic_shaping.json` against the game's Arabic shaper and rewrites it and fails when they differ |
 | `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs`, `fetch_mc_jar.mjs` |
@@ -41,7 +39,6 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 For every loot table under `loot_table/item/` except `item/random_loot/`, which includes the discs and horns under `item/special/`:
 
 - The loot table, its modifiers and any loot tables it references exist, and every `set_custom_data` tag is valid SNBT.
-- The item matches its entry in `specs/items.json`: `DungeonLootId`, `DungeonItem` flag, rarity, base items, modifier function types, `item_model` values, source hooks and predicates.
 - `DungeonLootId` is an int. A byte never matches the predicates.
 - Rarity matches the folder, and an item is not left unnamed.
 - Every `item_model` has an item definition, a model and a texture.
@@ -56,12 +53,10 @@ For every file under `src/foxcraft_dungeon_loot/item/`:
 - Objectives it adds are removed somewhere.
 - Predicates, item modifiers, loot tables, advancements, tags, sound events and functions named in its commands exist.
 
-The snapshot pins current state, not correctness. Reviewing a diff of `specs/items.json` is part of reviewing a change.
-
 ## Adding things
 
-- New item: add the loot table, modifier and source. The tests find them. Run `node tests/unit/gen_specs.mjs` and review the new spec entry.
-- Changed item on purpose: regenerate the spec and read the diff.
+- New item: add the loot table, modifier and source. The tests find them.
+- Changed item on purpose: re-run the unit tests against it.
 - New check that applies to every item: add it to `items.test.mjs`. A check for one item belongs in a spec field.
 
 ## Book pages
