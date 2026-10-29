@@ -372,14 +372,16 @@ function packFonts(cached, assetsDir, ascents = {}) {
 function loadFonts(options = {}) {
     const cache = fs.existsSync(options.cache || CACHE) ? JSON.parse(fs.readFileSync(options.cache || CACHE, 'utf8')) : {};
     const fonts = {};
+    let unifont = null;
     for (const [id, grouped] of Object.entries(cache)) if (!id.startsWith('__') && id !== UNIFONT) fonts[id] = unpack(grouped);
     // The fonts that reach Unifont have its widths under their own, which win
     if (cache[UNIFONT]) {
-        const unifont = unpackRanges(cache[UNIFONT]);
+        unifont = unpackRanges(cache[UNIFONT]);
         for (const id of cache.__with_unifont || []) fonts[id] = { ...unifont, ...fonts[id] };
     }
     const ascents = {};
-    Object.assign(fonts, packFonts({ ...fonts }, options.assets || PACK_ASSETS, ascents));
+    // Pack fonts can reference include/unifont directly, so it is readable here though not kept as a font of its own
+    Object.assign(fonts, packFonts(unifont ? { ...fonts, [UNIFONT]: unifont } : { ...fonts }, options.assets || PACK_ASSETS, ascents));
     const missing = new Set();
     const widthOf = (font, ch, bold) => {
         const id = withNamespace(font || DEFAULT_FONT);
