@@ -711,10 +711,12 @@ function groupCode(parts) {
     const out = [];
     for (let i = 0; i < parts.length; i++) {
         let end = i;
-        if (parts[i].literal) {
+        // A kerning node is literal text too, but no code
+        const code = (p) => p && p.literal && !p.kern;
+        if (code(parts[i])) {
             for (;;) {
-                if (parts[end + 1] && parts[end + 1].literal) end += 1;
-                else if (/^\n+$/.test(parts[end + 1] || '') && parts[end + 2] && parts[end + 2].literal) end += 2;
+                if (code(parts[end + 1])) end += 1;
+                else if (/^\n+$/.test(parts[end + 1] || '') && code(parts[end + 2])) end += 2;
                 else break;
             }
         }
@@ -745,7 +747,7 @@ function toComponent(content, key, lang, styles = {}) {
     }
     parts.splice(0, parts.length, ...groupCode(parts));
     if (parts.length === 1 && parts[0].code) return codeComponent(parts[0].code, key, lang, styles);
-    if (parts.length === 1 && parts[0].literal) return literalComponent(parts[0], styles);
+    if (parts.length === 1 && parts[0].literal && !parts[0].kern) return literalComponent(parts[0], styles);
     if (parts.length === 1 && typeof parts[0] !== 'string') {
         return toComponent(parts[0].content, key, lang, { ...styles, ...parts[0].styles });
     }
@@ -1087,6 +1089,40 @@ const padding = (width) =>
         .join('');
 // Padding either way, the backwards glyphs being 0x80 past the forwards ones
 const signedPadding = (width) => (width < 0 ? [...padding(-width)].map((c) => String.fromCharCode(c.charCodeAt(0) + 0x80)).join('') : padding(width));
+
+/**
+ * Sets the spacing of scripts/fonts/font_kerning.json: a node of padding as wide as the difference before and after each glyph
+ * whose font asks for other spacing than the game's own. The widths the layout used already count it, see FONTS.kerningOf, so
+ * this runs last, on a finished page, or the padding would be counted twice. Code, padding, shaped Arabic and newlines are
+ * left alone. The nodes are literal, plain text components that take no lang entry. Returns a copy of the content.
+ */
+function applyKerning(content, font = DEFAULT_FONT) {
+    const pad = (width) => ({ styles: PAD_STYLES, content: [signedPadding(width)], literal: true, kern: true });
+    return content.flatMap((part) => {
+        if (typeof part !== 'string') {
+            if (part.literal || part.kern) return [part];
+            const inner = part.styles.font ? withNamespace(part.styles.font) : font;
+            return [{ ...part, content: applyKerning(part.content, inner), ...(part.alt ? { alt: applyKerning(part.alt, inner) } : {}) }];
+        }
+        const out = [];
+        let text = '';
+        for (const ch of part) {
+            const { before, after } = ch === '\n' || shapeOf(ch) ? { before: 0, after: 0 } : FONTS.kerningOf(font, ch);
+            if (before) {
+                if (text) out.push(text);
+                out.push(pad(before));
+                text = '';
+            }
+            text += ch;
+            if (after) {
+                out.push(text, pad(after));
+                text = '';
+            }
+        }
+        if (text) out.push(text);
+        return out;
+    });
+}
 
 //region List items
 
@@ -2080,11 +2116,12 @@ function alignSources(files, warnings) {
             const { length } = tree ? layout(tree) : { length: 0 };
             if (length > PAGE_EDIT_LENGTH) warnings.push(`${files[used[k]]}: page ${n + 1} has ${length} characters, the editor stops at ${PAGE_EDIT_LENGTH}`);
         });
-        const page = unionPage(reads, `book.${NS}.${id(files[0])}.page.${n + 1}`, langs, 0);
         // A page that reads the same filtered stays a plain component, the game filters it to the same text
         const filters = filtered(n);
         const differs = reads.some((tree, k) => tree && JSON.stringify(tree) !== JSON.stringify(filters[k]));
-        components.push(differs ? { raw: page, filtered: unionPage(filters, `book.${NS}.${id(files[0])}.filtered.${n + 1}`, langs, 0) } : page);
+        const kerned = (trees) => trees.map((tree) => tree && applyKerning(tree));
+        const page = unionPage(kerned(reads), `book.${NS}.${id(files[0])}.page.${n + 1}`, langs, 0);
+        components.push(differs ? { raw: page, filtered: unionPage(kerned(filters), `book.${NS}.${id(files[0])}.filtered.${n + 1}`, langs, 0) } : page);
     }
     return sources.map((source, i) => {
         const k = used.indexOf(i);
@@ -2098,7 +2135,7 @@ function pageComponents(pages, id, kind, lang, warnings, file, numbers = pages.m
         const n = numbers[i];
         const { length } = layout(tree);
         if (length > PAGE_EDIT_LENGTH) warnings.push(`${file}: page ${n + 1} has ${length} characters, the editor stops at ${PAGE_EDIT_LENGTH}`);
-        return pruneOffFlags(toComponent(tree, `book.${NS}.${id}.${kind}.${n + 1}`, lang));
+        return pruneOffFlags(toComponent(applyKerning(tree), `book.${NS}.${id}.${kind}.${n + 1}`, lang));
     });
 }
 
@@ -2503,7 +2540,7 @@ function generate(options = {}) {
 
 //endregion
 
-module.exports = { GENERATED_DIR, generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, sectionsOf, paginate, paginateTogether, wrappedLore, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
+module.exports = { GENERATED_DIR, applyKerning, generate, findSources, parseSnbt, parseClasses, parseFrontmatter, parseInline, splitSections, pagesOf, sectionsOf, paginate, paginateTogether, wrappedLore, toComponent, buildBook, layout, reserveTall, hyphenate, unwrapNoHyphen, RARITY_COLORS, LORE_WIDTH, LORE_PIXELS, loreWidth, loreEntries };
 
 if (require.main === module) {
     const args = process.argv.slice(2);

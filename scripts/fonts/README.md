@@ -8,6 +8,24 @@ Glyph widths per font. The vanilla fonts are measured from the client jar once a
 
 Fonts of the resource pack, `texturepack/assets/<namespace>/font/<name>.json`, are read on every run with their bitmap and space providers, so a new font works without a step. `reference` providers are followed. TrueType and unihex providers cannot be measured, their glyphs count as 9 pixels, as does every glyph a font lacks.
 
+## font_kerning.json
+
+Spacing around the glyphs of a font, for fonts that read too loose or too tight. The game puts 1 pixel after every glyph and none before it, and a font cannot change that, so the book generator sets the difference with `foxcraft_dungeon_loot:padding` glyphs and measures widths with the same difference, which keeps the layout and the game's line breaks the same.
+
+```json
+{
+  "foxcraft_dungeon_loot:dnealian_script": {
+    "pre": { "default": 0, "chars": {} },
+    "post": { "default": 0, "chars": { "W": 1 } }
+  }
+}
+```
+
+- `pre` is the spacing before a glyph, default 0. `post` is the spacing after it, default 1, so `post` 0 pulls the next glyph a pixel closer. `default` covers every glyph of the font, `chars` overrides single characters. Either side may be left out. Whole pixels only.
+- Spaces are never kerned. Fonts not listed here are left as is.
+- Applied by `applyKerning` in `scripts/books/book_loot_gen.js` to the finished pages, one padding component per kerned glyph side, so a listed font makes the book JSON bigger. A negative `pre` on the first glyph of a line draws left of the page margin.
+- Only books are kerned, lore and other text in a pack font are not.
+
 ## font_to_bitmap.js
 
 Renders a pixel TrueType font to a bitmap font for the resource pack. Needs `npm i`, opentype.js is a dev dependency.

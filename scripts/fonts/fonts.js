@@ -14,7 +14,11 @@ const zlib = require('zlib');
 const ROOT = path.join(__dirname, '..', '..');
 const CACHE = path.join(__dirname, 'font_widths.json');
 const TEXTURE_CACHE = path.join(__dirname, 'font_textures.json');
-const PACK_ASSETS = path.join(ROOT, 'texturepack', 'assets');
+const KERNING = path.join(__dirname, 'font_kerning.json');
+// Pixels of spacing the game puts before and after every glyph
+const ENGINE_PRE = 0;
+const ENGINE_POST = 1;
+const PACK_ASSETS =path.join(ROOT, 'texturepack', 'assets');
 const DEFAULT_FONT = 'minecraft:default';
 const DEFAULT_SPACE = 4;
 const UNKNOWN_WIDTH = 9;
@@ -368,7 +372,35 @@ function packFonts(cached, assetsDir, ascents = {}) {
 
 //endregion
 
-/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold) is the advance of one glyph in pixels, ascentOf(font, char) how far a glyph reaches above the baseline, or the tallest glyph of the font without a char. */
+/**
+ * Reads font_kerning.json as { fontId: { pre: { default, chars }, post: { default, chars } } }. pre is the pixels of spacing
+ * before a glyph, the game's own being ENGINE_PRE (0), post the pixels after it, ENGINE_POST (1): post 0 pulls the next glyph one
+ * pixel closer. Either side may be left out. Integers only, a bad one stops the build.
+ */
+function loadKerning(file = KERNING) {
+    if (!fs.existsSync(file)) return {};
+    const name = path.basename(file);
+    const out = {};
+    const check = (where, v) => {
+        if (!Number.isInteger(v)) throw new Error(`${name}: ${where} is ${JSON.stringify(v)}, spacing is a whole number of pixels`);
+        return v;
+    };
+    const side = (id, key, engine, entry) => {
+        const chars = {};
+        for (const [ch, v] of Object.entries(entry?.chars || {})) {
+            if ([...ch].length !== 1) throw new Error(`${name}: ${id} ${key} chars key "${ch}" is not one character`);
+            chars[ch] = check(`${id} ${key} "${ch}"`, v);
+        }
+        return { default: entry?.default === undefined ? engine : check(`${id} ${key} default`, entry.default), chars };
+    };
+    for (const [id, entry] of Object.entries(JSON.parse(fs.readFileSync(file, 'utf8')))) {
+        if (id.startsWith('__')) continue;
+        out[withNamespace(id)] = { pre: side(id, 'pre', ENGINE_PRE, entry.pre), post: side(id, 'post', ENGINE_POST, entry.post) };
+    }
+    return out;
+}
+
+/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold) is the advance of one glyph in pixels, kerning included, kerningOf(font, char) the { before, after } pixels font_kerning.json adds around it, ascentOf(font, char) how far a glyph reaches above the baseline, or the tallest glyph of the font without a char. */
 function loadFonts(options = {}) {
     const cache = fs.existsSync(options.cache || CACHE) ? JSON.parse(fs.readFileSync(options.cache || CACHE, 'utf8')) : {};
     const fonts = {};
@@ -382,14 +414,23 @@ function loadFonts(options = {}) {
     const ascents = {};
     // Pack fonts can reference include/unifont directly, so it is readable here though not kept as a font of its own
     Object.assign(fonts, packFonts(unifont ? { ...fonts, [UNIFONT]: unifont } : { ...fonts }, options.assets || PACK_ASSETS, ascents));
+    const kerning = loadKerning(options.kerning || KERNING);
     const missing = new Set();
+    // Pixels font_kerning.json adds before and after a glyph, 0 for a font or glyph it does not list or a space
+    const NO_KERNING = { before: 0, after: 0 };
+    const kerningOf = (font, ch) => {
+        const entry = kerning[withNamespace(font || DEFAULT_FONT)];
+        if (!entry || ch === ' ' || ch === '\u00a0') return NO_KERNING;
+        return { before: (entry.pre.chars[ch] ?? entry.pre.default) - ENGINE_PRE, after: (entry.post.chars[ch] ?? entry.post.default) - ENGINE_POST };
+    };
     const widthOf = (font, ch, bold) => {
         const id = withNamespace(font || DEFAULT_FONT);
         const table = fonts[id];
         if (!table) missing.add(id);
         const width = ch === ' ' ? (table || fonts[DEFAULT_FONT] || {})[' '] ?? DEFAULT_SPACE : (table || {})[ch] ?? UNKNOWN_WIDTH;
         // Bold adds a pixel to every glyph, a space too: in 26.3 GlyphInfo.getAdvance(bold) adds getBoldOffset() and the space provider keeps it
-        return width + (bold ? 1 : 0);
+        const { before, after } = kerningOf(font, ch);
+        return width + (bold ? 1 : 0) + before + after;
     };
     // The ascent of a glyph of a font of the pack, 0 for the fonts of the game: they sit inside a line
     const ascentOf = (font, ch) => {
@@ -397,10 +438,10 @@ function loadFonts(options = {}) {
         if (!table) return 0;
         return ch === undefined ? Math.max(0, ...Object.values(table)) : table[ch] ?? 0;
     };
-    return { widthOf, ascentOf, fonts, missing };
+    return { widthOf, ascentOf, kerningOf, fonts, missing };
 }
 
-module.exports = { loadFonts, measureFont, buildCache, decodePng, withNamespace, DEFAULT_FONT };
+module.exports = { loadFonts, loadKerning, measureFont, buildCache, decodePng, withNamespace, DEFAULT_FONT };
 
 if (require.main === module) {
     const jar = process.argv[2] || DEFAULT_JAR;
