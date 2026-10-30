@@ -6,7 +6,7 @@
         },
         {
             "type": "bitmap",
-            "file": "foxcraft_dungeon_loot:font/nonlatin_european_garbled.png",
+            "file": "foxcraft_dungeon_loot:font/garbled_text/nonlatin_european_garbled.png",
             "ascent": 7,
             "chars": [
                 "\u00a1\u2030\u00ad\u00b7\u20b4\u2260\u00bf\u00d7\u00d8\u00de\u04bb\u00f0\u00f8\u00fe\u0391\u0392",
@@ -80,7 +80,7 @@
         },
         {
             "type": "bitmap",
-            "file": "foxcraft_dungeon_loot:font/accented_garbled.png",
+            "file": "foxcraft_dungeon_loot:font/garbled_text/accented_garbled.png",
             "height": 12,
             "ascent": 10,
             "chars": [
@@ -163,7 +163,7 @@
         },
         {
             "type": "bitmap",
-            "file": "foxcraft_dungeon_loot:font/ascii_garbled.png",
+            "file": "foxcraft_dungeon_loot:font/garbled_text/ascii_garbled.png",
             "ascent": 7,
             "chars": [
                 "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",

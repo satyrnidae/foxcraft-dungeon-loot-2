@@ -9,7 +9,7 @@
     },
     {
       "type": "bitmap",
-      "file": "foxcraft_dungeon_loot:font/illustration_test.png",
+      "file": "foxcraft_dungeon_loot:font/illustration/test.png",
       "ascent": 124,
       "height": 126,
       "chars": [
