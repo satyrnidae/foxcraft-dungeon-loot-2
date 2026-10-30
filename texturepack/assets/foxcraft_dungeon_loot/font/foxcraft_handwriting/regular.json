@@ -1,0 +1,46 @@
+{
+  "providers": [
+    {
+      "type": "reference",
+      "id": "minecraft:include/space"
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/foxcraft_handwriting.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "ABCDEFGHIJKLMNOP",
+        "QRSTUVWXYZ\u0000\u0000\u0000\u0000\u00c7\u00de",
+        "abcdefghijklmnop",
+        "qrstuvwxyz\u0000\u0000\u0000\u0000\u00e7\u00fe",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u017f\u1e9e\u00df\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/foxcraft_handwriting.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u00c6\u0152\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u00e6\u0153\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "foxcraft_dungeon_loot:include/handwriting_punctuation"
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}
