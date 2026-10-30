@@ -1,0 +1,42 @@
+{
+  "providers": [
+    {
+      "type": "reference",
+      "id": "minecraft:include/space"
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/dnealian_script.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "!\"#$%&'()*+,-./0",
+        "123456789:;<=>?@",
+        "ABCDEFGHIJKLMNOP",
+        "QRSTUVWXYZ[\\]^_`",
+        "abcdefghijklmnop",
+        "qrstuvwxyz{|}~\u00a1\u00a2",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u00bf\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/dnealian_script.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+        "\u00c6\u00e6\u0152\u0153\u0000\u0000\u0000\u0000"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}
