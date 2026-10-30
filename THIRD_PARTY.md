@@ -149,3 +149,18 @@ Crediting is appreciated but not required.
 
 Contact information: valiegraphie.itch.io | valentin.lhb@gmail.com
 ```
+
+### Arsenic Ink
+
+By CR.OS Software. Licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/), credit appreciated. The pack ships only a bitmap font made from the Tiny file plus the symbols of the regular file, U+00A1 to U+00A9, in `texturepack/assets/foxcraft_dungeon_loot/font/arsenic_ink.json` with the glyph sheets `arsenic_ink_tiny.png` and `arsenic_ink_special.png` in `textures/font/`. The TrueType files are not in this repository. NoDerivatives forbids distributing modified material, and a bitmap render is arguably that, so check the terms before a public release.
+
+```
+This asset pack can be used in both free and commercial projects. You can modify it to suit your own needs.
+Credit is unnecessary, but highly appreciated, just add
+
+created by CR.OS Software
+You may not redistribute, resell or take your own credit for this Asset Pack, a fraction of it, or a slightly modified version.
+
+This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.
+More info at: https://creativecommons.org/licenses/by-nd/4.0/
+```
