@@ -15,6 +15,7 @@
     "foxcraft_dungeon_loot:item/mythic/evokers_tome/on_uninstall",
     "foxcraft_dungeon_loot:item/rare/feather_of_quet_zala/on_uninstall",
     "foxcraft_dungeon_loot:item/common/dice/on_uninstall",
+    "foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/on_uninstall",
     "foxcraft_dungeon_loot:item/mythic/hammer_of_sol/on_uninstall",
     "foxcraft_dungeon_loot:item/mythic/how_about_no/on_uninstall",
     "foxcraft_dungeon_loot:item/mythic/poncho_sanchezs_fate/on_uninstall",

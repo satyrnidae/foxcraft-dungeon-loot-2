@@ -5,10 +5,8 @@ data/foxcraft_dungeon_loot/function
 data/minecraft/tags/function/load.json
 data/minecraft/tags/function/tick.json
 
-# Book modifiers, loot tables and lang files, generated from src/books by scripts/book_loot_gen.js
-data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated
-data/foxcraft_dungeon_loot/loot_table/item/random_loot/book/generated
-texturepack/assets/generated
+# Book modifiers, loot tables and lang files, generated from src/books by scripts/books/book_loot_gen.js
+**/__generated__
 
 # Custom music discs
 texturepack/assets/custom_music_discs
@@ -24,12 +22,6 @@ node_modules/
 .mcproject
 .mcb/
 
-# Wolfgun disc audio, attribution only, copied once from matchaoverrides
-texturepack/assets/foxcraft_dungeon_loot/sounds/records/wolfgun/
-
-# C418 disc audio, copied once from the old custom_music_discs folder
-texturepack/assets/foxcraft_dungeon_loot/sounds/records/c418/
-
 # Test caches
 tests/.cache/
 
@@ -40,3 +32,11 @@ tests/.cache/
 libraries/
 logs/
 versions/
+
+# Temporary files
+temp/
+
+# Non-Open-Source Licensed Files
+texturepack/assets/foxcraft_dungeon_loot/sounds/records/wolfgun/
+texturepack/assets/foxcraft_dungeon_loot/sounds/records/c418/
+texturepack/assets/foxcraft_dungeon_loot/textures/font/closed_source/

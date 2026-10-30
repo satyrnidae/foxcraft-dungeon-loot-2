@@ -6,6 +6,11 @@
     "prismjs": "^1.30.0"
   },
   "scripts": {
+    "build": "npm run data && npm run assets",
+    "data": "node scripts/build/data.mjs",
+    "assets": "node scripts/build/assets.mjs",
+    "watch": "mcb watch",
+    "previews": "node scripts/books/generate_previews.mjs",
     "test": "node tests/run_all.mjs"
   },
   "devDependencies": {

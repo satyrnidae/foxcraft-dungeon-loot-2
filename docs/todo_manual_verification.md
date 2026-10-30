@@ -148,7 +148,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Chainsaw: holding it in the main hand grants haste 2 once, and clears when put away. No unknown predicate errors in the log.
 - [ ] Quet Zala's Beloved: with another mob wearing an Unbreaking chestplate nearby, a player without Unbreaking still takes the always-damage path.
 - [ ] War Hog's Disdainful Pride: boots with Unbreaking use the Unbreaking durability odds on a fall.
-- [ ] Datapack zip built with `build.ps1` does not contain the `docs/` folder.
+- [ ] Datapack zip built with `npm run data` does not contain the `docs/` folder.
 
 ## Not yet testable (later phases)
 

@@ -1,0 +1,33 @@
+{
+    "providers": [
+        {
+            "type": "space",
+            "advances": {
+                " ": 3,
+                "\u00a0": 3
+            }
+        },
+        {
+            "type": "bitmap",
+            "file": "foxcraft_dungeon_loot:font/icons/decora_symbologie.png",
+            "ascent": 9,
+            "height": 12,
+            "chars": [
+                "><&-\ud83d\udc80\ud83d\udd77\ud83e\udddf~\u2026"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "foxcraft_dungeon_loot:font/icons/mysterian_iconography.png",
+            "ascent": 17,
+            "height": 17,
+            "chars": [
+                "\ue000\ue001\ue002"
+            ]
+        },
+        {
+            "type": "reference",
+            "id": "minecraft:default"
+        }
+    ]
+}

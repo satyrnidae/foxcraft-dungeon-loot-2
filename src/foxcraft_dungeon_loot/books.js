@@ -1,5 +1,5 @@
 // Runs the book generator on every build, so the written book modifiers always match src/books.
-const { generate } = require('../../scripts/book_loot_gen.js');
+const { generate } = require('../../scripts/books/book_loot_gen.js');
 
 const { changed, warnings } = generate();
 for (const w of warnings) console.warn('book_loot_gen: ' + w);

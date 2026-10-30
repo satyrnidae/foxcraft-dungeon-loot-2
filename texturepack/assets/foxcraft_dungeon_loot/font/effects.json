@@ -1,0 +1,39 @@
+{
+  "providers": [
+    {
+      "type": "reference",
+      "id": "minecraft:include/space"
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/effects/burnt_edge_left.png",
+      "ascent": 45,
+      "height": 45,
+      "chars": [
+        "\ue000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/effects/burnt_edge_right.png",
+      "ascent": 45,
+      "height": 45,
+      "chars": [
+        "\ue001"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/effects/splatter.png",
+      "ascent": 64,
+      "height": 64,
+      "chars": [
+        "\ue002\ue003\ue004"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}

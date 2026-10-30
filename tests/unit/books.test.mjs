@@ -1,4 +1,4 @@
-// The book generator in scripts/book_loot_gen.js: markdown to translatable text components, frontmatter, and the committed output.
+// The book generator in scripts/books/book_loot_gen.js: markdown to translatable text components, frontmatter, and the committed output.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
@@ -9,9 +9,9 @@ import { describe, it } from 'node:test';
 import * as pk from './packdata.mjs';
 
 const require = createRequire(import.meta.url);
-const gen = require('../../scripts/book_loot_gen.js');
-const fontsApi = require('../../scripts/fonts.js');
-const lore = require('../../scripts/lore.js');
+const gen = require('../../scripts/books/book_loot_gen.js');
+const fontsApi = require('../../scripts/fonts/fonts.js');
+const lore = require('../../scripts/lore/lore.js');
 const zlib = require('node:zlib');
 
 // An RGBA PNG of the pixels, for fonts built on the fly
@@ -204,6 +204,38 @@ describe('book generator markdown', () => {
     assert.deepEqual(page('<a href="https://example.com">x</a>').component.click_event, { action: 'open_url', url: 'https://example.com' });
   });
 
+  it('[text](target "hover") is the short form of an anchor', () => {
+    const click = (md) => page(md).component.click_event;
+    assert.deepEqual(click('[x](https://example.com)'), { action: 'open_url', url: 'https://example.com' });
+    assert.deepEqual(click('[x](https://en.wikipedia.org/wiki/A_(b))'), { action: 'open_url', url: 'https://en.wikipedia.org/wiki/A_(b)' });
+    assert.deepEqual(click('[x](page:3)'), { action: 'change_page', page: 3 });
+    assert.deepEqual(click('[x](copy:some text)'), { action: 'copy_to_clipboard', value: 'some text' });
+    assert.deepEqual(click('[x](run:time set day)'), { action: 'run_command', command: 'time set day' });
+    assert.deepEqual(click('[x](suggest:/give @s stone)'), { action: 'suggest_command', command: '/give @s stone' });
+    assert.deepEqual(click('[x]({action:copy_to_clipboard,value:"a)b"})'), { action: 'copy_to_clipboard', value: 'a)b' });
+    const titled = page('[x](https://example.com "A \\"tip\\"")').component;
+    assert.deepEqual(titled.hover_event, { action: 'show_text', value: 'A "tip"' });
+    // The label is inline markdown, and the span takes the class of the a type
+    assert.equal(page('[**x**](page:2)').component.click_event.page, 2);
+    // A bracket without a closed (target) is text
+    for (const text of ['[x]', '[x] (page:3)', '[x](page:3', '[x]()']) assert.equal(gen.parseInline(text, 0, null).content.every((p) => typeof p === 'string'), true, text);
+    assert.throws(() => gen.parseInline('[x](mailto:a@b.c)', 0, null), /link target/);
+    assert.throws(() => gen.parseInline('[x](page:two)', 0, null), /page number/);
+  });
+
+  it('![char](font) draws a character of the font', () => {
+    const image = (md) => gen.parseInline(md, 0, null).content[0];
+    for (const target of ['foxcraft_dungeon_loot:illustration_test', 'illustration_test']) {
+      const node = image(`![0](${target})`);
+      assert.deepEqual([node.styles.font, node.styles.color, node.content], ['foxcraft_dungeon_loot:illustration_test', undefined, ['0']], target);
+    }
+    assert.equal(image('![a](minecraft:alt)').styles.font, 'minecraft:alt');
+    assert.deepEqual(image('![0](illustration_test "A tip")').styles.hover_event, { action: 'show_text', value: 'A tip' });
+    assert.throws(() => gen.parseInline('![9](illustration_test)', 0, null), /no character/);
+    // Without a closed (font) it is a bang and a bracket of text
+    assert.equal(gen.parseInline('![0]', 0, null).content.every((p) => typeof p === 'string'), true);
+  });
+
   it('each level of header has its own look, only h1 is centered', () => {
     const look = (md) => {
       const page = gen.pagesOf(md + '\ny')[0];
@@ -226,6 +258,10 @@ describe('book generator markdown', () => {
     // A heading gets one empty line under it, and not a second when there is one already
     assert.deepEqual(gen.splitSections('# Head\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n\ntext'), ['<h1>Head</h1>\n\ntext']);
+    // Not before a horizontal line, which sits right under the heading
+    assert.deepEqual(gen.splitSections('# Head\n---\ntext'), ['<h1>Head</h1>\n---\ntext']);
+    assert.deepEqual(gen.splitSections('# Head\n<style class=".x">\n---\n</style>\ntext'), ['<h1>Head</h1>\n<style class=".x">\n---\n</style>\ntext']);
+    assert.deepEqual(gen.splitSections('# Head\n----\ntext'), ['<h1>Head</h1>\n\n----\ntext']);
     assert.equal(gen.pagesOf('one\n<br>\ntwo').length, 2);
     // A --- in code or after other text is not a break
     assert.equal(gen.splitSections('a ---\n`---`\nb\n<br>\nc').length, 2);
@@ -374,6 +410,47 @@ describe('book generator files', () => {
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
 
+  it('displayTitle is the item name alone, with no 32 character limit, while title stays the book title', () => {
+    const file = path.join(os.tmpdir(), 'display_test.md');
+    const long = 'Spiders: A Collection of Side Notes by a Researcher';
+    const build = (extra) => {
+      fs.writeFileSync(file, `---\ntitle: Spiders: Side Notes\nauthor: Me\n${extra}---\n\nx`);
+      return gen.buildBook('t', file);
+    };
+    const withRarity = build(`rarity: rare\ndisplayTitle: ${long}\n`);
+    const comps = withRarity.modifier.functions[0].components;
+    assert.equal(comps['minecraft:written_book_content'].title.raw, 'Spiders: Side Notes');
+    assert.deepEqual(comps['minecraft:custom_name'], { translate: 'book.foxcraft_dungeon_loot.t.title', fallback: long, color: 'aqua', italic: false });
+    assert.equal(withRarity.lang['book.foxcraft_dungeon_loot.t.title'], long);
+    assert.deepEqual(withRarity.warnings, []);
+    // Without a rarity a plain displayTitle still sets the name, and an SNBT one is the name as written
+    assert.equal(build(`displayTitle: ${long}\n`).modifier.functions[0].components['minecraft:custom_name'].fallback, long);
+    assert.deepEqual(build('displayTitle: {text: "Fancy", color: red}\n').modifier.functions[0].components['minecraft:custom_name'], { text: 'Fancy', color: 'red' });
+    assert.throws(() => build('displayTitle: <filter as="a">b</filter>\n'), /filter/);
+  });
+
+  it('writes the frontmatter generation into the book content, leaving out the original', () => {
+    const { dir, opts } = sandbox();
+    try {
+      const content = (generation) => {
+        write(dir, 'books/en_us/test.md', generation === undefined ? SOURCE : SOURCE.replace('rarity: epic', 'rarity: epic\ngeneration: ' + generation));
+        gen.generate(opts);
+        const modifier = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8'));
+        const fns = modifier.functions || [modifier];
+        return fns.find((f) => f.components && f.components['minecraft:written_book_content']).components['minecraft:written_book_content'];
+      };
+      assert.equal(content().generation, undefined);
+      assert.equal(content('original').generation, undefined);
+      assert.equal(content('copy').generation, 1);
+      assert.equal(content('copy of a copy').generation, 2);
+      assert.equal(content('3').generation, 3);
+      write(dir, 'books/en_us/test.md', SOURCE.replace('rarity: epic', 'rarity: epic\ngeneration: fourth'));
+      assert.throws(() => gen.generate(opts), /generation is 0 to 3/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   it('requires a title and an author, and warns about an unsupported key', () => {
     const { dir, opts } = sandbox();
     try {
@@ -400,10 +477,10 @@ describe('book generator files', () => {
       const entries = () => JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'random_book.json'), 'utf8')).pools[0].entries.map((e) => e.value);
       gen.generate({ ...opts, dev: false });
       assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
-      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown']);
+      assert.deepEqual(entries(), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/shown`]);
       gen.generate({ ...opts, dev: true });
       assert.ok(fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
-      assert.deepEqual(entries(), ['foxcraft_dungeon_loot:item/random_loot/book/generated/shown'], 'a debug book is not in the random table');
+      assert.deepEqual(entries(), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/shown`], 'a debug book is not in the random table');
       gen.generate({ ...opts, dev: false });
       assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')), 'the table of a book that went debug is removed');
     } finally {
@@ -417,7 +494,7 @@ describe('book generator files', () => {
       write(dir, 'books/en_us/test.md', SOURCE);
       gen.generate(opts);
       const read = (name) => JSON.parse(fs.readFileSync(path.join(opts.tableDir, name + '.json'), 'utf8'));
-      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), ['foxcraft_dungeon_loot:item/random_loot/book/generated/test']);
+      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/test`]);
       assert.deepEqual(read('random_rare_book'), { pools: [] });
       write(dir, 'books/en_us/random_rare_book.md', SOURCE);
       assert.throws(() => gen.generate(opts), /random_rare_book is the loot table/);
@@ -583,7 +660,9 @@ describe('book generator files', () => {
     // The one space after pad is dropped, a second one stays
     assert.deepEqual(pad('0'), ['a', 'b']);
     assert.deepEqual(gen.parseInline(`a${tick}1${tick}pad  b`, 0, null).content.slice(2), [' b']);
-    assert.throws(() => pad('114'), /up to 113/);
+    assert.throws(() => pad('114'), /to 113/);
+    assert.throws(() => pad('-115'), /from -114/);
+    assert.deepEqual(glyphs('-114'), [0xf8c0, 0xf8a0, 0xf890, 0xf882]);
     assert.throws(() => pad('1__0'), /not a number/);
     // Without pad and a space right after it, it is code
     assert.equal(gen.parseInline(`${tick}32${tick} pad`, 0, null).content[0].styles.font, 'foxcraft_dungeon_loot:pixel_mono');
@@ -640,7 +719,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('a code block is colored by its language and written as literal text components', () => {
-    const { highlight } = require('../../scripts/highlight.js');
+    const { highlight } = require('../../scripts/books/highlight.js');
     const colors = (code, language) => Object.fromEntries(highlight(code, language).flat().filter((p) => p.color).map((p) => [p.text, p.color]));
     assert.deepEqual(colors('{"a": [1, true]}', 'json'), { '"a"': 'dark_aqua', 1: 'dark_red', true: 'dark_red' });
     assert.equal(colors('x = 1 # c', 'py')['# c'], 'dark_gray');
@@ -671,28 +750,28 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     }
   });
 
-  it('a font that reaches higher than a line takes empty lines above its line', () => {
+  it('a font that reaches higher than a line takes empty lines above the rows an automatic wrap makes, and no others', () => {
     const tall = { styles: { font: 'foxcraft_dungeon_loot:tall' }, content: ['I'] };
     const ascentOf = (font) => (font.endsWith(':tall') ? 18 : 7);
     const text = (tree) => JSON.stringify(gen.reserveTall(tree, ascentOf));
-    // 18 pixels over a 7 pixel baseline is two lines
-    assert.equal(text(['first\nsecond ', tall, 'n']), JSON.stringify(['first\n\n\nsecond ', tall, 'n']));
-    // Empty lines that are there count, and a glyph at the very start is pushed down too
-    assert.equal(text(['a\n\n', tall, 'n']), JSON.stringify(['a\n\n', '\n', tall, 'n']));
-    assert.equal(text(['a\n\n\n', tall, 'n']), JSON.stringify(['a\n\n\n', tall, 'n']));
+    // A line after a newline is the text's to space, 18 pixels over a 7 pixel baseline would be two lines
+    for (const tree of [['first\nsecond ', tall, 'n'], ['a\n\n', tall, 'n']]) assert.equal(text(tree), JSON.stringify(tree));
+    // The first line of a text is the top of a page, which gets them
     assert.equal(text([tall, 'n at the start']), JSON.stringify(['\n\n', tall, 'n at the start']));
+    // A font that stays inside a line adds nothing
+    assert.equal(JSON.stringify(gen.reserveTall(['a \nb'], () => 9)), JSON.stringify(['a \nb']));
+    // At a wrap the new line break is the empty line too, and empty lines that are there count
+    const wrapped = gen.reserveTall(['a '.repeat(30), tall, 'n'], ascentOf);
+    assert.equal(gen.layout(wrapped).lines.filter((l) => l.start === l.end).length, 2);
+    const spaced = gen.reserveTall(['a '.repeat(30) + 'a\n\n', tall, 'n'], ascentOf);
+    // The text's own empty line stays one, a line it starts is not topped up
+    assert.equal(gen.layout(spaced).lines.filter((l) => l.start === l.end).length, 1);
     // No more than a page can hold above a line, the rest leaks over the top
     assert.equal(gen.layout(gen.reserveTall([tall, 'n'], () => 500)).lines.length, 14);
-    // A font that stays inside a line, as the default and the code font do, adds nothing
-    assert.equal(JSON.stringify(gen.reserveTall(['a\nb'], () => 9)), JSON.stringify(['a\nb']));
-    // At a wrap the new line break is the empty line too
-    const wrapped = gen.reserveTall(['a '.repeat(30), tall, 'n'], ascentOf);
-    const lines = gen.layout(wrapped).lines;
-    assert.equal(lines.filter((l) => l.start === l.end).length, 2);
   });
 
   it('a tall glyph at the top of a page is pushed down by empty lines so the illustration sits in place', () => {
-    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustrations">0</font>';
+    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustration_test">0</font>';
     const pages = gen.pagesOf(md);
     assert.equal(pages.length, 2);
     const { lines } = gen.layout(pages[1]);
@@ -797,6 +876,23 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(latin[0].styles.font, 'foxcraft_dungeon_loot:padding');
     // A book and quill keeps the text where it is
     assert.deepEqual(gen.pagesOf('Hi', null, null, {}, false, true)[0], ['Hi']);
+  });
+
+  it('<vbottom> puts the text of a page at the bottom of its lines', () => {
+    // Two lines of text on 14 leave 12, all above
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines')[0]).lines.length, 14);
+    const full = Array.from({ length: 14 }, (_, n) => 'l' + n).join('\n');
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\n' + full)[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
+  });
+
+  it('a <vcenter> ends at the <vbottom> after it, which sits on the last line', () => {
+    const { lines, chars } = gen.layout(gen.sectionsOf('title\n<vcenter>\nmiddle\n<vbottom>\nend')[0]);
+    const text = lines.map((l) => chars.slice(l.tstart, l.tend).map((c) => c.ch).join(''));
+    assert.equal(text.length, 14);
+    assert.equal(text[13], 'end');
+    // Centered in the 12 empty lines between the title and the end
+    assert.equal(text.indexOf('middle'), 6);
   });
 
   it('<vcenter> puts the text of a page in the middle of its lines', () => {
@@ -1059,7 +1155,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('reflowLore joins lines without ending punctuation, keeps sentence ends and wraps to the width', () => {
-    const lore = require('../../scripts/lore.js');
+    const lore = require('../../scripts/lore/lore.js');
     const out = lore.reflowLore(['Hastily scrawled sheet music with', 'accompanying lyrics.', 'Second paragraph that is long enough to need a wrap somewhere here.']);
     assert.equal(out[0], 'Hastily scrawled sheet music with');
     assert.equal(out[1], 'accompanying lyrics.');
@@ -1193,29 +1289,32 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
 
   it('the generated books match their sources', () => {
     const result = gen.generate({ check: true });
-    assert.deepEqual(result.changed, [], 'run node scripts/book_loot_gen.js, or mcb build, to regenerate');
+    assert.deepEqual(result.changed, [], 'run node scripts/books/book_loot_gen.js, or mcb build, to regenerate');
   });
 });
 
 describe('book give triggers', () => {
   it('every en_us book has a give function and a trigger', () => {
     const dir = path.join(pk.ROOT, 'src', 'books', 'en_us');
-    const ids = fs.readdirSync(dir).filter((f) => f.endsWith('.md') && !f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.slice(0, -3));
+    const rels = fs.readdirSync(dir, { recursive: true }).filter((f) => f.endsWith('.md') && !f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.split(path.sep).join('/').slice(0, -3));
+    const ids = rels.map((rel) => rel.split('/').pop());
     assert.ok(ids.length > 0);
-    for (const id of ids) {
-      const fn = pk.readText(pk.generatedFunction('give/give_' + id));
-      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/generated/${id}`), id);
-      assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add give_${id} trigger`), id);
+    for (const [i, id] of ids.entries()) {
+      const folder = rels[i].includes('/') ? rels[i].split('/').slice(-2, -1)[0] : 'unattributed';
+      const name = folder === 'debug' ? `give_debug_book_${id}` : folder === 'unattributed' ? `give_book_${id}` : `give_book_${id}_by_${folder}`;
+      const fn = pk.readText(pk.generatedFunction('give/' + name));
+      assert.ok(fn.includes(`loot give @s loot ${pk.NS}:item/random_loot/book/${gen.GENERATED_DIR}/${rels[i]}`), id);
+      assert.ok(pk.readText(pk.generatedFunction('give/on_load')).includes(`scoreboard objectives add ${name} trigger`), id);
     }
   });
 });
 
 describe('music fences', () => {
-  const music = require('../../scripts/music.js');
+  const music = require('../../scripts/music/music.js');
   const widthOf = (ch) => lore.FONTS.widthOf(music.FONT, ch, false);
   // The spans of each staff line, each as its color, the glyphs it draws but bars, its bars and how far it advances
   const lines = (code) =>
-    music.musicLines(code, widthOf).map((line) =>
+    music.musicLines(code, widthOf).filter((line) => line !== '').map((line) =>
       [...line.matchAll(/<font face="([^"]+)" color="([^"]+)" literal="1">([^<]*)<\/font>/g)].map(([, face, color, text]) => {
         assert.equal(face, music.FONT);
         const chars = [...text];
@@ -1365,6 +1464,10 @@ describe('music fences', () => {
     assert.equal(lines(`ClefG2 F#m TS6/8 ${bar} | ${bar} |||`).length, 1);
     const wrapped = lines(`ClefG2 F#m TS6/8 ${bar} | ${bar} | ${bar} | ${bar} |||`);
     assert.ok(wrapped.length > 1);
+    // A staff reaches two lines above its own, so two empty lines go between the lines of a broken fence
+    const rows = music.musicLines(`ClefG2 F#m TS6/8 ${bar} | ${bar} | ${bar} | ${bar} |||`, widthOf);
+    assert.equal(rows.length, wrapped.length * 3 - 2);
+    rows.forEach((row, n) => assert.equal(row === '', n % 3 !== 0));
     for (const [staff, notes] of wrapped) {
       assert.ok(notes.width <= 114, `${notes.width}px`);
       assert.deepEqual(notes.glyphs.slice(0, 4), [0xe000, 0xe101, 0xe104, 0xe100]);

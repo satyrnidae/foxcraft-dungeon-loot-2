@@ -1,0 +1,9 @@
+{
+  "lore.foxcraft_dungeon_loot.rarity": "レア度: %s",
+  "rarity.foxcraft_dungeon_loot.common": "コモン",
+  "rarity.foxcraft_dungeon_loot.uncommon": "アンコモン",
+  "rarity.foxcraft_dungeon_loot.rare": "レア",
+  "rarity.foxcraft_dungeon_loot.epic": "エピック",
+  "rarity.foxcraft_dungeon_loot.mythic": "ミシック",
+  "rarity.foxcraft_dungeon_loot.cursed": "呪われた"
+}

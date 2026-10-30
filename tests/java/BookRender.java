@@ -29,7 +29,7 @@ import java.util.stream.*;
  * so the line breaks are the game's. Drawing is done here, without a GPU: the glyphs of the pack and vanilla bitmap fonts are
  * placed as the screen places them, on the vanilla book background. A page the game breaks into more than 14 lines, so that
  * its end is cut off in game, fails the run. A book with filtered pages is drawn again as a reader with chat filtering sees it,
- * into <locale>/<book>/filtered. Every locale is drawn into a folder of its own, with the books that have a source in src/books/<locale>.
+ * into <locale>/[<group>/]<book>/filtered. Every locale is drawn into a folder of its own, with the books that have a source in src/books/<locale>.
  * Usage: BookRender ROOT OUT_DIR [SCALE]   (the repo root, where to write <locale>/<book>/page_NN.png, pixels per GUI pixel, default 3)
  */
 public class BookRender {
@@ -39,6 +39,11 @@ public class BookRender {
     static final int TEXT_COLOR = 0x000000;
 
     static Path root;
+
+    /** A book source is src/books/<locale>/<id>.md, or one folder down in a group such as an author: book is <group>/<id> then. */
+    static boolean hasSource(Path localeDir, String book) {
+        return Files.exists(localeDir.resolve(book + ".md"));
+    }
     static int scale;
     static final Map<String, FontSet> fonts = new HashMap<>();
     static String at = "";
@@ -397,7 +402,10 @@ public class BookRender {
             background = ImageIO.read(in).getSubimage(0, 0, BOOK_SIZE, BOOK_SIZE);
         }
 
-        Path modifiers = root.resolve("data/foxcraft_dungeon_loot/item_modifier/random_loot/book/generated");
+        // config.json mc.generatedDirectory, the folder the generator writes the books to
+        java.util.regex.Matcher dirName = java.util.regex.Pattern.compile("\"generatedDirectory\"\\s*:\\s*\"([^\"]+)\"").matcher(Files.readString(root.resolve("config.json")));
+        String generated = dirName.find() ? dirName.group(1) : "__generated__";
+        Path modifiers = root.resolve("data/foxcraft_dungeon_loot/item_modifier/random_loot/book").resolve(generated);
         if (!Files.isDirectory(modifiers)) {
             out("no generated books in " + modifiers);
             System.exit(1);
@@ -408,16 +416,17 @@ public class BookRender {
         int books = 0, pagesDrawn = 0;
         Set<String> failures = new TreeSet<>();
         List<Path> files;
-        try (Stream<Path> s = Files.list(modifiers)) { files = s.filter(f -> f.toString().endsWith(".json")).sorted().toList(); }
+        try (Stream<Path> s = Files.walk(modifiers)) { files = s.filter(f -> f.toString().endsWith(".json")).sorted().toList(); }
         List<String> locales = locales();
         for (String locale : locales) {
             Language.inject(language(locale));
             for (Path file : files) {
-                String book = file.getFileName().toString().replaceFirst("\\.json$", "");
+                // The path under generated/ without the extension, <id> or <group>/<id>, as the source has it under src/books/<locale>
+                String book = modifiers.relativize(file).toString().replace(java.io.File.separatorChar, '/').replaceFirst("\\.json$", "");
                 List<JsonElement[]> pages = pagesOf(JsonParser.parseString(Files.readString(file)));
                 if (pages == null) continue;
                 // A book is in a locale only where it has a source there, the rest would just repeat the English
-                if (!locale.equals("en_us") && !Files.exists(root.resolve("src/books").resolve(locale).resolve(book + ".md"))) continue;
+                if (!locale.equals("en_us") && !hasSource(root.resolve("src/books").resolve(locale), book)) continue;
                 if (locale.equals("en_us")) books++;
                 // With chat filtering on the book shows the filtered side of each page that has one, the raw side of the rest
                 boolean filtered = pages.stream().anyMatch(p -> p[1] != null);
@@ -442,7 +451,7 @@ public class BookRender {
                         for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) {
                             at = where + " line " + (i + 1);
                             float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
-                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/README.md)");
+                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/books/README.md)");
                         }
                         g.dispose();
                         ImageIO.write(image, "png", dir.resolve(String.format("page_%02d.png", n + 1)).toFile());
