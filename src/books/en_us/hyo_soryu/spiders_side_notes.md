@@ -6,14 +6,14 @@ generation: tattered
 lore: Education for the common adventurer on encountering Spiders.
 styles: {
     .title: {
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
         align: center
     },
     .symbol: {
         font: foxcraft_dungeon_loot:decora_symbologie
     }
     h1: {
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
         align: center,
         bold: false,
         underline: true

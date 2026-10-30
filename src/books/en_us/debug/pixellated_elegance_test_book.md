@@ -7,7 +7,7 @@ lore:
   Tests out the new font
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixellated_elegance
+    font: foxcraft_dungeon_loot:pixellated_elegance/regular
   },
   a: {
     color: dark_blue,
@@ -43,6 +43,25 @@ Digits:
 <span>!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
 
 <span>¡¢£¤¥¦§¨©«¬­®¯°±¶·»¼½¾¿×÷‘’‚‛“”…</span>
+<br>
+# Smallcaps:
+
+<font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">Upper:
+<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
+
+Lower:
+<span>abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
+
+Digits:
+<span>0123456789</span></font>
+<br>
+<font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">Cwm fjord bank glyphs vext quiz
+
+The quick brown fox jumps over the lazy dog.
+
+Sphinx of black quartz, judge my vow.</font>
+
+Mixed with regular text, <font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">small caps</font> inline.
 <br>
 # Cwm fjord:
 

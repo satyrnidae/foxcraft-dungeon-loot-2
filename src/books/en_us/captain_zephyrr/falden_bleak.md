@@ -4,10 +4,10 @@ author: Captain Zephyrr
 generation: tattered
 styles: {
    body: {
-      font: foxcraft_dungeon_loot:pixellated_elegance
+      font: foxcraft_dungeon_loot:pixellated_elegance/regular
    },
    .title: {
-      font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+      font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
       align: center
    },
    .symbol: {
@@ -17,7 +17,7 @@ styles: {
       align: right
    },
    .smallcaps: {
-      font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+      font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
    }
 }
 ---

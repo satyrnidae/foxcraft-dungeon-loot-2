@@ -29,7 +29,7 @@ title: Book title, or SNBT text component
 displayTitle: Item name, when it is longer than the 32 characters of a title
 author: Name
 rarity: common|uncommon|rare|epic|mythic|cursed
-styles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }
+styles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance/regular } }
 model: foxcraft_dungeon_loot:random_loot/written_letter
 data: {DungeonLootId:87,DungeonItem:1b}
 writable: false

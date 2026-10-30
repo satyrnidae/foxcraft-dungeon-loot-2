@@ -8,13 +8,13 @@ lore:
     With the possible exception of gold and emerald, it doesn't seem to have caught on.
 styles: {
     body: {
-        font: foxcraft_dungeon_loot:pixellated_elegance
+        font: foxcraft_dungeon_loot:pixellated_elegance/regular
     },
     h1: {
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .title: {
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
         align: center,
         bold: true
     },
@@ -27,43 +27,43 @@ styles: {
     .lapis: {
         color: blue,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .redstone: {
         color: red,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .iron: {
         color: gray,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .gold: {
         color: gold,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .diamond: {
         color: aqua,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .copper: {
         color: "#e46d3a",
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .emerald: {
         color: dark_green,
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     },
     .quartz: {
         color: "#faf5f5",
         shadow_color: "#4c4c4c",
         bold: true,
-        font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+        font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
     }
 }
 ---
@@ -190,7 +190,7 @@ Values are based on a factor of rarity and usefulness.
 
 <style class=".emerald">Emerald</style>s are extremely rare, but largely useless.  <style class=".gold">Gold</style> has some more uses, but is also rather rare. <style class=".lapis">Lapis</style>, <style class=".redstone">Redstone</style>, and <style class=".copper">Copper</style> are about equal.
 
-<font face="foxcraft_dungeon_loot:pixellated_elegance_smallcaps">**Coal**</font>, being near common as dirt, is not a currency item.
+<font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">**Coal**</font>, being near common as dirt, is not a currency item.
 <br>
 # ADDENDUM
 

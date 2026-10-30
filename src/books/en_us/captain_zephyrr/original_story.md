@@ -3,10 +3,10 @@ title: An Original Story
 author: Captain Zephyrr & Communal Mind
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixellated_elegance
+    font: foxcraft_dungeon_loot:pixellated_elegance/regular
   },
   .smallcaps: {
-    font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps
+    font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps
   },
   drop: {
     font: foxcraft_dungeon_loot:hexenaat

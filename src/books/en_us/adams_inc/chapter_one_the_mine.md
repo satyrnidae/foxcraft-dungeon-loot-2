@@ -16,7 +16,7 @@ styles: {
     bold: false
   }
   .title: {
-    font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+    font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
     align: center
   }
   .symbol: {

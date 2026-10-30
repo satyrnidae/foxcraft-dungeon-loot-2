@@ -186,7 +186,7 @@ describe('book generator markdown', () => {
   });
 
   it('a font id that is not a resource location stops the build', () => {
-    assert.throws(() => gen.parseInline('<font face="foxcraft_dungeon_loot:pixellated_elegance,">x</font>', 0, null), /not a resource location/);
+    assert.throws(() => gen.parseInline('<font face="foxcraft_dungeon_loot:pixellated_elegance/regular,">x</font>', 0, null), /not a resource location/);
     assert.throws(() => gen.parseClasses({ a: { font: 'Bad Font' } }), /not a resource location/);
     assert.doesNotThrow(() => gen.parseInline('<font face="minecraft:alt">x</font>', 0, null));
   });
@@ -321,6 +321,51 @@ describe('book generator page layout', () => {
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
+  });
+});
+
+describe('font kerning', () => {
+  const withKerning = (json, fn) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kerning-'));
+    try {
+      const file = path.join(dir, 'font_kerning.json');
+      fs.writeFileSync(file, JSON.stringify(json));
+      return fn(file);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  };
+  const FONT = 'minecraft:default';
+  const padText = (tree) => tree.filter((p) => p.kern).map((p) => p.content[0]);
+
+  it('adds post and pre spacing to the width, relative to the game defaults of 1 and 0', () => {
+    withKerning({ [FONT]: { post: { default: 0, chars: { W: 1 } }, pre: { chars: { i: 2 } } } }, (kerning) => {
+      const base = fontsApi.loadFonts({ kerning: '/nonexistent' });
+      const fonts = fontsApi.loadFonts({ kerning });
+      assert.equal(fonts.widthOf(FONT, 'a', false), base.widthOf(FONT, 'a', false) - 1);
+      assert.equal(fonts.widthOf(FONT, 'W', false), base.widthOf(FONT, 'W', false));
+      assert.equal(fonts.widthOf(FONT, 'i', false), base.widthOf(FONT, 'i', false) + 2 - 1);
+      assert.equal(fonts.widthOf(FONT, ' ', false), base.widthOf(FONT, ' ', false));
+    });
+  });
+
+  it('rejects spacing that is not a whole number', () => {
+    withKerning({ [FONT]: { post: { default: 0.5 } } }, (kerning) => assert.throws(() => fontsApi.loadKerning(kerning), /whole number/));
+  });
+
+  it('sets padding around the glyphs of a kerned font and leaves others alone', () => {
+    withKerning({ [FONT]: { post: { default: 0 }, pre: { chars: { b: 1 } } } }, (kerning) => {
+      const { kerningOf } = fontsApi.loadFonts({ kerning });
+      assert.deepEqual(kerningOf(FONT, 'a'), { before: 0, after: -1 });
+      assert.deepEqual(kerningOf(FONT, ' '), { before: 0, after: 0 });
+      assert.deepEqual(kerningOf('minecraft:uniform', 'a'), { before: 0, after: 0 });
+    });
+    // The pack's own kerned font is a D'Nealian one: its text gets a backwards pixel after each letter
+    const tree = gen.applyKerning([{ styles: { font: 'foxcraft_dungeon_loot:dnealian_script' }, content: ['ab c'] }]);
+    const inner = tree[0].content;
+    assert.deepEqual(padText(inner), ['', '', '']);
+    assert.equal(inner.filter((p) => typeof p === 'string').join(''), 'ab c');
+    assert.deepEqual(gen.applyKerning(['ab c']), ['ab c']);
   });
 });
 
@@ -946,7 +991,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
       return { lines: lines.length, width: text.reduce((sum, g) => sum + lore.FONTS.widthOf(g.font, g.ch, g.bold), 0), text, page };
     };
     // One glyph of 114 pixels, whatever the font of the book, and never bold: it would be a pixel too wide
-    const plain = rule('a\n---\nb', {}, 'foxcraft_dungeon_loot:pixellated_elegance');
+    const plain = rule('a\n---\nb', {}, 'foxcraft_dungeon_loot:pixellated_elegance/regular');
     assert.equal(plain.lines, 3);
     assert.equal(plain.width, 114);
     assert.deepEqual(plain.text.map((g) => [g.ch, g.font]), [['\ue000', 'foxcraft_dungeon_loot:rule']]);
@@ -1072,10 +1117,10 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('a body font in the styles sets the font of every page, a span inside keeps its own', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nstyles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance } }\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nstyles: { body: { font: foxcraft_dungeon_loot:pixellated_elegance/regular } }\n---\n\nPlain <font face="minecraft:illageralt">odd</font> end');
       gen.generate(opts);
       const [page] = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
-      assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance');
+      assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance/regular');
       assert.equal(page.with[0].font, 'minecraft:illageralt');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -1085,11 +1130,11 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('the old frontmatter font key still works and warns that it is deprecated', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance/regular\n---\n\nText');
       const { warnings } = gen.generate(opts);
-      assert.ok(warnings.some((w) => /test\.md: the frontmatter font is deprecated, use styles: \{ body: \{ font: foxcraft_dungeon_loot:pixellated_elegance \} \}/.test(w)));
+      assert.ok(warnings.some((w) => /test\.md: the frontmatter font is deprecated, use styles: \{ body: \{ font: foxcraft_dungeon_loot:pixellated_elegance\/regular \} \}/.test(w)));
       const [page] = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'].pages;
-      assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance');
+      assert.equal(page.font, 'foxcraft_dungeon_loot:pixellated_elegance/regular');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -1098,7 +1143,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('a frontmatter font that is not a resource location stops the build', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance,\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance/regular,\n---\n\nText');
       assert.throws(() => gen.generate(opts), /test\.md: frontmatter font/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });

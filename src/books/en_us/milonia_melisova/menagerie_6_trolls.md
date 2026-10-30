@@ -6,7 +6,7 @@ lore: An expoundment on the theoretical biology of a creature born from stone.
 generation: tattered
 styles: {
    .title: {
-      font: foxcraft_dungeon_loot:pixellated_elegance_smallcaps,
+      font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
       align: center
    },
    .symbologie: {
