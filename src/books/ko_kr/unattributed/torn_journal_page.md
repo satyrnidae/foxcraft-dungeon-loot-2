@@ -17,3 +17,5 @@ lore: 누군가의 생각이 적혀 있다... 전쟁에 대해서? 하지만... 
   이러니저러니 해도 우리는 <filter as="망했다">망했다</filter>. <filter as="망했다">대문자 망했다</filter>. <filter as="망했다">망했다</filter>는 상태 중에서도 지금 우리만큼 <filter as="망했다">망한</filter> 상태는 발명된 적이 없고, 지금 우리가 이렇게 <filter as="망했다">망했다</filter>.
 
   됐다, 이제 지긋지긋하다. 이 죽지도 않는 <filter as="빌어먹을">망할</filter> 거미들과 싸우느라 인생을 낭비하는 건 그만이다! 다음 화물선이 오면 타고 집에 간다, 맹세한다!
+<vbottom>
+<style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>

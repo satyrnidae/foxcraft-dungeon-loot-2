@@ -1,5 +1,5 @@
 ---
-title: "Day 1: My Return"
+title: Waterlogged Journal
 author: Unknown
 rarity: common
 lore: A very waterlogged journal from a wayward traveller.
@@ -11,8 +11,7 @@ styles: {
     .meta: {
         font: minecraft:default,
         color: gray,
-        italic: true,
-        align: center
+        italic: true
     }
     .garbled: {
         font: foxcraft_dungeon_loot:garbled,

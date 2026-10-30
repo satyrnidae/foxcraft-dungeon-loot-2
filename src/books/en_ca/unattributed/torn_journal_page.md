@@ -17,3 +17,5 @@ lore: The notes portray someone's thoughts on... a war? But... with whom? Or rat
   No ifs, ands, or buts about it, we are <filter as="Fudged">Fucked</filter>. <filter as="Capital-F Fudged">Capital-F Fucked</filter>. They haven't invented a state of being <filter as="Fudged">Fucked</filter> that's <filter as="Fudged">Fucked</filter> as much as we are <filter as="Fudged">Fucked</filter> right now.
 
   Well, I've had enough. I'm not wasting my life fighting these immortal <filter as="fudging">fucking</filter> spiders any longer! Next cargo ship home I'm taking it, I swear!
+<vbottom>
+<style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>

@@ -17,3 +17,5 @@ lore: Les pensées de quelqu'un sur... la guerre? Mais... contre qui? Ou plutôt
   Pas de si, pas de mais, on est <filter as="fichus">foutus</filter>. <filter as="Fichus">Foutus</filter> avec un F majuscule. On n'a pas encore inventé de façon d'être <filter as="fichu">foutu</filter> qui soit aussi <filter as="fichue">foutue</filter> que nous sommes <filter as="fichus">foutus</filter> en ce moment.
 
   Bon, j'en ai assez. Je ne gaspillerai plus ma vie à combattre ces <filter as="satanées">foutues</filter> araignées immortelles! Le prochain cargo pour la maison, je le prends, je le jure!
+<vbottom>
+<style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>

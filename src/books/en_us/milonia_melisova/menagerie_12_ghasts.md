@@ -1,5 +1,6 @@
 ---
 title: "Ghasts & Their Lifecycle"
+displayTitle: "Milonia's Mythic Menagerie, Vol. 12: Ghasts & Their Lifecycle"
 author: Milonia Melisova
 generation: tattered
 styles: {

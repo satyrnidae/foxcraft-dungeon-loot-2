@@ -29,11 +29,11 @@ On day 305, the cleanup effort was completed on the internal structure of the ba
 
 # Day 95, Year 2
 
-On day 375, the keeper of records, Tai Kitsune, died in a scuffle at the cemetery while distracted. No remains were found.
+On day 375, the keeper of records, Taikutsu Kitsune, died in a scuffle at the cemetery while distracted. No remains were found.
 <br>
 
 # Day 242, Year 2
 
-Day 522, new Keeper Kenny Chick reporting. The supplies chests have been nearly completely filled, and food is in no way a concern once more. Some structures, such as the fences, have been repaired. Others, such as the stilt house, have been left as they were, with no repair efforts intended. OSHA disbanded shortly after the destruction, and no organization has yet come to take its place. No raids into the nether have occurred since the incursion, and the funeral for Tai Kitsune was attended by few; most are still too shaken by the events prior to attend. The graveyard also still is in need of repairs to the fencing.
+Day 522, new Keeper Chickenny reporting. The supplies chests have been nearly completely filled, and food is in no way a concern once more. Some structures, such as the fences, have been repaired. Others, such as the stilt house, have been left as they were, with no repair efforts intended. OSHA disbanded shortly after the destruction, and no organization has yet come to take its place. No raids into the nether have occurred since the incursion, and the funeral for Taikutsu Kitsune was attended by few; most are still too shaken by the events prior to attend. The graveyard also still is in need of repairs to the fencing.
 
 <center>>-<</center>

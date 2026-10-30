@@ -1,5 +1,6 @@
 ---
 title: "Trolls & Where to Find Them"
+displayTitle: "Milonia's Mythic Menagerie, Vol. 6: Trolls & Where to Find Them"
 author: Milonia Melisova
 lore: An expoundment on the theoretical biology of a creature born from stone.
 generation: tattered

@@ -17,3 +17,5 @@ lore: 誰かの思いが綴られている…戦争について？だが…誰�
   言い訳のしようもない、俺たちは<filter as="大変">詰んでる</filter>。<filter as="大変">大文字の詰んでる</filter>。<filter as="大変">詰んでる</filter>という状態でも、俺たちが今<filter as="大変">詰んでる</filter>ほどは<filter as="大変">詰んでる</filter>ものはない。
 
   もう十分だ。不死身の<filter as="いまいましい">クソ</filter>蜘蛛どもと戦って人生を無駄にするのはやめだ！次の貨物船で帰る、絶対に！
+<vbottom>
+<style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>

@@ -225,13 +225,13 @@ describe('book generator markdown', () => {
 
   it('![char](font) draws a character of the font', () => {
     const image = (md) => gen.parseInline(md, 0, null).content[0];
-    for (const target of ['foxcraft_dungeon_loot:illustration_test', 'illustration_test']) {
+    for (const target of ['foxcraft_dungeon_loot:illustration', 'illustration']) {
       const node = image(`![0](${target})`);
-      assert.deepEqual([node.styles.font, node.styles.color, node.content], ['foxcraft_dungeon_loot:illustration_test', undefined, ['0']], target);
+      assert.deepEqual([node.styles.font, node.styles.color, node.content], ['foxcraft_dungeon_loot:illustration', undefined, ['0']], target);
     }
     assert.equal(image('![a](minecraft:alt)').styles.font, 'minecraft:alt');
-    assert.deepEqual(image('![0](illustration_test "A tip")').styles.hover_event, { action: 'show_text', value: 'A tip' });
-    assert.throws(() => gen.parseInline('![9](illustration_test)', 0, null), /no character/);
+    assert.deepEqual(image('![0](illustration "A tip")').styles.hover_event, { action: 'show_text', value: 'A tip' });
+    assert.throws(() => gen.parseInline('![9](illustration)', 0, null), /no character/);
     // Without a closed (font) it is a bang and a bracket of text
     assert.equal(gen.parseInline('![0]', 0, null).content.every((p) => typeof p === 'string'), true);
   });
@@ -687,6 +687,31 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(parse(`${tick}53${tick}pad2`)[0].styles.font, 'foxcraft_dungeon_loot:pixel_mono');
   });
 
+  it('inline code with drop after it is a drop cap on the second line, the first line padded as wide as the cap', () => {
+    const tick = String.fromCharCode(96);
+    const font = 'foxcraft_dungeon_loot:hexenaat';
+    const classes = { drop: { font } };
+    const lines = (body) => {
+      const tree = gen.sectionsOf(body, null, null, gen.parseClasses(classes), true)[0];
+      const { lines: rows, chars } = gen.layout(tree);
+      return rows.map((l) => chars.slice(l.tstart, l.tend).map((g) => (g.font === font ? '[' + g.ch + ']' : g.font.endsWith('padding') ? '~' : g.ch)).join(''));
+    };
+    const words = 'there is a giant tree, all right? So then, there is a weird building castle thing in the background.';
+    const wrapped = lines(`${tick}T${tick}drop ${words}`);
+    // Padding in front of the first line, the cap in front of the second, one space after drop is the separator
+    assert.match(wrapped[0], /^~+there is a giant/);
+    assert.match(wrapped[1], /^\[T\]/);
+    assert.equal(wrapped.join('').includes('[T]['), false);
+    // The padding is as wide as the cap, so a one line paragraph keeps the cap in place over it
+    // and the two lines a tall font needs above it are there
+    const short = lines(`${tick}B${tick}drop ut all.`);
+    assert.deepEqual(short.slice(0, 2), ['', '']);
+    assert.equal(short.length, 3);
+    assert.match(short[2], /^~+\[B\]ut all\.$/);
+    // No drop style, or one without a font, stops the build
+    assert.throws(() => gen.parseInline(`${tick}T${tick}drop x`, 0, null, {}), /drop style with a font/);
+  });
+
   it('inline code with tally after it is tally marks in groups of five', () => {
     const tick = String.fromCharCode(96);
     const tally = (n) => gen.parseInline(`${tick}${n}${tick}tally`, 0, null).content;
@@ -771,7 +796,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('a tall glyph at the top of a page is pushed down by empty lines so the illustration sits in place', () => {
-    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustration_test">0</font>';
+    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustration">0</font>';
     const pages = gen.pagesOf(md);
     assert.equal(pages.length, 2);
     const { lines } = gen.layout(pages[1]);
@@ -1515,4 +1540,31 @@ describe('music fences', () => {
     assert.equal(music.staffUnder(109, 109 + 30 / 36), null);
   });
 
+});
+
+describe('list items', () => {
+  // The pixels of the hanging padding at the start of each line, null for a line without
+  const hangs = (body) => {
+    const pad = (c) => c.flatMap((p) => (typeof p === 'string' ? [p] : p.hang ? [`<${[...p.content.join('')].reduce((s, ch) => s + (ch.charCodeAt(0) & 0x7f), 0)}>`] : pad(p.content)));
+    return gen.sectionsOf(body).flatMap(pad).join('').split('\n');
+  };
+  const long = 'has a rather long line of text that wraps around the page';
+
+  it('indents a wrapped line to the text of a bullet', () => {
+    const [first, second] = hangs(`- Item ${long}`);
+    assert.ok(!first.includes('<'));
+    assert.match(second, /^<10>/);
+  });
+
+  it('pads every number to the width of the widest, from the first item', () => {
+    const lines = hangs(Array.from({ length: 10 }, (_, n) => `${n + 1}. Item ${long}`).join('\n'));
+    // "1. " is 6 pixels short of "10. ", which every continuation line is indented to
+    assert.match(lines[0], /^1\. <6>Item/);
+    assert.match(lines[1], /^<18>/);
+    assert.match(lines.find((l) => l.startsWith('10. ')), /^10\. Item/);
+  });
+
+  it('leaves the numbers alone while they all have the same width', () => {
+    assert.ok(!hangs('1. One\n2. Two').join('').includes('<'));
+  });
 });

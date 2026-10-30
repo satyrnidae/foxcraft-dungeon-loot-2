@@ -283,7 +283,7 @@ function parseShadow(value) {
 // The names of the styles that are not classes: the format types, which override what they look like by default
 const MARKER_TYPES = { '**': 'bold', __: 'underline', '~~': 'strikethrough', '||': 'obfuscated', '*': 'italic', _: 'italic' };
 const ALIGNS = ['left', 'center', 'right'];
-const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center', 'horiz', 'tally'];
+const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center', 'horiz', 'tally', 'drop'];
 
 const CLASS_FLAGS = { bold: 'bold', italic: 'italic', underline: 'underlined', underlined: 'underlined', strikethrough: 'strikethrough', obfuscated: 'obfuscated' };
 
@@ -862,7 +862,7 @@ function shapeGlyphs(chars) {
  * { start, end, tstart, tend, soft }: glyph indexes without the space or newline that ended it, the same trimmed of the
  * spaces at its ends, and whether the line starts at a wrap. Does not remove anything, see layout.
  */
-function layoutGlyphs(chars, reserve = false) {
+function layoutGlyphs(chars, reserve = false, limit = PAGE_WIDTH) {
     const lines = [];
     let start = 0;
     // The width as the splitter counts it, and as the glyphs are drawn: a line has to fit both ways
@@ -889,7 +889,8 @@ function layoutGlyphs(chars, reserve = false) {
         }
         const w = widthOf(g) + room(g);
         // A word carried onto a new line can still be wider than it, as after the indent of a paragraph, and breaks again
-        while ((width + w > PAGE_WIDTH || drawn + drawnWidth(g) > PAGE_WIDTH) && g.ch !== ' ') {
+        // The first glyph of a line stays on it however wide it is, as the game keeps it, there is nowhere else to put it
+        while ((width + w > limit || drawn + drawnWidth(g) > limit) && g.ch !== ' ' && i > start) {
             if (lastSpace >= start) push(lastSpace, lastSpace + 1, true);
             else push(i, i, true);
             // Carry the word that overflowed onto the new line
@@ -1087,6 +1088,81 @@ const padding = (width) =>
 // Padding either way, the backwards glyphs being 0x80 past the forwards ones
 const signedPadding = (width) => (width < 0 ? [...padding(-width)].map((c) => String.fromCharCode(c.charCodeAt(0) + 0x80)).join('') : padding(width));
 
+//region List items
+
+// A line that starts with a "- " or "1. " marker, after any indentation
+const LIST_ITEM = /^( *)(-|\d+\.) /;
+const hangPad = (width) => ({ styles: PAD_STYLES, content: [padding(Math.min(width, MAX_PAD))], hang: true });
+
+/**
+ * Hangs the list items of a tree: the text of an item, and of the lines hyphenate broke it onto, is broken here against the
+ * width left of the line after its marker, and every line after the first starts with padding as wide as the marker. In a
+ * numbered list every number takes the room of the widest one, so the text lines up from the first item on when a number
+ * gains a digit further down; the padding goes after the marker. A list is a run of items of one kind and indentation with
+ * only empty lines between them. Run it after hyphenate. Returns a copy of the tree.
+ */
+function hangLists(content) {
+    const tree = JSON.parse(JSON.stringify(content));
+    const all = glyphs(tree).map((g, place) => ({ ...g, place }));
+    const plain = (g) => g.font !== CODE_FONT && g.font !== PAD_FONT && !g.literal;
+    const sum = (list) => list.reduce((total, g) => total + (g.sw ?? widthOf(g)), 0);
+    // The lines after newlines, as [from, to) into all
+    const rows = [];
+    for (let from = 0, i = 0; i <= all.length; i++) {
+        if (i < all.length && all[i].ch !== '\n') continue;
+        rows.push([from, i]);
+        from = i + 1;
+    }
+    const runs = new Map();
+    const items = [];
+    let item = null;
+    rows.forEach(([from, to], k) => {
+        if (from === to) {
+            item = null;
+            return;
+        }
+        const marker = LIST_ITEM.exec(all.slice(from, to).map((g) => g.ch).join(''));
+        const [before, end] = rows[k - 1] ?? [0, 0];
+        if (marker && all.slice(from, from + marker[0].length).every(plain)) {
+            const indent = marker[1].length;
+            const kind = marker[2] === '-' ? '-' : '#';
+            // A list ends where a shallower item starts, and a number does not continue a bullet list
+            for (const at of [...runs.keys()]) if (at > indent) runs.delete(at);
+            let run = runs.get(indent);
+            if (!run || run.kind !== kind) runs.set(indent, (run = { kind, items: [] }));
+            item = { width: sum(all.slice(from, from + marker[0].length)), rows: [[from + marker[0].length, to]], run };
+            run.items.push(item);
+            items.push(item);
+        } else if (item && end > before && all[end - 1].ch === '-') {
+            // The line hyphenate broke the word of the line above onto
+            item.rows.push([from, to]);
+        } else {
+            item = null;
+            runs.clear();
+        }
+    });
+    const edits = [];
+    for (const entry of items) {
+        const column = Math.max(...entry.run.items.map((i) => i.width));
+        // Less than this and the text has no room to wrap in
+        if (PAGE_WIDTH - column < 20) continue;
+        entry.rows.forEach(([from, to], n) => {
+            if (from === to) return;
+            if (n === 0 && entry.width < column) edits.push({ place: all[from].place, parts: [hangPad(column - entry.width)] });
+            if (n > 0) edits.push({ place: all[from].place, parts: [hangPad(column)] });
+            const text = all.slice(from, to);
+            for (const line of layoutGlyphs(text, false, PAGE_WIDTH - column)) {
+                if (line.soft && line.start < text.length) edits.push({ place: text[line.start].place, parts: ['\n', hangPad(column)] });
+            }
+        });
+    }
+    // From the end of the tree, so the places in front stay
+    for (const edit of edits.sort((x, y) => y.place - x.place)) insertAt(tree, edit.place, edit.parts);
+    return tree;
+}
+
+//endregion
+
 // A number of decimal, 0x, 0o or 0b digits with _ between them, as its value; undefined when it is not one
 function parseNumber(source) {
     const m = /^(-?)(0x[0-9a-f](?:_?[0-9a-f])*|0o[0-7](?:_?[0-7])*|0b[01](?:_?[01])*|\d(?:_?\d)*)$/i.exec(source.trim());
@@ -1171,9 +1247,20 @@ const INLINE_TYPES = {
         return width ? [{ styles: PAD_STYLES, content: [signedPadding(width)] }] : [];
     },
     tally: (code, classes) => tallyNodes(tallyCount(code), classes),
+    drop: (code, classes) => dropCapNodes(code, classes),
 };
 // The types that take one space after them with them, as `n`pad does; the others leave it in the text
-const INLINE_EATS_SPACE = new Set(['pad']);
+const INLINE_EATS_SPACE = new Set(['pad', 'drop']);
+
+// `T`drop is a drop cap, the text of the code in the font of the drop style of the stylesheet. Its place on the first line is
+// padding as wide as the cap, measured from the font, and applyDropCaps moves the cap itself to the start of the second line, once
+// the wraps are known: a tall font draws up over the first line, so the text of both lines starts after it.
+function dropCapNodes(code, classes) {
+    const styles = classes.drop;
+    if (!styles || !styles.font) throw new Error(`\`${code}\`drop needs a drop style with a font in the stylesheet`);
+    const width = [...code].reduce((sum, ch) => sum + FONTS.widthOf(styles.font, ch, !!styles.bold), 0);
+    return [{ styles: PAD_STYLES, content: [padding(width)], dropcap: { styles, content: [code], width } }];
+}
 
 // The locales written right to left. Their text is aligned to the right unless a style says otherwise, and an alignment a
 // book writes for text that starts at the left is mirrored: left is right there and right is left, center stays.
@@ -1457,7 +1544,12 @@ const hasCut = (content) => content.some((part) => typeof part !== 'string' && (
  */
 function paginateFit(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
     const pager = pagerOf(content, ascentOf);
-    const pages = [];
+    return fitRanges(pager).map(([from, to]) => pager.slice(from, to));
+}
+
+// The [from, to) lines of every page paginateFit makes of a pager, the ones that are not empty
+function fitRanges(pager) {
+    const ranges = [];
     for (let at = pager.first(0); at < pager.lines.length; ) {
         const fits = (to) => {
             if (pager.splitsReserve(to)) return false;
@@ -1467,11 +1559,10 @@ function paginateFit(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch))
         };
         let end = Math.min(at + PAGE_LINES, pager.lines.length);
         while (end > at + 1 && !fits(end)) end--;
-        const page = pager.slice(at, end);
-        if (page) pages.push(page);
+        if (pager.slice(at, end)) ranges.push([at, end]);
         at = pager.first(end);
     }
-    return pages;
+    return ranges;
 }
 
 // Adjacent strings joined, empty ones dropped
@@ -1763,13 +1854,17 @@ function centerVertically(tree, marks) {
     const blank = () => [{ styles: PAD_STYLES, content: [padding(1)] }, '\n'];
     const fill = (count) => Array.from({ length: count }).flatMap(blank);
     const edits = [];
-    // Each page is aligned on its own, and a region that spans a page boundary is ignored
-    for (const [pageFrom, pageTo] of pageRanges(pager)) {
+    // Each page is aligned on its own, and a region that spans a page boundary is ignored. The pages are the ones the book is
+    // cut into, paginateFit's, which end early around a <filter> span; the spare lines are what the longer of the page and
+    // its chat-filtered reading leaves
+    for (const [pageFrom, pageTo] of fitRanges(pager)) {
         const first = lines.findIndex((_, n) => n >= pageFrom && !empty(n));
         let last = Math.min(pageTo, lines.length) - 1;
         while (last > first && empty(last)) last--;
         if (first < 0 || first >= pageTo) continue;
-        const spare = PAGE_LINES - (last - first + 1);
+        const page = pager.slice(pageFrom, pageTo);
+        const filtered = page ? layout(variant(page, true)).lines.length : 0;
+        const spare = PAGE_LINES - Math.max(last - first + 1, filtered);
         const onPage = regions.filter((r) => r.from >= pageFrom && r.from <= last && r.to <= last);
         if (spare <= 0 || !onPage.length) continue;
         // The first <vbottom> goes first: it sits on the last line, so the whitespace above it is what is left for the <vcenter>s
@@ -1797,6 +1892,50 @@ function centerVertically(tree, marks) {
     return result;
 }
 
+// The first drop cap padding in the tree that applyDropCaps has not moved yet, with where its first glyph is
+function findDropCap(content) {
+    let pos = 0;
+    const walk = (nodes) => {
+        for (const part of nodes) {
+            if (typeof part === 'string') {
+                pos += [...part].length;
+                continue;
+            }
+            if (part.dropcap) return part;
+            const found = walk(part.content);
+            if (found) return found;
+        }
+        return null;
+    };
+    const node = walk(content);
+    return node ? { node, at: pos } : null;
+}
+
+/**
+ * Moves each drop cap of `n`drop to the start of the line after the padding it left on its first line, a newline in front of
+ * it where that line starts at a wrap. The padding is as wide as the cap, so the text of the first line and of the lines
+ * after the cap start at the same place. A paragraph of one line has no second line, the cap goes over its padding there.
+ * Returns a copy of the tree.
+ */
+function applyDropCaps(content) {
+    const tree = JSON.parse(JSON.stringify(content));
+    for (let guard = 0; guard < 1000; guard++) {
+        const found = findDropCap(tree);
+        if (!found) return tree;
+        const { node, at } = found;
+        const { dropcap: cap } = node;
+        delete node.dropcap;
+        const { lines, chars } = layout(tree);
+        const c = chars.findIndex((g) => g.place >= at);
+        const row = c < 0 ? -1 : lines.findIndex((l) => c >= l.start && c <= l.end);
+        const next = lines[row + 1];
+        const capNode = { styles: cap.styles, content: cap.content };
+        if (next && next.soft && next.tstart < next.tend) insertAt(tree, chars[next.tstart].place, ['\n', capNode]);
+        else insertAt(tree, at + [...node.content.join('')].length, [{ styles: PAD_STYLES, content: [signedPadding(-cap.width)] }, capNode]);
+    }
+    throw new Error('applyDropCaps does not settle');
+}
+
 // The tree of every section of the body, laid out and ready to be cut into pages
 function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = true, rtl = false) {
     let nextId = 0;
@@ -1814,7 +1953,10 @@ function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = 
             return parsed;
         });
         const base = { ...(font ? { font } : {}), ...classes.body };
-        const tree = reserveTall(unwrapNoHyphen(hyphenate(Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content, hyphenator)));
+        const whole = Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content;
+        // Right to left lines are aligned to the right by alignLines, a hanging indent would be on the wrong side
+        const hung = (c) => (rtl ? c : hangLists(c));
+        const tree = reserveTall(applyDropCaps(unwrapNoHyphen(hung(hyphenate(whole, hyphenator)))));
         const wrapped = hardWrap(tree);
         const laidOut = align ? alignLines(wrapped, rtl) : unwrapAlign(wrapped);
         // A book and quill has no padding glyphs to hold the empty lines

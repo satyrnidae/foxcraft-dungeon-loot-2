@@ -9,7 +9,7 @@ styles: {
   body: {
     font: foxcraft_dungeon_loot:pixellated_elegance
   },
-  .front: {
+  drop: {
     font: foxcraft_dungeon_loot:hexenaat
   },
   .name: {
@@ -22,9 +22,6 @@ styles: {
   },
   .symbol: {
     font: foxcraft_dungeon_loot:decora_symbologie
-  },
-  .iconography: {
-    font: foxcraft_dungeon_loot:mysterian_iconography
   }
 }
 ---
@@ -39,13 +36,13 @@ styles: {
 <center class=".symbol">~</center>
 
 
-<center class=".iconography"><font color="gold">\ue000</font>`-14`pad<font color="black">\ue001</font>`-9`pad<font color="white">\ue002</font></center>
+<center class=".symbol"><font color="gold">\ue000</font>`-14`pad<font color="black">\ue001</font>`-9`pad<font color="white">\ue002</font></center>
 <br>
 
 # - I -
 
 
-<style class=".front">In</style> Time Immemorial, the God of the Sun <style class=".name">Mysteria</style> fought the <style class=".name">Dæmon Lord</style> <style class=".name">Melimonas</style> and sealed It away, deep below the Earth.
+`I`drop n Time Immemorial, the God of the Sun <style class=".name">Mysteria</style> fought the <style class=".name">Dæmon Lord</style> <style class=".name">Melimonas</style> and sealed It away, deep below the Earth.
 
 For a long time, Humanity prospered under <style class=".name">Mysteria</style>'s Light, building great civilizations and filling many libraries with the tales of their exploits.
 
@@ -59,7 +56,7 @@ Generations passed, and Humanity dwindled. The forces of <style class=".name">Me
 # - II -
 
 
-<style class=".front">B</style>ut all was not lost.
+`B`drop ut all was not lost.
 
 When Humanity was at its lowest, a Hero was chosen by <style class=".name">Mysteria</style> Themself. She was a Knight, and her name was Palomina.
 
@@ -78,7 +75,7 @@ Thus spake <style class=".name">Mysteria</style>.
 # - III -
 
 
-<style class=".front">A</style>nd so Palomina set out towards the tallest peak, steadfast in her duty.
+`A`drop nd so Palomina set out towards the tallest peak, steadfast in her duty.
 
 But <style class=".name">Melimonas</style> sensed <style class=".name">Mysteria</style>'s Light and set upon Palomina with Its forces. Wave after wave of enemies drained Palomina of her strength. And just when Palomina felt she could continue no longer, she met the Merchant.
 
@@ -102,7 +99,7 @@ Upon reaching the highest peak, Palomina called out, "<style class=".name">Melim
 # - IV -
 
 
-<style class=".front">M</style><style class=".name">elimonas</style> simply laughed.
+`M`drop<style class=".name">elimonas</style> simply laughed.
 
 "Thou seek'st to do battle unto Me? Fine then, Knight. Level thy Spear at Me, and We shall see who is victorious."
 
@@ -122,7 +119,7 @@ Palomina, out of options, and not knowing the Dark Spear's blighted provenance, 
 # - V -
 
 
-<style class=".front">"F</style>oolish little insect!" exclaimed the <style class=".name">Dæmon Lord</style>, "Thou didst think to best Me?
+`"F`drop oolish little insect!" exclaimed the <style class=".name">Dæmon Lord</style>, "Thou didst think to best Me?
 
 "Now thou art Mine, suspended in My Night! Now thou shalt watch as thy precious Humanity burns, along with the rest of <style class=".name">Mysteria</style>'s wretched Light!"
 
@@ -138,7 +135,7 @@ Palomina struggled against the tide of omens as they threatened to pull her unde
 # - VI -
 
 
-<style class=".front">"H</style>arken!" The voice of <style class=".name">Mysteria</style> whispered from the Shards of Light, "Fear not, Child, for Humanity is not yet lost.
+`"H`drop arken!" The voice of <style class=".name">Mysteria</style> whispered from the Shards of Light, "Fear not, Child, for Humanity is not yet lost.
 
 "Thou art their final hope, and thou shalt take what remains of My Light, and loose it upon the Sky. It shall strike the <style class=".name">Dæmon Lord</style> as a thousand piercing bolts, and We shall drive It from this place."
 
@@ -150,7 +147,7 @@ Slowly, Palomina understood. She needed not a Spear, but the Light, and the <sty
 # - VII -
 
 
-<style class=".front">"D</style><style class=".name">æmon</style>!" Palomina exclaimed, her resolve returning. "If you seek our destruction, then I must not waver!"
+`"D`drop<style class=".name">æmon</style>!" Palomina exclaimed, her resolve returning. "If you seek our destruction, then I must not waver!"
 
 And with a mighty throw, she loosed the thousands of Shards from her grasp.
 
@@ -166,7 +163,7 @@ Palomina would never again return to the Earth, but she left behind the wound re
 # - VIII -
 
 
-<style class=".front">N</style>ever again was <style class=".name">Melimonas</style>' Night so Dark that <style class=".name">Mysteria</style> could not banish it from the Sky.
+`N`drop ever again was <style class=".name">Melimonas</style>' Night so Dark that <style class=".name">Mysteria</style> could not banish it from the Sky.
 
 And as a new dawn rose upon Humanity, they all sang the name of their Hero:
 

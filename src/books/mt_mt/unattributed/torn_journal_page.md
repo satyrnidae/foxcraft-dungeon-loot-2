@@ -17,3 +17,5 @@ lore: In-noti juru l-ħsibijiet ta' xi ħadd dwar... gwerra? Imma... ma' min? Je
   Mingħajr "imma" u mingħajr "jekk", aħna <filter as="fl-inkwiet">mitluf</filter>. <filter as="fl-inkwiet kbir">Mitluf bl-ittra kbira</filter>. Għadhom ma ivvintawx stat ta' <filter as="inkwiet">telfien</filter> li hu tant <filter as="fl-inkwiet">tilfa</filter> daqs kemm aħna <filter as="fl-inkwiet">mitluf</filter> bħalissa.
 
   Tajjeb, ħadt biżżejjed. Mhux se nibqa' nwaqqaf ħajti niġġieled dawn l-brimb <filter as="fastidjużi">immortali tal-biża'</filter> aktar! L-ewwel vapur tal-merkanzija lejn id-dar se nieħu, naħlef!
+<vbottom>
+<style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>
