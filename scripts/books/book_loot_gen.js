@@ -147,6 +147,15 @@ function unquote(value) {
     return m ? m[2] : value;
 }
 
+// A plain lore line may be wrapped in double or single quotes to stay valid YAML, which are not part of the line. \" and \\ in
+// double quotes and '' in single quotes stand for the character. A line that is not wrapped, or is a component, stays as it is.
+function unquoteLore(line) {
+    const double = /^"(.*)"$/.exec(line);
+    if (double) return double[1].replace(/\\(["\\])/g, '$1');
+    const single = /^'(.*)'$/.exec(line);
+    return single ? single[1].replace(/''/g, "'") : line;
+}
+
 // Splits a source file into { meta, body }. Values run to the end of the line; lore is the indented block under it.
 // Braces and brackets still open at the end of the text, those inside a string do not count
 function bracesOpen(text) {
@@ -210,7 +219,7 @@ function parseFrontmatter(text) {
                         throw new Error(`lore is not a valid JSON or SNBT list: ${e.message}`);
                     }
                     meta.lore.push(...list.map((entry) => ({ entry })));
-                } else if (value) meta.lore.push(value);
+                } else if (value) meta.lore.push(unquoteLore(value));
             } else if (key === 'data') {
                 // An SNBT compound over as many lines as it takes to close its braces, kept as the SNBT string
                 let text = m[2];
@@ -227,7 +236,7 @@ function parseFrontmatter(text) {
                 meta[key] = unquote(m[2].trim());
             }
         } else if (key === 'lore' && line.trim()) {
-            meta.lore.push(line.trim());
+            meta.lore.push(unquoteLore(line.trim()));
         }
     }
     return { meta, body: lines.slice(end + 1).join('\n') };
@@ -792,7 +801,31 @@ function reserveRoom(inner, part, bold, font) {
     if (extra !== 0) inner[inner.length - 1].delta = extra;
 }
 
-const widthOf = ({ ch, bold, font }) => FONTS.widthOf(font, ch, bold);
+// Whether applyKerning leaves a glyph alone: the nodes it skips, a literal one, and newlines and shaped Arabic. A glyph it leaves
+// alone is drawn with the game's own spacing, so its width has none of the kerning of its font.
+const unkerned = (g) => g.literal || g.ch === '\n' || (g.ch !== undefined && shapeOf(g.ch));
+const widthOf = (g) => {
+    const width = FONTS.widthOf(g.font, g.ch, g.bold);
+    if (!unkerned(g)) return width;
+    const { before, after } = FONTS.kerningOf(g.font, g.ch);
+    return width - before - after;
+};
+
+// How far past the width of a glyph the game's line gets before the padding of its kerning pulls it back: kerning that closes up
+// the next glyph is a backwards padding after the glyph, and the splitter checks the width after the glyph and before that padding
+const peak = (g) => (unkerned(g) || !g.font || !g.ch ? 0 : Math.max(0, -FONTS.kerningOf(g.font, g.ch).after));
+
+// The width a run of glyphs needs of a line: the furthest the splitter's count gets, which is its width plus that of the last
+// glyph's peak, or a middle glyph's when more kerning follows it
+const spanOf = (list) => {
+    let x = 0;
+    let far = 0;
+    for (const g of list) {
+        x += g.sw ?? widthOf(g);
+        far = Math.max(far, x + peak(g));
+    }
+    return far;
+};
 
 // How the game's text renderer draws Arabic: each letter takes the form its neighbors give it, so a line is as wide as its
 // shaped glyphs, which the splitter does not know, it measures the plain letters. scripts/books/arabic_shaping.json is made from
@@ -892,7 +925,7 @@ function layoutGlyphs(chars, reserve = false, limit = PAGE_WIDTH) {
         const w = widthOf(g) + room(g);
         // A word carried onto a new line can still be wider than it, as after the indent of a paragraph, and breaks again
         // The first glyph of a line stays on it however wide it is, as the game keeps it, there is nowhere else to put it
-        while ((width + w > limit || drawn + drawnWidth(g) > limit) && g.ch !== ' ' && i > start) {
+        while ((width + w + peak(g) > limit || drawn + drawnWidth(g) + peak(g) > limit) && g.ch !== ' ' && i > start) {
             if (lastSpace >= start) push(lastSpace, lastSpace + 1, true);
             else push(i, i, true);
             // Carry the word that overflowed onto the new line
@@ -967,7 +1000,7 @@ function hyphenate(content, hyphenator) {
             let to = from;
             while (to < all.length && all[to].ch !== ' ' && all[to].ch !== '\n') to++;
             const word = all.slice(from, to);
-            if (sum(word) > PAGE_WIDTH) {
+            if (spanOf(word) > PAGE_WIDTH) {
                 // The syllable breaks inside the word, as indexes into all
                 const breaks = [];
                 for (let at = from; at < to; ) {
@@ -990,7 +1023,11 @@ function hyphenate(content, hyphenator) {
                 const k = lines.findIndex((l) => j >= l.tstart && j < l.tend);
                 const first = k > 0 && lines[k].soft && lines[k].tstart === j ? lines[k - 1] : lines[k];
                 const used = sum(all.slice(chars[first.tstart].place, from));
-                const room = (b, taken) => taken + sum(all.slice(from, b)) + widthOf({ ch: '-', bold: all[b - 1].bold, font: all[b - 1].font }) <= PAGE_WIDTH;
+                const room = (b, taken) => {
+                    const head = all.slice(from, b);
+                    const hyphen = { ch: '-', bold: all[b - 1].bold, font: all[b - 1].font };
+                    return taken + spanOf(head) <= PAGE_WIDTH && taken + sum(head) + widthOf(hyphen) + peak(hyphen) <= PAGE_WIDTH;
+                };
                 const pick = [...usable].reverse().find((b) => room(b, used)) ?? [...usable].reverse().find((b) => room(b, 0));
                 if (pick !== undefined) change = all[pick].place;
             }
@@ -1306,11 +1343,17 @@ const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Scrip
 
 // How far a line reaches from its start: the furthest the pen gets, so glyphs stacked with a backwards padding count by where
 // they end and not by the sum of their advances, which that padding shortens
+//
+// Kerning that pulls the next glyph closer is a backwards padding after the glyph, so the game's line is as wide as the glyph
+// before that padding, a pixel more than the widths here, which fold it in. The splitter wraps at that peak, so the peak counts
+// too, or a line aligned to fit the page exactly loses its last glyph to a wrap.
 function reach(text) {
     let x = 0;
     let far = 0;
     for (const g of text) {
-        x += g.sw ?? widthOf(g);
+        const w = g.sw ?? widthOf(g);
+        far = Math.max(far, x + w + peak(g));
+        x += w;
         far = Math.max(far, x);
     }
     return far;
@@ -1689,10 +1732,18 @@ const escapeMarkup = (s) => s.replace(/[\\*_~|<`]/g, '\\$&');
 
 // The lines of a code block as markup: literal spans in the code font, colored by the language of the fence when the
 // highlighter knows it. A code line keeps its indentation and is never a heading.
+// A code line of 10 or more hyphens or equals signs and nothing else, as in the divider of a pasted license, is a horizontal line
+// of that character in the code font, as wide as the page, instead of a long run of glyphs that wraps
+const CODE_DIVIDER = /^\s*([-=])\1{9,}$/;
+
 function codeLines(language, lines) {
     const code = lines.map((l) => l.replace(/\s+$/, '')).join('\n');
     const rows = (language && highlight(code, language)) || code.split('\n').map((l) => (l ? [{ text: l, color: undefined }] : []));
-    return rows.map((row) => row.map(({ text, color }) => `<font face="${CODE_FONT}"${color ? ` color="${color}"` : ''} literal="1">${escapeMarkup(text)}</font>`).join(''));
+    return rows.map((row, n) => {
+        const divider = CODE_DIVIDER.exec(lines[n].replace(/\s+$/, ''));
+        if (divider) return `<style font="${CODE_FONT}" char="${divider[1]}">---</style>`;
+        return row.map(({ text, color }) => `<font face="${CODE_FONT}"${color ? ` color="${color}"` : ''} literal="1">${escapeMarkup(text)}</font>`).join('');
+    });
 }
 
 // The lines of a block as markup, a music block as staff lines and any other as code
@@ -1981,7 +2032,10 @@ function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = 
         const content = pieces.flatMap((part, n) => {
             if (n % 2 && !/^<v(center|bottom)>/.test(part)) {
                 const tag = /^<style((?:\s[^>]*)?)>/.exec(part);
-                return [...horizontalLine(classes, tag ? classStyles(parseAttributes(tag[1]), classes) : {}), '\n'];
+                // font and char on the tag give the line that font and mark, as classes can, so a divider can be made of any glyph
+                const attrs = tag ? parseAttributes(tag[1]) : {};
+                const own = { ...(attrs.font === undefined ? {} : { font: attrs.font }), ...(attrs.char === undefined ? {} : { char: attrs.char }) };
+                return [...horizontalLine(classes, tag ? { ...classStyles(attrs, classes), ...own } : {}), '\n'];
             }
             if (n % 2) return [{ styles: {}, content: [], vmark: part.slice(1, 8) === 'vcenter' ? 'vcenter' : 'vbottom' }];
             const parsed = parseInline(part, 0, null, classes).content;
@@ -2154,6 +2208,11 @@ function titleOf(meta) {
     return result;
 }
 
+// A plain title and displayTitle read \n, \t, \\ and \uXXXX as the characters, so a name can have a line break. SNBT titles have
+// their own escapes. Anything else after a backslash stays as typed.
+const TITLE_ESCAPE = /\\(n|t|\\|u[0-9a-fA-F]{4})/g;
+const decodeTitleEscapes = (text) => text.replace(TITLE_ESCAPE, (_, code) => (code === 'n' ? '\n' : code === 't' ? '\t' : code === '\\' ? '\\' : String.fromCharCode(parseInt(code.slice(1), 16))));
+
 function titleParts(meta) {
     const raw = meta.title || '';
     if (/^\s*[{[]/.test(raw)) {
@@ -2166,7 +2225,7 @@ function titleParts(meta) {
     const text = raw.replace(TITLE_FILTER, (_, a, b, content) => content);
     const filtered = raw.replace(TITLE_FILTER, (_, a, b) => (a !== undefined ? a : b));
     if (/<\/?filter/i.test(text)) throw new Error('title has a <filter> that is not <filter as="...">text</filter>');
-    return { text, filtered: filtered === text ? null : filtered, rich: null };
+    return { text: decodeTitleEscapes(text), filtered: filtered === text ? null : decodeTitleEscapes(filtered), rich: null };
 }
 
 function rarityOf(meta) {
@@ -2313,6 +2372,10 @@ function buildBook(id, file, source = readSource(file)) {
     if (!title.text) throw new Error(`${file}: title is missing`);
     for (const [kind, text] of [['title', title.text], ['filtered title', title.filtered]]) {
         if (text && text.length > MAX_TITLE) warnings.push(`${file}: ${kind} is ${text.length} characters, the book takes ${MAX_TITLE}`);
+    }
+    // An item name is one tooltip line, the game draws a newline in it as a missing glyph box
+    for (const [kind, text] of [['title', title.text], ['filtered title', title.filtered], ['displayTitle', title.display && title.display.text]]) {
+        if (text && text.includes('\n')) warnings.push(`${file}: ${kind} has a newline, an item name or title is one line and the game draws the break as a box`);
     }
     if (pages.length > MAX_PAGES) warnings.push(`${file}: ${pages.length} pages, a book takes ${MAX_PAGES}`);
     if (isWritable(meta)) return buildWritable(id, source, title, file, warnings);

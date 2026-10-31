@@ -1,5 +1,6 @@
 import com.google.gson.*;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.ChatFormatting;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.StringSplitter;
 import net.minecraft.client.resources.language.FormattedBidiReorder;
@@ -7,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.*;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.StringDecomposer;
@@ -39,6 +41,18 @@ public class BookRender {
     static final int TEXT_COLOR = 0x000000;
 
     static Path root;
+    // What drawLine uses for text with no color of its own, and whether it shades text the way tooltips do
+    static int textColor = TEXT_COLOR;
+    static boolean autoShadow = false;
+    // Obfuscated text: frames of a page that has some, shown 5 per second, and the random source that picks each stand-in glyph
+    static final int ANIM_FRAMES = 15, ANIM_FPS = 5;
+    static boolean sawObfuscated = false;
+    static Random obfuscationRandom = new Random(0);
+    static long lineSeed;
+    // Where the page being drawn has text that opens a link, as {x, y, width, height, url} in GUI pixels; null when not collecting
+    static List<Object[]> linkSink = null;
+    // Glyphs of the line being drawn that are not blank, and how many of those are not underlined or sit under an event; a line of only underlined text is a heading
+    static int inkGlyphs = 0, plainGlyphs = 0;
 
     /** A book source is src/books/<locale>/<id>.md, or one folder down in a group such as an author: book is <group>/<id> then. */
     static boolean hasSource(Path localeDir, String book) {
@@ -59,6 +73,20 @@ public class BookRender {
         final List<Map<Integer, Glyph>> providers = new ArrayList<>();
         final Map<Integer, Glyph> cache = new HashMap<>();
         boolean found = true;
+
+        /** Every glyph that draws, by advance rounded to whole pixels, what obfuscated text picks its stand-ins from. */
+        Map<Integer, List<Glyph>> byWidth;
+
+        Glyph randomOfWidth(Glyph like, Random rnd) {
+            if (byWidth == null) {
+                byWidth = new HashMap<>();
+                for (var p : providers) for (Glyph g : p.values()) {
+                    if (g.image() != null) byWidth.computeIfAbsent(Math.round(g.advance()), w -> new ArrayList<>()).add(g);
+                }
+            }
+            List<Glyph> same = byWidth.get(Math.round(like.advance()));
+            return same == null || same.isEmpty() ? like : same.get(rnd.nextInt(same.size()));
+        }
 
         Glyph glyph(int cp) {
             return cache.computeIfAbsent(cp, c -> {
@@ -332,18 +360,43 @@ public class BookRender {
      * all under the text.
      */
     static float drawLine(Graphics2D g, FormattedText line, float x, float y) {
+        // The shadow pass and the text pass pick the same stand-ins for obfuscated glyphs
+        lineSeed = obfuscationRandom.nextLong();
         drawPass(g, line, x, y, true);
         return drawPass(g, line, x, y, false);
     }
 
     static float drawPass(Graphics2D g, FormattedText line, float x, float y, boolean shadow) {
         float[] pen = {x};
+        Random rnd = new Random(lineSeed);
+        // The run of glyphs under one click or hover event on this line: the events and where the run starts
+        Object[] run = {null, null};
+        float[] runStart = {0};
         // The game draws a line in its visual order, so right to left runs are reversed and Arabic letters take their joined forms
         Language.getInstance().getVisualOrder(line).accept((index, st, cp) -> {
             Glyph glyph = glyph(cp, st);
+            if (!shadow && linkSink != null) {
+                // The padding that centers a line is blank and never underlined, it says nothing about the line
+                if (!Character.isWhitespace(cp) && !fontOf(st).equals("foxcraft_dungeon_loot:padding")) {
+                    inkGlyphs++;
+                    if (!st.isUnderlined() || st.getClickEvent() != null) plainGlyphs++;
+                }
+                Object click = st.getClickEvent(), hover = st.getHoverEvent() instanceof HoverEvent.ShowText ? st.getHoverEvent() : null;
+                if (!Objects.equals(click, run[0]) || !Objects.equals(hover, run[1])) {
+                    if (run[0] != null || run[1] != null) linkSink.add(new Object[] {runStart[0], y, pen[0] - runStart[0], (float) LINE_HEIGHT, run[0], run[1]});
+                    run[0] = click;
+                    run[1] = hover;
+                    runStart[0] = pen[0];
+                }
+            }
+            if (st.isObfuscated() && glyph.image() != null) {
+                sawObfuscated = true;
+                glyph = font(fontOf(st)).randomOfWidth(glyph, rnd);
+            }
             float adv = glyph.advance() + (st.isBold() ? 1 : 0);
-            int argb = 0xff000000 | (st.getColor() != null ? st.getColor().getValue() : TEXT_COLOR);
-            if (shadow) argb = st.getShadowColor() != null ? st.getShadowColor() : 0;
+            int argb = 0xff000000 | (st.getColor() != null ? st.getColor().getValue() : textColor);
+            // A tooltip shades its text a quarter as bright, the book screen draws none
+            if (shadow) argb = st.getShadowColor() != null ? st.getShadowColor() : autoShadow ? 0xff000000 | ((argb & 0xfcfcfc) >> 2) : 0;
             if (argb >>> 24 != 0) {
                 float gx = pen[0] + (shadow ? 1 : 0), gy = y + (shadow ? 1 : 0);
                 draw(g, glyph, gx, gy, argb, st.isItalic());
@@ -355,7 +408,69 @@ public class BookRender {
             pen[0] += adv;
             return true;
         });
+        if (!shadow && linkSink != null && (run[0] != null || run[1] != null)) linkSink.add(new Object[] {runStart[0], y, pen[0] - runStart[0], (float) LINE_HEIGHT, run[0], run[1]});
         return pen[0];
+    }
+
+    static void chunk(java.io.ByteArrayOutputStream out, String type, byte[] data) throws java.io.IOException {
+        java.io.DataOutputStream d = new java.io.DataOutputStream(out);
+        byte[] t = type.getBytes(java.nio.charset.StandardCharsets.US_ASCII);
+        java.util.zip.CRC32 crc = new java.util.zip.CRC32();
+        crc.update(t);
+        crc.update(data);
+        d.writeInt(data.length);
+        d.write(t);
+        d.write(data);
+        d.writeInt((int) crc.getValue());
+    }
+
+    /**
+     * Writes frames as an animated PNG looping forever at ANIM_FPS. The first frame is also the default image, so a viewer
+     * with no APNG support shows it as any other page. Each frame is encoded by ImageIO and its IDAT data reused, as fdAT for
+     * all but the first.
+     */
+    static void writeApng(List<BufferedImage> frames, Path file) throws Exception {
+        java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
+        out.write(new byte[] {(byte) 0x89, 'P', 'N', 'G', 0x0d, 0x0a, 0x1a, 0x0a});
+        int seq = 0;
+        for (int n = 0; n < frames.size(); n++) {
+            java.io.ByteArrayOutputStream encoded = new java.io.ByteArrayOutputStream();
+            ImageIO.write(frames.get(n), "png", encoded);
+            java.nio.ByteBuffer buf = java.nio.ByteBuffer.wrap(encoded.toByteArray());
+            buf.position(8);
+            byte[] ihdr = null;
+            java.io.ByteArrayOutputStream idat = new java.io.ByteArrayOutputStream();
+            while (buf.remaining() >= 12) {
+                int len = buf.getInt();
+                byte[] type = new byte[4];
+                buf.get(type);
+                byte[] data = new byte[len];
+                buf.get(data);
+                buf.getInt();
+                String name = new String(type, java.nio.charset.StandardCharsets.US_ASCII);
+                if (name.equals("IHDR")) ihdr = data;
+                else if (name.equals("IDAT")) idat.write(data);
+            }
+            if (n == 0) {
+                chunk(out, "IHDR", ihdr);
+                java.nio.ByteBuffer ac = java.nio.ByteBuffer.allocate(8);
+                ac.putInt(frames.size()).putInt(0);
+                chunk(out, "acTL", ac.array());
+            }
+            java.nio.ByteBuffer fc = java.nio.ByteBuffer.allocate(26);
+            fc.putInt(seq++).putInt(frames.get(n).getWidth()).putInt(frames.get(n).getHeight()).putInt(0).putInt(0);
+            fc.putShort((short) 1).putShort((short) ANIM_FPS).put((byte) 0).put((byte) 0);
+            chunk(out, "fcTL", fc.array());
+            if (n == 0) {
+                chunk(out, "IDAT", idat.toByteArray());
+            } else {
+                java.nio.ByteBuffer fd = java.nio.ByteBuffer.allocate(4 + idat.size());
+                fd.putInt(seq++).put(idat.toByteArray());
+                chunk(out, "fdAT", fd.array());
+            }
+        }
+        chunk(out, "IEND", new byte[0]);
+        Files.write(file, out.toByteArray());
     }
 
     /** The pages of a book modifier, from its written_book_content, each as its raw side and its filtered side, null when it has none. */
@@ -383,6 +498,135 @@ public class BookRender {
         return null;
     }
 
+    //region Tooltip
+
+    /** Every set_lore function in a modifier or loot table JSON, in order, their lines added to lore. */
+    static void collectLore(JsonElement el, List<JsonElement> lore) {
+        if (el.isJsonObject()) {
+            JsonObject o = el.getAsJsonObject();
+            if (o.has("lore") && o.has("type") && o.get("type").getAsString().equals("minecraft:set_lore")) o.getAsJsonArray("lore").forEach(lore::add);
+            else o.entrySet().forEach(e -> collectLore(e.getValue(), lore));
+        } else if (el.isJsonArray()) {
+            el.getAsJsonArray().forEach(e -> collectLore(e, lore));
+        }
+    }
+
+    /** The first string in a JSON tree that is a rarity modifier id, null when there is none. */
+    static String rarityId(JsonElement el) {
+        if (el.isJsonPrimitive()) {
+            String s = el.getAsString();
+            return s.startsWith("foxcraft_dungeon_loot:rarity/") ? s : null;
+        }
+        Iterable<JsonElement> children = el.isJsonObject() ? el.getAsJsonObject().entrySet().stream().map(Map.Entry::getValue).toList()
+            : el.isJsonArray() ? el.getAsJsonArray() : List.of();
+        for (JsonElement c : children) {
+            String found = rarityId(c);
+            if (found != null) return found;
+        }
+        return null;
+    }
+
+    /** Draws a nine-slice sprite over a box of GUI pixels, the border copied and the rest stretched. */
+    static void nineSlice(Graphics2D g, BufferedImage sprite, int border, int w, int h) {
+        int s = sprite.getWidth();
+        int[] sx = {0, border, s - border, s}, dx = {0, border, w - border, w};
+        int[] sy = {0, border, s - border, s}, dy = {0, border, h - border, h};
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                g.drawImage(sprite, dx[i] * scale, dy[j] * scale, dx[i + 1] * scale, dy[j + 1] * scale, sx[i], sy[j], sx[i + 1], sy[j + 1], null);
+            }
+        }
+    }
+
+    /**
+     * Draws the item tooltip of a book as the game shows it for the stack the loot table gives: the name, the author and
+     * generation lines of a written book, then the lore of the modifier followed by the one the rarity modifier appends,
+     * in the default lore style. Lines are read from the generated modifier and loot table, in the locale injected.
+     */
+    static void writeTooltip(JsonElement modifier, JsonElement table, String generated, Path out, StringSplitter splitter, RegistryOps<JsonElement> ops, BufferedImage background, BufferedImage frame) throws Exception {
+        JsonObject content = findContent(modifier);
+        JsonObject components = findComponents(modifier);
+        Component name;
+        if (components != null && components.has("minecraft:custom_name")) {
+            name = ComponentSerialization.CODEC.parse(ops, components.get("minecraft:custom_name")).getOrThrow(e -> new IllegalStateException(e));
+        } else {
+            JsonElement title = content.get("title");
+            name = Component.literal(title.isJsonObject() ? title.getAsJsonObject().get("raw").getAsString() : title.getAsString());
+        }
+        List<JsonElement> loreJson = new ArrayList<>();
+        collectLore(modifier, loreJson);
+        String rarity = rarityId(table);
+        if (rarity != null) {
+            Path file = root.resolve("data/foxcraft_dungeon_loot/item_modifier").resolve(rarity.substring("foxcraft_dungeon_loot:".length()) + ".json");
+            if (Files.exists(file)) collectLore(JsonParser.parseString(Files.readString(file)), loreJson);
+        }
+        List<Component> lines = new ArrayList<>();
+        lines.add(name);
+        String author = content.has("author") ? content.get("author").getAsString() : "";
+        lines.add(Component.translatable("book.byAuthor", author).withStyle(ChatFormatting.GRAY));
+        // 0 original to 3 tattered, original when the book sets none
+        int generation = content.has("generation") ? content.get("generation").getAsInt() : 0;
+        lines.add(Component.translatable("book.generation." + generation).withStyle(ChatFormatting.GRAY));
+        Style loreStyle = Style.EMPTY.withColor(ChatFormatting.DARK_PURPLE).withItalic(true);
+        for (JsonElement l : loreJson) {
+            lines.add(ComponentUtils.mergeStyles(ComponentSerialization.CODEC.parse(ops, l).getOrThrow(e -> new IllegalStateException(e)), loreStyle));
+        }
+
+        drawTooltip(new ArrayList<FormattedText>(lines), out, splitter, background, frame);
+    }
+
+    /** Draws lines of text as the game draws a tooltip, the frame and background sprites under white, shaded text. */
+    static void drawTooltip(List<FormattedText> lines, Path out, StringSplitter splitter, BufferedImage background, BufferedImage frame) throws Exception {
+        int width = 0;
+        for (FormattedText c : lines) width = Math.max(width, (int) Math.ceil(splitter.stringWidth(c)));
+        int height = lines.size() == 1 ? 8 : 10 * lines.size();
+        // The text sits 3 pixels inside a box the sprites reach another 9 pixels beyond
+        int pad = 12, w = width + 2 * pad, h = height + 2 * pad;
+        BufferedImage image = new BufferedImage(w * scale, h * scale, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+        nineSlice(g, background, 9, w, h);
+        nineSlice(g, frame, 10, w, h);
+        textColor = 0xffffff;
+        autoShadow = true;
+        try {
+            for (int i = 0; i < lines.size(); i++) {
+                drawLine(g, lines.get(i), pad, pad + i * 10 + (i > 0 ? 2 : 0));
+            }
+        } finally {
+            textColor = TEXT_COLOR;
+            autoShadow = false;
+        }
+        g.dispose();
+        ImageIO.write(image, "png", out.toFile());
+    }
+
+    /** The written_book_content object of a book modifier. */
+    static JsonObject findContent(JsonElement el) {
+        JsonObject components = findComponents(el);
+        return components == null ? null : components.getAsJsonObject("minecraft:written_book_content");
+    }
+
+    /** The components object of the set_components function that holds the book content. */
+    static JsonObject findComponents(JsonElement el) {
+        if (el.isJsonObject()) {
+            JsonObject o = el.getAsJsonObject();
+            if (o.has("components") && o.get("components").isJsonObject() && o.getAsJsonObject("components").has("minecraft:written_book_content")) return o.getAsJsonObject("components");
+            for (var e : o.entrySet()) {
+                JsonObject found = findComponents(e.getValue());
+                if (found != null) return found;
+            }
+        } else if (el.isJsonArray()) {
+            for (JsonElement e : el.getAsJsonArray()) {
+                JsonObject found = findComponents(e);
+                if (found != null) return found;
+            }
+        }
+        return null;
+    }
+
+    //endregion
+
     public static void main(String[] args) throws Exception {
         root = Path.of(args[0]).toAbsolutePath();
         Path outDir = Path.of(args[1]).toAbsolutePath();
@@ -401,6 +645,9 @@ public class BookRender {
         try (InputStream in = BookRender.class.getResourceAsStream("/assets/minecraft/textures/gui/book.png")) {
             background = ImageIO.read(in).getSubimage(0, 0, BOOK_SIZE, BOOK_SIZE);
         }
+        BufferedImage tooltipBackground, tooltipFrame;
+        try (InputStream in = BookRender.class.getResourceAsStream("/assets/minecraft/textures/gui/sprites/tooltip/background.png")) { tooltipBackground = ImageIO.read(in); }
+        try (InputStream in = BookRender.class.getResourceAsStream("/assets/minecraft/textures/gui/sprites/tooltip/frame.png")) { tooltipFrame = ImageIO.read(in); }
 
         // config.json mc.generatedDirectory, the folder the generator writes the books to
         java.util.regex.Matcher dirName = java.util.regex.Pattern.compile("\"generatedDirectory\"\\s*:\\s*\"([^\"]+)\"").matcher(Files.readString(root.resolve("config.json")));
@@ -429,6 +676,16 @@ public class BookRender {
                 if (!locale.equals("en_us") && !hasSource(root.resolve("src/books").resolve(locale), book)) continue;
                 if (locale.equals("en_us")) books++;
                 // With chat filtering on the book shows the filtered side of each page that has one, the raw side of the rest
+                try {
+                    Path table = root.resolve("data/foxcraft_dungeon_loot/loot_table/item/random_loot/book").resolve(generated).resolve(book + ".json");
+                    JsonElement tableJson = Files.exists(table) ? JsonParser.parseString(Files.readString(table)) : new JsonObject();
+                    Path dir = outDir.resolve(locale).resolve(book);
+                    Files.createDirectories(dir);
+                    at = locale + " " + book + " tooltip";
+                    writeTooltip(JsonParser.parseString(Files.readString(file)), tableJson, generated, dir.resolve("tooltip.png"), splitter, ops, tooltipBackground, tooltipFrame);
+                } catch (Exception e) {
+                    failures.add(locale + " " + book + " tooltip: " + e);
+                }
                 boolean filtered = pages.stream().anyMatch(p -> p[1] != null);
                 for (String side : filtered ? List.of("raw", "filtered") : List.of("raw")) {
                     Path dir = outDir.resolve(locale).resolve(book);
@@ -442,19 +699,64 @@ public class BookRender {
                         String where = locale + " " + book + (side.equals("filtered") ? " filtered" : "") + " page " + (n + 1);
                         if (lines.size() > MAX_LINES) failures.add(where + " is " + lines.size() + " lines in game, the book shows " + MAX_LINES);
 
-                        BufferedImage image = new BufferedImage(BOOK_SIZE * scale, BOOK_SIZE * scale, BufferedImage.TYPE_INT_ARGB);
-                        Graphics2D g = image.createGraphics();
-                        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-                        g.drawImage(background, 0, 0, BOOK_SIZE * scale, BOOK_SIZE * scale, null);
-                        Component indicator = Component.translatable("book.pageIndicator", n + 1, pages.size());
-                        drawLine(g, indicator, INDICATOR_RIGHT - splitter.stringWidth(indicator), INDICATOR_Y);
-                        for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) {
-                            at = where + " line " + (i + 1);
-                            float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
-                            if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/books/README.md)");
+                        // Obfuscated text redraws as other glyphs every frame in game, so a page with some is written as an animated PNG
+                        List<BufferedImage> frames = new ArrayList<>();
+                        List<Object[]> pageLinks = new ArrayList<>();
+                        sawObfuscated = false;
+                        boolean heading = false;
+                        for (int frame = 0; frame < (frames.isEmpty() || sawObfuscated ? ANIM_FRAMES : 1); frame++) {
+                            obfuscationRandom = new Random(where.hashCode() * 31L + frame);
+                            linkSink = frame == 0 ? pageLinks : null;
+                            BufferedImage image = new BufferedImage(BOOK_SIZE * scale, BOOK_SIZE * scale, BufferedImage.TYPE_INT_ARGB);
+                            Graphics2D g = image.createGraphics();
+                            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                            g.drawImage(background, 0, 0, BOOK_SIZE * scale, BOOK_SIZE * scale, null);
+                            Component indicator = Component.translatable("book.pageIndicator", n + 1, pages.size());
+                            drawLine(g, indicator, INDICATOR_RIGHT - splitter.stringWidth(indicator), INDICATOR_Y);
+                            for (int i = 0; i < Math.min(lines.size(), MAX_LINES); i++) {
+                                at = where + " line " + (i + 1);
+                                inkGlyphs = 0;
+                                plainGlyphs = 0;
+                                float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
+                                if (frame == 0 && inkGlyphs > 0 && plainGlyphs == 0) heading = true;
+                                if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/books/README.md)");
+                            }
+                            g.dispose();
+                            frames.add(image);
                         }
-                        g.dispose();
-                        ImageIO.write(image, "png", dir.resolve(String.format("page_%02d.png", n + 1)).toFile());
+                        linkSink = null;
+                        // A marker file for a page with a heading, the viewer shows it above the page slider
+                        Path headingMark = dir.resolve(String.format("page_%02d.heading", n + 1));
+                        if (heading) Files.writeString(headingMark, ""); else Files.deleteIfExists(headingMark);
+                        if (!pageLinks.isEmpty()) {
+                            JsonArray arr = new JsonArray();
+                            // A hover text is drawn once for the runs that share it, to page_NN.hover_K.png
+                            Map<Object, Integer> hovers = new HashMap<>();
+                            for (Object[] l : pageLinks) {
+                                JsonObject o = new JsonObject();
+                                o.addProperty("x", (Float) l[0]); o.addProperty("y", (Float) l[1]); o.addProperty("w", (Float) l[2]); o.addProperty("h", (Float) l[3]);
+                                if (l[4] instanceof ClickEvent.OpenUrl e) { o.addProperty("action", "open_url"); o.addProperty("value", e.uri().toString()); }
+                                else if (l[4] instanceof ClickEvent.ChangePage e) { o.addProperty("action", "change_page"); o.addProperty("value", String.valueOf(e.page())); }
+                                else if (l[4] instanceof ClickEvent.CopyToClipboard e) { o.addProperty("action", "copy_to_clipboard"); o.addProperty("value", e.value()); }
+                                else if (l[4] instanceof ClickEvent.RunCommand e) { o.addProperty("action", "run_command"); o.addProperty("value", e.command()); }
+                                else if (l[4] instanceof ClickEvent.SuggestCommand e) { o.addProperty("action", "suggest_command"); o.addProperty("value", e.command()); }
+                                if (l[5] instanceof HoverEvent.ShowText h) {
+                                    Integer k = hovers.get(h.value());
+                                    if (k == null) {
+                                        k = hovers.size() + 1;
+                                        hovers.put(h.value(), k);
+                                        List<FormattedText> hoverLines = splitter.splitLines(h.value(), 200, Style.EMPTY);
+                                        drawTooltip(hoverLines, dir.resolve(String.format("page_%02d.hover_%d.png", n + 1, k)), splitter, tooltipBackground, tooltipFrame);
+                                    }
+                                    o.addProperty("hover", k);
+                                }
+                                arr.add(o);
+                            }
+                            Files.writeString(dir.resolve(String.format("page_%02d.links.json", n + 1)), arr.toString());
+                        }
+                        Path pagePng = dir.resolve(String.format("page_%02d.png", n + 1));
+                        if (frames.size() > 1) writeApng(frames, pagePng);
+                        else ImageIO.write(frames.get(0), "png", pagePng.toFile());
                         pagesDrawn++;
                     }
                 }

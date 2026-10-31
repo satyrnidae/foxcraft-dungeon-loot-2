@@ -1,6 +1,6 @@
 # Third party assets
 
-Licenses of assets in this repository that are not mine. Credits for audio are in `README.md`.
+Licenses of assets in this repository that are not mine.
 
 ## Fonts
 
@@ -152,7 +152,7 @@ Contact information: valiegraphie.itch.io | valentin.lhb@gmail.com
 
 ### Arsenic Ink
 
-By CR.OS Software. Licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/), credit appreciated. The pack ships only a bitmap font made from the Tiny file plus the symbols of the regular file, U+00A1 to U+00A9, in `texturepack/assets/foxcraft_dungeon_loot/font/arsenic_ink.json` with the glyph sheets `arsenic_ink_tiny.png` and `arsenic_ink_special.png` in `textures/font/`. The TrueType files are not in this repository. NoDerivatives forbids distributing modified material, and a bitmap render is arguably that, so check the terms before a public release.
+By CR.OS Software. Licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/), credit appreciated. The pack ships only a bitmap font made from the Tiny file plus the symbols of the regular file, U+00A1 to U+00A9, in `texturepack/assets/foxcraft_dungeon_loot/font/arsenic_ink.json` with the glyph sheets `arsenic_ink/tiny.png` and `arsenic_ink/special.png` in `textures/font/`. The asset pack itself is also not in this repository.
 
 ```
 This asset pack can be used in both free and commercial projects. You can modify it to suit your own needs.
@@ -164,3 +164,29 @@ You may not redistribute, resell or take your own credit for this Asset Pack, a 
 This work is licensed under a Creative Commons Attribution-NoDerivatives 4.0 International License.
 More info at: https://creativecommons.org/licenses/by-nd/4.0/
 ```
+
+## Audio
+
+The audio files are under `texturepack/assets/` and are not all committed, see the notes per source.
+
+### Music discs
+
+The pack adds 51 custom music discs, each a vanilla disc with its own jukebox song.
+
+- 19 tracks by CaptainZephyrr and 9 by @satyrnidae, their own work.
+- 22 tracks by Wolfgun, 11 from [RUNNING](https://wolfgun.bandcamp.com/album/running) and 11 from [RUNNING II](https://wolfgun.bandcamp.com/album/running-ii), used with attribution. The audio is not committed. Both albums can be downloaded for free or at any price through [Wolfgun's Bandcamp page](https://wolfgun.bandcamp.com).
+- ["Dog"](https://c418.bandcamp.com/track/dog) by C418, which the game does not ship. The audio is not committed either.
+
+### Freesound
+
+Sound effects downloaded from Freesound.org:
+
+- [Electric zap](https://freesound.org/people/michael_grinnell/sounds/512471/) by michael_grinnell, CC-0.
+- [Spark](https://freesound.org/people/elliott.klein/sounds/189630/) by elliot.klein, CC-0.
+- [Sword Block](https://freesound.org/people/LukeSharples/sounds/209096/) and [Sword Block 2](https://freesound.org/people/LukeSharples/sounds/209099/) by LukeSharples, CC-BY.
+- [Chainsaw Idle Loops](https://freesound.org/people/Audionautics/sounds/171652/) by Audionautics, CC-BY.
+- [Chainsaw Start Attempts.wav](https://freesound.org/people/lonemonk/sounds/185580/) by lonemonk, CC-BY.
+
+### Engine simulator
+
+The chainsaw shutdown sound was created with [AngeTheGreat's engine simulator](https://github.com/ange-yaghi/engine-sim). It is only a placeholder for now.

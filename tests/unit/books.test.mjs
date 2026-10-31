@@ -474,6 +474,30 @@ describe('book generator files', () => {
     assert.throws(() => build('displayTitle: <filter as="a">b</filter>\n'), /filter/);
   });
 
+  it('a newline in a title or displayTitle warns, and quotes around a lore line are not part of it', () => {
+    const file = path.join(os.tmpdir(), 'newline_test.md');
+    fs.writeFileSync(file, '---\ntitle: A\nauthor: Me\ndisplayTitle: "One\\nTwo"\nlore:\n   "Said \\"hi\\" there"\n   \'it\'\'s\'\n   plain\n---\n\nx');
+    const book = gen.buildBook('t', file);
+    assert.ok(book.warnings.some((w) => /displayTitle has a newline/.test(w)), book.warnings.join('\n'));
+    assert.deepEqual(gen.parseFrontmatter(fs.readFileSync(file, 'utf8')).meta.lore, ['Said "hi" there', "it's", 'plain']);
+    fs.writeFileSync(file, '---\ntitle: A\nauthor: Me\nlore: "Solo line"\n---\n\nx');
+    assert.deepEqual(gen.parseFrontmatter(fs.readFileSync(file, 'utf8')).meta.lore, ['Solo line']);
+  });
+
+  it('title and displayTitle read\\n, \\t, \\\\ and \\uXXXX as characters', () => {
+    const file = path.join(os.tmpdir(), 'escape_test.md');
+    const build = (extra) => {
+      fs.writeFileSync(file, `---\ntitle: A\\nB\nauthor: Me\nrarity: rare\n${extra}---\n\nx`);
+      return gen.buildBook('t', file);
+    };
+    const named = build('displayTitle: "Line one\\nLine\\ttwo \\\\ \\u00e9"\n');
+    assert.equal(named.modifier.functions[0].components['minecraft:custom_name'].fallback, 'Line one\nLine\ttwo \\ \u00e9');
+    assert.equal(named.modifier.functions[0].components['minecraft:written_book_content'].title.raw, 'A\nB');
+    // Without a displayTitle the name is the title, escapes read too, and an unknown escape stays as typed
+    assert.equal(build('').lang['book.foxcraft_dungeon_loot.t.title'], 'A\nB');
+    assert.equal(build('displayTitle: C:\\dir\n').lang['book.foxcraft_dungeon_loot.t.title'], 'C:\\dir');
+  });
+
   it('writes the frontmatter generation into the book content, leaving out the original', () => {
     const { dir, opts } = sandbox();
     try {
@@ -1366,7 +1390,8 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
 describe('book give triggers', () => {
   it('every en_us book has a give function and a trigger', () => {
     const dir = path.join(pk.ROOT, 'src', 'books', 'en_us');
-    const rels = fs.readdirSync(dir, { recursive: true }).filter((f) => f.endsWith('.md') && !f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.split(path.sep).join('/').slice(0, -3));
+    // site/ holds the books only the Pages build has, scripts/books/site_books.mjs, which have no give function
+    const rels = fs.readdirSync(dir, { recursive: true }).filter((f) => !/^site[\\/]/.test(f) && f.endsWith('.md') &&!f.endsWith('_filtered.md') && fs.readFileSync(path.join(dir, f), 'utf8').trimStart().startsWith('---')).map((f) => f.split(path.sep).join('/').slice(0, -3));
     const ids = rels.map((rel) => rel.split('/').pop());
     assert.ok(ids.length > 0);
     for (const [i, id] of ids.entries()) {
