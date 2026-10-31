@@ -8,9 +8,10 @@ lore: [
     "Department of Archaeology",
     "Tynesdale Academy"
 ]
+generation: tattered
 styles: {
     body: {
-        font: foxcraft_dungeon_loot:textmachine_handwriting
+        font: foxcraft_dungeon_loot:dnealian_script
     }
 }
 ---

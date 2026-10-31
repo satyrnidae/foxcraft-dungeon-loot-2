@@ -411,6 +411,52 @@ function anchorStyles(attrs) {
     return styles;
 }
 
+// The name a heading goes by in a #link: its text in lowercase, every run of other characters one underscore
+const anchorOf = (text) => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '_').replace(/^_+|_+$/g, '');
+const plainOf = (nodes) => nodes.map((part) => (typeof part === 'string' ? part : plainOf(part.content))).join('');
+
+// An object component, a sprite or a head, is 8 pixels wide in a line of text
+const OBJECT_WIDTH = 8;
+
+/**
+ * The component of an inline {{component}} that starts at text[start], the brace of the component itself: JSON or SNBT, braces
+ * balanced outside strings. Returns { component, end } with end past the closing brace, or null when the braces do not close on
+ * the line. A component that is not an object one stops the build, as the layout has no width for it.
+ */
+function readComponent(text, start) {
+    let depth = 0;
+    let quote = null;
+    let end = -1;
+    for (let i = start; i < text.length && text[i] !== '\n'; i++) {
+        const c = text[i];
+        if (quote) {
+            if (c === '\\') i++;
+            else if (c === quote) quote = null;
+        } else if (c === '"' || c === "'") quote = c;
+        else if (c === '{') depth++;
+        else if (c === '}' && --depth === 0) {
+            end = i + 1;
+            break;
+        }
+    }
+    if (end < 0) return null;
+    const source = text.slice(start, end);
+    let component;
+    try {
+        component = JSON.parse(source);
+    } catch {
+        try {
+            component = parseSnbt(source);
+        } catch (e) {
+            throw new Error(`inline component ${source} is not JSON or SNBT: ${e.message}`);
+        }
+    }
+    if (!component || typeof component !== 'object' || Array.isArray(component) || (component.sprite === undefined && component.player === undefined && component.object === undefined)) {
+        throw new Error(`inline component ${source} is an object component, with a sprite or a player; the layout only knows their width`);
+    }
+    return { component, end };
+}
+
 // The click events a link target names besides a bare http or https link: page:3, copy:text, run:command and suggest:command
 const LINK_ACTIONS = { page: 'change_page', copy: 'copy_to_clipboard', run: 'run_command', suggest: 'suggest_command' };
 const LINK_KEYS = { change_page: 'page', copy_to_clipboard: 'value', run_command: 'command', suggest_command: 'command' };
@@ -419,6 +465,12 @@ const LINK_KEYS = { change_page: 'page', copy_to_clipboard: 'value', run_command
 function linkEvent(target) {
     if (target.startsWith('{')) return target;
     if (/^https?:\/\//i.test(target)) return `{action:open_url,url:${JSON.stringify(target)}}`;
+    // #heading is a page link to the page of the heading, its number is set once the pages are cut, see resolveAnchors
+    if (target.startsWith('#')) {
+        const anchor = anchorOf(target.slice(1));
+        if (!anchor) throw new Error(`link target "${target}" has no name for a heading`);
+        return `{action:change_page,page:1,anchor:${JSON.stringify(anchor)}}`;
+    }
     const m = /^(page|copy|run|suggest):([\s\S]*)$/.exec(target);
     if (!m) return undefined;
     const action = LINK_ACTIONS[m[1]];
@@ -592,7 +644,8 @@ function parseInline(text, start, closer, classes = {}) {
             if (!sub.closed) throw new Error(`<${name}> is not closed`);
             flush();
             if (/^h[1-6]$/.test(name)) {
-                content.push({ styles: headerStyles(name, classes), content: sub.content, header: true });
+                // The anchor is in the styles, the pages are cut from the glyphs and a node outside the styles does not survive that. It leaves in toComponent
+                content.push({ styles: { ...headerStyles(name, classes), anchor: anchorOf(plainOf(sub.content)) }, content: sub.content, header: true });
             } else if (name === 'center') {
                 // The center type and the styles of its classes, alignLines aligns every line it is on. Like a block, the newline right
                 // after <center> and the one right before </center> are not lines of their own
@@ -632,6 +685,16 @@ function parseInline(text, start, closer, classes = {}) {
                     i = image.end;
                     continue;
                 }
+            }
+        }
+        if (c === '{' && text[i + 1] === '{') {
+            // {{"sprite":"item/diamond"}} is a component of the game as it is, 8 pixels of padding to the layout
+            const raw = readComponent(text, i + 1);
+            if (raw && text[raw.end] === '}') {
+                flush();
+                content.push({ styles: { ...PAD_STYLES, raw: raw.component }, content: [padding(OBJECT_WIDTH)], literal: true });
+                i = raw.end + 1;
+                continue;
             }
         }
         if (c === '[') {
@@ -691,9 +754,17 @@ function parseInline(text, start, closer, classes = {}) {
 
 const escapePercent = (s) => s.replace(/%/g, '%%');
 
+// An inline {{component}}, with the styles around it that it does not set itself
+function rawComponent(own, around = {}) {
+    const { raw, ...rest } = own;
+    const inherited = Object.fromEntries(Object.entries({ ...around, ...rest }).filter(([k]) => ['color', 'shadow_color'].includes(k)));
+    return { ...inherited, ...JSON.parse(JSON.stringify(raw)) };
+}
+
 // A literal span as a plain text component, the text of the code as it is
 function literalComponent(node, styles = {}) {
     const plain = (nodes) => nodes.map((p) => (typeof p === 'string' ? p : plain(p.content))).join('');
+    if (node.styles && node.styles.raw) return rawComponent(node.styles, styles);
     return { text: plain(node.content), ...styles, ...node.styles };
 }
 
@@ -745,6 +816,9 @@ function groupCode(parts) {
  * A span that holds only one other span is merged into it, so stacked formatting is one component.
  */
 function toComponent(content, key, lang, styles = {}) {
+    // A heading's anchor is only for resolveAnchors, the game would not know the tag
+    if (styles.anchor !== undefined) delete (styles = { ...styles }).anchor;
+    if (content.length === 1 && content[0].styles && content[0].styles.raw) return rawComponent(content[0].styles, styles);
     const parts = [];
     for (const part of content) {
         if (typeof part === 'string') {
@@ -2084,6 +2158,33 @@ function placeOf(file) {
     return { locale: path.basename(localeDir), group: grouped ? path.basename(dir) : null, root: path.dirname(localeDir) };
 }
 
+/**
+ * Sets the page of every #heading link to the first page that has the heading. The link text is the same on every page it
+ * can land on, so this does not move a page break. Each locale resolves against its own headings, a translation names the
+ * heading as it is written there.
+ */
+function resolveAnchors(pages, file) {
+    const where = new Map();
+    const links = [];
+    const walk = (nodes, page) => {
+        for (const part of nodes) {
+            if (typeof part === 'string') continue;
+            const anchor = part.styles && part.styles.anchor;
+            if (anchor && !where.has(anchor)) where.set(anchor, page);
+            const event = part.styles && part.styles.click_event;
+            if (event && event.anchor !== undefined) links.push(event);
+            walk(part.content, page);
+            if (part.alt) walk(part.alt, page);
+        }
+    };
+    pages.forEach((tree, n) => walk(Array.isArray(tree) ? tree : [tree], n + 1));
+    for (const event of links) {
+        if (!where.has(event.anchor)) throw new Error(`${file}: link to #${event.anchor}, no heading of that name; headings are ${[...where.keys()].join(', ') || 'missing'}`);
+        event.page = where.get(event.anchor);
+        delete event.anchor;
+    }
+}
+
 function readSource(file) {
     const { meta, body } = parseFrontmatter(fs.readFileSync(file, 'utf8'));
     const { locale, group, root } = placeOf(file);
@@ -2136,7 +2237,7 @@ const spansOf = (source) => {
     const walk = (nodes) =>
         nodes.forEach((part) => {
             if (typeof part === 'string') return;
-            if (part.id !== undefined && part.id !== WHOLE) out.push(`${part.id}:${JSON.stringify(part.styles)}:${part.alt ? 1 : 0}:${part.literal ? 1 : 0}`);
+            if (part.id !== undefined && part.id !== WHOLE) out.push(`${part.id}:${JSON.stringify(part.styles, (k, v) => (k === 'anchor' || k === 'page' ? undefined : v))}:${part.alt ? 1 : 0}:${part.literal ? 1 : 0}`);
             walk(part.content);
         });
     source.sections.forEach(walk);
@@ -2158,6 +2259,7 @@ function alignSources(files, warnings) {
         else warnings.push(`${files[i]}: the spans are not the ones of ${files[0]}, in the same order, so its pages are not translated`);
     }
     const own = sources.map((source) => source.sections.flatMap((tree) => paginateFit(tree)));
+    for (const i of used) resolveAnchors(own[i], files[i]);
     const count = Math.max(...used.map((i) => own[i].length));
     const langs = used.map(() => ({}));
     const raw = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], false) : null));
@@ -2366,6 +2468,7 @@ function buildWritable(id, source, title, file, warnings) {
 function buildBook(id, file, source = readSource(file)) {
     const warnings = [];
     const { meta } = source;
+    if (!source.union && !isWritable(meta)) resolveAnchors(source.pages, file);
     const pages = source.union ? new Array(source.union.count) : source.pages.map((tree) => variant(tree, false));
     const lang = {};
     const title = titleOf(meta);

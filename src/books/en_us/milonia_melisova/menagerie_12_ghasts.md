@@ -1,8 +1,10 @@
 ---
 title: "Ghasts & Their Lifecycle"
-displayTitle: "Milonia's Mythic Menagerie, Vol. 12: Ghasts & Their Lifecycle"
+displayTitle: "Milonia's Mythic Menagerie, Vol. 12"
 author: Milonia Melisova
 generation: tattered
+lore:
+   "Milonia Melisova presents her latest entry in her Mythic Menagerie: Vol. 12, Ghasts & Their Lifecycle!"
 styles: {
    .title: {
       font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,

@@ -275,7 +275,85 @@ public class BookRender {
         return style.getFont() instanceof FontDescription.Resource r ? r.id().toString() : "minecraft:default";
     }
 
+    /** Object components, a sprite or a head, are 8 pixels of the line. Their images are drawn as they are, not tinted by the text color. */
+    static final Map<String, Glyph> OBJECTS = new HashMap<>();
+    static final Set<BufferedImage> UNTINTED = Collections.newSetFromMap(new IdentityHashMap<>());
+
+    static Glyph objectGlyph(String key, String texture) {
+        return OBJECTS.computeIfAbsent(key, k -> {
+            try (InputStream in = BookRender.class.getResourceAsStream(texture)) {
+                BufferedImage image = in == null ? null : ImageIO.read(in);
+                if (image == null) {
+                    warned.add("object texture " + texture + " is not in the client jar, it draws as a missing glyph, in " + at);
+                    return MISSING;
+                }
+                UNTINTED.add(image);
+                return new Glyph(8, image, 8f / image.getWidth(), 7);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * The skin URL a profile names in its textures property, a base64 JSON the way the game reads it. A profile with only a name
+     * has none, the game would look it up with Mojang, which is not done here.
+     */
+    static String skinUrl(FontDescription.PlayerSprite p) {
+        try {
+            for (var prop : p.profile().partialProfile().properties().get("textures")) {
+                JsonObject skin = JsonParser.parseString(new String(Base64.getDecoder().decode(prop.value()), java.nio.charset.StandardCharsets.UTF_8))
+                    .getAsJsonObject().getAsJsonObject("textures").getAsJsonObject("SKIN");
+                return skin.get("url").getAsString();
+            }
+        } catch (Exception e) { /* a profile without a readable skin */ }
+        return null;
+    }
+
+    /** The skin at a URL, kept in tests/.cache/skins by its name so a rebuild does not fetch it again; null when it cannot be had. */
+    static BufferedImage fetchSkin(String url) {
+        try {
+            Path file = root.resolve("tests/.cache/skins").resolve(url.substring(url.lastIndexOf('/') + 1) + ".png");
+            if (!Files.exists(file)) {
+                var request = java.net.http.HttpRequest.newBuilder(java.net.URI.create(url)).timeout(java.time.Duration.ofSeconds(20)).build();
+                var response = java.net.http.HttpClient.newHttpClient().send(request, java.net.http.HttpResponse.BodyHandlers.ofByteArray());
+                if (response.statusCode() != 200) return null;
+                Files.createDirectories(file.getParent());
+                Files.write(file, response.body());
+            }
+            return ImageIO.read(file.toFile());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /** The head of a player: the face of their skin with the hat layer over it, from the skin the profile names, else Steve's. */
+    static Glyph headGlyph(FontDescription.PlayerSprite p) {
+        String url = skinUrl(p);
+        return OBJECTS.computeIfAbsent("head " + url + " " + p.hat(), k -> {
+            BufferedImage skin = url == null ? null : fetchSkin(url);
+            if (skin == null) {
+                if (url != null) warned.add("skin " + url + " could not be fetched, the head is drawn as Steve, in " + at);
+                try (InputStream in = BookRender.class.getResourceAsStream("/assets/minecraft/textures/entity/player/wide/steve.png")) {
+                    skin = ImageIO.read(in);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            BufferedImage face = new BufferedImage(8, 8, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D fg = face.createGraphics();
+            fg.drawImage(skin.getSubimage(8, 8, 8, 8), 0, 0, null);
+            if (p.hat()) fg.drawImage(skin.getSubimage(40, 8, 8, 8), 0, 0, null);
+            fg.dispose();
+            UNTINTED.add(face);
+            return new Glyph(8, face, 1, 7);
+        });
+    }
+
     static Glyph glyph(int cp, Style style) {
+        if (style.getFont() instanceof FontDescription.PlayerSprite p) return headGlyph(p);
+        if (style.getFont() instanceof FontDescription.AtlasSprite a) return objectGlyph("sprite " + a.spriteId(), "/assets/" + a.spriteId().getNamespace() + "/textures/" + a.spriteId().getPath() + ".png");
+        // Anything else below is a glyph of a font
         FontSet set = font(fontOf(style));
         Glyph g = set.glyph(cp);
         if (g == null) warned.add("U+" + Integer.toHexString(cp) + " is not in font " + fontOf(style) + ", it draws as a missing glyph, in " + at);
@@ -334,6 +412,7 @@ public class BookRender {
     static void draw(Graphics2D g, Glyph glyph, float x, float y, int argb, boolean italic) {
         if (glyph.image() == null) return;
         BufferedImage cell = glyph.image();
+        if (UNTINTED.contains(cell)) argb = 0xffffffff & (argb | 0x00ffffff);
         BufferedImage tinted = new BufferedImage(cell.getWidth(), cell.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int px = 0; px < cell.getWidth(); px++) {
             for (int py = 0; py < cell.getHeight(); py++) {

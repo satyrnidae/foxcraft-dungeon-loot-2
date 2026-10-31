@@ -4,7 +4,7 @@ author: Unknown
 generation: tattered
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:textmachine_handwriting
+    font: foxcraft_dungeon_loot:dnealian_script
   },
   h1: {
     bold: false,
@@ -51,9 +51,9 @@ Toiling Day,
 Weddings Day
 # Vengir, AGA 1369
 
-  Thank you my gods, for the beasts have left… Most of them, at least. I can still hear their grunts and groans below, but I noted the jellyfish moving away through the clouds this morning, pigmen climbing the walls, and magma creatures slinking through the snow toward the gate. O, I hope this has no great effect on the kingdom… And most of all I hop
-that I will be s
-from the be
-belc<style class=".garbled">hes o</style>
+  Thank you my gods, for the beasts have left… Most of them, at least. I can still hear their grunts and groans below, but I noted the jellyfish moving away through the clouds this morning, pigmen climbing the walls, and magma creatures slinking through the snow toward the gate. O, I hope this has no great effect on the kingdom… And most of all I hope that I will be safe fro
+the beast's bel
+of exploaing b
+fire! myste
 <vbottom>
 <style class=".effects">\ue001</style>`-100`pad`-34`pad<style class=".effects">\ue000</style>

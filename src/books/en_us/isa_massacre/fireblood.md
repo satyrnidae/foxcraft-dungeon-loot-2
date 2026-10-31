@@ -3,6 +3,7 @@ title: Fireblood
 author: Isa Massacre
 rarity: common
 lore: A mysterious affliction? Or a curse?
+generation: tattered
 ---
 
 The screams in the next room grew louder.

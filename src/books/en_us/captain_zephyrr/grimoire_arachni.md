@@ -17,7 +17,7 @@ But never 'til the founding days did pale-eyed man come out to stay.
 
 In wonder gazed he at the skies, but never could our glowing orbs be shown this view.
 
-For ages untold we slumbered here, but now we waken and bloated and fat and hungry we grew.
+For ages untold we slumbered here, but now we waken and bloated and fat yet hungry we grew.
 
 Twisted tower, Emerald Parapets, never will we forgive.
 

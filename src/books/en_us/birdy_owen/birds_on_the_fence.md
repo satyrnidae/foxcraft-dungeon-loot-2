@@ -2,7 +2,7 @@
 title: Birds on the Fence
 author: Benny "Birdy" Owen
 rarity: common
-generation: copy
+generation: tattered
 lore:
   A nursery rhyme to be sung by young children. Despite the charged imagery of fence sitting, it's truly not political in nature.
 ---

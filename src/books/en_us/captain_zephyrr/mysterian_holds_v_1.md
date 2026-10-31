@@ -50,7 +50,7 @@ In the following months, the Mayor created a melon farm and a guest house while 
 
 # Thalbodir
 
-Directly down the road leading away from the Foxtrot Mire is Thalbodir Hold. This region is mostly a desert of sand that forms a rise upon which Thalbodir Citadel sits. Beginning as a church that was built over a long period of time by Mayor Boredfox, Shriner of Shriner's Insurance Company, and Chickenny (who was not one of the Founders), Thalbodir Citadel slowly evolved into a thriving, walled town.
+Directly down the road leading away from the Foxtrot Mire is Thalbodir Hold. This region is mostly a desert of sand that forms a rise upon which Thalbodir Citadel sits. Beginning as a church that was built over a long period of time by Mayor Boredfox, H. Shriner of Shriner's Insurance Company, and J. Tivel (who was not one of the Founders), Thalbodir Citadel slowly evolved into a thriving, walled town.
 
 Instead of the normal coarse, sandy ground of the region, Thalbodir sits upon soil and grass. Several of the houses are businesses like the wool shop, the bakery, and the Thalbodir Bank while others may be residential. Twin golems roam the area within the massive Thalbodiri walls, which are a wonderous sight to see.
 <br>

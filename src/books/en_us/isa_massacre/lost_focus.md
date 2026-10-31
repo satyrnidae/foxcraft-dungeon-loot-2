@@ -3,6 +3,7 @@ title: Lost Focus
 author: Isa Massacre
 rarity: common
 lore: A pondering on loss, as it were.
+generation: tattered
 ---
 
 # Lost Focus

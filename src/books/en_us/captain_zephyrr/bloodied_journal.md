@@ -4,13 +4,14 @@ author: Unknown
 generation: tattered
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:textmachine_handwriting
+    font: foxcraft_dungeon_loot:foxcraft_handwriting/regular
   },
   h1: {
     bold: false,
     underlined: true,
     italic: false,
-    align: left
+    align: left,
+    font: foxcraft_dungeon_loot:foxcraft_handwriting/smallcaps
   },
   .effects: {
     color: dark_red,

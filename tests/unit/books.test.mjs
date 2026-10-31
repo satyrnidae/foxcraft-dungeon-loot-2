@@ -1638,3 +1638,54 @@ describe('list items', () => {
     assert.ok(!hangs('1. One\n2. Two').join('').includes('<'));
   });
 });
+
+describe('heading links', () => {
+  const file = path.join(os.tmpdir(), 'anchor_test.md');
+  const build = (body) => {
+    fs.writeFileSync(file, `---\ntitle: Anchors\nauthor: Me\n---\n\n${body}`);
+    return gen.buildBook('t', file);
+  };
+  // Every change_page event of the pages, as its number
+  const pagesLinked = (book) => {
+    const out = [];
+    const walk = (node) => {
+      if (Array.isArray(node)) node.forEach(walk);
+      else if (node && typeof node === 'object') {
+        if (node.click_event && node.click_event.action === 'change_page') out.push(node.click_event.page);
+        Object.values(node).forEach(walk);
+      }
+    };
+    walk(book.modifier.functions[0].components['minecraft:written_book_content'].pages);
+    return out;
+  };
+
+  it('points #name at the page of the heading with that name', () => {
+    const book = build('[Go](#brewing_stands) and [again](#Brewing-Stands)\n\n<br>\n\n## Intro\n\nText\n\n<br>\n\n## Brewing Stands\n\nMore');
+    assert.deepEqual(pagesLinked(book), [3, 3]);
+    assert.ok(!JSON.stringify(book.modifier).includes('anchor'));
+  });
+
+  it('fails on a link to a heading that is not there', () => {
+    assert.throws(() => build('[Go](#nowhere)\n\n## Somewhere'), /no heading of that name/);
+  });
+});
+
+describe('inline components', () => {
+  const component = (text) => gen.toComponent(gen.applyKerning(gen.pagesOf(text)[0]), 'k', {});
+
+  it('puts {{component}} in the text as a component of its own, 8 pixels wide', () => {
+    assert.deepEqual(component('Take {{"sprite":"item/diamond"}} now'), {
+      translate: 'k',
+      fallback: 'Take %1$s now',
+      with: [{ sprite: 'item/diamond' }],
+    });
+    assert.deepEqual(component('{{"player":{"name":"Steve"}}}'), { player: { name: 'Steve' } });
+    const { lines } = gen.layout(gen.pagesOf('{{"sprite":"a"}}'.repeat(24))[0]);
+    assert.equal(lines[0].tend - lines[0].tstart, 14);
+  });
+
+  it('leaves an unclosed {{ as text and rejects a component that is not an object one', () => {
+    assert.deepEqual(gen.pagesOf('a {{ b')[0], ['a {{ b']);
+    assert.throws(() => gen.pagesOf('{{"text":"x"}}'), /object component/);
+  });
+});

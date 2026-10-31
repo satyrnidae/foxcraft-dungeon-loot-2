@@ -1,8 +1,9 @@
 ---
 title: "Trolls & Where to Find Them"
-displayTitle: "Milonia's Mythic Menagerie, Vol. 6: Trolls & Where to Find Them"
+displayTitle: "Milonia's Mythic Menagerie, Vol. 6"
 author: Milonia Melisova
-lore: An expoundment on the theoretical biology of a creature born from stone.
+lore:
+   "Milonia Melisova presents her bestselling entry in her Mythic Menagerie: Vol. 6, Trolls & Where to Find Them!"
 generation: tattered
 styles: {
    .title: {
