@@ -56,6 +56,7 @@ const { withNamespace, DEFAULT_FONT } = require('../fonts/fonts.js');
 const { highlight } = require('./highlight.js');
 const { FONTS, LORE_WIDTH, LORE_PIXELS, loreWidth, componentWidth, reflowLore, UNSPACED } = require('../lore/lore.js');
 const { musicLines, FONT: MUSIC_FONT } = require('../music/music.js');
+const COVER = require('../fonts/cover_to_font.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
@@ -412,7 +413,7 @@ function anchorStyles(attrs) {
 }
 
 // The name a heading goes by in a #link: its text in lowercase, every run of other characters one underscore
-const anchorOf = (text) => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '_').replace(/^_+|_+$/g, '');
+const anchorOf = (text) => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '');
 const plainOf = (nodes) => nodes.map((part) => (typeof part === 'string' ? part : plainOf(part.content))).join('');
 
 // An object component, a sprite or a head, is 8 pixels wide in a line of text
@@ -586,6 +587,25 @@ function fontStyles(attrs) {
  * Parses inline markdown into a tree: an array of strings and { styles, content } nodes. Parses on to the closer when given
  * and reports whether it was found; an opener without a closer stays literal.
  */
+/**
+ * Splits the content of a link label at its first pipe, Obsidian style: [hover|text]. Only the plain text of the label counts,
+ * a pipe inside a code span or an object is not one. Returns { shown, hover }, with hover undefined when there is no pipe or
+ * nothing left of it.
+ */
+function splitPipe(content) {
+    const at = content.findIndex((part) => typeof part === 'string' && part.includes('|'));
+    if (at < 0) return { shown: content, hover: undefined };
+    const cut = content[at].indexOf('|');
+    const hover = plainOf([...content.slice(0, at), content[at].slice(0, cut)]).trim();
+    const shown = [content[at].slice(cut + 1).replace(/^ +/, ''), ...content.slice(at + 1)].filter((part) => part !== '');
+    return { shown, hover: hover || undefined };
+}
+
+// Whether nothing but opening tags comes before index i on its line, as the start of a header or a <center>, which write no text
+function firstOnLine(text, i) {
+    return /^(<[a-z][^>]*>)*$/i.test(text.slice(text.lastIndexOf('\n', i - 1) + 1, i));
+}
+
 function parseInline(text, start, closer, classes = {}) {
     const content = [];
     let buffer = '';
@@ -627,7 +647,7 @@ function parseInline(text, start, closer, classes = {}) {
                 // is code and the word padding. What follows the type stays text, a space only for the types of INLINE_EATS_SPACE
                 const typed = /^([a-z]+)(?![a-zA-Z0-9])/.exec(text.slice(close + 1));
                 if (typed && Object.hasOwn(INLINE_TYPES, typed[1])) {
-                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close), classes));
+                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close), classes, firstOnLine(text, i)));
                     i = close + 1 + typed[0].length + (INLINE_EATS_SPACE.has(typed[1]) && text[close + 1 + typed[0].length] === ' ' ? 1 : 0);
                     continue;
                 }
@@ -707,8 +727,12 @@ function parseInline(text, start, closer, classes = {}) {
                     if (click === undefined) throw new Error(`link target "${link.target}" is an http or https link, page:N, copy:text, run:command, suggest:command or an event in braces`);
                     flush();
                     const styles = { ...classes.a, click_event: eventFrom(click) };
-                    if (link.hover !== undefined) styles.hover_event = eventFrom(`{action:show_text,value:${JSON.stringify(link.hover)}}`);
-                    content.push({ styles, content: label.content });
+                    // [hover|text](target): the first pipe in the text of the label splits it, the left side is the hover and the right
+                    // the text shown. It wins over a "hover" after the target, and no pipe leaves the label as it is
+                    const { shown, hover } = splitPipe(label.content);
+                    const text_ = hover !== undefined ? hover : link.hover;
+                    if (text_ !== undefined) styles.hover_event = eventFrom(`{action:show_text,value:${JSON.stringify(text_)}}`);
+                    content.push({ styles, content: shown });
                     i = link.end;
                     continue;
                 }
@@ -855,10 +879,10 @@ function toComponent(content, key, lang, styles = {}) {
 function glyphs(...args) {
     return shapeGlyphs(rawGlyphs(...args));
 }
-function rawGlyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = null, lead = null) {
+function rawGlyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = null, lead = null, heading = false) {
     return content.flatMap((p) => {
-        if (typeof p === 'string') return [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead }));
-        const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead);
+        if (typeof p === 'string') return [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead, heading }));
+        const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead, heading || p.header === true);
         if (p.alt && inner.length) reserveRoom(inner, p, bold, font);
         return inner;
     });
@@ -1386,9 +1410,68 @@ function tallyNodes(count, classes = {}) {
     return nodes;
 }
 
+// A line of the cover of the book screen, cut from texturepack/assets/foxcraft_dungeon_loot/textures/gui/cover.png into the font of cover.json
+// by scripts/fonts/cover_to_font.js. A line is two glyphs: the body from the left of the text to the right edge of the art, and a
+// strip of the art left of the text. The game keeps the first glyph of a line however wide it is, and breaks the line at any other glyph
+// that takes it past the width of the page, so the body, which reaches 17 pixels over the width, has to come first, and the strip is
+// drawn after a step back. The text of the line is written after the nodes and draws over the cover, the nodes end where they start.
+const COVER_FONT = `${NS}:cover`;
+const COVER_STYLES = { font: COVER_FONT, bold: false, italic: false, underlined: false, strikethrough: false, obfuscated: false, color: 'white' };
+// Padding of any width, in steps the padding font has glyphs for
+function longPadding(px) {
+    let out = '';
+    while (px) {
+        const step = Math.max(-127, Math.min(127, px));
+        out += signedPadding(step);
+        px -= step;
+    }
+    return out;
+}
+function coverNodes(source, atLineStart) {
+    const n = parseNumber(source);
+    if (n === undefined || n < 0 || n >= COVER.LINES) throw new Error(`\`${source}\`cover is not a line of the cover, 0 to ${COVER.LINES - 1}`);
+    if (!atLineStart) throw new Error(`\`${source}\`cover has to be first on its line, the game breaks a line at a glyph that is not, if it takes the line past its width`);
+    const right = FONTS.widthOf(COVER_FONT, COVER.RIGHT(n), false);
+    const left = FONTS.widthOf(COVER_FONT, COVER.LEFT_GLYPH(n), false);
+    const pad = (px) => ({ styles: PAD_STYLES, content: [longPadding(px)] });
+    return [
+        { styles: COVER_STYLES, content: [COVER.RIGHT(n)] },
+        pad(-(right + COVER.LEFT)),
+        { styles: COVER_STYLES, content: [COVER.LEFT_GLYPH(n)] },
+        pad(COVER.LEFT - left),
+    ].filter((node) => node.content[0] !== '');
+}
+
+// The lines of the cover reach over the lines above them, the first up over the margin of the page, which is no text to make room for
+const baseAscentOf = FONTS.ascentOf;
+FONTS.ascentOf = (font, ch) => (font === COVER_FONT ? 0 : baseAscentOf(font, ch));
+
+// A potion icon in the font of potion.json, 8x8 like an object component: the bottle of the type in white, then a step back
+// as wide as the bottle with its kerning, then the overlay in the color, which is the liquid the bottle shows through.
+const POTION_FONT = `${NS}:potion`;
+const POTION_STYLES = { font: POTION_FONT, bold: false, underlined: false, strikethrough: false, obfuscated: false };
+const POTION_OVERLAY = '';
+const POTION_BOTTLES = { normal: '', splash: '', lingering: '' };
+
+// The nodes of a `type color`potion: the type is normal, splash or lingering, the color a built-in name or #rrggbb
+function potionNodes(source) {
+    const [type, color, ...rest] = source.trim().split(/\s+/);
+    if (!Object.hasOwn(POTION_BOTTLES, type) || !color || rest.length) {
+        throw new Error(`\`${source}\`potion is not a type and a color, as \`splash red\`potion; the types are ${Object.keys(POTION_BOTTLES).join(', ')}`);
+    }
+    const bottle = POTION_BOTTLES[type];
+    return [
+        { styles: { ...POTION_STYLES, color: 'white' }, content: [bottle] },
+        { styles: PAD_STYLES, content: [signedPadding(-FONTS.widthOf(POTION_FONT, bottle, false))] },
+        { styles: { ...POTION_STYLES, color: parseColor(color) }, content: [POTION_OVERLAY] },
+    ];
+}
+
 // The types of inline code, by the word after its closing backtick, each giving the nodes that stand for the code.
-// `n`pad is n pixels of padding, negative to step back. `n`tally is n tallies, see tallyNodes.
+// `n`pad is n pixels of padding, negative to step back. `n`tally is n tallies, see tallyNodes. `type color`potion is a potion icon.
 const INLINE_TYPES = {
+    potion: (code) => potionNodes(code),
+    cover: (code, classes, atLineStart) => coverNodes(code, atLineStart),
     pad: (code) => {
         const width = padWidth(code);
         return width ? [{ styles: PAD_STYLES, content: [signedPadding(width)] }] : [];
@@ -1397,7 +1480,7 @@ const INLINE_TYPES = {
     drop: (code, classes) => dropCapNodes(code, classes),
 };
 // The types that take one space after them with them, as `n`pad does; the others leave it in the text
-const INLINE_EATS_SPACE = new Set(['pad', 'drop']);
+const INLINE_EATS_SPACE = new Set(['pad', 'drop', 'cover']);
 
 // `T`drop is a drop cap, the text of the code in the font of the drop style of the stylesheet. Its place on the first line is
 // padding as wide as the cap, measured from the font, and applyDropCaps moves the cap itself to the start of the second line, once
@@ -1421,6 +1504,20 @@ const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Scrip
 // Kerning that pulls the next glyph closer is a backwards padding after the glyph, so the game's line is as wide as the glyph
 // before that padding, a pixel more than the widths here, which fold it in. The splitter wraps at that peak, so the peak counts
 // too, or a line aligned to fit the page exactly loses its last glyph to a wrap.
+// How many glyphs at the start of a line are the nodes of a `n`cover: the body glyph, the step back, the strip and the step that
+// returns to the start of the line, 0 for a line that does not start with the cover
+function coverPrefix(text) {
+    if (!text.length || text[0].font !== COVER_FONT) return 0;
+    let x = 0;
+    for (let n = 0; n < text.length; n++) {
+        const g = text[n];
+        if (g.font !== COVER_FONT && g.font !== PAD_FONT) return 0;
+        x += g.sw ?? widthOf(g);
+        if (x === 0 && n > 0) return n + 1;
+    }
+    return 0;
+}
+
 function reach(text) {
     let x = 0;
     let far = 0;
@@ -1450,10 +1547,14 @@ function alignLines(content, rtl = false) {
     const tree = JSON.parse(JSON.stringify(content));
     const { lines, chars } = layout(tree, rtl);
     for (const line of [...lines].reverse()) {
-        const text = chars.slice(line.tstart, line.tend);
+        const whole = chars.slice(line.tstart, line.tend);
+        // The line of a cover starts with the glyphs of the cover and padding that steps back to where the line began, which have to stay
+        // first and are no width of the text: it is aligned from what comes after them
+        const lead = coverPrefix(whole);
+        const text = whole.slice(lead);
         if (!text.length) continue;
         const written = text[0].lead ?? text.find((g) => g.center)?.center ?? null;
-        const laidOut = text.some((g) => g.font === PAD_FONT || g.font === TALLY_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
+        const laidOut = text.some((g) => g.font === PAD_FONT || g.font === TALLY_FONT || g.font === POTION_FONT || g.font === COVER_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
         const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
         if (align === 'left') continue;
         const room = PAGE_WIDTH - reach(text);
@@ -1469,7 +1570,9 @@ function alignLines(content, rtl = false) {
         // Where the two differ the padding is a filter span of its own: the filtered reading shows the other one
         const node = JSON.stringify(raw) === JSON.stringify(filtered) ? raw : { styles: {}, content: [raw], alt: [filtered] };
         if (pad && reads && !insertAt(tree, chars[line.tend - 1].place + 1, [node])) tree.push(node);
-        const parts = [...(line.soft ? ['\n'] : []), ...(pad && !reads ? [node] : [])];
+        // The padding goes after the cover, at the start of the text; the end of a line before is a newline, which goes first
+        const parts = [...(line.soft ? ['\n'] : []), ...(pad && !reads && !lead ? [node] : [])];
+        if (pad && !reads && lead) insertAt(tree, chars[line.tstart + lead].place, [node]);
         if (parts.length) insertAt(tree, chars[line.tstart].place, parts);
     }
     return unwrapAlign(tree);
@@ -1559,7 +1662,7 @@ function pageRanges(pager) {
     for (let at = pager.first(0); at < pager.lines.length; ) {
         let end = Math.min(at + PAGE_LINES, pager.lines.length);
         // The empty lines above a tall line go to the next page with it
-        while (end > at + 1 && pager.splitsReserve(end)) end--;
+        while (end > at + 1 && (pager.splitsReserve(end) || pager.splitsHeading(end, at))) end--;
         ranges.push([at, end]);
         at = pager.first(end);
     }
@@ -1599,7 +1702,29 @@ function pagerOf(content, ascentOf = (font, ch) => FONTS.ascentOf(font, ch)) {
         const need = linesAbove(Math.max(...chars.slice(lines[next].tstart, lines[next].tend).filter((g) => g.ch !== ' ').map((g) => ascentOf(g.font, g.ch)), 0));
         return next - to < need;
     };
-    return { lines, chars, empty, first, slice, splitsReserve };
+    // Whether a heading is inked on the line: a # header has glyphs marked heading and nothing else but spaces and the padding that centers it
+    const isHeading = (n) => {
+        if (empty(n)) return false;
+        const line = chars.slice(lines[n].tstart, lines[n].tend);
+        return line.some((g) => g.heading) && line.every((g) => g.ch === ' ' || g.heading || g.font === PAD_FONT);
+    };
+    // Whether a page from line `from` that ends before line `to` ends on a heading with its text on the next page: the last lines of
+    // the page are headings and the empty lines under them, and something follows. A heading goes to the next page with the
+    // first line of its paragraph, or with its subheading and that line, unless that would leave the page with nothing but headings
+    const splitsHeading = (to, from) => {
+        if (to <= from || to >= lines.length) return false;
+        let next = to;
+        while (next < lines.length && empty(next)) next++;
+        if (next === lines.length) return false;
+        let k = to - 1;
+        let heading = false;
+        while (k >= from && (empty(k) || isHeading(k))) {
+            if (!empty(k)) heading = true;
+            k--;
+        }
+        return heading && k >= from;
+    };
+    return { lines, chars, empty, first, slice, splitsReserve, splitsHeading };
 }
 
 // Where the spans of a tree start and end, in glyph places and in the order they come. The padding of <center> is left
@@ -1668,7 +1793,7 @@ function paginateTogether(contents, ascentOf = (font, ch) => FONTS.ascentOf(font
             for (let to = at[i] + 1; to <= Math.min(at[i] + PAGE_LINES, a.pager.lines.length); to++) {
                 const cut = cutOf(a, at[i], to);
                 // The chat-filtered reading of the page has to fit too, an alt can be longer than its text
-                if (cut && !a.pager.splitsReserve(to) && layout(variant(a.pager.slice(at[i], to), true)).lines.length <= PAGE_LINES) list.push(cut);
+                if (cut && !a.pager.splitsReserve(to) && !a.pager.splitsHeading(to, at[i]) && layout(variant(a.pager.slice(at[i], to), true)).lines.length <= PAGE_LINES) list.push(cut);
             }
             return list;
         });
@@ -1705,7 +1830,7 @@ function fitRanges(pager) {
     const ranges = [];
     for (let at = pager.first(0); at < pager.lines.length; ) {
         const fits = (to) => {
-            if (pager.splitsReserve(to)) return false;
+            if (pager.splitsReserve(to) || pager.splitsHeading(to, at)) return false;
             const page = pager.slice(at, to);
             // A page edge inside a filter span would leave the span unfiltered
             return !page || (!hasCut(page) && layout(variant(page, true)).lines.length <= PAGE_LINES);
@@ -1766,7 +1891,9 @@ function unionComponent(contents, key, langs, ref) {
             const node = found[ref] || found.find(Boolean);
             if (node.literal) return literalComponent(node);
             const child = unionComponent(found.map((f) => f && f.content), `${key}.${n + 1}`, langs, ref);
-            return Object.assign(child, node.styles);
+            // The anchor of a heading is only for resolveAnchors, as in toComponent
+            const { anchor, ...styles } = node.styles;
+            return Object.assign(child, styles);
         });
     }
     return component;
@@ -1883,6 +2010,8 @@ function splitOnBreaks(body) {
 }
 
 // A --- line, or one inside a <style>, at the start of the text: what a heading may sit directly on
+// A # header that starts with a line of the cover: the empty line a header gets has no piece of the cover, and shifts the lines under it
+const COVER_HEADING = /^#{1,6}\s+`[^`\n]*`cover(?![a-zA-Z0-9])/;
 const HORIZONTAL_LINE_NEXT = /^(---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/;
 
 function splitSections(body) {
@@ -1891,12 +2020,46 @@ function splitSections(body) {
             fenceCode(section.split('\n'))
                 .map((line) => line.replace(/\s+$/, ''))
                 // A heading is bold and underlined and always has an empty line under it, unless a horizontal line comes right after it
-                .flatMap((line, n, lines) => (/^#{1,6}\s+/.test(line) ? [line.replace(/^(#{1,6})\s+(.*)$/, (_, hashes, text) => `<h${hashes.length}>${text}</h${hashes.length}>`), ...(lines[n + 1] === '' || HORIZONTAL_LINE_NEXT.test(lines.slice(n + 1, n + 4).join('\n')) ? [] : [''])] : [line]))
+                .flatMap((line, n, lines) => (/^#{1,6}\s+/.test(line) ? [line.replace(/^(#{1,6})\s+(.*)$/, (_, hashes, text) => `<h${hashes.length}>${text}</h${hashes.length}>`), ...(lines[n + 1] === '' || COVER_HEADING.test(line) || HORIZONTAL_LINE_NEXT.test(lines.slice(n + 1, n + 4).join('\n')) ? [] : [''])] : [line]))
                 .join('\n')
                 // The line break that ends the --- line goes, the empty lines after it are paginate's to keep or drop
                 .replace(/^\n|\n+$/g, '')
         )
         .filter(Boolean);
+}
+
+/**
+ * Keeps the start of a link together: the game breaks a line at a space only, so the spaces in the first quarter of the width of
+ * a link become no-break spaces. A link that has to wrap then wraps where it has already shown most of itself, and never leaves its
+ * icon, or an icon and a short word, alone at the end of a line. The rest of the link wraps like any text. The no-break space
+ * is a pixel wider than a space in the default font, the layout measures the text as it is. base is the style of the whole
+ * text, for the font a link inherits. Returns a copy of the tree.
+ */
+const LINK_BIND = 0.25;
+function bindLinks(content, base = {}, bold = base.bold === true, font = base.font ? withNamespace(base.font) : DEFAULT_FONT) {
+    return content.map((part) => {
+        if (typeof part === 'string' || part.literal) return part;
+        const inBold = part.styles.bold === undefined ? bold : part.styles.bold === true;
+        const inFont = part.styles.font ? withNamespace(part.styles.font) : font;
+        if (!part.styles.click_event) return { ...part, content: bindLinks(part.content, base, inBold, inFont), ...(part.alt ? { alt: bindLinks(part.alt, base, inBold, inFont) } : {}) };
+        const list = glyphs([part], bold, font);
+        const total = list.reduce((sum, g) => sum + (g.sw ?? widthOf(g)), 0);
+        const bind = new Set();
+        let x = 0;
+        list.forEach((g, n) => {
+            if (g.ch === ' ' && x < total * LINK_BIND) bind.add(n);
+            x += g.sw ?? widthOf(g);
+        });
+        if (!bind.size) return part;
+        // The glyphs are the characters of the content in order, the alt of a filter has none of its own
+        let n = 0;
+        const walk = (parts, literal) =>
+            parts.map((p) => {
+                if (typeof p !== 'string') return { ...p, content: walk(p.content, literal || p.literal === true) };
+                return [...p].map((ch) => (n++, ch === ' ' && !literal && bind.has(n - 1) ? '\u00a0' : ch)).join('');
+            });
+        return { ...part, content: walk(part.content, false) };
+    });
 }
 
 // Every page of the body, a list of trees. Sections fill pages on their own, 14 lines each. A font wraps the whole text,
@@ -2120,7 +2283,7 @@ function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = 
         const whole = Object.keys(base).length ? [{ id: WHOLE, styles: base, content }] : content;
         // Right to left lines are aligned to the right by alignLines, a hanging indent would be on the wrong side
         const hung = (c) => (rtl ? c : hangLists(c));
-        const tree = reserveTall(applyDropCaps(unwrapNoHyphen(hung(hyphenate(whole, hyphenator)))));
+        const tree = reserveTall(applyDropCaps(unwrapNoHyphen(hung(hyphenate(bindLinks(whole, base), hyphenator)))));
         const wrapped = hardWrap(tree);
         const laidOut = align ? alignLines(wrapped, rtl) : unwrapAlign(wrapped);
         // A book and quill has no padding glyphs to hold the empty lines
@@ -2165,14 +2328,15 @@ function placeOf(file) {
  */
 function resolveAnchors(pages, file) {
     const where = new Map();
-    const links = [];
+    // A set: a click event shared by several nodes of one link is resolved once, its anchor is gone after that
+    const links = new Set();
     const walk = (nodes, page) => {
         for (const part of nodes) {
             if (typeof part === 'string') continue;
             const anchor = part.styles && part.styles.anchor;
             if (anchor && !where.has(anchor)) where.set(anchor, page);
             const event = part.styles && part.styles.click_event;
-            if (event && event.anchor !== undefined) links.push(event);
+            if (event && event.anchor !== undefined) links.add(event);
             walk(part.content, page);
             if (part.alt) walk(part.alt, page);
         }

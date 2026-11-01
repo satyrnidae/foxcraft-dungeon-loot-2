@@ -59,5 +59,29 @@
    "7": "░╢╖╣║╗╝╜∅⌠",
    "8": "▒▓└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┌█▄▐▀"
   }
+ },
+ "minecraft:item/potion_overlay.png": {
+  "cellH": 16,
+  "pixels": {
+   "12": ""
+  }
+ },
+ "minecraft:item/potion.png": {
+  "cellH": 16,
+  "pixels": {
+   "13": ""
+  }
+ },
+ "minecraft:item/splash_potion.png": {
+  "cellH": 16,
+  "pixels": {
+   "13": ""
+  }
+ },
+ "minecraft:item/lingering_potion.png": {
+  "cellH": 16,
+  "pixels": {
+   "13": ""
+  }
  }
 }

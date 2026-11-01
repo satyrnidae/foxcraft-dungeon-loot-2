@@ -781,6 +781,119 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.throws(() => gen.parseInline(`${tick}T${tick}drop x`, 0, null, {}), /drop style with a font/);
   });
 
+  it('inline code with cover after it is a line of the cover, which has to be first on its line', () => {
+    const tick = String.fromCharCode(96);
+    const cover = (text) => gen.parseInline(text, 0, null).content;
+    const codes = (nodes) => nodes.map((n) => (typeof n === 'string' ? n : [...n.content[0]].map((c) => c.charCodeAt(0).toString(16)).join(' ')));
+    // The body glyph first, a step back of its 131 and the 16 of the art left of the text, the strip, and back to the start
+    assert.deepEqual(codes(cover(`${tick}3${tick}cover Title`)), ['e003', 'f8c0 f8a0 f890 f888 f884 f882 f881 f890 f884', 'e013', 'f881', 'Title']);
+    assert.equal(codes(cover(`${tick}0${tick}cover`))[0], 'e000');
+    assert.equal(codes(cover(`${tick}13${tick}cover`))[0], 'e00d');
+    assert.throws(() => cover(`${tick}14${tick}cover`), /not a line of the cover/);
+    assert.throws(() => cover(`x ${tick}3${tick}cover`), /first on its line/);
+    // A line after a newline is first on it
+    assert.equal(cover(`x\n${tick}3${tick}cover`).length > 1, true);
+  });
+
+  it('a cover line can be the start of a heading, which a link can go to', () => {
+    const tick = String.fromCharCode(96);
+    // Opening tags before it write no text, so it is first on its line
+    const book = (body) => gen.pagesOf(body);
+    assert.doesNotThrow(() => book(`<h1>${tick}3${tick}cover Title</h1>\nnext`));
+    assert.doesNotThrow(() => book(`<center class="h1">${tick}3${tick}cover Title</center>`));
+    assert.throws(() => book(`x <h1>${tick}3${tick}cover Title</h1>`), /first on its line/);
+    // The heading is named by its text alone, the cover glyphs and their padding are no letters
+    assert.doesNotThrow(() => gen.sectionsOf(`<h1>${tick}3${tick}cover Title</h1>\n[Go](#title)`));
+  });
+
+  it('a # header that starts with a cover line gets no empty line under it', () => {
+    const tick = String.fromCharCode(96);
+    const lines = (body) => gen.pagesOf(body)[0].flatMap(function flat(p) { return typeof p === 'string' ? [p] : p.content.flatMap(flat); }).join('').split('\n').length;
+    // The header line and the line after it, two lines, where a plain header has an empty line between them and makes three
+    assert.equal(lines(`# ${tick}1${tick}cover Title\n${tick}2${tick}cover next`), 2);
+    assert.equal(lines('# plain\nnext'), 3);
+  });
+
+  it('centers the text of a cover line from after the cover, which stays first on the line', () => {
+    const tick = String.fromCharCode(96);
+    const flat = [];
+    const walk = (nodes) => nodes.forEach((p) => (typeof p === 'string' ? flat.push(p) : walk(p.content)));
+    walk(gen.pagesOf(`${tick}3${tick}cover <center>Hi</center>`)[0]);
+    // The cover glyph is the first of the line, the padding that centers "Hi" comes after the cover's own step back, before the text
+    assert.equal(flat[0], '\ue003');
+    assert.equal(flat[flat.length - 1], 'Hi');
+    assert.ok(/^[\uf800-\uf8ff]+$/.test(flat[flat.length - 2]), flat[flat.length - 2]);
+  });
+
+  it('keeps a heading with the first line of its text, or with its subheadings, across a page break', () => {
+    const text = (tree) => {
+      const out = [];
+      const walk = (nodes) => nodes.forEach((p) => (typeof p === 'string' ? out.push(p) : walk(p.content)));
+      walk(tree);
+      return out.join('').replace(/[\uf800-\uf8ff]/g, '');
+    };
+    const rows = Array.from({ length: 12 }, (_, i) => `line ${i + 1}`).join('\n');
+    // 12 lines, an empty one and the heading fill a page: the heading would end it, so it goes to the next page with its text
+    const heading = gen.pagesOf(`${rows}\n\n# Head\n\ntext after`);
+    assert.equal(heading.length, 2);
+    assert.ok(text(heading[1]).startsWith('Head'), text(heading[1]));
+    assert.ok(!text(heading[0]).includes('Head'));
+    // A subheading and the heading above it go together
+    const chain = gen.pagesOf(`${rows}\n\n# Head\n\n## Sub\n\ntext after`);
+    assert.ok(text(chain[1]).startsWith('Head\n\nSub'), text(chain[1]));
+    // A heading with its text on the page stays where it is
+    const fits = gen.pagesOf(`${rows.split('\n').slice(0, 8).join('\n')}\n\n# Head\n\ntext after`);
+    assert.equal(fits.length, 1);
+    // A <br> ends the page wherever it is, the heading before it has nothing to go with
+    const forced = gen.sectionsOf(`${rows}\n\n# Head\n<br>\ntext after`).flatMap((tree) => gen.paginate(tree));
+    assert.ok(text(forced[0]).includes('Head'), text(forced[0]));
+  });
+
+  it('keeps the start of a link on one line, the first quarter of its width', () => {
+    const body = (text) => JSON.stringify(gen.pagesOf(text)[0]);
+    const nbsp = ' ';
+    // The space after the icon is a no-break space, the later ones wrap like any text
+    const linked = body('see [{{"sprite":"item/redstone"}} Lingering Water Bottles](https://example.com) now');
+    assert.ok(linked.includes(nbsp + 'Lingering Water Bottles'), linked);
+    // A short word does not leave its icon, but only the first quarter of the link is held together
+    const long = body('[Alpha Beta Gamma Delta Epsilon Zeta](https://example.com)');
+    assert.ok(long.includes('Alpha' + nbsp + 'Beta Gamma'), long);
+    assert.ok(!long.includes('Gamma' + nbsp), long);
+    // Text that is not a link keeps its spaces
+    assert.equal(body('Alpha Beta').includes(nbsp), false);
+  });
+
+  it('splits a link label at its first pipe into the hover and the text shown', () => {
+    const link = (text) => gen.parseInline(text, 0, null).content[0];
+    const piped = link('[Opens the wiki|**Fire** Sword](https://example.com)');
+    assert.deepEqual(piped.styles.hover_event, { action: 'show_text', value: 'Opens the wiki' });
+    assert.equal(piped.content.map((p) => (typeof p === 'string' ? p : p.content.join(''))).join(''), 'Fire Sword');
+    // No pipe leaves no hover, and a pipe wins over a "hover" after the target
+    assert.equal(link('[Plain](https://example.com)').styles.hover_event, undefined);
+    assert.equal(link('[a|b](https://example.com "old")').styles.hover_event.value, 'a');
+    assert.equal(link('[Plain](https://example.com "old")').styles.hover_event.value, 'old');
+    // Only the first pipe splits
+    assert.deepEqual(link('[h|a|b](https://example.com)').content, ['a|b']);
+  });
+
+  it('inline code with potion after it is a potion icon: the bottle, a step back, then the overlay in the color', () => {
+    const tick = String.fromCharCode(96);
+    const potion = (code) => gen.parseInline(`${tick}${code}${tick}potion`, 0, null).content;
+    const codes = (nodes) => nodes.map((n) => [...n.content[0]].map((c) => c.charCodeAt(0).toString(16)).join(' '));
+    // The bottle is 8 wide with the 2 of kerning on it, so the step back is 9 (f888 + f881)
+    assert.deepEqual(codes(potion('normal red')), ['e001', 'f888 f881', 'e000']);
+    assert.equal(codes(potion('splash red'))[0], 'e002');
+    assert.equal(codes(potion('lingering red'))[0], 'e003');
+    const [bottle, , overlay] = potion('splash #ff8800');
+    assert.equal(bottle.styles.color, 'white');
+    assert.equal(overlay.styles.color, '#ff8800');
+    assert.equal(potion('normal dark_aqua')[2].styles.color, 'dark_aqua');
+    // The text after it stays text, and the type and the color are both needed
+    assert.deepEqual(gen.parseInline(`${tick}normal red${tick}potion.`, 0, null).content.slice(-1), ['.']);
+    for (const bad of ['red', 'normal', 'fizzy red', 'normal red blue']) assert.throws(() => potion(bad), /potion is not a type and a color/);
+    assert.throws(() => potion('normal chartreuse'), /unknown color/);
+  });
+
   it('inline code with tally after it is tally marks in groups of five', () => {
     const tick = String.fromCharCode(96);
     const tally = (n) => gen.parseInline(`${tick}${n}${tick}tally`, 0, null).content;
@@ -1660,7 +1773,7 @@ describe('heading links', () => {
   };
 
   it('points #name at the page of the heading with that name', () => {
-    const book = build('[Go](#brewing_stands) and [again](#Brewing-Stands)\n\n<br>\n\n## Intro\n\nText\n\n<br>\n\n## Brewing Stands\n\nMore');
+    const book = build('[Go](#brewing-stands) and [again](#Brewing_Stands)\n\n<br>\n\n## Intro\n\nText\n\n<br>\n\n## Brewing Stands\n\nMore');
     assert.deepEqual(pagesLinked(book), [3, 3]);
     assert.ok(!JSON.stringify(book.modifier).includes('anchor'));
   });

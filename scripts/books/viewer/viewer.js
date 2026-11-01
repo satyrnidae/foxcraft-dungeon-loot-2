@@ -125,11 +125,15 @@ function show(book, page, replace) {
   const filteredHas = (n) => useFiltered && n <= book.filteredPages;
   $('page').src = fileOf(book, pageName(open.page), filteredHas(open.page));
   $('page-count').textContent = `Page ${open.page} of ${book.pages}`;
-  setSlider(book.pages, open.page, new Set(useFiltered ? [...book.filteredHeadings, ...book.headings.filter((n) => n > book.filteredPages)] : book.headings));
+  const headings = new Map(useFiltered ? [...book.filteredHeadings, ...book.headings.filter(([n]) => n > book.filteredPages)] : book.headings);
+  open.headings = headings;
+  setSlider(book.pages, open.page, headings);
   $('prev').disabled = open.page <= 1;
   $('next').disabled = open.page >= book.pages;
-  $('first').disabled = $('prev').disabled;
-  $('last').disabled = $('next').disabled;
+  $('start').disabled = $('prev').disabled;
+  $('end').disabled = $('next').disabled;
+  $('chapter-prev').disabled = chapterPage(-1) === null;
+  $('chapter-next').disabled = chapterPage(1) === null;
   showLinks(book, open.page, filteredHas(open.page));
   for (const n of [open.page - 1, open.page + 1]) {
     if (n >= 1 && n <= book.pages) new Image().src = fileOf(book, pageName(n), filteredHas(n));
@@ -139,8 +143,26 @@ function show(book, page, replace) {
   if (location.hash !== hash) history[replace ? 'replaceState' : 'pushState'](null, '', hash);
 }
 
+/** The page of the next heading marker in a direction, or null. Backwards with no heading left goes to page 1, forwards with none left has nowhere to go. */
+function chapterPage(dir) {
+  if (!open) return null;
+  const marks = [...(open.headings?.keys() ?? [])].filter((n) => n >= 1 && n <= open.book.pages);
+  if (dir < 0) {
+    const before = marks.filter((n) => n < open.page);
+    return before.length ? Math.max(...before) : open.page > 1 ? 1 : null;
+  }
+  const after = marks.filter((n) => n > open.page);
+  return after.length ? Math.min(...after) : null;
+}
+
+/** Skips to the next heading marker in a direction, if there is one. */
+function skipChapter(dir) {
+  const page = chapterPage(dir);
+  if (page !== null) show(open.book, page);
+}
+
 /** Sets the slider to a page and draws a stop for each of the pages, the current one marked. */
-function setSlider(total, page, headings = new Set()) {
+function setSlider(total, page, headings = new Map()) {
   const slider = $('page-slider'), ticks = $('ticks');
   // A book of one page has one stop, in the middle: the range runs 0 to 2 around it, disabled
   slider.min = total < 2 ? '0' : '1';
@@ -157,14 +179,44 @@ function setSlider(total, page, headings = new Set()) {
     }));
   }
   [...ticks.children].forEach((tick, n) => tick.classList.toggle('on', n + 1 === page));
-  // A page with a heading gets a mark on a row of its own above the slider
-  $('marks').replaceChildren(...[...headings].filter((n) => n <= total).map((n) => {
-    const mark = document.createElement('i');
+  // The marks are made again, the one a tip was shown for is gone without a mouseleave
+  $('mark-tip').hidden = true;
+  // A page with a heading gets a mark on a row of its own above the slider, one diamond per heading
+  // stacked upward from the bar with an overlap, the first at the bottom and in front, each one above it drawn behind the last
+  $('marks').replaceChildren(...[...headings].filter(([n]) => n <= total).map(([n, names]) => {
+    const mark = document.createElement('b');
     mark.style.left = total < 2 ? '50%' : `calc(7px + (100% - 14px) * ${(n - 1) / (total - 1)})`;
-    mark.title = `Heading on page ${n}`;
+    for (let k = 0; k < names.length; k++) {
+      const count = names.length;
+      const diamond = document.createElement('i');
+      diamond.addEventListener('mouseenter', (e) => showMarkTip(names[k] || `Heading on page ${n}`, e));
+      diamond.addEventListener('mousemove', moveMarkTip);
+      diamond.addEventListener('click', () => { if (open && n !== open.page) show(open.book, n); });
+      diamond.addEventListener('mouseleave', () => { $('mark-tip').hidden = true; });
+      diamond.style.bottom = `${k * 3}px`;
+      // Later pages draw over earlier ones; within a stack the lowest is in front
+      diamond.style.zIndex = String(n * 100 + count - k);
+      mark.append(diamond);
+    }
     return mark;
   }));
   slider.title = headings.has(page) ? 'Chapter heading on this page' : '';
+}
+
+/** A mock of the game's item tooltip for a heading mark, drawn in CSS rather than by the game renderer. */
+function showMarkTip(text, e) {
+  const tip = $('mark-tip');
+  tip.textContent = text;
+  tip.hidden = false;
+  moveMarkTip(e);
+}
+
+function moveMarkTip(e) {
+  const tip = $('mark-tip');
+  // Above and right of the cursor like the game's, kept on screen; the marks sit at the bottom of the page
+  const x = Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 4);
+  tip.style.left = `${Math.max(4, x)}px`;
+  tip.style.top = `${Math.max(4, e.clientY - 12 - tip.offsetHeight)}px`;
 }
 
 function toggleFilter() {
@@ -230,8 +282,36 @@ function activate(area, el) {
   }
 }
 
+/** Pulls the side buttons in over the transparent margins of the page image, so they sit at the edge of the book itself. */
+function fitSides() {
+  const img = $('page'), [left, right] = document.querySelectorAll('.stage .side');
+  if (!img.naturalWidth || !img.clientWidth) return;
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const { data, width, height } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let min = width, max = -1;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        if (data[(y * width + x) * 4 + 3] > 10) { min = Math.min(min, x); max = Math.max(max, x); }
+      }
+    }
+    const scale = img.clientWidth / img.naturalWidth;
+    left.style.marginRight = max < 0 ? '' : `${-min * scale}px`;
+    right.style.marginLeft = max < 0 ? '' : `${-(width - 1 - max) * scale}px`;
+  } catch {
+    // A tainted canvas leaves the buttons at the edge of the image
+    left.style.marginRight = right.style.marginLeft = '';
+  }
+}
+
 function placeLinks() {
   const img = $('page'), host = $('links');
+  // The areas are made again, so the one the pointer was on is gone without a mouseleave, and its hover would stay on screen
+  if (open) $('tooltip').hidden = true;
   host.replaceChildren();
   const box = img.getBoundingClientRect(), base = host.getBoundingClientRect();
   if (!box.width || !open) return;
@@ -277,8 +357,10 @@ async function main() {
   $('search').addEventListener('input', renderGrid);
   $('filter').addEventListener('click', toggleFilter);
   $('prev').addEventListener('click', () => open && show(open.book, open.page - 1));
-  $('first').addEventListener('click', () => open && show(open.book, 1));
-  $('last').addEventListener('click', () => open && show(open.book, open.book.pages));
+  $('start').addEventListener('click', () => open && show(open.book, 1));
+  $('end').addEventListener('click', () => open && show(open.book, open.book.pages));
+  $('chapter-prev').addEventListener('click', () => skipChapter(-1));
+  $('chapter-next').addEventListener('click', () => skipChapter(1));
   $('next').addEventListener('click', () => open && show(open.book, open.page + 1));
   $('page-slider').addEventListener('input', (e) => open && show(open.book, Number(e.target.value)));
   $('close').addEventListener('click', close);
@@ -296,16 +378,18 @@ async function main() {
     if (page >= 1 && page <= open.book.pages) show(open.book, page);
   }, { passive: false });
   addEventListener('hashchange', fromHash);
-  addEventListener('resize', placeLinks);
-  $('page').addEventListener('load', placeLinks);
+  addEventListener('resize', () => { placeLinks(); fitSides(); });
+  $('page').addEventListener('load', () => { placeLinks(); fitSides(); });
   addEventListener('keydown', (e) => {
     if (!open) return;
     // Home and End would scroll the grid behind the book, the arrows its sideways overflow
-    if (['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
+    if (['Home', 'End', 'PageUp', 'PageDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
     if (e.key === 'Escape') close();
     else if (e.key === 'f' || e.key === 'F') toggleFilter();
     else if (e.key === 'Home') show(open.book, 1);
     else if (e.key === 'End') show(open.book, open.book.pages);
+    else if (e.key === 'PageUp') skipChapter(-1);
+    else if (e.key === 'PageDown') skipChapter(1);
     else if (e.key === 'ArrowLeft' || e.key === 'z' || e.key === 'Z') show(open.book, open.page - 1);
     else if (e.key === 'ArrowRight' || e.key === 'c' || e.key === 'C') show(open.book, open.page + 1);
   });

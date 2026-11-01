@@ -35,7 +35,7 @@ const DEFAULT_JAR = fs.existsSync(CACHED_JAR) || !fs.existsSync(LAUNCHER_JAR) ? 
 
 //region PNG and zip
 
-/** Decodes a PNG into { width, height, inked(x, y) }, inked being whether the pixel is not transparent. */
+/** Decodes a PNG into { width, height, inked(x, y), pixel(x, y) }, inked being whether the pixel is not transparent, pixel its [r, g, b, a]. */
 function decodePng(buf) {
     if (buf.readUInt32BE(0) !== 0x89504e47) throw new Error('not a PNG');
     let pos = 8;
@@ -100,7 +100,20 @@ function decodePng(buf) {
         for (let n = 0; n < channels; n++) if (sample(x, y, n) > 0) return true;
         return false;
     };
-    return { width: header.width, height: header.height, inked };
+    // The pixel as [r, g, b, a], the samples of other depths scaled to 8 bits
+    const scale = (v) => (header.depth === 16 || header.depth === 8 ? v : Math.round((v * 255) / ((1 << header.depth) - 1)));
+    const pixel = (x, y) => {
+        if (header.color === 6) return [0, 1, 2, 3].map((n) => sample(x, y, n));
+        if (header.color === 2) return [sample(x, y, 0), sample(x, y, 1), sample(x, y, 2), 255];
+        if (header.color === 4) return [sample(x, y, 0), sample(x, y, 0), sample(x, y, 0), sample(x, y, 1)];
+        if (header.color === 3) {
+            const i = sample(x, y, 0);
+            return [palette[i * 3], palette[i * 3 + 1], palette[i * 3 + 2], trns && i < trns.length ? trns[i] : 255];
+        }
+        const v = scale(sample(x, y, 0));
+        return [v, v, v, 255];
+    };
+    return { width: header.width, height: header.height, inked, pixel };
 }
 
 /** Reads the entries of a zip as { name: () => Buffer }, enough for a client jar. */
@@ -306,6 +319,24 @@ function buildCache(jarFile, unifontDir = path.join(path.dirname(jarFile), 'unif
             const id = withNamespace(provider.file);
             const { cellH, pixels } = glyphPixels(provider, readTexture(id));
             textures[id] ??= { cellH, pixels: pack(pixels) };
+        }
+    }
+    // The vanilla textures a pack font draws from, as minecraft:item/potion.png, so the pack inherits what a resource pack does to them
+    const assets = path.join(ROOT, 'texturepack', 'assets');
+    if (fs.existsSync(assets)) {
+        for (const ns of fs.readdirSync(assets)) {
+            const dir = path.join(assets, ns, 'font');
+            if (!fs.existsSync(dir)) continue;
+            for (const name of fs.readdirSync(dir, { recursive: true })) {
+                if (!String(name).endsWith('.json')) continue;
+                for (const provider of JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8')).providers || []) {
+                    if (provider.type !== 'bitmap') continue;
+                    const id = withNamespace(provider.file);
+                    if (!id.startsWith('minecraft:') || textures[id]) continue;
+                    const { cellH, pixels } = glyphPixels(provider, readTexture(id));
+                    textures[id] = { cellH, pixels: pack(pixels) };
+                }
+            }
         }
     }
     if (withUnifont.length) fonts.__with_unifont = withUnifont;

@@ -455,8 +455,9 @@ public class BookRender {
         Language.getInstance().getVisualOrder(line).accept((index, st, cp) -> {
             Glyph glyph = glyph(cp, st);
             if (!shadow && linkSink != null) {
-                // The padding that centers a line is blank and never underlined, it says nothing about the line
-                if (!Character.isWhitespace(cp) && !fontOf(st).equals("foxcraft_dungeon_loot:padding")) {
+                // The padding that centers a line is blank and never underlined, it says nothing about the line, and neither does the
+                // piece of the cover a line can start with, which is no text
+                if (!Character.isWhitespace(cp) && !fontOf(st).equals("foxcraft_dungeon_loot:padding") && !fontOf(st).equals("foxcraft_dungeon_loot:cover")) {
                     inkGlyphs++;
                     if (!st.isUnderlined() || st.getClickEvent() != null) plainGlyphs++;
                 }
@@ -710,6 +711,9 @@ public class BookRender {
         root = Path.of(args[0]).toAbsolutePath();
         Path outDir = Path.of(args[1]).toAbsolutePath();
         scale = args.length > 2 ? Integer.parseInt(args[2]) : 3;
+        // Optional fourth argument: the books to draw, <id> or <group>/<id> as the generated files have it, comma separated. Only those
+        // books are drawn and replaced under outDir, the rest of it is left as it is
+        Set<String> only = args.length > 3 && !args[3].isBlank() ? new HashSet<>(List.of(args[3].split(","))) : null;
         SharedConstants.tryDetectVersion();
         Bootstrap.bootStrap();
         HolderLookup.Provider lookup = VanillaRegistries.createReloadableLookup(VanillaRegistries.createWorldLookup());
@@ -736,8 +740,22 @@ public class BookRender {
             out("no generated books in " + modifiers);
             System.exit(1);
         }
-        if (Files.isDirectory(outDir)) try (Stream<Path> old = Files.walk(outDir)) {
+        if (only == null && Files.isDirectory(outDir)) try (Stream<Path> old = Files.walk(outDir)) {
             for (Path f : old.sorted(Comparator.reverseOrder()).toList()) Files.delete(f);
+        }
+        // A single book is cleared in every locale, so a page it no longer has does not stay behind
+        if (only != null && Files.isDirectory(outDir)) {
+            try (Stream<Path> locales = Files.list(outDir)) {
+                for (Path localeDir : locales.toList()) {
+                    for (String book : only) {
+                        Path old = localeDir.resolve(book);
+                        if (!Files.isDirectory(old)) continue;
+                        try (Stream<Path> walk = Files.walk(old)) {
+                            for (Path f : walk.sorted(Comparator.reverseOrder()).toList()) Files.delete(f);
+                        }
+                    }
+                }
+            }
         }
         int books = 0, pagesDrawn = 0;
         Set<String> failures = new TreeSet<>();
@@ -749,6 +767,7 @@ public class BookRender {
             for (Path file : files) {
                 // The path under generated/ without the extension, <id> or <group>/<id>, as the source has it under src/books/<locale>
                 String book = modifiers.relativize(file).toString().replace(java.io.File.separatorChar, '/').replaceFirst("\\.json$", "");
+                if (only != null && !only.contains(book)) continue;
                 List<JsonElement[]> pages = pagesOf(JsonParser.parseString(Files.readString(file)));
                 if (pages == null) continue;
                 // A book is in a locale only where it has a source there, the rest would just repeat the English
@@ -782,7 +801,8 @@ public class BookRender {
                         List<BufferedImage> frames = new ArrayList<>();
                         List<Object[]> pageLinks = new ArrayList<>();
                         sawObfuscated = false;
-                        boolean heading = false;
+                        List<StringBuilder> headings = new ArrayList<>();
+                        boolean prevHeading = false;
                         for (int frame = 0; frame < (frames.isEmpty() || sawObfuscated ? ANIM_FRAMES : 1); frame++) {
                             obfuscationRandom = new Random(where.hashCode() * 31L + frame);
                             linkSink = frame == 0 ? pageLinks : null;
@@ -797,16 +817,27 @@ public class BookRender {
                                 inkGlyphs = 0;
                                 plainGlyphs = 0;
                                 float end = drawLine(g, lines.get(i), TEXT_X, TEXT_Y + i * LINE_HEIGHT);
-                                if (frame == 0 && inkGlyphs > 0 && plainGlyphs == 0) heading = true;
+                                // Consecutive heading lines are one heading that wrapped
+                                boolean isHeading = inkGlyphs > 0 && plainGlyphs == 0;
+                                if (frame == 0) {
+                                    if (isHeading) {
+                                        if (!prevHeading) headings.add(new StringBuilder());
+                                        StringBuilder name = headings.get(headings.size() - 1);
+                                        if (name.length() > 0) name.append(' ');
+                                        // Icons from the pack fonts are private use glyphs the browser has no font for
+                                        name.append(lines.get(i).getString().replaceAll("[\uE000-\uF8FF]", "").strip());
+                                    }
+                                    prevHeading = isHeading;
+                                }
                                 if (end - TEXT_X > TEXT_WIDTH) failures.add(where + " line " + (i + 1) + " draws " + (end - TEXT_X) + " pixels wide, the page text is " + TEXT_WIDTH + " (shaped Arabic is wider than the game splits it, see scripts/books/README.md)");
                             }
                             g.dispose();
                             frames.add(image);
                         }
                         linkSink = null;
-                        // A marker file for a page with a heading, the viewer shows it above the page slider
+                        // A marker file for a page with headings, holding their names one per line; the viewer shows it above the page slider
                         Path headingMark = dir.resolve(String.format("page_%02d.heading", n + 1));
-                        if (heading) Files.writeString(headingMark, ""); else Files.deleteIfExists(headingMark);
+                        if (!headings.isEmpty()) Files.writeString(headingMark, String.join("\n", headings.stream().map(StringBuilder::toString).toList())); else Files.deleteIfExists(headingMark);
                         if (!pageLinks.isEmpty()) {
                             JsonArray arr = new JsonArray();
                             // A hover text is drawn once for the runs that share it, to page_NN.hover_K.png

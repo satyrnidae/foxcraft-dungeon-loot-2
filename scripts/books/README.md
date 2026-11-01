@@ -4,7 +4,7 @@ Book loot generator, built from markdown in `src/books`. Dev utilities, not part
 
 ## generate_previews.mjs
 
-`npm run previews` runs the generator, `tests/unit/books.test.mjs` and then only `BookRender`, which draws every page to `tests/.cache/books`. `--no-tests` skips the tests, `--no-download` never fetches the client jar, `--scale N` sets the pixels per GUI pixel. A page with `||obfuscated||` text comes out as an animated PNG, 15 frames at 5 fps, under the same `page_NN.png` name.
+`npm run previews` runs the generator, `tests/unit/books.test.mjs` and then only `BookRender`, which draws every page to `tests/.cache/books`. `--no-tests` skips the tests, `--no-download` never fetches the client jar, `--scale N` sets the pixels per GUI pixel. `--book <author>/<title>` rebuilds and redraws only that book, as `chickenny/brewing_potions`, and can be repeated. A bare title works only while no other author has a book of that name, else the run stops and lists the authors: only its loot is rewritten, only its folders under `tests/.cache/books` are replaced, and the other books and their pages stay as they are. Run `npm run previews -- --book chickenny/brewing_potions`. A page with `||obfuscated||` text comes out as an animated PNG, 15 frames at 5 fps, under the same `page_NN.png` name.
 
 ## viewer.mjs
 

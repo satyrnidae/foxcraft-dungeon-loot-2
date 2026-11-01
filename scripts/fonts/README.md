@@ -44,3 +44,11 @@ Writes `texturepack/assets/<namespace>/textures/font/<name>.png` and `font/<name
 - `--monospace` makes every glyph advance the same, the space too. The game takes the advance of a glyph from its rightmost column with any alpha, so a glyph that ends short of the cell, such as a period, gets one pixel of alpha 1 in the last column. The text shader discards it, nothing shows. Without the flag a monospaced font still comes out narrow on punctuation and spaces. `--preview` shows those pixels as `:`.
 - `--height`, `--ascent` and `--space` override what the font reports, `--namespace` and `--out` move the output.
 - Glyph widths are the ink of each glyph plus one pixel, as in vanilla, so spacing can not go tighter than that. Kerning pairs and the advances of the TTF are not used.
+
+## cover_to_font.js
+
+Cuts `texturepack/assets/foxcraft_dungeon_loot/textures/gui/cover.png`, 146 by 180 pixels, the art of the book screen, into the rows of the `foxcraft_dungeon_loot:cover` font, so it can be drawn over the book with the title and author written on it. Run `node scripts/fonts/cover_to_font.js` after changing the picture; it writes `textures/font/cover/*.png` and `font/cover.json`.
+
+- The game draws the lines of a page one after the other, and a glyph can reach over the lines around it, so the cover is cut by page line. A page has 14 lines, from the text at 36, 30 on the 192 by 192 picture of the screen. Line 0 has a large height with an ascent that lifts it over the margin above the text; the lines 1 to 12 are 9 high with the ascent of a line; line 13 has a large height and the ascent of a line, which reaches down over the margin under the text. Text written on a line after its piece is drawn over it.
+- Every line has two glyphs: the body from the left of the text to the right edge of the art, 130 wide, and a strip of the 16 pixels of art left of the text. The game breaks a line at any glyph past the first that takes it over the width of the page, 114, and keeps the first however wide it is, like the burnt edges of `effects`: the body goes first, a step back, then the strip, then back to the start. `` `n`cover `` in a book does that, see `src/books/README.md`.
+- The geometry is that of `BookRender.java` and of `book.png`, whose art starts at 20, 1.

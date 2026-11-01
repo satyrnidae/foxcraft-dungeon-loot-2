@@ -172,8 +172,9 @@ const bookItem = (name) => {
 const isPage = (f) => /^page_\d+\.png$/.test(f);
 /** The numbers of the pages in a folder that have link areas, from their page_NN.links.json. */
 const linkPages = (dir) => fs.readdirSync(dir).map((f) => /^page_(\d+)\.links\.json$/.exec(f)).filter(Boolean).map((m) => Number(m[1]));
-/** The numbers of the pages in a folder that have a heading, from their page_NN.heading marker files. */
-const headingPages = (dir) => fs.readdirSync(dir).map((f) => /^page_(\d+)\.heading$/.exec(f)).filter(Boolean).map((m) => Number(m[1]));
+/** Pages with headings as [page, names]; the marker file holds the heading names one per line, an empty one from an older render is one nameless heading. */
+const headingPages = (dir) => fs.readdirSync(dir).map((f) => /^page_(\d+)\.heading$/.exec(f)).filter(Boolean)
+  .map((m) => [Number(m[1]), fs.readFileSync(path.join(dir, m[0]), 'utf8').split('\n').filter((l, i, a) => l || a.length === 1)]);
 const pagesIn = (dir) => fs.readdirSync(dir).filter(isPage).sort();
 
 /** Every book under a locale folder: a folder with page_NN.png files is one, the folders above it are its group. */

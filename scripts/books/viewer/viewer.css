@@ -99,6 +99,23 @@ h2 {
   max-width: none;
 }
 
+/* Mock of the game tooltip: near-black purple fill, a two tone purple frame and a pixel step at the corners */
+#mark-tip {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  padding: 4px 6px;
+  background: rgba(16, 0, 16, .94);
+  border: 2px solid;
+  border-image: linear-gradient(#5000ff80, #28007f80) 1;
+  box-shadow: 0 0 0 2px rgba(16, 0, 16, .94);
+  clip-path: polygon(0 2px, 2px 2px, 2px 0, calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px));
+  color: #fff;
+  font: 14px/1.2 'Minecraft', ui-monospace, Consolas, monospace;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  white-space: nowrap;
+}
+
 #reader {
   position: fixed;
   inset: 0;
@@ -108,21 +125,23 @@ h2 {
   background: rgba(10, 9, 13, .94);
 }
 
-#reader[hidden], #tooltip[hidden], #toast[hidden], #filter[hidden], #reader-tip[hidden] { display: none; }
+#reader[hidden], #mark-tip[hidden], #tooltip[hidden], #toast[hidden], #filter[hidden], #reader-tip[hidden] { display: none; }
 #filter[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 .bar { display: flex; align-items: center; gap: 16px; padding: 10px 16px; }
 .bar #close { margin-left: auto; }
 .bar #page-count { margin: 0 auto; color: var(--dim); }
 
-.stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 0 12px; }
+.stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 12px; }
 .stage img { max-width: 100%; max-height: 100%; min-height: 0; image-rendering: pixelated; object-fit: contain; }
-.stage .side { display: flex; gap: 6px; }
-.stage button { font-size: 28px; padding: 10px 14px; }
+/* Above the page image, which the buttons are pulled in over, see fitSides */
+.stage .side { position: relative; z-index: 1; display: flex; gap: 4px; }
+.stage button { font-size: 28px; padding: 10px 10px; }
+.stage button.edge { font-size: 18px; padding: 16px 8px; }
 .stage button:disabled { opacity: .3; cursor: default; }
 
 @media (max-width: 600px) {
-  .stage .side { position: absolute; bottom: 8px; z-index: 1; }
+  .stage .side { position: absolute; bottom: 8px; z-index: 1; margin: 0 !important; }
   .stage .side:first-child { left: 16px; }
   .stage .side:last-child { right: 16px; }
 }
@@ -167,8 +186,11 @@ h2 {
 .slider input::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--accent); }
 .slider input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 50%; border: 0; background: var(--accent); }
 .slider input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; border: 0; background: var(--accent); }
-#marks { position: relative; height: 14px; }
-#marks i { position: absolute; top: 2px; width: 6px; height: 6px; margin-left: -3px; background: var(--accent); transform: rotate(45deg); }
+#marks { position: relative; height: 22px; }
+#marks b { position: absolute; bottom: 2px; width: 0; height: 0; }
+#marks i { cursor: pointer; }
+#marks i:hover { filter: brightness(1.35); }
+#marks i { position: absolute; bottom: 0; left: -4px; width: 8px; height: 8px; box-sizing: border-box; background: var(--accent); border: 1px solid var(--bg); transform: rotate(45deg); }
 #ticks { position: relative; height: 6px; }
 #ticks i { position: absolute; top: 0; width: 1px; height: 6px; background: var(--dim); }
 #ticks i.on { background: var(--accent); height: 8px; }
