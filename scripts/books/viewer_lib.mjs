@@ -14,6 +14,8 @@ const MC = path.join(CACHE, 'mc');
 export const VIEWER = path.join(CACHE, 'viewer');
 export const ICON = path.join(VIEWER, 'written_book.png');
 export const GLINT = path.join(VIEWER, 'glint.png');
+export const FONT = path.join(VIEWER, 'minecraftfont.woff');
+const FONT_URL = 'https://classic.minecraft.net/assets/fonts/minecraftfont.woff';
 export const ICONS = path.join(VIEWER, 'icons');
 const ICON_ENTRY = 'assets/minecraft/textures/item/written_book.png';
 const GLINT_ENTRY = 'assets/minecraft/textures/misc/enchanted_glint_item.png';
@@ -70,6 +72,22 @@ export function prepareIcon() {
   fs.writeFileSync(ICON, icon);
   fs.writeFileSync(GLINT, glint);
   return true;
+}
+
+/** Puts the Minecraft font in the cache, downloaded the first time and never checked in. False when the download fails, the viewer then falls back to a system font. */
+export async function prepareFont() {
+  if (fs.existsSync(FONT)) return true;
+  try {
+    const res = await fetch(FONT_URL);
+    if (!res.ok) return false;
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (buf.subarray(0, 4).toString('latin1') !== 'wOFF') return false;
+    fs.mkdirSync(VIEWER, { recursive: true });
+    fs.writeFileSync(FONT, buf);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 //endregion

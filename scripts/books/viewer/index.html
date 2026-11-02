@@ -31,14 +31,14 @@
     <div class="stage">
       <div class="side">
         <button id="start" class="edge" aria-label="First page" title="First page (Home)">|&lt;</button>
-        <button id="chapter-prev" aria-label="Previous chapter" title="Previous chapter (Page Up)">&laquo;</button>
-        <button id="prev" aria-label="Previous page">&lsaquo;</button>
+        <button id="chapter-prev" aria-label="Previous chapter" title="Previous chapter (Page Up)">&lt;&lt;</button>
+        <button id="prev" aria-label="Previous page">&lt;</button>
       </div>
       <img id="page" alt="">
       <div id="links"></div>
       <div class="side">
-        <button id="next" aria-label="Next page">&rsaquo;</button>
-        <button id="chapter-next" aria-label="Next chapter" title="Next chapter (Page Down)">&raquo;</button>
+        <button id="next" aria-label="Next page">&gt;</button>
+        <button id="chapter-next" aria-label="Next chapter" title="Next chapter (Page Down)">&gt;&gt;</button>
         <button id="end" class="edge" aria-label="Last page" title="Last page (End)">&gt;|</button>
       </div>
     </div>
@@ -49,6 +49,17 @@
         <div id="ticks" aria-hidden="true"></div>
       </div>
       <span id="page-count"></span>
+    </div>
+  </div>
+
+  <div id="eula" role="dialog" aria-modal="true" aria-labelledby="eula-title" hidden>
+    <div class="box">
+      <h2 id="eula-title">Minecraft Assets</h2>
+      <p>This site uses assets from Minecraft, such as its textures, fonts and item models. Minecraft is owned by Mojang AB and Microsoft, and this site is not affiliated with either.</p>
+      <p>To continue, you need to read and accept the <a href="https://www.minecraft.net/en-us/eula" target="_blank" rel="noopener noreferrer">Minecraft End User License Agreement</a>.</p>
+      <p id="eula-privacy">Accepting saves one cookie, <code>fdl_eula</code>, for one year so this isn't asked again. It only records that you accepted, holds no personal data and is never sent anywhere else. If your browser sends Do Not Track, no cookie is saved and you'll be asked each visit.</p>
+      <label><input id="eula-check" type="checkbox"> I have read and agree to the Minecraft EULA</label>
+      <div class="actions"><button id="eula-ok" disabled>OK</button></div>
     </div>
   </div>
 

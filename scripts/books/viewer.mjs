@@ -13,7 +13,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { BOOKS, ICON, ICONS, index, prepareIcon } from './viewer_lib.mjs';
+import { BOOKS, FONT, ICON, ICONS, index, prepareIcon } from './viewer_lib.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'viewer');
@@ -26,7 +26,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
   process.exit(1);
 }
 
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.json': 'application/json' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.woff': 'font/woff', '.json': 'application/json' };
 
 //region Server
 
@@ -55,6 +55,7 @@ const server = http.createServer((req, res) => {
     const icon = resolveIn(ICONS, url.pathname.slice('/icons/'.length));
     return icon ? sendFile(res, icon) : send(res, 404, 'not found');
   }
+  if (url.pathname === '/fonts/minecraftfont.woff') return fs.existsSync(FONT) ? sendFile(res, FONT) : send(res, 404, 'no font');
   if (url.pathname === '/icon.png') return fs.existsSync(ICON) ? sendFile(res, ICON) : send(res, 404, 'no icon');
   const fromCache = url.pathname.startsWith('/files/');
   const file = fromCache ? resolveIn(BOOKS, url.pathname.slice('/files/'.length)) : resolveIn(SITE, url.pathname === '/' ? '/index.html' : url.pathname);

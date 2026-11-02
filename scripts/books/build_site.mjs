@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { BOOKS, ICON, ICONS, index, prepareIcon } from './viewer_lib.mjs';
+import { BOOKS, FONT, ICON, ICONS, index, prepareFont, prepareIcon } from './viewer_lib.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'viewer');
@@ -27,10 +27,17 @@ if (!prepareIcon()) {
   process.exit(1);
 }
 
+if (!await prepareFont()) {
+  console.error('Could not download the Minecraft font from classic.minecraft.net');
+  process.exit(1);
+}
+
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 fs.cpSync(SITE, out, { recursive: true });
 fs.copyFileSync(ICON, path.join(out, 'icon.png'));
+fs.mkdirSync(path.join(out, 'fonts'), { recursive: true });
+fs.copyFileSync(FONT, path.join(out, 'fonts', 'minecraftfont.woff'));
 fs.cpSync(BOOKS, path.join(out, 'files'), { recursive: true });
 // index() resolves the icons, so it runs before they are copied, over a clean folder so no old icon is shipped
 fs.rmSync(ICONS, { recursive: true, force: true });

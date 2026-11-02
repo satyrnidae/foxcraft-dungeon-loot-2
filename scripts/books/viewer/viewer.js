@@ -348,7 +348,44 @@ function fromHash() {
 
 //endregion
 
+//region EULA
+
+const EULA_COOKIE = 'fdl_eula';
+// Scoped to the folder the site is served from, so a GitHub Pages sub-path does not share it with the rest of the host
+const cookiePath = () => location.pathname.replace(/[^/]*$/, '');
+const dnt = () => [navigator.doNotTrack, window.doNotTrack, navigator.msDoNotTrack].some((v) => v === '1' || v === 'yes');
+const eulaAccepted = () => document.cookie.split('; ').some((c) => c === `${EULA_COOKIE}=1`);
+
+/** Asks for the EULA on a visit without the cookie. Do Not Track gets no cookie, so it is asked again on the next visit. */
+function eulaGate() {
+  if (eulaAccepted()) return;
+  const dialog = $('eula'), check = $('eula-check'), ok = $('eula-ok');
+  dialog.hidden = false;
+  check.focus();
+  check.addEventListener('change', () => { ok.disabled = !check.checked; });
+  ok.addEventListener('click', () => {
+    if (!check.checked) return;
+    if (!dnt()) {
+      document.cookie = `${EULA_COOKIE}=1; max-age=31536000; path=${cookiePath()}; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}`;
+    }
+    dialog.hidden = true;
+  });
+  // Keep tab focus in the dialog, the page behind it is not usable yet
+  dialog.addEventListener('keydown', (e) => {
+    e.stopPropagation();
+    if (e.key !== 'Tab') return;
+    const items = [dialog.querySelector('a'), check, ok].filter((el) => !el.disabled);
+    const at = items.indexOf(document.activeElement);
+    const next = items[(at + (e.shiftKey ? items.length - 1 : 1)) % items.length];
+    e.preventDefault();
+    next.focus();
+  });
+}
+
+//endregion
+
 async function main() {
+  eulaGate();
   data = await (await fetch('books.json')).json();
   $('reader-locale').addEventListener('change', (e) => {
     const other = open && data.books.find((b) => b.name === open.book.name && b.locale === e.target.value);
