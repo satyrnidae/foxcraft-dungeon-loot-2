@@ -15,6 +15,9 @@ export const VIEWER = path.join(CACHE, 'viewer');
 export const ICON = path.join(VIEWER, 'written_book.png');
 export const GLINT = path.join(VIEWER, 'glint.png');
 export const FONT = path.join(VIEWER, 'minecraftfont.woff');
+export const SOUNDS = path.join(VIEWER, 'sounds');
+/** The book sounds of the game: the page turn, which also opens a book, and the close one, as named in the asset index. */
+const SOUND_FILES = ['open_flip1', 'open_flip2', 'open_flip3', 'close_put1', 'close_put2'];
 const FONT_URL = 'https://classic.minecraft.net/assets/fonts/minecraftfont.woff';
 export const ICONS = path.join(VIEWER, 'icons');
 const ICON_ENTRY = 'assets/minecraft/textures/item/written_book.png';
@@ -84,6 +87,28 @@ export async function prepareFont() {
     if (buf.subarray(0, 4).toString('latin1') !== 'wOFF') return false;
     fs.mkdirSync(VIEWER, { recursive: true });
     fs.writeFileSync(FONT, buf);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Puts the book sounds in the cache, downloaded from the asset index of the client jar's version the first time and never checked in. False when that fails, the viewer is then silent. */
+export async function prepareSounds() {
+  if (SOUND_FILES.every((n) => fs.existsSync(path.join(SOUNDS, `${n}.ogg`)))) return true;
+  try {
+    const versions = fs.existsSync(MC) ? fs.readdirSync(MC).filter((v) => fs.existsSync(path.join(MC, v, `${v}.json`))).sort() : [];
+    if (!versions.length) return false;
+    const meta = JSON.parse(fs.readFileSync(path.join(MC, versions[versions.length - 1], `${versions[versions.length - 1]}.json`), 'utf8'));
+    const { objects } = await (await fetch(meta.assetIndex.url)).json();
+    fs.mkdirSync(SOUNDS, { recursive: true });
+    for (const name of SOUND_FILES) {
+      const { hash } = objects[`minecraft/sounds/item/book/${name}.ogg`] ?? {};
+      if (!hash) return false;
+      const res = await fetch(`https://resources.download.minecraft.net/${hash.slice(0, 2)}/${hash}`);
+      if (!res.ok) return false;
+      fs.writeFileSync(path.join(SOUNDS, `${name}.ogg`), Buffer.from(await res.arrayBuffer()));
+    }
     return true;
   } catch {
     return false;

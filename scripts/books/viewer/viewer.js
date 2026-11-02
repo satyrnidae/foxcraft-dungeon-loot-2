@@ -12,6 +12,41 @@ let data = { locales: [], books: [] };
 let open = null; // { book, page }
 let filtered = false; // the chat filtered side, kept across books
 
+//region Sound
+
+// The game's book sounds, downloaded by the site build. A missing file or a browser that blocks sound before a click plays nothing
+const SOUND = { flip: [1, 2, 3].map((n) => `sounds/open_flip${n}.ogg`), close: [1, 2].map((n) => `sounds/close_put${n}.ogg`) };
+const playing = new Set(); // sounds still going, so muting can cut them off
+let muted = false;
+try { muted = localStorage.getItem('muted') === '1'; } catch { /* storage blocked, sound stays on */ }
+/** Both mute buttons, the header one and the one under the close button, show the same state. */
+function showMuted() {
+  for (const id of ['mute', 'mute-reader']) {
+    const b = $(id);
+    b.textContent = muted ? '\u{1F507}' : '\u{1F508}';
+    b.title = muted ? 'Unmute sounds' : 'Mute sounds';
+    b.setAttribute('aria-label', b.title);
+    b.setAttribute('aria-pressed', String(muted));
+  }
+}
+function toggleMuted() {
+  muted = !muted;
+  if (muted) for (const a of playing) a.pause();
+  try { localStorage.setItem('muted', muted ? '1' : '0'); } catch { /* nothing to remember it with */ }
+  showMuted();
+}
+function play(kind) {
+  if (muted) return;
+  const files = SOUND[kind];
+  const audio = new Audio(files[Math.floor(Math.random() * files.length)]);
+  audio.volume = .7;
+  playing.add(audio);
+  audio.addEventListener('ended', () => playing.delete(audio));
+  audio.addEventListener('pause', () => playing.delete(audio));
+  audio.play().catch(() => {});
+}
+
+//endregion
 //region Grid
 
 // The page the last book was left on, so closing it by accident loses nothing. Opening another book replaces it. Storage can be blocked, the viewer then starts at page 1
@@ -102,13 +137,16 @@ function hashOf(book = open?.book, page = open?.page) {
   return book ? `#${book.locale}/${book.name}/${page}` : '';
 }
 
-function show(book, page, replace) {
+function show(book, page, replace, silent) {
   const useFiltered = book.filteredPages > 0 && filtered;
   $('filter').hidden = book.filteredPages === 0;
   $('filter').textContent = useFiltered ? 'Filtered' : 'Unfiltered';
   $('filter').setAttribute('aria-pressed', String(useFiltered));
   const total = useFiltered ? book.filteredPages : book.pages;
+  // Opening a book and turning a page in it both make the page turn sound
+  const before = open;
   open = { book, page: Math.min(Math.max(1, page), total) };
+  if (!silent && (!before || (before.book.name === book.name && before.page !== open.page))) play('flip');
   $('reader').hidden = false;
   $('reader-title').textContent = book.name;
   const siblings = data.books.filter((b) => b.name === book.name);
@@ -283,6 +321,19 @@ function activate(area, el) {
 }
 
 /** Pulls the side buttons in over the transparent margins of the page image, so they sit at the edge of the book itself. */
+/** Puts the close button just right of the top corner of the book, or over the corner when the book fills the width. */
+function placeClose(bounds, scale) {
+  const box = $('page').getBoundingClientRect(), stage = document.querySelector('.stage').getBoundingClientRect(), button = $('close');
+  const right = box.left - stage.left + (bounds ? bounds.right * scale : box.width);
+  const top = box.top - stage.top + (bounds ? bounds.top * scale : 0);
+  button.style.right = 'auto';
+  button.style.left = `${Math.max(0, Math.min(right + 4, stage.width - button.offsetWidth))}px`;
+  button.style.top = `${Math.max(0, top)}px`;
+  const mute = $('mute-reader');
+  mute.style.right = 'auto';
+  mute.style.left = button.style.left;
+  mute.style.top = `${Math.max(0, top) + button.offsetHeight + 4}px`;
+}
 function fitSides() {
   const img = $('page'), [left, right] = document.querySelectorAll('.stage .side');
   if (!img.naturalWidth || !img.clientWidth) return;
@@ -293,18 +344,20 @@ function fitSides() {
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
     const { data, width, height } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let min = width, max = -1;
+    let min = width, max = -1, top = height;
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
-        if (data[(y * width + x) * 4 + 3] > 10) { min = Math.min(min, x); max = Math.max(max, x); }
+        if (data[(y * width + x) * 4 + 3] > 10) { min = Math.min(min, x); max = Math.max(max, x); top = Math.min(top, y); }
       }
     }
     const scale = img.clientWidth / img.naturalWidth;
     left.style.marginRight = max < 0 ? '' : `${-min * scale}px`;
     right.style.marginLeft = max < 0 ? '' : `${-(width - 1 - max) * scale}px`;
+    placeClose(max < 0 ? null : { top, right: max + 1 }, scale);
   } catch {
     // A tainted canvas leaves the buttons at the edge of the image
     left.style.marginRight = right.style.marginLeft = '';
+    placeClose(null, 1);
   }
 }
 
@@ -333,6 +386,7 @@ function placeLinks() {
 //endregion
 
 function close() {
+  if (open) play('close');
   open = null;
   $('reader').hidden = true;
   if (location.hash) history.pushState(null, '', location.pathname);
@@ -340,7 +394,7 @@ function close() {
 
 function fromHash() {
   const m = /^#([^/]+)\/(.+)\/(\d+)$/.exec(decodeURIComponent(location.hash));
-  if (!m) { open = null; $('reader').hidden = true; return; }
+  if (!m) { if (open) play('close'); open = null; $('reader').hidden = true; return; }
   const book = data.books.find((b) => b.locale === m[1] && b.name === m[2]);
   if (!book) return;
   show(book, Number(m[3]), true);
@@ -401,6 +455,8 @@ async function main() {
   $('next').addEventListener('click', () => open && show(open.book, open.page + 1));
   $('page-slider').addEventListener('input', (e) => open && show(open.book, Number(e.target.value)));
   $('close').addEventListener('click', close);
+  for (const id of ['mute', 'mute-reader']) $(id).addEventListener('click', toggleMuted);
+  showMuted();
   $('reader').addEventListener('click', (e) => { if (e.target.classList.contains('stage')) close(); });
   // The wheel moves the slider while a book is open, and swallows the scroll. Trackpads send many small deltas, so a page turns for every 60 of them
   let wheel = 0;
@@ -412,7 +468,7 @@ async function main() {
     // Down goes forth, up goes back
     const page = open.page + Math.sign(wheel);
     wheel = 0;
-    if (page >= 1 && page <= open.book.pages) show(open.book, page);
+    if (page >= 1 && page <= open.book.pages) show(open.book, page, false, true);
   }, { passive: false });
   addEventListener('hashchange', fromHash);
   addEventListener('resize', () => { placeLinks(); fitSides(); });
