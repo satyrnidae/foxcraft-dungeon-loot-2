@@ -163,7 +163,7 @@ function show(book, page, replace, silent) {
   const filteredHas = (n) => useFiltered && n <= book.filteredPages;
   $('page').src = fileOf(book, pageName(open.page), filteredHas(open.page));
   $('page-count').textContent = `Page ${open.page} of ${book.pages}`;
-  const headings = new Map(useFiltered ? [...book.filteredHeadings, ...book.headings.filter(([n]) => n > book.filteredPages)] : book.headings);
+  const headings = new Map(useFiltered ? book.filteredHeadings : book.headings);
   open.headings = headings;
   setSlider(book.pages, open.page, headings);
   $('prev').disabled = open.page <= 1;

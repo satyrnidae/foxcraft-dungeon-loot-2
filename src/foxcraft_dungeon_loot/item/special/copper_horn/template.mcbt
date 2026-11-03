@@ -2,8 +2,8 @@ import ../../../../config.js
 
 # Points a held copper goat horn at the instrument for the player's current stance.
 # The horn reads its instrument when use starts, so the swap runs every tick while it is held.
-# Sneaking plays the bass part, looking up past copperGoatHorn.minHarmonyPitch plays the harmony, anything else the melody.
-# Expects satyrn.fdl.copperGoatHorn.currentPitch to be set on the player.
+# Sneaking plays the bass part, looking up 30 degrees or more plays the harmony, anything else the melody.
+# The 30 is literal, mc-build 4.2.0 leaves config values unevaluated on an else line. Pitch is tested with the x_rotation selector, reading Rotation would serialize the whole player every tick.
 #
 # Parameters:
 # 0 - The non-numeric slot ID of the horn.
@@ -13,7 +13,7 @@ template horn_swap {
         execute if items entity @s <%a0%> minecraft:goat_horn[minecraft:custom_data~{CustomInstrument:"<%a1%>"}] run {
             execute if predicate foxcraft_dungeon_loot:entity/is_sneaking run {
                 execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:copper_horn/<%a1%>/bass"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/copper_horn/<%a1%>/bass
-            } else execute if score @s satyrn.fdl.copperGoatHorn.currentPitch >= copperGoatHorn.minHarmonyPitch satyrn.fdl.internal run {
+            } else execute if entity @s[x_rotation=..-30] run {
                 execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:copper_horn/<%a1%>/harmony"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/copper_horn/<%a1%>/harmony
             } else run {
                 execute unless items entity @s <%a0%> *[minecraft:instrument="foxcraft_dungeon_loot:copper_horn/<%a1%>/melody"] run item modify entity @s <%a0%> foxcraft_dungeon_loot:special/copper_horn/<%a1%>/melody

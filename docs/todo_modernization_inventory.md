@@ -328,5 +328,5 @@ Open points:
 
 - A macro call is parsed again on every call, so keep it off the per-tick path. The book only runs it on use, which is fine.
 - Cleaning up the storage keys after the call, as the book does, keeps `data get storage` output tidy.
-- `source.test.mjs` skips loot table paths with `$(...)` in them, and `CmdCheck.java` cannot expand them, so a typo in a macro built id is only found in game. A test could expand the list of possible values and check each table exists, which for the book is `random_<rarity>_book` for the six rarities.
+- `source.test.mjs` skips loot table paths with `$(...)` in them, and `CmdCheck.java` cannot expand them, so a typo in a macro built id is only found in game. A test could expand the list of possible values and check each table exists, which for the book is `mystery_book/<tier>` for the six tiers.
 - The book could drop the `warped_fungus_on_a_stick` use hook for a `consumable` base like the items in 3.3. Not checked: how the opened book table would then be picked from the consumed item.

@@ -1,0 +1,19 @@
+# Runs when a warped fungus is used. Opens the bottle for one random letter and uses it up.
+function on_warped_fungus_used {
+    execute if entity @s[predicate=foxcraft_dungeon_loot:item/special/message_in_a_bottle/in_main_hand] run {
+        playsound foxcraft_dungeon_loot:item.message_in_a_bottle.open player @a ~ ~ ~ 1 1
+        playsound minecraft:item.book.page_turn player @a ~ ~ ~ 1 1.0
+        particle minecraft:enchant ^ ^1.0 ^0.25 0.25 0.25 0.25 0.5 20
+
+        loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/book/__generated__/mystery_letter
+
+        execute unless entity @s[gamemode=creative] run {
+            item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
+        }
+    }
+}
+
+# Gives the target a message in a bottle.
+function give_message_in_a_bottle {
+    loot give @s loot foxcraft_dungeon_loot:item/special/message_in_a_bottle
+}

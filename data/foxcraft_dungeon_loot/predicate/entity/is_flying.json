@@ -2,7 +2,9 @@
   "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "minecraft:nbt": "{FallFlying:1b}",
+    "minecraft:flags": {
+      "is_fall_flying": true
+    },
     "minecraft:equipment": {
       "chest": {
         "items": [

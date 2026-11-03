@@ -6,7 +6,7 @@
     "prismjs": "^1.30.0"
   },
   "scripts": {
-    "build": "npm run data && npm run assets",
+    "build": "node scripts/build/build.mjs",
     "data": "node scripts/build/data.mjs",
     "assets": "node scripts/build/assets.mjs",
     "watch": "mcb watch",

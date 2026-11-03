@@ -16,7 +16,7 @@ function on_hit {
     execute unless entity @s[gamemode=creative] run {
         execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
             # Get unbreaking level from the tool.
-            execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
+            enchantment_level weapon.mainhand minecraft:unbreaking
             function foxcraft_dungeon_loot:math/should_damage_tool
             # Only execute the following if the score is equal to 1 or more
             execute if score #math.result <%config.internalScoreboard%> matches 1 run item modify entity @s weapon.mainhand foxcraft_dungeon_loot:rare/beta_iron_sword/on_hit

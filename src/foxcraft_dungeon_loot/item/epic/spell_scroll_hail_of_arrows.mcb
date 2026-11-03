@@ -15,10 +15,10 @@ function on_tick {
     execute as @a[predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/in_off_hand] run tag @s add satyrn.fdl.holdingSC_HOA
 
     # Teleport tracker to the scroll and do all the tracking that needs to be tracked
-    execute as @e[tag=satyrn.fdl.SC_HOA_tracker] at @s run {
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.SC_HOA_tracker] at @s run {
         # A scroll covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest] run {
-            tp @s @e[tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest]
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest] run {
+            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest]
             execute at @s run particle minecraft:enchant ~ ~ ~ 0.1 0.1 0.1 0 3
         # If tracker cannot find a scroll, it hit something and was destroyed.
         } else run {

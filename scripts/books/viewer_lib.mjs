@@ -220,13 +220,22 @@ const headingPages = (dir) => fs.readdirSync(dir).map((f) => /^page_(\d+)\.headi
   .map((m) => [Number(m[1]), fs.readFileSync(path.join(dir, m[0]), 'utf8').split('\n').filter((l, i, a) => l || a.length === 1)]);
 const pagesIn = (dir) => fs.readdirSync(dir).filter(isPage).sort();
 
+/** The headings of every book as the generator read them from the markdown, { '<locale>/<book>': { raw, filtered } } of [page, names] lists, empty when it has not run. */
+const sourceHeadings = () => {
+  try { return JSON.parse(fs.readFileSync(path.join(CACHE, 'book_headings.json'), 'utf8')); } catch { return {}; }
+};
+
 /** Every book under a locale folder: a folder with page_NN.png files is one, the folders above it are its group. */
-function scan(localeDir, locale, rel = []) {
+function scan(localeDir, locale, headingIndex, rel = []) {
   const dir = path.join(localeDir, ...rel);
   const pages = pagesIn(dir);
   const found = [];
   if (pages.length) {
     const filtered = fs.existsSync(path.join(dir, 'filtered')) ? pagesIn(path.join(dir, 'filtered')).length : 0;
+    // From the markdown source when the generator has been run, else from the pages the renderer found underlined text on
+    const fromSource = headingIndex[`${locale}/${rel.join('/')}`];
+    const markers = fromSource ? null : headingPages(dir);
+    const filteredMarkers = fromSource || !filtered ? [] : headingPages(path.join(dir, 'filtered'));
     found.push({
       locale,
       group: rel.length > 1 ? rel.slice(0, -1).join('/') : '',
@@ -237,13 +246,14 @@ function scan(localeDir, locale, rel = []) {
       filteredPages: filtered,
       links: linkPages(dir),
       filteredLinks: fs.existsSync(path.join(dir, 'filtered')) ? linkPages(path.join(dir, 'filtered')) : [],
-      headings: headingPages(dir),
-      filteredHeadings: fs.existsSync(path.join(dir, 'filtered')) ? headingPages(path.join(dir, 'filtered')) : [],
+      headings: fromSource ? fromSource.raw : markers,
+      // The whole filtered reading; the marker fallback only has the pages of the filtered folder, the raw ones carry on after them
+      filteredHeadings: fromSource ? fromSource.filtered : [...filteredMarkers, ...markers.filter(([n]) => n > filtered)],
       hasTooltip: fs.existsSync(path.join(dir, 'tooltip.png')),
     });
   }
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.isDirectory() && e.name !== 'filtered') found.push(...scan(localeDir, locale, [...rel, e.name]));
+    if (e.isDirectory() && e.name !== 'filtered') found.push(...scan(localeDir, locale, headingIndex, [...rel, e.name]));
   }
   return found;
 }
@@ -251,7 +261,8 @@ function scan(localeDir, locale, rel = []) {
 export function index() {
   const locales = fs.readdirSync(BOOKS, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name)
     .sort((a, b) => (a === 'en_us' ? -1 : b === 'en_us' ? 1 : a.localeCompare(b)));
-  const books = locales.flatMap((l) => scan(path.join(BOOKS, l), l));
+  const headingIndex = sourceHeadings();
+  const books = locales.flatMap((l) => scan(path.join(BOOKS, l), l, headingIndex));
   return { locales, books };
 }
 

@@ -134,7 +134,7 @@ async function resolveJar(allowDownload) {
  * Find Java 25 and the client jar, fetch the libraries and compile the given tests/java sources into tests/.cache/classes.
  * Returns { java, runcp } to run a class with, or { skip } with the reason it cannot, or { fail } when compiling fails.
  */
-export async function prepareJava(allowDownload, sourceNames = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'BookRender.java', 'ArabicShapingTable.java']) {
+export async function prepareJava(allowDownload, sourceNames = ['Harness.java', 'Scan.java', 'CmdCheck.java', 'PackLoad.java', 'ArabicShapingTable.java']) {
   const java = findJava();
   if (!java) return { skip: 'no Java 25 found, set JAVA25' };
   const found = await resolveJar(allowDownload);
@@ -173,8 +173,6 @@ async function javaChecks(allowDownload) {
     ['data codecs (Scan)', 'Scan', path.join(ROOT, 'data')],
     ['generated commands (CmdCheck)', 'CmdCheck', functions],
     ['pack registry load (PackLoad)', 'PackLoad', ROOT],
-    // Every generated book page as a PNG in tests/.cache/books, wrapped by the game's own line splitter
-    ['book pages (BookRender)', 'BookRender', ROOT, path.join(CACHE, 'books')],
   ]) {
     if (main === 'CmdCheck' && !fs.existsSync(functions)) {
       results.push([label, 'SKIPPED no build output']);

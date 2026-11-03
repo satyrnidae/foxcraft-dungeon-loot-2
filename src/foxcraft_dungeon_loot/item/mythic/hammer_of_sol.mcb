@@ -33,6 +33,7 @@ function on_load {
     # Set up storage. Fire is the duration of the Hammer of Sol's fire effect.
     # 240t = Fire Aspect III
     data merge storage foxcraft_dungeon_loot:items {HammerOfSol:{Fire:240}}
+    scoreboard objectives add satyrn.fdl.hammerOfSol.expiry dummy "Hammer of Sol ticks until the dropped hammer pops"
 }
 
 # Runs on ticks when a snowball is used.
@@ -63,14 +64,14 @@ function on_tick {
     execute as @a[predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/mythic/hammer_of_sol/in_off_hand] run tag @s add satyrn.fdl.holdingTitanHammer
 
     # Teleport tracker to the hammer and do all the tracking that needs to be tracked
-    execute as @e[tag=satyrn.fdl.titanHammerTracker] at @s run {
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.titanHammerTracker] at @s run {
         # A hammer covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.titanHammer, distance=..4, limit=1, sort=nearest] run {
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.titanHammer, distance=..4, limit=1, sort=nearest] run {
             kill @e[type=#foxcraft_dungeon_loot:markers,tag=satyrn.fdl.titanHammer.raycastTarget,limit=1,sort=nearest,distance=..4]
 
             # The raycast target is where the tracker was a tick ago, so target to tracker is the direction of travel
             summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.titanHammer.raycastTarget]}
-            tp @s @e[tag=satyrn.fdl.titanHammer, distance=..4, limit=1, sort=nearest]
+            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.titanHammer, distance=..4, limit=1, sort=nearest]
 
             execute at @s run particle minecraft:small_flame ~ ~ ~ 0.1 0.1 0.1 0 1
             execute at @s run particle minecraft:smoke ~ ~ ~ 0.1 0.1 0.1 0 1
@@ -95,6 +96,7 @@ function on_tick {
             # Spawn new hammer that will disappear after 10 seconds (200 ticks)
             loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol/drop
             data merge entity @e[type=minecraft:item,limit=1,sort=nearest] {Age:5699,Tags:[satyrn.fdl.titanHammerSpawnedItem]}
+            scoreboard players set @e[type=minecraft:item,tag=satyrn.fdl.titanHammerSpawnedItem,limit=1,sort=nearest] satyrn.fdl.hammerOfSol.expiry 300
 
             # Destroy tracker, play hit sound, and hit particle effects
             particle minecraft:flame ~ ~ ~ 0.5 0.2 0.5 0 20
@@ -109,17 +111,21 @@ function on_tick {
 
     # Track newly spawned hammers after they were destroyed.
     # If one is about to disappear, play sound, spawn particle effects, and delete the tag so it only happens once.
-    execute as @e[tag=satyrn.fdl.titanHammerSpawnedItem,predicate=foxcraft_dungeon_loot:item/mythic/hammer_of_sol/should_expire] at @s run {
-        particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
-        particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
-        particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
-        playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 2.0
-        tag @s remove satyrn.fdl.titanHammerSpawnedItem
-        loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol/expiry
+    execute as @e[type=minecraft:item,tag=satyrn.fdl.titanHammerSpawnedItem] at @s run {
+        scoreboard players remove @s satyrn.fdl.hammerOfSol.expiry 1
+        execute if score @s satyrn.fdl.hammerOfSol.expiry matches ..0 run {
+            particle minecraft:explosion ~ ~ ~ 0.2 0.2 0.2 0 10
+            particle minecraft:flame ~ ~ ~ 0.3 0.2 0.3 0 60
+            particle minecraft:smoke ~ ~ ~ 0.3 0.2 0.3 0 30
+            playsound foxcraft_dungeon_loot:item.hammer_of_sol.pop player @a ~ ~ ~ 2.0
+            tag @s remove satyrn.fdl.titanHammerSpawnedItem
+            loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/mythic/hammer_of_sol/expiry
+        }
     }
 }
 
 function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.hammerOfSol.expiry
     data remove storage foxcraft_dungeon_loot:items HammerOfSol
 }
 
@@ -142,7 +148,7 @@ dir raycast {
         function step {
             execute as @e[tag=!satyrn.fdl.titanHammer.raycastSource,dx=0,type=!#foxcraft_dungeon_loot:non_living] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0] positioned ~0.99 ~0.99 ~0.99 run {
                 function foxcraft_dungeon_loot:item/mythic/hammer_of_sol/hit_target
-                tag @e[tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
+                tag @e[type=minecraft:marker,tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
             } else run {
                 IF (config.dev) {
                     particle minecraft:witch ~ ~ ~
@@ -173,7 +179,7 @@ dir raycast {
         function step {
             execute as @e[tag=!satyrn.fdl.titanHammer.raycastSource,dx=0,type=!#foxcraft_dungeon_loot:non_living] positioned ~-0.99 ~-0.99 ~-0.99 if entity @s[dx=0] positioned ~0.99 ~0.99 ~0.99 run {
                 function foxcraft_dungeon_loot:item/mythic/hammer_of_sol/hit_target
-                tag @e[tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
+                tag @e[type=minecraft:marker,tag=satyrn.fdl.titanHammerTracker,limit=1,sort=nearest] add satyrn.fdl.titanHammer.raycastSuccess
             } else run {
                 IF (config.dev) {
                     particle minecraft:witch ~ ~ ~

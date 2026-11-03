@@ -29,7 +29,7 @@ Unit tests alone: `node --test tests/unit/*.test.mjs`.
 | `unit/source.test.mjs` | One generated test per file in `src/foxcraft_dungeon_loot/item/` |
 | `unit/integrity.test.mjs` | Whole-pack checks: ids, references, resources, scoreboards, versions, old keys |
 | `unit/checks.mjs` | Lets one test report several failed checks together |
-| `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader, `BookRender`, which draws every generated book page, and `ArabicShapingTable`, which checks `scripts/books/arabic_shaping.json` against the game's Arabic shaper and rewrites it and fails when they differ |
+| `java/` | `Harness`, `Scan`, `CmdCheck` and `PackLoad`, which run the game's own codecs, command parser and datapack loader, `BookRender`, which draws every generated book page and runs only from `npm run previews`, not from `run_all.mjs`, and `ArabicShapingTable`, which checks `scripts/books/arabic_shaping.json` against the game's Arabic shaper and rewrites it and fails when they differ |
 | `tools/` | `check_old_keys.mjs`, `compare_mcfunction.mjs`, `fetch_mc_libs.mjs`, `fetch_mc_jar.mjs` |
 | `verifying-against-vanilla.md` | How the Java checks work and what they found |
 | `.cache/` | Downloaded libraries, compiled classes and the rendered book pages in `books/<locale>/[<group>/]<id>/page_NN.png` with the item tooltip beside them as `tooltip.png`, gitignored; `npm run viewer` browses them |

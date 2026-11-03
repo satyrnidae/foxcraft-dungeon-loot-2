@@ -8,7 +8,7 @@ lore: The notes portray someone's thoughts on... a war? But... with whom? Or rat
 styles: {
   body: {
     font: foxcraft_dungeon_loot:textmachine_handwriting
-  }
+  },
   .annotation: {
     font: minecraft:default,
     italic: true,

@@ -28,9 +28,9 @@ function pick {
     $data modify storage foxcraft_dungeon_loot:mystery_book table set from storage foxcraft_dungeon_loot:mystery_book rarities[$(rarity)]
 }
 
-# Macro, spawns a random book of the looked up table.
+# Macro, spawns a random book of the table of the tier, its rarity odds are in the generator.
 function open {
-    $loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/book/random_$(table)_book
+    $loot spawn ^ ^1.0 ^0.25 loot foxcraft_dungeon_loot:item/random_loot/book/__generated__/mystery_book/$(table)
 }
 
 # Gives the target the common mystery book.

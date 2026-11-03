@@ -50,6 +50,11 @@ describe('villager trades', () => {
     const trade = pk.loadJson(dataFile('villager_trade', 'librarian', '5', 'common_mystery_book.json'));
     assert.deepEqual(trade.given_item_modifier, [`${NS}special/mystery_book/common`, `${NS}special/mystery_book/define`].flatMap(expand));
   });
+
+  it('the message in a bottle trade has the functions of the loot table', () => {
+    const trade = pk.loadJson(dataFile('villager_trade', 'fisherman', '5', 'message_in_a_bottle.json'));
+    assert.deepEqual(trade.given_item_modifier, [`${NS}special/message_in_a_bottle/common`, `${NS}special/message_in_a_bottle/define`].flatMap(expand));
+  });
 });
 
 describe('references', () => {

@@ -32,8 +32,8 @@ function on_tick {
     # Update the projectile tracker
     execute as @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,type=#foxcraft_dungeon_loot:markers] at @s run {
         # A snowball covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] run {
-            tp @s @e[tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest]
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] run {
+            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest]
             particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 1
         } else run {
             summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.torenhiasFist.lightningSpawner]}

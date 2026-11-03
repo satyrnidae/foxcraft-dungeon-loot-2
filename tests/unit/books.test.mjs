@@ -543,7 +543,7 @@ describe('book generator files', () => {
       write(dir, 'books/en_us/hidden.md', SOURCE.replace('rarity: epic', 'debug: true'));
       assert.deepEqual(Object.keys(gen.findSources(opts.bookDir, [], false).en_us), ['shown']);
       assert.deepEqual(Object.keys(gen.findSources(opts.bookDir, [], true).en_us), ['hidden', 'shown']);
-      const entries = () => JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'random_book.json'), 'utf8')).pools[0].entries.map((e) => e.value);
+      const entries = () => JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'mystery_book', 'common.json'), 'utf8')).pools[0].entries.flatMap((e) => e.value.pools[0].entries.map((x) => x.value));
       gen.generate({ ...opts, dev: false });
       assert.ok(!fs.existsSync(path.join(opts.tableDir, 'hidden.json')));
       assert.deepEqual(entries(), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/shown`]);
@@ -557,16 +557,36 @@ describe('book generator files', () => {
     }
   });
 
-  it('writes a table per rarity, empty when no book has it', () => {
+  it('writes a mystery table per tier and one for letters, weighted by rarity', () => {
+    const { dir, opts } = sandbox();
+    try {
+      const book = (id, extra) => write(dir, `books/en_us/${id}.md`, SOURCE.replace('rarity: epic', extra));
+      book('c1', 'rarity: common');
+      book('c2', 'rarity: common\nwritable: true');
+      book('r1', 'rarity: rare');
+      book('plain', 'author: x');
+      book('note', 'rarity: uncommon\nmodel: foxcraft_dungeon_loot:random_loot/written_letter');
+      book('blank_note', 'rarity: rare\nwritable: true\nmodel: foxcraft_dungeon_loot:random_loot/writable_letter');
+      gen.generate(opts);
+      const read = (name) => JSON.parse(fs.readFileSync(path.join(opts.tableDir, name + '.json'), 'utf8'));
+      const shares = (name) => read(name).pools[0].entries.map((e) => [e.weight, e.value.pools[0].entries.map((x) => x.value.split('/').pop())]);
+      assert.deepEqual(shares('mystery_book/common'), [[50, ['c1', 'c2', 'plain']], [13, ['r1']]]);
+      assert.deepEqual(shares('mystery_book/rare'), [[50, ['r1']], [6, ['c1', 'c2', 'plain']]]);
+      assert.deepEqual(shares('mystery_book/cursed'), [[3, ['r1']], [1, ['c1', 'c2', 'plain']]]);
+      assert.deepEqual(shares('mystery_letter'), [[25, ['note']], [13, ['blank_note']]]);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a mystery table has no pools when no book fits', () => {
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', SOURCE);
       gen.generate(opts);
-      const read = (name) => JSON.parse(fs.readFileSync(path.join(opts.tableDir, name + '.json'), 'utf8'));
-      assert.deepEqual(read('random_epic_book').pools[0].entries.map((e) => e.value), [`foxcraft_dungeon_loot:item/random_loot/book/${gen.GENERATED_DIR}/test`]);
-      assert.deepEqual(read('random_rare_book'), { pools: [] });
-      write(dir, 'books/en_us/random_rare_book.md', SOURCE);
-      assert.throws(() => gen.generate(opts), /random_rare_book is the loot table/);
+      assert.deepEqual(JSON.parse(fs.readFileSync(path.join(opts.tableDir, 'mystery_letter.json'), 'utf8')), { pools: [] });
+      write(dir, 'books/en_us/mystery_letter.md', SOURCE);
+      assert.throws(() => gen.generate(opts), /mystery_letter is the loot table/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -1206,13 +1226,21 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const [start] = gen.pagesOf('<style class=".c">Start</style> of a line', null, null, classes);
     assert.deepEqual(padOf(start), [true]);
     assert.ok(!JSON.stringify(start).includes('"center"'));
-    assert.deepEqual(gen.pagesOf('Mid <style class=".c">centered</style> line', null, null, classes)[0], ['Mid ', 'centered', ' line']);
-    // Mid-line it is ignored, the lines it wraps onto start with it and are centered
+    // Mid-line it centers its own text on the line, with padding in front of it; the line before it stays at the left
+    const [mid] = gen.pagesOf('Mid <style class=".c">centered</style> line', null, null, classes);
+    assert.deepEqual(padOf(mid), [true]);
+    assert.equal(mid[0], 'Mid ');
+    assert.equal(mid.filter((p) => typeof p === 'string' && p.includes('centered')).length, 1);
+    // Left, center and right spread across one line
+    const spread = gen.pagesOf('1<center>2</center><style class=".r">3</style>', null, null, gen.parseClasses({ '.r': { align: 'right' } }))[0];
+    assert.equal(spread.filter((p) => p?.styles?.font === 'foxcraft_dungeon_loot:padding').length, 2);
+    // The lines it wraps onto start with it and are centered
     const [wrap] = gen.pagesOf('Mid <style class=".cr">a long centered run of text that goes on and wraps over</style>', null, null, classes);
     assert.deepEqual(padOf(wrap), [false, true, true]);
     assert.ok(!JSON.stringify(wrap).includes('"center"'));
-    // An inner align: left turns it off, a body with align center centers every line
-    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start</style> of a line</style>', null, null, classes)[0]), [false]);
+    // An inner align: left turns it off for its text, the rest of the line is a centered run mid-line; a body with align center centers every line
+    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start</style> of a line</style>', null, null, classes)[0]), [true]);
+    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start of a line</style></style>', null, null, classes)[0]), [false]);
     assert.deepEqual(padOf(gen.pagesOf('one\ntwo', null, null, gen.parseClasses({ body: { align: 'center' } }))[0]), [true, true]);
     assert.throws(() => gen.parseClasses({ '.c': { align: 'middle' } }), /align is left, center, right/);
     // class="center" is built in, the center type styles it and <center>
@@ -1281,7 +1309,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nfont: foxcraft_dungeon_loot:pixellated_elegance/regular,\n---\n\nText');
-      assert.throws(() => gen.generate(opts), /test\.md: frontmatter font/);
+      assert.throws(() => gen.generate(opts), /test\.md:\d+: frontmatter font/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -1306,7 +1334,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
       const { dir, opts } = sandbox();
       try {
         write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\ndata: ${data}\n---\n\nText`);
-        assert.throws(() => gen.generate(opts), /test\.md: frontmatter data/);
+        assert.throws(() => gen.generate(opts), /test\.md:\d+: frontmatter data/);
       } finally {
         fs.rmSync(dir, { recursive: true, force: true });
       }
@@ -1329,7 +1357,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nmodel: Foo Bar\n---\n\nText');
-      assert.throws(() => gen.generate(opts), /test\.md: frontmatter model/);
+      assert.throws(() => gen.generate(opts), /test\.md:\d+: frontmatter model/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }

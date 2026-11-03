@@ -1,0 +1,62 @@
+{
+  "gives": {
+    "id": "minecraft:warped_fungus_on_a_stick"
+  },
+  "given_item_modifier": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{rarity:0b}"
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        {
+          "translate": "lore.foxcraft_dungeon_loot.rarity",
+          "fallback": "Rarity: %s",
+          "with": [
+            {
+              "translate": "rarity.foxcraft_dungeon_loot.common",
+              "fallback": "Common",
+              "color": "white",
+              "italic": true
+            }
+          ]
+        }
+      ],
+      "mode": "append"
+    },
+    {
+      "type": "minecraft:set_name",
+      "name": {
+        "text": "Message in a Bottle",
+        "color": "white",
+        "italic": false
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": "{DungeonLootId:140,MessageInABottle:1b,ProcessOnUsed:1b}"
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:item_model": "foxcraft_dungeon_loot:random_loot/message_in_a_bottle"
+      }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "lore": [
+        "A message, sealed in glass and carried far",
+        "by the tide. Someone wanted it found."
+      ],
+      "mode": "insert"
+    }
+  ],
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 12
+  },
+  "max_uses": 8,
+  "reputation_discount": 0.05,
+  "xp": 30
+}

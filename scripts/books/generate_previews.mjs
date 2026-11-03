@@ -8,6 +8,9 @@
 //     node scripts/books/generate_previews.mjs --book brewing_potions
 //                                                              rebuild and redraw only that book, <author>/<title> as the folders have it, as often as
 //                                                              needed; the other books and their pages are left as they are
+//     node scripts/books/generate_previews.mjs --book "chickenny127/*"
+//                                                              * is a wildcard in the author or the title: author/*, */*, */title,
+//                                                              start*, *end, *part*, also as start*/*part*; quote it in the shell
 //
 // The Java side is the same as in run_all.mjs: Java 25, the client jar and its libraries, found or downloaded the same way. Pages are
 // written to tests/.cache/books/<locale>/[<group>/]<id>/page_NN.png. Exit status is 1 when a step fails, and a failing generator or
@@ -48,6 +51,18 @@ if (names.length) {
   }
   for (const name of names) {
     const wanted = name.replace(/\.md$/, '').replaceAll('\\', '/');
+    // A * is any run of characters within a folder or title: author/*, */*, */title, start*, *end, *part*. Without a slash it is a title
+    if (wanted.includes('*')) {
+      const body = wanted.split('*').map((part) => part.replace(/[.+?^${}()|[\]\\]/g, '\\$&')).join('[^/]*');
+      const re = new RegExp(`^${wanted.includes('/') ? '' : '(?:.*/)?'}${body}$`, 'i');
+      const matched = found.filter((f) => re.test(f.rel));
+      if (!matched.length) {
+        console.error(`no book matches ${name}; the books are ${[...new Set(found.map((f) => f.rel))].sort().join(', ')}`);
+        process.exit(1);
+      }
+      matched.forEach((f) => { sources.push(f.file); books.add(f.rel); });
+      continue;
+    }
     // The full <author>/<title> wins; a bare title is taken only when no other author has a book of that name
     let hits = found.filter((f) => f.rel === wanted);
     if (!hits.length) hits = found.filter((f) => f.rel.endsWith('/' + wanted));

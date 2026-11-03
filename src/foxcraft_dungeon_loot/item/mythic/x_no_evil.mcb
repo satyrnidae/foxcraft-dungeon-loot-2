@@ -17,7 +17,7 @@ function on_snowball_used {
 
             # Summon a tracker marker and remember the thrower on it.
             summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.xNoEvil.projectileTracker],data:{Owner:[I;0,0,0,0]}}
-            data modify entity @e[tag=satyrn.fdl.xNoEvil.projectileTracker,limit=1,sort=nearest] data.Owner set from entity @s Owner
+            data modify entity @e[type=minecraft:marker,tag=satyrn.fdl.xNoEvil.projectileTracker,limit=1,sort=nearest] data.Owner set from entity @s Owner
         }
     }
 }
@@ -33,10 +33,10 @@ function on_tick {
 
     execute as @a[predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_snowball,predicate=foxcraft_dungeon_loot:item/mythic/x_no_evil/in_off_hand] run tag @s add satyrn.fdl.xNoEvil.heldItem
 
-    execute as @e[tag=satyrn.fdl.xNoEvil.projectileTracker] at @s run {
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.xNoEvil.projectileTracker] at @s run {
         # If the tracker is near a projectile, move onto it. A snowball covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.xNoEvil.projectile,distance=..4,limit=1,sort=nearest] run {
-            tp @s @e[tag=satyrn.fdl.xNoEvil.projectile,distance=..4,limit=1,sort=nearest]
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.xNoEvil.projectile,distance=..4,limit=1,sort=nearest] run {
+            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.xNoEvil.projectile,distance=..4,limit=1,sort=nearest]
         } else run {
             # Bottle break sound and particles
             playsound minecraft:entity.splash_potion.break player @a ~ ~ ~ 1.5

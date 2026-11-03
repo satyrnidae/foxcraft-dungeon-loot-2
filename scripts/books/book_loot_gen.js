@@ -25,9 +25,25 @@ const BOOK_DIR = path.join(ROOT, 'src', 'books');
 const MODIFIER_DIR = path.join(ROOT, 'data', NS, 'item_modifier', 'random_loot', 'book', GENERATED_DIR);
 const TABLE_DIR = path.join(ROOT, 'data', NS, 'loot_table', 'item', 'random_loot', 'book', GENERATED_DIR);
 const LANG_DIR = path.join(ROOT, 'texturepack', 'assets', GENERATED_DIR, 'lang');
+// Where the headings of every book and the page they are on go for the book viewer, gitignored with the rest of tests/.cache
+const HEADINGS_FILE = path.join(ROOT, 'tests', '.cache', 'book_headings.json');
 const REFERENCE_LANG = 'en_us';
-// Loot table that rolls one of the generated books, there are no loot table tags. The name is not available as a book id.
-const ALL_TABLE = 'random_book';
+// Mystery tables roll one generated book, there are no loot table tags: mystery_book/<tier> for the Mysterious Book of a tier and
+// mystery_letter for the Message in a Bottle. Their names are not available as book ids. A book is a letter when the item model
+// has "letter" in it, else a book, written or writable.
+const MYSTERY_LETTER = 'mystery_letter';
+const MYSTERY_BOOK_DIR = 'mystery_book';
+const isLetter = (model) => /letter/i.test(String(model || ''));
+// Share of the drops of each rarity, by the tier of the mystery table. A rarity without a book is skipped and the others keep
+// their ratio to each other.
+const TIER_WEIGHTS = {
+    common: { common: 50, uncommon: 25, rare: 13, epic: 6, mythic: 3, cursed: 1 },
+    uncommon: { uncommon: 50, common: 25, rare: 13, epic: 6, mythic: 3, cursed: 1 },
+    rare: { rare: 50, uncommon: 25, epic: 13, common: 6, mythic: 3, cursed: 1 },
+    epic: { rare: 50, epic: 25, uncommon: 13, mythic: 6, common: 3, cursed: 1 },
+    mythic: { epic: 50, mythic: 25, rare: 13, uncommon: 6, common: 3, cursed: 1 },
+    cursed: { cursed: 79, mythic: 10, epic: 5, rare: 3, uncommon: 2, common: 1 },
+};
 // Frontmatter keys, anything else is warned about. Title and author are required.
 const FRONTMATTER_KEYS = ['title', 'author', 'rarity', 'lore', 'font', 'model', 'writable', 'data', 'styles', 'style', 'debug', 'generation', 'displaytitle'];
 const REQUIRED_KEYS = ['title', 'author'];
@@ -60,7 +76,7 @@ const COVER = require('../fonts/cover_to_font.js');
 
 const RARITY_COLORS = { common: 'white', uncommon: 'yellow', rare: 'aqua', epic: 'light_purple', mythic: 'green', cursed: 'red' };
 // Names of the loot tables that group books, random_book and random_<rarity>_book, so not usable as book ids
-const RESERVED = new Set([ALL_TABLE, ...Object.keys(RARITY_COLORS).map((r) => `random_${r}_book`)]);
+const RESERVED = new Set([MYSTERY_LETTER, MYSTERY_BOOK_DIR]);
 const COLORS = ['black', 'dark_blue', 'dark_green', 'dark_aqua', 'dark_red', 'dark_purple', 'gold', 'gray', 'dark_gray', 'blue', 'green', 'aqua', 'red', 'light_purple', 'yellow', 'white'];
 
 //region SNBT
@@ -1553,10 +1569,36 @@ function alignLines(content, rtl = false) {
         const lead = coverPrefix(whole);
         const text = whole.slice(lead);
         if (!text.length) continue;
-        const written = text[0].lead ?? text.find((g) => g.center)?.center ?? null;
+        const written = text[0].lead ?? text[0].center ?? null;
         const laidOut = text.some((g) => g.font === PAD_FONT || g.font === TALLY_FONT || g.font === POTION_FONT || g.font === COVER_FONT || g.font === CODE_FONT || g.font === MUSIC_FONT);
         const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
-        if (align === 'left') continue;
+        if (align === 'left') {
+            // Runs of text that start mid-line with align center or right go to the middle or the right edge of the same line,
+            // each with the padding in front of it: `1<center>2</center><style class=".right">3</style>` is 1, 2 and 3 spread
+            // across the line. Runs go in order, and a run that has no room left stays where it falls
+            if (!rtl && !laidOut) {
+                const modeOf = (g) => g.lead ?? g.center ?? 'left';
+                const runs = [];
+                text.forEach((g, n) => {
+                    const mode = modeOf(g);
+                    if (!runs.length || runs[runs.length - 1].mode !== mode) runs.push({ mode, from: n });
+                    runs[runs.length - 1].to = n + 1;
+                });
+                let x = 0;
+                const pads = [];
+                for (const run of runs) {
+                    const w = reach(text.slice(run.from, run.to));
+                    const pad = run.mode === 'center' ? Math.floor((PAGE_WIDTH - w) / 2) - x : run.mode === 'right' ? PAGE_WIDTH - x - w : 0;
+                    if (pad > 0 && run.from > 0) {
+                        pads.push({ place: text[run.from].place, pad });
+                        x += pad;
+                    }
+                    x += w;
+                }
+                for (const { place, pad } of pads.reverse()) insertAt(tree, place, [{ styles: PAD_STYLES, content: [padding(Math.min(MAX_PAD, pad))] }]);
+            }
+            continue;
+        }
         const room = PAGE_WIDTH - reach(text);
         // The line of the filtered reading is wider by the delta of the spans on it, so it gets that much less padding
         const delta = rtl ? text.reduce((sum, g) => sum + (g.delta ?? 0), 0) : 0;
@@ -2349,6 +2391,31 @@ function resolveAnchors(pages, file) {
     }
 }
 
+/**
+ * Prefixes an error message with file:line, the format editors and terminals open. The line comes from what the message names:
+ * a class, a style, a `n`cover line or a frontmatter key; a message that names nothing findable gets the file alone.
+ */
+function locate(file, message) {
+    const own = `${file}: `;
+    const text = message.startsWith(own) ? message.slice(own.length) : message;
+    let lines;
+    try {
+        lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
+    } catch (e) {
+        return own + text;
+    }
+    // First line matching, 1-based, 0 for none
+    const find = (test) => lines.findIndex(test) + 1;
+    let line = 0;
+    let m;
+    if ((m = /class "\.?([^"]+)"/.exec(text))) line = find((l) => l.includes(`class=".${m[1]}"`) || l.includes(`class="${m[1]}"`));
+    else if ((m = /^style "([^"]+)"/.exec(text))) line = find((l) => l.trim().replace(/^"|"?:.*$/g, '') === m[1]);
+    else if ((m = /^`(.+?)`cover/.exec(text))) line = find((l) => l.startsWith('`' + m[1] + '`cover'));
+    else if ((m = /^(styles|data|lore|font) |frontmatter (\w+)/.exec(text))) line = find((l) => l.toLowerCase().startsWith((m[1] || m[2]).toLowerCase() + ':'));
+    else if (/^SNBT/.test(text)) line = find((l) => /^(styles|style|data|lore)\s*:/i.test(l));
+    return `${file}${line ? ':' + line : ''}: ${text}`;
+}
+
 function readSource(file) {
     const { meta, body } = parseFrontmatter(fs.readFileSync(file, 'utf8'));
     const { locale, group, root } = placeOf(file);
@@ -2628,6 +2695,32 @@ function buildWritable(id, source, title, file, warnings) {
     return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
 }
 
+/**
+ * The # headers of the page trees as [page, names] pairs, read from the source text and not the pixels. A header cut by the
+ * page break is one heading, listed on the page it starts on.
+ */
+function headingsOf(trees, filtered) {
+    const found = [];
+    let last = null;
+    trees.forEach((tree, n) => {
+        const names = [];
+        const walk = (nodes) => {
+            for (const part of nodes) {
+                if (typeof part === 'string') continue;
+                // The pages are cut from glyphs, which keep the styles of a header and its anchor but not the header flag
+                if (part.styles && part.styles.anchor !== undefined) names.push({ anchor: part.styles.anchor, name: plainOf(part.content).replace(/[\ue000-\uf8ff]/g, '').replace(/\s+/g, ' ').trim() });
+                else walk(part.content);
+            }
+        };
+        walk(variant(Array.isArray(tree) ? tree : [tree], filtered));
+        // The header at the start of a page is the tail of the one the previous page ended on
+        const kept = names.filter((h, k) => !(k === 0 && last !== null && h.anchor === last));
+        if (kept.length) found.push([n + 1, kept.map((h) => h.name)]);
+        if (names.length) last = names[names.length - 1].anchor;
+    });
+    return found;
+}
+
 /** Item modifier JSON and lang entries for one book in one locale. */
 function buildBook(id, file, source = readSource(file)) {
     const warnings = [];
@@ -2688,7 +2781,7 @@ function buildBook(id, file, source = readSource(file)) {
     if (meta.data) functions.push({ type: 'minecraft:set_custom_data', tag: meta.data });
     const lore = loreLines(meta, id, lang, source.loreCount);
     if (lore.length) functions.push({ type: 'minecraft:set_lore', lore, mode: 'insert' });
-    return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings };
+    return { modifier: { type: 'minecraft:sequence', functions }, lang, warnings, headings: { raw: headingsOf(source.pages, false), filtered: headingsOf(source.pages, true) } };
 }
 
 //endregion
@@ -2713,12 +2806,18 @@ function emit(file, text, check) {
 // Private-use characters, the glyphs of fonts such as staff_notation, are written as \uXXXX so they stay readable in the output
 const json = (value) => JSON.stringify(value, null, 2).replace(/[\u00a0\ue000-\uf8ff]/g, (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`) + '\n';
 
-// One book of the generated ones, equal odds
-// An empty list is a table without pools, which drops nothing. A table entry that points at one still counts as picked, so
-// the tables of all books list the books themselves and not the rarity tables.
-function allTable(ids, paths = {}) {
-    if (!ids.length) return { pools: [] };
-    return { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/${GENERATED_DIR}/${paths[id] || id}` })) }] };
+// One book of the generated ones by tier weights, equal odds within a rarity. A rarity is an inline loot table so its weight
+// does not depend on how many books it has. An empty list is a table without pools, which drops nothing. A table entry that
+// points at one still counts as picked, so the tables list the books themselves.
+function mysteryTable(books, tier, paths = {}) {
+    const entries = [];
+    for (const [rarity, weight] of Object.entries(TIER_WEIGHTS[tier])) {
+        const ids = books.filter((book) => (book.rarity || 'common') === rarity).map((book) => book.id);
+        if (!ids.length) continue;
+        const value = { pools: [{ rolls: 1, entries: ids.map((id) => ({ type: 'minecraft:loot_table', value: `${NS}:item/random_loot/book/${GENERATED_DIR}/${paths[id] || id}` })) }] };
+        entries.push({ type: 'minecraft:loot_table', weight, value });
+    }
+    return entries.length ? { pools: [{ rolls: 1, entries }] } : { pools: [] };
 }
 
 // The rarity is the shared item modifier rarity/<name>, in the entry so that it runs before the modifier of the book
@@ -2765,7 +2864,7 @@ function findSources(dir, warnings = [], dev = devMode()) {
             try {
                 meta = parseFrontmatter(text).meta;
             } catch (e) {
-                throw new Error(`${file}: ${e.message}`);
+                throw new Error(locate(file, e.message));
             }
             for (const key of requiredKeys(meta)) if (!String(meta[key] || '').trim()) throw new Error(`${file}: frontmatter ${key} is required`);
             if (meta.font !== undefined) warnings.push(`${file}: the frontmatter font is deprecated, use styles: { body: { font: ${meta.font} } }`);
@@ -2773,7 +2872,7 @@ function findSources(dir, warnings = [], dev = devMode()) {
             if (String(meta.debug).toLowerCase() === 'true' && !dev) hidden.add(m[1]);
             else if (meta.debug !== undefined && !/^(true|false)$/i.test(String(meta.debug))) throw new Error(`${file}: frontmatter debug is true or false`);
             if (books[m[1]]) throw new Error(`${file}: the book id ${m[1]} is also used by ${books[m[1]].file}, ids are unique across group folders`);
-            books[m[1]] = { file, rel: (path.dirname(rel) === '.' ? '' : path.dirname(rel).split(path.sep).join('/') + '/') + m[1], writable: isWritable(meta), rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
+            books[m[1]] = { file, rel: (path.dirname(rel) === '.' ? '' : path.dirname(rel).split(path.sep).join('/') + '/') + m[1], writable: isWritable(meta), letter: isLetter(meta.model), rarity: meta.rarity ? String(meta.rarity).toLowerCase() : null, debug: String(meta.debug).toLowerCase() === 'true' };
         }
     }
     for (const books of Object.values(found)) for (const id of hidden) delete books[id];
@@ -2785,7 +2884,7 @@ function findSources(dir, warnings = [], dev = devMode()) {
  * Options: check, only (source files to limit the modifiers to), and the directories for tests.
  */
 function generate(options = {}) {
-    const { check = false, bookDir = BOOK_DIR, modifierDir = MODIFIER_DIR, tableDir = TABLE_DIR, langDir = LANG_DIR, dev } = options;
+    const { check = false, bookDir = BOOK_DIR, modifierDir = MODIFIER_DIR, tableDir = TABLE_DIR, langDir = LANG_DIR, dev, headingsFile = options.modifierDir ? null : HEADINGS_FILE } = options;
     const only = options.only && options.only.map((f) => path.resolve(f));
     const changed = [];
     const warnings = [];
@@ -2803,8 +2902,15 @@ function generate(options = {}) {
         both.forEach((source, i) => aligned.set(files[i], { ...source, loreCount }));
     }
     const builds = new Map();
+    const headings = {};
     const buildOnce = (id, file) => {
-        if (!builds.has(file)) builds.set(file, buildBook(id, file, aligned.get(file)));
+        if (!builds.has(file)) {
+            try {
+                builds.set(file, buildBook(id, file, aligned.get(file)));
+            } catch (e) {
+                throw new Error(locate(file, e.message));
+            }
+        }
         return builds.get(file);
     };
 
@@ -2815,6 +2921,7 @@ function generate(options = {}) {
             const built = buildOnce(id, book.file);
             warnings.push(...built.warnings);
             Object.assign(langs[locale], built.lang);
+            if (built.headings) headings[`${locale}/${book.rel}`] = built.headings;
             if (locale === REFERENCE_LANG) {
                 if (only && !only.includes(path.resolve(book.file))) continue;
                 const modifier = path.join(modifierDir, book.rel + '.json');
@@ -2834,11 +2941,13 @@ function generate(options = {}) {
     // Debug books have their own table and give function, but never drop at random
     const random = Object.keys(references).filter((id) => !references[id].debug).sort();
     const paths = Object.fromEntries(Object.entries(references).map(([id, book]) => [id, book.rel]));
-    const aggregates = { [ALL_TABLE]: random };
-    for (const rarity of Object.keys(RARITY_COLORS)) aggregates[`random_${rarity}_book`] = random.filter((id) => references[id].rarity === rarity);
-    for (const [name, ids] of Object.entries(aggregates)) {
+    const aggregates = {};
+    const listed = (letter) => random.filter((id) => references[id].letter === letter).map((id) => ({ id, rarity: references[id].rarity }));
+    for (const tier of Object.keys(TIER_WEIGHTS)) aggregates[`${MYSTERY_BOOK_DIR}/${tier}`] = mysteryTable(listed(false), tier, paths);
+    aggregates[MYSTERY_LETTER] = mysteryTable(listed(true), 'common', paths);
+    for (const [name, table] of Object.entries(aggregates)) {
         const file = path.join(tableDir, name + '.json');
-        if (emit(file, json(allTable(ids, paths)), check)) changed.push(file);
+        if (emit(file, json(table), check)) changed.push(file);
     }
 
     // Modifiers and tables are all made here, so one without a source is left over from a book that was removed or renamed
@@ -2864,7 +2973,10 @@ function generate(options = {}) {
         const file = path.join(langDir, locale + '.json');
         if (emit(file, json(entries), check)) changed.push(file);
     }
+    // The viewer reads the headings from here, only the real run writes them
+    if (headingsFile && !check) emit(headingsFile, json(headings), false);
     for (const id of FONTS.missing) warnings.push(`font ${id} is not defined by the game or texturepack/assets, its glyphs are measured as 9 pixels`);
+
     return { changed, warnings };
 }
 

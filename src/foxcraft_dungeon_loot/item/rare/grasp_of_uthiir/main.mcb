@@ -37,10 +37,10 @@ function on_tick {
 
     execute as @e[type=minecraft:marker,tag=satyrn.fdl.cobwebdecay] at @s run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/decay_tick
 
-    execute as @e[tag=satyrn.fdl.grasp_of_uthiir.projectile_tracker] at @s run {
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.grasp_of_uthiir.projectile_tracker] at @s run {
         # If the tracker is near a projectile, move onto it. A snowball covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest] run {
-            tp @s @e[tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest]
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest] run {
+            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest]
         } else run {
             # A snowball that struck an entity webs the entity, otherwise the item is given back where the tracker stopped.
             # An entity's position is its feet, so a hit on the head of a tall mob is further than 2 blocks from it. Look
@@ -52,7 +52,7 @@ function on_tick {
                 execute as @e[tag=satyrn.fdl.grasp_of_uthiir.candidate,sort=nearest,limit=1] at @s run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_entity
                 tag @e[tag=satyrn.fdl.grasp_of_uthiir.candidate] remove satyrn.fdl.grasp_of_uthiir.candidate
             } else run {
-                loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/rare/grasp_of_uthiir
+                function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_ground
             }
 
             # Clean up tracking entity
@@ -63,43 +63,56 @@ function on_tick {
     }
 }
 
-# Runs as the struck entity. Slows it and webs every empty block its hitbox touches. align xyz plus dx=dy=dz=0 tests the
+# Runs as the struck entity. Webs every replaceable block its hitbox touches. align xyz plus dx=dy=dz=0 tests the
 # hitbox against a single block cell, the scan covers 3x3 columns up to 3 blocks tall from the feet.
 function hit_entity {
-    effect give @s minecraft:slowness <%cobwebDecay%> 1
     scoreboard players set #test <%config.internalScoreboard%> 0
     REPEAT(-1, 1) as x {
         REPEAT(0, 2) as y {
             REPEAT(-1, 1) as z {
-                execute positioned ~<%x%> ~<%y%> ~<%z%> align xyz if entity @s[dx=0,dy=0,dz=0] if block ~ ~ ~ #minecraft:air store success score #test <%config.internalScoreboard%> run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/web_cell
+                execute positioned ~<%x%> ~<%y%> ~<%z%> align xyz if entity @s[dx=0,dy=0,dz=0] if function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/web_cell run scoreboard players set #test <%config.internalScoreboard%> 1
             }
         }
     }
-    # Nothing could be placed, give the item back
+    # The effects only apply when a web was placed on the entity, otherwise give the item back
+    execute if score #test <%config.internalScoreboard%> matches 1 run {
+        effect give @s minecraft:slowness <%cobwebDecay%> 2
+        effect give @s minecraft:weaving <%cobwebDecay%> 1
+    } else run {
+        loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/rare/grasp_of_uthiir
+    }
+}
+
+# Runs at the tracker when the snowball hit no entity. Webs the first replaceable block of a 3d cross around the landing position,
+# so the cobweb uses the same decay marker as the entity path. Gives the item back only if none of the 7 blocks were replaceable.
+function hit_ground {
+    scoreboard players set #test <%config.internalScoreboard%> 0
+    REPEAT(['~ ~ ~', '~-1 ~ ~', '~ ~-1 ~', '~ ~ ~-1', '~1 ~ ~', '~ ~1 ~', '~ ~ ~1']) as offset {
+        execute if score #test <%config.internalScoreboard%> matches 0 positioned <%offset%> align xyz if function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/web_cell run scoreboard players set #test <%config.internalScoreboard%> 1
+    }
     execute if score #test <%config.internalScoreboard%> matches 0 run loot spawn ~ ~ ~ loot foxcraft_dungeon_loot:item/rare/grasp_of_uthiir
 }
 
-# Runs at the corner of an empty block in the hitbox. Places the cobweb and a marker that decays it. Returns 1 so the caller
-# can tell something was placed.
+# Runs at the corner of a cell. Places the cobweb and a marker that decays it when the cell is replaceable. Returns 1 when
+# something was placed and fails otherwise, callers test it with if function and need no check of their own.
 function web_cell {
-    setblock ~ ~ ~ minecraft:cobweb keep
-    # Prototype for namespaced custom data on entities, nested under the pack id so other implementations can follow it
-    summon minecraft:marker ~0.5 ~0.5 ~0.5 {Tags:[satyrn.fdl.cobwebdecay],data:{foxcraft_dungeon_loot:{cobweb_decay:<%cobwebDecay * 20%>}}}
+    execute unless block ~ ~ ~ #minecraft:replaceable run return fail
+    setblock ~ ~ ~ minecraft:cobweb
+    # The countdown is a score on the marker. Reading or writing marker data every tick serializes the whole entity.
+    summon minecraft:marker ~0.5 ~0.5 ~0.5 {Tags:[satyrn.fdl.cobwebdecay]}
+    execute positioned ~0.5 ~0.5 ~0.5 as @n[type=minecraft:marker,tag=satyrn.fdl.cobwebdecay,distance=..0.1] run scoreboard players set @s satyrn.fdl.grasp_of_uthiir.cobweb_decay <%cobwebDecay * 20%>
     return 1
 }
 
-# Runs as and at a decay marker. Markers do not tick any timer, so count data.foxcraft_dungeon_loot.cobweb_decay down here.
-# Gone when the cobweb was broken, along with one string from the drop, and clears the cobweb when the time runs out.
+# Runs as and at a decay marker. Markers do not tick any timer, so count the satyrn.fdl.grasp_of_uthiir.cobweb_decay score down
+# here. Gone when the cobweb was broken, along with one string from the drop, and clears the cobweb when the time runs out.
 function decay_tick {
     execute if block ~ ~ ~ minecraft:cobweb run {
-        execute if data entity @s data.foxcraft_dungeon_loot{cobweb_decay:1} run {
+        scoreboard players remove @s satyrn.fdl.grasp_of_uthiir.cobweb_decay 1
+        execute if score @s satyrn.fdl.grasp_of_uthiir.cobweb_decay matches ..0 run {
             setblock ~ ~ ~ minecraft:air
             particle minecraft:item{item:{id:"minecraft:cobweb"}} ~ ~ ~ 0.2 0.2 0.2 0.05 10
             kill @s
-        } else run {
-            # compute cannot read entity data, only scoreboards and storage, so stage the value in storage
-            data modify storage foxcraft_dungeon_loot:items grasp_of_uthiir.cobweb_decay set from entity @s data.foxcraft_dungeon_loot.cobweb_decay
-            execute store result entity @s data.foxcraft_dungeon_loot.cobweb_decay int 1 run compute default integer {type:"minecraft:sub",left:{type:"minecraft:storage",storage:"foxcraft_dungeon_loot:items",path:"grasp_of_uthiir.cobweb_decay"},right:1}
         }
     } else run {
         # Broken early, expiry never reaches here. The break drops one string within a quarter block of the cell center, so
@@ -119,7 +132,12 @@ function remove_string {
     }
 }
 
+function on_load {
+    scoreboard objectives add satyrn.fdl.grasp_of_uthiir.cobweb_decay dummy "Grasp of Uthiir cobweb ticks left"
+}
+
 function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.grasp_of_uthiir.cobweb_decay
     data remove storage foxcraft_dungeon_loot:items grasp_of_uthiir
 }
 

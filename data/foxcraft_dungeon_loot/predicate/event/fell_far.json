@@ -2,7 +2,10 @@
   "type": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "minecraft:entity_type": "minecraft:item",
-    "minecraft:nbt": "{Age:5999s}"
+    "minecraft:movement": {
+      "fall_distance": {
+        "min": 5
+      }
+    }
   }
 }

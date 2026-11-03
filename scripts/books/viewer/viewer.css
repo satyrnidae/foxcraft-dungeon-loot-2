@@ -11,6 +11,11 @@
   --text: #e6e3ee;
   --dim: #9a96a8;
   --accent: #b17bff;
+  /* The game tooltip frame, shared by the tooltips, buttons, fields, toast and the notice */
+  --tip-bg: rgba(16, 0, 16, .94);
+  --tip-border: linear-gradient(#5000ff80, #28007f80);
+  --tip-border-hover: linear-gradient(#a070ffcc, #6030c0cc);
+  --tip-clip: polygon(0 2px, 2px 2px, 2px 0, calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px));
 }
 
 * { box-sizing: border-box; }
@@ -39,17 +44,23 @@ h1 { margin: 0; font-size: 18px; }
 #count { color: var(--dim); margin-left: auto; }
 
 input[type="search"], select, button {
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--edge);
-  border-radius: 4px;
-  padding: 6px 10px;
+  background: var(--tip-bg);
+  color: #fff;
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  border-radius: 0;
+  clip-path: var(--tip-clip);
+  padding: 5px 9px;
   font: inherit;
+  text-shadow: 2px 2px 0 #3f3f3f;
 }
 
-input[type="search"] { width: 240px; max-width: 100%; }
+input[type="search"] { width: 240px; max-width: 100%; text-shadow: none; }
 button { cursor: pointer; }
-button:hover { border-color: var(--accent); }
+button:hover:not(:disabled), button:focus-visible { border-image: var(--tip-border-hover) 1; outline: none; }
+/* Held down, text goes yellow like a tooltip title; important so it also beats the red close X */
+button:active:not(:disabled) { color: #ffff55 !important; }
+button:disabled { opacity: .3; cursor: default; }
 
 main { padding: 8px 16px 32px; }
 
@@ -74,12 +85,14 @@ h2 {
   gap: 6px;
   padding: 10px 6px;
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  border: 2px solid transparent;
+  border-image: none;
+  clip-path: none;
+  text-shadow: none;
   min-width: 0;
 }
 
-.book:hover, .book:focus-visible { background: var(--panel); border-color: var(--edge); outline: none; }
+.book:hover, .book:focus-visible { background: var(--tip-bg); clip-path: var(--tip-clip); }
 .icon {
   position: relative;
   width: 64px;
@@ -111,11 +124,11 @@ h2 {
   z-index: 30;
   pointer-events: none;
   padding: 4px 6px;
-  background: rgba(16, 0, 16, .94);
+  background: var(--tip-bg);
   border: 2px solid;
-  border-image: linear-gradient(#5000ff80, #28007f80) 1;
-  box-shadow: 0 0 0 2px rgba(16, 0, 16, .94);
-  clip-path: polygon(0 2px, 2px 2px, 2px 0, calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px));
+  border-image: var(--tip-border) 1;
+  box-shadow: 0 0 0 2px var(--tip-bg);
+  clip-path: var(--tip-clip);
   color: #fff;
   font: 14px/1.2 'Minecraft', ui-monospace, Consolas, monospace;
   text-shadow: 2px 2px 0 #3f3f3f;
@@ -132,13 +145,13 @@ h2 {
 }
 
 #reader[hidden], #mark-tip[hidden], #tooltip[hidden], #toast[hidden], #filter[hidden], #reader-tip[hidden] { display: none; }
-#filter[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+#filter[aria-pressed="true"] { border-image: var(--tip-border-hover) 1; color: #ffff55; }
 
 .bar { display: flex; align-items: center; gap: 16px; padding: 10px 16px; }
 /* Over the top right corner of the book, placed by placeClose in viewer.js */
 #close, #mute-reader { position: absolute; z-index: 2; top: 0; right: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; font-size: 20px; line-height: 1; }
 #close { color: #ff5555; }
-.mute { line-height: 1.2; }
+.mute { line-height: 1.2; text-shadow: none; }
 .bar #page-count { margin: 0 auto; color: var(--dim); }
 
 .stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 12px; }
@@ -147,7 +160,6 @@ h2 {
 .stage .side { position: relative; z-index: 1; display: flex; gap: 4px; }
 .stage button { font-size: 28px; padding: 10px 10px; }
 .stage button.edge { letter-spacing: 3px; }
-.stage button:disabled { opacity: .3; cursor: default; }
 
 @media (max-width: 600px) {
   .stage .side { position: absolute; bottom: 8px; z-index: 1; margin: 0 !important; }
@@ -179,10 +191,13 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
-  padding: 8px 14px;
-  background: var(--panel);
-  border: 1px solid var(--accent);
-  border-radius: 4px;
+  padding: 6px 12px;
+  background: var(--tip-bg);
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  clip-path: var(--tip-clip);
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
 }
 
 /* First visit notice, over everything including the reader */
@@ -201,23 +216,22 @@ h2 {
   /* Same frame as #mark-tip */
   width: min(460px, 100%);
   padding: 12px 14px;
-  background: rgba(16, 0, 16, .94);
+  background: var(--tip-bg);
   border: 2px solid;
-  border-image: linear-gradient(#5000ff80, #28007f80) 1;
-  box-shadow: 0 0 0 2px rgba(16, 0, 16, .94);
-  clip-path: polygon(0 2px, 2px 2px, 2px 0, calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px));
+  border-image: var(--tip-border) 1;
+  box-shadow: 0 0 0 2px var(--tip-bg);
+  clip-path: var(--tip-clip);
   color: #fff;
   font: 14px/1.4 'Minecraft', ui-monospace, Consolas, monospace;
   text-shadow: 2px 2px 0 #3f3f3f;
 }
-#eula button, #eula input { font-family: inherit; text-shadow: none; }
+#eula input { font-family: inherit; text-shadow: none; }
 #eula h2 { margin: 0 0 12px; font-size: 16px; letter-spacing: 0; text-transform: none; color: #ffff55; }
 #eula p { margin: 0 0 12px; }
 #eula a { color: var(--accent); }
 #eula label { display: flex; align-items: center; gap: 8px; margin: 16px 0; cursor: pointer; }
 #eula .actions { display: flex; justify-content: flex-end; }
-#eula-ok:disabled { background: #3a3745; color: var(--dim); border-color: transparent; cursor: not-allowed; }
-#eula-ok:not(:disabled) { background: var(--accent); color: #12101a; border-color: var(--accent); }
+#eula-ok:disabled { cursor: not-allowed; }
 
 /* The page slider under the book, with a stop for every page */
 .bar.pager { flex-direction: column; gap: 6px; padding-top: 4px; }
