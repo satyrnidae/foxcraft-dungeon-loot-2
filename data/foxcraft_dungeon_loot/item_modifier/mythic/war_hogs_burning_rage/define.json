@@ -26,7 +26,7 @@
         "",
         [
           {
-            "text": "Disarming Strike: ",
+            "text": "Disarming Strike III: ",
             "color": "green",
             "italic": false
           },
@@ -37,17 +37,12 @@
           }
         ],
         {
-          "text": "that is holding an item, has a one in ten",
+          "text": "that is holding an item, has a 20% chance to",
           "color": "gray",
           "italic": false
         },
         {
-          "text": "chance to force the entity to drop said",
-          "color": "gray",
-          "italic": false
-        },
-        {
-          "text": "item.",
+          "text": "force the entity to drop said item.",
           "color": "gray",
           "italic": false
         },
@@ -64,17 +59,12 @@
           }
         ],
         {
-          "text": " reduced to one in twenty. Player items",
+          "text": " reduced to 10%. Player items cannot be",
           "color": "red",
           "italic": false
         },
         {
-          "text": " cannot be picked up except by the",
-          "color": "red",
-          "italic": false
-        },
-        {
-          "text": " owner.",
+          "text": " picked up except by the owner.",
           "color": "red",
           "italic": false
         }
@@ -103,6 +93,7 @@
     {
       "type": "minecraft:set_enchantments",
       "enchantments": {
+        "foxcraft_dungeon_loot:disarming_strike": 3,
         "minecraft:fire_aspect": 3,
         "minecraft:impaling": 3,
         "minecraft:mending": 1,

@@ -4,7 +4,7 @@ import ./constants.js
 
 # Relevant Entity Tags:
 # satyrn.fdl.grasp_of_uthiir.held_item - A player that is holding the Grasp of Uthiir
-# satyrn.fdl.grasp_of_uthiir.thrower - The player who threw it while the projectile is in flight, never counts as a hit entity
+# satyrn.fdl.raycast.source - The player who threw it while the projectile is in flight, never counts as a hit entity
 # satyrn.fdl.grasp_of_uthiir.projectile - The snowball thrown by a player who used the Grasp of Uthiir
 # satyrn.fdl.grasp_of_uthiir.projectile_tracker - A marker which is teleported onto the projectile every tick. It has no hitbox, so the
 #   snowball cannot strike it, and it is left behind where the projectile stopped.
@@ -12,7 +12,7 @@ import ./constants.js
 function on_snowball_used {
     # Execute if a tagged player threw a snowball.
     execute if entity @s[tag=satyrn.fdl.grasp_of_uthiir.held_item] run {
-        tag @s add satyrn.fdl.grasp_of_uthiir.thrower
+        tag @s add satyrn.fdl.raycast.source
         # Execute the following as the nearest snowball, presumably the one thrown by the player.
         execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
             # Tag the snowball as the projectile.
@@ -20,6 +20,8 @@ function on_snowball_used {
 
             # Summon the tracker on the projectile. An armor stand was struck by the snowball and had its own physics.
             summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.grasp_of_uthiir.projectile_tracker]}
+            # Start the tracker facing the throw, in case the snowball is gone before the first tick
+            execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run data modify entity @n[type=minecraft:marker,tag=satyrn.fdl.grasp_of_uthiir.projectile_tracker,distance=..0.01] Rotation set from entity @s Rotation
         }
     }
 }
@@ -40,24 +42,30 @@ function on_tick {
     execute as @e[type=minecraft:marker,tag=satyrn.fdl.grasp_of_uthiir.projectile_tracker] at @s run {
         # If the tracker is near a projectile, move onto it. A snowball covers up to 1.5 blocks a tick, so look wider than one.
         execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest] run {
-            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest]
+            # Face along the travel from the old tracker position, which the raycast uses as the direction of travel
+            execute facing entity @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest] feet positioned as @e[type=minecraft:snowball,tag=satyrn.fdl.grasp_of_uthiir.projectile,distance=..4,limit=1,sort=nearest] run tp @s ~ ~ ~ ~ ~
         } else run {
-            # A snowball that struck an entity webs the entity, otherwise the item is given back where the tracker stopped.
-            # An entity's position is its feet, so a hit on the head of a tall mob is further than 2 blocks from it. Look
-            # from the tracker and from 1 and 2 blocks below it.
-            REPEAT(-2, 0) as y {
-                execute positioned ~ ~<%y%> ~ run tag @e[type=!#foxcraft_dungeon_loot:non_living,tag=!satyrn.fdl.grasp_of_uthiir.thrower,distance=..2.5] add satyrn.fdl.grasp_of_uthiir.candidate
-            }
-            execute if entity @e[tag=satyrn.fdl.grasp_of_uthiir.candidate] run {
-                execute as @e[tag=satyrn.fdl.grasp_of_uthiir.candidate,sort=nearest,limit=1] at @s run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_entity
-                tag @e[tag=satyrn.fdl.grasp_of_uthiir.candidate] remove satyrn.fdl.grasp_of_uthiir.candidate
-            } else run {
-                function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_ground
+            # The tracker is a tick short of the impact, so move it there first
+            function foxcraft_dungeon_loot:raycast/impact
+
+            execute at @s run {
+                # A snowball that struck an entity webs the entity, otherwise the item is given back where the tracker stopped.
+                # An entity's position is its feet, so a hit on the head of a tall mob is further than 2 blocks from it. Look
+                # from the tracker and from 1 and 2 blocks below it.
+                REPEAT(-2, 0) as y {
+                    execute positioned ~ ~<%y%> ~ run tag @e[type=!#foxcraft_dungeon_loot:non_living,tag=!satyrn.fdl.raycast.source,distance=..2.5] add satyrn.fdl.grasp_of_uthiir.candidate
+                }
+                execute if entity @e[tag=satyrn.fdl.grasp_of_uthiir.candidate] run {
+                    execute as @e[tag=satyrn.fdl.grasp_of_uthiir.candidate,sort=nearest,limit=1] at @s run function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_entity
+                    tag @e[tag=satyrn.fdl.grasp_of_uthiir.candidate] remove satyrn.fdl.grasp_of_uthiir.candidate
+                } else run {
+                    function foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/hit_ground
+                }
             }
 
             # Clean up tracking entity
-            particle minecraft:item{item:{id:"minecraft:cobweb"}} ~ ~ ~ 0.1 0.1 0.1 0.1 20
-            tag @a remove satyrn.fdl.grasp_of_uthiir.thrower
+            execute at @s run particle minecraft:item{item:{id:"minecraft:cobweb"}} ~ ~ ~ 0.1 0.1 0.1 0.1 20
+            tag @a remove satyrn.fdl.raycast.source
             kill @s
         }
     }

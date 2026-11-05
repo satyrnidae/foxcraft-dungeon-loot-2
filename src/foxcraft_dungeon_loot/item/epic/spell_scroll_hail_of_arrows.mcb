@@ -3,6 +3,16 @@ import ../../../config.js
 # Holding Spell Scroll Hail of Arrows:      satyrn.fdl.holdingSC_HOA
 # Snowball entity representing the scroll:  satyrn.fdl.SC_HOA
 # Marker for tracking                      satyrn.fdl.SC_HOA_tracker
+# Entity the scroll struck, if any         satyrn.fdl.SC_HOA.target
+# Arrow that has not been launched yet     satyrn.fdl.SC_HOA.arrow
+# Marker that fires the volleys            satyrn.fdl.SC_HOA.volley
+# Volley marker whose target was an entity satyrn.fdl.SC_HOA.aimed
+# Entity temporarily marked while looked up satyrn.fdl.SC_HOA.current
+# Marker that holds an aim vector          satyrn.fdl.SC_HOA.vector
+#
+# SCORES
+# satyrn.fdl.SC_HOA.id - On a volley marker and on its target, so the marker can find the target again.
+# satyrn.fdl.SC_HOA.timer - Ticks since the volley marker spawned. A volley fires at 0, 15 and 30.
 
 # Runs once per tick
 function on_tick {
@@ -18,21 +28,136 @@ function on_tick {
     execute as @e[type=minecraft:marker,tag=satyrn.fdl.SC_HOA_tracker] at @s run {
         # A scroll covers up to 1.5 blocks a tick, so look wider than one.
         execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest] run {
-            tp @s @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest]
+            # Face along the travel from the old tracker position, which the raycast uses as the direction of travel
+            execute facing entity @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest] feet positioned as @e[type=minecraft:snowball,tag=satyrn.fdl.SC_HOA, distance=..4, limit=1, sort=nearest] run tp @s ~ ~ ~ ~ ~
             execute at @s run particle minecraft:enchant ~ ~ ~ 0.1 0.1 0.1 0 3
         # If tracker cannot find a scroll, it hit something and was destroyed.
         } else run {
+            # The tracker is a tick short of the impact, so move it there first
+            function foxcraft_dungeon_loot:raycast/impact
+
             # Launch Hail of Arrows
-            playsound minecraft:entity.evoker.prepare_attack player @a ~ ~ ~ 10
-            particle minecraft:enchant ~ ~ ~ 1 0.5 1 0 100
-            function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/spawn_arrows_1
-            function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/spawn_arrows_2
-            function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/spawn_arrows_3
+            execute at @s run {
+                playsound minecraft:entity.evoker.prepare_attack player @a ~ ~ ~ 10
+                particle minecraft:enchant ~ ~ ~ 1 0.5 1 0 100
+                function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/start_volleys
+            }
 
             #Destroy tracker
+            tag @a remove satyrn.fdl.raycast.source
             kill @s
         }
     }
+
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.volley] at @s run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/volley_tick
+}
+
+# Runs when the datapack loads.
+function on_load {
+    scoreboard objectives add satyrn.fdl.SC_HOA.id dummy "Hail of Arrows volley id"
+    scoreboard objectives add satyrn.fdl.SC_HOA.timer dummy "Hail of Arrows volley ticks"
+}
+
+# Runs when the datapack is uninstalled.
+function on_uninstall {
+    scoreboard objectives remove satyrn.fdl.SC_HOA.id
+    scoreboard objectives remove satyrn.fdl.SC_HOA.timer
+    data remove storage foxcraft_dungeon_loot:items hoa
+}
+
+# Run as and at the tracker where the scroll landed. Spawns the marker that fires the volleys, 30 blocks above the spot. The
+# marker faces straight down, or at the entity the scroll struck, and fires its arrows in a disc around itself along that
+# direction. It faces the entity again before each volley, and keeps the last direction once the entity is dead.
+function start_volleys {
+    scoreboard players add #hoa.id <%config.internalScoreboard%> 1
+    summon minecraft:marker ~ ~30 ~ {Tags:[satyrn.fdl.SC_HOA.volley,satyrn.fdl.SC_HOA.new],Rotation:[0.0f,90.0f]}
+    execute as @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.new] run {
+        tag @s remove satyrn.fdl.SC_HOA.new
+        scoreboard players set @s satyrn.fdl.SC_HOA.timer 0
+        scoreboard players operation @s satyrn.fdl.SC_HOA.id = #hoa.id <%config.internalScoreboard%>
+        execute if entity @e[tag=satyrn.fdl.raycast.struck,limit=1] run {
+            tag @s add satyrn.fdl.SC_HOA.aimed
+            data modify entity @s data.last set from entity @e[tag=satyrn.fdl.raycast.struck,limit=1,sort=nearest] Pos
+            execute as @e[tag=satyrn.fdl.raycast.struck,limit=1,sort=nearest] run {
+                tag @s add satyrn.fdl.SC_HOA.target
+                scoreboard players operation @s satyrn.fdl.SC_HOA.id = #hoa.id <%config.internalScoreboard%>
+            }
+        }
+    }
+    tag @e[tag=satyrn.fdl.raycast.struck] remove satyrn.fdl.raycast.struck
+}
+
+# Run as and at a volley marker every tick. Fires at 0, 15 and 30 ticks, then removes the marker and the mark on its target.
+function volley_tick {
+    execute if score @s satyrn.fdl.SC_HOA.timer matches 0 run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/volley
+    execute if score @s satyrn.fdl.SC_HOA.timer matches 15 run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/volley
+    execute if score @s satyrn.fdl.SC_HOA.timer matches 30 run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/volley
+    scoreboard players add @s satyrn.fdl.SC_HOA.timer 1
+    execute if score @s satyrn.fdl.SC_HOA.timer matches 31.. run {
+        scoreboard players operation #hoa.cur <%config.internalScoreboard%> = @s satyrn.fdl.SC_HOA.id
+        execute as @e[tag=satyrn.fdl.SC_HOA.target] if score @s satyrn.fdl.SC_HOA.id = #hoa.cur <%config.internalScoreboard%> run {
+            tag @s remove satyrn.fdl.SC_HOA.target
+            scoreboard players reset @s satyrn.fdl.SC_HOA.id
+        }
+        kill @s
+    }
+}
+
+# Run as and at a volley marker. Turns it to face its target when the target is still alive, a dead one is not selectable, so
+# the marker keeps its last direction. It faces a point a little ahead of the target: half of how far the target moved since
+# the last volley, sideways only and at most 6 blocks, taken from the position the marker saved in data.last. The first volley
+# has not seen the target move yet and faces it directly. Then fires.
+function volley {
+    execute if entity @s[tag=satyrn.fdl.SC_HOA.aimed] run {
+        scoreboard players operation #hoa.cur <%config.internalScoreboard%> = @s satyrn.fdl.SC_HOA.id
+        execute as @e[tag=satyrn.fdl.SC_HOA.target] if score @s satyrn.fdl.SC_HOA.id = #hoa.cur <%config.internalScoreboard%> run tag @s add satyrn.fdl.SC_HOA.current
+        execute if entity @e[tag=satyrn.fdl.SC_HOA.current,limit=1] run {
+            summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.SC_HOA.lead]}
+            scoreboard players set #hoa.two <%config.internalScoreboard%> 2
+            REPEAT(0, 2) as i {
+                execute store result score #hoa.p <%config.internalScoreboard%> run data get entity @n[tag=satyrn.fdl.SC_HOA.current] Pos[<%i%>] 100
+                IF (i != 1) {
+                    execute store result score #hoa.o <%config.internalScoreboard%> run data get entity @s data.last[<%i%>] 100
+                    scoreboard players operation #hoa.q <%config.internalScoreboard%> = #hoa.p <%config.internalScoreboard%>
+                    scoreboard players operation #hoa.q <%config.internalScoreboard%> -= #hoa.o <%config.internalScoreboard%>
+                    scoreboard players operation #hoa.q <%config.internalScoreboard%> /= #hoa.two <%config.internalScoreboard%>
+                    execute if score #hoa.q <%config.internalScoreboard%> matches 601.. run scoreboard players set #hoa.q <%config.internalScoreboard%> 600
+                    execute if score #hoa.q <%config.internalScoreboard%> matches ..-601 run scoreboard players set #hoa.q <%config.internalScoreboard%> -600
+                    scoreboard players operation #hoa.p <%config.internalScoreboard%> += #hoa.q <%config.internalScoreboard%>
+                }
+                execute store result entity @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.lead] Pos[<%i%>] double 0.01 run scoreboard players get #hoa.p <%config.internalScoreboard%>
+            }
+            data modify entity @s data.last set from entity @n[tag=satyrn.fdl.SC_HOA.current] Pos
+            tp @s ~ ~ ~ facing entity @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.lead] feet
+            kill @e[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.lead]
+        }
+        tag @e[tag=satyrn.fdl.SC_HOA.current] remove satyrn.fdl.SC_HOA.current
+    }
+    execute at @s run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/fire_volley
+}
+
+# Run as and at a volley marker. Works out the direction the marker faces once, as a unit vector in hundredths in #hoa.d0 to
+# #hoa.d2, and its rotation for the arrows in storage, then spawns the disc of arrows and launches each.
+function fire_volley {
+    summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.SC_HOA.vector]}
+    execute positioned ^ ^ ^1 run tp @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.vector] ~ ~ ~
+    REPEAT(0, 2) as i {
+        execute store result score #hoa.d<%i%> <%config.internalScoreboard%> run data get entity @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.vector] Pos[<%i%>] 100
+        execute store result score #hoa.o <%config.internalScoreboard%> run data get entity @s Pos[<%i%>] 100
+        scoreboard players operation #hoa.d<%i%> <%config.internalScoreboard%> -= #hoa.o <%config.internalScoreboard%>
+    }
+    kill @e[type=minecraft:marker,tag=satyrn.fdl.SC_HOA.vector]
+
+    # Projectiles read pitch as atan2(y, horizontal), so up is positive, the opposite of what facing sets. Flip it or the
+    # arrows spawn pointing up and take several ticks to turn over.
+    data modify storage foxcraft_dungeon_loot:items hoa.rotation set from entity @s Rotation
+    execute store result score #hoa.r <%config.internalScoreboard%> run data get entity @s Rotation[1] 100
+    scoreboard players set #hoa.q <%config.internalScoreboard%> 0
+    scoreboard players operation #hoa.q <%config.internalScoreboard%> -= #hoa.r <%config.internalScoreboard%>
+    execute store result storage foxcraft_dungeon_loot:items hoa.rotation[1] float 0.01 run scoreboard players get #hoa.q <%config.internalScoreboard%>
+
+    function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/spawn_arrows
+    execute as @e[type=minecraft:arrow,tag=satyrn.fdl.SC_HOA.arrow] at @s run function foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/launch_arrow
 }
 
 # Runs when a player uses a snowball.
@@ -41,41 +166,62 @@ function on_snowball_used {
         stopsound @s * entity.snowball.throw
         playsound minecraft:entity.evoker.cast_spell player @a ~ ~ ~ 10
 
+        tag @s add satyrn.fdl.raycast.source
+
         # Add tag to thrown scroll so we can track it.
         data merge entity @e[type=snowball, limit=1, sort=nearest] {Tags:[satyrn.fdl.SC_HOA]}
 
         # Summon a marker (tracker) to track when the scroll breaks.
         execute at @e[type=snowball, limit=1, sort=nearest] run summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.SC_HOA_tracker]}
+        # Start the tracker facing the throw, in case the snowball is gone before the first tick
+        execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run data modify entity @n[type=minecraft:marker,tag=satyrn.fdl.SC_HOA_tracker,distance=..0.01] Rotation set from entity @s Rotation
     }
 }
 
-function spawn_arrows_1 {
-    REPEAT(0, 12) as x {
-        REPEAT(0, 12) as z {
-            IF (!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
-                summon arrow ~<%x-6%> ~30 ~<%z-6%>
+# One volley, a rounded disc of arrows around the marker, square on to the direction it faces. Local coordinates are left,
+# up, forward, so zero forward keeps every arrow in that plane.
+function spawn_arrows {
+    REPEAT(0, 6) as x {
+        REPEAT(0, 6) as z {
+            IF ((x-3)*(x-3) + (z-3)*(z-3) <= 11) {
+                summon arrow ^<%x-3%> ^<%z-3%> ^ {Tags:[satyrn.fdl.SC_HOA.arrow]}
             }
         }
     }
 }
 
-function spawn_arrows_2 {
-    REPEAT(0, 12) as x {
-        REPEAT(0, 12) as z {
-            IF (!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
-                summon arrow ~<%x-6%> ~45 ~<%z-6%>
-            }
-        }
-    }
-}
+# Run as and at a fresh arrow. Points it the way the marker faces and gives it a random speed of 0.52 to 0.75 blocks a tick
+# along that direction, plus up to 0.1 blocks a tick of drift sideways, so the volley heads the same general way without
+# aiming at the target. It never starts out moving up. Last, the start is staggered by up to 0.4 blocks sideways and 5 up or
+# down. Scores are hundredths, so a position is exact out to about 21 million blocks.
+function launch_arrow {
+    tag @s remove satyrn.fdl.SC_HOA.arrow
+    data modify entity @s Rotation set from storage foxcraft_dungeon_loot:items hoa.rotation
 
-function spawn_arrows_3 {
-    REPEAT(0, 12) as x {
-        REPEAT(0, 12) as z {
-            IF (!(Math.abs(x-6)==6 && Math.abs(z-6)==6) && !(Math.abs(x-6)==5 && Math.abs(z-6)==5) && !(Math.abs(x-6)==6 && Math.abs(z-6)==5) && !(Math.abs(x-6)==5 && Math.abs(z-6)==6) && !(Math.abs(x-6)==6 && Math.abs(z-6)==4) && !(Math.abs(x-6)==4 && Math.abs(z-6)==6)) {
-                summon arrow ~<%x-6%> ~60 ~<%z-6%>
-            }
+    execute store result score #hoa.k <%config.internalScoreboard%> run random value 52..75
+    REPEAT(0, 2) as i {
+        scoreboard players operation #hoa.m <%config.internalScoreboard%> = #hoa.d<%i%> <%config.internalScoreboard%>
+        scoreboard players operation #hoa.m <%config.internalScoreboard%> *= #hoa.k <%config.internalScoreboard%>
+        IF (i != 1) {
+            execute store result score #hoa.j <%config.internalScoreboard%> run random value -1000..1000
+            scoreboard players operation #hoa.m <%config.internalScoreboard%> += #hoa.j <%config.internalScoreboard%>
         }
+        IF (i == 1) {
+            execute if score #hoa.m <%config.internalScoreboard%> matches 1.. run scoreboard players set #hoa.m <%config.internalScoreboard%> 0
+        }
+        execute store result entity @s Motion[<%i%>] double 0.0001 run scoreboard players get #hoa.m <%config.internalScoreboard%>
+    }
+
+    REPEAT(0, 2) as i {
+        execute store result score #hoa.p <%config.internalScoreboard%> run data get entity @s Pos[<%i%>] 100
+        IF (i == 1) {
+            execute store result score #hoa.j <%config.internalScoreboard%> run random value -500..500
+        }
+        IF (i != 1) {
+            execute store result score #hoa.j <%config.internalScoreboard%> run random value -40..40
+        }
+        scoreboard players operation #hoa.p <%config.internalScoreboard%> += #hoa.j <%config.internalScoreboard%>
+        execute store result entity @s Pos[<%i%>] double 0.01 run scoreboard players get #hoa.p <%config.internalScoreboard%>
     }
 }
 

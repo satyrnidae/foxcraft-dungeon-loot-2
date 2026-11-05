@@ -1,0 +1,66 @@
+import ../config.js
+
+# Shared raycast. Marches from the current position along the current rotation in 0.1 block steps and stops at the first
+#  entity hitbox or solid block.
+
+# SCORES, on the internal scoreboard
+# #raycast.max - Steps to march, set by the caller before cast. impact sets it itself.
+# #raycast.hit - 1 when the ray stopped on an entity.
+
+# TAGS USED
+# satyrn.fdl.raycast.source - Never counts as hit. cast tags @s with it for the length of the ray; a projectile item also
+#   tags its thrower on throw and clears it from @a once the projectile is done.
+# satyrn.fdl.raycast.struck - Added to every entity the ray stopped on. The caller runs on them and then removes the tag.
+
+# Run as and at an entity with the origin and rotation of the ray, for instance at @s anchored eyes positioned ^ ^ ^.
+#  The entity stays where it is. Set #raycast.max first.
+function cast {
+    tag @e[tag=satyrn.fdl.raycast.struck] remove satyrn.fdl.raycast.struck
+    tag @s add satyrn.fdl.raycast.source
+    scoreboard players set #raycast.step <%config.internalScoreboard%> 0
+    scoreboard players set #raycast.hit <%config.internalScoreboard%> 0
+    function foxcraft_dungeon_loot:raycast/step
+    tag @s remove satyrn.fdl.raycast.source
+}
+
+# Run as and at a projectile tracker whose snowball is gone. A tracker is teleported onto its snowball during the tick
+#  function, before entities move, so it is left one tick of travel short of the impact. It has the
+#  facing set by the item each tick, from its old position toward the snowball, so it points along the direction of travel.
+#  Casts 6 blocks along it and moves the tracker to the last open point before a block, or inside the pick range of the
+#  entity it hit. Nothing found leaves it where it was.
+#  Items re-bind their position with execute at @s afterwards.
+function impact {
+    scoreboard players set #raycast.max <%config.internalScoreboard%> 60
+    scoreboard players set #raycast.move <%config.internalScoreboard%> 1
+    function foxcraft_dungeon_loot:raycast/cast
+    scoreboard players set #raycast.move <%config.internalScoreboard%> 0
+}
+
+# Checks the point the ray is at, then moves on 0.1 blocks if it is open. A snowball picks entities within 0.3 of their
+#  hitbox. dx=0 is a 1 block box, so the two boxes below overlap in a 0.6 block cube centered on the point, and a hitbox
+#  touching both must touch the cube. Spectators are skipped like they are for a real snowball, so players are tested on
+#  their own line. #raycast.move is only 1 during impact, when @s is the tracker.
+function step {
+    IF (config.dev) {
+        particle minecraft:smoke ~ ~ ~
+    }
+    execute positioned ~-0.3 ~-0.3 ~-0.3 as @e[type=!#foxcraft_dungeon_loot:non_living,type=!minecraft:player,tag=!satyrn.fdl.raycast.source,dx=0] positioned ~-0.4 ~-0.4 ~-0.4 if entity @s[dx=0] run {
+        tag @s add satyrn.fdl.raycast.struck
+        scoreboard players set #raycast.hit <%config.internalScoreboard%> 1
+    }
+    execute positioned ~-0.3 ~-0.3 ~-0.3 as @a[gamemode=!spectator,tag=!satyrn.fdl.raycast.source,dx=0] positioned ~-0.4 ~-0.4 ~-0.4 if entity @s[dx=0] run {
+        tag @s add satyrn.fdl.raycast.struck
+        scoreboard players set #raycast.hit <%config.internalScoreboard%> 1
+    }
+
+    # A tracker only moves when the ray stopped on something. Out of steps leaves it where it was.
+    execute if score #raycast.hit <%config.internalScoreboard%> matches 1 if score #raycast.move <%config.internalScoreboard%> matches 1 run tp @s ~ ~ ~
+    execute if score #raycast.hit <%config.internalScoreboard%> matches 0 run {
+        execute if block ~ ~ ~ #foxcraft_dungeon_loot:raycast_pass run {
+            scoreboard players add #raycast.step <%config.internalScoreboard%> 1
+            execute if score #raycast.step <%config.internalScoreboard%> < #raycast.max <%config.internalScoreboard%> positioned ^ ^ ^0.1 run function foxcraft_dungeon_loot:raycast/step
+        } else run {
+            execute if score #raycast.move <%config.internalScoreboard%> matches 1 positioned ^ ^ ^-0.1 run tp @s ~ ~ ~
+        }
+    }
+}

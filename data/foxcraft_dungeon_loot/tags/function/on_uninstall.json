@@ -23,6 +23,7 @@
     "foxcraft_dungeon_loot:item/epic/silverfish_escape_artist/on_uninstall",
     "foxcraft_dungeon_loot:item/epic/torenhias_fist/on_uninstall",
     "foxcraft_dungeon_loot:item/mythic/totem_of_mysteria/on_uninstall",
-    "foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/on_uninstall"
+    "foxcraft_dungeon_loot:item/mythic/war_hogs_blighted_harvest/on_uninstall",
+    "foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/on_uninstall"
   ]
 }

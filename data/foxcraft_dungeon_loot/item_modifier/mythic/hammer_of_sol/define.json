@@ -116,7 +116,8 @@
     {
       "type": "minecraft:set_components",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/hammer_of_sol"
+        "minecraft:item_model": "foxcraft_dungeon_loot:mythic/hammer_of_sol",
+        "minecraft:max_stack_size": 1
       }
     }
   ]

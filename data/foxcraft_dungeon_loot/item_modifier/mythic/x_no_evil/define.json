@@ -33,16 +33,11 @@
             "italic": false
           },
           {
-            "text": "When thrown, rolls a D10.",
+            "text": "When thrown, a random",
             "color": "gray",
             "italic": false
           }
         ],
-        {
-          "text": "Depending on the outcome, a detrimental ",
-          "color": "gray",
-          "italic": false
-        },
         {
           "text": "potion effect is applied to all entities in a",
           "color": "gray",

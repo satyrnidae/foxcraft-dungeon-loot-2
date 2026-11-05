@@ -5,6 +5,6 @@
     "foxcraft_dungeon_loot:item/mythic/hammer_of_sol/on_snowball_used",
     "foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/on_snowball_used",
     "foxcraft_dungeon_loot:item/epic/torenhias_fist/on_snowball_used",
-    "foxcraft_dungeon_loot:item/mythic/x_no_evil/on_snowball_used"
+    "foxcraft_dungeon_loot:item/mythic/x_no_evil/main/on_snowball_used"
   ]
 }
