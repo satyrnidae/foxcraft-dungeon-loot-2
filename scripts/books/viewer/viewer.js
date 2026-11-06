@@ -334,6 +334,15 @@ function placeClose(bounds, scale) {
   mute.style.left = button.style.left;
   mute.style.top = `${Math.max(0, top) + button.offsetHeight + 4}px`;
 }
+/** Opaque part of the page image as fractions of its size, so clicks on the transparent margin count as outside the book. */
+let pageBounds = null;
+function clickedOutsideBook(e) {
+  if (e.target.classList.contains('stage')) return true;
+  if (e.target !== $('page') || !pageBounds) return false;
+  const box = $('page').getBoundingClientRect();
+  const x = (e.clientX - box.left) / box.width, y = (e.clientY - box.top) / box.height;
+  return x < pageBounds.left || x > pageBounds.right || y < pageBounds.top || y > pageBounds.bottom;
+}
 function fitSides() {
   const img = $('page'), [left, right] = document.querySelectorAll('.stage .side');
   if (!img.naturalWidth || !img.clientWidth) return;
@@ -350,12 +359,18 @@ function fitSides() {
         if (data[(y * width + x) * 4 + 3] > 10) { min = Math.min(min, x); max = Math.max(max, x); top = Math.min(top, y); }
       }
     }
+    let bottom = -1;
+    for (let y = height - 1; y >= 0 && bottom < 0; y--) {
+      for (let x = min; x <= max; x++) if (data[(y * width + x) * 4 + 3] > 10) { bottom = y; break; }
+    }
+    pageBounds = max < 0 ? null : { left: min / width, right: (max + 1) / width, top: top / height, bottom: (bottom + 1) / height };
     const scale = img.clientWidth / img.naturalWidth;
     left.style.marginRight = max < 0 ? '' : `${-min * scale}px`;
     right.style.marginLeft = max < 0 ? '' : `${-(width - 1 - max) * scale}px`;
     placeClose(max < 0 ? null : { top, right: max + 1 }, scale);
   } catch {
     // A tainted canvas leaves the buttons at the edge of the image
+    pageBounds = null;
     left.style.marginRight = right.style.marginLeft = '';
     placeClose(null, 1);
   }
@@ -457,7 +472,7 @@ async function main() {
   $('close').addEventListener('click', close);
   for (const id of ['mute', 'mute-reader']) $(id).addEventListener('click', toggleMuted);
   showMuted();
-  $('reader').addEventListener('click', (e) => { if (e.target.classList.contains('stage')) close(); });
+  $('reader').addEventListener('click', (e) => { if (clickedOutsideBook(e)) close(); });
   // The wheel moves the slider while a book is open, and swallows the scroll. Trackpads send many small deltas, so a page turns for every 60 of them
   let wheel = 0;
   $('reader').addEventListener('wheel', (e) => {
