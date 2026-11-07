@@ -1,6 +1,10 @@
 ---
 title: An Adventure
 author: Gunny Stryker
+rarity: uncommon
+generation: tattered
+lore: |
+  It is a story. The story. A Good Story.
 styles: {
   .right: {
     align: right
