@@ -21,7 +21,10 @@ styles: {
       align: center
    },
    .signature: {
-      font: foxcraft_dungeon_loot:textmachine_handwriting
+      font: foxcraft_dungeon_loot:dnealian_script
+   },
+   .approval: {
+      font: foxcraft_dungeon_loot:foxcraft_handwriting
    }
 }
 ---
@@ -52,5 +55,6 @@ Shriner's Insurance Company is the newest addition to Foxtrot. It was created to
 Foxtrot is well connected with the outside world, with tracks leading to the remains of Deinotown and a road extending out to Thalbodir. The swampland beyond the boundaries of Foxtrot to the west are extensive and dangerous, so only the brave or foolish journey within, especially under the veil of darkness.
 
 <vbottom>
-<style class=".signature">APPROVED:</style>
-<style class=".signature">Mayor of the Holding of Foxtrot, 28 April 1212</style>
+<style class=".approval">APPROVED:</style>
+<style class=".signature">T. Kitsune</style>
+<style class=".approval">Mayor of the Holding of Foxtrot, 28 April 1212</style>

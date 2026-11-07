@@ -21,7 +21,10 @@ styles: {
       align: center
    },
    .signature: {
-      font: foxcraft_dungeon_loot:textmachine_handwriting
+      font: foxcraft_dungeon_loot:dnealian_script
+   },
+   .approval: {
+      font: foxcraft_dungeon_loot:foxcraft_handwriting
    }
 }
 ---
@@ -81,5 +84,6 @@ The final hold to be detailed in this book is the Valley of Peace, a tundra and 
 In the northernmost part of this region, there is a subholding of mountains whereupon lies the home of Yergaderga, a large mansion of stone. The Valley of Peace is connected to the Desolate Hold by the Guarded Road, a path with guard towers on either side. This road constitutes its own subholding, The Plains, where are located the courthouse, the second home of Deino, and the home of Gunnystryker. The region between Desolate Hold and Zephyrian Hold is the Broken Meadow subholding, where wars have been fought. And thus are the positions and histories of the Mysterian Holds.
 
 <vbottom>
-<style class=".signature">APPROVED:</style>
-<style class=".signature">Mayor of the Holding of Foxtrot, 11 July 1212</style>
+<style class=".approval">APPROVED:</style>
+<style class=".signature">T. Kitsune</style>
+<style class=".approval">Mayor of the Holding of Foxtrot, 11 July 1212</style>
