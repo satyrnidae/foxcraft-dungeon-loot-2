@@ -3,7 +3,7 @@ title: "Custom Font: Pixelated Elegance"
 author: Debug
 rarity: epic
 generation: tattered
-lore:
+lore: |
   Tests out the new font
 styles: {
   body: {

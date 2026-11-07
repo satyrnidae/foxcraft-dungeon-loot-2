@@ -2,7 +2,7 @@
 title: The Interview
 author: Isa Massacre
 rarity: common
-lore:
+lore: |
   Albatross Heavy Industries can neither confirm nor deny the accuracy of this depiction of their hiring practices.
 generation: tattered
 ---

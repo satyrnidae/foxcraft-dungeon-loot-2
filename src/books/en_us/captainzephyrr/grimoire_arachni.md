@@ -1,7 +1,7 @@
 ---
 title: Grimoire Arachni
 author: Unknown
-lore:
+lore: |
   A treatise to the God of Arthropods.
 generation: tattered
 styles: {

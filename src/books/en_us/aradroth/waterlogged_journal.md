@@ -12,7 +12,7 @@ styles: {
         font: minecraft:default,
         color: gray,
         italic: true
-    }
+    },
     .garbled: {
         font: foxcraft_dungeon_loot:garbled,
         color: dark_gray,

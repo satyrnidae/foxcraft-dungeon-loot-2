@@ -2,7 +2,7 @@
 title: The Endless Winter II
 author: Isa Massacre
 rarity: common
-lore:
+lore: |
   A long forgotten force wakes from its slumber…
 generation: tattered
 ---

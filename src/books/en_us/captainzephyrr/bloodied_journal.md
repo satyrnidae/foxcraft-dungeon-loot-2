@@ -16,7 +16,7 @@ styles: {
   .effects: {
     color: dark_red,
     font: foxcraft_dungeon_loot:effects
-  }
+  },
   .right: {
     align: right
   }

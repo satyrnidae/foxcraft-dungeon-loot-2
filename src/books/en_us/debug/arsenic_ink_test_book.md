@@ -3,7 +3,7 @@ title: "Custom Font: Arsenic Ink"
 author: Debug
 rarity: epic
 generation: tattered
-lore:
+lore: |
   Tests out the Arsenic Ink font.
 styles: {
   body: {

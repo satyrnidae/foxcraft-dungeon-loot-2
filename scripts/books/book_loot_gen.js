@@ -7,6 +7,7 @@
 //
 // mc-build runs it on every build through src/foxcraft_dungeon_loot/books.js.
 const fs = require('fs');
+const YAML = require('yaml');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..', '..');
@@ -159,101 +160,66 @@ function parseSnbt(source) {
 
 //region Frontmatter
 
-function unquote(value) {
-    const m = /^(["'])(.*)\1$/.exec(value);
-    return m ? m[2] : value;
+// Frontmatter is plain YAML. Scalars of the free text keys stay text however YAML would type them, a title of 1984 is "1984".
+// A compound or list where a text is expected, such as displayTitle: {text: Fancy, color: red}, is kept as its JSON, which the
+// SNBT reader of the title takes as it is.
+function frontmatterText(value) {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object') return JSON.stringify(value);
+    return String(value);
 }
 
-// A plain lore line may be wrapped in double or single quotes to stay valid YAML, which are not part of the line. \" and \\ in
-// double quotes and '' in single quotes stand for the character. A line that is not wrapped, or is a component, stays as it is.
-function unquoteLore(line) {
-    const double = /^"(.*)"$/.exec(line);
-    if (double) return double[1].replace(/\\(["\\])/g, '$1');
-    const single = /^'(.*)'$/.exec(line);
-    return single ? single[1].replace(/''/g, "'") : line;
+// The lore lines of the lore key. A string is one line per line of text, so lore: | keeps the line breaks you write; a list gives
+// one line per entry, a string or a component, a nested list of components counting as one line.
+function frontmatterLore(value) {
+    if (value === null || value === undefined) return [];
+    if (typeof value === 'string') return value.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+    if (!Array.isArray(value)) return [{ entry: value }];
+    return value.map((entry) => ({ entry: entry !== null && typeof entry === 'object' ? entry : String(entry ?? '') }));
 }
 
-// Splits a source file into { meta, body }. Values run to the end of the line; lore is the indented block under it.
-// Braces and brackets still open at the end of the text, those inside a string do not count
-function bracesOpen(text) {
-    let depth = 0;
-    let quote = null;
-    for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        if (quote) {
-            if (c === '\\') i++;
-            else if (c === quote) quote = null;
-        } else if (c === '"' || c === "'") {
-            quote = c;
-        } else if (c === '{' || c === '[') {
-            depth++;
-        } else if (c === '}' || c === ']') {
-            depth--;
-        }
+// A YAML value as SNBT, for data written as a map. A string like 1b or 2.5f stays a typed number, any other string is quoted.
+// {DungeonLootId:87} with no space after the colon reads in YAML as one key with no value, so that is told apart and refused.
+function snbtOf(value) {
+    if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+    if (typeof value === 'string') return /^[+-]?(\d+\.?\d*|\.\d+)[bBsSlLfFdD]$/.test(value) ? value : JSON.stringify(value);
+    if (Array.isArray(value)) return `[${value.map(snbtOf).join(',')}]`;
+    if (value !== null && typeof value === 'object') {
+        const parts = Object.entries(value).map(([k, v]) => {
+            if (v === null && k.includes(':')) throw new Error(`data key "${k}" needs a space after the colon, or put the whole compound in quotes`);
+            return `${/^[A-Za-z0-9_.+-]+$/.test(k) ? k : JSON.stringify(k)}:${snbtOf(v)}`;
+        });
+        return `{${parts.join(',')}}`;
     }
-    return depth;
+    throw new Error('data in the frontmatter has an empty value');
 }
 
-// How many [ and { are still open at the end of the text, not counting the ones in quoted strings
-function nestingOpen(text) {
-    let depth = 0;
-    let quote = null;
-    for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-        if (quote) {
-            if (c === '\\') i++;
-            else if (c === quote) quote = null;
-        } else if (c === '"' || c === "'") quote = c;
-        else if (c === '[' || c === '{') depth++;
-        else if (c === ']' || c === '}') depth--;
-    }
-    return depth;
-}
-
+// Splits a source file into { meta, body }. The block between the --- lines is YAML, data is a YAML map written out as SNBT, or an
+// SNBT string in quotes.
 function parseFrontmatter(text) {
     const lines = text.replace(/\r\n/g, '\n').split('\n');
     const meta = { lore: [] };
     if (lines[0].trim() !== '---') return { meta, body: lines.join('\n') };
     const end = lines.findIndex((l, n) => n > 0 && l.trim() === '---');
     if (end < 0) throw new Error('frontmatter is not closed with ---');
-    let key = null;
-    const frontmatter = lines.slice(1, end);
-    for (let n = 0; n < frontmatter.length; n++) {
-        const line = frontmatter[n];
-        const m = /^([A-Za-z_]+):\s*(.*)$/.exec(line);
-        if (m && !/^\s/.test(line)) {
-            key = m[1].toLowerCase();
-            if (key === 'lore') {
-                let value = m[2].trim();
-                if (value.startsWith('[')) {
-                    // lore: [ "line", {"text": "component"} ] over as many lines as it takes to close the list; each entry is kept as it is
-                    while (nestingOpen(value) > 0 && n + 1 < frontmatter.length) value += '\n' + frontmatter[++n];
-                    if (nestingOpen(value) !== 0) throw new Error('lore in the frontmatter is not closed');
-                    let list;
-                    try {
-                        list = parseSnbt(value.replace(/,\s*$/, ''));
-                    } catch (e) {
-                        throw new Error(`lore is not a valid JSON or SNBT list: ${e.message}`);
-                    }
-                    meta.lore.push(...list.map((entry) => ({ entry })));
-                } else if (value) meta.lore.push(unquoteLore(value));
-            } else if (key === 'data') {
-                // An SNBT compound over as many lines as it takes to close its braces, kept as the SNBT string
-                let text = m[2];
-                while (nestingOpen(text) > 0 && n + 1 < frontmatter.length) text += '\n' + frontmatter[++n];
-                if (nestingOpen(text) !== 0) throw new Error('data in the frontmatter is not closed');
-                meta.data = text.replace(/,\s*$/, '').replace(/\s*\n\s*/g, ' ').trim();
-            } else if (key === 'styles' || key === 'style') {
-                // A compound over as many lines as it takes to close its braces
-                let text = m[2];
-                while (bracesOpen(text) > 0 && n + 1 < frontmatter.length) text += '\n' + frontmatter[++n];
-                if (bracesOpen(text) !== 0) throw new Error('styles in the frontmatter is not closed');
-                meta.styles = parseClasses(parseSnbt(text));
-            } else {
-                meta[key] = unquote(m[2].trim());
-            }
-        } else if (key === 'lore' && line.trim()) {
-            meta.lore.push(unquoteLore(line.trim()));
+    let doc;
+    try {
+        doc = YAML.parse(lines.slice(1, end).join('\n'));
+    } catch (e) {
+        throw new Error(`frontmatter is not valid YAML: ${String(e.message).split('\n')[0]}`);
+    }
+    if (doc === null || doc === undefined) doc = {};
+    if (typeof doc !== 'object' || Array.isArray(doc)) throw new Error('frontmatter needs key: value pairs');
+    for (const [rawKey, value] of Object.entries(doc)) {
+        const key = rawKey.toLowerCase();
+        if (key === 'lore') {
+            meta.lore.push(...frontmatterLore(value));
+        } else if (key === 'data') {
+            meta.data = (typeof value === 'string' ? value : snbtOf(value)).replace(/,\s*$/, '').replace(/\s*\n\s*/g, ' ').trim();
+        } else if (key === 'styles' || key === 'style') {
+            meta.styles = parseClasses(value);
+        } else {
+            meta[key] = frontmatterText(value).trim();
         }
     }
     return { meta, body: lines.slice(end + 1).join('\n') };

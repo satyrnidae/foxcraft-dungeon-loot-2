@@ -1,24 +1,24 @@
 ---
-title: Chapter One: The Mine
+title: "Chapter One: The Mine"
 author: Unknown
 rarity: common
 generation: tattered
-lore:
+lore: |
   The first chapter of an autobiographical story, though the cover is damaged and the name of the author has been lost to time.
 styles: {
   .garbled: {
     font: foxcraft_dungeon_loot:garbled
-  }
+  },
   .notice: {
     font: minecraft:default,
     color: gray,
     italic: true,
     bold: false
-  }
+  },
   .title: {
     font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps,
     align: center
-  }
+  },
   .symbol: {
     font: foxcraft_dungeon_loot:decora_symbologie
   }

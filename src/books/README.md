@@ -20,7 +20,7 @@ model: foxcraft_dungeon_loot:random_loot/written_letter
 data: {DungeonLootId:87,DungeonItem:1b}
 writable: false
 debug: true
-lore:
+lore: |
   first lore line, wrapped by hand
   second lore line
 ---

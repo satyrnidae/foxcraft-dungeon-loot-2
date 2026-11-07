@@ -2,7 +2,7 @@
 title: "Font: Foxcraft Handwriting"
 author: Debug
 rarity: epic
-lore:
+lore: |
   Tests out both variants of the Foxcraft Handwriting font.
 styles: {
   body: {

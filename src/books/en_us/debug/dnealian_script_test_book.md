@@ -2,7 +2,7 @@
 title: "Custom Font: D'Nealian"
 author: Debug
 rarity: epic
-lore:
+lore: |
   Tests out the D'Nealian script font.
 styles: {
   body: {

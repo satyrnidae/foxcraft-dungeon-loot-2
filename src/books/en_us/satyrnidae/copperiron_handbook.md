@@ -3,7 +3,7 @@ title: Currency
 author: Rosteph Erasaltz
 generation: tattered
 rarity: common
-lore:
+lore: |
     This mouldering guidebook details a proposal for a more materially-focused currency.
     With the possible exception of gold and emerald, it doesn't seem to have caught on.
 styles: {

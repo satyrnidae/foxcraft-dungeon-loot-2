@@ -2,7 +2,7 @@
 title: "Trolls & Where to Find Them"
 displayTitle: "Milonia's Mythic Menagerie, Vol. 6"
 author: Milonia Melisova
-lore:
+lore: |
    "Milonia Melisova presents her bestselling entry in her Mythic Menagerie: Vol. 6, Trolls & Where to Find Them!"
 generation: tattered
 styles: {

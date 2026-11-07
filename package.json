@@ -3,7 +3,8 @@
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
     "mc-build": "4.2.0",
-    "prismjs": "^1.30.0"
+    "prismjs": "^1.30.0",
+    "yaml": "^2.8.1"
   },
   "scripts": {
     "build": "node scripts/build/build.mjs",

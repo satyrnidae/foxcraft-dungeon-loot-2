@@ -3,7 +3,7 @@ title: Palomina and the Dæmon Lord
 author: Unknown
 rarity: uncommon
 generation: tattered
-lore:
+lore: |
   A faded, leather-bound bible. It seems familiar, somehow...
 styles: {
   body: {

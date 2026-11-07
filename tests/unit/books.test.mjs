@@ -140,7 +140,7 @@ describe('book generator markdown', () => {
     assert.throws(() => component('<style>x</style>'), /needs a class/);
     assert.throws(() => gen.parseClasses({ a: { colour: 'red' } }), /unknown colour/);
     assert.throws(() => gen.parseClasses({ a: { bold: 'yes' } }), /true or false/);
-    assert.throws(() => gen.parseFrontmatter('---\nstyles: {\n  a: {}\n---\n'), /not closed/);
+    assert.throws(() => gen.parseFrontmatter('---\nstyles: {\n  a: {}\n---\n'), /not valid YAML/);
   });
 
   it('a style name may start with a dot, quoted or not, and a value may be an unquoted id or color', () => {
@@ -429,7 +429,7 @@ describe('book generator files', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'books-'));
     return { dir, opts: { bookDir: path.join(dir, 'books'), modifierDir: path.join(dir, 'mod'), tableDir: path.join(dir, 'table'), langDir: path.join(dir, 'lang') } };
   };
-  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore:\n  first line\n    second line\n---\n\nPage **one**\n<br>\nPage two';
+  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore: |\n  first line\n    second line\n---\n\nPage **one**\n<br>\nPage two';
 
   it('frontmatter gives title, author, rarity and trimmed lore', () => {
     const { meta, body } = gen.parseFrontmatter(SOURCE);
@@ -459,27 +459,27 @@ describe('book generator files', () => {
     const file = path.join(os.tmpdir(), 'display_test.md');
     const long = 'Spiders: A Collection of Side Notes by a Researcher';
     const build = (extra) => {
-      fs.writeFileSync(file, `---\ntitle: Spiders: Side Notes\nauthor: Me\n${extra}---\n\nx`);
+      fs.writeFileSync(file, `---\ntitle: "Spiders: Side Notes"\nauthor: Me\n${extra}---\n\nx`);
       return gen.buildBook('t', file);
     };
-    const withRarity = build(`rarity: rare\ndisplayTitle: ${long}\n`);
+    const withRarity = build(`rarity: rare\ndisplayTitle: "${long}"\n`);
     const comps = withRarity.modifier.functions[0].components;
     assert.equal(comps['minecraft:written_book_content'].title.raw, 'Spiders: Side Notes');
     assert.deepEqual(comps['minecraft:custom_name'], { translate: 'book.foxcraft_dungeon_loot.t.title', fallback: long, color: 'aqua', italic: false });
     assert.equal(withRarity.lang['book.foxcraft_dungeon_loot.t.title'], long);
     assert.deepEqual(withRarity.warnings, []);
     // Without a rarity a plain displayTitle still sets the name, and an SNBT one is the name as written
-    assert.equal(build(`displayTitle: ${long}\n`).modifier.functions[0].components['minecraft:custom_name'].fallback, long);
+    assert.equal(build(`displayTitle: "${long}"\n`).modifier.functions[0].components['minecraft:custom_name'].fallback, long);
     assert.deepEqual(build('displayTitle: {text: "Fancy", color: red}\n').modifier.functions[0].components['minecraft:custom_name'], { text: 'Fancy', color: 'red' });
     assert.throws(() => build('displayTitle: <filter as="a">b</filter>\n'), /filter/);
   });
 
-  it('a newline in a title or displayTitle warns, and quotes around a lore line are not part of it', () => {
+  it('a newline in a title or displayTitle warns, and YAML quotes around a lore entry are not part of it', () => {
     const file = path.join(os.tmpdir(), 'newline_test.md');
-    fs.writeFileSync(file, '---\ntitle: A\nauthor: Me\ndisplayTitle: "One\\nTwo"\nlore:\n   "Said \\"hi\\" there"\n   \'it\'\'s\'\n   plain\n---\n\nx');
+    fs.writeFileSync(file, '---\ntitle: A\nauthor: Me\ndisplayTitle: "One\\nTwo"\nlore:\n  - "Said \\"hi\\" there"\n  - \'it\'\'s\'\n  - plain\n---\n\nx');
     const book = gen.buildBook('t', file);
     assert.ok(book.warnings.some((w) => /displayTitle has a newline/.test(w)), book.warnings.join('\n'));
-    assert.deepEqual(gen.parseFrontmatter(fs.readFileSync(file, 'utf8')).meta.lore, ['Said "hi" there', "it's", 'plain']);
+    assert.deepEqual(gen.parseFrontmatter(fs.readFileSync(file, 'utf8')).meta.lore, [{ entry: 'Said "hi" there' }, { entry: "it's" }, { entry: 'plain' }]);
     fs.writeFileSync(file, '---\ntitle: A\nauthor: Me\nlore: "Solo line"\n---\n\nx');
     assert.deepEqual(gen.parseFrontmatter(fs.readFileSync(file, 'utf8')).meta.lore, ['Solo line']);
   });
@@ -564,7 +564,7 @@ describe('book generator files', () => {
       book('c1', 'rarity: common');
       book('c2', 'rarity: common\nwritable: true');
       book('r1', 'rarity: rare');
-      book('plain', 'author: x');
+      book('plain', 'writable: false');
       book('note', 'rarity: uncommon\nmodel: foxcraft_dungeon_loot:random_loot/written_letter');
       book('blank_note', 'rarity: rare\nwritable: true\nmodel: foxcraft_dungeon_loot:random_loot/writable_letter');
       gen.generate(opts);
@@ -715,7 +715,7 @@ describe('book generator files', () => {
       assert.deepEqual(content.title, { raw: 'Damn Book', filtered: 'Darn Book' });
       write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: <filter as="' + 'x'.repeat(33) + '">Book</filter>'));
       assert.ok(gen.generate(opts).warnings.some((w) => /filtered title is 33 characters/.test(w)));
-      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: {text:"<filter>b"}'));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: {text: "<filter>b"}'));
       assert.throws(() => gen.generate(opts), /SNBT title/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -1318,22 +1318,29 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('data in the frontmatter is set as custom data in the SNBT string form, on written and writable books', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\ndata: {\n  DungeonLootId: 87,\n  DungeonItem: 1b\n}\n---\n\nText');
-      write(dir, 'books/en_us/note.md', '---\ntitle: Note\nwritable: true\ndata: {DungeonLootId:88}\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\ndata: "{DungeonLootId: 87, DungeonItem: 1b}"\n---\n\nText');
+      write(dir, 'books/en_us/note.md', '---\ntitle: Note\nwritable: true\ndata: "{DungeonLootId:88}"\n---\n\nText');
       gen.generate(opts);
       const read = (id) => JSON.parse(fs.readFileSync(path.join(opts.modifierDir, id + '.json'), 'utf8')).functions;
-      assert.deepEqual(read('test')[1], { type: 'minecraft:set_custom_data', tag: '{ DungeonLootId: 87, DungeonItem: 1b }' });
+      assert.deepEqual(read('test')[1], { type: 'minecraft:set_custom_data', tag: '{DungeonLootId: 87, DungeonItem: 1b}' });
       assert.deepEqual(read('note')[1], { type: 'minecraft:set_custom_data', tag: '{DungeonLootId:88}' });
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
   });
 
+  it('data may be a YAML map, written out as SNBT', () => {
+    const meta = (data) => gen.parseFrontmatter(`---\ntitle: T\n${data}\n---\n`).meta.data;
+    assert.equal(meta('data: {DungeonLootId: 87, DungeonItem: 1b}'), '{DungeonLootId:87,DungeonItem:1b}');
+    assert.equal(meta('data:\n  DungeonLootId: 87\n  Tags: [a, b]\n  Name: "x y"'), '{DungeonLootId:87,Tags:["a","b"],Name:"x y"}');
+    assert.throws(() => meta('data: {DungeonLootId:87}'), /needs a space/);
+  });
+
   it('data that is not an SNBT compound stops the build', () => {
     for (const data of ['{DungeonLootId:}', '[1,2]', 'nope']) {
       const { dir, opts } = sandbox();
       try {
-        write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\ndata: ${data}\n---\n\nText`);
+        write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\ndata: "${data}"\n---\n\nText`);
         assert.throws(() => gen.generate(opts), /test\.md:\d+: frontmatter data/);
       } finally {
         fs.rmSync(dir, { recursive: true, force: true });
@@ -1402,7 +1409,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('a lore line starting with { or [ is a JSON text component, anything else is plain text', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Plain line.\n  {"text":"Blue","color":"blue","italic":true}\n  ["A ",{"text":"list","bold":true}]\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore: |\n  Plain line.\n  {"text":"Blue","color":"blue","italic":true}\n  ["A ",{"text":"list","bold":true}]\n---\n\nText');
       const { warnings } = gen.generate(opts);
       assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
       const { lore } = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[1];
@@ -1446,7 +1453,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('a lore line of broken JSON stops the build', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  {"text":\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore: |\n  {"text":\n---\n\nText');
       assert.throws(() => gen.generate(opts), /lore line/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -1456,7 +1463,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('plain lore is wrapped to the width by the generator, keeping the breaks after sentence ends', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore:\n  Hastily scrawled sheet music with accompanying lyrics. The sheet\n  bears no author.\n---\n\nText');
+      write(dir, 'books/en_us/test.md', '---\ntitle: Test Book\nauthor: Me\nlore: |\n  Hastily scrawled sheet music with accompanying lyrics. The sheet\n  bears no author.\n---\n\nText');
       const { warnings } = gen.generate(opts);
       assert.deepEqual(warnings.filter((w) => w.includes('lore')), []);
       const lang = JSON.parse(fs.readFileSync(path.join(opts.langDir, 'en_us.json'), 'utf8'));
@@ -1472,12 +1479,12 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('only a lore word or a component line too wide for a line is warned about', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  ' + 'x'.repeat(lore.LORE_WIDTH)));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('lore: |', 'lore: |\n  ' + 'x'.repeat(lore.LORE_WIDTH)));
       assert.ok(gen.generate(opts).warnings.some((w) => /lore word "x+" is \d+ pixels/.test(w)));
       // Narrow letters get more characters in the same width, and a long line of words just wraps
-      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  ' + 'i'.repeat(lore.LORE_WIDTH + 20) + '\n  ' + 'word '.repeat(40)));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('lore: |', 'lore: |\n  ' + 'i'.repeat(lore.LORE_WIDTH + 20) + '\n  ' + 'word '.repeat(40)));
       assert.ok(!gen.generate(opts).warnings.some((w) => /lore/.test(w)));
-      write(dir, 'books/en_us/test.md', SOURCE.replace('lore:', 'lore:\n  {"text":"' + 'x'.repeat(lore.LORE_WIDTH) + '"}'));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('lore: |', 'lore: |\n  {"text":"' + 'x'.repeat(lore.LORE_WIDTH) + '"}'));
       assert.ok(gen.generate(opts).warnings.some((w) => /lore line is \d+ pixels/.test(w)));
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -1487,7 +1494,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   it('a translation whose lore wraps into fewer lines is wrapped narrower to fill as many', () => {
     const { dir, opts } = sandbox();
     try {
-      const book = (lore) => `---\ntitle: Test Book\nauthor: Me\nlore:\n  ${lore}\n---\n\nText`;
+      const book = (lore) => `---\ntitle: Test Book\nauthor: Me\nlore: |\n  ${lore}\n---\n\nText`;
       write(dir, 'books/en_us/test.md', book('A short note about the war.'));
       write(dir, 'books/fr_ca/test.md', book('Une note pas si courte que ça sur la guerre et sur ceux qui la font.'));
       gen.generate(opts);

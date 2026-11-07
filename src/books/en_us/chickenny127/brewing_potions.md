@@ -3,13 +3,15 @@ title: Brewing Potions
 author: J. Tivel, Dor'Lomin Potion Master
 generation: tattered
 rarity: rare
+lore: |
+  A quick reference for the aspiring potioneer.
 styles: {
   body: {
     font: minecraft:default
   },
   drop: {
     font: foxcraft_dungeon_loot:hexenaat
-  }
+  },
   h1: {
     align: center,
     underlined: true,
