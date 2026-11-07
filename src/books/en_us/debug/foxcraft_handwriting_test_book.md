@@ -6,7 +6,7 @@ lore: |
   Tests out both variants of the Foxcraft Handwriting font.
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:foxcraft_handwriting/regular
+    font: foxcraft_dungeon_loot:foxcraft_handwriting
   }
 }
 debug: true
@@ -56,7 +56,7 @@ Sharp S:
 <br>
 # Cwm fjord:
 
-<font face="foxcraft_dungeon_loot:foxcraft_handwriting/regular">Lowercase:
+<font face="foxcraft_dungeon_loot:foxcraft_handwriting">Lowercase:
 cwm fjord bank glyphs vext quiz
 
 Title Case:
@@ -70,7 +70,7 @@ Cwm Fjord Bank Glyphs Vext Quiz</font>
 <br>
 # Pangram:
 
-<font face="foxcraft_dungeon_loot:foxcraft_handwriting/regular">The quick brown fox jumps over the lazy dog.</font>
+<font face="foxcraft_dungeon_loot:foxcraft_handwriting">The quick brown fox jumps over the lazy dog.</font>
 
 <font face="foxcraft_dungeon_loot:foxcraft_handwriting/smallcaps">The quick brown fox jumps over the lazy dog.</font>
 

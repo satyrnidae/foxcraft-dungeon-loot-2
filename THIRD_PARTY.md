@@ -6,7 +6,7 @@ Licenses of assets in this repository that are not mine.
 
 ### Pixelated Elegance
 
-Designed by GGBotNet, version 0.4, copyright 2020, made with PixelForge. Released under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). Found at [ggbot.net](https://www.ggbot.net). The pack ships a bitmap font made from it, `texturepack/assets/foxcraft_dungeon_loot/font/pixellated_elegance/regular.json` and `smallcaps.json` and its glyph sheet in `textures/font/`.
+Designed by GGBotNet, version 0.4, copyright 2020, made with PixelForge. Released under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). Found at [ggbot.net](https://www.ggbot.net). The pack ships a bitmap font made from it, `texturepack/assets/foxcraft_dungeon_loot/font/pixellated_elegance.json` and `smallcaps.json` and its glyph sheet in `textures/font/`.
 
 ### Pixeloid Mono
 

@@ -12,7 +12,7 @@ styles: {
         align: center
     },
     body: {
-        font: foxcraft_dungeon_loot:pixellated_elegance/regular
+        font: foxcraft_dungeon_loot:pixellated_elegance
     }
 }
 ---

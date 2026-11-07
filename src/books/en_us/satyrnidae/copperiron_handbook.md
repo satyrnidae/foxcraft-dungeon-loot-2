@@ -8,7 +8,7 @@ lore: |
     With the possible exception of gold and emerald, it doesn't seem to have caught on.
 styles: {
     body: {
-        font: foxcraft_dungeon_loot:pixellated_elegance/regular
+        font: foxcraft_dungeon_loot:pixellated_elegance
     },
     h1: {
         font: foxcraft_dungeon_loot:pixellated_elegance/smallcaps

@@ -7,7 +7,7 @@ lore: |
   A faded, leather-bound bible. It seems familiar, somehow...
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixellated_elegance/regular
+    font: foxcraft_dungeon_loot:pixellated_elegance
   },
   drop: {
     font: foxcraft_dungeon_loot:hexenaat

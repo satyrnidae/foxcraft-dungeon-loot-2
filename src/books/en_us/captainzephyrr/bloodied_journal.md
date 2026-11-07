@@ -4,7 +4,7 @@ author: Unknown
 generation: tattered
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:foxcraft_handwriting/regular
+    font: foxcraft_dungeon_loot:foxcraft_handwriting
   },
   h1: {
     bold: false,

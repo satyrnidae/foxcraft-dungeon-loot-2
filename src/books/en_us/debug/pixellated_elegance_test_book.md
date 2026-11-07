@@ -7,7 +7,7 @@ lore: |
   Tests out the new font
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:pixellated_elegance/regular
+    font: foxcraft_dungeon_loot:pixellated_elegance
   },
   a: {
     color: dark_blue,

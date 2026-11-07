@@ -6,7 +6,7 @@ rarity: uncommon
 generation: tattered
 styles: {
   body: {
-    font: "foxcraft_dungeon_loot:pixellated_elegance/regular"
+    font: "foxcraft_dungeon_loot:pixellated_elegance"
   },
   .title: {
     bold: true,
