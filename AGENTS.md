@@ -59,7 +59,7 @@ data/foxcraft_dungeon_loot/
   enchantment/                   custom enchantments, any item can carry them, functions in src/.../enchantment/<name>.mcb
   predicate/enchantment/<name>/  predicates that detect an enchantment, any and level_<n>
 data/minecraft/loot_table/   vanilla overrides that inject loot
-texturepack/                 resource pack, own pack.mcmeta and build.ps1
+texturepack/                 resource pack, own pack.mcmeta, zipped by npm run assets
 docs/                        notes, audits, todo lists
 tests/                       run_all.mjs, unit tests, Java checks, Node tools
 ```
@@ -94,7 +94,7 @@ There are no published artifacts and no CI in the usual sense, but the static te
 - Commit messages: match `git log`, a gitmoji then an imperative summary, for example `👽️ Modernize copper goat horns`. Reference the issue as `Refs #<n>` in the body.
 - Preserve each file's line endings. Most `.mcb` are LF, most JSON is CRLF. Do not reformat unrelated lines.
 - JSON: two-space indent, no trailing commas.
-- Item lore text: break lines at 226 pixels, the width of 44 average characters in the default font, one lore entry per line, so tooltips keep a consistent width. `scripts/lore.js` measures it.
+- Item lore text: break lines at 226 pixels, the width of 44 average characters in the default font, one lore entry per line, so tooltips keep a consistent width. `scripts/lore/lore.js` measures it.
 
 ## Working rules
 
@@ -113,7 +113,7 @@ There are no published artifacts and no CI in the usual sense, but the static te
 - Scratch scores `#test` and `#math.*` are shared. Do not call a helper that uses them from inside another chain that also uses them.
 - The uninstall function disables `file/<baseArchiveName>-<version>.zip`. A dev build or a duplicate name breaks that match.
 - Audio for Wolfgun and C418 discs is not in the repo. Missing-sound warnings on a fresh clone are expected.
-- The master `DungeonLootId` list is `dungeon_loot_items.csv`; regenerate it with `node scripts/dump_items_csv.mjs` after adding items.
+- The master `DungeonLootId` list is `dungeon_loot_items.csv`; regenerate it with `node scripts/tools/dump_items_csv.mjs` after adding items.
 - Effects granted by clocks (`effect give ... 1000000`) are cleared with `effect clear`, which also removes the same effect from other sources. Prefer attributes or enchantment effects when adding new passive bonuses.
 
 ## Reporting

@@ -3,9 +3,17 @@
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
     "mc-build": "4.2.0",
-    "prismjs": "^1.30.0"
+    "prismjs": "^1.30.0",
+    "yaml": "^2.8.1"
   },
   "scripts": {
+    "build": "node scripts/build/build.mjs",
+    "data": "node scripts/build/data.mjs",
+    "assets": "node scripts/build/assets.mjs",
+    "watch": "mcb watch",
+    "previews": "node scripts/books/generate_previews.mjs",
+    "viewer": "node scripts/books/viewer.mjs",
+    "site": "node scripts/books/build_site.mjs",
     "test": "node tests/run_all.mjs"
   },
   "devDependencies": {

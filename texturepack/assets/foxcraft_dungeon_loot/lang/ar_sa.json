@@ -1,0 +1,9 @@
+{
+  "lore.foxcraft_dungeon_loot.rarity": "الندرة: %s",
+  "rarity.foxcraft_dungeon_loot.common": "شائع",
+  "rarity.foxcraft_dungeon_loot.uncommon": "غير شائع",
+  "rarity.foxcraft_dungeon_loot.rare": "نادر",
+  "rarity.foxcraft_dungeon_loot.epic": "ملحمي",
+  "rarity.foxcraft_dungeon_loot.mythic": "أسطوري",
+  "rarity.foxcraft_dungeon_loot.cursed": "ملعون"
+}

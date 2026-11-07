@@ -972,5 +972,15 @@
         "stream": true
       }
     ]
+  },
+  "item.message_in_a_bottle.open": {
+    "subtitle": "subtitles.item.message_in_a_bottle.open",
+    "sounds": [
+      "foxcraft_dungeon_loot:items/message_in_a_bottle/pop1",
+      "foxcraft_dungeon_loot:items/message_in_a_bottle/pop2",
+      "foxcraft_dungeon_loot:items/message_in_a_bottle/pop3",
+      "foxcraft_dungeon_loot:items/message_in_a_bottle/pop4",
+      "foxcraft_dungeon_loot:items/message_in_a_bottle/pop5"
+    ]
   }
 }

@@ -8,7 +8,11 @@
     {
       "type": "minecraft:set_components",
       "components": {
-        "minecraft:item_model": "foxcraft_dungeon_loot:epic/torenhias_fist"
+        "minecraft:item_model": "foxcraft_dungeon_loot:epic/torenhias_fist",
+        "minecraft:max_stack_size": 1,
+        "minecraft:damage_resistant": {
+          "types": "#foxcraft_dungeon_loot:lightning_and_fire"
+        }
       }
     },
     {

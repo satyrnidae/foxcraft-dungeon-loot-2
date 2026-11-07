@@ -1,0 +1,68 @@
+name: Book viewer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time, a newer push replaces a queued one
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # BookRender runs the game's own text code, which needs Java 25
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - id: mc
+        run: echo "version=$(node -p "require('./config.json').mc.mc_version")" >> "$GITHUB_OUTPUT"
+
+      # Holds the Mojang client jar and the libraries it needs, same key as test.yml so they are shared
+      - uses: actions/cache@v4
+        with:
+          path: tests/.cache
+          key: mc-${{ steps.mc.outputs.version }}-${{ hashFiles('tests/tools/fetch_mc_*.mjs', 'tests/java/*.java') }}
+
+      - run: npm ci
+
+      # THIRD_PARTY.md and README.md as books, for the site only
+      - run: node scripts/books/site_books.mjs
+
+      # Generates the book loot and draws every page and tooltip, the tests run in test.yml
+      - run: npm run previews -- --no-tests
+
+      - run: npm run site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .build/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

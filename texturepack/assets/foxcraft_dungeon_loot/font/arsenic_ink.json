@@ -1,0 +1,34 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        " ": 5,
+        "\u00a0": 5
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/arsenic_ink/tiny.png",
+      "ascent": 6,
+      "height": 9,
+      "chars": [
+        "!\"#$%&'()*+,-./0",
+        "123456789:;<=>?@",
+        "ABCDEFGHIJKLMNOP",
+        "QRSTUVWXYZ[\\]^_`",
+        "abcdefghijklmnop",
+        "qrstuvwxyz{|}~\u0000\u0000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/arsenic_ink/special.png",
+      "ascent": 6,
+      "height": 9,
+      "chars": [
+        "\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a8\u00a9\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+      ]
+    }
+  ]
+}

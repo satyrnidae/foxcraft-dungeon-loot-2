@@ -1,0 +1,9 @@
+{
+  "lore.foxcraft_dungeon_loot.rarity": "희귀도: %s",
+  "rarity.foxcraft_dungeon_loot.common": "일반",
+  "rarity.foxcraft_dungeon_loot.uncommon": "고급",
+  "rarity.foxcraft_dungeon_loot.rare": "희귀",
+  "rarity.foxcraft_dungeon_loot.epic": "영웅",
+  "rarity.foxcraft_dungeon_loot.mythic": "신화",
+  "rarity.foxcraft_dungeon_loot.cursed": "저주받은"
+}

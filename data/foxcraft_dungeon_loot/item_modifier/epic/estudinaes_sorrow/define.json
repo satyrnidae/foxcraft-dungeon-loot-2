@@ -80,6 +80,7 @@
     {
       "type": "minecraft:set_enchantments",
       "enchantments": {
+        "foxcraft_dungeon_loot:poison_of_poncho_sanchez": 1,
         "minecraft:knockback": 5,
         "minecraft:luck_of_the_sea": 10,
         "minecraft:mending": 1,

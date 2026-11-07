@@ -11,13 +11,6 @@ function on_using_item {
     advancement revoke @s only foxcraft_dungeon_loot:item/copper_goat_horn/on_using_item
 }
 
-function on_load {
-    scoreboard objectives add satyrn.fdl.copperGoatHorn.currentPitch dummy
-
-    execute store success score #test <%config.internalScoreboard%> run scoreboard players get copperGoatHorn.minHarmonyPitch <%config.internalScoreboard%>
-    execute if score #test <%config.internalScoreboard%> matches 0 run scoreboard players set copperGoatHorn.minHarmonyPitch <%config.internalScoreboard%> 30
-}
-
 function on_tick {
     execute as @a if items entity @s weapon.mainhand minecraft:goat_horn[minecraft:custom_data~{CopperGoatHorn:1b}] run function foxcraft_dungeon_loot:item/special/copper_horn/main/swap_mainhand
     execute as @a if items entity @s weapon.offhand minecraft:goat_horn[minecraft:custom_data~{CopperGoatHorn:1b}] run function foxcraft_dungeon_loot:item/special/copper_horn/main/swap_offhand
@@ -25,7 +18,6 @@ function on_tick {
 
 # Swaps the instrument of the horn in the main hand.
 function swap_mainhand {
-    execute store result score @s satyrn.fdl.copperGoatHorn.currentPitch run data get entity @s Rotation[1] -1
     horn_swap weapon.mainhand great_sky_falling
     horn_swap weapon.mainhand old_hymn_resting
     horn_swap weapon.mainhand pure_water_desire
@@ -40,7 +32,6 @@ function swap_mainhand {
 
 # Swaps the instrument of the horn in the off hand.
 function swap_offhand {
-    execute store result score @s satyrn.fdl.copperGoatHorn.currentPitch run data get entity @s Rotation[1] -1
     horn_swap weapon.offhand great_sky_falling
     horn_swap weapon.offhand old_hymn_resting
     horn_swap weapon.offhand pure_water_desire
@@ -51,12 +42,6 @@ function swap_offhand {
     horn_swap weapon.offhand secret_lake_tear
     horn_swap weapon.offhand fearless_river_gift
     horn_swap weapon.offhand sweet_moon_love
-}
-
-function on_uninstall {
-    scoreboard objectives remove satyrn.fdl.copperGoatHorn.currentPitch
-
-    scoreboard players reset copperGoatHorn.minHarmonyPitch <%config.internalScoreboard%>
 }
 
 # Gives the target the clear temper journey.
