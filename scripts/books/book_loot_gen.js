@@ -863,7 +863,7 @@ function glyphs(...args) {
 }
 function rawGlyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = null, lead = null, heading = false) {
     return content.flatMap((p) => {
-        if (typeof p === 'string') return [...p].map((ch) => ({ ch, bold, font, literal, nohyphen, center, lead, heading }));
+        if (typeof p === 'string') return [...p].map((ch, i, chars) => ({ ch, at: { chars, i }, bold, font, literal, nohyphen, center, lead, heading }));
         const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead, heading || p.header === true);
         if (p.alt && inner.length) reserveRoom(inner, p, bold, font);
         return inner;
@@ -885,15 +885,15 @@ function reserveRoom(inner, part, bold, font) {
 // alone is drawn with the game's own spacing, so its width has none of the kerning of its font.
 const unkerned = (g) => g.literal || g.ch === '\n' || (g.ch !== undefined && shapeOf(g.ch));
 const widthOf = (g) => {
-    const width = FONTS.widthOf(g.font, g.ch, g.bold);
+    const width = FONTS.widthOf(g.font, g.ch, g.bold, g.at);
     if (!unkerned(g)) return width;
-    const { before, after } = FONTS.kerningOf(g.font, g.ch);
+    const { before, after } = FONTS.kerningOf(g.font, g.ch, g.at);
     return width - before - after;
 };
 
 // How far past the width of a glyph the game's line gets before the padding of its kerning pulls it back: kerning that closes up
 // the next glyph is a backwards padding after the glyph, and the splitter checks the width after the glyph and before that padding
-const peak = (g) => (unkerned(g) || !g.font || !g.ch ? 0 : Math.max(0, -FONTS.kerningOf(g.font, g.ch).after));
+const peak = (g) => (unkerned(g) || !g.font || !g.ch ? 0 : Math.max(0, -FONTS.kerningOf(g.font, g.ch, g.at).after));
 
 // The width a run of glyphs needs of a line: the furthest the splitter's count gets, which is its width plus that of the last
 // glyph's peak, or a middle glyph's when more kerning follows it
@@ -1223,8 +1223,9 @@ function applyKerning(content, font = DEFAULT_FONT) {
         }
         const out = [];
         let text = '';
-        for (const ch of part) {
-            const { before, after } = ch === '\n' || shapeOf(ch) ? { before: 0, after: 0 } : FONTS.kerningOf(font, ch);
+        const chars = [...part];
+        for (const [i, ch] of chars.entries()) {
+            const { before, after } = ch === '\n' || shapeOf(ch) ? { before: 0, after: 0 } : FONTS.kerningOf(font, ch, { chars, i });
             if (before) {
                 if (text) out.push(text);
                 out.push(pad(before));

@@ -21,10 +21,10 @@ styles: {
       align: center
    },
    .signature: {
-      font: foxcraft_dungeon_loot:dnealian_script
+      font: foxcraft_dungeon_loot:script
    },
    .approval: {
-      font: foxcraft_dungeon_loot:foxcraft_handwriting
+      font: foxcraft_dungeon_loot:handwriting
    }
 }
 ---

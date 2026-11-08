@@ -10,7 +10,7 @@ styles: {
     font: foxcraft_dungeon_loot:textmachine_handwriting
   },
   .signature: {
-    font: foxcraft_dungeon_loot:dnealian_script
+    font: foxcraft_dungeon_loot:script
   }
 }
 ---

@@ -404,9 +404,10 @@ function packFonts(cached, assetsDir, ascents = {}) {
 //endregion
 
 /**
- * Reads font_kerning.json as { fontId: { pre: { default, chars }, post: { default, chars } } }. pre is the pixels of spacing
+ * Reads font_kerning.json as { fontId: { pre: { default, chars }, post: { default, chars }, pairs } }. pre is the pixels of spacing
  * before a glyph, the game's own being ENGINE_PRE (0), post the pixels after it, ENGINE_POST (1): post 0 pulls the next glyph one
- * pixel closer. Either side may be left out. Integers only, a bad one stops the build.
+ * pixel closer. pairs is { "fi": -3, "ffi": -3 }, groups of two or more characters: the post of every glyph in the group but the
+ * last, when the group stands in one text, which replaces the post of that glyph alone. The longest group wins. Either side may be left out. Integers only, a bad one stops the build.
  */
 function loadKerning(file = KERNING) {
     if (!fs.existsSync(file)) return {};
@@ -426,12 +427,18 @@ function loadKerning(file = KERNING) {
     };
     for (const [id, entry] of Object.entries(JSON.parse(fs.readFileSync(file, 'utf8')))) {
         if (id.startsWith('__')) continue;
-        out[withNamespace(id)] = { pre: side(id, 'pre', ENGINE_PRE, entry.pre), post: side(id, 'post', ENGINE_POST, entry.post) };
+        const pairs = {};
+        for (const [pair, v] of Object.entries(entry.pairs || {})) {
+            if ([...pair].length < 2) throw new Error(`${name}: ${id} pairs key "${pair}" is not a group of two or more characters`);
+            pairs[pair] = check(`${id} pairs "${pair}"`, v);
+        }
+        const groups = Object.entries(pairs).map(([group, v]) => ({ chars: [...group], value: v })).sort((a, b) => b.chars.length - a.chars.length);
+        out[withNamespace(id)] = { pre: side(id, 'pre', ENGINE_PRE, entry.pre), post: side(id, 'post', ENGINE_POST, entry.post), groups };
     }
     return out;
 }
 
-/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold) is the advance of one glyph in pixels, kerning included, kerningOf(font, char) the { before, after } pixels font_kerning.json adds around it, ascentOf(font, char) how far a glyph reaches above the baseline, or the tallest glyph of the font without a char. */
+/** Loads the vanilla cache and the pack's fonts. widthOf(font, char, bold, at) is the advance of one glyph in pixels, kerning included, kerningOf(font, char, at) the { before, after } pixels font_kerning.json adds around it, at being { chars, i } the characters of the text it stands in and its place there, which a group can change, ascentOf(font, char) how far a glyph reaches above the baseline, or the tallest glyph of the font without a char. */
 function loadFonts(options = {}) {
     const cache = fs.existsSync(options.cache || CACHE) ? JSON.parse(fs.readFileSync(options.cache || CACHE, 'utf8')) : {};
     const fonts = {};
@@ -449,18 +456,32 @@ function loadFonts(options = {}) {
     const missing = new Set();
     // Pixels font_kerning.json adds before and after a glyph, 0 for a font or glyph it does not list or a space
     const NO_KERNING = { before: 0, after: 0 };
-    const kerningOf = (font, ch) => {
+    // The post a group of the font sets for the glyph at chars[i], the longest group that covers it, or undefined
+    const grouped = (entry, at) => {
+        if (!at || !entry.groups.length) return undefined;
+        const { chars, i } = at;
+        for (const group of entry.groups) {
+            const n = group.chars.length;
+            for (let k = 0; k < n - 1; k++) {
+                const start = i - k;
+                if (start >= 0 && start + n <= chars.length && group.chars.every((c, j) => chars[start + j] === c)) return group.value;
+            }
+        }
+        return undefined;
+    };
+    const kerningOf = (font, ch, at) => {
         const entry = kerning[withNamespace(font || DEFAULT_FONT)];
         if (!entry || ch === ' ' || ch === '\u00a0') return NO_KERNING;
-        return { before: (entry.pre.chars[ch] ?? entry.pre.default) - ENGINE_PRE, after: (entry.post.chars[ch] ?? entry.post.default) - ENGINE_POST };
+        const post = grouped(entry, at) ?? entry.post.chars[ch] ?? entry.post.default;
+        return { before: (entry.pre.chars[ch] ?? entry.pre.default) - ENGINE_PRE, after: post - ENGINE_POST };
     };
-    const widthOf = (font, ch, bold) => {
+    const widthOf = (font, ch, bold, at) => {
         const id = withNamespace(font || DEFAULT_FONT);
         const table = fonts[id];
         if (!table) missing.add(id);
         const width = ch === ' ' ? (table || fonts[DEFAULT_FONT] || {})[' '] ?? DEFAULT_SPACE : (table || {})[ch] ?? UNKNOWN_WIDTH;
         // Bold adds a pixel to every glyph, a space too: in 26.3 GlyphInfo.getAdvance(bold) adds getBoldOffset() and the space provider keeps it
-        const { before, after } = kerningOf(font, ch);
+        const { before, after } = kerningOf(font, ch, at);
         return width + (bold ? 1 : 0) + before + after;
     };
     // The ascent of a glyph of a font of the pack, 0 for the fonts of the game: they sit inside a line

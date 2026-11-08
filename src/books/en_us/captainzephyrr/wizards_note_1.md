@@ -5,7 +5,7 @@ generation: tattered
 model: foxcraft_dungeon_loot:random_loot/written_letter
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:dnealian_script
+    font: foxcraft_dungeon_loot:script
   }
 }
 ---

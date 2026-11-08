@@ -14,14 +14,16 @@ Spacing around the glyphs of a font, for fonts that read too loose or too tight.
 
 ```json
 {
-  "foxcraft_dungeon_loot:dnealian_script": {
+  "foxcraft_dungeon_loot:script": {
     "pre": { "default": 0, "chars": {} },
-    "post": { "default": 0, "chars": { "W": 1 } }
+    "post": { "default": 0, "chars": { "W": 1 } },
+    "pairs": { "fi": -2, "ffi": -2 }
   }
 }
 ```
 
 - `pre` is the spacing before a glyph, default 0. `post` is the spacing after it, default 1, so `post` 0 pulls the next glyph a pixel closer. `default` covers every glyph of the font, `chars` overrides single characters. Either side may be left out. Whole pixels only.
+- `pairs` sets the spacing after a glyph for groups of two or more characters, `"fi": -2`: the `post` of every glyph of the group but the last, when the whole group stands in one run of text, in place of the `post` of that glyph. The longest group that covers a glyph wins, so `ffi` can differ from `fi`. Nothing is matched across a change of style, font or a line the text was cut into by a node of its own.
 - Spaces are never kerned. Fonts not listed here are left as is.
 - Applied by `applyKerning` in `scripts/books/book_loot_gen.js` to the finished pages, one padding component per kerned glyph side, so a listed font makes the book JSON bigger. A negative `pre` on the first glyph of a line draws left of the page margin.
 - Only books are kerned, lore and other text in a pack font are not.

@@ -6,7 +6,7 @@ lore: A note from a treasure hunter, searching for the lost tomb of Cokilio Van 
 model: foxcraft_dungeon_loot:random_loot/written_letter
 styles: {
   body: {
-    font: foxcraft_dungeon_loot:foxcraft_handwriting
+    font: foxcraft_dungeon_loot:handwriting
   }
 }
 ---

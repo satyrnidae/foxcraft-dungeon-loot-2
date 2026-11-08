@@ -349,6 +349,20 @@ describe('font kerning', () => {
     });
   });
 
+  it('sets the spacing inside a group of characters, the longest group winning, within one text', () => {
+    withKerning({ [FONT]: { pairs: { fi: -3, ffi: -2 } } }, (kerning) => {
+      const { kerningOf } = fontsApi.loadFonts({ kerning });
+      const at = (text, i) => ({ chars: [...text], i });
+      assert.deepEqual(kerningOf(FONT, 'f', at('fi', 0)), { before: 0, after: -4 });
+      assert.deepEqual(kerningOf(FONT, 'i', at('fi', 1)), { before: 0, after: 0 });
+      assert.deepEqual(kerningOf(FONT, 'f', at('ffi', 0)), { before: 0, after: -3 });
+      assert.deepEqual(kerningOf(FONT, 'f', at('ffi', 1)), { before: 0, after: -3 });
+      assert.deepEqual(kerningOf(FONT, 'f', at('fa', 0)), { before: 0, after: 0 });
+      assert.deepEqual(kerningOf(FONT, 'f'), { before: 0, after: 0 });
+    });
+    withKerning({ [FONT]: { pairs: { f: -1 } } }, (kerning) => assert.throws(() => fontsApi.loadKerning(kerning), /group of two or more/));
+  });
+
   it('rejects spacing that is not a whole number', () => {
     withKerning({ [FONT]: { post: { default: 0.5 } } }, (kerning) => assert.throws(() => fontsApi.loadKerning(kerning), /whole number/));
   });
@@ -361,7 +375,7 @@ describe('font kerning', () => {
       assert.deepEqual(kerningOf('minecraft:uniform', 'a'), { before: 0, after: 0 });
     });
     // The pack's own kerned font is a D'Nealian one: its text gets a backwards pixel after each letter
-    const tree = gen.applyKerning([{ styles: { font: 'foxcraft_dungeon_loot:dnealian_script' }, content: ['ab c'] }]);
+    const tree = gen.applyKerning([{ styles: { font: 'foxcraft_dungeon_loot:script' }, content: ['ab c'] }]);
     const inner = tree[0].content;
     assert.deepEqual(padText(inner), ['', '', '']);
     assert.equal(inner.filter((p) => typeof p === 'string').join(''), 'ab c');
