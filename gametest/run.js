@@ -77,6 +77,7 @@ if (fs.existsSync(path.join(root, "data", "fdl_test"))) {
 	process.exit(-1);
 }
 build(root);
+require("./sweep.js").generateSweep(root);
 build(path.join(root, "gametest", "mc"));
 // A step naming a function that did not compile does nothing and the test passes, a typo or a file prefix in the name, so every manifest step is checked
 for (const t of require("./tests.js").gametest.tests) {

@@ -21,17 +21,22 @@ function start {
 function check {
 	# The tag is gone, the expiry ran
 	execute if entity @e[type=minecraft:item,tag=satyrn.fdl.titanHammerSpawnedItem] run scoreboard players set #ok fdl_test 0
+	execute if entity @e[type=minecraft:item,tag=satyrn.fdl.titanHammerSpawnedItem] run say gt FAIL hammer_expiry check: the tagged item still exists
 
 	# The zombie in the blast is hurt and burning, the one outside is untouched
 	execute store result score #near_now fdl_test run data get entity @e[tag=tt.near,limit=1] Health
 	execute unless score #near_now fdl_test < #near_hp fdl_test run scoreboard players set #ok fdl_test 0
+	execute unless score #near_now fdl_test < #near_hp fdl_test run say gt FAIL hammer_expiry check: near zombie was not hurt
 	execute store result score #fire fdl_test run data get entity @e[tag=tt.near,limit=1] Fire
 	execute unless score #fire fdl_test matches 1.. run scoreboard players set #ok fdl_test 0
+	execute unless score #fire fdl_test matches 1.. run say gt FAIL hammer_expiry check: near zombie is not burning
 	execute store result score #far_now fdl_test run data get entity @e[tag=tt.far,limit=1] Health
 	execute unless score #far_now fdl_test = #far_hp fdl_test run scoreboard players set #ok fdl_test 0
+	execute unless score #far_now fdl_test = #far_hp fdl_test run say gt FAIL hammer_expiry check: far zombie was hurt
 
 	# The expiry table drops blaze powder where the hammer was
 	execute at @e[tag=tt.origin,limit=1] positioned ~3 ~ ~ unless entity @e[type=minecraft:item,distance=..3,nbt={Item:{id:"minecraft:blaze_powder"}}] run scoreboard players set #ok fdl_test 0
+	execute at @e[tag=tt.origin,limit=1] positioned ~3 ~ ~ unless entity @e[type=minecraft:item,distance=..3,nbt={Item:{id:"minecraft:blaze_powder"}}] run say gt FAIL hammer_expiry check: no blaze powder dropped
 }
 
 # expiry_hit called directly, so the numbers are exact: 5 explosion damage and 3 seconds of fire, 60 ticks. The zombie is NoAI so nothing else touches it

@@ -20,6 +20,11 @@ const gametest = {
 		{ id: "poncho_post_attack", steps: [[1, "strikes/poncho/run"]] },
 		{ id: "hammer_expiry", steps: [[1, "hammer/start"], [8, "hammer/check"]] },
 		{ id: "hammer_expiry_hit", steps: [[1, "hammer/hit"]] },
+		{ id: "sweep_common", steps: [[1, "sweep/common"]] },
+		{ id: "sweep_uncommon", steps: [[1, "sweep/uncommon"]] },
+		{ id: "sweep_rare", steps: [[1, "sweep/rare"]] },
+		{ id: "sweep_epic", steps: [[1, "sweep/epic"]] },
+		{ id: "sweep_mythic", steps: [[1, "sweep/mythic"]] },
 	],
 };
 

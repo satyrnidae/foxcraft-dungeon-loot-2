@@ -51,3 +51,4 @@ gametest/mc/.mcb
 
 # Executing-plans workspace
 .superpowers
+gametest/mc/src/fdl_test/sweep.mcb
