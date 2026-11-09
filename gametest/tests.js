@@ -18,6 +18,8 @@ const gametest = {
 		{ id: "balm_levels", steps: [[1, "enchantments/balm/run"]] },
 		{ id: "disarming_entity", steps: [[1, "strikes/disarm/run"]] },
 		{ id: "poncho_post_attack", steps: [[1, "strikes/poncho/run"]] },
+		{ id: "hammer_expiry", steps: [[1, "hammer/start"], [8, "hammer/check"]] },
+		{ id: "hammer_expiry_hit", steps: [[1, "hammer/hit"]] },
 	],
 };
 

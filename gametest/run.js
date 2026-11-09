@@ -78,6 +78,15 @@ if (fs.existsSync(path.join(root, "data", "fdl_test"))) {
 }
 build(root);
 build(path.join(root, "gametest", "mc"));
+// A step naming a function that did not compile does nothing and the test passes, a typo or a file prefix in the name, so every manifest step is checked
+for (const t of require("./tests.js").gametest.tests) {
+	for (const [, fn] of t.steps) {
+		if (!fs.existsSync(path.join(root, "gametest", "mc", "data", "fdl_test", "function", `${fn}.mcfunction`))) {
+			console.error(`FAIL ${t.id}: step function fdl_test:${fn} was not compiled, see gametest/tests.js`);
+			process.exit(-1);
+		}
+	}
+}
 const gametestPack = generate(root);
 
 const packs = path.join(server, "packs");

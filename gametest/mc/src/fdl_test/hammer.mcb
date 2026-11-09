@@ -1,0 +1,53 @@
+# Hammer of Sol expiry. A dropped hammer pops when its expiry score runs out: 5 explosion damage and fire to the living in a cube around it, the tag
+# comes off and the expiry loot spawns. The pack's own on_tick does the counting, this only stages the item and reads the result.
+# The item sits 3 blocks out so the origin marker is outside the blast cube, which spans from 1.5 blocks below to 0.5 above the item on each axis.
+
+function start {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:item ~3 ~ ~ {Tags:["tt","tt.item","satyrn.fdl.titanHammerSpawnedItem"],Item:{id:"minecraft:snowball",count:1},PickupDelay:32767}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~2 ~ ~ {NoAI:1b,Tags:["tt","tt.near"]}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~7 ~ ~ {NoAI:1b,Tags:["tt","tt.far"]}
+	scoreboard players set @e[tag=tt.item] satyrn.fdl.hammerOfSol.expiry 3
+
+	# Both start at full health, the check compares against this
+	execute store result score #near_hp fdl_test run data get entity @e[tag=tt.near,limit=1] Health
+	execute store result score #far_hp fdl_test run data get entity @e[tag=tt.far,limit=1] Health
+	execute unless score #near_hp fdl_test matches 20 run scoreboard players set #ok fdl_test 0
+	execute unless score #far_hp fdl_test matches 20 run scoreboard players set #ok fdl_test 0
+	execute unless entity @e[tag=tt.item,tag=satyrn.fdl.titanHammerSpawnedItem] run scoreboard players set #ok fdl_test 0
+}
+
+function check {
+	# The tag is gone, the expiry ran
+	execute if entity @e[type=minecraft:item,tag=satyrn.fdl.titanHammerSpawnedItem] run scoreboard players set #ok fdl_test 0
+
+	# The zombie in the blast is hurt and burning, the one outside is untouched
+	execute store result score #near_now fdl_test run data get entity @e[tag=tt.near,limit=1] Health
+	execute unless score #near_now fdl_test < #near_hp fdl_test run scoreboard players set #ok fdl_test 0
+	execute store result score #fire fdl_test run data get entity @e[tag=tt.near,limit=1] Fire
+	execute unless score #fire fdl_test matches 1.. run scoreboard players set #ok fdl_test 0
+	execute store result score #far_now fdl_test run data get entity @e[tag=tt.far,limit=1] Health
+	execute unless score #far_now fdl_test = #far_hp fdl_test run scoreboard players set #ok fdl_test 0
+
+	# The expiry table drops blaze powder where the hammer was
+	execute at @e[tag=tt.origin,limit=1] positioned ~3 ~ ~ unless entity @e[type=minecraft:item,distance=..3,nbt={Item:{id:"minecraft:blaze_powder"}}] run scoreboard players set #ok fdl_test 0
+}
+
+# expiry_hit called directly, so the numbers are exact: 5 explosion damage and 3 seconds of fire, 60 ticks. The zombie is NoAI so nothing else touches it
+function hit {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["tt","tt.t"]}
+	execute store result score #hp fdl_test run data get entity @e[tag=tt.t,limit=1] Health
+	execute unless score #hp fdl_test matches 20 run scoreboard players set #ok fdl_test 0
+	execute store result score #fire fdl_test run data get entity @e[tag=tt.t,limit=1] Fire
+	execute if score #fire fdl_test matches 1.. run scoreboard players set #ok fdl_test 0
+
+	execute as @e[tag=tt.t] at @s run function foxcraft_dungeon_loot:item/mythic/hammer_of_sol/expiry_hit
+
+	execute store result score #hp fdl_test run data get entity @e[tag=tt.t,limit=1] Health
+	execute unless score #hp fdl_test matches 15 run scoreboard players set #ok fdl_test 0
+	execute store result score #fire fdl_test run data get entity @e[tag=tt.t,limit=1] Fire
+	execute unless score #fire fdl_test matches 60 run scoreboard players set #ok fdl_test 0
+}
