@@ -13,6 +13,11 @@ const gametest = {
 	margin: 300,
 	tests: [
 		{ id: "load_scoreboards", steps: [[1, "load/check"]] },
+		{ id: "aura_post_attack", steps: [[1, "enchantments/aura/run"]] },
+		{ id: "haemolymph_levels", steps: [[1, "enchantments/haemolymph/run"]] },
+		{ id: "balm_levels", steps: [[1, "enchantments/balm/run"]] },
+		{ id: "disarming_entity", steps: [[1, "strikes/disarm/run"]] },
+		{ id: "poncho_post_attack", steps: [[1, "strikes/poncho/run"]] },
 	],
 };
 
