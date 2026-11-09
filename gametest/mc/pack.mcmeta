@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "Foxcraft Dungeon Loot gametests",
+    "min_format": [121, 0],
+    "max_format": [121, 0]
+  }
+}
