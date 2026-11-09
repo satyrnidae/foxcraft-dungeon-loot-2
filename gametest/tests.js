@@ -25,6 +25,8 @@ const gametest = {
 		{ id: "sweep_rare", steps: [[1, "sweep/rare"]] },
 		{ id: "sweep_epic", steps: [[1, "sweep/epic"]] },
 		{ id: "sweep_mythic", steps: [[1, "sweep/mythic"]] },
+		// Last, it removes the objectives the others use
+		{ id: "uninstall", steps: [[1, "uninstall/run"], [3, "uninstall/reload"]] },
 	],
 };
 
