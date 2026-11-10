@@ -2,11 +2,11 @@
   "providers": [
     {
       "type": "bitmap",
-      "file": "foxcraft_dungeon_loot:font/rule.png",
+      "file": "foxcraft_dungeon_loot:font/utils/rule.png",
       "ascent": 7,
       "height": 8,
       "chars": [
-        ""
+        "\ue000"
       ]
     },
     {

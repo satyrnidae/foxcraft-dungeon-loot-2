@@ -3,6 +3,7 @@ import ./config.js
 Contains various macros for use throughout the datapack, including:
  - Item breaking
  - Random number generation
+ - Enchantment level lookup
 ###
 
 ###
@@ -32,5 +33,22 @@ Parameters:
 template rng {
     with a0:word a1:word {
         execute store result score #math.result <%config.internalScoreboard%> run random value <%a0%>..<%a1%>
+    }
+}
+
+###
+Sets #math.input1 in the internal scoreboard to the level of an enchantment on the item in a slot of the executing entity, 0 when it has none.
+Tests the item stack, reading it with data get entity would serialize the whole entity. Levels above 10 count as 10.
+
+Parameters:
+0 - The non-numeric slot ID of the item.
+1 - The enchantment ID, such as minecraft:unbreaking.
+###
+template enchantment_level {
+    with a0:word a1:word {
+        scoreboard players set #math.input1 <%config.internalScoreboard%> 0
+        REPEAT(1, 10) as i {
+            execute if items entity @s <%a0%> *[minecraft:enchantments~[{enchantments:"<%a1%>",levels:{min:<%i%>}}]] run scoreboard players set #math.input1 <%config.internalScoreboard%> <%i%>
+        }
     }
 }

@@ -4,7 +4,7 @@ import java.nio.file.*;
 import java.util.*;
 
 /**
- * Checks scripts/arabic_shaping.json, how the game's text renderer (ArabicShaping LETTERS_SHAPE, as FormattedBidiReorder uses it)
+ * Checks scripts/books/arabic_shaping.json, how the game's text renderer (ArabicShaping LETTERS_SHAPE, as FormattedBidiReorder uses it)
  * shapes each Arabic letter: whether it joins the letter before and after it, and the code points of its four forms. The book
  * generator reads it to measure a line as it is drawn. A file that is not what the shaper gives is written again and the
  * step fails, so the build and the tests are run once more with the new one. Run: ArabicShapingTable <file>.

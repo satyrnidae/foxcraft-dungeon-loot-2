@@ -162,7 +162,13 @@
           "type": "minecraft:loot_table",
           "weight": 1,
           "quality": 0,
-          "value": "foxcraft_dungeon_loot:item/random_loot/book/random_uncommon_book"
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/__generated__/mystery_book/uncommon"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 1,
+          "quality": 0,
+          "value": "foxcraft_dungeon_loot:item/random_loot/book/__generated__/mystery_letter"
         }
       ]
     }

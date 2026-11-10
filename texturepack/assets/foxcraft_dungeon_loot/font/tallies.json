@@ -2,11 +2,11 @@
   "providers": [
     {
       "type": "bitmap",
-      "file": "foxcraft_dungeon_loot:font/tallies.png",
+      "file": "foxcraft_dungeon_loot:font/utils/tallies.png",
       "ascent": 8,
       "height": 9,
       "chars": [
-        ""
+        "\ue000\ue001"
       ]
     },
     {

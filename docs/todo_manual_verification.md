@@ -22,6 +22,14 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 ## Phase 4a - item components in commands
 
 - [ ] Unbreaking: hold or wear an item with Unbreaking III for each item that reads it (beta_iron_sword, buckwheat, downpour_amulet, evokers_tome, poncho_sanchezs_fate, scripture_of_cleansing, gravilock_boots, quet_zalas_beloved, war_hogs_disdainful_pride). Durability drops less often than without it, and no command errors in the log.
+- [ ] Projectile impact: throw X No Evil, Tor'Enhia's Fist, the Hail of Arrows scroll and Grasp of Uthiir at a wall, the floor and a mob from close and far. Cloud, lightning, arrows and web land at the impact point, not up to 1.5 blocks short. Tracker rotation follows the snowball (`/data get entity <tracker> Rotation` while in flight).
+- [ ] Projectile impact: throw at a wall while standing against it. The thrower is never the hit entity. A spectator standing in the path is ignored.
+- [ ] Projectile impact: throw straight down while falling fast. The impact still resolves, the ray reaches 6 blocks.
+- [ ] Hammer of Sol on the shared raycast: throw at a mob, a wall and open sky-facing floor. The mob takes fire and damage, a wall or floor plays the miss sound, the dropped hammer lands at the impact, and it still pops after 10 seconds.
+- [ ] War Hog's Burning Rage: the axe shows Disarming Strike. About one hit in ten makes a mob holding an item drop it, one in twenty for a player who is not in creative mode, and a war hog never drops its item. A war hog piglin brute holding the axe hitting a player disarms in the same way.
+- [ ] Spell Scroll Hail of Arrows: a marker sits 30 blocks above where the scroll landed and fires three volleys of about 37 arrows, 15 ticks apart, in a disc around itself. Thrown at the ground the arrows fall straight down. Thrown at a mob they head in the direction of it without homing, and each volley turns toward a point slightly ahead of the mob's current spot, so a mob running sideways is led. If it dies the remaining volleys keep the last direction. Arrows spawn pointing the way they fly and never start moving up. No marker is left afterwards (`/kill @e[type=marker,tag=satyrn.fdl.SC_HOA.volley]` kills none), and the target loses its tag.
+- [ ] Tor'Enhia's Fist: thrown at a mob, sparks cover the mob's whole body, a tall and a wide mob included, and the bolts strike where the mob is by then. Thrown at the ground the fist drops, sparks show on the dropped item, the bolt strikes it and the item survives. Picking the fist up during the countdown moves the sparks and the strike onto the player. No marker or tag is left afterwards.
+- [ ] Estudinae's Sorrow: the sword shows Poison of Poncho Sanchez. About one hit in ten gives the target Wither II for 5 seconds with crit particles, creative players are skipped, and hitting no longer runs any raycast.
 - [ ] War Hog's Blighted Harvest: kill mobs, the Souls count on the item rises and the item name/lore updates; at 10 souls the wither burst fires.
 - [ ] War Hog's Burning Rage: thrown item entity appears with the right item, owner and thrower, and drops as the real item.
 - [ ] `break_item` particle: let an item of each kind break (17 items). The break particles show the item's own model, not an error particle or a plain vanilla one.
@@ -148,7 +156,7 @@ Dev helpers: `config.json` `mc.dev: true` makes armor stands visible and re-enab
 - [ ] Chainsaw: holding it in the main hand grants haste 2 once, and clears when put away. No unknown predicate errors in the log.
 - [ ] Quet Zala's Beloved: with another mob wearing an Unbreaking chestplate nearby, a player without Unbreaking still takes the always-damage path.
 - [ ] War Hog's Disdainful Pride: boots with Unbreaking use the Unbreaking durability odds on a fall.
-- [ ] Datapack zip built with `build.ps1` does not contain the `docs/` folder.
+- [ ] Datapack zip built with `npm run data` does not contain the `docs/` folder.
 
 ## Not yet testable (later phases)
 
