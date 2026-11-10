@@ -1,0 +1,53 @@
+# Uninstall. The on_uninstall tag removes the event and Hammer of Sol objectives and the Hammer storage, then load adds everything back. The other
+# four objectives are removed by the uninstall function itself, which also disables the datapack and removes the internal scoreboard, so it is not
+# run here. Runs last, the other scenarios use these objectives.
+# Setting a score succeeds only when the objective exists, which is how presence is probed.
+
+function run {
+	# Something for the storage check to remove
+	data modify storage foxcraft_dungeon_loot:items HammerOfSol set value {marker:1b}
+	execute unless data storage foxcraft_dungeon_loot:items HammerOfSol run scoreboard players set #ok fdl_test 0
+
+	function #foxcraft_dungeon_loot:on_uninstall
+
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.ateSpiderEye 1
+	execute unless score #x fdl_test matches 0 run say gt FAIL uninstall: satyrn.fdl.events.ateSpiderEye still exists
+	execute unless score #x fdl_test matches 0 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.blockedAttack 1
+	execute unless score #x fdl_test matches 0 run say gt FAIL uninstall: satyrn.fdl.events.blockedAttack still exists
+	execute unless score #x fdl_test matches 0 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.hammerOfSol.expiry 1
+	execute unless score #x fdl_test matches 0 run say gt FAIL uninstall: satyrn.fdl.hammerOfSol.expiry still exists
+	execute unless score #x fdl_test matches 0 run scoreboard players set #ok fdl_test 0
+	scoreboard players reset #probe
+	execute if data storage foxcraft_dungeon_loot:items HammerOfSol run say gt FAIL uninstall: HammerOfSol storage still exists
+	execute if data storage foxcraft_dungeon_loot:items HammerOfSol run scoreboard players set #ok fdl_test 0
+}
+
+# The load function, not the load tag, that one reloads the test pack's objectives as well
+function reload {
+	function foxcraft_dungeon_loot:load
+
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.used.warpedFungusOnAStick 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.used.warpedFungusOnAStick is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.used.snowball 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.used.snowball is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.loot.variant 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.loot.variant is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.souls 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.souls is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.ateSpiderEye 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.events.ateSpiderEye is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.blockedAttack 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.events.blockedAttack is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.hammerOfSol.expiry 1
+	execute unless score #x fdl_test matches 1 run say gt FAIL uninstall: satyrn.fdl.hammerOfSol.expiry is missing after load
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	scoreboard players reset #probe
+}

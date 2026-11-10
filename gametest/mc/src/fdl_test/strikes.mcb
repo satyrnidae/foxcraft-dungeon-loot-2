@@ -1,0 +1,46 @@
+# Disarming Strike and Poison of Poncho Sanchez. The chance rolls live in the enchantment JSON and the post_attack functions are called directly.
+# The player branches, creative mode and the owner-only pickup, need a player and a headless server has none, so they are not asserted.
+
+# Disarming Strike post_attack_entity runs as and at the struck entity. It drops the main hand item and skips an empty hand and a war hog
+function disarm/run {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~2 ~ ~ {NoAI:1b,Tags:["tt","tt.a"],equipment:{mainhand:{id:"minecraft:iron_axe",count:1}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~6 ~ ~ {NoAI:1b,Tags:["tt","tt.b"]}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:piglin_brute ~10 ~ ~ {NoAI:1b,Tags:["tt","tt.hog","war_hog"],equipment:{mainhand:{id:"minecraft:golden_axe",count:1}}}
+
+	# Nothing dropped yet, and the hands are as built
+	execute if entity @e[type=minecraft:item,tag=satyrn.fdl.droppedItem] run scoreboard players set #ok fdl_test 0
+	execute as @e[tag=tt.a] unless items entity @s weapon.mainhand minecraft:iron_axe run scoreboard players set #ok fdl_test 0
+	execute as @e[tag=tt.hog] unless items entity @s weapon.mainhand minecraft:golden_axe run scoreboard players set #ok fdl_test 0
+
+	execute as @e[tag=tt.a] at @s run function foxcraft_dungeon_loot:enchantment/disarming_strike/post_attack_entity
+	execute as @e[tag=tt.b] at @s run function foxcraft_dungeon_loot:enchantment/disarming_strike/post_attack_entity
+	execute as @e[tag=tt.hog] at @s run function foxcraft_dungeon_loot:enchantment/disarming_strike/post_attack_entity
+
+	# Exactly one dropped item in the arena, so the empty hand and the war hog dropped nothing. It is the axe, next to the zombie, thrown by it
+	execute store result score #n fdl_test if entity @e[type=minecraft:item,tag=satyrn.fdl.droppedItem]
+	execute unless score #n fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute as @e[tag=tt.a] at @s unless entity @e[type=minecraft:item,tag=satyrn.fdl.droppedItem,distance=..2,nbt={Item:{id:"minecraft:iron_axe"}}] run scoreboard players set #ok fdl_test 0
+	data modify storage fdl_test:disarm uuid set from entity @e[tag=tt.a,limit=1] UUID
+	execute store success score #changed fdl_test run data modify storage fdl_test:disarm uuid set from entity @e[type=minecraft:item,tag=satyrn.fdl.droppedItem,limit=1] Thrower
+	execute unless score #changed fdl_test matches 0 run scoreboard players set #ok fdl_test 0
+
+	# The struck zombie is disarmed, the war hog keeps its axe
+	execute as @e[tag=tt.a] if items entity @s weapon.mainhand minecraft:iron_axe run scoreboard players set #ok fdl_test 0
+	execute as @e[tag=tt.hog] unless items entity @s weapon.mainhand minecraft:golden_axe run scoreboard players set #ok fdl_test 0
+}
+
+# Poison of Poncho Sanchez post_attack runs as the struck entity, Wither II for 5 seconds. A bystander gets nothing
+function poncho/run {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~2 ~ ~ {NoAI:1b,Tags:["tt","tt.a"]}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~6 ~ ~ {NoAI:1b,Tags:["tt","tt.b"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1}}}
+
+	execute as @e[tag=tt.a] run function fdl_test:lib/expect_no_effect {id:"minecraft:wither"}
+	execute as @e[tag=tt.a] at @s run function foxcraft_dungeon_loot:enchantment/poison_of_poncho_sanchez/post_attack
+
+	execute as @e[tag=tt.a] run function fdl_test:lib/expect_effect {id:"minecraft:wither",amp:1,max_dur:100}
+	execute as @e[tag=tt.b] run function fdl_test:lib/expect_no_effect {id:"minecraft:wither"}
+}
