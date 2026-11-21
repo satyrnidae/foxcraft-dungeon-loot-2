@@ -3,7 +3,7 @@ title: Eleven
 author: Unknown
 rarity: common
 generation: tattered
-lore: A worn book. Its pages seem to depict a fictional event but the pages are stained a concerning red...
+lore: A worn book. Its pages seem to depict a fictional event, but the pages are stained a concerning red...
 styles: {
     body: {
         font: foxcraft_dungeon_loot:textmachine_handwriting
@@ -34,14 +34,14 @@ I looked behind me for reasons I to this day don't understand. I couldn't see an
 
 I picked up my bag to run, but my diary fell out. I reached down to grab it and the pages fumbled in my sooty, trembling hands. I threw it in my bag and bolted. The noises followed me. I must have been tired and delusional, because I thought I even heard a note block serenade playing in a disturbingly ironic tone. I ran blindly until I saw the faint lights of the stars-an escape from what had become some hellish dream, all so quickly and suddenly. I climbed up the path of grass leading from the opening, a horridly scream-ish noise following me.
 
-I looked behind as I ran, the deep purple lights darting behind me. For the split second I looked, said glowing lights shot across the landscape, as if they were teleporting. Then, I hit a hard surface and fell down. I looked up to see these purple lights right in my face, larger and deeper than ever. I tried to scream for help in that moment of terror.
-<br>
-<vcenter>
+I looked behind as I ran, the deep purple lights darting behind me. For the split second I looked, said glowing lights shot across the landscape, as if they were teleporting. Then I hit a hard surface and fell down. I looked up to see these purple lights right in my face, larger and deeper than ever. I tried to scream for help in that moment of terror.
+<!-- page-break -->
+<!-- vertical-align-center -->
 
-    <style class=".ender">||A||     ||B||</style>
+    <span class=".ender">||A||     ||B||</span>
 
-                       <style class=".ender">||C||</style>
+                       <span class=".ender">||C||</span>
 
-<style class=".ender">None came.</style>
+<span class=".ender">None came.</span>
 
-            <style class=".ender">||D||</style>
+            <span class=".ender">||D||</span>

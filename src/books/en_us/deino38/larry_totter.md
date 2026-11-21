@@ -19,7 +19,7 @@ rarity: epic
 
   Then, Moldy-s'more was a baby. Then, he was big again. Then, he got an army. Then, he killed the head bearded man. Then, 6 parts of his soul were destroyed. Then, he was in a dual with Larry! As they fought with electric sticks, Larry won. Then everything was happy, and Larry got a life. 
 
-<vcenter>
+<!-- vertical-align-center -->
 <center>THE END</center>
-<vbottom>
+<!-- vertical-align-bottom -->
 - oh yeah, and Larry told deino38 this true story.

@@ -31,13 +31,13 @@ styles: {
 }
 ---
 
-<vcenter>
-<style class=".title">The Beats of Mysteria</style>
+<!-- vertical-align-center -->
+<span class=".title">The Beats of Mysteria</span>
 
-<style class=".decora">\u2026</style>
+<span class=".decora">\u2026</span>
 
-<style class=".title">A Handbook by Captain Zephyrr</style>
-<br>
+<span class=".title">A Handbook by Captain Zephyrr</span>
+<!-- page-break -->
 
 # The Peaceful
 
@@ -64,7 +64,7 @@ Chickens wander the Mysterian wilds, laying eggs from which the young of their k
 Squid can be found in bodies of water all across Mysteria, and can be found in abundance in the ocean to the north and swamp to the south. All these creatures, with the notable exception of the squid, can be bred through the use of wheat, of all things.
 
 Also, all of the various meats obtained from these creatures can be cooked in a furnace.
-<br>
+<!-- page-break -->
 
 # The Hostile
 
@@ -95,7 +95,7 @@ Deep in the bowels of the world live the slime. These slimy, green creatures hop
 Hiding in the walls of ancient underground strongholds are the silverfish. These creatures worm their way out of the walls and attack in large swarms whenever potential prey comes by. Silk can be harvested from a dead silverfish's body.
 
 Some of the aforementioned creatures drop iron ingots and tools or bows. Occasionally, a record can be found on the dead body of a creeper.
-<br>
+<!-- page-break -->
 
 # The Otherworldly: The Nether
 
@@ -114,7 +114,7 @@ Another dangerous creature of the nether is the molten slime, the counterpart of
 ## Blazes
 
 The final creature of the nether is the blaze. These floating beasts of flame can blast three bolts of fire between each recharging period at foes. The creatures rarely appear individually, so rushing and demolishing them with melee weapons is difficult. The best way to kill them is with a bow, but in their weak state between volleys, any weapon can fairly easily down them. Blazes leave behind blaze rods, small cylinders that rotate around them while in combat. These rods can be used to create eyes of ender and potion stands.
-<br>
+<!-- page-break -->
 
 # The Otherworldly: The End
 
@@ -125,7 +125,7 @@ The End is another dimension filled to the brim with hostile creatures. Most of 
 ## Endermen
 
 The endermen below grovel at the feet of the enderdragons. With their tall forms and purple, glowing eyes, these creatures are quite imposing. They teleport around their foes, any who look them in the eye, in a confusing manner, forcing the victim to whirl around quickly and repeatedly to avoid being taken down from behind. The easiest way to kill an enderman is to climb up a four meter pillar on high ground and draw the enderman closer. Then, one needs only to stab at the being below until it falls. When it does so, its enderpearl can be taken from its corpse. The enderpearl is a strange gem that can be thrown to teleport the user to wherever it shattered. Also, a pearl can be used in an eye of ender. Endermen in the end are the hardest to slay, because there are thousands of them scattered across each island. In the End, it is better to simply avoid them. However, endermen also sometimes warp to Mysteria, where they can be downed much quicker.
-<br>
+<!-- page-break -->
 
 # The Friendly
 
@@ -140,7 +140,7 @@ The ocelots of Foxtrot are also docile. They are easily scared and will run away
 ## Villagers and Golems
 
 The human villagers of Thalbodir and Downsville are also quite friendly, and will trade with an adventurer. Unfortunately, these people are the prime victims of zombie onslaughts. Iron and snow golems are constructs created by adventurers and villagers. Iron golem specimens will occasionally bestow upon a villager child a rose flower. Both types of golems will defend their creator against foes.
-<br>
+<!-- page-break -->
 
 # The Conclusion
 

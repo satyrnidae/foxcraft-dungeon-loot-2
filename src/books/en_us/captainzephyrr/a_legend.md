@@ -29,7 +29,7 @@ styles: {
    }
 }
 ---
-There is a legend that, beneath the icy covering of a ravine to the west of our fair village, one can find that which we here always see<style class=".garbled">k, t</style>he great <style class=".garbled">Ark of the</style>
+There is a legend that beneath the icy covering of a ravine to the west of our fair village, one can find that which we here always see<span class=".garbled">k, t</span>he great <span class=".garbled">Ark of the</span>
 
-<vbottom>
-`55`pad<style class=".blot1">\ue005</style>`-110`pad<style class=".blot2">\ue006</style>`-43`pad<style class=".meta">The text is too blotted to make out.</style>
+<!-- vertical-align-bottom -->
+<span class="pad">55</span><span class=".blot1">\ue005</span><span class="pad">-110</span><span class=".blot2">\ue006</span><span class="pad">-43</span><span class=".meta">The text is too blotted to make out.</span>

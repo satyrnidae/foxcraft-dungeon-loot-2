@@ -29,31 +29,31 @@ styles: {
 }
 ---
 
-`0`cover
-`1`cover <center class=".title">Fire</center>
-`2`cover <center class=".title">and</center>
-`3`cover <center class=".title">Fear</center>
-`4`cover
-`5`cover
-`6`cover
-`7`cover
-`8`cover
-`9`cover
-`10`cover
-`11`cover
-`12`cover <center class=".title">A Follower of</center>
-`13`cover <center class=".title">Dendris</center>
-<br>
+<span class="cover">0</span>
+<span class="cover">1</span><center class=".title">Fire</center>
+<span class="cover">2</span><center class=".title">and</center>
+<span class="cover">3</span><center class=".title">Fear</center>
+<span class="cover">4</span>
+<span class="cover">5</span>
+<span class="cover">6</span>
+<span class="cover">7</span>
+<span class="cover">8</span>
+<span class="cover">9</span>
+<span class="cover">10</span>
+<span class="cover">11</span>
+<span class="cover">12</span><center class=".title">A Follower of</center>
+<span class="cover">13</span><center class=".title">Dendris</center>
+<!-- page-break -->
 ---
-<vcenter>
+<!-- vertical-align-center -->
 
 # Fire and Fear
 
-<vbottom>
+<!-- vertical-align-bottom -->
 ---
-<br>
+<!-- page-break -->
 
-`V`drop erna had heard of the black gate behind the mountain. Sometimes strange creatures would come from within and do business with the Ifs in the village. The items were foreign and strange, but most of all intriguing. Verna had been warned about the dangers. The traders would speak in hushed tones about the fear beyond the portal. Some were calling for it to be closed. Verna saw potential in exploring new realms. Despite warnings from Cile the Elder, Verna went through the portal to the realm of fire.
+<span class="drop">V</span>erna had heard of the black gate behind the mountain. Sometimes strange creatures would come from within and do business with the Ifs in the village. The items were foreign and strange, but most of all intriguing. Verna had been warned about the dangers. The traders would speak in hushed tones about the fear beyond the portal. Some were calling for it to be closed. Verna saw potential in exploring new realms. Despite warnings from Cile the Elder, Verna went through the portal to the realm of fire.
 
   In the realm of fire, Verna was surrounded by smoke and stone. Verna decided to explore the area, and found many odd things which could be brought back to the village. Verna collected many wonderful things, and went back to the village. The villagers were surprised that Verna had found so many items, and asked many questions. Verna did not tell them the truth, and kept their travels a secret.
 

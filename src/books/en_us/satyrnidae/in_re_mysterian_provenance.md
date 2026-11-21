@@ -27,5 +27,5 @@ At the very least, I commend your effort to see that the book reached an expert 
 
 Yours truly,
 
-<style class=".signature">Doctor F Braun</style>
+<span class=".signature">Doctor F Braun</span>
 Director of Archaeology, New Tyne Academy

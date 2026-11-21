@@ -41,17 +41,17 @@ styles: {
 # An Adventure
 ---
 ---
-<vbottom>
+<!-- vertical-align-bottom -->
 ---
-<style class=".byline">By: <style class=".right">Gunny Stryker</style></style>
+<span class=".byline">By: <span class=".right">Gunny Stryker</span></span>
 ---
-<br>
+<!-- page-break -->
 
-`A`drop dventures do often begin with a young man, a nobody, a conduit through which the reader may associate himself or herself with the world of the story.  This, I think, would be a mistake on my part to begin my story as such.  This is because our story does not begin, but end with a young man, a nobody.  It is this end that I will attempt to explain, through my too-few powers of storytelling and by my personal relationship with said young man, and by such, hope to regale you with how he came to be.
-<br>
+<span class="drop">A</span>dventures do often begin with a young man, a nobody, a conduit through which the reader may associate himself or herself with the world of the story.  This, I think, would be a mistake on my part to begin my story as such.  This is because our story does not begin, but end with a young man, a nobody.  It is this end that I will attempt to explain, through my too-few powers of storytelling and by my personal relationship with said young man, and by such, hope to regale you with how he came to be.
+<!-- page-break -->
 
 ## Chapter I
-<style class=".title">A Good Story</style>
+<span class=".title">A Good Story</span>
 
 
   Good stories begin at the beginning, but seeing as this story is not particularly pleasant at the start, let us begin at the end.  The room was dark, dank, and smelled much like its former occupants (who I will decline to name at this time, but whom I assure you will later be of some singular importance).  The room was also small.  Large by my standards, myself being a very small man, but small to the giants that once dined there.

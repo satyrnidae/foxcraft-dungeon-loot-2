@@ -15,21 +15,21 @@ _He danced his dance, he tried his best,_
 _But the first little bird was not impressed._
 _She told him that his dance was swell_
 _And bid him farewell._
-<br>
+<!-- page-break -->
 _Two little birds sitting on the fence._
 _A third bird came right up to dance._
 _He danced a little bit better than the last,_
 _But the first bird thought that it lacked class._
 _She lied and said his dance was swell,_
 _And bid him farewell._
-<br>
+<!-- page-break -->
 _Three little birds sitting on the fence._
 _A fourth bird came right up to dance._
 _He danced a little bit better than the rest,_
 _But the first bird was still not impressed._
 _She told him that his dance was swell,_
 _And bid him farewell._
-<br>
+<!-- page-break -->
 _Four little birds sitting on the fence._
 _A fourth bird came right up to dance._
 _He danced a dance much better than the rest,_

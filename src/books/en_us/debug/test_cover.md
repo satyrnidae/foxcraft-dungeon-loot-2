@@ -7,19 +7,19 @@ generation: tattered
 lore: A test book for the cover font.
 ---
 
-`0`cover <center>1: 12345678901234</center>
-`1`cover <center>2: 12345678901234</center>
-<h1>`2`cover Test Cover</h1>
-`3`cover <center>4: 12345678901234</center>
-`4`cover <center>5: 12345678901234</center>
-`5`cover
-`6`cover
-`7`cover
-`8`cover
-`9`cover
-`10`cover
-`11`cover
-`12`cover
-`13`cover <center>by Debug</center>
-<br>
+<span class="cover">0</span><center>1: 12345678901234</center>
+<span class="cover">1</span><center>2: 12345678901234</center>
+<h1><span class="cover">2</span>Test Cover</h1>
+<span class="cover">3</span><center>4: 12345678901234</center>
+<span class="cover">4</span><center>5: 12345678901234</center>
+<span class="cover">5</span>
+<span class="cover">6</span>
+<span class="cover">7</span>
+<span class="cover">8</span>
+<span class="cover">9</span>
+<span class="cover">10</span>
+<span class="cover">11</span>
+<span class="cover">12</span>
+<span class="cover">13</span><center>by Debug</center>
+<!-- page-break -->
 [Back to the cover heading](#test-cover)

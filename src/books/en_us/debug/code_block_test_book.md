@@ -15,7 +15,7 @@ A fenced block is colored by the language after the fence.
 Known: mcfunction, json, js, bash, python, yaml and java.
 
 No language, or an unknown one, stays plain.
-<br>
+<!-- page-break -->
 # mcfunction
 ```mcfunction
 # tick
@@ -28,7 +28,7 @@ execute as @a
 effect give @a
   speed 5 1 true
 ```
-<br>
+<!-- page-break -->
 # json
 ```json
 {
@@ -39,7 +39,7 @@ effect give @a
   "s": "text"
 }
 ```
-<br>
+<!-- page-break -->
 # javascript
 ```js
 // add
@@ -49,7 +49,7 @@ if (x) {
   go("hi", 2);
 }
 ```
-<br>
+<!-- page-break -->
 # bash
 ```bash
 # list
@@ -58,7 +58,7 @@ for f in *; do
 done
 ls -l | wc -l
 ```
-<br>
+<!-- page-break -->
 # python
 ```python
 # square
@@ -66,7 +66,7 @@ def sq(x):
   return x * x
 print(sq(3))
 ```
-<br>
+<!-- page-break -->
 # yaml
 ```yaml
 # pack
@@ -76,7 +76,7 @@ tags:
   - loot
   - book
 ```
-<br>
+<!-- page-break -->
 # java
 ```java
 // hi
@@ -87,7 +87,7 @@ class A {
   }
 }
 ```
-<br>
+<!-- page-break -->
 # Plain
 ```
 no language

@@ -6,6 +6,7 @@ generation: tattered
 lore: |
   Tests out the new font
 styles: {
+  .nohyphen: { hyphenate: false },
   body: {
     font: foxcraft_dungeon_loot:pixellated_elegance
   },
@@ -23,38 +24,38 @@ Pixelated Elegance
 
 Designed by GGBotNet
 
-<a on_click="{action:'open_url',url:'https://creativecommons.org/publicdomain/zero/1.0/'}">CC0 1.0 Universal</a>
+<a data-on-click="{action:'open_url',url:'https://creativecommons.org/publicdomain/zero/1.0/'}">CC0 1.0 Universal</a>
 
-<a on_click="{action:'open_url',url:'https://www.ggbot.net'}"><span>ggbot.net</span></a>
-<br>
+<a data-on-click="{action:'open_url',url:'https://www.ggbot.net'}"><span class=".nohyphen">ggbot.net</span></a>
+<!-- page-break -->
 # Glyphs:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
 
 Digits:
 0123456789
-<br>
+<!-- page-break -->
 # Symbols:
 
-<span>!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
+<span class=".nohyphen">!"#$%&'()\*+,-./:;\<=>?@[\\]^\_`{\|}\~</span>
 
-<span>¡¢£¤¥¦§¨©«¬­®¯°±¶·»¼½¾¿×÷‘’‚‛“”…</span>
-<br>
+<span class=".nohyphen">¡¢£¤¥¦§¨©«¬­®¯°±¶·»¼½¾¿×÷‘’‚‛“”…</span>
+<!-- page-break -->
 # Smallcaps:
 
 <font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZÆÐØÞ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyzµßæðøþ</span>
 
 Digits:
-<span>0123456789</span></font>
-<br>
+<span class=".nohyphen">0123456789</span></font>
+<!-- page-break -->
 <font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">Cwm fjord bank glyphs vext quiz
 
 The quick brown fox jumps over the lazy dog.
@@ -62,7 +63,7 @@ The quick brown fox jumps over the lazy dog.
 Sphinx of black quartz, judge my vow.</font>
 
 Mixed with regular text, <font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">small caps</font> inline.
-<br>
+<!-- page-break -->
 # Cwm fjord:
 
 lowercase:
@@ -73,7 +74,7 @@ CWM FJORD BANK GLYPHS VEXT QUIZ
 
 Title Case:
 Cwm Fjord Bank Glyphs Vext Quiz
-<br>
+<!-- page-break -->
 Sentence case:
 Cwm fjord bank glyphs vext quiz
 
@@ -82,34 +83,34 @@ cWm FjOrD bAnK gLyPhS vExT qUiZ
 
 AlTeRnAtInG:
 CwM fJoRd BaNk GlYpHs VeXt QuIz
-<br>
+<!-- page-break -->
 tOGGLE cASE:
 cWM fJORD bANK gLYPHS vEXT qUIZ
 
 camelCase:
-<span>cwmFjordBankGlyphsVextQuiz</span>
+<span class=".nohyphen">cwmFjordBankGlyphsVextQuiz</span>
 
 PascalCase:
-<span>CwmFjordBankGlyphsVextQuiz</span>
-<br>
+<span class=".nohyphen">CwmFjordBankGlyphsVextQuiz</span>
+<!-- page-break -->
 snake\_case:
-<span>cwm\_fjord\_bank\_glyphs\_vext\_quiz</span>
+<span class=".nohyphen">cwm\_fjord\_bank\_glyphs\_vext\_quiz</span>
 
 SCREAMING\_SNAKE:
-<span>CWM\_FJORD\_BANK\_GLYPHS\_VEXT\_QUIZ</span>
+<span class=".nohyphen">CWM\_FJORD\_BANK\_GLYPHS\_VEXT\_QUIZ</span>
 
 kebab-case:
-<span>cwm-fjord-bank-glyphs-vext-quiz</span>
-<br>
+<span class=".nohyphen">cwm-fjord-bank-glyphs-vext-quiz</span>
+<!-- page-break -->
 Train-Case:
-<span>Cwm-Fjord-Bank-Glyphs-Vext-Quiz</span>
+<span class=".nohyphen">Cwm-Fjord-Bank-Glyphs-Vext-Quiz</span>
 
 dot.case:
-<span>cwm.fjord.bank.glyphs.vext.quiz</span>
+<span class=".nohyphen">cwm.fjord.bank.glyphs.vext.quiz</span>
 
 Initials:
 C F B G V Q
-<br>
+<!-- page-break -->
 # Pangram:
 
 The quick brown fox jumps over the lazy dog.
@@ -119,7 +120,7 @@ THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.
 Sphinx of black quartz, judge my vow.
 
 Pack my box with five dozen liquor jugs.
-<br>
+<!-- page-break -->
 # Sator Square:
 
 R O T A S
@@ -127,7 +128,7 @@ O P E R A
 T E N E T
 A R E P O
 S A T O R
-<br>
+<!-- page-break -->
 # Styles:
 
 **Cwm fjord bank glyphs vext quiz**
@@ -137,7 +138,7 @@ S A T O R
 __Cwm fjord bank glyphs vext quiz__
 
 ~~Cwm fjord bank glyphs vext quiz~~
-<br>
+<!-- page-break -->
 # Stacked:
 
 ***bold italic***
@@ -150,7 +151,7 @@ __*underlined italic*__
 
 **Bold with *italic inside* and
 __underlined inside__ it.**
-<br>
+<!-- page-break -->
 # Colors:
 
 <font color="dark_red">dark_red</font> <font color="red">red</font> <font color="gold">gold</font>
@@ -161,7 +162,7 @@ __underlined inside__ it.**
 <font color="dark_purple">dark_purple</font> <font color="white">white</font>
 <font color="gray">gray</font> <font color="dark_gray">dark_gray</font>
 <font color="black">black</font>
-<br>
+<!-- page-break -->
 # Mixed:
 
 Hex: <font color="#ff8800">#ff8800</font> and <font color="#3366cc">#3366cc</font>.

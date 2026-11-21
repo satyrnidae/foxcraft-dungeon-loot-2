@@ -19,14 +19,14 @@ styles: {
 }
 ---
 
-<style class=".title">Arturia's Guide to the Peoples of the World</style>
-<style class=".title">- Vol. 4 -</style>
-<vcenter>
+<span class=".title">Arturia's Guide to the Peoples of the World</span>
+<span class=".title">- Vol. 4 -</span>
+<!-- vertical-align-center -->
 <center>*Obsidian Golems*</center>
-<vbottom>
+<!-- vertical-align-bottom -->
 ---
-<style class=".right">by Arturia So'Tiria</style>
-<br>
+<span class=".right">by Arturia So'Tiria</span>
+<!-- page-break -->
 
 In the earliest days of prehistory, the Wraiths and the Pigmen of the Nether battled in an all-out war that scarred their realm forever. The flames of the endless armies boiled the lush forests away, and most of the Netherrack at the base of the world was melted into a veritable sea of fire. Toward the end of the conflict, centuries later, the blazes of the Phantasmogoric Inferno assailed the wraiths in their ancient fortresses, and the resultant flames changed all the water remaining in the Nether into obsidian fields.
 

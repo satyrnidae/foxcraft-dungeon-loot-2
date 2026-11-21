@@ -5,6 +5,7 @@ rarity: epic
 lore: |
   Tests out both variants of the Foxcraft Handwriting font.
 styles: {
+  .nohyphen: { hyphenate: false },
   body: {
     font: foxcraft_dungeon_loot:handwriting
   }
@@ -17,67 +18,67 @@ debug: true
 Foxcraft Handwriting
 
 Two variants: lowercase, and smallcaps in place of the lowercase.
-<br>
+<!-- page-break -->
 # Regular:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
-<span>0123456789</span>
-<br>
+<span class=".nohyphen">0123456789</span>
+<!-- page-break -->
 # Accents, upper:
 
-<span>ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŠŽŸ</span>
-<br>
+<span class=".nohyphen">ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŠŽŸ</span>
+<!-- page-break -->
 # Accents, lower:
 
-<span>àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšž</span>
+<span class=".nohyphen">àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšž</span>
 
 Ligatures:
-<span>Æ æ Œ œ</span>
+<span class=".nohyphen">Æ æ Œ œ</span>
 
 Sharp S:
-<span>ſ ẞ ß</span>
-<br>
+<span class=".nohyphen">ſ ẞ ß</span>
+<!-- page-break -->
 # Symbols:
 
-<span>!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
+<span class=".nohyphen">!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
 
-<span>¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷</span>
+<span class=".nohyphen">¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷</span>
 
-<span>€‚ƒ„…†‡ˆ‰‹‘’“”•–—˜™›</span>
-<br>
+<span class=".nohyphen">€‚ƒ„…†‡ˆ‰‹‘’“”•–—˜™›</span>
+<!-- page-break -->
 # Smallcaps:
 
 <font face="foxcraft_dungeon_loot:handwriting/smallcaps">Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
-<span>0123456789</span></font>
-<br>
+<span class=".nohyphen">0123456789</span></font>
+<!-- page-break -->
 # Smallcaps, accents:
 
-<font face="foxcraft_dungeon_loot:handwriting/smallcaps"><span>àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšž</span>
+<font face="foxcraft_dungeon_loot:handwriting/smallcaps"><span class=".nohyphen">àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšž</span>
 
 Ligatures:
-<span>Æ æ Œ œ</span>
+<span class=".nohyphen">Æ æ Œ œ</span>
 
 Sharp S:
-<span>ſ ẞ ß</span></font>
-<br>
+<span class=".nohyphen">ſ ẞ ß</span></font>
+<!-- page-break -->
 # Descenders:
 
 gjpqy ç þ ý ÿ
 
 <font face="foxcraft_dungeon_loot:handwriting/smallcaps">gjpqy ç þ ý ÿ</font>
-<br>
+<!-- page-break -->
 # Cwm fjord:
 
 <font face="foxcraft_dungeon_loot:handwriting">Lowercase:
@@ -91,7 +92,7 @@ cwm fjord bank glyphs vext quiz
 
 Title Case:
 Cwm Fjord Bank Glyphs Vext Quiz</font>
-<br>
+<!-- page-break -->
 # Pangram:
 
 <font face="foxcraft_dungeon_loot:handwriting">The quick brown fox jumps over the lazy dog.</font>
@@ -99,7 +100,7 @@ Cwm Fjord Bank Glyphs Vext Quiz</font>
 <font face="foxcraft_dungeon_loot:handwriting/smallcaps">The quick brown fox jumps over the lazy dog.</font>
 
 Sphinx of black quartz, judge my vow.
-<br>
+<!-- page-break -->
 # Words:
 
 Æsir and æther.
@@ -119,7 +120,7 @@ Façade, Þor and þorn.
 <font face="foxcraft_dungeon_loot:handwriting/smallcaps">Šalom, žižek, naïve, jalapeño.</font>
 
 ¡Hola! ¿Qué tal? 25¢ ½ ¼ ¾
-<br>
+<!-- page-break -->
 # Letter:
 
 Dear Reader,
@@ -128,7 +129,7 @@ I hope this note finds you well. The caves were deep, the torches few, and the f
 
 <font face="foxcraft_dungeon_loot:handwriting/smallcaps">Yours truly,
 Nobody in particular</font>
-<br>
+<!-- page-break -->
 # Styles:
 
 **Cwm fjord bank glyphs vext quiz**
@@ -140,7 +141,7 @@ __Cwm fjord bank glyphs vext quiz__
 ~~Cwm fjord bank glyphs vext quiz~~
 
 ***__~~all four~~__***
-<br>
+<!-- page-break -->
 # Colors:
 
 <font color="dark_red">dark_red</font> <font color="red">red</font> <font color="gold">gold</font>

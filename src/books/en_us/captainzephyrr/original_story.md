@@ -13,17 +13,17 @@ styles: {
   }
 }
 ---
-<vcenter>
+<!-- vertical-align-center -->
 <center class=".smallcaps">An Original Story</center>
-<br>
-`T`drop here's a giant tree, all right? So then, there's like this weird building castle thing in the background. And then like the tree has a big black fire hole thing in it. And there's… there's a giant thing-a-ma-bob bottom flashing thrashing thing splashing around. And there's a thing crawling up the thing's leg and then there's this guy who's hanging from the tree who looks like he will soon fall off but it doesn't matter because the snake already pretty much like ripped the bird apart, man. You eat stuff and it suddenly, like, appears on you lip?!?!?
-<vbottom>
-<style class=".smallcaps">Fin.</style>
-<br>
+<!-- page-break -->
+<span class="drop">T</span>here's a giant tree, all right? So then, there's like this weird building castle thing in the background. And then like the tree has a big black fire hole thing in it. And there's… there's a giant thing-a-ma-bob bottom flashing thrashing thing splashing around. And there's a thing crawling up the thing's leg and then there's this guy who's hanging from the tree who looks like he will soon fall off but it doesn't matter because the snake already pretty much like ripped the bird apart, man. You eat stuff and it suddenly, like, appears on you lip?!?!?
+<!-- vertical-align-bottom -->
+<span class=".smallcaps">Fin.</span>
+<!-- page-break -->
 # CREDITS
 
-<style class=".smallcaps">Original Picture by</style> Captain Zephyrr
-<style class=".smallcaps">Image Description by</style> Communal Mind
-<style class=".smallcaps">Typed by</style> Captain Zephyrr
+<span class=".smallcaps">Original Picture by</span> Captain Zephyrr
+<span class=".smallcaps">Image Description by</span> Communal Mind
+<span class=".smallcaps">Typed by</span> Captain Zephyrr
 
 <center class=".smallcaps">An Original Story Rewritten by Us</center>

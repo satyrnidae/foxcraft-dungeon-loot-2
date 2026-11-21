@@ -21,166 +21,166 @@ styles: {
 ```music
 ClefG2 TSC Bm 8-4 8-4 10-4 10-4 |
 ```
-`34`pad Lone`2`pad -`2`pad ly`5`pad Lit`3`pad -`2`pad tle
+<span class="pad">34</span>Lone<span class="pad">2</span>-<span class="pad">2</span>ly<span class="pad">5</span>Lit<span class="pad">3</span>-<span class="pad">2</span>tle
 
 
 ```music
 ClefG2 Bm 8-4 8-4 5-2 |
 ```
-`27`pad Glock`2`pad -`2`pad en`4`pad -`4`pad spiel
+<span class="pad">27</span>Glock<span class="pad">2</span>-<span class="pad">2</span>en<span class="pad">4</span>-<span class="pad">4</span>spiel
 
 
 ```music
 ClefG2 Bm 8-4 9-4 10-4 11-4 |
 ```
-`23`pad Tines`6`pad all`5`pad fouled`2`pad with
+<span class="pad">23</span>Tines<span class="pad">6</span>all<span class="pad">5</span>fouled<span class="pad">2</span>with
 
 
 ```music
 ClefG2 Bm 12-1 |
 ```
-`57`pad rust,
+<span class="pad">57</span>rust,
 
 
 ```music
 ClefG2 Bm 11-4 11-4 11-2 |
 ```
-`28`pad Why`6`pad have`13`pad they
+<span class="pad">28</span>Why<span class="pad">6</span>have<span class="pad">13</span>they
 
 
 ```music
 ClefG2 Bm \ue600 \ue601 \ue602 \ue603 8-2 |
 ```
-`18`pad a`2`pad -`2`pad ban`2`pad -`2`pad doned`4`pad you,
+<span class="pad">18</span>a<span class="pad">2</span>-<span class="pad">2</span>ban<span class="pad">2</span>-<span class="pad">2</span>doned<span class="pad">4</span>you,
 
 
 ```music
 ClefG2 Bm 10-4 11-4 10-4 9-4 |
 ```
-`21`pad Sun`2`pad -`2`pad dered`3`pad all`6`pad your
+<span class="pad">21</span>Sun<span class="pad">2</span>-<span class="pad">2</span>dered<span class="pad">3</span>all<span class="pad">6</span>your
 
 
 ```music
 ClefG2 Bm 8-1 |
 ```
-`54`pad trust?
+<span class="pad">54</span>trust?
 
 
 ```music
 ClefG2 Bm 8-4 8-4 10-4 10-4 |
 ```
-`26`pad Bro`2`pad -`2`pad ken`9`pad Lit`4`pad -`3`pad tle
+<span class="pad">26</span>Bro<span class="pad">2</span>-<span class="pad">2</span>ken<span class="pad">9</span>Lit<span class="pad">4</span>-<span class="pad">3</span>tle
 
 
 ```music
 ClefG2 Bm 8-4 8-4 5-2 |
 ```
-`27`pad Glock`2`pad -`2`pad en`4`pad -`4`pad spiel
+<span class="pad">27</span>Glock<span class="pad">2</span>-<span class="pad">2</span>en<span class="pad">4</span>-<span class="pad">4</span>spiel
 
 
 ```music
 ClefG2 Bm 8-4 9-4 10-4 11-4 |
 ```
-`24`pad don't`5`pad you`8`pad fill`9`pad with
+<span class="pad">24</span>don't<span class="pad">5</span>you<span class="pad">8</span>fill<span class="pad">9</span>with
 
 
 ```music
 ClefG2 Bm 12-1 |
 ```
-`55`pad rage?
+<span class="pad">55</span>rage?
 
 
 ```music
 ClefG2 Bm 11-4 11-4 11-2 |
 ```
-`26`pad Thin`2`pad -`2`pad king`19`pad of
+<span class="pad">26</span>Thin<span class="pad">2</span>-<span class="pad">2</span>king<span class="pad">19</span>of
 
 
 ```music
 ClefG2 Bm \ue600 \ue601 \ue602 \ue603 8-4 8-4 |
 ```
-`21`pad the`2`pad wic`2`pad -`2`pad ked`2`pad ones`2`pad who
+<span class="pad">21</span>the<span class="pad">2</span>wic<span class="pad">2</span>-<span class="pad">2</span>ked<span class="pad">2</span>ones<span class="pad">2</span>who
 
 
 ```music
 ClefG2 Bm 10-4 11-4 10-4 9-4 |
 ```
-`25`pad cast`6`pad you`8`pad off`8`pad with
+<span class="pad">25</span>cast<span class="pad">6</span>you<span class="pad">8</span>off<span class="pad">8</span>with
 
 
 ```music
 ClefG2 Bm 8-1 |
 ```
-`57`pad age?
+<span class="pad">57</span>age?
 
 
 ```music
 ClefG2 Bm 9-4 9-4 9-4 10-4 |
 ```
-`27`pad Love`2`pad -`2`pad ly`9`pad Lit`4`pad -`3`pad tle
+<span class="pad">27</span>Love<span class="pad">2</span>-<span class="pad">2</span>ly<span class="pad">9</span>Lit<span class="pad">4</span>-<span class="pad">3</span>tle
 
 
 ```music
 ClefG2 Bm 9-4 9-4 5-2 |
 ```
-`27`pad Glock`2`pad -`2`pad en`4`pad -`3`pad spiel,
+<span class="pad">27</span>Glock<span class="pad">2</span>-<span class="pad">2</span>en<span class="pad">4</span>-<span class="pad">3</span>spiel,
 
 
 ```music
 ClefG2 Bm 9-4 9-4 9-4 10-4 |
 ```
-`28`pad Let`10`pad me`7`pad hear`5`pad you
+<span class="pad">28</span>Let<span class="pad">10</span>me<span class="pad">7</span>hear<span class="pad">5</span>you
 
 
 ```music
 ClefG2 Bm 9-1 |
 ```
-`58`pad sing!
+<span class="pad">58</span>sing!
 
 
 ```music
 ClefG2 Bm 8-4 8-4 10-4 10-4 |
 ```
-`27`pad Lone`2`pad -`2`pad ly`10`pad lit`4`pad -`4`pad tle
+<span class="pad">27</span>Lone<span class="pad">2</span>-<span class="pad">2</span>ly<span class="pad">10</span>lit<span class="pad">4</span>-<span class="pad">4</span>tle
 
 
 ```music
 ClefG2 Bm 8-4 8-4 5-2 |
 ```
-`27`pad Glock`2`pad -`2`pad en`4`pad -`3`pad spiel,
+<span class="pad">27</span>Glock<span class="pad">2</span>-<span class="pad">2</span>en<span class="pad">4</span>-<span class="pad">3</span>spiel,
 
 
 ```music
 ClefG2 Bm 8-4 9-4 10-4 11-4 |
 ```
-`23`pad Tines`6`pad all`5`pad fouled`2`pad with
+<span class="pad">23</span>Tines<span class="pad">6</span>all<span class="pad">5</span>fouled<span class="pad">2</span>with
 
 
 ```music
 ClefG2 Bm 12-1 |
 ```
-`57`pad rust,
+<span class="pad">57</span>rust,
 
 
 ```music
 ClefG2 Bm 11-4 11-4 11-2 |
 ```
-`28`pad How`5`pad could`11`pad they
+<span class="pad">28</span>How<span class="pad">5</span>could<span class="pad">11</span>they
 
 
 ```music
 ClefG2 Bm \ue600 \ue601 \ue602 \ue603 8-2 |
 ```
-`23`pad a`2`pad -`2`pad ban`2`pad -`2`pad don`9`pad you,
+<span class="pad">23</span>a<span class="pad">2</span>-<span class="pad">2</span>ban<span class="pad">2</span>-<span class="pad">2</span>don<span class="pad">9</span>you,
 
 
 ```music
 ClefG2 Bm 10-4 11-4 10-4 9-4 |
 ```
-`26`pad sun`2`pad -`2`pad der`8`pad all`6`pad your
+<span class="pad">26</span>sun<span class="pad">2</span>-<span class="pad">2</span>der<span class="pad">8</span>all<span class="pad">6</span>your
 
 
 ```music
 ClefG2 Bm 8-1 |||
 ```
-`53`pad trust?
+<span class="pad">53</span>trust?

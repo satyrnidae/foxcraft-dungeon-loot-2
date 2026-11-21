@@ -20,7 +20,7 @@ rarity: rare
 
   He threw the model into the sunset and baked a pie. He then shoved it into the organism's face, and became a beautiful creature.
 
-<vcenter>
+<!-- vertical-align-center -->
 <center>THE END</center>
-<vbottom>
+<!-- vertical-align-bottom -->
   Shrinerh read this story and said, "This story teaches your children that to make yourself beautiful, you must get pies and models. Even though Uglitha was ugly, he turned beautiful. I recommend this to all."

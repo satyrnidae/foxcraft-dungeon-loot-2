@@ -19,7 +19,7 @@ styles: {
 ---
 
 # Sand Removal
-<vcenter>
+<!-- vertical-align-center -->
 
 - [Contract Details](#details-of-contract)
 
@@ -28,7 +28,7 @@ styles: {
 
 
 - [Cocaine Pages](#cocaine)
-<br>
+<!-- page-break -->
 
 ## Details of contract:
 
@@ -100,24 +100,24 @@ styles: {
 
 44. Failure to provide tools and food will result in a doubling of the required payment.
 
-<vbottom>
-Signed: <style class=".right"><style class=".signature">Joey</style></style>
+<!-- vertical-align-bottom -->
+Signed: <span class=".right"><span class=".signature">Joey</span></span>
 
 No other signatures needed per contract details.
-<br>
+<!-- page-break -->
 ## Invoice:
 
 Sand Blocks Removed:
-<style class=".right">15,125,548</style>
+<span class=".right">15,125,548</span>
 
-TNT Used:<style class=".right">64</style>
+TNT Used:<span class=".right">64</span>
 
 
 ---
 
 Bill: 30,251,224 diamond blocks
-<br>
-<br>
+<!-- page-break -->
+<!-- page-break -->
 ## Cocaine
 
 cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine cocaine

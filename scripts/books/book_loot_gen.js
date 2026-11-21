@@ -275,7 +275,7 @@ function parseShadow(value) {
 // The names of the styles that are not classes: the format types, which override what they look like by default
 const MARKER_TYPES = { '**': 'bold', __: 'underline', '~~': 'strikethrough', '||': 'obfuscated', '*': 'italic', _: 'italic' };
 const ALIGNS = ['left', 'center', 'right'];
-const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center', 'horiz', 'tally', 'drop'];
+const TYPE_NAMES = ['body', 'header', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'underline', 'strikethrough', 'obfuscated', 'code', 'a', 'font', 'span', 'center', 'hr', 'tally', 'drop'];
 
 const CLASS_FLAGS = { bold: 'bold', italic: 'italic', underline: 'underlined', underlined: 'underlined', strikethrough: 'strikethrough', obfuscated: 'obfuscated' };
 
@@ -301,6 +301,10 @@ function parseClasses(raw) {
                 styles.font = parseFont(value);
             } else if (key === 'shadow_color') {
                 styles.shadow_color = typeof value === 'number' ? value | 0 : parseShadow(String(value));
+            } else if (key === 'hyphenate') {
+                // Not a component style: false keeps the words of the span from being hyphenated, parseInline takes it out
+                if (typeof value !== 'boolean') throw new Error(`style "${name}": hyphenate is true or false`);
+                styles.hyphenate = value;
             } else if (key === 'char') {
                 // Not a component style: the glyph horizontalLine draws a line of, unwrapAlign drops it
                 if (typeof value !== 'string' || [...value].length !== 1 || value === '\n') throw new Error(`style "${name}": char is one character, such as "~" or " "`);
@@ -310,7 +314,7 @@ function parseClasses(raw) {
                 if (!ALIGNS.includes(value)) throw new Error(`style "${name}": align is ${ALIGNS.join(', ')}`);
                 styles.align = value;
             } else {
-                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, align, char, ${Object.keys(CLASS_FLAGS).join(', ')}`);
+                throw new Error(`style "${name}": unknown ${key}, one of color, font, shadow_color, align, char, hyphenate, ${Object.keys(CLASS_FLAGS).join(', ')}`);
             }
         }
         classes[name] = styles;
@@ -387,10 +391,11 @@ function eventFrom(raw) {
 
 function anchorStyles(attrs) {
     const styles = {};
-    let click = attrs.on_click;
+    if (attrs.on_click !== undefined || attrs.on_hover !== undefined) throw new Error('<a> takes data-on-click and data-on-hover, not on_click and on_hover');
+    let click = attrs['data-on-click'];
     if (click === undefined && attrs.href !== undefined) click = /^\s*\{/.test(attrs.href) ? attrs.href : `{action:open_url,url:"${attrs.href}"}`;
     if (click !== undefined) styles.click_event = eventFrom(click);
-    if (attrs.on_hover !== undefined) styles.hover_event = eventFrom(attrs.on_hover);
+    if (attrs['data-on-hover'] !== undefined) styles.hover_event = eventFrom(attrs['data-on-hover']);
     return styles;
 }
 
@@ -625,20 +630,24 @@ function parseInline(text, start, closer, classes = {}) {
             const close = text.indexOf('`', i + 1);
             if (close > i + 1 && !text.slice(i + 1, close).includes('\n')) {
                 flush();
-                // A type of INLINE_TYPES right after the code, with no letter or digit after it, makes the code that type; `n`padding
-                // is code and the word padding. What follows the type stays text, a space only for the types of INLINE_EATS_SPACE
-                const typed = /^([a-z]+)(?![a-zA-Z0-9])/.exec(text.slice(close + 1));
-                if (typed && Object.hasOwn(INLINE_TYPES, typed[1])) {
-                    content.push(...INLINE_TYPES[typed[1]](text.slice(i + 1, close), classes, firstOnLine(text, i)));
-                    i = close + 1 + typed[0].length + (INLINE_EATS_SPACE.has(typed[1]) && text[close + 1 + typed[0].length] === ' ' ? 1 : 0);
-                    continue;
-                }
                 content.push({ styles: { font: CODE_FONT, ...classes.code }, content: [text.slice(i + 1, close)] });
                 i = close + 1;
                 continue;
             }
         }
-        const tag = /^<(font|a|filter|span|style|center|h[1-6])(\s[^>]*)?>/i.exec(text.slice(i));
+        if (c === '<') {
+            // A <br> is a line break, the same as a newline in the text; a page break is the <!-- page-break --> comment
+            const lineBreak = /^<br\s*\/?>/i.exec(text.slice(i, i + 8));
+            if (lineBreak) {
+                buffer += '\n';
+                i += lineBreak[0].length;
+                continue;
+            }
+            if (/^<hr[\s/>]/i.test(text.slice(i, i + 5))) throw new Error('<hr> goes on a line of its own, as <hr class=".name">');
+            const legacy = /^<(style|filter|vcenter|vbottom)[\s>]/i.exec(text.slice(i, i + 12));
+            if (legacy) throw new Error(`<${legacy[1].toLowerCase()}> is gone: ${LEGACY_TAGS[legacy[1].toLowerCase()]}`);
+        }
+        const tag = /^<(font|a|span|center|h[1-6])(\s[^>]*)?>/i.exec(text.slice(i));
         if (tag) {
             const name = tag[1].toLowerCase();
             const attrs = parseAttributes(tag[2] || '');
@@ -655,17 +664,19 @@ function parseInline(text, start, closer, classes = {}) {
                 if (typeof inner[0] === 'string') inner[0] = inner[0].replace(/^\n/, '');
                 if (typeof inner[inner.length - 1] === 'string') inner[inner.length - 1] = inner[inner.length - 1].replace(/\n$/, '');
                 content.push({ styles: { ...classes.center, ...classStyles(attrs, classes) }, content: inner.filter((p) => p !== ''), center: true });
-            } else if (name === 'style') {
-                // The styles of the named classes from the frontmatter
-                if (!attrs.class) throw new Error('<style> needs a class="..." attribute');
-                content.push({ styles: classStyles(attrs, classes), content: sub.content });
             } else if (name === 'span') {
-                // No style; the words inside are not hyphenated, see hyphenate
-                content.push({ styles: { ...classes.span, ...classStyles(attrs, classes) }, content: sub.content, nohyphen: true });
-            } else if (name === 'filter') {
-                if (attrs.as === undefined) throw new Error('<filter> needs an as="..." attribute');
-                // No style of its own; alt is what the chat filter shows instead of the content
-                content.push({ styles: {}, content: sub.content, alt: parseInline(attrs.as, 0, null, classes).content });
+                const inlineType = (attrs.class || '').trim();
+                if (attrs['data-filter-as'] !== undefined) {
+                    if (attrs.class !== undefined) throw new Error('<span data-filter-as> has no style of its own, put the class on a span around it');
+                    // No style of its own; alt is what the chat filter shows instead of the content
+                    content.push({ styles: {}, content: sub.content, alt: parseInline(attrs['data-filter-as'], 0, null, classes).content });
+                } else if (Object.hasOwn(INLINE_TYPES, inlineType)) {
+                    // <span class="drop">I</span>, and likewise for every type of INLINE_TYPES; the text after it stays as written
+                    content.push(...INLINE_TYPES[inlineType](plainOf(sub.content), classes, firstOnLine(text, i)));
+                } else {
+                    // The styles of the named classes from the frontmatter, hyphenate: false in one keeps its words whole
+                    content.push({ styles: { ...classes.span, ...classStyles(attrs, classes) }, content: sub.content });
+                }
             } else {
                 // A literal span is code: its text goes in as it is, not through a lang key
                 content.push({ styles: { ...(name === 'a' ? classes.a : attrs.literal !== undefined ? classes.code : classes.font), ...classStyles(attrs, classes), ...(name === 'font' ? fontStyles(attrs) : anchorStyles(attrs)) }, content: sub.content, ...(name === 'font' && attrs.literal !== undefined ? { literal: true } : {}) });
@@ -864,13 +875,13 @@ function glyphs(...args) {
 function rawGlyphs(content, bold = false, font = DEFAULT_FONT, literal = false, nohyphen = false, center = null, lead = null, heading = false) {
     return content.flatMap((p) => {
         if (typeof p === 'string') return [...p].map((ch, i, chars) => ({ ch, at: { chars, i }, bold, font, literal, nohyphen, center, lead, heading }));
-        const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, nohyphen || p.nohyphen === true, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead, heading || p.header === true);
+        const inner = rawGlyphs(p.content, p.styles.bold === undefined ? bold : p.styles.bold === true, p.styles.font ? withNamespace(p.styles.font) : font, literal || p.literal === true, p.styles.hyphenate === undefined ? nohyphen : p.styles.hyphenate === false, center ?? (p.center === true ? p.styles.align ?? 'center' : null), p.styles.align ?? lead, heading || p.header === true);
         if (p.alt && inner.length) reserveRoom(inner, p, bold, font);
         return inner;
     });
 }
 
-// A <filter> span can read wider filtered than raw. Its last glyph gets reserve, the pixels the filtered text is wider, which a
+// A filter span can read wider filtered than raw. Its last glyph gets reserve, the pixels the filtered text is wider, which a
 // text cut into lines for both readings counts (see layoutGlyphs) but never draws, and delta, how much wider it is, less if it
 // is narrower, which the padding of the filtered reading makes up for (see alignLines). each is measured as drawn, shaped on its own.
 function reserveRoom(inner, part, bold, font) {
@@ -1119,19 +1130,18 @@ function hyphenate(content, hyphenator) {
     throw new Error('hyphenate does not settle');
 }
 
-// The tree without the marks of span nodes, which only tell hyphenate to leave the text alone. A span with no style of
-// its own is gone, its text stays where it is.
+// The tree without the hyphenate style, which is not a component style and only tells hyphenate to leave the text alone. A node
+// with no style of its own left and nothing else to mark it is gone, its text stays where it is.
 function unwrapNoHyphen(content) {
     return content.flatMap((part) => {
         if (typeof part === 'string') return [part];
         const inner = unwrapNoHyphen(part.content);
-        if (!part.nohyphen) return [{ ...part, content: inner }];
-        if (!Object.keys(part.styles).length) return inner;
-        const { nohyphen, ...kept } = part;
-        return [{ ...kept, content: inner }];
+        const { hyphenate, ...styles } = part.styles;
+        if (hyphenate === undefined) return [{ ...part, content: inner }];
+        if (!Object.keys(styles).length && part.id !== WHOLE && Object.keys(part).every((k) => k === 'styles' || k === 'content' || k === 'id')) return inner;
+        return [{ ...part, styles, content: inner }];
     });
 }
-
 
 // Puts the string, or a list of strings and nodes, in the tree before the glyph with the given index, outside the span
 // that starts there
@@ -1323,13 +1333,13 @@ function parseNumber(source) {
     return m ? Number(m[2].replace(/_/g, '')) * (m[1] ? -1 : 1) : undefined;
 }
 
-// The pixels of a `n`pad. A whole line of padding forwards, 114 pixels, is the same as a line break, so it stops at 113; a
+// The pixels of a a pad span. A whole line of padding forwards, 114 pixels, is the same as a line break, so it stops at 113; a
 // whole line back is not a break, so a step back goes to 114.
 const MAX_PAD = PAGE_WIDTH - 1;
 function padWidth(source) {
     const width = parseNumber(source);
-    if (width === undefined) throw new Error(`\`${source}\`pad is not a number`);
-    if (width > MAX_PAD || width < -PAGE_WIDTH) throw new Error(`\`${source}\`pad is ${width}px, padding goes from -${PAGE_WIDTH} to ${MAX_PAD}`);
+    if (width === undefined) throw new Error(`<span class="pad">${source}</span> is not a number`);
+    if (width > MAX_PAD || width < -PAGE_WIDTH) throw new Error(`<span class="pad">${source}</span> is ${width}px, padding goes from -${PAGE_WIDTH} to ${MAX_PAD}`);
     return width;
 }
 
@@ -1344,12 +1354,12 @@ const TALLY_COLOR = 'dark_gray';
 const TALLY_GAP = 2;
 const MAX_TALLY = 1000;
 
-// The count of a `n`tally: a number as for pad, or the tally itself, IIIII with spaces anywhere between
+// The count of a a tally span: a number as for pad, or the tally itself, IIIII with spaces anywhere between
 function tallyCount(source) {
     const code = source.trim();
     const count = /^[I ]+$/.test(code) ? code.replace(/ /g, '').length : parseNumber(code);
-    if (count === undefined || count < 0) throw new Error(`\`${source}\`tally is not a number or tallies of I`);
-    if (count > MAX_TALLY) throw new Error(`\`${source}\`tally is ${count}, tallies go up to ${MAX_TALLY}`);
+    if (count === undefined || count < 0) throw new Error(`<span class="tally">${source}</span> is not a number or tallies of I`);
+    if (count > MAX_TALLY) throw new Error(`<span class="tally">${source}</span> is ${count}, tallies go up to ${MAX_TALLY}`);
     return count;
 }
 
@@ -1412,8 +1422,8 @@ function longPadding(px) {
 }
 function coverNodes(source, atLineStart) {
     const n = parseNumber(source);
-    if (n === undefined || n < 0 || n >= COVER.LINES) throw new Error(`\`${source}\`cover is not a line of the cover, 0 to ${COVER.LINES - 1}`);
-    if (!atLineStart) throw new Error(`\`${source}\`cover has to be first on its line, the game breaks a line at a glyph that is not, if it takes the line past its width`);
+    if (n === undefined || n < 0 || n >= COVER.LINES) throw new Error(`<span class="cover">${source}</span> is not a line of the cover, 0 to ${COVER.LINES - 1}`);
+    if (!atLineStart) throw new Error(`<span class="cover">${source}</span> has to be first on its line, the game breaks a line at a glyph that is not, if it takes the line past its width`);
     const right = FONTS.widthOf(COVER_FONT, COVER.RIGHT(n), false);
     const left = FONTS.widthOf(COVER_FONT, COVER.LEFT_GLYPH(n), false);
     const pad = (px) => ({ styles: PAD_STYLES, content: [longPadding(px)] });
@@ -1440,7 +1450,7 @@ const POTION_BOTTLES = { normal: '', splash: '', lingering: '' };
 function potionNodes(source) {
     const [type, color, ...rest] = source.trim().split(/\s+/);
     if (!Object.hasOwn(POTION_BOTTLES, type) || !color || rest.length) {
-        throw new Error(`\`${source}\`potion is not a type and a color, as \`splash red\`potion; the types are ${Object.keys(POTION_BOTTLES).join(', ')}`);
+        throw new Error(`<span class="potion">${source}</span> is not a type and a color, as <span class="potion">splash red</span>; the types are ${Object.keys(POTION_BOTTLES).join(', ')}`);
     }
     const bottle = POTION_BOTTLES[type];
     return [
@@ -1450,8 +1460,9 @@ function potionNodes(source) {
     ];
 }
 
-// The types of inline code, by the word after its closing backtick, each giving the nodes that stand for the code.
-// `n`pad is n pixels of padding, negative to step back. `n`tally is n tallies, see tallyNodes. `type color`potion is a potion icon.
+// The types of inline span, by the class of the <span>, each giving the nodes that stand for the text inside it.
+// <span class="pad">n</span> is n pixels of padding, negative to step back. class="tally" is n tallies, see tallyNodes.
+// <span class="potion">type color</span> is a potion icon.
 const INLINE_TYPES = {
     potion: (code) => potionNodes(code),
     cover: (code, classes, atLineStart) => coverNodes(code, atLineStart),
@@ -1462,15 +1473,20 @@ const INLINE_TYPES = {
     tally: (code, classes) => tallyNodes(tallyCount(code), classes),
     drop: (code, classes) => dropCapNodes(code, classes),
 };
-// The types that take one space after them with them, as `n`pad does; the others leave it in the text
-const INLINE_EATS_SPACE = new Set(['pad', 'drop', 'cover']);
+// The tags the markdown used to have, and what stands for each now; a book that still has one stops the build
+const LEGACY_TAGS = {
+    style: '<span class=".name">text</span>',
+    filter: '<span data-filter-as="alt">text</span>',
+    vcenter: '<!-- vertical-align-center --> on a line of its own',
+    vbottom: '<!-- vertical-align-bottom --> on a line of its own',
+};
 
-// `T`drop is a drop cap, the text of the code in the font of the drop style of the stylesheet. Its place on the first line is
+// <span class="drop">T</span> is a drop cap, the text of the code in the font of the drop style of the stylesheet. Its place on the first line is
 // padding as wide as the cap, measured from the font, and applyDropCaps moves the cap itself to the start of the second line, once
 // the wraps are known: a tall font draws up over the first line, so the text of both lines starts after it.
 function dropCapNodes(code, classes) {
     const styles = classes.drop;
-    if (!styles || !styles.font) throw new Error(`\`${code}\`drop needs a drop style with a font in the stylesheet`);
+    if (!styles || !styles.font) throw new Error(`<span class="drop">${code}</span> needs a drop style with a font in the stylesheet`);
     const width = [...code].reduce((sum, ch) => sum + FONTS.widthOf(styles.font, ch, !!styles.bold), 0);
     return [{ styles: PAD_STYLES, content: [padding(width)], dropcap: { styles, content: [code], width } }];
 }
@@ -1487,7 +1503,7 @@ const RTL_LETTER = /[\p{Script=Arabic}\p{Script=Hebrew}\p{Script=Syriac}\p{Scrip
 // Kerning that pulls the next glyph closer is a backwards padding after the glyph, so the game's line is as wide as the glyph
 // before that padding, a pixel more than the widths here, which fold it in. The splitter wraps at that peak, so the peak counts
 // too, or a line aligned to fit the page exactly loses its last glyph to a wrap.
-// How many glyphs at the start of a line are the nodes of a `n`cover: the body glyph, the step back, the strip and the step that
+// How many glyphs at the start of a line are the nodes of a a cover span: the body glyph, the step back, the strip and the step that
 // returns to the start of the line, 0 for a line that does not start with the cover
 function coverPrefix(text) {
     if (!text.length || text[0].font !== COVER_FONT) return 0;
@@ -1541,7 +1557,7 @@ function alignLines(content, rtl = false) {
         const align = written ? (rtl ? MIRROR[written] : written) : rtl && !laidOut ? 'right' : 'left';
         if (align === 'left') {
             // Runs of text that start mid-line with align center or right go to the middle or the right edge of the same line,
-            // each with the padding in front of it: `1<center>2</center><style class=".right">3</style>` is 1, 2 and 3 spread
+            // each with the padding in front of it: `1<center>2</center><span class=".right">3</span>` is 1, 2 and 3 spread
             // across the line. Runs go in order, and a run that has no room left stays where it falls
             if (!rtl && !laidOut) {
                 const modeOf = (g) => g.lead ?? g.center ?? 'left';
@@ -1951,7 +1967,7 @@ function codeLines(language, lines) {
     const rows = (language && highlight(code, language)) || code.split('\n').map((l) => (l ? [{ text: l, color: undefined }] : []));
     return rows.map((row, n) => {
         const divider = CODE_DIVIDER.exec(lines[n].replace(/\s+$/, ''));
-        if (divider) return `<style font="${CODE_FONT}" char="${divider[1]}">---</style>`;
+        if (divider) return `<hr font="${CODE_FONT}" char="${divider[1]}">`;
         return row.map(({ text, color }) => `<font face="${CODE_FONT}"${color ? ` color="${color}"` : ''} literal="1">${escapeMarkup(text)}</font>`).join('');
     });
 }
@@ -1980,9 +1996,9 @@ function fenceCode(lines) {
     return out;
 }
 
-// Splits on a <br> anywhere in the text, except in code: a fenced block, or an inline `code` span on a line, so code that
-// shows one stays in one piece. A line of --- is a horizontal line, see horizontalLine.
-const PAGE_BREAK = /^<br\s*\/?>/i;
+// Splits on a <!-- page-break --> comment anywhere in the text, except in code: a fenced block, or an inline `code` span on a
+// line, so code that shows one stays in one piece. A line of --- is a horizontal line, see horizontalLine.
+const PAGE_BREAK = /^<!--\s*page-?break\s*-->/i;
 
 function splitOnBreaks(body) {
     const sections = [[]];
@@ -2018,10 +2034,10 @@ function splitOnBreaks(body) {
     return sections.map((lines) => lines.join('\n'));
 }
 
-// A --- line, or one inside a <style>, at the start of the text: what a heading may sit directly on
+// A --- line, or an <hr>, at the start of the text: what a heading may sit directly on
 // A # header that starts with a line of the cover: the empty line a header gets has no piece of the cover, and shifts the lines under it
-const COVER_HEADING = /^#{1,6}\s+`[^`\n]*`cover(?![a-zA-Z0-9])/;
-const HORIZONTAL_LINE_NEXT = /^(---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/;
+const COVER_HEADING = /^#{1,6}\s+<span\s+class="cover">/;
+const HORIZONTAL_LINE_NEXT = /^(---|<hr(?:\s[^>]*)?>)[ \t]*(?:\n|$)/;
 
 function splitSections(body) {
     return splitOnBreaks(body.replace(/\r\n/g, '\n'))
@@ -2100,17 +2116,17 @@ function assignAltIds(content, prefix) {
 }
 
 // A line of only --- is a horizontal line across the page: one glyph of foxcraft_dungeon_loot:rule, 113 pixels of line and
-// the pixel after it, so there is no gap in it, as there is between hyphens. The color of the horiz style tints it; it is
-// never bold, a bold glyph would be a pixel wider than the page and wrap. A horiz style with a font or a char of its own
+// the pixel after it, so there is no gap in it, as there is between hyphens. The color of the hr style tints it; it is
+// never bold, a bold glyph would be a pixel wider than the page and wrap. A hr style with a font or a char of its own
 // gets that character instead, a hyphen unless char says otherwise, as many as fit 114 pixels, a bold one being a pixel
 // wider, and touching, see join. When they do not fit evenly the last one starts early, after padding that steps back, over the one before it, so the
 // line is exactly as wide as the page: a line any wider would wrap, and any shorter would not reach the edge. A space
-// with underline or strikethrough is a line too. over is the styles of a <style> around the --- line, laid over horiz.
+// with underline or strikethrough is a line too. over is the styles of an <hr>, laid over hr.
 // The pieces are literal, they are not text to translate.
 const RULE_FONT = `${NS}:rule`;
 function horizontalLine(classes, over = {}) {
-    // The char of horiz, else the one of the body, and a style around the line wins over both
-    const { char, ...style } = { ...(classes.body?.char === undefined ? {} : { char: classes.body.char }), ...classes.horiz, ...over };
+    // The char of hr, else the one of the body, and a style around the line wins over both
+    const { char, ...style } = { ...(classes.body?.char === undefined ? {} : { char: classes.body.char }), ...classes.hr, ...over };
     if (!style.font && char === undefined) return [{ styles: { ...style, font: RULE_FONT, bold: false }, content: ['\ue000'], literal: true, rule: true }];
     const font = style.font ? withNamespace(style.font) : DEFAULT_FONT;
     const mark = char ?? '-';
@@ -2130,10 +2146,12 @@ function horizontalLine(classes, over = {}) {
     return [...front, ...(excess ? [back(excess)] : []), piece(end)];
 }
 
-// The lines that split a section into parts: a <vcenter> or <vbottom>, or a horizontal line, which a <style> around the --- may restyle
-const LINE_MARKS = /^(<vcenter>|<vbottom>|---|<style(?:\s[^>]*)?>\s*---\s*<\/style>)[ \t]*(?:\n|$)/m;
+// The lines that split a section into parts: a <!-- vertical-align-center --> or <!-- vertical-align-bottom --> comment, or a
+// horizontal line, which an <hr> may restyle
+const VERTICAL_MARK = /^<!--\s*vertical-align-(center|bottom)\s*-->$/;
+const LINE_MARKS = /^(<!--\s*vertical-align-(?:center|bottom)\s*-->|---|<hr(?:\s[^>]*)?>)[ \t]*(?:\n|$)/m;
 
-// What a text tree holds in the order of its glyphs: where each <vcenter> and <vbottom> is, and where each header starts
+// What a text tree holds in the order of its glyphs: where each vertical-align-center and vertical-align-bottom comments is, and where each header starts
 function textMarks(content) {
     const marks = [];
     let pos = 0;
@@ -2175,9 +2193,9 @@ function centerVertically(tree, marks) {
     const regions = centers.map((m) => {
         let from = lineAt(m.at);
         while (from <= lastLine && empty(from)) from++;
-        // Under a header the text goes up to the next header, a <vcenter> or <vbottom> of the page itself up to the end of the text
+        // Under a header the text goes up to the next header, a vertical-align-center or vertical-align-bottom comment of the page itself up to the end of the text
         const under = headers.some((h) => h.end <= m.at && glyphList.slice(h.end, m.at).every((g) => /\s/.test(g.ch)));
-        // and any region ends where the next <vcenter> or <vbottom> starts
+        // and any region ends where the next vertical-align-center or vertical-align-bottom comment starts
         const stops = [...(under ? headers : []), ...centers.filter((c) => c.at > m.at)].map((h) => lineAt(h.at)).filter((h) => h > from);
         const next = stops.length ? Math.min(...stops) : undefined;
         let to = (next ?? lastLine + 1) - 1;
@@ -2188,7 +2206,7 @@ function centerVertically(tree, marks) {
     const fill = (count) => Array.from({ length: count }).flatMap(blank);
     const edits = [];
     // Each page is aligned on its own, and a region that spans a page boundary is ignored. The pages are the ones the book is
-    // cut into, paginateFit's, which end early around a <filter> span; the spare lines are what the longer of the page and
+    // cut into, paginateFit's, which end early around a filter span; the spare lines are what the longer of the page and
     // its chat-filtered reading leaves
     for (const [pageFrom, pageTo] of fitRanges(pager)) {
         const first = lines.findIndex((_, n) => n >= pageFrom && !empty(n));
@@ -2200,8 +2218,8 @@ function centerVertically(tree, marks) {
         const spare = PAGE_LINES - Math.max(last - first + 1, filtered);
         const onPage = regions.filter((r) => r.from >= pageFrom && r.from <= last && r.to <= last);
         if (spare <= 0 || !onPage.length) continue;
-        // The first <vbottom> goes first: it sits on the last line, so the whitespace above it is what is left for the <vcenter>s
-        // before it, which share that and center in it. Without one before it, the <vbottom> takes the whitespace itself, and
+        // The first vertical-align-bottom goes first: it sits on the last line, so the whitespace above it is what is left for the vertical-align-center marks
+        // before it, which share that and center in it. Without one before it, the vertical-align-bottom takes the whitespace itself, and
         // nothing is left for what comes after it
         const bottom = onPage.findIndex((r) => r.bottom);
         const taking = onPage.filter((r, n) => (bottom < 0 ? true : !r.bottom && n < bottom));
@@ -2210,7 +2228,7 @@ function centerVertically(tree, marks) {
             const n = taking.indexOf(r);
             if (n < 0) return;
             const share = Math.floor(spare / taking.length) + (n < spare % taking.length ? 1 : 0);
-            // <vbottom> puts all of the spare lines above the text, <vcenter> half
+            // vertical-align-bottom puts all of the spare lines above the text, vertical-align-center half
             const above = r.bottom ? share : Math.floor(share / 2);
             edits.push({ at: chars[lines[r.from].start].place, text: fill(above) });
             // Under the text, before the line that follows it, unless that is where the page ends
@@ -2245,7 +2263,7 @@ function findDropCap(content) {
 }
 
 /**
- * Moves each drop cap of `n`drop to the start of the line after the padding it left on its first line, a newline in front of
+ * Moves each drop cap of drop spans to the start of the line after the padding it left on its first line, a newline in front of
  * it where that line starts at a wrap. The padding is as wide as the cap, so the text of the first line and of the lines
  * after the cap start at the same place. A paragraph of one line has no second line, the cap goes over its padding there.
  * Returns a copy of the tree.
@@ -2273,17 +2291,18 @@ function applyDropCaps(content) {
 function sectionsOf(body, font = null, hyphenator = null, classes = {}, align = true, rtl = false) {
     let nextId = 0;
     return splitSections(ligate(body)).map((text) => {
-        // The parts between the <vcenter> and --- lines, each its own text, with a mark or a horizontal line where one was
+        // The parts between the vertical-align and --- lines, each its own text, with a mark or a horizontal line where one was
         const pieces = text.split(LINE_MARKS);
         const content = pieces.flatMap((part, n) => {
-            if (n % 2 && !/^<v(center|bottom)>/.test(part)) {
-                const tag = /^<style((?:\s[^>]*)?)>/.exec(part);
+            const vertical = n % 2 ? VERTICAL_MARK.exec(part.trim()) : null;
+            if (n % 2 && !vertical) {
+                const tag = /^<hr((?:\s[^>]*)?)>/.exec(part);
                 // font and char on the tag give the line that font and mark, as classes can, so a divider can be made of any glyph
                 const attrs = tag ? parseAttributes(tag[1]) : {};
                 const own = { ...(attrs.font === undefined ? {} : { font: attrs.font }), ...(attrs.char === undefined ? {} : { char: attrs.char }) };
                 return [...horizontalLine(classes, tag ? { ...classStyles(attrs, classes), ...own } : {}), '\n'];
             }
-            if (n % 2) return [{ styles: {}, content: [], vmark: part.slice(1, 8) === 'vcenter' ? 'vcenter' : 'vbottom' }];
+            if (n % 2) return [{ styles: {}, content: [], vmark: vertical[1] === 'center' ? 'vcenter' : 'vbottom' }];
             const parsed = parseInline(part, 0, null, classes).content;
             nextId = assignIds(parsed, nextId);
             return parsed;
@@ -2360,7 +2379,7 @@ function resolveAnchors(pages, file) {
 
 /**
  * Prefixes an error message with file:line, the format editors and terminals open. The line comes from what the message names:
- * a class, a style, a `n`cover line or a frontmatter key; a message that names nothing findable gets the file alone.
+ * a class, a style, a cover line or a frontmatter key; a message that names nothing findable gets the file alone.
  */
 function locate(file, message) {
     const own = `${file}: `;
@@ -2377,7 +2396,7 @@ function locate(file, message) {
     let m;
     if ((m = /class "\.?([^"]+)"/.exec(text))) line = find((l) => l.includes(`class=".${m[1]}"`) || l.includes(`class="${m[1]}"`));
     else if ((m = /^style "([^"]+)"/.exec(text))) line = find((l) => l.trim().replace(/^"|"?:.*$/g, '') === m[1]);
-    else if ((m = /^`(.+?)`cover/.exec(text))) line = find((l) => l.startsWith('`' + m[1] + '`cover'));
+    else if ((m = /^<span class="cover">(.+?)<\/span>/.exec(text))) line = find((l) => l.includes(`<span class="cover">${m[1]}</span>`));
     else if ((m = /^(styles|data|lore|font) |frontmatter (\w+)/.exec(text))) line = find((l) => l.toLowerCase().startsWith((m[1] || m[2]).toLowerCase() + ':'));
     else if (/^SNBT/.test(text)) line = find((l) => /^(styles|style|data|lore)\s*:/i.test(l));
     return `${file}${line ? ':' + line : ''}: ${text}`;
@@ -2461,7 +2480,7 @@ function alignSources(files, warnings) {
     const count = Math.max(...used.map((i) => own[i].length));
     const langs = used.map(() => ({}));
     const raw = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], false) : null));
-    const filtered = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], true, () => warnings.push(`${files[i]}: page ${n + 1} has a <filter> span cut by the page break, it stays unfiltered`)) : null));
+    const filtered = (n) => used.map((i) => (own[i][n] ? variant(own[i][n], true, () => warnings.push(`${files[i]}: page ${n + 1} has a filter span cut by the page break, it stays unfiltered`)) : null));
     const components = [];
     const id = (file) => path.basename(file, '.md');
     for (let n = 0; n < count; n++) {
@@ -2493,16 +2512,16 @@ function pageComponents(pages, id, kind, lang, warnings, file, numbers = pages.m
     });
 }
 
-const TITLE_FILTER = /<filter\s+as=(?:"([^"]*)"|'([^']*)')\s*>(.*?)<\/filter>/gi;
+const TITLE_FILTER = /<span\s+data-filter-as=(?:"([^"]*)"|'([^']*)')\s*>(.*?)<\/span>/gi;
 
 // A title in SNBT also sets the item name, the book title itself is plain text. A plain title takes
-// <filter as="...">text</filter> for the chat-filtered title; custom_name has no filtered side, so an SNBT one does not.
+// <span data-filter-as="...">text</span> for the chat-filtered title; custom_name has no filtered side, so an SNBT one does not.
 function titleOf(meta) {
     const result = titleParts(meta);
     // displayTitle is only the item name, so it has no 32 character limit and no filtered side
     if (meta.displaytitle) {
         const display = titleParts({ title: String(meta.displaytitle) });
-        if (display.filtered || /<\/?filter/i.test(display.text)) throw new Error('<filter> does not work in displayTitle, the item name has no filtered side');
+        if (display.filtered || /<\/?span/i.test(display.text)) throw new Error('<span data-filter-as> does not work in displayTitle, the item name has no filtered side');
         result.display = { text: display.text, rich: display.rich };
     }
     return result;
@@ -2519,12 +2538,12 @@ function titleParts(meta) {
         const rich = parseSnbt(raw);
         const flat = (c) => (typeof c === 'string' ? c : Array.isArray(c) ? c.map(flat).join('') : (c.text || '') + (c.extra ? flat(c.extra) : ''));
         const text = flat(rich);
-        if (/<filter/i.test(text)) throw new Error('<filter> does not work in an SNBT title, the item name has no filtered side');
+        if (/<span/i.test(text)) throw new Error('<span data-filter-as> does not work in an SNBT title, the item name has no filtered side');
         return { text, filtered: null, rich };
     }
     const text = raw.replace(TITLE_FILTER, (_, a, b, content) => content);
     const filtered = raw.replace(TITLE_FILTER, (_, a, b) => (a !== undefined ? a : b));
-    if (/<\/?filter/i.test(text)) throw new Error('title has a <filter> that is not <filter as="...">text</filter>');
+    if (/<\/?span/i.test(text)) throw new Error('title has a <span> that is not <span data-filter-as="...">text</span>');
     return { text: decodeTitleEscapes(text), filtered: filtered === text ? null : decodeTitleEscapes(filtered), rich: null };
 }
 
@@ -2716,7 +2735,7 @@ function buildBook(id, file, source = readSource(file)) {
 
         // The filtered reading cuts pages where the raw one does. A page that reads the same stays a plain component, the game
         // filters it to the same text
-        const filtered = source.pages.map((tree, n) => variant(tree, true, () => warnings.push(`${file}: page ${n + 1} has a <filter> span cut by the page break, it stays unfiltered`)));
+        const filtered = source.pages.map((tree, n) => variant(tree, true, () => warnings.push(`${file}: page ${n + 1} has a filter span cut by the page break, it stays unfiltered`)));
         const differs = pages.map((_, n) => n).filter((n) => JSON.stringify(filtered[n]) !== JSON.stringify(pages[n]));
         for (const n of differs) {
             const lines = layout(filtered[n]).lines.length;
@@ -2824,7 +2843,7 @@ function findSources(dir, warnings = [], dev = devMode()) {
             if (RESERVED.has(m[1])) throw new Error(`${file}: ${m[1]} is the loot table of a group of generated books, pick another book id`);
             if (!/^[a-z0-9_.-]+$/.test(m[1])) throw new Error(`${file}: the file name is the book id and a resource path, lowercase letters, digits and _ . - only`);
             if (m[1].endsWith('_filtered')) {
-                warnings.push(`${file}: ignored, filtering is inline now with <filter as="...">text</filter>`);
+                warnings.push(`${file}: ignored, filtering is inline now with <span data-filter-as="...">text</span>`);
                 continue;
             }
             let meta;

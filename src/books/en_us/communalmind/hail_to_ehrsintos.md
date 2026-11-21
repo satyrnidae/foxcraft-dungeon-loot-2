@@ -13,7 +13,7 @@ styles: {
   }
 }
 ---
-`H`drop ail to Ehrsintos, the vast worm of Nurechi, under whose coils now are obscured the fierce tendrils of Mysteria's infernal spire.
+<span class="drop">H</span>ail to Ehrsintos, the vast worm of Nurechi, under whose coils now are obscured the fierce tendrils of Mysteria's infernal spire.
 
 When the sages of the sanguine reach first laid eyes upon the tower of flame, it is said that it seared the eyes from the skulls of their most devout, burning out the very vestiges of their faith from their minds. In response, they sealed the Dawning Caverns from their sprawling subterranean citadel.
 

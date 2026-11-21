@@ -25,12 +25,12 @@ An effort was started immediately to repair the damage this individual inflicted
 The perpetrator could not be found, was presumed dead, and a burial area was made far apart from the cemetery.  None mourned their passing.
 
 On day 305, the cleanup effort was completed on the internal structure of the base, and farm production was able to return to normal.  The chest room was even expanded to allow for more storage space in the future.  Unfortunately, the contents of the chest room, including many diamonds, and several books including the OSHA standards handbook, a short story, and the account of the first year were lost in the explosion, and could not be recovered.
-<br>
+<!-- page-break -->
 
 # Day 95, Year 2
 
 On day 375, the keeper of records, Taikutsu Kitsune, died in a scuffle at the cemetery while distracted. No remains were found.
-<br>
+<!-- page-break -->
 
 # Day 242, Year 2
 

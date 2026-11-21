@@ -13,9 +13,9 @@ styles: {
 }
 ---
 
-<vcenter>
+<!-- vertical-align-center -->
 The treasure lies in a mound of snow by the gates
 
 Get by morning and the deal is closed
-<vbottom>
-<style class=".signature">- DQ</style>
+<!-- vertical-align-bottom -->
+<span class=".signature">- DQ</span>

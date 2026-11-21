@@ -29,31 +29,31 @@ styles: {
 }
 ---
 
-`0`cover
-`1`cover <center class=".title">The Iron</center>
-`2`cover <center class=".title">and</center>
-`3`cover <center class=".title">The Giant</center>
-`4`cover
-`5`cover
-`6`cover
-`7`cover
-`8`cover
-`9`cover
-`10`cover
-`11`cover
-`12`cover <center class=".title">A Follower of</center>
-`13`cover <center class=".title">Dendris</center>
-<br>
+<span class="cover">0</span>
+<span class="cover">1</span><center class=".title">The Iron</center>
+<span class="cover">2</span><center class=".title">and</center>
+<span class="cover">3</span><center class=".title">The Giant</center>
+<span class="cover">4</span>
+<span class="cover">5</span>
+<span class="cover">6</span>
+<span class="cover">7</span>
+<span class="cover">8</span>
+<span class="cover">9</span>
+<span class="cover">10</span>
+<span class="cover">11</span>
+<span class="cover">12</span><center class=".title">A Follower of</center>
+<span class="cover">13</span><center class=".title">Dendris</center>
+<!-- page-break -->
 ---
-<vcenter>
+<!-- vertical-align-center -->
 
 # The Iron and the Giant
 
-<vbottom>
+<!-- vertical-align-bottom -->
 ---
-<br>
+<!-- page-break -->
 
-`S`drop calito was a young If, wandering through the fields of flowers near their sunny town. After the harvest had finished, seeing the far side of the mountain was finally a priority. None from the town went near the location, so Scalito needed to see it.
+<span class="drop">S</span>calito was a young If, wandering through the fields of flowers near their sunny town. After the harvest had finished, seeing the far side of the mountain was finally a priority. None from the town went near the location, so Scalito needed to see it.
 
   Scalito saw some movement among the brush. After a flash of sweat, Scalito calmed, for it was still bright this day, with the sun still lingering in the sky. Scalito stepped through the brush, and spotted an orange shape. A green stem in its back, ridges of bright orange stood out against the grass it grew from.
 

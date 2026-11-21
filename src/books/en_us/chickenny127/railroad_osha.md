@@ -38,29 +38,29 @@ styles: {
    }
 }
 ---
-<vcenter>
+<!-- vertical-align-center -->
 ---
 
 # OSHA Railroad Guidelines
 
 ---
 
-<vbottom>
-<style class=".right">V.1.0</style>
+<!-- vertical-align-bottom -->
+<span class=".right">V.1.0</span>
 
-<style class=".right">By J. Tivel</style>
-<br>
-<vcenter>
+<span class=".right">By J. Tivel</span>
+<!-- page-break -->
+<!-- vertical-align-center -->
 ---
 
 ## Safety Separation
 
 ---
-<br>
+<!-- page-break -->
 
 ### 1. Track Barriers
 
-**1.1** Tracks should be separated from walking paths by at least two methods of restaint. One of the two barriers must be a physical barrier keeping people from the interacting with the train.
+**1.1** Tracks should be separated from walking paths by at least two methods of restraint. One of the two barriers must be a physical barrier keeping people from interacting with the train.
 
 **1.2** Trains should be accessible when not in motion, but need to have some means of alert before movement can begin to keep employees safe from moving equipment.
 
@@ -72,10 +72,10 @@ styles: {
 
 **1.3.3** Elevation changes can be used to keep users safe from trains. The train must be on the higher elevated level in order to be considered a safety tool.
 
-**1.3.4** Locking doors is a viable option that can be utilized in high risk situations. Such doors should be able to open from the inside at all times, but lock from the outside when the train is present on the tracks. This option is very tool intense, use with caution.
+**1.3.4** Locking doors is a viable option that can be utilized in high risk situations. Such doors should be able to open from the inside at all times, but lock from the outside when the train is present on the tracks. This option is very intense, use with caution.
 
 **1.3.5** Distance is considered a way to protect users. There must be three blocks of space between the rail line and the closest location on the walking path.
-<br>
+<!-- page-break -->
 
 ### 2. Bridge Safety
 
@@ -91,4 +91,4 @@ styles: {
 
 **2.2.2** Water bridges do not require a third safety level to protect users after work completion.
 
-**2.2.3** Water bridges require premenant access within 32 blocks from any point along the bridge post-construction.
+**2.2.3** Water bridges require permanant access within 32 blocks from any point along the bridge post-construction.

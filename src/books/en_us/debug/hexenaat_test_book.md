@@ -5,6 +5,7 @@ rarity: epic
 generation: tattered
 lore: Tests out the Hexenaat font.
 styles: {
+  .nohyphen: { hyphenate: false },
   body: {
     font: foxcraft_dungeon_loot:hexenaat
   },
@@ -28,33 +29,33 @@ By Valiegraphie
 Personal and commercial use
 
 
-<a on_click="{action:'open_url',url:'https://valiegraphie.itch.io'}"><span>valiegraphie.itch.io</span></a>
-<br>
+<a data-on-click="{action:'open_url',url:'https://valiegraphie.itch.io'}"><span class=".nohyphen">valiegraphie.itch.io</span></a>
+<!-- page-break -->
 # Glyphs:
 
 
 Upper:
 
 
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 
 Lower:
 
 
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 
 Digits:
 
 
 0123456789
-<br>
+<!-- page-break -->
 # Symbols:
 
 
-<span>!"#$%&'()\*+,-./:;\<=>?@[]\_{\|}\~</span>
-<br>
+<span class=".nohyphen">!"#$%&'()\*+,-./:;\<=>?@[]\_{\|}\~</span>
+<!-- page-break -->
 # Cwm fjord:
 
 
@@ -74,7 +75,7 @@ Title Case:
 
 
 Cwm Fjord Bank Glyphs Vext Quiz
-<br>
+<!-- page-break -->
 Sentence case:
 
 
@@ -91,7 +92,7 @@ AlTeRnAtInG:
 
 
 CwM fJoRd BaNk GlYpHs VeXt QuIz
-<br>
+<!-- page-break -->
 tOGGLE cASE:
 
 
@@ -101,48 +102,48 @@ cWM fJORD bANK gLYPHS vEXT qUIZ
 camelCase:
 
 
-<span>cwmFjordBankGlyphsVextQuiz</span>
+<span class=".nohyphen">cwmFjordBankGlyphsVextQuiz</span>
 
 
 PascalCase:
 
 
-<span>CwmFjordBankGlyphsVextQuiz</span>
-<br>
+<span class=".nohyphen">CwmFjordBankGlyphsVextQuiz</span>
+<!-- page-break -->
 snake\_case:
 
 
-<span>cwm\_fjord\_bank\_glyphs\_vext\_quiz</span>
+<span class=".nohyphen">cwm\_fjord\_bank\_glyphs\_vext\_quiz</span>
 
 
 SCREAMING\_SNAKE:
 
 
-<span>CWM\_FJORD\_BANK\_GLYPHS\_VEXT\_QUIZ</span>
+<span class=".nohyphen">CWM\_FJORD\_BANK\_GLYPHS\_VEXT\_QUIZ</span>
 
 
 kebab-case:
 
 
-<span>cwm-fjord-bank-glyphs-vext-quiz</span>
-<br>
+<span class=".nohyphen">cwm-fjord-bank-glyphs-vext-quiz</span>
+<!-- page-break -->
 Train-Case:
 
 
-<span>Cwm-Fjord-Bank-Glyphs-Vext-Quiz</span>
+<span class=".nohyphen">Cwm-Fjord-Bank-Glyphs-Vext-Quiz</span>
 
 
 dot.case:
 
 
-<span>cwm.fjord.bank.glyphs.vext.quiz</span>
+<span class=".nohyphen">cwm.fjord.bank.glyphs.vext.quiz</span>
 
 
 Initials:
 
 
 C F B G V Q
-<br>
+<!-- page-break -->
 # Pangram:
 
 
@@ -156,7 +157,7 @@ Sphinx of black quartz, judge my vow.
 
 
 Pack my box with five dozen liquor jugs.
-<br>
+<!-- page-break -->
 # Sator Square:
 
 
@@ -173,7 +174,7 @@ A R E P O
 
 
 S A T O R
-<br>
+<!-- page-break -->
 # Styles:
 
 
@@ -187,7 +188,7 @@ __Cwm fjord bank glyphs vext quiz__
 
 
 ~~Cwm fjord bank glyphs vext quiz~~
-<br>
+<!-- page-break -->
 # Stacked:
 
 
@@ -213,7 +214,7 @@ __*underlined italic*__
 
 
 __underlined inside__ it.**
-<br>
+<!-- page-break -->
 # Colors:
 
 
@@ -239,7 +240,7 @@ __underlined inside__ it.**
 
 
 <font color="black">black</font>
-<br>
+<!-- page-break -->
 # Mixed:
 
 

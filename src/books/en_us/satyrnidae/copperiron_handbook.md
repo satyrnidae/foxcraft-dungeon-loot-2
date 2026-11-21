@@ -68,148 +68,148 @@ styles: {
 }
 ---
 
-<vcenter>
-<style class=".title">The Book of Currency and Conversions</style>
+<!-- vertical-align-center -->
+<span class=".title">The Book of Currency and Conversions</span>
 
-<center><style class=".it">A Handbook to the Copperiron Trade</style></center>
+<center><span class=".it">A Handbook to the Copperiron Trade</span></center>
 
 ---
 <center>- BY -</center>
 <center>ROSTEPH ERASALTZ</center>
 
-<center><style class=".it">Comptroller, Foxtrot Village</style></center>
-<br>
+<center><span class=".it">Comptroller, Foxtrot Village</span></center>
+<!-- page-break -->
 # Foreword
 
 There is no doubt in my mind that you, at one point, found yourself with the need to trade for items of value with another.  This can be a hassle at times; greedier folk may attempt to wheedle more of your goods for cheaper prices, and you may accidentally make a very grave miscalculation in the pricing of your own wares.  This book aims to preclude such incident.
 
-Within these pages you will discover the convenient Copperiron Trading system; an economic system based not upon the exchange of abstract, valueless concepts as fiat currency.  With the guidelines in this handbook, you may find yourself growing richer with actual, valuable items, whether that be <style class=".iron">Iron</style>, <style class=".gold">Gold</style>, or possibly even <style class=".diamond">Diamond</style>.
+Within these pages you will discover the convenient Copperiron Trading system; an economic system based not upon the exchange of abstract, valueless concepts as fiat currency.  With the guidelines in this handbook, you may find yourself growing richer with actual, valuable items, whether that be <span class=".iron">Iron</span>, <span class=".gold">Gold</span>, or possibly even <span class=".diamond">Diamond</span>.
 
 Thus ends the foreword.  On the page proceeding you will find the conversion values, henceforth initiated.  Happy trading!
 
-<style class=".right">- Ross Erasaltz</style>
+<span class=".right">- Ross Erasaltz</span>
 
-<br>
-<vcenter>
+<!-- page-break -->
+<!-- vertical-align-center -->
 # Copperiron
-<center><style class=".it">An economy system developed for a Material Age.</style></center>
+<center><span class=".it">An economy system developed for a Material Age.</span></center>
 
 Converions follow from the next page.
-<br>
+<!-- page-break -->
 
-<style class=".iron">Iron</style>: Base Value.
+<span class=".iron">Iron</span>: Base Value.
     (1 ingot is 1 point)
 
 In bases of 9 (as 1 block is 9 ingots)
 
 ---
 
-1 <style class=".lapis">Lapis</style> =
-<style class=".right">1/9 point</style>
+1 <span class=".lapis">Lapis</span> =
+<span class=".right">1/9 point</span>
 
-1 <style class=".lapis">Lapis</style> =
-<style class=".right">1 <style class=".redstone">Redstone</style></style>
+1 <span class=".lapis">Lapis</span> =
+<span class=".right">1 <span class=".redstone">Redstone</span></span>
 
-1 <style class=".lapis">Lapis</style> =
-<style class=".right">1 <style class=".copper">Copper</style></style>
+1 <span class=".lapis">Lapis</span> =
+<span class=".right">1 <span class=".copper">Copper</span></span>
 
-9 <style class=".lapis">Lapis</style> =
-<style class=".right">1 <style class=".lapis">Lapis Block</style></style>
+9 <span class=".lapis">Lapis</span> =
+<span class=".right">1 <span class=".lapis">Lapis Block</span></span>
 
-9 <style class=".lapis">Lapis</style> =
-<style class=".right">1 <style class=".redstone">Redstone Block</style></style>
+9 <span class=".lapis">Lapis</span> =
+<span class=".right">1 <span class=".redstone">Redstone Block</span></span>
 
-9 <style class=".lapis">Lapis</style> =
-<style class=".right">1 <style class=".copper">Copper Block</style></style>
+9 <span class=".lapis">Lapis</span> =
+<span class=".right">1 <span class=".copper">Copper Block</span></span>
 
-9 <style class=".redstone">Redstone</style> =
-<style class=".right">1 <style class=".redstone">Redstone Block</style></style>
+9 <span class=".redstone">Redstone</span> =
+<span class=".right">1 <span class=".redstone">Redstone Block</span></span>
 
-9 <style class=".copper">Copper</style> =
-<style class=".right">1 <style class=".copper">Copper Block</style></style>
+9 <span class=".copper">Copper</span> =
+<span class=".right">1 <span class=".copper">Copper Block</span></span>
 
-1 <style class=".lapis">Lapis Block</style> =
-<style class=".right">1 <style class=".redstone">Redstone Block</style></style>
+1 <span class=".lapis">Lapis Block</span> =
+<span class=".right">1 <span class=".redstone">Redstone Block</span></span>
 
-1 <style class=".lapis">Lapis Block</style> =
-<style class=".right">1 <style class=".copper">Copper Block</style></style>
+1 <span class=".lapis">Lapis Block</span> =
+<span class=".right">1 <span class=".copper">Copper Block</span></span>
 
-1 <style class=".lapis">Lapis Block</style> =
-<style class=".right">1 <style class=".iron">Iron</style></style>
+1 <span class=".lapis">Lapis Block</span> =
+<span class=".right">1 <span class=".iron">Iron</span></span>
 
-1 <style class=".iron">Iron</style> =
-<style class=".right">1 point</style>
+1 <span class=".iron">Iron</span> =
+<span class=".right">1 point</span>
 
-1 <style class=".iron">Iron</style> =
-<style class=".right">1 <style class=".gold">Gold Nugget</style></style>
+1 <span class=".iron">Iron</span> =
+<span class=".right">1 <span class=".gold">Gold Nugget</span></span>
 
-9 <style class=".iron">Iron</style> =
-<style class=".right">1 <style class=".iron">Iron Block</style></style>
+9 <span class=".iron">Iron</span> =
+<span class=".right">1 <span class=".iron">Iron Block</span></span>
 
-1 <style class=".iron">Iron Block</style> =
-<style class=".right">9 <style class=".gold">Gold Nugget</style></style>
+1 <span class=".iron">Iron Block</span> =
+<span class=".right">9 <span class=".gold">Gold Nugget</span></span>
 
-1 <style class=".iron">Iron Block</style> =
-<style class=".right">1 <style class=".gold">Gold</style></style>
+1 <span class=".iron">Iron Block</span> =
+<span class=".right">1 <span class=".gold">Gold</span></span>
 
-9 <style class=".gold">Gold Nugget</style> =
-<style class=".right">1 <style class=".gold">Gold</style></style>
+9 <span class=".gold">Gold Nugget</span> =
+<span class=".right">1 <span class=".gold">Gold</span></span>
 
-1 <style class=".gold">Gold</style> =
-<style class=".right">9 points</style>
+1 <span class=".gold">Gold</span> =
+<span class=".right">9 points</span>
 
-1 <style class=".gold">Gold</style> =
-<style class=".right">1 <style class=".emerald">Emerald</style></style>
+1 <span class=".gold">Gold</span> =
+<span class=".right">1 <span class=".emerald">Emerald</span></span>
 
-9 <style class=".gold">Gold</style> =
-<style class=".right">1 <style class=".gold">Gold Block</style></style>
+9 <span class=".gold">Gold</span> =
+<span class=".right">1 <span class=".gold">Gold Block</span></span>
 
-9 <style class=".gold">Gold</style> =
-<style class=".right">1 <style class=".emerald">Emerald Block</style></style>
+9 <span class=".gold">Gold</span> =
+<span class=".right">1 <span class=".emerald">Emerald Block</span></span>
 
-9 <style class=".emerald">Emerald</style> =
-<style class=".right">1 <style class=".emerald">Emerald Block</style></style>
+9 <span class=".emerald">Emerald</span> =
+<span class=".right">1 <span class=".emerald">Emerald Block</span></span>
 
-1 <style class=".gold">Gold Block</style> =
-<style class=".right">1 <style class=".diamond">Diamond</style></style>
+1 <span class=".gold">Gold Block</span> =
+<span class=".right">1 <span class=".diamond">Diamond</span></span>
 
-1 <style class=".emerald">Emerald Block</style> =
-<style class=".right">1 <style class=".diamond">Diamond</style></style>
+1 <span class=".emerald">Emerald Block</span> =
+<span class=".right">1 <span class=".diamond">Diamond</span></span>
 
-1 <style class=".diamond">Diamond</style> =
-<style class=".right">81 points</style>
+1 <span class=".diamond">Diamond</span> =
+<span class=".right">81 points</span>
 
-9 <style class=".diamond">Diamond</style> =
-<style class=".right">1 <style class=".diamond">Diamond Block</style></style>
+9 <span class=".diamond">Diamond</span> =
+<span class=".right">1 <span class=".diamond">Diamond Block</span></span>
 
-1 <style class=".diamond">Diamond Block</style> =
-<style class=".right">729 points (and far larger a trade than you should probably be making)</style>
+1 <span class=".diamond">Diamond Block</span> =
+<span class=".right">729 points (and far larger a trade than you should probably be making)</span>
 
-<br>
+<!-- page-break -->
 Values are based on a factor of rarity and usefulness.
 
-<style class=".emerald">Emerald</style>s are extremely rare, but largely useless.  <style class=".gold">Gold</style> has some more uses, but is also rather rare. <style class=".lapis">Lapis</style>, <style class=".redstone">Redstone</style>, and <style class=".copper">Copper</style> are about equal.
+<span class=".emerald">Emerald</span>s are extremely rare, but largely useless.  <span class=".gold">Gold</span> has some more uses, but is also rather rare. <span class=".lapis">Lapis</span>, <span class=".redstone">Redstone</span>, and <span class=".copper">Copper</span> are about equal.
 
 <font face="foxcraft_dungeon_loot:pixellated_elegance/smallcaps">**Coal**</font>, being near common as dirt, is not a currency item.
-<br>
+<!-- page-break -->
 # ADDENDUM
 
-4 <style class=".quartz">Quartz</style> shall be equivalent to 1 <style class=".iron">iron</style>.
+4 <span class=".quartz">Quartz</span> shall be equivalent to 1 <span class=".iron">iron</span>.
 
-4 <style class=".quartz">Quartz</style> =
-<style class=".right">1 <style class=".iron">Iron</style></style>
+4 <span class=".quartz">Quartz</span> =
+<span class=".right">1 <span class=".iron">Iron</span></span>
 
-<style class=".quartz">Quartz Blocks</style> are not currency.
-<br>
+<span class=".quartz">Quartz Blocks</span> are not currency.
+<!-- page-break -->
 So, in all:
 
-1 <style class=".lapis">Lapis</style> is about 10 fiat cents. 1 <style class=".redstone">Redstone</style> is also.
+1 <span class=".lapis">Lapis</span> is about 10 fiat cents. 1 <span class=".redstone">Redstone</span> is also.
 
-1 <style class=".iron">Iron</style> is a fiat dollar, as is a <style class=".gold">Gold Nugget</style>.
+1 <span class=".iron">Iron</span> is a fiat dollar, as is a <span class=".gold">Gold Nugget</span>.
 
-1 <style class=".gold">Gold</style> is $10, as is an <style class=".emerald">Emerald</style>.
+1 <span class=".gold">Gold</span> is $10, as is an <span class=".emerald">Emerald</span>.
 
-<style class=".diamond">Diamond</style>s are about $100 each.
+<span class=".diamond">Diamond</span>s are about $100 each.
 
 ---
 

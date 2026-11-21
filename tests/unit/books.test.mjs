@@ -105,11 +105,11 @@ describe('book generator markdown', () => {
   });
 
   it('attribute values read the five entities', () => {
-    const { component } = page('<a on_hover="{action:show_text,value:&quot;tip &amp; &lt;more&gt;&quot;}">x</a>');
+    const { component } = page('<a data-on-hover="{action:show_text,value:&quot;tip &amp; &lt;more&gt;&quot;}">x</a>');
     assert.deepEqual(component.hover_event, { action: 'show_text', value: 'tip & <more>' });
   });
 
-  it('styles of the frontmatter are named classes for <style class>', () => {
+  it('styles of the frontmatter are named classes for <span class>', () => {
     const front = '---\ntitle: T\nstyles: {\n  .url: {\n    color: "blue",\n    bold: false,\n    underline: true,\n    shadow_color: 12345678\n  },\n  .warn: { color: "#ff8800", italic: true }\n}\nrarity: epic\n---\n';
     const { meta } = gen.parseFrontmatter(front + 'body');
     assert.deepEqual(meta.styles, { '.url': { color: 'blue', bold: false, underlined: true, shadow_color: 12345678 }, '.warn': { color: '#ff8800', italic: true } });
@@ -119,9 +119,9 @@ describe('book generator markdown', () => {
       return gen.toComponent(tree, 'k', {});
     };
     // The class styles go on the span, several names apply in order
-    const link = component('a <style class=".url">link</style>');
+    const link = component('a <span class=".url">link</span>');
     assert.deepEqual(link.with[0], { translate: 'k.1', fallback: 'link', color: 'blue', bold: false, underlined: true, shadow_color: 12345678 });
-    assert.deepEqual(component('<style class=".url .warn">x</style>'), { translate: 'k', fallback: 'x', color: '#ff8800', bold: false, underlined: true, shadow_color: 12345678, italic: true });
+    assert.deepEqual(component('<span class=".url .warn">x</span>'), { translate: 'k', fallback: 'x', color: '#ff8800', bold: false, underlined: true, shadow_color: 12345678, italic: true });
     // The class works on font, a and span too, and the attributes of the tag win over it
     const withFont = component('<font class=".url" color="red" face="minecraft:alt">x</font>');
     assert.equal(withFont.color, 'red');
@@ -131,13 +131,16 @@ describe('book generator markdown', () => {
     assert.deepEqual([anchor.color, anchor.click_event.url], ['blue', 'https://example.com']);
     assert.equal(component('<span class=".url">x</span>').color, 'blue');
     // A false turns off what the text around it has, and the width follows
-    const inBold = gen.pagesOf('**a <style class=".url">b</style>**', null, null, meta.styles)[0];
+    const inBold = gen.pagesOf('**a <span class=".url">b</span>**', null, null, meta.styles)[0];
     const { chars } = gen.layout(inBold);
     assert.equal(chars.find((c) => c.ch === 'a').bold, true);
     assert.equal(chars.find((c) => c.ch === 'b').bold, false);
     // Unknown classes and keys stop the build
-    assert.throws(() => component('<style class=".nope">x</style>'), /unknown class ".nope"/);
-    assert.throws(() => component('<style>x</style>'), /needs a class/);
+    assert.throws(() => component('<span class=".nope">x</span>'), /unknown class ".nope"/);
+    // The old tags are gone, each error names what stands for it
+    assert.throws(() => component('<style class=".url">x</style>'), /<span class=".name">/);
+    assert.throws(() => component('<filter as="a">x</filter>'), /data-filter-as/);
+    assert.throws(() => component('<vcenter>'), /vertical-align-center/);
     assert.throws(() => gen.parseClasses({ a: { colour: 'red' } }), /unknown colour/);
     assert.throws(() => gen.parseClasses({ a: { bold: 'yes' } }), /true or false/);
     assert.throws(() => gen.parseFrontmatter('---\nstyles: {\n  a: {}\n---\n'), /not valid YAML/);
@@ -193,12 +196,12 @@ describe('book generator markdown', () => {
 
   it('open_url takes only http and https links', () => {
     assert.throws(() => gen.parseInline('<a href="mailto:a@b.c">x</a>', 0, null), /http or https/);
-    assert.throws(() => gen.parseInline(`<a on_click="{action:'open_url',url:'ftp://x.y'}">x</a>`, 0, null), /http or https/);
+    assert.throws(() => gen.parseInline(`<a data-on-click="{action:'open_url',url:'ftp://x.y'}">x</a>`, 0, null), /http or https/);
     assert.doesNotThrow(() => gen.parseInline('<a href="https://example.com">x</a>', 0, null));
   });
 
   it('anchors map on_click and on_hover from SNBT', () => {
-    const { component } = page(`<a on_click='{action:copy_to_clipboard,value:"text"}' on_hover='{action:show_text,value:"tip"}'>go</a>`);
+    const { component } = page(`<a data-on-click='{action:copy_to_clipboard,value:"text"}' data-on-hover='{action:show_text,value:"tip"}'>go</a>`);
     assert.deepEqual(component.click_event, { action: 'copy_to_clipboard', value: 'text' });
     assert.deepEqual(component.hover_event, { action: 'show_text', value: 'tip' });
     assert.deepEqual(page('<a href="https://example.com">x</a>').component.click_event, { action: 'open_url', url: 'https://example.com' });
@@ -254,23 +257,28 @@ describe('book generator markdown', () => {
   });
 
   it('a line of --- is a page break, a newline a line break and a header is bold and underlined', () => {
-    assert.deepEqual(gen.splitSections('one  \ntwo\n\n<br>\nthree\n  <br>  \n# Head'), ['one\ntwo', 'three', '<h1>Head</h1>']);
+    assert.deepEqual(gen.splitSections('one  \ntwo\n\n<!-- page-break -->\nthree\n  <!-- page-break -->  \n# Head'), ['one\ntwo', 'three', '<h1>Head</h1>']);
     // A heading gets one empty line under it, and not a second when there is one already
     assert.deepEqual(gen.splitSections('# Head\ntext'), ['<h1>Head</h1>\n\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n\ntext'), ['<h1>Head</h1>\n\ntext']);
     // Not before a horizontal line, which sits right under the heading
     assert.deepEqual(gen.splitSections('# Head\n---\ntext'), ['<h1>Head</h1>\n---\ntext']);
-    assert.deepEqual(gen.splitSections('# Head\n<style class=".x">\n---\n</style>\ntext'), ['<h1>Head</h1>\n<style class=".x">\n---\n</style>\ntext']);
+    assert.deepEqual(gen.splitSections('# Head\n<hr class=".x">\ntext'), ['<h1>Head</h1>\n<hr class=".x">\ntext']);
     assert.deepEqual(gen.splitSections('# Head\n----\ntext'), ['<h1>Head</h1>\n\n----\ntext']);
-    assert.equal(gen.pagesOf('one\n<br>\ntwo').length, 2);
+    assert.equal(gen.pagesOf('one\n<!-- page-break -->\ntwo').length, 2);
     // A --- in code or after other text is not a break
-    assert.equal(gen.splitSections('a ---\n`---`\nb\n<br>\nc').length, 2);
-    assert.equal(gen.splitSections('a\n```\n---\n```\nb\n<br>\nc').length, 2);
-    // A <br> in a code block is code too
-    assert.equal(gen.splitSections('a\n```\n<br>\n```\nb\n<br>\nc').length, 2);
+    assert.equal(gen.splitSections('a ---\n`---`\nb\n<!-- page-break -->\nc').length, 2);
+    assert.equal(gen.splitSections('a\n```\n---\n```\nb\n<!-- page-break -->\nc').length, 2);
+    // A <!-- page-break --> in a code block is code too
+    assert.equal(gen.splitSections('a\n```\n<!-- page-break -->\n```\nb\n<!-- page-break -->\nc').length, 2);
     // Anywhere in a line, but not in inline code
-    assert.deepEqual(gen.splitSections('one <br> two<br/>three'), ['one', 'two', 'three']);
-    assert.deepEqual(gen.splitSections('a `x <br> y` b <br> c'), ['a `x <br> y` b', 'c']);
+    assert.deepEqual(gen.splitSections('one <!-- page-break --> two<!-- page-break -->three'), ['one', 'two', 'three']);
+    // A <br> is a line break in the text, not a page break, and the other spellings of the marker work
+    assert.deepEqual(gen.splitSections('one<br>two<br/>three'), ['one<br>two<br/>three']);
+    assert.equal(gen.pagesOf('one<br>two').length, 1);
+    assert.deepEqual(gen.pagesOf('one<br>two')[0], ['one\ntwo']);
+    assert.deepEqual(gen.splitSections('one <!--page-break--> two <!-- pagebreak -->three'), ['one', 'two', 'three']);
+    assert.deepEqual(gen.splitSections('a `x <!-- page-break --> y` b <!-- page-break --> c'), ['a `x <!-- page-break --> y` b', 'c']);
   });
 });
 
@@ -429,7 +437,7 @@ describe('book generator pagination', () => {
   });
 
   it('--- starts a page even when the last one has room', () => {
-    assert.deepEqual(gen.pagesOf('one\n<br>\ntwo').map(text), ['one', 'two']);
+    assert.deepEqual(gen.pagesOf('one\n<!-- page-break -->\ntwo').map(text), ['one', 'two']);
   });
 });
 
@@ -443,7 +451,7 @@ describe('book generator files', () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'books-'));
     return { dir, opts: { bookDir: path.join(dir, 'books'), modifierDir: path.join(dir, 'mod'), tableDir: path.join(dir, 'table'), langDir: path.join(dir, 'lang') } };
   };
-  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore: |\n  first line\n    second line\n---\n\nPage **one**\n<br>\nPage two';
+  const SOURCE = '---\ntitle: Test Book\nauthor: Me\nrarity: epic\nlore: |\n  first line\n    second line\n---\n\nPage **one**\n<!-- page-break -->\nPage two';
 
   it('frontmatter gives title, author, rarity and trimmed lore', () => {
     const { meta, body } = gen.parseFrontmatter(SOURCE);
@@ -464,7 +472,7 @@ describe('book generator files', () => {
     assert.equal(gen.buildBook('t', file).lang['book.foxcraft_dungeon_loot.t.title'], 'Plain');
     assert.equal(name(book('Plain')), undefined);
     // The item name has no filtered side, so it takes the filtered title
-    assert.equal(name(book('<filter as="Darn">Damn</filter>', 'rare')).fallback, 'Darn');
+    assert.equal(name(book('<span data-filter-as="Darn">Damn</span>', 'rare')).fallback, 'Darn');
     const rich = name(book('{text: "Fancy", color: red}', 'rare'));
     assert.deepEqual(rich, { text: '', color: 'aqua', italic: false, extra: [{ text: 'Fancy', color: 'red' }] });
   });
@@ -485,7 +493,7 @@ describe('book generator files', () => {
     // Without a rarity a plain displayTitle still sets the name, and an SNBT one is the name as written
     assert.equal(build(`displayTitle: "${long}"\n`).modifier.functions[0].components['minecraft:custom_name'].fallback, long);
     assert.deepEqual(build('displayTitle: {text: "Fancy", color: red}\n').modifier.functions[0].components['minecraft:custom_name'], { text: 'Fancy', color: 'red' });
-    assert.throws(() => build('displayTitle: <filter as="a">b</filter>\n'), /filter/);
+    assert.throws(() => build('displayTitle: <span data-filter-as="a">b</span>\n'), /filter/);
   });
 
   it('a newline in a title or displayTitle warns, and YAML quotes around a lore entry are not part of it', () => {
@@ -659,7 +667,7 @@ describe('book generator files', () => {
   it('filter spans give the filtered side of a page, other locales only write lang', () => {
     const { dir, opts } = sandbox();
     try {
-      const source = '---\ntitle: Test Book\nauthor: Me\n---\n\nSay <filter as="||heck||">hell</filter> now\n<br>\nPage two';
+      const source = '---\ntitle: Test Book\nauthor: Me\n---\n\nSay <span data-filter-as="||heck||">hell</span> now\n<!-- page-break -->\nPage two';
       write(dir, 'books/en_us/test.md', source);
       write(dir, 'books/es_es/test.md', source.replace('Say', 'Di'));
       gen.generate(opts);
@@ -723,13 +731,13 @@ describe('book generator files', () => {
   it('a title takes a filter for its filtered side', () => {
     const { dir, opts } = sandbox();
     try {
-      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: <filter as="Darn Book">Damn Book</filter>'));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: <span data-filter-as="Darn Book">Damn Book</span>'));
       gen.generate(opts);
       const content = JSON.parse(fs.readFileSync(path.join(opts.modifierDir, 'test.json'), 'utf8')).functions[0].components['minecraft:written_book_content'];
       assert.deepEqual(content.title, { raw: 'Damn Book', filtered: 'Darn Book' });
-      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: <filter as="' + 'x'.repeat(33) + '">Book</filter>'));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: <span data-filter-as="' + 'x'.repeat(33) + '">Book</span>'));
       assert.ok(gen.generate(opts).warnings.some((w) => /filtered title is 33 characters/.test(w)));
-      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: {text: "<filter>b"}'));
+      write(dir, 'books/en_us/test.md', SOURCE.replace('title: Test Book', 'title: {text: "<span>b"}'));
       assert.throws(() => gen.generate(opts), /SNBT title/);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -752,7 +760,7 @@ describe('book generator files', () => {
 
   it('inline code with pad after it is that many pixels of padding', () => {
     const tick = String.fromCharCode(96);
-    const pad = (n) => gen.parseInline(`a${tick}${n}${tick}pad b`, 0, null).content;
+    const pad = (n) => gen.parseInline(`a<span class="pad">${n}</span>b`, 0, null).content;
     const glyphs = (n) => [...pad(n)[1].content[0]].map((c) => c.charCodeAt(0));
     assert.equal(pad('32')[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.deepEqual(glyphs('32'), [0xf820]);
@@ -762,7 +770,7 @@ describe('book generator files', () => {
     assert.deepEqual(glyphs('-3'), [0xf882, 0xf881]);
     // The one space after pad is dropped, a second one stays
     assert.deepEqual(pad('0'), ['a', 'b']);
-    assert.deepEqual(gen.parseInline(`a${tick}1${tick}pad  b`, 0, null).content.slice(2), [' b']);
+    assert.deepEqual(gen.parseInline(`a<span class="pad">1</span> b`, 0, null).content.slice(2), [' b']);
     assert.throws(() => pad('114'), /to 113/);
     assert.throws(() => pad('-115'), /from -114/);
     assert.deepEqual(glyphs('-114'), [0xf8c0, 0xf8a0, 0xf890, 0xf882]);
@@ -772,20 +780,20 @@ describe('book generator files', () => {
     const glued = gen.parseInline(`${tick}32${tick}padLone`, 0, null).content;
     assert.deepEqual(glued, [{ styles: { font: 'foxcraft_dungeon_loot:pixel_mono' }, content: ['32'] }, 'padLone']);
     // The end of a line ends it too
-    assert.equal(gen.parseInline(`a${tick}3${tick}pad
+    assert.equal(gen.parseInline(`a<span class="pad">3</span>
 b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     // Padding takes its width on the page
-    const page = gen.pagesOf(`${tick}113${tick}pad ${tick}1${tick}pad`);
+    const page = gen.pagesOf(`<span class="pad">113</span><span class="pad">1</span>`);
     assert.equal(page.length, 1);
   });
 
   it('inline code type words take any non-alphanumeric character after them, and only a space after pad is dropped', () => {
     const tick = String.fromCharCode(96);
     const parse = (text) => gen.parseInline(text, 0, null).content;
-    assert.deepEqual(parse(`${tick}53${tick}pad!`).slice(1), ['!']);
-    assert.deepEqual(parse(`${tick}53${tick}pad,x`).slice(1), [',x']);
-    assert.deepEqual(parse(`${tick}II${tick}tally. x`).slice(-1), ['. x']);
-    assert.deepEqual(parse(`${tick}II${tick}tally x`).slice(-1), [' x']);
+    assert.deepEqual(parse(`<span class="pad">53</span>!`).slice(1), ['!']);
+    assert.deepEqual(parse(`<span class="pad">53</span>,x`).slice(1), [',x']);
+    assert.deepEqual(parse(`<span class="tally">II</span>. x`).slice(-1), ['. x']);
+    assert.deepEqual(parse(`<span class="tally">II</span> x`).slice(-1), [' x']);
     // A letter or digit after it makes it code and a word
     assert.equal(parse(`${tick}53${tick}pad2`)[0].styles.font, 'foxcraft_dungeon_loot:pixel_mono');
   });
@@ -800,19 +808,19 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
       return rows.map((l) => chars.slice(l.tstart, l.tend).map((g) => (g.font === font ? '[' + g.ch + ']' : g.font.endsWith('padding') ? '~' : g.ch)).join(''));
     };
     const words = 'there is a giant tree, all right? So then, there is a weird building castle thing in the background.';
-    const wrapped = lines(`${tick}T${tick}drop ${words}`);
+    const wrapped = lines(`<span class="drop">T</span>${words}`);
     // Padding in front of the first line, the cap in front of the second, one space after drop is the separator
     assert.match(wrapped[0], /^~+there is a giant/);
     assert.match(wrapped[1], /^\[T\]/);
     assert.equal(wrapped.join('').includes('[T]['), false);
     // The padding is as wide as the cap, so a one line paragraph keeps the cap in place over it
     // and the two lines a tall font needs above it are there
-    const short = lines(`${tick}B${tick}drop ut all.`);
+    const short = lines(`<span class="drop">B</span>ut all.`);
     assert.deepEqual(short.slice(0, 2), ['', '']);
     assert.equal(short.length, 3);
     assert.match(short[2], /^~+\[B\]ut all\.$/);
     // No drop style, or one without a font, stops the build
-    assert.throws(() => gen.parseInline(`${tick}T${tick}drop x`, 0, null, {}), /drop style with a font/);
+    assert.throws(() => gen.parseInline(`<span class="drop">T</span>x`, 0, null, {}), /drop style with a font/);
   });
 
   it('inline code with cover after it is a line of the cover, which has to be first on its line', () => {
@@ -820,31 +828,31 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const cover = (text) => gen.parseInline(text, 0, null).content;
     const codes = (nodes) => nodes.map((n) => (typeof n === 'string' ? n : [...n.content[0]].map((c) => c.charCodeAt(0).toString(16)).join(' ')));
     // The body glyph first, a step back of its 131 and the 16 of the art left of the text, the strip, and back to the start
-    assert.deepEqual(codes(cover(`${tick}3${tick}cover Title`)), ['e003', 'f8c0 f8a0 f890 f888 f884 f882 f881 f890 f884', 'e013', 'f881', 'Title']);
-    assert.equal(codes(cover(`${tick}0${tick}cover`))[0], 'e000');
-    assert.equal(codes(cover(`${tick}13${tick}cover`))[0], 'e00d');
-    assert.throws(() => cover(`${tick}14${tick}cover`), /not a line of the cover/);
-    assert.throws(() => cover(`x ${tick}3${tick}cover`), /first on its line/);
+    assert.deepEqual(codes(cover(`<span class="cover">3</span>Title`)), ['e003', 'f8c0 f8a0 f890 f888 f884 f882 f881 f890 f884', 'e013', 'f881', 'Title']);
+    assert.equal(codes(cover(`<span class="cover">0</span>`))[0], 'e000');
+    assert.equal(codes(cover(`<span class="cover">13</span>`))[0], 'e00d');
+    assert.throws(() => cover(`<span class="cover">14</span>`), /not a line of the cover/);
+    assert.throws(() => cover(`x <span class="cover">3</span>`), /first on its line/);
     // A line after a newline is first on it
-    assert.equal(cover(`x\n${tick}3${tick}cover`).length > 1, true);
+    assert.equal(cover(`x\n<span class="cover">3</span>`).length > 1, true);
   });
 
   it('a cover line can be the start of a heading, which a link can go to', () => {
     const tick = String.fromCharCode(96);
     // Opening tags before it write no text, so it is first on its line
     const book = (body) => gen.pagesOf(body);
-    assert.doesNotThrow(() => book(`<h1>${tick}3${tick}cover Title</h1>\nnext`));
-    assert.doesNotThrow(() => book(`<center class="h1">${tick}3${tick}cover Title</center>`));
-    assert.throws(() => book(`x <h1>${tick}3${tick}cover Title</h1>`), /first on its line/);
+    assert.doesNotThrow(() => book(`<h1><span class="cover">3</span>Title</h1>\nnext`));
+    assert.doesNotThrow(() => book(`<center class="h1"><span class="cover">3</span>Title</center>`));
+    assert.throws(() => book(`x <h1><span class="cover">3</span>Title</h1>`), /first on its line/);
     // The heading is named by its text alone, the cover glyphs and their padding are no letters
-    assert.doesNotThrow(() => gen.sectionsOf(`<h1>${tick}3${tick}cover Title</h1>\n[Go](#title)`));
+    assert.doesNotThrow(() => gen.sectionsOf(`<h1><span class="cover">3</span>Title</h1>\n[Go](#title)`));
   });
 
   it('a # header that starts with a cover line gets no empty line under it', () => {
     const tick = String.fromCharCode(96);
     const lines = (body) => gen.pagesOf(body)[0].flatMap(function flat(p) { return typeof p === 'string' ? [p] : p.content.flatMap(flat); }).join('').split('\n').length;
     // The header line and the line after it, two lines, where a plain header has an empty line between them and makes three
-    assert.equal(lines(`# ${tick}1${tick}cover Title\n${tick}2${tick}cover next`), 2);
+    assert.equal(lines(`# <span class="cover">1</span>Title\n<span class="cover">2</span>next`), 2);
     assert.equal(lines('# plain\nnext'), 3);
   });
 
@@ -852,7 +860,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const tick = String.fromCharCode(96);
     const flat = [];
     const walk = (nodes) => nodes.forEach((p) => (typeof p === 'string' ? flat.push(p) : walk(p.content)));
-    walk(gen.pagesOf(`${tick}3${tick}cover <center>Hi</center>`)[0]);
+    walk(gen.pagesOf(`<span class="cover">3</span><center>Hi</center>`)[0]);
     // The cover glyph is the first of the line, the padding that centers "Hi" comes after the cover's own step back, before the text
     assert.equal(flat[0], '\ue003');
     assert.equal(flat[flat.length - 1], 'Hi');
@@ -878,8 +886,8 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     // A heading with its text on the page stays where it is
     const fits = gen.pagesOf(`${rows.split('\n').slice(0, 8).join('\n')}\n\n# Head\n\ntext after`);
     assert.equal(fits.length, 1);
-    // A <br> ends the page wherever it is, the heading before it has nothing to go with
-    const forced = gen.sectionsOf(`${rows}\n\n# Head\n<br>\ntext after`).flatMap((tree) => gen.paginate(tree));
+    // A <!-- page-break --> ends the page wherever it is, the heading before it has nothing to go with
+    const forced = gen.sectionsOf(`${rows}\n\n# Head\n<!-- page-break -->\ntext after`).flatMap((tree) => gen.paginate(tree));
     assert.ok(text(forced[0]).includes('Head'), text(forced[0]));
   });
 
@@ -912,7 +920,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
 
   it('inline code with potion after it is a potion icon: the bottle, a step back, then the overlay in the color', () => {
     const tick = String.fromCharCode(96);
-    const potion = (code) => gen.parseInline(`${tick}${code}${tick}potion`, 0, null).content;
+    const potion = (code) => gen.parseInline(`<span class="potion">${code}</span>`, 0, null).content;
     const codes = (nodes) => nodes.map((n) => [...n.content[0]].map((c) => c.charCodeAt(0).toString(16)).join(' '));
     // The bottle is 8 wide with the 2 of kerning on it, so the step back is 9 (f888 + f881)
     assert.deepEqual(codes(potion('normal red')), ['e001', 'f888 f881', 'e000']);
@@ -923,14 +931,14 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(overlay.styles.color, '#ff8800');
     assert.equal(potion('normal dark_aqua')[2].styles.color, 'dark_aqua');
     // The text after it stays text, and the type and the color are both needed
-    assert.deepEqual(gen.parseInline(`${tick}normal red${tick}potion.`, 0, null).content.slice(-1), ['.']);
-    for (const bad of ['red', 'normal', 'fizzy red', 'normal red blue']) assert.throws(() => potion(bad), /potion is not a type and a color/);
+    assert.deepEqual(gen.parseInline(`<span class="potion">normal red</span>.`, 0, null).content.slice(-1), ['.']);
+    for (const bad of ['red', 'normal', 'fizzy red', 'normal red blue']) assert.throws(() => potion(bad), /is not a type and a color/);
     assert.throws(() => potion('normal chartreuse'), /unknown color/);
   });
 
   it('inline code with tally after it is tally marks in groups of five', () => {
     const tick = String.fromCharCode(96);
-    const tally = (n) => gen.parseInline(`${tick}${n}${tick}tally`, 0, null).content;
+    const tally = (n) => gen.parseInline(`<span class="tally">${n}</span>`, 0, null).content;
     const text = (nodes) => nodes.map((n) => (typeof n === 'string' ? n : [...n.content[0]].map((c) => c.charCodeAt(0).toString(16)).join(' ') + (n.styles.font.endsWith('tallies') ? 'T' : 'P'))).join('|');
     // Four ticks, the cross stepped back over them, then the next group
     assert.equal(text(tally('5')), 'f802P|e000 e000 e000 e000T|f888 f884 f882P|e001T');
@@ -945,18 +953,18 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.deepEqual(tally('45').filter((n) => n === '\n').length, 1);
     assert.equal(tally('30').includes('\n'), false);
     // Dark gray unless the tally type of the stylesheet says otherwise
-    const colored = (classes) => gen.parseInline(`${tick}3${tick}tally`, 0, null, gen.parseClasses(classes)).content[0].styles.color;
+    const colored = (classes) => gen.parseInline(`<span class="tally">3</span>`, 0, null, gen.parseClasses(classes)).content[0].styles.color;
     assert.equal(colored({}), 'dark_gray');
     assert.equal(colored({ tally: { color: 'red' } }), 'red');
     // Tallies that reach the end of a page go on at the top of the next one, a group never split
     const crosses = (page) => (JSON.stringify(page).match(/\ue001/g) || []).length;
     const rows = Array.from({ length: 13 }, (_, i) => i + 1).join('\n');
-    const pages = gen.pagesOf(`${rows}\n${tick}60${tick}tally\nend`);
+    const pages = gen.pagesOf(`${rows}\n<span class="tally">60</span>\nend`);
     assert.equal(pages.length, 2);
     assert.deepEqual(pages.map(crosses), [6, 6]);
     assert.ok(pages.every((page) => (JSON.stringify(page).match(/\ue000/g) || []).length === crosses(page) * 4));
     // The mark after it stays text
-    assert.deepEqual(gen.parseInline(`${tick}III${tick}tally.`, 0, null).content.slice(-1), ['.']);
+    assert.deepEqual(gen.parseInline(`<span class="tally">III</span>.`, 0, null).content.slice(-1), ['.']);
   });
 
   it('a code block is colored by its language and written as literal text components', () => {
@@ -1012,7 +1020,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
   });
 
   it('a tall glyph at the top of a page is pushed down by empty lines so the illustration sits in place', () => {
-    const md = 'text\n<br>\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustration">0</font>';
+    const md = 'text\n<!-- page-break -->\n' + '\n'.repeat(13) + '<font face="foxcraft_dungeon_loot:illustration">0</font>';
     const pages = gen.pagesOf(md);
     assert.equal(pages.length, 2);
     const { lines } = gen.layout(pages[1]);
@@ -1040,10 +1048,20 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.ok(moved.some((row) => row.endsWith('-')), moved.join('|'));
     // No syllable break, no hyphen, the word breaks between letters as before
     assert.equal(JSON.stringify(gen.hyphenate(['x'.repeat(30)], hyphenator)), JSON.stringify(['x'.repeat(30)]))
-    // A span is never broken at a syllable and is gone from the pages
-    const [kept] = gen.pagesOf('By <span>antidisestablishmentarianism</span>', null, hyphenator);
+    // A span is hyphenated like the text around it, and a hyphenate of false, from the tag or a class, keeps its words whole
+    const [open] = gen.pagesOf('By <span>antidisestablishmentarianism</span>', null, hyphenator);
+    assert.deepEqual(rows(open), ['By antidisestablish-', 'mentarianism']);
+    const [kept] = gen.pagesOf('By <span class=".nohyphen">antidisestablishmentarianism</span>', null, hyphenator, gen.parseClasses({ '.nohyphen': { hyphenate: false } }));
     assert.ok(kept.every((part) => typeof part === 'string'));
     assert.deepEqual(rows(kept), ['By', 'antidisestablishmentari', 'anism']);
+    assert.ok(JSON.stringify(kept).indexOf('hyphenate') < 0);
+    // Any style takes it, the types too, and an inner true turns it back on
+    const [whole] = gen.pagesOf('By antidisestablishmentarianism', null, hyphenator, gen.parseClasses({ body: { hyphenate: false } }));
+    assert.deepEqual(rows(whole), ['By', 'antidisestablishmentari', 'anism']);
+    assert.ok(JSON.stringify(whole).indexOf('hyphenate') < 0);
+    const [again] = gen.pagesOf('By <span class=".on">antidisestablishmentarianism</span>', null, hyphenator, gen.parseClasses({ body: { hyphenate: false }, '.on': { hyphenate: true } }));
+    assert.deepEqual(rows(again), ['By antidisestablish-', 'mentarianism']);
+    assert.throws(() => gen.parseClasses({ '.x': { hyphenate: 'no' } }), /hyphenate is true or false/);
     const [plain] = gen.pagesOf('By antidisestablishmentarianism', null, hyphenator);
     assert.deepEqual(rows(plain), ['By antidisestablish-', 'mentarianism']);
     // No patterns for the locale, or code, are left alone
@@ -1099,10 +1117,10 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const text = (page) => page.filter((p) => typeof p === 'string').join('');
     const textWidth = (page) => [...text(page)].reduce((sum, ch) => sum + lore.FONTS.widthOf('minecraft:default', ch, false), 0);
     // Left to right: right takes all the room, left nothing, and the padding comes first
-    const [right] = gen.pagesOf('<style class=".r">Hi there</style>', null, null, classes);
+    const [right] = gen.pagesOf('<span class=".r">Hi there</span>', null, null, classes);
     assert.equal(padWidth(right), 114 - textWidth(right));
     assert.equal(right[0].styles.font, 'foxcraft_dungeon_loot:padding');
-    assert.equal(padWidth(gen.pagesOf('<style class=".l">Hi there</style>', null, null, classes)[0]), 0);
+    assert.equal(padWidth(gen.pagesOf('<span class=".l">Hi there</span>', null, null, classes)[0]), 0);
     assert.equal(padWidth(gen.pagesOf('Hi there')[0]), 0);
     // Right to left: a line that reads that way is drawn with its end at the left, so the padding follows the text
     const arabic = 'مرحبا بكم';
@@ -1110,8 +1128,8 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.ok(padWidth(auto) > 0);
     assert.equal(auto[auto.length - 1].styles.font, 'foxcraft_dungeon_loot:padding');
     // left is mirrored to the right there and right to the left, center stays
-    assert.ok(padWidth(gen.pagesOf(`<style class=".l">${arabic}</style>`, null, null, classes, true, true)[0]) > 0);
-    assert.equal(padWidth(gen.pagesOf(`<style class=".r">${arabic}</style>`, null, null, classes, true, true)[0]), 0);
+    assert.ok(padWidth(gen.pagesOf(`<span class=".l">${arabic}</span>`, null, null, classes, true, true)[0]) > 0);
+    assert.equal(padWidth(gen.pagesOf(`<span class=".r">${arabic}</span>`, null, null, classes, true, true)[0]), 0);
     // A line of a right to left locale that reads left to right keeps its padding in front
     const [latin] = gen.pagesOf('Hi there', null, null, {}, true, true);
     assert.equal(latin[0].styles.font, 'foxcraft_dungeon_loot:padding');
@@ -1119,16 +1137,16 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.deepEqual(gen.pagesOf('Hi', null, null, {}, false, true)[0], ['Hi']);
   });
 
-  it('<vbottom> puts the text of a page at the bottom of its lines', () => {
+  it('<!-- vertical-align-bottom --> puts the text of a page at the bottom of its lines', () => {
     // Two lines of text on 14 leave 12, all above
-    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines')[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-bottom -->\ntwo\nlines')[0]).lines.length, 14);
     const full = Array.from({ length: 14 }, (_, n) => 'l' + n).join('\n');
-    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\n' + full)[0]).lines.length, 14);
-    assert.equal(gen.layout(gen.sectionsOf('<vbottom>\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-bottom -->\n' + full)[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-bottom -->\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
   });
 
-  it('a <vcenter> ends at the <vbottom> after it, which sits on the last line', () => {
-    const { lines, chars } = gen.layout(gen.sectionsOf('title\n<vcenter>\nmiddle\n<vbottom>\nend')[0]);
+  it('a <!-- vertical-align-center --> ends at the <!-- vertical-align-bottom --> after it, which sits on the last line', () => {
+    const { lines, chars } = gen.layout(gen.sectionsOf('title\n<!-- vertical-align-center -->\nmiddle\n<!-- vertical-align-bottom -->\nend')[0]);
     const text = lines.map((l) => chars.slice(l.tstart, l.tend).map((c) => c.ch).join(''));
     assert.equal(text.length, 14);
     assert.equal(text[13], 'end');
@@ -1136,24 +1154,24 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(text.indexOf('middle'), 6);
   });
 
-  it('<vcenter> puts the text of a page in the middle of its lines', () => {
+  it('<!-- vertical-align-center --> puts the text of a page in the middle of its lines', () => {
     // Two lines of text on 14 leave 12, six above
-    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\ntwo\nlines')[0]).lines.length, 8);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-center -->\ntwo\nlines')[0]).lines.length, 8);
     // Not for a page that is full, or for a book and quill
     const full = Array.from({ length: 14 }, (_, n) => 'l' + n).join('\n');
-    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\n' + full)[0]).lines.length, 14);
-    assert.equal(gen.layout(gen.sectionsOf('<vcenter>\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-center -->\n' + full)[0]).lines.length, 14);
+    assert.equal(gen.layout(gen.sectionsOf('<!-- vertical-align-center -->\ntwo\nlines', null, null, {}, false)[0]).lines.length, 2);
     // Under a header it centers the text up to the next header, or the end of the page
     const lineCount = (body) => gen.layout(gen.sectionsOf(body)[0]).lines.length;
-    assert.equal(lineCount('# A\n<vcenter>\none\n\ntwo'), 1 + 1 + 3 + Math.floor((14 - 5) / 2));
-    assert.equal(lineCount('# A\n<vcenter>\none\n# B\ntwo'), 14);
+    assert.equal(lineCount('# A\n<!-- vertical-align-center -->\none\n\ntwo'), 1 + 1 + 3 + Math.floor((14 - 5) / 2));
+    assert.equal(lineCount('# A\n<!-- vertical-align-center -->\none\n# B\ntwo'), 14);
     // At the start of a page no header ends it
-    assert.equal(lineCount('<vcenter>\n# A\none'), 3 + Math.floor((14 - 3) / 2));
+    assert.equal(lineCount('<!-- vertical-align-center -->\n# A\none'), 3 + Math.floor((14 - 3) / 2));
     // Only at the start of a page
     assert.equal(gen.layout(gen.sectionsOf('two\nlines')[0]).lines.length, 2);
   });
 
-  it('a line of --- is one glyph of the rule font that fills the page exactly, hyphens of the font of horiz when it has one', () => {
+  it('a line of --- is one glyph of the rule font that fills the page exactly, hyphens of the font of hr when it has one', () => {
     const rule = (body, classes = {}, font = null) => {
       const [page] = gen.pagesOf(body, font, null, gen.parseClasses(classes));
       const { lines, chars } = gen.layout(page);
@@ -1166,20 +1184,20 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     assert.equal(plain.lines, 3);
     assert.equal(plain.width, 114);
     assert.deepEqual(plain.text.map((g) => [g.ch, g.font]), [['\ue000', 'foxcraft_dungeon_loot:rule']]);
-    const bold = rule('a\n---\nb', { horiz: { bold: true, color: 'gray' } });
+    const bold = rule('a\n---\nb', { hr: { bold: true, color: 'gray' } });
     assert.equal(bold.width, 114);
     assert.equal(bold.text.length, 1);
     assert.ok(!bold.text[0].bold);
-    // The font of horiz wins, as hyphens: bold ones are a pixel wider, so 17 would be 119 and the last steps back over the one before it
-    const mono = rule('a\n---\nb', { horiz: { font: 'foxcraft_dungeon_loot:pixel_mono' } });
+    // The font of hr wins, as hyphens: bold ones are a pixel wider, so 17 would be 119 and the last steps back over the one before it
+    const mono = rule('a\n---\nb', { hr: { font: 'foxcraft_dungeon_loot:pixel_mono' } });
     assert.equal(mono.width, 114);
     assert.ok(mono.text.filter((g) => g.ch === '-').every((g) => g.font === 'foxcraft_dungeon_loot:pixel_mono'));
-    // A <br> line is a page break, a --- with text on the line is text
-    assert.equal(gen.pagesOf('a\n<br>\nb').length, 2);
+    // A <!-- page-break --> line is a page break, a --- with text on the line is text
+    assert.equal(gen.pagesOf('a\n<!-- page-break -->\nb').length, 2);
     assert.equal(gen.pagesOf('a\n--- b\nc').length, 1);
   });
 
-  it('horiz takes a char, and a <style> around the --- line lays its styles over horiz', () => {
+  it('hr takes a char, and an <hr> lays its styles over hr', () => {
     const line = (body, classes) => {
       const [page] = gen.pagesOf(body, null, null, gen.parseClasses(classes));
       const { lines, chars } = gen.layout(page);
@@ -1187,46 +1205,47 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
       const text = all.filter((g) => g.font !== 'foxcraft_dungeon_loot:padding');
       return { lines: lines.length, text, width: all.reduce((sum, g) => sum + lore.FONTS.widthOf(g.font, g.ch, g.bold), 0) };
     };
-    const tilde = line('a\n---\nb', { horiz: { char: '~' } });
+    const tilde = line('a\n---\nb', { hr: { char: '~' } });
     assert.equal(tilde.lines, 3);
     assert.equal(tilde.width, 114);
     assert.ok(tilde.text.every((g) => g.ch === '~'));
     // A blank with an underline is a line
-    const blank = line('a\n---\nb', { horiz: { char: ' ', underline: true } });
+    const blank = line('a\n---\nb', { hr: { char: ' ', underline: true } });
     assert.equal(blank.width, 114);
     assert.ok(blank.text.every((g) => /\s/.test(g.ch)));
-    assert.ok(JSON.stringify(gen.pagesOf('a\n---\nb', null, null, gen.parseClasses({ horiz: { char: ' ', underline: true } }))).includes('"underlined":true'));
-    // The style around the line wins over horiz, on one line or around it, and the lines next to it are not touched
-    const classes = { horiz: { color: 'gray' }, '.tildehoriz': { char: '~', color: 'red' } };
-    const over = line('a\n<style class=".tildehoriz">\n---\n</style>\nb', classes);
+    assert.ok(JSON.stringify(gen.pagesOf('a\n---\nb', null, null, gen.parseClasses({ hr: { char: ' ', underline: true } }))).includes('"underlined":true'));
+    // The style around the line wins over hr, on one line or around it, and the lines next to it are not touched
+    const classes = { hr: { color: 'gray' }, '.tildehoriz': { char: '~', color: 'red' } };
+    const over = line('a\n<hr class=".tildehoriz">\nb', classes);
     assert.equal(over.lines, 3);
     assert.equal(over.width, 114);
     assert.ok(over.text.every((g) => g.ch === '~'));
-    assert.ok(JSON.stringify(gen.pagesOf('a\n<style class=".tildehoriz">\n---\n</style>\nb', null, null, gen.parseClasses(classes))).includes('"color":"red"'));
-    assert.deepEqual(line('a\n<style class=".tildehoriz">---</style>\nb', classes).text, over.text);
+    assert.ok(JSON.stringify(gen.pagesOf('a\n<hr class=".tildehoriz">\nb', null, null, gen.parseClasses(classes))).includes('"color":"red"'));
+    assert.deepEqual(line('a\n<hr class=".tildehoriz">\nb', classes).text, over.text);
     assert.ok(line('a\n---\nb', classes).text.every((g) => g.ch === '\ue000'));
-    assert.throws(() => gen.parseClasses({ horiz: { char: 'ab' } }), /one character/);
-    assert.throws(() => line('a\n<style class=".nope">\n---\n</style>\nb', classes), /unknown class/);
+    assert.throws(() => gen.parseClasses({ hr: { char: 'ab' } }), /one character/);
+    assert.throws(() => line('a\n<hr class=".nope">\nb', classes), /unknown class/);
+    assert.throws(() => gen.parseInline('a <hr class=".tildehoriz"> b', 0, null), /line of its own/);
     // The char is not a style of the component
-    assert.ok(!JSON.stringify(gen.pagesOf('a\n---\nb', null, null, gen.parseClasses({ horiz: { char: '~' } }))).includes('"char"'));
+    assert.ok(!JSON.stringify(gen.pagesOf('a\n---\nb', null, null, gen.parseClasses({ hr: { char: '~' } }))).includes('"char"'));
   });
 
-  it('char is a style of every class, horiz inherits it from body, and a class around the line wins', () => {
+  it('char is a style of every class, hr inherits it from body, and a class around the line wins', () => {
     const chars = (classes, body = 'a\n---\nb') => {
       const [page] = gen.pagesOf(body, null, null, gen.parseClasses(classes));
       const { lines, chars: all } = gen.layout(page);
       return { ch: new Set(all.slice(lines[1].start, lines[1].end).filter((g) => g.font !== 'foxcraft_dungeon_loot:padding').map((g) => g.ch)), json: JSON.stringify(page) };
     };
-    // body.char reaches the line, horiz.char wins over it, the class around the line over both
+    // body.char reaches the line, hr.char wins over it, the class around the line over both
     assert.deepEqual([...chars({ body: { char: '=' } }).ch], ['=']);
-    assert.deepEqual([...chars({ body: { char: '=' }, horiz: { char: '~' } }).ch], ['~']);
-    const classes = { body: { char: '=' }, horiz: { char: '~' }, '.dots': { char: '.' }, '.plain': { color: 'red' } };
-    assert.deepEqual([...chars(classes, 'a\n<style class=".dots">\n---\n</style>\nb').ch], ['.']);
-    // A class without a char leaves the one of horiz
-    assert.deepEqual([...chars(classes, 'a\n<style class=".plain">\n---\n</style>\nb').ch], ['~']);
+    assert.deepEqual([...chars({ body: { char: '=' }, hr: { char: '~' } }).ch], ['~']);
+    const classes = { body: { char: '=' }, hr: { char: '~' }, '.dots': { char: '.' }, '.plain': { color: 'red' } };
+    assert.deepEqual([...chars(classes, 'a\n<hr class=".dots">\nb').ch], ['.']);
+    // A class without a char leaves the one of hr
+    assert.deepEqual([...chars(classes, 'a\n<hr class=".plain">\nb').ch], ['~']);
     // Every kind of class takes it, and it never reaches the text
-    for (const name of ['body', 'horiz', 'header', 'h1', 'bold', 'code', 'center', '.x']) assert.doesNotThrow(() => gen.parseClasses({ [name]: { char: '*' } }), name);
-    const text = chars({ body: { char: '=' }, '.dots': { char: '.' } }, 'a <style class=".dots">b</style>\n---\nc');
+    for (const name of ['body', 'hr', 'header', 'h1', 'bold', 'code', 'center', '.x']) assert.doesNotThrow(() => gen.parseClasses({ [name]: { char: '*' } }), name);
+    const text = chars({ body: { char: '=' }, '.dots': { char: '.' } }, 'a <span class=".dots">b</span>\n---\nc');
     assert.ok(!text.json.includes('"char"'));
   });
 
@@ -1237,38 +1256,38 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     };
     const classes = gen.parseClasses({ '.c': { align: 'center' }, '.cr': { align: 'center', color: 'red' }, '.off': { align: 'left' } });
     // The whole line is centered when the style starts it, and the style leaves no span when centering is all it does
-    const [start] = gen.pagesOf('<style class=".c">Start</style> of a line', null, null, classes);
+    const [start] = gen.pagesOf('<span class=".c">Start</span> of a line', null, null, classes);
     assert.deepEqual(padOf(start), [true]);
     assert.ok(!JSON.stringify(start).includes('"center"'));
     // Mid-line it centers its own text on the line, with padding in front of it; the line before it stays at the left
-    const [mid] = gen.pagesOf('Mid <style class=".c">centered</style> line', null, null, classes);
+    const [mid] = gen.pagesOf('Mid <span class=".c">centered</span> line', null, null, classes);
     assert.deepEqual(padOf(mid), [true]);
     assert.equal(mid[0], 'Mid ');
     assert.equal(mid.filter((p) => typeof p === 'string' && p.includes('centered')).length, 1);
     // Left, center and right spread across one line
-    const spread = gen.pagesOf('1<center>2</center><style class=".r">3</style>', null, null, gen.parseClasses({ '.r': { align: 'right' } }))[0];
+    const spread = gen.pagesOf('1<center>2</center><span class=".r">3</span>', null, null, gen.parseClasses({ '.r': { align: 'right' } }))[0];
     assert.equal(spread.filter((p) => p?.styles?.font === 'foxcraft_dungeon_loot:padding').length, 2);
     // The lines it wraps onto start with it and are centered
-    const [wrap] = gen.pagesOf('Mid <style class=".cr">a long centered run of text that goes on and wraps over</style>', null, null, classes);
+    const [wrap] = gen.pagesOf('Mid <span class=".cr">a long centered run of text that goes on and wraps over</span>', null, null, classes);
     assert.deepEqual(padOf(wrap), [false, true, true]);
     assert.ok(!JSON.stringify(wrap).includes('"center"'));
     // An inner align: left turns it off for its text, the rest of the line is a centered run mid-line; a body with align center centers every line
-    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start</style> of a line</style>', null, null, classes)[0]), [true]);
-    assert.deepEqual(padOf(gen.pagesOf('<style class=".c"><style class=".off">Start of a line</style></style>', null, null, classes)[0]), [false]);
+    assert.deepEqual(padOf(gen.pagesOf('<span class=".c"><span class=".off">Start</span> of a line</span>', null, null, classes)[0]), [true]);
+    assert.deepEqual(padOf(gen.pagesOf('<span class=".c"><span class=".off">Start of a line</span></span>', null, null, classes)[0]), [false]);
     assert.deepEqual(padOf(gen.pagesOf('one\ntwo', null, null, gen.parseClasses({ body: { align: 'center' } }))[0]), [true, true]);
     assert.throws(() => gen.parseClasses({ '.c': { align: 'middle' } }), /align is left, center, right/);
     // class="center" is built in, the center type styles it and <center>
     const typed = gen.parseClasses({ center: { color: 'red' } });
-    const [builtIn] = gen.pagesOf('<style class="center">Start</style> of a line', null, null, typed);
+    const [builtIn] = gen.pagesOf('<span class="center">Start</span> of a line', null, null, typed);
     assert.deepEqual(padOf(builtIn), [true]);
     assert.equal(builtIn[1].styles.color, 'red');
     assert.equal(gen.pagesOf('<center>Title</center>', null, null, typed)[0][1].styles.color, 'red');
     // A class of the frontmatter needs its dot
-    assert.throws(() => gen.pagesOf('<style class="c">x</style>', null, null, classes), /needs its dot, class="\.c"/);
+    assert.throws(() => gen.pagesOf('<span class="c">x</span>', null, null, classes), /needs its dot, class="\.c"/);
   });
 
   it('a filter span needs as, an old _filtered file is ignored with a warning', () => {
-    assert.throws(() => gen.parseInline('a <filter>b</filter>', 0, null), /as=/);
+    assert.throws(() => gen.parseInline('a <filter>b</filter>', 0, null), /data-filter-as/);
     const { dir, opts } = sandbox();
     try {
       write(dir, 'books/en_us/test.md', SOURCE);
@@ -1285,7 +1304,7 @@ b`, 0, null).content[1].styles.font, 'foxcraft_dungeon_loot:padding');
     const { dir, opts } = sandbox();
     try {
       const filler = Array.from({ length: 13 }, () => 'x').join('\n');
-      write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\n---\n\n${filler}\n<filter as="a b">one\ntwo</filter>`);
+      write(dir, 'books/en_us/test.md', `---\ntitle: Test Book\nauthor: Me\n---\n\n${filler}\n<span data-filter-as="a b">one\ntwo</span>`);
       const { warnings } = gen.generate(opts);
       assert.ok(warnings.some((w) => /cut by the page break/.test(w)), warnings.join('\n'));
     } finally {
@@ -1822,7 +1841,7 @@ describe('heading links', () => {
   };
 
   it('points #name at the page of the heading with that name', () => {
-    const book = build('[Go](#brewing-stands) and [again](#Brewing_Stands)\n\n<br>\n\n## Intro\n\nText\n\n<br>\n\n## Brewing Stands\n\nMore');
+    const book = build('[Go](#brewing-stands) and [again](#Brewing_Stands)\n\n<!-- page-break -->\n\n## Intro\n\nText\n\n<!-- page-break -->\n\n## Brewing Stands\n\nMore');
     assert.deepEqual(pagesLinked(book), [3, 3]);
     assert.ok(!JSON.stringify(book.modifier).includes('anchor'));
   });

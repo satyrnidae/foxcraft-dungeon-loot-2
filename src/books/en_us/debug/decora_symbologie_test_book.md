@@ -17,44 +17,44 @@ debug: true
 
 # Font:
 
-<style class=".plain">Decora Symbologie</style>
+<span class=".plain">Decora Symbologie</span>
 
-<style class=".plain">An icon font of ornaments and the Mysterian glyphs. Anything else falls back to the default font.</style>
-<br>
+<span class=".plain">An icon font of ornaments and the Mysterian glyphs. Anything else falls back to the default font.</span>
+<!-- page-break -->
 # Ornaments:
 
-<style class=".plain">Greater than:</style> >
+<span class=".plain">Greater than:</span> >
 
-<style class=".plain">Less than:</style> <
+<span class=".plain">Less than:</span> <
 
-<style class=".plain">Ampersand:</style> &
+<span class=".plain">Ampersand:</span> &
 
-<style class=".plain">Hyphen:</style> -
+<span class=".plain">Hyphen:</span> -
 
-<style class=".plain">Tilde:</style> ~
+<span class=".plain">Tilde:</span> ~
 
-<style class=".plain">Ellipsis:</style> …
-<br>
+<span class=".plain">Ellipsis:</span> …
+<!-- page-break -->
 # Icons:
 
-<style class=".plain">Skull:</style> 💀
+<span class=".plain">Skull:</span> 💀
 
-<style class=".plain">Spider:</style> 🕷
+<span class=".plain">Spider:</span> 🕷
 
-<style class=".plain">Zombie:</style> 🧟
-<br>
+<span class=".plain">Zombie:</span> 🧟
+<!-- page-break -->
 # Mysterian iconography:
 
   
 
-<style class=".plain">Three glyphs, U+E000 to U+E002.</style>
-<br>
+<span class=".plain">Three glyphs, U+E000 to U+E002.</span>
+<!-- page-break -->
 # Fallback:
 
-<style class=".plain">Plain text, spaced out.</style>
+<span class=".plain">Plain text, spaced out.</span>
 
 ABC abc 123
-<br>
+<!-- page-break -->
 # In a row:
 
 > < & - ~ … <

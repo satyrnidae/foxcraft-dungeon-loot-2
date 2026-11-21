@@ -28,17 +28,17 @@ styles: {
 }
 ---
 
-<vcenter>
+<!-- vertical-align-center -->
 
 # Warhogs
 
-<vbottom>
+<!-- vertical-align-bottom -->
 
 <center class=".title">by</center>
 <center class=".title">Groggus Everus</center>
-<br>
+<!-- page-break -->
 
-`T`drop he moldy tracts of the Nether are home to a vast myriad of powerful and objectively evil forces.
+<span class="drop">T</span>he moldy tracts of the Nether are home to a vast myriad of powerful and objectively evil forces.
 
   These include the destructive blaze, the deadly ghast, and the wicked wraith. However, likely the most terrifying of all is the slaughterous warhog.
 

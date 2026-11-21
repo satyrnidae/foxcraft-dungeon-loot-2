@@ -5,6 +5,7 @@ rarity: epic
 lore: |
   Tests out both variants of the Serif font.
 styles: {
+  .nohyphen: { hyphenate: false },
   body: {
     font: foxcraft_dungeon_loot:serif
   }
@@ -17,61 +18,61 @@ debug: true
 Serif
 
 Two variants: regular, and smallcaps in place of the lowercase.
-<br>
+<!-- page-break -->
 # Regular:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
-<span>0123456789</span>
-<br>
+<span class=".nohyphen">0123456789</span>
+<!-- page-break -->
 # Accents, upper:
 
-<span>ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŠŽŸ</span>
-<br>
+<span class=".nohyphen">ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŠŽŸ</span>
+<!-- page-break -->
 # Accents, lower:
 
-<span>àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšžß</span>
+<span class=".nohyphen">àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšžß</span>
 
 Ligatures:
-<span>Æ æ Œ œ</span>
-<br>
+<span class=".nohyphen">Æ æ Œ œ</span>
+<!-- page-break -->
 # Symbols:
 
-<span>!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
+<span class=".nohyphen">!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
 
-<span>¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷</span>
+<span class=".nohyphen">¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×÷</span>
 
-<span>€‚ƒ„…†‡ˆ‰‹‘’“”•–—˜™›</span>
-<br>
+<span class=".nohyphen">€‚ƒ„…†‡ˆ‰‹‘’“”•–—˜™›</span>
+<!-- page-break -->
 # Smallcaps:
 
 <font face="foxcraft_dungeon_loot:serif/smallcaps">Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
-<span>0123456789</span></font>
-<br>
+<span class=".nohyphen">0123456789</span></font>
+<!-- page-break -->
 # Smallcaps, accents:
 
-<font face="foxcraft_dungeon_loot:serif/smallcaps"><span>àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšžß</span>
+<font face="foxcraft_dungeon_loot:serif/smallcaps"><span class=".nohyphen">àáâãäåçèéêëìíîïðñòóôõöøùúûüýþÿšžß</span>
 
 Ligatures:
-<span>Æ æ Œ œ</span></font>
-<br>
+<span class=".nohyphen">Æ æ Œ œ</span></font>
+<!-- page-break -->
 # Descenders:
 
 gjpqy ç þ ý ÿ 7
 
 <font face="foxcraft_dungeon_loot:serif/smallcaps">gjpqy ç þ ý ÿ 7</font>
-<br>
+<!-- page-break -->
 # Cwm fjord:
 
 Lowercase:
@@ -85,7 +86,7 @@ cwm fjord bank glyphs vext quiz
 
 Title Case:
 Cwm Fjord Bank Glyphs Vext Quiz</font>
-<br>
+<!-- page-break -->
 # Pangram:
 
 The quick brown fox jumps over the lazy dog.
@@ -93,7 +94,7 @@ The quick brown fox jumps over the lazy dog.
 <font face="foxcraft_dungeon_loot:serif/smallcaps">The quick brown fox jumps over the lazy dog.</font>
 
 Sphinx of black quartz, judge my vow.
-<br>
+<!-- page-break -->
 # Words:
 
 Æsir and æther.
@@ -111,7 +112,7 @@ Façade, Þor and þorn.
 Šalom, žižek, naïve, jalapeño.
 
 <font face="foxcraft_dungeon_loot:serif/smallcaps">Šalom, žižek, naïve, jalapeño.</font>
-<br>
+<!-- page-break -->
 # Styles:
 
 **Cwm fjord bank glyphs vext quiz**
@@ -123,7 +124,7 @@ __Cwm fjord bank glyphs vext quiz__
 ~~Cwm fjord bank glyphs vext quiz~~
 
 ***__~~all four~~__***
-<br>
+<!-- page-break -->
 # Colors:
 
 <font color="dark_red">dark_red</font> <font color="red">red</font> <font color="gold">gold</font>

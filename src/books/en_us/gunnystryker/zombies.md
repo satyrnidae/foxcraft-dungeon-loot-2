@@ -40,19 +40,19 @@ styles: {
 }
 ---
 
-# <style class=".symbol">></style> A Bestiary <style class=".symbol"><</style>
-<vcenter>
-<center><style class=".title">By:</style> Gunny Stryker</center>
-<vbottom>
--<center class=".title">Book 1</center><style class=".right">-</style>
+# <span class=".symbol">></span> A Bestiary <span class=".symbol"><</span>
+<!-- vertical-align-center -->
+<center><span class=".title">By:</span> Gunny Stryker</center>
+<!-- vertical-align-bottom -->
+-<center class=".title">Book 1</center><span class=".right">-</span>
 
--<center>Zombies</center><style class=".right">-</style>
-<br>
+-<center>Zombies</center><span class=".right">-</span>
+<!-- page-break -->
 
 ## Introduction
 
   Zombies are, by their very nature, slow, dull, and narrow-minded creatures.  They do not care for games or fancy tricks and will persue, with all of their might, any target that may provide its needed sustainance.  It is for these reasons that I have seen fit to create this bestiary.  To prepare adventurers and explorers for unexpected terrors that haunt the nights of Minecraftia.
-<br>
+<!-- page-break -->
 
 ## Chapter I
 ### Nature of a Zombie
@@ -62,7 +62,7 @@ styles: {
   As to the living habits of zombies, they appear in almost every corner of Minecraftia, most commonly when they crawl from the darkness of night.  During the night on the surface they will simply mill about with little to no direction or purpose. They are attracted to water; more so as night draws to a close and will attempt to stave off death from the sun by swimming or hiding in the shade of a tree or cliff.  It is also possible to encounter a zombie in your own home, if the lighting is poor enough to allow it.  I strongly recommend placing many torches or other such light sources in your home to avoid such an event.  It is by this mechanism of nature that zombies may also appear in caves.  The dark atmosphere lends to their ability to spawn and stay alive, well after dawn.  It is also possible to stumble upon "zombie dungeons;" rooms often deep underground, where hundreds of zombies will spawn indefinitely. Many adventurers have perished at the hands of zombies whilst spelunking for the treasure fabled to be in these dungeons.
 
   It is important for me to note at this point that zombies almost never hunt alone.  They are most commonly found in packs of two to five zombies, and you can become surrounded if you don not pay close attention.
-<br>
+<!-- page-break -->
 
 ## Chapter II
 ### Fighting a Zombie

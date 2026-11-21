@@ -5,6 +5,7 @@ rarity: epic
 lore: |
   Tests out the Garbled font.
 styles: {
+  .nohyphen: { hyphenate: false },
   body: {
     font: foxcraft_dungeon_loot:garbled
   },
@@ -20,73 +21,73 @@ debug: true
 Garbled
 
 Stands in for text that is not meant to be read, with Latin, Greek, Cyrillic, runes and symbols.
-<br>
+<!-- page-break -->
 # ASCII:
 
 Upper:
-<span>ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class=".nohyphen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
 
 Lower:
-<span>abcdefghijklmnopqrstuvwxyz</span>
+<span class=".nohyphen">abcdefghijklmnopqrstuvwxyz</span>
 
 Digits:
-<span>0123456789</span>
-<br>
+<span class=".nohyphen">0123456789</span>
+<!-- page-break -->
 # Symbols:
 
-<span>!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
+<span class=".nohyphen">!"#$%&'()\*+,-./:;\<=>?@[\]^\_`{\|}\~</span>
 
-<span>£ƒªº¬«»¢¤¥©®µ¶¼½¾</span>
-<br>
+<span class=".nohyphen">£ƒªº¬«»¢¤¥©®µ¶¼½¾</span>
+<!-- page-break -->
 # Accents:
 
-<span>ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ</span>
+<span class=".nohyphen">ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ</span>
 
-<span>àáâãäåçèéêëìíîïñòóôõöùúûüýÿ</span>
+<span class=".nohyphen">àáâãäåçèéêëìíîïñòóôõöùúûüýÿ</span>
 
-<span>ĀāĂăĄąĆćČčĎďĐđĒēĚěĞğĦħĪīŁłŃńŇňŌōŐőŒœŘřŚśŠšŢţŪūŮůŰűŹźŻżŽž</span>
-<br>
+<span class=".nohyphen">ĀāĂăĄąĆćČčĎďĐđĒēĚěĞğĦħĪīŁłŃńŇňŌōŐőŒœŘřŚśŠšŢţŪūŮůŰűŹźŻżŽž</span>
+<!-- page-break -->
 # Greek and Cyrillic:
 
-<span>ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ</span>
+<span class=".nohyphen">ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ</span>
 
-<span>αβγδεζηθικλμνξοπρςστυφχψω</span>
+<span class=".nohyphen">αβγδεζηθικλμνξοπρςστυφχψω</span>
 
-<span>АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ</span>
+<span class=".nohyphen">АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ</span>
 
-<span>абвгдежзиклмнопрстуфхцчшщъыьэюя</span>
-<br>
+<span class=".nohyphen">абвгдежзиклмнопрстуфхцчшщъыьэюя</span>
+<!-- page-break -->
 # Runes and others:
 
-<span>ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ</span>
+<span class=".nohyphen">ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ</span>
 
 Armenian:
-<span>ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿ</span>
+<span class=".nohyphen">ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿ</span>
 
 Georgian:
-<span>ႠႡႢႣႤႥႦႧႨႩႪႫ</span>
+<span class=".nohyphen">ႠႡႢႣႤႥႦႧႨႩႪႫ</span>
 
 Hebrew:
-<span>אבגדהוזחטיכלמנסעפצקרשת</span>
-<br>
+<span class=".nohyphen">אבגדהוזחטיכלמנסעפצקרשת</span>
+<!-- page-break -->
 # Symbols, misc:
 
-<span>☀☁☂☃★☆♠♣♥♦♪♫♯⚔☠⚡⛏❄❤⭐✔❌</span>
+<span class=".nohyphen">☀☁☂☃★☆♠♣♥♦♪♫♯⚔☠⚡⛏❄❤⭐✔❌</span>
 
-<span>←↑→↓⇄∞≠±≈≤≥√∑∫∂∀∃⊂⊃∧∨∩</span>
+<span class=".nohyphen">←↑→↓⇄∞≠±≈≤≥√∑∫∂∀∃⊂⊃∧∨∩</span>
 
-<span>⚀⚁⚂⚃⚄⚅☰☱☲☳☴☵☶☷</span>
+<span class=".nohyphen">⚀⚁⚂⚃⚄⚅☰☱☲☳☴☵☶☷</span>
 
-<span>₠₡₢₣₤₥₦₩₪₫€₭₮₯₰₱₲₳₴₵₶₷₸₹₺₽</span>
-<br>
+<span class=".nohyphen">₠₡₢₣₤₥₦₩₪₫€₭₮₯₰₱₲₳₴₵₶₷₸₹₺₽</span>
+<!-- page-break -->
 # Pangram:
 
 The quick brown fox jumps over the lazy dog.
 
 Sphinx of black quartz, judge my vow.
 
-<style class=".plain">Plain, for comparison: The quick brown fox jumps over the lazy dog.</style>
-<br>
+<span class=".plain">Plain, for comparison: The quick brown fox jumps over the lazy dog.</span>
+<!-- page-break -->
 # Styles:
 
 **Cwm fjord bank glyphs vext quiz**
@@ -98,7 +99,7 @@ __Cwm fjord bank glyphs vext quiz__
 ~~Cwm fjord bank glyphs vext quiz~~
 
 ***__~~all four~~__***
-<br>
+<!-- page-break -->
 # Colors:
 
 <font color="dark_red">dark_red</font> <font color="red">red</font> <font color="gold">gold</font>
