@@ -53,6 +53,7 @@ function on_warped_fungus_used {
             effect give @s minecraft:luck 30
             effect give @s minecraft:slow_falling 30
             effect give @s minecraft:hunger 30 2
+            effect give @s minecraft:infested 180
 
             execute unless entity @s[gamemode=creative] run {
                 scoreboard players operation @s satyrn.fdl.silverfishEscapeArtist.cooldown = silverfishEscapeArtist.cooldown <%config.internalScoreboard%>

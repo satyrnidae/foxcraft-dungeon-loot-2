@@ -1,0 +1,9 @@
+{
+  "lore.foxcraft_dungeon_loot.rarity": "נדירות: %s",
+  "rarity.foxcraft_dungeon_loot.common": "נפוץ",
+  "rarity.foxcraft_dungeon_loot.uncommon": "לא נפוץ",
+  "rarity.foxcraft_dungeon_loot.rare": "נדיר",
+  "rarity.foxcraft_dungeon_loot.epic": "אפי",
+  "rarity.foxcraft_dungeon_loot.mythic": "מיתי",
+  "rarity.foxcraft_dungeon_loot.cursed": "ארור"
+}

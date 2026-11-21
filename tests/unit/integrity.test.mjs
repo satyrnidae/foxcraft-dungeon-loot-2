@@ -9,7 +9,7 @@ import { scan } from '../tools/check_old_keys.mjs';
 import { dicts, sorted } from './checks.mjs';
 import * as pk from './packdata.mjs';
 
-const loreLib = createRequire(import.meta.url)('../../scripts/lore.js');
+const loreLib = createRequire(import.meta.url)('../../scripts/lore/lore.js');
 
 const NS = pk.NS;
 const ITEMS = pk.itemTables();
@@ -49,6 +49,11 @@ describe('villager trades', () => {
   it('the mystery book trade has the functions of the common book', () => {
     const trade = pk.loadJson(dataFile('villager_trade', 'librarian', '5', 'common_mystery_book.json'));
     assert.deepEqual(trade.given_item_modifier, [`${NS}special/mystery_book/common`, `${NS}special/mystery_book/define`].flatMap(expand));
+  });
+
+  it('the message in a bottle trade has the functions of the loot table', () => {
+    const trade = pk.loadJson(dataFile('villager_trade', 'fisherman', '5', 'message_in_a_bottle.json'));
+    assert.deepEqual(trade.given_item_modifier, [`${NS}special/message_in_a_bottle/common`, `${NS}special/message_in_a_bottle/define`].flatMap(expand));
   });
 });
 
@@ -247,7 +252,7 @@ describe('enchantments', () => {
 });
 
 describe('lore', () => {
-  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore.js
+  // Pixels, not characters: 44 characters of average English text in the default font, see scripts/lore/lore.js
   const MAX_LORE_WIDTH = loreLib.LORE_PIXELS;
 
   /**
@@ -466,7 +471,9 @@ describe('give functions', () => {
       let owner = name;
       if (name.startsWith('item/special/music_disc/')) owner = 'item/special/music_disc/main';
       else if (name.startsWith('item/special/copper_horn/')) owner = 'item/special/copper_horn/main';
-      if (!(GIVES['give_' + base] || []).includes(owner)) problems.push(`${name} has no give_${base} in ${owner}.mcb`);
+      const owners = GIVES['give_' + base] || [];
+      // An item with helper files, like constants.js, keeps its functions in <name>/main.mcb
+      if (!owners.includes(owner) && !owners.includes(name + '/main')) problems.push(`${name} has no give_${base} in ${owner}.mcb`);
     }
     assert.deepEqual(problems, []);
   });

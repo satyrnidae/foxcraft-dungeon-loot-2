@@ -7,11 +7,11 @@
     "foxcraft_dungeon_loot:trading/main/on_load",
     "foxcraft_dungeon_loot:item/mythic/auto_pickaxe/on_load",
     "foxcraft_dungeon_loot:item/rare/beta_iron_sword/on_load",
+    "foxcraft_dungeon_loot:item/rare/grasp_of_uthiir/main/on_load",
     "foxcraft_dungeon_loot:item/mythic/bringer_of_fear/on_load",
     "foxcraft_dungeon_loot:item/epic/buckwheat/on_load",
     "foxcraft_dungeon_loot:item/mythic/chainsaw/on_load",
     "foxcraft_dungeon_loot:item/mythic/constantines_gift/on_load",
-    "foxcraft_dungeon_loot:item/special/copper_horn/main/on_load",
     "foxcraft_dungeon_loot:item/mythic/deilonas_holy_blessings/on_load",
     "foxcraft_dungeon_loot:item/common/dice/on_load",
     "foxcraft_dungeon_loot:item/mythic/downpour_amulet/on_load",
@@ -42,6 +42,7 @@
     "foxcraft_dungeon_loot:item/mythic/war_hogs_insatiable_hunger/on_load",
     "foxcraft_dungeon_loot:item/mythic/war_hogs_seething_hatred/on_load",
     "foxcraft_dungeon_loot:item/mythic/wing_of_ouet_zala/on_load",
-    "foxcraft_dungeon_loot:item/mythic/wing_of_quet_zala/on_load"
+    "foxcraft_dungeon_loot:item/mythic/wing_of_quet_zala/on_load",
+    "foxcraft_dungeon_loot:item/epic/spell_scroll_hail_of_arrows/on_load"
   ]
 }

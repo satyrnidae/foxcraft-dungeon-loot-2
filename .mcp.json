@@ -2,7 +2,7 @@
   "mcpServers": {
     "minecraft-dev": {
       "command": "node",
-      "args": ["scripts/mcp_minecraft_dev.mjs"]
+      "args": [".claude/mcps/minecraft_dev.mjs"]
     }
   }
 }

@@ -79,8 +79,8 @@ REPEAT(0, plain.length - 1) as i {
 # One give function per written book, the loot table is made from src/books.
 REPEAT(0, plain.length - 1) as i {
     IF (plain[i].book) {
-        function give_<%plain[i].book%> {
-            loot give @s loot foxcraft_dungeon_loot:item/random_loot/book/generated/<%plain[i].book%>
+        function <%plain[i].book%> {
+            loot give @s loot foxcraft_dungeon_loot:item/random_loot/book/<%config.generatedDirectory%>/<%plain[i].bookPath%>
         }
     }
 }

@@ -1,0 +1,84 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/right_top.png",
+      "ascent": 36,
+      "height": 38,
+      "chars": [
+        "\ue000"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/right_mid.png",
+      "ascent": 7,
+      "height": 9,
+      "chars": [
+        "\ue001",
+        "\ue002",
+        "\ue003",
+        "\ue004",
+        "\ue005",
+        "\ue006",
+        "\ue007",
+        "\ue008",
+        "\ue009",
+        "\ue00a",
+        "\ue00b",
+        "\ue00c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/right_bottom.png",
+      "ascent": 7,
+      "height": 34,
+      "chars": [
+        "\ue00d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/left_top.png",
+      "ascent": 36,
+      "height": 38,
+      "chars": [
+        "\ue010"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/left_mid.png",
+      "ascent": 7,
+      "height": 9,
+      "chars": [
+        "\ue011",
+        "\ue012",
+        "\ue013",
+        "\ue014",
+        "\ue015",
+        "\ue016",
+        "\ue017",
+        "\ue018",
+        "\ue019",
+        "\ue01a",
+        "\ue01b",
+        "\ue01c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "foxcraft_dungeon_loot:font/cover/left_bottom.png",
+      "ascent": 7,
+      "height": 34,
+      "chars": [
+        "\ue01d"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:include/space"
+    }
+  ]
+}

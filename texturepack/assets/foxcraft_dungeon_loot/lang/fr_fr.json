@@ -1,0 +1,9 @@
+{
+  "lore.foxcraft_dungeon_loot.rarity": "Rareté : %s",
+  "rarity.foxcraft_dungeon_loot.common": "Commun",
+  "rarity.foxcraft_dungeon_loot.uncommon": "Peu commun",
+  "rarity.foxcraft_dungeon_loot.rare": "Rare",
+  "rarity.foxcraft_dungeon_loot.epic": "Épique",
+  "rarity.foxcraft_dungeon_loot.mythic": "Mythique",
+  "rarity.foxcraft_dungeon_loot.cursed": "Maudit"
+}

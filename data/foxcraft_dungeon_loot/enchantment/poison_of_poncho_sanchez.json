@@ -1,0 +1,37 @@
+{
+  "description": {
+    "translate": "enchantment.foxcraft_dungeon_loot.poison_of_poncho_sanchez",
+    "fallback": "Poison of Poncho Sanchez"
+  },
+  "supported_items": "#minecraft:swords",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "enchanted": "attacker",
+        "affected": "victim",
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "foxcraft_dungeon_loot:enchantment/poison_of_poncho_sanchez/post_attack"
+        },
+        "requirements": {
+          "type": "minecraft:random_chance",
+          "chance": 0.10
+        }
+      }
+    ]
+  }
+}

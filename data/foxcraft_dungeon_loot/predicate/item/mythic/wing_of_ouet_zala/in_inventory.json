@@ -1,7 +1,44 @@
 {
-  "type": "minecraft:entity_properties",
-  "entity": "this",
-  "predicate": {
-    "minecraft:nbt": "{Inventory:[{components:{\"minecraft:custom_data\":{DungeonLootId:61}}}]}"
-  }
+  "type": "minecraft:any_of",
+  "terms": [
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:slots": {
+          "container.*": {
+            "predicates": {
+              "minecraft:custom_data": "{DungeonLootId:61}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:slots": {
+          "armor.*": {
+            "predicates": {
+              "minecraft:custom_data": "{DungeonLootId:61}"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:slots": {
+          "weapon.*": {
+            "predicates": {
+              "minecraft:custom_data": "{DungeonLootId:61}"
+            }
+          }
+        }
+      }
+    }
+  ]
 }

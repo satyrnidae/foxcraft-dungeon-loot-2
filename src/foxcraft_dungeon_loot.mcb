@@ -68,6 +68,9 @@ function update_scoreboards {
     scoreboard objectives remove satyrn.fdl.itemId.helmet
     scoreboard objectives remove satyrn.fdl.custom.sneakTime
     scoreboard objectives remove satyrn.fdl.custom.fallOneCm
+    scoreboard objectives remove satyrn.fdl.events.fallOneCm
+    scoreboard objectives remove satyrn.fdl.copperGoatHorn.currentPitch
+    scoreboard players reset copperGoatHorn.minHarmonyPitch <%config.internalScoreboard%>
     scoreboard objectives remove satyrn.fdl.math.input1
     scoreboard objectives remove satyrn.fdl.math.input2
     scoreboard objectives remove satyrn.fdl.const

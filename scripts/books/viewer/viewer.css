@@ -1,0 +1,260 @@
+@font-face {
+  font-family: 'Minecraft';
+  src: url('fonts/minecraftfont.woff') format('woff');
+  font-display: swap;
+}
+
+:root {
+  --bg: #1b1a1f;
+  --panel: #26242b;
+  --edge: #3b3844;
+  --text: #e6e3ee;
+  --dim: #9a96a8;
+  --accent: #b17bff;
+  /* The game tooltip frame, shared by the tooltips, buttons, fields, toast and the notice */
+  --tip-bg: rgba(16, 0, 16, .94);
+  --tip-border: linear-gradient(#5000ff80, #28007f80);
+  --tip-border-hover: linear-gradient(#a070ffcc, #6030c0cc);
+  --tip-clip: polygon(0 2px, 2px 2px, 2px 0, calc(100% - 2px) 0, calc(100% - 2px) 2px, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 2px calc(100% - 2px), 0 calc(100% - 2px));
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 'Minecraft', system-ui, sans-serif;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--edge);
+}
+
+h1 { margin: 0; font-size: 18px; }
+#count { color: var(--dim); margin-left: auto; }
+
+input[type="search"], select, button {
+  background: var(--tip-bg);
+  color: #fff;
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  border-radius: 0;
+  clip-path: var(--tip-clip);
+  padding: 5px 9px;
+  font: inherit;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+input[type="search"] { width: 240px; max-width: 100%; text-shadow: none; }
+button { cursor: pointer; }
+button:hover:not(:disabled), button:focus-visible { border-image: var(--tip-border-hover) 1; outline: none; }
+/* Held down, text goes yellow like a tooltip title; important so it also beats the red close X */
+button:active:not(:disabled) { color: #ffff55 !important; }
+button:disabled { opacity: .3; cursor: default; }
+
+main { padding: 8px 16px 32px; }
+
+h2 {
+  margin: 24px 0 8px;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 8px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-image: none;
+  clip-path: none;
+  text-shadow: none;
+  min-width: 0;
+}
+
+.book:hover, .book:focus-visible { background: var(--tip-bg); clip-path: var(--tip-clip); }
+.icon {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  background: var(--icon) center / contain no-repeat;
+  image-rendering: pixelated;
+}
+
+
+.book span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font: 12px/1.2 'Minecraft', ui-monospace, Consolas, monospace;
+  color: var(--text);
+}
+
+#tooltip {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  image-rendering: pixelated;
+  max-width: none;
+}
+
+/* Mock of the game tooltip: near-black purple fill, a two tone purple frame and a pixel step at the corners */
+#mark-tip {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  padding: 4px 6px;
+  background: var(--tip-bg);
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  box-shadow: 0 0 0 2px var(--tip-bg);
+  clip-path: var(--tip-clip);
+  color: #fff;
+  font: 14px/1.2 'Minecraft', ui-monospace, Consolas, monospace;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  white-space: nowrap;
+}
+
+#reader {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 9, 13, .94);
+}
+
+#reader[hidden], #mark-tip[hidden], #tooltip[hidden], #toast[hidden], #filter[hidden], #reader-tip[hidden] { display: none; }
+#filter[aria-pressed="true"] { border-image: var(--tip-border-hover) 1; color: #ffff55; }
+
+.bar { display: flex; align-items: center; gap: 16px; padding: 10px 16px; }
+/* Over the top right corner of the book, placed by placeClose in viewer.js */
+#close, #mute-reader { position: absolute; z-index: 2; top: 0; right: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; font-size: 20px; line-height: 1; }
+#close { color: #ff5555; }
+.mute { line-height: 1.2; text-shadow: none; }
+.bar #page-count { margin: 0 auto; color: var(--dim); }
+
+.stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 12px; }
+.stage img { max-width: 100%; max-height: 100%; min-height: 0; image-rendering: pixelated; object-fit: contain; }
+/* Above the page image, which the buttons are pulled in over, see fitSides */
+.stage .side { position: relative; z-index: 1; display: flex; gap: 4px; }
+.stage button { font-size: 28px; padding: 10px 10px; }
+.stage button.edge { letter-spacing: 3px; }
+
+@media (max-width: 600px) {
+  .stage .side { position: absolute; bottom: 8px; z-index: 1; margin: 0 !important; }
+  .stage .side:first-child { left: 16px; }
+  .stage .side:last-child { right: 16px; }
+}
+
+/* The tooltip preview sits over the dark space left of the page, 2 GUI pixels per pixel like the hover one */
+#reader-tip {
+  position: absolute;
+  top: 56px;
+  left: 16px;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px), (max-height: 520px) {
+  #reader-tip { display: none; }
+}
+
+/* Link areas over the page image, placed by viewer.js from the rectangles BookRender wrote */
+#links { position: absolute; inset: 0; pointer-events: none; }
+#links a { position: absolute; pointer-events: auto; border-bottom: 1px solid transparent; }
+#links a:hover, #links a:focus-visible { background: rgba(177, 123, 255, .25); border-bottom-color: var(--accent); outline: none; }
+
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  padding: 6px 12px;
+  background: var(--tip-bg);
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  clip-path: var(--tip-clip);
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+/* First visit notice, over everything including the reader */
+#eula {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 9, 13, .94);
+}
+#eula[hidden] { display: none; }
+#eula .box {
+  /* Same frame as #mark-tip */
+  width: min(460px, 100%);
+  padding: 12px 14px;
+  background: var(--tip-bg);
+  border: 2px solid;
+  border-image: var(--tip-border) 1;
+  box-shadow: 0 0 0 2px var(--tip-bg);
+  clip-path: var(--tip-clip);
+  color: #fff;
+  font: 14px/1.4 'Minecraft', ui-monospace, Consolas, monospace;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+#eula input { font-family: inherit; text-shadow: none; }
+#eula h2 { margin: 0 0 12px; font-size: 16px; letter-spacing: 0; text-transform: none; color: #ffff55; }
+#eula p { margin: 0 0 12px; }
+#eula a { color: var(--accent); }
+#eula label { display: flex; align-items: center; gap: 8px; margin: 16px 0; cursor: pointer; }
+#eula .actions { display: flex; justify-content: flex-end; }
+#eula-ok:disabled { cursor: not-allowed; }
+
+/* The page slider under the book, with a stop for every page */
+.bar.pager { flex-direction: column; gap: 6px; padding-top: 4px; }
+.slider { width: min(560px, 90vw); }
+.slider input { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 14px; margin: 0; background: transparent; cursor: pointer; }
+/* WebKit has no progress part, so the fill is a gradient that stops at the thumb center, --p is the share of the way set in viewer.js */
+.slider input::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(to right, var(--accent) calc(7px + (100% - 14px) * var(--p, 0)), #3a3745 0); }
+.slider input::-moz-range-track { height: 4px; border-radius: 2px; background: #3a3745; }
+.slider input::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--accent); }
+.slider input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 50%; border: 0; background: var(--accent); }
+.slider input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; border: 0; background: var(--accent); }
+#marks { position: relative; height: 22px; }
+#marks b { position: absolute; bottom: 2px; width: 0; height: 0; }
+#marks i { cursor: pointer; }
+#marks i:hover { filter: brightness(1.35); }
+#marks i { position: absolute; bottom: 0; left: -4px; width: 8px; height: 8px; box-sizing: border-box; background: var(--accent); border: 1px solid var(--bg); transform: rotate(45deg); }
+#ticks { position: relative; height: 6px; }
+#ticks i { position: absolute; top: 0; width: 1px; height: 6px; background: var(--dim); }
+#ticks i.on { background: var(--accent); height: 8px; }
+.bar.pager #page-count { margin: 0; }
+/* A book of one page has nothing to fill */
+.slider input:disabled::-webkit-slider-runnable-track { background: #3a3745; }
+.slider input:disabled::-moz-range-progress { background: transparent; }
+
+#eula-privacy { color: #aaa; font-size: 12px; }
+#eula code { font: inherit; color: #fff; }

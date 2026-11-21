@@ -1,0 +1,39 @@
+import ../../config.js
+
+# Disarming Strike. The enchantment data file runs one of the two post_attack functions as the struck entity from its post_attack
+# effects, the chance is rolled there: one in ten for anything but a player, one in twenty for a player.
+
+# Run as and at an entity that is not a player, one hit in ten. Forces it to drop its main-hand item, unless it is a war hog
+# or holds nothing.
+function post_attack_entity {
+    execute if entity @s[predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_empty,predicate=!foxcraft_dungeon_loot:entity/is_war_hog] run {
+        playsound minecraft:entity.player.attack.crit player @a
+        particle minecraft:crit ~ ~ ~ 0.5 0.85 0.5 0.01 20 force
+
+        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",count:1},PickupDelay:30}
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Item set from entity @s equipment.mainhand
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Thrower set from entity @s UUID
+
+        playsound minecraft:entity.item.pickup player @a ~ ~1.5 ~ 1.0 0.75
+
+        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
+    }
+}
+
+# Run as and at a player, one hit in twenty. Forces the player to drop their main-hand item, unless they are in creative mode
+# or hold nothing. The dropped item can only be picked up by its owner.
+function post_attack_player {
+    execute if entity @s[gamemode=!creative,predicate=!foxcraft_dungeon_loot:entity/inventory/is_mainhand_empty] run {
+        playsound minecraft:entity.player.attack.crit player @a
+        particle minecraft:crit ~ ~ ~ 0.5 0.85 0.5 0.01 20 force
+
+        summon minecraft:item ~ ~ ~ {Tags:[satyrn.fdl.droppedItem],Item:{id:"minecraft:stick",count:1},PickupDelay:30}
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Item set from entity @s SelectedItem
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Thrower set from entity @s UUID
+        data modify entity @e[tag=satyrn.fdl.droppedItem,limit=1,sort=nearest] Owner set from entity @s UUID
+
+        playsound minecraft:entity.item.pickup player @a ~ ~1.5 ~ 1.0 0.75
+
+        item modify entity @s weapon.mainhand foxcraft_dungeon_loot:remove
+    }
+}

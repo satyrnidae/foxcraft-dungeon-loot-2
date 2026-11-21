@@ -168,7 +168,15 @@ Albatross Heavy Industries® LumberJACKED™ 8.5hp,minecraft:netherite_axe,foxcr
 ,minecraft:music_disc_cat,foxcraft_dungeon_loot:special/music_disc/music_disc_wolfgun_unseen_land,137,{DungeonItem:1b}
 ,minecraft:music_disc_cat,foxcraft_dungeon_loot:special/music_disc/music_disc_c418_dog,138,{DungeonItem:1b}
 Mysterious Book,minecraft:warped_fungus_on_a_stick,foxcraft_dungeon_loot:special/mystery_book,139,"{MysteryBook:1b,ProcessOnUsed:1b}"
+Message in a Bottle,minecraft:warped_fungus_on_a_stick,foxcraft_dungeon_loot:random_loot/message_in_a_bottle,140,"{MessageInABottle:1b,ProcessOnUsed:1b}"
+A Book of Fruits and Flowers,minecraft:written_book,,,{rarity:0b}
+A Legend,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+About,minecraft:written_book,,,
+Above Province,minecraft:written_book,,,{rarity:1b}
 Absinthe,minecraft:potion,,,{DungeonItem:1b}
+Advent of Death,minecraft:written_book,,,
+An Original Story,minecraft:written_book,,,
+Animal Census,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
 Animus,minecraft:potion,,,{DungeonItem:1b}
 Armor Stand,minecraft:armor_stand,foxcraft_dungeon_loot:common/armor_stand,,{DungeonItem:1b}
 Armor Stand (Baby),minecraft:armor_stand,foxcraft_dungeon_loot:common/armor_stand,,{DungeonItem:1b}
@@ -180,6 +188,11 @@ Armor Stand (Greyskull),minecraft:armor_stand,foxcraft_dungeon_loot:common/armor
 Armor Stand (Skeleton),minecraft:armor_stand,foxcraft_dungeon_loot:common/armor_stand,,{DungeonItem:1b}
 Armor Stand (Zombie),minecraft:armor_stand,foxcraft_dungeon_loot:common/armor_stand,,{DungeonItem:1b}
 Birds on the Fence,minecraft:written_book,,,{rarity:0b}
+Blargoyle Settlement Logbook,minecraft:written_book,,,{rarity:0b}
+Bloodied Journal,minecraft:written_book,,,
+Brewing Potions,minecraft:written_book,,,{rarity:2b}
+Burnt Journal,minecraft:written_book,,,
+Chapter One: The Mine,minecraft:written_book,,,{rarity:0b}
 Code Block Test Book,minecraft:written_book,,,{rarity:3b}
 Coffee,minecraft:potion,,,{DungeonItem:1b}
 Copper Coins,minecraft:copper_ingot,foxcraft_dungeon_loot:random_loot/coin/copper_coins,,
@@ -193,23 +206,42 @@ Copper Goat Horn,minecraft:goat_horn,foxcraft_dungeon_loot:special/copper_horn/c
 Copper Goat Horn,minecraft:goat_horn,foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn,,"{CopperGoatHorn:1b,CustomInstrument:""pure_water_desire""}"
 Copper Goat Horn,minecraft:goat_horn,foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn,,"{CopperGoatHorn:1b,CustomInstrument:""secret_lake_tear""}"
 Copper Goat Horn,minecraft:goat_horn,foxcraft_dungeon_loot:special/copper_horn/copper_goat_horn,,"{CopperGoatHorn:1b,CustomInstrument:""sweet_moon_love""}"
+Currency,minecraft:written_book,,,{rarity:0b}
+Custom Font: Arsenic Ink,minecraft:written_book,,,{rarity:3b}
+Custom Font: D'Nealian,minecraft:written_book,,,{rarity:3b}
 Custom Font: Handwriting,minecraft:written_book,,,{rarity:3b}
 Custom Font: Hexenaat,minecraft:written_book,,,{rarity:3b}
 Custom Font: Pixel Mono,minecraft:written_book,,,{rarity:3b}
 Custom Font: Pixelated Elegance,minecraft:written_book,,,{rarity:3b}
+Dendris and Mysteria,minecraft:written_book,,,{rarity:1b}
 Electrum Coins,minecraft:gold_nugget,foxcraft_dungeon_loot:random_loot/coin/electrum_coins,,
+Eleven,minecraft:written_book,,,{rarity:0b}
 ENDERMAN,minecraft:written_book,,,{rarity:0b}
+Falden Bleak,minecraft:written_book,,,
+Fire and Fear,minecraft:written_book,,,{rarity:0b}
 Fireblood,minecraft:written_book,,,{rarity:0b}
+Font: Foxcraft Handwriting,minecraft:written_book,,,{rarity:3b}
 Formatting Test Book,minecraft:written_book,,,{rarity:3b}
 Gold Coins,minecraft:gold_nugget,foxcraft_dungeon_loot:random_loot/coin/gold_coins,,
+Grimoire Arachni,minecraft:written_book,,,
+Hidden Treasure,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+In Re: Mysterian Provenance,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,{rarity:0b}
+Into the Abyss,minecraft:written_book,,,
 Laudanum,minecraft:potion,,,{DungeonItem:1b}
+Legdos,minecraft:written_book,,,
 Letter,minecraft:writable_book,foxcraft_dungeon_loot:random_loot/writable_letter,,{DungeonItem:1b}
 Little Glockenspiel,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,{rarity:0b}
 Lost Focus,minecraft:written_book,,,{rarity:0b}
 Luma,minecraft:potion,,,{DungeonItem:1b}
+"Milonia's Mythic Menagerie, Vol. 12",minecraft:written_book,,,
+"Milonia's Mythic Menagerie, Vol. 6",minecraft:written_book,,,
+Moldering Journal,minecraft:written_book,,,
 Moonshine,minecraft:potion,,,{DungeonItem:1b}
 Music Notation Test Book,minecraft:written_book,,,{rarity:3b}
+Mysterian Beasts,minecraft:written_book,,,
 Nectar,minecraft:potion,,,{DungeonItem:1b}
+Observations on Zombies,minecraft:written_book,,,
+Obsidian Golems,minecraft:written_book,,,{rarity:1b}
 On Mysterian Provenance,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,{rarity:1b}
 Palomina and the Dæmon Lord,minecraft:written_book,,,{rarity:1b}
 Platinum Coins,minecraft:gold_nugget,foxcraft_dungeon_loot:random_loot/coin/platinum_coins,,
@@ -220,7 +252,11 @@ Potion of Heroism,minecraft:potion,,,
 Potion of Satiation,minecraft:potion,,,
 Potion of Vitality,minecraft:potion,,,
 Potion of Warding,minecraft:potion,,,
+Sand Removal Invoice,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,{rarity:0b}
+Scrawled Note,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Sheepmen,minecraft:written_book,,,{rarity:1b}
 Silver Coins,minecraft:iron_nugget,foxcraft_dungeon_loot:random_loot/coin/silver_coins,,
+Spiders: A Collection of Side Notes,minecraft:written_book,,,
 Splash Potion of Blindness,minecraft:splash_potion,,,
 Splash Potion of Calamity,minecraft:splash_potion,,,
 Splash Potion of Darkness,minecraft:splash_potion,,,
@@ -232,10 +268,32 @@ Splash Potion of Luminance,minecraft:splash_potion,,,
 Splash Potion of Misfortune,minecraft:splash_potion,,,
 Splash Potion of Nausea,minecraft:splash_potion,,,
 Stout,minecraft:potion,,,{DungeonItem:1b}
+Studies of Skeletons,minecraft:written_book,,,
 Tequila,minecraft:potion,,,{DungeonItem:1b}
+Test Book: Cover,minecraft:written_book,,,{rarity:3b}
 Test Book: Illustrations,minecraft:written_book,,,{rarity:3b}
+The Blaze and the Frog,minecraft:written_book,,,{rarity:0b}
+The Chroniclean of Dendris,minecraft:written_book,,,{rarity:2b}
 The Endless Winter I,minecraft:written_book,,,{rarity:0b}
 The Endless Winter II,minecraft:written_book,,,{rarity:0b}
+The First Garden,minecraft:written_book,,,
+"The Holdings of Mysteria, Vol. 1",minecraft:written_book,,,
+"The Holdings of Mysteria, Vol. 2: Foxtrot",minecraft:written_book,,,
+The Inception of Dendris,minecraft:written_book,,,{rarity:1b}
 The Interview,minecraft:written_book,,,{rarity:0b}
+The Iron and the Giant,minecraft:written_book,,,{rarity:0b}
+The Keep,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+The Ladder,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+The Second Garden,minecraft:written_book,,,
+The Villager,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Third Party Notices,minecraft:written_book,,,
+Tinkerer's Diary,minecraft:written_book,,,
 Torn Journal Page,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,{rarity:0b}
+Traveler's Note I,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Traveler's Note II,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Traveler's Note III,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Traveler's Note IV,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
 Vitae,minecraft:potion,,,{DungeonItem:1b}
+Waterlogged Journal,minecraft:written_book,,,{rarity:0b}
+Wizard's Note I,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,
+Wizard's Note II,minecraft:written_book,foxcraft_dungeon_loot:random_loot/written_letter,,

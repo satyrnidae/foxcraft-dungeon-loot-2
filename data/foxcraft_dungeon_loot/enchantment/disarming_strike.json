@@ -1,0 +1,90 @@
+{
+  "description": {
+    "translate": "enchantment.foxcraft_dungeon_loot.disarming_strike",
+    "fallback": "Disarming Strike"
+  },
+  "supported_items": "#minecraft:axes",
+  "weight": 1,
+  "max_level": 3,
+  "min_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 7,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "enchanted": "attacker",
+        "affected": "victim",
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "foxcraft_dungeon_loot:enchantment/disarming_strike/post_attack_entity"
+        },
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "minecraft:entity_type": "minecraft:player"
+                }
+              }
+            },
+            {
+              "type": "minecraft:random_chance",
+              "chance": {
+                "type": "minecraft:enchantment_level",
+                "amount": {
+                  "type": "minecraft:linear",
+                  "base": 0.1,
+                  "per_level_above_first": 0.05
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "enchanted": "attacker",
+        "affected": "victim",
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "foxcraft_dungeon_loot:enchantment/disarming_strike/post_attack_player"
+        },
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "minecraft:entity_type": "minecraft:player"
+              }
+            },
+            {
+              "type": "minecraft:random_chance",
+              "chance": {
+                "type": "minecraft:enchantment_level",
+                "amount": {
+                  "type": "minecraft:linear",
+                  "base": 0.05,
+                  "per_level_above_first": 0.025
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

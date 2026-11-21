@@ -18,7 +18,7 @@ function clock_3s {
         execute if score #test <%config.internalScoreboard%> matches 1.. unless entity @s[gamemode=creative] run {
             execute if entity @s[predicate=foxcraft_dungeon_loot:entity/inventory/mainhand_has_unbreaking] run {
                 # Get unbreaking level from the tool.
-                execute store result score #math.input1 <%config.internalScoreboard%> run data get entity @s SelectedItem.components."minecraft:enchantments"."minecraft:unbreaking"
+                enchantment_level weapon.mainhand minecraft:unbreaking
                 function foxcraft_dungeon_loot:math/should_damage_tool
                 execute if score #math.result <%config.internalScoreboard%> matches 1 run function foxcraft_dungeon_loot:item/epic/buckwheat/damage_tool
             } else run {

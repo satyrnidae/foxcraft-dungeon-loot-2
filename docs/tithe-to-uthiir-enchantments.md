@@ -8,7 +8,7 @@ The Tithe was a single netherite sword. Every effect was keyed off "the held ite
 
 - Identity: `DungeonLootId:81` in `custom_data`, set by `item_modifier/epic/tithe_to_uthiir/define.json`.
 - Aura of Uthiir: an advancement fired on a hit against an arthropod, the reward function rolled a D20 with `rng` and on a 20 ran the wither aura around the player.
-- Haemolymph Sacrifice: the same advancement, on a kill, gave Speed, Resistance and Regeneration.
+- Haemolymph Sacrifice: the same advancement, on a kill, gave Speed, Resistance and Regeneration. It now gives Weaving in place of Speed.
 - Balm of the Spider God: a stat objective `minecraft.used:minecraft.spider_eye` was polled every tick, gated by the `ProcessSpiderEye` flag in `custom_data`. It cleared poison.
 - Everything was gated by checking the item, so a second sword could never share any of it.
 
@@ -54,7 +54,7 @@ Functions: `src/foxcraft_dungeon_loot/enchantment/<name>.mcb`, compiled to `ench
 
 Effects by level:
 
-- Haemolymph I: Speed I 10 s, Resistance II 5 s, Regeneration 3 s. Level II: Speed II 10 s, Resistance III 5 s, Regeneration 5 s.
+- Haemolymph I: Weaving 15 s, Resistance II 5 s, Regeneration 3 s. Level II: Weaving 15 s, Resistance III 5 s, Regeneration 5 s.
 - Balm I to III: Strength I to III for 10 s. Level IV: Strength III for 30 s, three times Balm III's length. Every level clears poison first.
 
 The higher level is a stronger effect, except Balm IV, which is a longer one.

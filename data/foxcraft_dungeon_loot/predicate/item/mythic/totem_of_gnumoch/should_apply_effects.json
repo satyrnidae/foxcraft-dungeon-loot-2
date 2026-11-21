@@ -3,9 +3,9 @@
   "entity": "this",
   "predicate": {
     "minecraft:flags": {
-      "is_sneaking": true
+      "is_sneaking": true,
+      "is_on_ground": true
     },
-    "minecraft:nbt": "{OnGround:1b}",
     "minecraft:equipment": {
       "offhand": {
         "count": {

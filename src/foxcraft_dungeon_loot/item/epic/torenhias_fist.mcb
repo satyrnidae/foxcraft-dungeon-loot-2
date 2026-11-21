@@ -6,7 +6,14 @@ TAGS USED
 satyrn.fdl.torenhiasFist.heldItem - A player that was holding Tor'Enhia's Fist
 satyrn.fdl.torenhiasFist.projectile - The snowball projectile
 satyrn.fdl.torenhiasFist.projectileTracker - The marker teleported onto the projectile every tick
-satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawning lighting
+satyrn.fdl.torenhiasFist.lightningSpawner - The marker in charge of spawning lightning. It counts down and follows its target
+satyrn.fdl.torenhiasFist.lightningTarget - What a lightning spawner follows: the entity the fist struck, or the dropped fist when it struck none
+satyrn.fdl.torenhiasFist.fromItem - A lightning spawner whose target is the dropped fist, which hands the target to the player who picks it up
+satyrn.fdl.torenhiasFist.current - An entity that is a spawner's target while it is being looked up
+
+SCORES
+
+satyrn.fdl.torenhiasFist.id - On a lightning spawner and on its target, so the spawner can find the target again
 
 ###
 
@@ -14,6 +21,7 @@ satyrn.fdl.torenhiasFist.lightningSpawner - The marker entity in charge of spawn
 function on_load {
     scoreboard objectives add satyrn.fdl.torenhiasFist.cooldown dummy
     scoreboard objectives add satyrn.fdl.torenhiasFist.particle dummy
+    scoreboard objectives add satyrn.fdl.torenhiasFist.id dummy
 
     scoreboard players set #5 <%config.internalScoreboard%> 5
 }
@@ -32,55 +40,154 @@ function on_tick {
     # Update the projectile tracker
     execute as @e[tag=satyrn.fdl.torenhiasFist.projectileTracker,type=#foxcraft_dungeon_loot:markers] at @s run {
         # A snowball covers up to 1.5 blocks a tick, so look wider than one.
-        execute if entity @e[tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] run {
-            tp @s @e[tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest]
+        execute if entity @e[type=minecraft:snowball,tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] run {
+            # Face along the travel from the old tracker position, which the raycast uses as the direction of travel
+            execute facing entity @e[type=minecraft:snowball,tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] feet positioned as @e[type=minecraft:snowball,tag=satyrn.fdl.torenhiasFist.projectile,distance=..4,limit=1,sort=nearest] run tp @s ~ ~ ~ ~ ~
             particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 1
         } else run {
-            summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.torenhiasFist.lightningSpawner]}
-            loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:item/epic/torenhias_fist
+            # The tracker is a tick short of the impact, so move it there first
+            function foxcraft_dungeon_loot:raycast/impact
+            execute at @s run {
+                loot spawn ^ ^ ^ loot foxcraft_dungeon_loot:item/epic/torenhias_fist
+
+                # The spawner counts down at the spot. Its target is the entity that was struck, or the fist that just dropped,
+                # and the spawner follows it from then on
+                scoreboard players add #fist.id <%config.internalScoreboard%> 1
+                summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.torenhiasFist.lightningSpawner,satyrn.fdl.torenhiasFist.new]}
+                execute as @n[type=minecraft:marker,tag=satyrn.fdl.torenhiasFist.new] run {
+                    tag @s remove satyrn.fdl.torenhiasFist.new
+                    scoreboard players operation @s satyrn.fdl.torenhiasFist.id = #fist.id <%config.internalScoreboard%>
+                    scoreboard players operation #fist.cur <%config.internalScoreboard%> = #fist.id <%config.internalScoreboard%>
+                    execute if entity @e[tag=satyrn.fdl.raycast.struck,limit=1] run {
+                        execute as @e[tag=satyrn.fdl.raycast.struck,limit=1,sort=nearest] run function foxcraft_dungeon_loot:item/epic/torenhias_fist/mark_target
+                    }
+                    execute unless entity @e[tag=satyrn.fdl.raycast.struck,limit=1] run {
+                        tag @s add satyrn.fdl.torenhiasFist.fromItem
+                        execute as @n[type=minecraft:item,distance=..1,nbt={Age:0s}] run function foxcraft_dungeon_loot:item/epic/torenhias_fist/mark_target
+                    }
+                }
+                tag @e[tag=satyrn.fdl.raycast.struck] remove satyrn.fdl.raycast.struck
+            }
+            tag @a remove satyrn.fdl.raycast.source
             kill @s
         }
     }
 
     # Update the lightning spawners
-    execute as @e[tag=satyrn.fdl.torenhiasFist.lightningSpawner,type=#foxcraft_dungeon_loot:markers] at @s run {
-        execute unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0.. run {
-            # 3 seconds until lightning spawns
-            scoreboard players set @s satyrn.fdl.torenhiasFist.cooldown 70
-            execute if predicate foxcraft_dungeon_loot:world/is_weather_clear run weather thunder 7
-        } else execute unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0 run {
-            scoreboard players remove @s satyrn.fdl.torenhiasFist.cooldown 1
-            scoreboard players operation @s satyrn.fdl.torenhiasFist.particle = @s satyrn.fdl.torenhiasFist.cooldown
-            scoreboard players operation @s satyrn.fdl.torenhiasFist.particle %= #5 <%config.internalScoreboard%>
+    execute as @e[type=minecraft:marker,tag=satyrn.fdl.torenhiasFist.lightningSpawner] at @s run function foxcraft_dungeon_loot:item/epic/torenhias_fist/lightning_tick
+}
 
-            execute if score @s satyrn.fdl.torenhiasFist.particle matches 0 run {
+# Run as and at a lightning spawner. Moves onto the target, then counts down at its new spot. The target stays tagged as current
+# until the countdown is done, so the sparks can be drawn over it.
+function lightning_tick {
+    function foxcraft_dungeon_loot:item/epic/torenhias_fist/follow
+    execute at @s run function foxcraft_dungeon_loot:item/epic/torenhias_fist/lightning_count
+    tag @e[tag=satyrn.fdl.torenhiasFist.current] remove satyrn.fdl.torenhiasFist.current
+}
+
+# Run as and at a lightning spawner. Moves it onto its target while the target is alive, so the lightning is where the target
+# is. A dead target is not selectable and the spawner stays at the last spot. When the target was the dropped fist and it is
+# gone, a player standing near the last spot took it, and the spawner follows that player instead.
+function follow {
+    scoreboard players operation #fist.cur <%config.internalScoreboard%> = @s satyrn.fdl.torenhiasFist.id
+    execute as @e[tag=satyrn.fdl.torenhiasFist.lightningTarget] if score @s satyrn.fdl.torenhiasFist.id = #fist.cur <%config.internalScoreboard%> run tag @s add satyrn.fdl.torenhiasFist.current
+    execute if entity @e[tag=satyrn.fdl.torenhiasFist.current,limit=1] run tp @s @n[tag=satyrn.fdl.torenhiasFist.current]
+    execute unless entity @e[tag=satyrn.fdl.torenhiasFist.current,limit=1] if entity @s[tag=satyrn.fdl.torenhiasFist.fromItem] run {
+        tag @s remove satyrn.fdl.torenhiasFist.fromItem
+        execute as @n[type=minecraft:player,distance=..3] run function foxcraft_dungeon_loot:item/epic/torenhias_fist/mark_target
+    }
+}
+
+# Run as the entity a lightning spawner follows. Marks it with the id in #fist.cur, the spawner's own.
+function mark_target {
+    tag @s add satyrn.fdl.torenhiasFist.lightningTarget
+    scoreboard players operation @s satyrn.fdl.torenhiasFist.id = #fist.cur <%config.internalScoreboard%>
+}
+
+# Run as and at a lightning spawner. The countdown: 3 seconds of sparks, two small bolts, then the strike.
+function lightning_count {
+    execute unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0.. run {
+        # 3 seconds until lightning spawns
+        scoreboard players set @s satyrn.fdl.torenhiasFist.cooldown 70
+        execute if predicate foxcraft_dungeon_loot:world/is_weather_clear run weather thunder 7
+    } else execute unless score @s satyrn.fdl.torenhiasFist.cooldown matches 0 run {
+        scoreboard players remove @s satyrn.fdl.torenhiasFist.cooldown 1
+        scoreboard players operation @s satyrn.fdl.torenhiasFist.particle = @s satyrn.fdl.torenhiasFist.cooldown
+        scoreboard players operation @s satyrn.fdl.torenhiasFist.particle %= #5 <%config.internalScoreboard%>
+
+        execute if score @s satyrn.fdl.torenhiasFist.particle matches 0 run {
+            execute if entity @e[tag=satyrn.fdl.torenhiasFist.current,limit=1] run {
+                execute as @e[tag=satyrn.fdl.torenhiasFist.current,limit=1] at @s run function foxcraft_dungeon_loot:item/epic/torenhias_fist/sparks
+            } else run {
                 particle minecraft:electric_spark ~ ~0.5 ~ 0.25 0 0.25 0.05 3 force
             }
-            execute if score @s satyrn.fdl.torenhiasFist.cooldown matches 10 run {
-                summon minecraft:lightning_bolt ^0.25 ^ ^-0.25
-            }
-            execute if score @s satyrn.fdl.torenhiasFist.cooldown matches 5 run {
-                summon minecraft:lightning_bolt ^-0.25 ^ ^0.25
-            }
-        } else run {
-            summon minecraft:lightning_bolt
-            playsound foxcraft_dungeon_loot:item.torenhias_fist.thunder player @a ~ ~ ~ 4.0
-            # Clean up lightning spawner
-            kill @s
         }
+        execute if score @s satyrn.fdl.torenhiasFist.cooldown matches 10 run {
+            summon minecraft:lightning_bolt ^0.25 ^ ^-0.25
+        }
+        execute if score @s satyrn.fdl.torenhiasFist.cooldown matches 5 run {
+            summon minecraft:lightning_bolt ^-0.25 ^ ^0.25
+        }
+    } else run {
+        summon minecraft:lightning_bolt
+        playsound foxcraft_dungeon_loot:item.torenhias_fist.thunder player @a ~ ~ ~ 4.0
+        # Clean up. The spawner goes and its target loses the mark.
+        scoreboard players operation #fist.cur <%config.internalScoreboard%> = @s satyrn.fdl.torenhiasFist.id
+        execute as @e[tag=satyrn.fdl.torenhiasFist.lightningTarget] if score @s satyrn.fdl.torenhiasFist.id = #fist.cur <%config.internalScoreboard%> run {
+            tag @s remove satyrn.fdl.torenhiasFist.lightningTarget
+            scoreboard players reset @s satyrn.fdl.torenhiasFist.id
+        }
+        kill @s
     }
+}
+
+# Run as and at the entity a lightning spawner follows. Draws sparks over its whole hitbox. The size is measured, since it is
+# not in the entity data: a unit box at the entity's feet that is moved up in quarter blocks still touches the hitbox while the
+# entity is taller than that, and one moved out sideways while it is wider than twice that. The counts give the height and half
+# the width in quarter blocks. The particle spread is the standard deviation, so it is half of half of each size.
+function sparks {
+    scoreboard players set #fist.h <%config.internalScoreboard%> 0
+    REPEAT(0, 15) as i {
+        execute positioned ~ ~<%i * 0.25%> ~ if entity @s[dx=0] run scoreboard players add #fist.h <%config.internalScoreboard%> 1
+    }
+    scoreboard players set #fist.w <%config.internalScoreboard%> 0
+    REPEAT(1, 8) as i {
+        execute positioned ~<%i * 0.25%> ~ ~ if entity @s[dx=0] run scoreboard players add #fist.w <%config.internalScoreboard%> 1
+    }
+
+    # In hundredths of a block: middle height is 12 per quarter block, vertical spread 6, sideways spread 12 plus a base of 6
+    scoreboard players set #fist.12 <%config.internalScoreboard%> 12
+    scoreboard players set #fist.6 <%config.internalScoreboard%> 6
+    scoreboard players operation #fist.cy <%config.internalScoreboard%> = #fist.h <%config.internalScoreboard%>
+    scoreboard players operation #fist.cy <%config.internalScoreboard%> *= #fist.12 <%config.internalScoreboard%>
+    scoreboard players operation #fist.dy <%config.internalScoreboard%> = #fist.h <%config.internalScoreboard%>
+    scoreboard players operation #fist.dy <%config.internalScoreboard%> *= #fist.6 <%config.internalScoreboard%>
+    scoreboard players operation #fist.dx <%config.internalScoreboard%> = #fist.w <%config.internalScoreboard%>
+    scoreboard players operation #fist.dx <%config.internalScoreboard%> *= #fist.12 <%config.internalScoreboard%>
+    scoreboard players add #fist.dx <%config.internalScoreboard%> 6
+    execute store result storage foxcraft_dungeon_loot:items fist.cy double 0.01 run scoreboard players get #fist.cy <%config.internalScoreboard%>
+    execute store result storage foxcraft_dungeon_loot:items fist.dy double 0.01 run scoreboard players get #fist.dy <%config.internalScoreboard%>
+    execute store result storage foxcraft_dungeon_loot:items fist.dx double 0.01 run scoreboard players get #fist.dx <%config.internalScoreboard%>
+    function foxcraft_dungeon_loot:item/epic/torenhias_fist/sparks_macro with storage foxcraft_dungeon_loot:items fist
+}
+
+function sparks_macro {
+    $particle minecraft:electric_spark ~ ~$(cy) ~ $(dx) $(dy) $(dx) 0.05 6 force
 }
 
 # Runs when a player uses a snowball.
 function on_snowball_used {
     # Execute if a player who was holding Tor'Enhia's Fist threw the item from their main hand.
     execute if entity @s[tag=satyrn.fdl.torenhiasFist.heldItem] run {
+        tag @s add satyrn.fdl.raycast.source
         execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run {
             # Tag the snowball as the projectile.
             tag @s add satyrn.fdl.torenhiasFist.projectile
 
             # A marker has no hitbox for the snowball to strike and follows by teleport, not by its own motion
             summon minecraft:marker ~ ~ ~ {Tags:[satyrn.fdl.torenhiasFist.projectileTracker]}
+            # Start the tracker facing the throw, in case the snowball is gone before the first tick
+            execute as @e[type=minecraft:snowball,limit=1,sort=nearest] at @s run data modify entity @n[type=minecraft:marker,tag=satyrn.fdl.torenhiasFist.projectileTracker,distance=..0.01] Rotation set from entity @s Rotation
         }
     }
 }
@@ -89,6 +196,8 @@ function on_snowball_used {
 function on_uninstall {
     scoreboard objectives remove satyrn.fdl.torenhiasFist.cooldown
     scoreboard objectives remove satyrn.fdl.torenhiasFist.particle
+    scoreboard objectives remove satyrn.fdl.torenhiasFist.id
+    data remove storage foxcraft_dungeon_loot:items fist
 }
 
 # Gives the target the torenhias fist.

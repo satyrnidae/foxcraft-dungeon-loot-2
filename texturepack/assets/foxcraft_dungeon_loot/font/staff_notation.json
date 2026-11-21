@@ -9,7 +9,7 @@
     },
     {
       "type": "bitmap",
-      "file": "foxcraft_dungeon_loot:font/notation.png",
+      "file": "foxcraft_dungeon_loot:font/notation/notation.png",
       "ascent": 25,
       "height": 30,
       "chars": [
@@ -207,7 +207,7 @@
     },
     {
       "type": "bitmap",
-      "file": "foxcraft_dungeon_loot:font/staff.png",
+      "file": "foxcraft_dungeon_loot:font/notation/staff.png",
       "ascent": 25,
       "height": 30,
       "chars": [

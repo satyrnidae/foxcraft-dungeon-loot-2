@@ -1,0 +1,12 @@
+# Poison of Poncho Sanchez. The enchantment data file runs post_attack as the struck entity from its post_attack effect.
+
+# Run as the entity that Poison of Poncho Sanchez struck, one hit in ten, from the enchantment's post_attack effect.
+# Creative players are skipped; gamemode never matches a non-player, so everything else is hit.
+function post_attack {
+    execute unless entity @s[gamemode=creative] run {
+        playsound minecraft:entity.player.attack.crit player @a
+        particle minecraft:crit ~ ~1 ~ 0.5 0.85 0.5 0.01 20 force
+
+        effect give @s minecraft:wither 5 1
+    }
+}

@@ -29,17 +29,22 @@
         [
           {
             "text": "Grasp of the Spider God: ",
-            "color": "aqua",
+            "color": "gold",
             "italic": false
           },
           {
-            "text": "Throw the item to place",
+            "text": "Throw the item at a",
             "color": "gray",
             "italic": false
           }
         ],
         {
-          "text": "a cobweb where it lands.",
+          "text": "creature to web its whole hitbox and slow it",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "for 20 seconds.",
           "color": "gray",
           "italic": false
         },
