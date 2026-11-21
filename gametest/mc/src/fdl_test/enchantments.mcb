@@ -1,0 +1,70 @@
+# Arthropod enchantments. The effect functions are called directly, the chance roll and the post_attack dispatch live in the enchantment JSON
+# and a headless server has no player to swing. Mobs are NoAI so they stay put and keep the effects they are given.
+
+# Aura of Uthiir post_attack runs as the struck arthropod. Hostiles within 10 get Wither III for 5 seconds, arthropods Weakness III
+function aura/run {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:cave_spider ~ ~ ~ {NoAI:1b,Tags:["tt","tt.arth"]}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~5 ~ ~ {NoAI:1b,Tags:["tt","tt.near"]}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~11 ~ ~ {NoAI:1b,Tags:["tt","tt.far"]}
+
+	# Clean stage, a leftover effect would make the checks below meaningless
+	execute as @e[tag=tt.near] run function fdl_test:lib/expect_no_effect {id:"minecraft:wither"}
+	execute as @e[tag=tt.far] run function fdl_test:lib/expect_no_effect {id:"minecraft:wither"}
+
+	execute as @e[tag=tt.arth] at @s run function foxcraft_dungeon_loot:enchantment/aura_of_uthiir/post_attack
+
+	execute as @e[tag=tt.near] run function fdl_test:lib/expect_effect {id:"minecraft:wither",amp:2,max_dur:100}
+	execute as @e[tag=tt.arth] run function fdl_test:lib/expect_effect {id:"minecraft:weakness",amp:2,max_dur:100}
+	execute as @e[tag=tt.near] run function fdl_test:lib/expect_no_effect {id:"minecraft:weakness"}
+	execute as @e[tag=tt.far] run function fdl_test:lib/expect_no_effect {id:"minecraft:wither"}
+	execute as @e[tag=tt.far] run function fdl_test:lib/expect_no_effect {id:"minecraft:weakness"}
+}
+
+# Hæmolymph Sacrifice on_killed_arthropod runs as the attacker, a vindicator since undead are immune to Regeneration, the level of the sword in its main hand picks the effects
+function haemolymph/run {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:vindicator ~2 ~ ~ {NoAI:1b,Tags:["tt","tt.l1"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:haemolymph_sacrifice":1}}}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:vindicator ~4 ~ ~ {NoAI:1b,Tags:["tt","tt.l2"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:haemolymph_sacrifice":2}}}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:vindicator ~6 ~ ~ {NoAI:1b,Tags:["tt","tt.none"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1}}}
+
+	execute as @e[tag=tt.l1] run function foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/on_killed_arthropod
+	execute as @e[tag=tt.l2] run function foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/on_killed_arthropod
+	execute as @e[tag=tt.none] run function foxcraft_dungeon_loot:enchantment/haemolymph_sacrifice/on_killed_arthropod
+
+	execute as @e[tag=tt.l1] run function fdl_test:lib/expect_effect {id:"minecraft:weaving",amp:0,max_dur:300}
+	execute as @e[tag=tt.l1] run function fdl_test:lib/expect_effect {id:"minecraft:resistance",amp:1,max_dur:100}
+	execute as @e[tag=tt.l1] run function fdl_test:lib/expect_effect {id:"minecraft:regeneration",amp:0,max_dur:60}
+	execute as @e[tag=tt.l2] run function fdl_test:lib/expect_effect {id:"minecraft:weaving",amp:0,max_dur:300}
+	execute as @e[tag=tt.l2] run function fdl_test:lib/expect_effect {id:"minecraft:resistance",amp:2,max_dur:100}
+	execute as @e[tag=tt.l2] run function fdl_test:lib/expect_effect {id:"minecraft:regeneration",amp:0,max_dur:100}
+	execute as @e[tag=tt.none] run function fdl_test:lib/expect_no_effect {id:"minecraft:weaving"}
+	execute as @e[tag=tt.none] run function fdl_test:lib/expect_no_effect {id:"minecraft:resistance"}
+	execute as @e[tag=tt.none] run function fdl_test:lib/expect_no_effect {id:"minecraft:regeneration"}
+}
+
+# Balm of the Spider God on_spider_eye_eaten, Strength I to III for 10 seconds by level, IV is Strength III for 30 seconds. Clears Poison
+function balm/run {
+	function fdl_test:lib/begin
+	function fdl_test:lib/flat
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~2 ~ ~ {NoAI:1b,Tags:["tt","tt.b1"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:balm_of_the_spider_god":1}}}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~4 ~ ~ {NoAI:1b,Tags:["tt","tt.b2"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:balm_of_the_spider_god":2}}}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~6 ~ ~ {NoAI:1b,Tags:["tt","tt.b3"],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:balm_of_the_spider_god":3}}}}}
+	execute at @e[tag=tt.origin,limit=1] run summon minecraft:zombie ~8 ~ ~ {NoAI:1b,Tags:["tt","tt.b4"],active_effects:[{id:"minecraft:poison",amplifier:0,duration:400}],equipment:{mainhand:{id:"minecraft:iron_sword",count:1,components:{"minecraft:enchantments":{"foxcraft_dungeon_loot:balm_of_the_spider_god":4}}}}}
+
+	# The poison has to be there before the eye, or the clear proves nothing
+	execute as @e[tag=tt.b4] unless data entity @s active_effects[{id:"minecraft:poison"}] run scoreboard players set #ok fdl_test 0
+
+	execute as @e[tag=tt.b1] run function foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/on_spider_eye_eaten
+	execute as @e[tag=tt.b2] run function foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/on_spider_eye_eaten
+	execute as @e[tag=tt.b3] run function foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/on_spider_eye_eaten
+	execute as @e[tag=tt.b4] run function foxcraft_dungeon_loot:enchantment/balm_of_the_spider_god/on_spider_eye_eaten
+
+	execute as @e[tag=tt.b1] run function fdl_test:lib/expect_effect {id:"minecraft:strength",amp:0,max_dur:200}
+	execute as @e[tag=tt.b2] run function fdl_test:lib/expect_effect {id:"minecraft:strength",amp:1,max_dur:200}
+	execute as @e[tag=tt.b3] run function fdl_test:lib/expect_effect {id:"minecraft:strength",amp:2,max_dur:200}
+	execute as @e[tag=tt.b4] run function fdl_test:lib/expect_effect {id:"minecraft:strength",amp:2,max_dur:600}
+	execute as @e[tag=tt.b4] run function fdl_test:lib/expect_no_effect {id:"minecraft:poison"}
+}

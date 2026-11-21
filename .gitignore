@@ -43,3 +43,12 @@ texturepack/assets/foxcraft_dungeon_loot/textures/font/closed_source/
 
 # Site-only books from THIRD_PARTY.md and README.md, written by scripts/books/site_books.mjs
 src/books/en_us/site/
+
+# Gametests, server jar and generated pack, and the second mcb project of gametest/mc
+.gametest
+gametest/mc/data
+gametest/mc/.mcb
+
+# Executing-plans workspace
+.superpowers
+gametest/mc/src/fdl_test/sweep.mcb

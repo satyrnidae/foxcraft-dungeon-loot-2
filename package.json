@@ -14,7 +14,9 @@
     "previews": "node scripts/books/generate_previews.mjs",
     "viewer": "node scripts/books/viewer.mjs",
     "site": "node scripts/books/build_site.mjs",
-    "test": "node tests/run_all.mjs"
+    "test": "node tests/run_all.mjs",
+    "gametest": "node gametest/run.js",
+    "gametest:fetch": "node gametest/fetch-server.js"
   },
   "devDependencies": {
     "@mcdxai/minecraft-dev-mcp": "1.3.0",

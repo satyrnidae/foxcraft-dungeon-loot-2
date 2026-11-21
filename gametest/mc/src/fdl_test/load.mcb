@@ -1,0 +1,29 @@
+# load_scoreboards. Every objective the pack adds on load exists, the version score is set and the loot variant trigger starts clean.
+import ../../../../src/config.js
+
+function check {
+	# Reset state first, a probe write below would make this meaningless. The variant is reset for everyone on load
+	execute if score #probe satyrn.fdl.loot.variant matches -2147483648..2147483647 run scoreboard players set #ok fdl_test 0
+
+	# Setting a score succeeds only when the objective exists
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.used.warpedFungusOnAStick 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.used.snowball 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.loot.variant 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.souls 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.ateSpiderEye 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.events.blockedAttack 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe satyrn.fdl.hammerOfSol.expiry 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+	execute store success score #x fdl_test run scoreboard players set #probe <%config.internalScoreboard%> 1
+	execute unless score #x fdl_test matches 1 run scoreboard players set #ok fdl_test 0
+
+	scoreboard players reset #probe
+
+	execute unless score #version <%config.internalScoreboard%> matches <%config.scoreboardsVersion%> run scoreboard players set #ok fdl_test 0
+}

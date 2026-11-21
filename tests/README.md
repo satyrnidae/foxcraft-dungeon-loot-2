@@ -1,6 +1,6 @@
 # Tests
 
-Static checks for the datapack and resource pack. Nothing here launches Minecraft, so gameplay still needs the manual list in `docs/todo_manual_verification.md`.
+Static checks for the datapack and resource pack. Nothing here launches Minecraft, so gameplay still needs the manual list in `docs/todo_manual_verification.md`. Runtime scenarios on a headless 26.3 server are separate, `npm run gametest` (needs Java 25), see `gametest/README.md`.
 
 ## Run
 

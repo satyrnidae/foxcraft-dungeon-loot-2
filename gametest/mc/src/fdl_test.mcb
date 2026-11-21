@@ -1,0 +1,111 @@
+# Test namespace, never part of a release. Every scenario here is run by a gametest test instance, see gametest/tests.js for the list and
+# the ticks each step runs at, and gametest/run.js to run them headless, npm run gametest. A scenario is plain functions that build a stage at the
+# origin marker and spawn mobs, and checks that set #ok fdl_test to 0 when something is wrong. The generated poll functions in the
+# last region call them at the right ticks and power the accept or fail test block. Scenario files are in src/fdl_test/, a function x in
+# src/fdl_test/load.mcb is fdl_test:load/x.
+
+import ../../tests.js
+
+function load minecraft:load {
+	scoreboard objectives add fdl_test dummy
+	# Ticks since a test started, on the marker at its command block
+	scoreboard objectives add gt.age dummy
+}
+
+#region Library
+# Origin marker of the arena, always at 100.5 64 100.5, everything else is placed relative to it. Clears old test entities. The test runner puts
+# each test structure far from the origin at a random spot, so nothing is built at the command block. The structure only carries the start,
+# command, accept and fail blocks. The chunks of the arena are forceloaded by the gametest pack at load, see gametest/generate.js
+function lib/begin {
+	function fdl_test:lib/cleanup
+	kill @e[tag=tt.origin]
+	execute positioned 100.5 64 100.5 run summon minecraft:marker ~ ~ ~ {Tags:["tt","tt.origin"]}
+}
+
+# Flat stage, floor y-1 and clear air y..y+4, x -1..20, z -4..4 from the origin
+function lib/flat {
+	execute at @e[tag=tt.origin,limit=1] run fill ~-1 ~-1 ~-4 ~20 ~-1 ~4 minecraft:stone
+	execute at @e[tag=tt.origin,limit=1] run fill ~-1 ~ ~-4 ~20 ~4 ~4 minecraft:air
+}
+
+# Removes everything the tests spawned, items too
+function lib/cleanup {
+	kill @e[tag=tt,tag=!tt.origin]
+	execute at @e[tag=tt.origin,limit=1] run kill @e[type=minecraft:item,distance=..64]
+}
+
+# Printed when a step fails, so a log is enough to see why. A headless server logs say and not tellraw
+function lib/dump {
+	execute unless loaded 100 64 100 run say gt dump the arena chunk is not loaded
+	execute unless entity @e[tag=tt.origin] run say gt dump there is no origin marker
+	execute at @e[tag=tt.origin,limit=1] unless block ~ ~-1 ~ minecraft:stone run say gt dump no stone floor under the origin
+	execute store result storage fdl_test:dump n int 1 if entity @e[tag=tt,tag=!tt.origin]
+	function fdl_test:lib/dump_say with storage fdl_test:dump
+}
+
+function lib/dump_say {
+	$say gt dump $(n) test entities besides the origin
+}
+
+# Macro, name from storage fdl_test:cur. Says PASS or FAIL, say is what reaches a headless server log, tellraw has no player to send to
+function lib/report {
+	$execute if score #ok fdl_test matches 1 run say gt PASS $(name)
+	$execute unless score #ok fdl_test matches 1 run say gt FAIL $(name)
+}
+
+# Macro {id, amp, max_dur}, run as the entity under test. Fails unless it has the effect at exactly that amplifier with 1..max_dur ticks left.
+# A missing effect fails before the stored amplifier is read, data get stores 0 for a miss and would pass amplifier 0.
+function lib/expect_effect {
+	$execute unless data entity @s active_effects[{id:"$(id)"}] run scoreboard players set #ok fdl_test 0
+	$execute if data entity @s active_effects[{id:"$(id)"}] store result score #amp fdl_test run data get entity @s active_effects[{id:"$(id)"}].amplifier
+	$execute if data entity @s active_effects[{id:"$(id)"}] store result score #dur fdl_test run data get entity @s active_effects[{id:"$(id)"}].duration
+	$execute if data entity @s active_effects[{id:"$(id)"}] unless score #amp fdl_test matches $(amp) run scoreboard players set #ok fdl_test 0
+	$execute if data entity @s active_effects[{id:"$(id)"}] unless score #dur fdl_test matches 1..$(max_dur) run scoreboard players set #ok fdl_test 0
+}
+
+# Macro {id}, run as the entity under test. Fails if it has the effect
+function lib/expect_no_effect {
+	$execute if data entity @s active_effects[{id:"$(id)"}] run scoreboard players set #ok fdl_test 0
+}
+#endregion
+
+#region Gametest poll functions
+# One poll function per test, run every tick by the repeating command block of its structure, at the command block. A marker at the block
+# counts ticks. A step that leaves #ok at 0 powers the fail block, the last step passing powers the accept block. Redstone goes at ~5 ~1 ~
+# for fail and ~3 ~1 ~ for accept, above the test blocks of the scaffold, see gametest/generate.js. A test removes its own command block when
+# it ends. The runner clears a finished test's entities, and a command block left running would count from 0 again and replay the scenario
+# over whichever test is running now. Every step prints its result once
+<%%
+for (const t of gametest.tests) {
+	const last = Math.max(...t.steps.map(([age]) => age));
+	const lines = [
+		// The test's window on the global clock, which only runs once the arena is loaded. An unset #clock is not in any range
+		`\texecute unless score #clock fdl_test matches ${t.start}.. run return 0`,
+		"\texecute unless entity @e[type=minecraft:marker,tag=gt.mark,distance=..0.6] run summon minecraft:marker ~ ~ ~ {Tags:[\"gt.mark\"]}",
+		"\tscoreboard players add @e[type=minecraft:marker,tag=gt.mark,distance=..0.6] gt.age 1",
+		"\tscoreboard players operation #age fdl_test = @e[type=minecraft:marker,tag=gt.mark,distance=..0.6,limit=1] gt.age",
+	];
+	t.steps.forEach(([age, fn], i) => {
+		lines.push(`\texecute if score #age fdl_test matches ${age} run function fdl_test:gt/${t.id}_${i}`);
+		const body = [
+			`\tsay gt run ${t.id} step ${i + 1}`,
+			"\tscoreboard players set #ok fdl_test 1",
+			`\tfunction fdl_test:${fn}`,
+			`\tdata modify storage fdl_test:cur name set value "${t.id} step ${i + 1} of ${t.steps.length}"`,
+			"\texecute unless score #ok fdl_test matches 1 run function fdl_test:lib/report with storage fdl_test:cur",
+			"\texecute unless score #ok fdl_test matches 1 run function fdl_test:lib/dump",
+			"\texecute unless score #ok fdl_test matches 1 run setblock ~5 ~1 ~ minecraft:redstone_block",
+			"\texecute unless score #ok fdl_test matches 1 run setblock ~ ~ ~ minecraft:air",
+		];
+		if (age === last) {
+			body.push(`\tdata modify storage fdl_test:cur name set value "${t.id}"`);
+			body.push("\texecute if score #ok fdl_test matches 1 run function fdl_test:lib/report with storage fdl_test:cur");
+			body.push("\texecute if score #ok fdl_test matches 1 run setblock ~3 ~1 ~ minecraft:redstone_block");
+			body.push("\texecute if score #ok fdl_test matches 1 run setblock ~ ~ ~ minecraft:air");
+		}
+		emit.mcb(`function gt/${t.id}_${i} {\n${body.join("\n")}\n}`);
+	});
+	emit.mcb(`function gt/${t.id} {\n${lines.join("\n")}\n}`);
+}
+%%>
+#endregion
